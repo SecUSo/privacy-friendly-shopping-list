@@ -10,6 +10,7 @@
 *.vrb
 *.iml
 
+build.gradle
 .gradle
 /local.properties
 /.idea/workspace.xml
