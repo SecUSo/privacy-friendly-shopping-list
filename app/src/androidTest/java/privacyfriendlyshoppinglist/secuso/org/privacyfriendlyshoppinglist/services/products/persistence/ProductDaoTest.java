@@ -27,7 +27,7 @@ public class ProductDaoTest extends AndroidTestCase
     }
 
     @Test
-    public void test() throws Exception
+    public void save() throws Exception
     {
         String expectedName = "Product_Name";
 
@@ -37,6 +37,9 @@ public class ProductDaoTest extends AndroidTestCase
         entity.setProductName(expectedName);
         Long id = productDao.save(context, entity);
         assertNotNull(id);
+
+        ProductEntity entity2 = productDao.getById(context, id);
+        assertEquals(expectedName, entity2.getProductName());
     }
 
 }

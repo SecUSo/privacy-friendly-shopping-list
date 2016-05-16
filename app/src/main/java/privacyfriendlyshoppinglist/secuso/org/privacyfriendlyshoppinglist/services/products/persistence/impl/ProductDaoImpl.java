@@ -21,17 +21,16 @@ public class ProductDaoImpl implements ProductDao
         SQLiteDatabase db = dbHelper.getWritableDatabase();
 
         ContentValues values = new ContentValues();
-        values.put(ProductContract.ProductEntry.COLUMN_NAME_ENTRY_ID, entity.getId());
-        values.put(ProductContract.ProductEntry.COLUMN_NAME_ENTRY_NAME, entity.getProductName());
+        values.put(ProductDbContract.Entry.COLUMN_NAME_ENTRY_NAME, entity.getProductName());
 
-        long newRowId;
-        newRowId = db.insert(
-                ProductContract.ProductEntry.TABLE_NAME,
-                ProductContract.ProductEntry.COLUMN_NAME_ENTRY_NAME,
+        long id;
+        id = db.insert(
+                ProductDbContract.Entry.TABLE_NAME,
+                ProductDbContract.Entry.COLUMN_NAME_ENTRY_NAME,
                 values
         );
 
-        return newRowId;
+        return id;
     }
 
     @Override
