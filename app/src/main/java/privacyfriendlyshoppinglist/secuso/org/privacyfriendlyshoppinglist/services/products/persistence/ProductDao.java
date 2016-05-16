@@ -1,5 +1,7 @@
 package privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.services.products.persistence;
 
+import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.services.products.persistence.entity.ProductEntity;
+
 /**
  * Description:
  * Author: Grebiel Jose Ifill Brito
@@ -7,4 +9,7 @@ package privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.servi
  */
 public interface ProductDao
 {
+    Long save (ProductEntity entity);
+
+    ProductEntity getById(Long id);
 }
