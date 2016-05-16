@@ -16,7 +16,6 @@ public final class ProductDbContract
     public static abstract class Entry implements BaseColumns
     {
         public static final String TABLE_NAME = "productEntry";
-        public static final String COLUMN_NAME_ENTRY_ID = "productId";
         public static final String COLUMN_NAME_ENTRY_NAME = "productName";
     }
 
@@ -25,8 +24,7 @@ public final class ProductDbContract
 
     private static final String SQL_CREATE_ENTRIES =
             "CREATE TABLE " + Entry.TABLE_NAME + " (" +
-                    Entry._ID + " INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL," +
-                    Entry.COLUMN_NAME_ENTRY_ID + TEXT_TYPE + COMMA_SEP +
+                    Entry._ID + " INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL" + COMMA_SEP +
                     Entry.COLUMN_NAME_ENTRY_NAME + TEXT_TYPE +
                     " )";
 
@@ -42,4 +40,6 @@ public final class ProductDbContract
     {
         return SQL_DELETE_ENTRIES;
     }
+
+
 }
