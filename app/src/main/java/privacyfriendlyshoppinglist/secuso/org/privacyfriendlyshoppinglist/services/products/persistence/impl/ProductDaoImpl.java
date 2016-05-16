@@ -1,5 +1,9 @@
 package privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.services.products.persistence.impl;
 
+import android.content.ContentValues;
+import android.content.Context;
+import android.database.sqlite.SQLiteDatabase;
+import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.DataBaseHelper;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.services.products.persistence.ProductDao;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.services.products.persistence.entity.ProductEntity;
 
@@ -11,13 +15,27 @@ import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.servic
 public class ProductDaoImpl implements ProductDao
 {
     @Override
-    public Long save(ProductEntity entity)
+    public Long save(Context context, ProductEntity entity)
     {
-        return null;
+        DataBaseHelper dbHelper = new DataBaseHelper(context);
+        SQLiteDatabase db = dbHelper.getWritableDatabase();
+
+        ContentValues values = new ContentValues();
+        values.put(ProductContract.ProductEntry.COLUMN_NAME_ENTRY_ID, entity.getId());
+        values.put(ProductContract.ProductEntry.COLUMN_NAME_ENTRY_NAME, entity.getProductName());
+
+        long newRowId;
+        newRowId = db.insert(
+                ProductContract.ProductEntry.TABLE_NAME,
+                ProductContract.ProductEntry.COLUMN_NAME_ENTRY_NAME,
+                values
+        );
+
+        return newRowId;
     }
 
     @Override
-    public ProductEntity getById(Long id)
+    public ProductEntity getById(Context context, Long id)
     {
         return null;
     }
