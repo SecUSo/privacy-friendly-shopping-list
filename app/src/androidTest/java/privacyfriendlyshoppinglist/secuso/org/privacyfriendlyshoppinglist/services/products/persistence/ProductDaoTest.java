@@ -18,18 +18,18 @@ import static org.junit.Assert.*;
 public class ProductDaoTest extends AndroidTestCase
 {
     Context context;
+    ProductDao productDao;
 
     @Before
     public void setUp() throws Exception
     {
+        productDao = new ProductDaoImpl();
         context = new RenamingDelegatingContext(getContext(), "test_");
-
     }
 
     @Test
     public void testSave() throws Exception
     {
-        ProductDao productDao = new ProductDaoImpl();
         String aProductName = "Product_Name";
 
         ProductEntity entity = getEntity(aProductName);
@@ -41,7 +41,6 @@ public class ProductDaoTest extends AndroidTestCase
     @Test
     public void testGetById() throws Exception
     {
-        ProductDao productDao = new ProductDaoImpl();
         String expectedName = "Product_Name";
 
         ProductEntity entity = getEntity(expectedName);
@@ -49,6 +48,29 @@ public class ProductDaoTest extends AndroidTestCase
 
         ProductEntity newEntity = productDao.getById(context, id);
         assertEquals(expectedName, newEntity.getProductName());
+    }
+
+    @Test
+    public void testUpdate() throws Exception
+    {
+        String product1 = "Product 1";
+        String product2 = "Product 2";
+        String product3 = "Product 3";
+
+        ProductEntity entity1 = getEntity(product1);
+        ProductEntity entity2 = getEntity(product2);
+        ProductEntity entity3 = getEntity(product3);
+
+        productDao.save(context, entity1);
+        Long id2 = productDao.save(context, entity2);
+
+        entity3.setId(id2);
+        productDao.save(context, entity3);
+
+        ProductEntity updatedEntity = productDao.getById(context, id2);
+        assertEquals(product3, updatedEntity.getProductName());
+
+
     }
 
     private ProductEntity getEntity(String productName)

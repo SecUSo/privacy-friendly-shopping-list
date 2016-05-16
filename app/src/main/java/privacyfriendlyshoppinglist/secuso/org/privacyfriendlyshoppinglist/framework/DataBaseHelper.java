@@ -3,7 +3,7 @@ package privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.frame
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.services.products.persistence.impl.ProductDbContract;
+import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.services.products.persistence.impl.ProductContract;
 
 /**
  * Description:
@@ -23,13 +23,13 @@ public class DataBaseHelper extends SQLiteOpenHelper
     @Override
     public void onCreate(SQLiteDatabase db)
     {
-        db.execSQL(ProductDbContract.getSqlCreateEntries());
+        db.execSQL(ProductContract.SQL_CREATE_ENTRIES);
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion)
     {
-        db.execSQL(ProductDbContract.getSqlDeleteEntries());
+        db.execSQL(ProductContract.SQL_DELETE_ENTRIES);
         onCreate(db);
     }
 
