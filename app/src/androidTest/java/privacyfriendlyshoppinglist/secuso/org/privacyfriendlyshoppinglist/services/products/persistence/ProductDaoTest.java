@@ -1,14 +1,9 @@
 package privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.services.products.persistence;
 
-import android.content.Context;
 import android.test.AndroidTestCase;
-import android.test.RenamingDelegatingContext;
-import org.junit.Before;
 import org.junit.Test;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.services.products.persistence.entity.ProductEntity;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.services.products.persistence.impl.ProductDaoImpl;
-
-import static org.junit.Assert.*;
 
 /**
  * Description:
@@ -17,23 +12,17 @@ import static org.junit.Assert.*;
  */
 public class ProductDaoTest extends AndroidTestCase
 {
-    Context context;
     ProductDao productDao;
-
-    @Before
-    public void setUp() throws Exception
-    {
-        productDao = new ProductDaoImpl();
-        context = new RenamingDelegatingContext(getContext(), "test_");
-    }
 
     @Test
     public void testSave() throws Exception
     {
+        productDao = new ProductDaoImpl(getContext());
+
         String aProductName = "Product_Name";
 
         ProductEntity entity = getEntity(aProductName);
-        Long id = productDao.save(context, entity);
+        Long id = productDao.save(entity);
         assertNotNull(id);
     }
 
@@ -41,18 +30,20 @@ public class ProductDaoTest extends AndroidTestCase
     @Test
     public void testGetById() throws Exception
     {
+        productDao = new ProductDaoImpl(getContext());
         String expectedName = "Product_Name";
 
         ProductEntity entity = getEntity(expectedName);
-        Long id = productDao.save(context, entity);
+        Long id = productDao.save(entity);
 
-        ProductEntity newEntity = productDao.getById(context, id);
+        ProductEntity newEntity = productDao.getById(id);
         assertEquals(expectedName, newEntity.getProductName());
     }
 
     @Test
     public void testUpdate() throws Exception
     {
+        productDao = new ProductDaoImpl(getContext());
         String product1 = "Product 1";
         String product2 = "Product 2";
         String product3 = "Product 3";
@@ -61,13 +52,13 @@ public class ProductDaoTest extends AndroidTestCase
         ProductEntity entity2 = getEntity(product2);
         ProductEntity entity3 = getEntity(product3);
 
-        productDao.save(context, entity1);
-        Long id2 = productDao.save(context, entity2);
+        productDao.save(entity1);
+        Long id2 = productDao.save(entity2);
 
         entity3.setId(id2);
-        productDao.save(context, entity3);
+        productDao.save(entity3);
 
-        ProductEntity updatedEntity = productDao.getById(context, id2);
+        ProductEntity updatedEntity = productDao.getById(id2);
         assertEquals(product3, updatedEntity.getProductName());
 
 

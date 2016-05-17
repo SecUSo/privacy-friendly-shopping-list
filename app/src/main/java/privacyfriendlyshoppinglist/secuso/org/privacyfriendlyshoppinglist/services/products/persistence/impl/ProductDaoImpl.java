@@ -15,8 +15,13 @@ import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.servic
 public class ProductDaoImpl extends AbstractDao implements ProductDao
 {
 
+    public ProductDaoImpl( Context context)
+    {
+        super(context);
+    }
+
     @Override
-    public Long save(Context context, ProductEntity entity)
+    public Long save(ProductEntity entity)
     {
         ContentValues values = new ContentValues();
         values.put(ProductContract.Entry.COLUMN_NAME_ENTRY_NAME, entity.getProductName());
@@ -26,7 +31,7 @@ public class ProductDaoImpl extends AbstractDao implements ProductDao
     }
 
     @Override
-    public ProductEntity getById(Context context, Long id)
+    public ProductEntity getById(Long id)
     {
         String[] columnNames = ProductContract.getColumnNames();
         Cursor cursor = getCursor(context, ProductContract.Entry.TABLE_NAME, id, columnNames);

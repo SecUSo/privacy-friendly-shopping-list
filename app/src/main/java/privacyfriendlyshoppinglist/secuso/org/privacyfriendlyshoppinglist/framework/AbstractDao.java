@@ -1,9 +1,12 @@
 package privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework;
 
+import android.app.Application;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+
+import javax.inject.Inject;
 
 /**
  * Description:
@@ -15,8 +18,15 @@ public abstract class AbstractDao
     protected static final String ASC = " ASC";
     protected static final String DESC = " DESC";
     protected static final String EQUALS = "=?";
+    protected static final String LIKE = " LIKE ?";
     private static final String _ID = "_id";
-    public static final String LIKE = " LIKE ?";
+
+    protected Context context;
+
+    protected AbstractDao(Context context)
+    {
+        this.context = context;
+    }
 
     protected SQLiteDatabase getWritableSqLiteDatabase(Context context)
     {
@@ -35,7 +45,7 @@ public abstract class AbstractDao
         Long id;
         SQLiteDatabase db = getWritableSqLiteDatabase(context);
 
-        if ( entity.getId() != null )
+        if ( hasId(entity) )
         {
             id = update(context, entity, tableName, values);
         }
@@ -46,6 +56,11 @@ public abstract class AbstractDao
 
         db.close();
         return id;
+    }
+
+    private boolean hasId(AbstractEntity entity)
+    {
+        return entity.getId() != null;
     }
 
     private Long save(String tableName, ContentValues values, SQLiteDatabase db)
@@ -75,14 +90,15 @@ public abstract class AbstractDao
         );
         db.close();
 
-        id = getId(entity, count);
+        boolean found = count > 0;
+        id = getId(entity, found);
         return id;
     }
 
-    private Long getId(AbstractEntity entity, int count)
+    private Long getId(AbstractEntity entity, boolean found)
     {
         Long id;
-        if ( count > 0 )
+        if ( found )
         {
             id = entity.getId();
         }

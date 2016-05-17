@@ -1,6 +1,5 @@
 package privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.services.products.persistence;
 
-import android.content.Context;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.services.products.persistence.entity.ProductEntity;
 
 /**
@@ -10,7 +9,7 @@ import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.servic
  */
 public interface ProductDao
 {
-    Long save(Context context, ProductEntity entity);
+    Long save(ProductEntity entity);
 
-    ProductEntity getById(Context context, Long id);
+    ProductEntity getById(Long id);
 }
