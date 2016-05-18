@@ -1,6 +1,6 @@
 package privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.services.products.persistence.entity;
 
-import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.AbstractEntity;
+import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.persistence.AbstractEntity;
 
 /**
  * Description:

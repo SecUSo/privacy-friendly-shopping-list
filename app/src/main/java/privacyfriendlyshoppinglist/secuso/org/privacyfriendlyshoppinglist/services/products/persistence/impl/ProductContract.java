@@ -1,7 +1,7 @@
 package privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.services.products.persistence.impl;
 
 import android.provider.BaseColumns;
-import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.AbstractContract;
+import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.persistence.AbstractContract;
 
 /**
  * Description:

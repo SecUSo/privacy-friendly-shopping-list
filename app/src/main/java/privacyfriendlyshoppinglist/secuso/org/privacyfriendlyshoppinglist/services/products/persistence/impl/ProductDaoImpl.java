@@ -1,9 +1,8 @@
 package privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.services.products.persistence.impl;
 
 import android.content.ContentValues;
-import android.content.Context;
 import android.database.Cursor;
-import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.AbstractDao;
+import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.persistence.AbstractDao;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.services.products.persistence.ProductDao;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.services.products.persistence.entity.ProductEntity;
 
@@ -14,11 +13,6 @@ import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.servic
  */
 public class ProductDaoImpl extends AbstractDao implements ProductDao
 {
-
-    public ProductDaoImpl( Context context)
-    {
-        super(context);
-    }
 
     @Override
     public Long save(ProductEntity entity)

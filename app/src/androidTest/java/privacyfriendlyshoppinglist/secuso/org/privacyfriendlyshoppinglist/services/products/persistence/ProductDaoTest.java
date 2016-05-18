@@ -2,8 +2,8 @@ package privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.servi
 
 import android.test.AndroidTestCase;
 import org.junit.Test;
+import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.context.ContextManager;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.services.products.persistence.entity.ProductEntity;
-import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.services.products.persistence.impl.ProductDaoImpl;
 
 /**
  * Description:
@@ -14,10 +14,15 @@ public class ProductDaoTest extends AndroidTestCase
 {
     ProductDao productDao;
 
+    @Override
+    public void setUp()
+    {
+        productDao = new ContextManager<ProductDao>().getInstance(getContext(), ProductDao.class);
+    }
+
     @Test
     public void testSave() throws Exception
     {
-        productDao = new ProductDaoImpl(getContext());
 
         String aProductName = "Product_Name";
 
@@ -30,7 +35,6 @@ public class ProductDaoTest extends AndroidTestCase
     @Test
     public void testGetById() throws Exception
     {
-        productDao = new ProductDaoImpl(getContext());
         String expectedName = "Product_Name";
 
         ProductEntity entity = getEntity(expectedName);
@@ -43,7 +47,6 @@ public class ProductDaoTest extends AndroidTestCase
     @Test
     public void testUpdate() throws Exception
     {
-        productDao = new ProductDaoImpl(getContext());
         String product1 = "Product 1";
         String product2 = "Product 2";
         String product3 = "Product 3";
@@ -52,13 +55,13 @@ public class ProductDaoTest extends AndroidTestCase
         ProductEntity entity2 = getEntity(product2);
         ProductEntity entity3 = getEntity(product3);
 
-        productDao.save(entity1);
-        Long id2 = productDao.save(entity2);
+        this.productDao.save(entity1);
+        Long id2 = this.productDao.save(entity2);
 
         entity3.setId(id2);
-        productDao.save(entity3);
+        this.productDao.save(entity3);
 
-        ProductEntity updatedEntity = productDao.getById(id2);
+        ProductEntity updatedEntity = this.productDao.getById(id2);
         assertEquals(product3, updatedEntity.getProductName());
 
 

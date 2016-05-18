@@ -1,4 +1,4 @@
-package privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework;
+package privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.persistence;
 
 /**
  * Description:

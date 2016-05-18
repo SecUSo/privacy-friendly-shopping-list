@@ -1,19 +1,17 @@
-package privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework;
+package privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.persistence;
 
-import android.app.Application;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-
-import javax.inject.Inject;
+import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.context.ContextSetter;
 
 /**
  * Description:
  * Author: Grebiel Jose Ifill Brito
  * Created: 16.05.16 creation date
  */
-public abstract class AbstractDao
+public abstract class AbstractDao implements ContextSetter
 {
     protected static final String ASC = " ASC";
     protected static final String DESC = " DESC";
@@ -23,7 +21,8 @@ public abstract class AbstractDao
 
     protected Context context;
 
-    protected AbstractDao(Context context)
+    @Override
+    public void setContext(Context context)
     {
         this.context = context;
     }
