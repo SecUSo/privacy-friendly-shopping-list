@@ -1,6 +1,7 @@
 package privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.services.products.persistence;
 
 import android.test.AndroidTestCase;
+
 import org.junit.Test;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.context.ContextManager;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.services.products.persistence.entity.ProductEntity;
@@ -12,12 +13,13 @@ import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.servic
  */
 public class ProductDaoTest extends AndroidTestCase
 {
-    ProductDao productDao;
+    private ProductDao productDao;
 
     @Override
     public void setUp()
     {
         productDao = new ContextManager<ProductDao>().getInstance(getContext(), ProductDao.class);
+
     }
 
     @Test

@@ -2,6 +2,7 @@ package privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.dagge
 
 import dagger.Module;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.dagger.context.config.product.ProductDaoModule;
+import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.context.AppModule;
 
 /**
  * Description:
@@ -13,6 +14,6 @@ import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.dagger
                 ProductDaoModule.class
         }
 )
-public class AppContextModule
+public class AppContextModule implements AppModule
 {
 }

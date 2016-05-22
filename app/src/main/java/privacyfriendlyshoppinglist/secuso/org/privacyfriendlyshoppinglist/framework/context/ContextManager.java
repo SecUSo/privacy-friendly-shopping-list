@@ -11,11 +11,21 @@ import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.dagger
  */
 public class ContextManager<T extends ContextSetter>
 {
+    private AppModule module;
+
+    public ContextManager(){
+        this.module = new AppContextModule();
+    }
+
+    public ContextManager(AppModule module){
+        this.module = module;
+    }
+
 
     public T getInstance(Context context, Class<T> aClass)
     {
         T classInstance;
-        ObjectGraph objectGraph = ObjectGraph.create(new AppContextModule());
+        ObjectGraph objectGraph = ObjectGraph.create(module);
         classInstance = objectGraph.get(aClass);
         classInstance.setContext(context);
         return classInstance;
@@ -24,7 +34,7 @@ public class ContextManager<T extends ContextSetter>
     public T getInstance(Class<T> aClass)
     {
         T classInstance;
-        ObjectGraph objectGraph = ObjectGraph.create(new AppContextModule());
+        ObjectGraph objectGraph = ObjectGraph.create(module);
         classInstance = objectGraph.get(aClass);
         return classInstance;
     }

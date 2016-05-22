@@ -2,6 +2,7 @@ package privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.dagge
 
 import dagger.Module;
 import dagger.Provides;
+import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.context.AppModule;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.services.products.persistence.ProductDao;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.services.products.persistence.impl.ProductDaoImpl;
 
@@ -17,9 +18,8 @@ import javax.inject.Singleton;
                 ProductDao.class,
         }
 )
-public class ProductDaoModule
+public class ProductDaoModule implements AppModule
 {
-
     @Provides @Singleton
     ProductDao provideProductDao()
     {
