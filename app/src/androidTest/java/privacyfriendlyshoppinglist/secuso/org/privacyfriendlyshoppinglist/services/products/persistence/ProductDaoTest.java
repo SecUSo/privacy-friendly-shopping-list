@@ -1,10 +1,12 @@
 package privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.services.products.persistence;
 
 import android.test.AndroidTestCase;
-
+import org.joda.time.DateTime;
 import org.junit.Test;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.context.ContextManager;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.services.products.persistence.entity.ProductEntity;
+
+import java.util.Date;
 
 /**
  * Description:
@@ -19,17 +21,23 @@ public class ProductDaoTest extends AndroidTestCase
     public void setUp()
     {
         productDao = new ContextManager<ProductDao>().getInstance(getContext(), ProductDao.class);
-
+        getContext().deleteDatabase("ShoppingList_test.db");
+//        getContext().deleteDatabase("ShoppingList.db");
     }
 
     @Test
     public void testSave() throws Exception
     {
+        ProductEntity entity = new ProductEntity()
+                .setProductName("name")
+                .setDescription("description")
+                .setPrice(100.0)
+                .setStore("store")
+                .setCategory("category")
+                .setLastDate(new DateTime("2015-05-31").toDate());
 
-        String aProductName = "Product_Name";
-
-        ProductEntity entity = getEntity(aProductName);
         Long id = productDao.save(entity);
+
         assertNotNull(id);
     }
 
@@ -37,42 +45,67 @@ public class ProductDaoTest extends AndroidTestCase
     @Test
     public void testGetById() throws Exception
     {
-        String expectedName = "Product_Name";
+        String expectedName = "name";
+        String expectedDescription = "description";
+        double expectedPrice = 100.0;
+        String expectedStore = "store";
+        String expectedCategory = "category";
+        Date expectedDate = new DateTime("2015-05-31").toDate();
 
-        ProductEntity entity = getEntity(expectedName);
+        ProductEntity entity = new ProductEntity()
+                .setProductName(expectedName)
+                .setDescription(expectedDescription)
+                .setPrice(expectedPrice)
+                .setStore(expectedStore)
+                .setCategory(expectedCategory)
+                .setLastDate(expectedDate);;
+
         Long id = productDao.save(entity);
 
         ProductEntity newEntity = productDao.getById(id);
         assertEquals(expectedName, newEntity.getProductName());
+        assertEquals(expectedDescription, newEntity.getDescription());
+        assertEquals(expectedPrice, newEntity.getPrice());
+        assertEquals(expectedStore, newEntity.getStore());
+        assertEquals(expectedCategory, newEntity.getCategory());
+        assertEquals(expectedDate, newEntity.getLastDate());
     }
 
     @Test
     public void testUpdate() throws Exception
     {
-        String product1 = "Product 1";
-        String product2 = "Product 2";
-        String product3 = "Product 3";
+        String name = "name";
+        String description = "description";
+        double price = 100.0;
+        String store = "store";
+        String category = "category";
 
-        ProductEntity entity1 = getEntity(product1);
-        ProductEntity entity2 = getEntity(product2);
-        ProductEntity entity3 = getEntity(product3);
+        ProductEntity entity1 = new ProductEntity()
+                .setProductName(name)
+                .setDescription(description)
+                .setPrice(price)
+                .setStore(store)
+                .setCategory(category);
 
-        this.productDao.save(entity1);
-        Long id2 = this.productDao.save(entity2);
+        Long id = productDao.save(entity1);
 
-        entity3.setId(id2);
-        this.productDao.save(entity3);
+        String expectedName = "name";
+        String expectedDescription = "description";
+        double expectedPrice = 100.0;
+        String expectedStore = "store";
+        String expectedCategory = "category";
 
-        ProductEntity updatedEntity = this.productDao.getById(id2);
-        assertEquals(product3, updatedEntity.getProductName());
+        ProductEntity updatedEntity = productDao.getById(id)
+                .setProductName(expectedName)
+                .setDescription(expectedDescription)
+                .setPrice(expectedPrice)
+                .setStore(expectedStore)
+                .setCategory(expectedCategory);
 
-
-    }
-
-    private ProductEntity getEntity(String productName)
-    {
-        ProductEntity entity = new ProductEntity();
-        entity.setProductName(productName);
-        return entity;
+        assertEquals(expectedName, updatedEntity.getProductName());
+        assertEquals(expectedDescription, updatedEntity.getDescription());
+        assertEquals(expectedPrice, updatedEntity.getPrice());
+        assertEquals(expectedStore, updatedEntity.getStore());
+        assertEquals(expectedCategory, updatedEntity.getCategory());
     }
 }

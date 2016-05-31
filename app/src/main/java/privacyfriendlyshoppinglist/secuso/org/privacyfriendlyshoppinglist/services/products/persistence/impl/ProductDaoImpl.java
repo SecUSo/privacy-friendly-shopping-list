@@ -1,41 +1,30 @@
 package privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.services.products.persistence.impl;
 
-import android.content.ContentValues;
-import android.database.Cursor;
+import android.util.Log;
+import com.j256.ormlite.dao.Dao;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.persistence.AbstractDao;
+import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.persistence.DataBaseHelper;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.services.products.persistence.ProductDao;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.services.products.persistence.entity.ProductEntity;
+
+import java.sql.SQLException;
 
 /**
  * Description:
  * Author: Grebiel Jose Ifill Brito
  * Created: 16.05.16 15:08 creation date
  */
-public class ProductDaoImpl extends AbstractDao implements ProductDao
+public class ProductDaoImpl extends AbstractDao<ProductEntity> implements ProductDao
 {
-
     @Override
     public Long save(ProductEntity entity)
     {
-        ContentValues values = new ContentValues();
-        values.put(ProductContract.Entry.COLUMN_NAME_ENTRY_NAME, entity.getProductName());
-        String tableName = ProductContract.Entry.TABLE_NAME;
-        Long id = saveOrUpdate(context, entity, tableName, values);
-        return id;
+        return saveOrUpdate(entity);
     }
 
     @Override
     public ProductEntity getById(Long id)
     {
-        String[] columnNames = ProductContract.getColumnNames();
-        Cursor cursor = getCursor(context, ProductContract.Entry.TABLE_NAME, id, columnNames);
-
-        long entityId = cursor.getLong(cursor.getColumnIndexOrThrow(ProductContract.Entry._ID));
-        String productName = cursor.getString(cursor.getColumnIndexOrThrow(ProductContract.Entry.COLUMN_NAME_ENTRY_NAME));
-
-        ProductEntity entity = new ProductEntity();
-        entity.setId(entityId);
-        entity.setProductName(productName);
-        return entity;
+        return getById(id, ProductEntity.class);
     }
 }

@@ -11,6 +11,7 @@ import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framew
  */
 @Module(
         includes = {
+                // DEPENDENCY_INJECTION add all Modules here
                 ProductDaoModule.class
         }
 )

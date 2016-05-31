@@ -1,5 +1,7 @@
 package privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.persistence;
 
+import com.j256.ormlite.field.DatabaseField;
+
 /**
  * Description:
  * Author: Grebiel Jose Ifill Brito
@@ -7,7 +9,8 @@ package privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.frame
  */
 public abstract class AbstractEntity
 {
-    private Long id;
+    @DatabaseField(generatedId = true)
+    public Long id;
 
     public Long getId()
     {
