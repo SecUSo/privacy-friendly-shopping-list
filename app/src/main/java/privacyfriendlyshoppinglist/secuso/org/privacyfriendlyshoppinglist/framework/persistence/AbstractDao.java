@@ -8,6 +8,8 @@ import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framew
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.services.products.persistence.entity.ProductEntity;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Description:
@@ -56,6 +58,23 @@ public abstract class AbstractDao<T extends AbstractEntity> implements ContextSe
         catch ( SQLException e )
         {
             Logger.error(getClass().getName(), "getById", id, e);
+            return null;
+        }
+    }
+
+    public List<T> getAllEntities(Class<T> type){
+        List<T> entities;
+        Logger.info(getClass().getName(), "getAllEntities", "start");
+        try
+        {
+            Dao<T, Long> dao = database.getDao(type);
+            entities = dao.queryForAll();
+            Logger.info(getClass().getName(), "getById", "successful");
+            return entities;
+        }
+        catch ( SQLException e )
+        {
+            Logger.error(getClass().getName(), "getById", type, e);
             return null;
         }
     }

@@ -2,7 +2,6 @@ package privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.frame
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
-import android.util.Log;
 import com.j256.ormlite.android.apptools.OrmLiteConfigUtil;
 import com.j256.ormlite.android.apptools.OrmLiteSqliteOpenHelper;
 import com.j256.ormlite.support.ConnectionSource;
@@ -13,7 +12,7 @@ import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.servic
 
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -25,7 +24,7 @@ public class DataBaseHelper extends OrmLiteSqliteOpenHelper
 {
     public static final int DATABASE_VERSION = 1;
     public static final String DATABASE_NAME = "ShoppingList_test.db";
-    private static List<? extends AbstractEntity> entities;
+    private static List<Class<? extends AbstractEntity>> entityClasses;
 
     public DataBaseHelper(Context context)
     {
@@ -34,10 +33,8 @@ public class DataBaseHelper extends OrmLiteSqliteOpenHelper
 
     private void setupClasses()
     {
-        entities = Arrays.asList(
-                // SETUP_PERSISTENCE: all entities must be added here
-                new ProductEntity()
-        );
+        entityClasses = new ArrayList<>();
+        entityClasses.add(ProductEntity.class);
     }
 
     @Override
@@ -47,14 +44,14 @@ public class DataBaseHelper extends OrmLiteSqliteOpenHelper
         {
             setupClasses();
             Logger.info(getClass().getName(), "onCreate", "start");
-            for (AbstractEntity entity : entities)
+            for (Class aClass : entityClasses )
             {
-                TableUtils.createTable(connectionSource, entity.getClass());
+                TableUtils.createTable(connectionSource, aClass);
             }
         }
         catch ( Exception e )
         {
-            Logger.error(getClass().getName(), "onCreate", entities, e);
+            Logger.error(getClass().getName(), "onCreate", entityClasses, e);
         }
     }
 
@@ -64,15 +61,15 @@ public class DataBaseHelper extends OrmLiteSqliteOpenHelper
         try
         {
             setupClasses();
-            for (AbstractEntity entity : entities)
+            for (Class aClass : entityClasses )
             {
-                TableUtils.dropTable(connectionSource, entity.getClass(), true);
+                TableUtils.dropTable(connectionSource, aClass.getClass(), true);
             }
             onCreate(database, connectionSource);
         }
         catch ( SQLException e )
         {
-            Logger.error(getClass().getName(), "onUpgrade", entities, e);
+            Logger.error(getClass().getName(), "onUpgrade", entityClasses, e);
         }
     }
 

@@ -8,6 +8,7 @@ import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.servic
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.services.products.persistence.entity.ProductEntity;
 
 import java.sql.SQLException;
+import java.util.List;
 
 /**
  * Description:
@@ -26,5 +27,11 @@ public class ProductDaoImpl extends AbstractDao<ProductEntity> implements Produc
     public ProductEntity getById(Long id)
     {
         return getById(id, ProductEntity.class);
+    }
+
+    @Override
+    public List<ProductEntity> getAllEntities()
+    {
+        return getAllEntities(ProductEntity.class);
     }
 }

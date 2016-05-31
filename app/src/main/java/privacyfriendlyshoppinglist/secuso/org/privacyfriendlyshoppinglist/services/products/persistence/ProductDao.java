@@ -4,6 +4,8 @@ import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framew
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.persistence.AbstractDao;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.services.products.persistence.entity.ProductEntity;
 
+import java.util.List;
+
 /**
  * Description:
  * Author: Grebiel Jose Ifill Brito
@@ -14,4 +16,6 @@ public interface ProductDao extends ContextSetter
     Long save(ProductEntity entity);
 
     ProductEntity getById(Long id);
+
+    List<ProductEntity> getAllEntities();
 }
