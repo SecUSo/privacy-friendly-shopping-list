@@ -1,6 +1,7 @@
 package privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.context;
 
 import android.content.Context;
+import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.persistence.DB;
 
 /**
  * Description:
@@ -9,5 +10,5 @@ import android.content.Context;
  */
 public interface ContextSetter
 {
-    void setContext(Context context);
+    void setContext(Context context, DB db);
 }

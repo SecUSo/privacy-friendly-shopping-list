@@ -1,14 +1,11 @@
 package privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.persistence;
 
 import android.content.Context;
-import android.util.Log;
 import com.j256.ormlite.dao.Dao;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.context.ContextSetter;
-import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.logger.Logger;
-import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.services.products.persistence.entity.ProductEntity;
+import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.logger.PFALogger;
 
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -18,63 +15,96 @@ import java.util.List;
  */
 public abstract class AbstractDao<T extends AbstractEntity> implements ContextSetter
 {
-    protected Context context;
-    protected DataBaseHelper database;
+    private DataBaseHelper database;
 
     @Override
-    public void setContext(Context context)
+    public void setContext(Context context, DB db)
     {
-        this.context = context;
-        database = new DataBaseHelper(context);
+        database = new DataBaseHelper(context, db);
     }
 
-    public Long saveOrUpdate(T entity)
+    protected Long saveOrUpdate(T entity)
     {
-        Logger.info(getClass().getName(), "saveOrUpdate", entity);
+        PFALogger.info(getClass().getName(), "saveOrUpdate", entity);
         try
         {
+            @SuppressWarnings("unchecked")
             Dao<T, Long> dao = database.getDao((Class) entity.getClass());
             dao.createOrUpdate(entity);
-            Logger.info(getClass().getName(), "saveOrUpdate", "successful");
+            PFALogger.info(getClass().getName(), "saveOrUpdate", "successful");
             return entity.getId();
         }
         catch ( SQLException e )
         {
-            Logger.error(getClass().getName(), "saveOrUpdate", entity, e);
+            PFALogger.error(getClass().getName(), "saveOrUpdate", entity, e);
             return null;
         }
     }
 
-    public T getById(Long id, Class<T> type)
+    protected T getById(Long id, Class<T> type)
     {
-        Logger.info(getClass().getName(), "getById", id);
+        PFALogger.info(getClass().getName(), "getById", id);
         try
         {
             Dao<T, Long> dao = database.getDao(type);
             T entity = dao.queryForId(id);
-            Logger.info(getClass().getName(), "getById", "successful");
+            PFALogger.info(getClass().getName(), "getById", "successful");
             return entity;
         }
         catch ( SQLException e )
         {
-            Logger.error(getClass().getName(), "getById", id, e);
+            PFALogger.error(getClass().getName(), "getById", id, e);
             return null;
         }
     }
 
-    public List<T> getAllEntities(Class<T> type){
+    protected List<T> getAllEntities(Class<T> type)
+    {
         List<T> entities;
-        Logger.info(getClass().getName(), "getAllEntities", "start");
+        PFALogger.info(getClass().getName(), "getAllEntities", "start");
         try
         {
             Dao<T, Long> dao = database.getDao(type);
             entities = dao.queryForAll();
-            Logger.info(getClass().getName(), "getById", "successful");
+            PFALogger.info(getClass().getName(), "getAllEntities", "successful");
             return entities;
         }
         catch ( SQLException e )
         {
-            Logger.error(getClass().getName(), "getById", type, e);
+            PFALogger.error(getClass().getName(), "getAllEntities", type, e);
+            return null;
+        }
+    }
+
+    protected boolean deleteById(Long id, Class<T> type)
+    {
+        PFALogger.info(getClass().getName(), "deleteById", id);
+        try
+        {
+            Dao<T, Long> dao = database.getDao(type);
+            dao.deleteById(id);
+            PFALogger.info(getClass().getName(), "deleteById", "successful");
+            return true;
+        }
+        catch ( SQLException e )
+        {
+            PFALogger.error(getClass().getName(), "deleteById", id, e);
+            return false;
+        }
+    }
+
+    protected Dao<T, Long> getDao(Class<T> type)
+    {
+        PFALogger.info(getClass().getName(), "getDao", "start");
+        try
+        {
+            Dao<T, Long> dao = database.getDao(type);
+            PFALogger.info(getClass().getName(), "getDao", "successful");
+            return dao;
+        }
+        catch ( SQLException e )
+        {
+            PFALogger.error(getClass().getName(), "getDao", type, e);
             return null;
         }
     }

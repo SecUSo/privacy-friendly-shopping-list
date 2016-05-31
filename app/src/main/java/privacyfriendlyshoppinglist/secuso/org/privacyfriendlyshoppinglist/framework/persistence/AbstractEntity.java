@@ -10,14 +10,14 @@ import com.j256.ormlite.field.DatabaseField;
 public abstract class AbstractEntity
 {
     @DatabaseField(generatedId = true)
-    public Long id;
+    private Long id;
 
-    public Long getId()
+    Long getId()
     {
         return id;
     }
 
-    public void setId(Long id)
+    void setId(Long id)
     {
         this.id = id;
     }

@@ -1,13 +1,9 @@
 package privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.services.products.persistence.impl;
 
-import android.util.Log;
-import com.j256.ormlite.dao.Dao;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.persistence.AbstractDao;
-import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.persistence.DataBaseHelper;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.services.products.persistence.ProductDao;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.services.products.persistence.entity.ProductEntity;
 
-import java.sql.SQLException;
 import java.util.List;
 
 /**
@@ -33,5 +29,11 @@ public class ProductDaoImpl extends AbstractDao<ProductEntity> implements Produc
     public List<ProductEntity> getAllEntities()
     {
         return getAllEntities(ProductEntity.class);
+    }
+
+    @Override
+    public boolean deleteById(Long id)
+    {
+        return deleteById(id, ProductEntity.class);
     }
 }

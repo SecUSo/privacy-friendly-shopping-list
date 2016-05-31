@@ -12,7 +12,7 @@ import java.util.Date;
  */
 public class ProductEntity extends AbstractEntity
 {
-    @DatabaseField
+    @DatabaseField(canBeNull = false)
     private String productName;
 
     @DatabaseField

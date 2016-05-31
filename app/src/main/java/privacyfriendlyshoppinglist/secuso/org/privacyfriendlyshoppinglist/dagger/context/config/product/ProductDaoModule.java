@@ -20,7 +20,8 @@ import javax.inject.Singleton;
 )
 public class ProductDaoModule implements AppModule
 {
-    @Provides @Singleton
+    @Provides
+    @Singleton
     ProductDao provideProductDao()
     {
         return new ProductDaoImpl();

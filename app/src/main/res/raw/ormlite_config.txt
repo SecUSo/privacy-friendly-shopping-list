@@ -1,5 +1,5 @@
 #
-# generated on 2016/05/31 08:49:34
+# generated on 2016/05/31 09:29:51
 #
 # --table-start--
 dataClass=privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.services.products.persistence.entity.ProductEntity
@@ -7,6 +7,7 @@ tableName=productentity
 # --table-fields-start--
 # --field-start--
 fieldName=productName
+canBeNull=false
 # --field-end--
 # --field-start--
 fieldName=price

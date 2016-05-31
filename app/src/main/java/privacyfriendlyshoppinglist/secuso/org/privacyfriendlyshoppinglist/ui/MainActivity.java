@@ -12,18 +12,21 @@ public class MainActivity extends AppCompatActivity
 {
 
     @Override
-    protected final void onCreate(final Bundle savedInstanceState) {
+    protected final void onCreate(final Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
 
     }
 
     @Override
-    protected final void onStart() {
+    protected final void onStart()
+    {
         super.onStart();
     }
 
     @Override
-    protected final void onStop() {
+    protected final void onStop()
+    {
         super.onStop();
     }
 }

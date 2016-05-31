@@ -7,7 +7,7 @@ import com.j256.ormlite.android.apptools.OrmLiteSqliteOpenHelper;
 import com.j256.ormlite.support.ConnectionSource;
 import com.j256.ormlite.table.TableUtils;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.R;
-import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.logger.Logger;
+import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.logger.PFALogger;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.services.products.persistence.entity.ProductEntity;
 
 import java.io.IOException;
@@ -20,20 +20,19 @@ import java.util.List;
  * Author: Grebiel Jose Ifill Brito
  * Created: 16.05.16 15:35 creation date
  */
-public class DataBaseHelper extends OrmLiteSqliteOpenHelper
+class DataBaseHelper extends OrmLiteSqliteOpenHelper
 {
-    public static final int DATABASE_VERSION = 1;
-    public static final String DATABASE_NAME = "ShoppingList_test.db";
     private static List<Class<? extends AbstractEntity>> entityClasses;
 
-    public DataBaseHelper(Context context)
+    DataBaseHelper(Context context, DB db)
     {
-        super(context, DATABASE_NAME, null, DATABASE_VERSION, R.raw.ormlite_config);
+        super(context, db.getDbName(), null, db.getDbVersion(), R.raw.ormlite_config);
     }
 
     private void setupClasses()
     {
         entityClasses = new ArrayList<>();
+        // SETUP_PERSISTENCE: add all Entity classes to this list
         entityClasses.add(ProductEntity.class);
     }
 
@@ -43,15 +42,15 @@ public class DataBaseHelper extends OrmLiteSqliteOpenHelper
         try
         {
             setupClasses();
-            Logger.info(getClass().getName(), "onCreate", "start");
-            for (Class aClass : entityClasses )
+            PFALogger.info(getClass().getName(), "onCreate", "start");
+            for ( Class aClass : entityClasses )
             {
                 TableUtils.createTable(connectionSource, aClass);
             }
         }
         catch ( Exception e )
         {
-            Logger.error(getClass().getName(), "onCreate", entityClasses, e);
+            PFALogger.error(getClass().getName(), "onCreate", entityClasses, e);
         }
     }
 
@@ -61,7 +60,7 @@ public class DataBaseHelper extends OrmLiteSqliteOpenHelper
         try
         {
             setupClasses();
-            for (Class aClass : entityClasses )
+            for ( Class aClass : entityClasses )
             {
                 TableUtils.dropTable(connectionSource, aClass.getClass(), true);
             }
@@ -69,14 +68,8 @@ public class DataBaseHelper extends OrmLiteSqliteOpenHelper
         }
         catch ( SQLException e )
         {
-            Logger.error(getClass().getName(), "onUpgrade", entityClasses, e);
+            PFALogger.error(getClass().getName(), "onUpgrade", entityClasses, e);
         }
-    }
-
-    @Override
-    public void close()
-    {
-        super.close();
     }
 
     private static class DataBaseConfig extends OrmLiteConfigUtil
