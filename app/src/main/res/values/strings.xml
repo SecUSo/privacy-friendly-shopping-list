@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Privacy Friendly Shopping List</string>
+    <string name="tab_2">TAB 2</string>
+    <string name="tab_1">TAB 1</string>
 </resources>
