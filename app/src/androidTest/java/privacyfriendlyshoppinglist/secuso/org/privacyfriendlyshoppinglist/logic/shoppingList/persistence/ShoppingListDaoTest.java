@@ -63,8 +63,20 @@ public class ShoppingListDaoTest extends AbstractTest
         ProductEntity p3 = new ProductEntity().setProductName("p3").setShoppingList(listEntity);
         ProductEntity p4 = new ProductEntity().setProductName("p4").setShoppingList(listEntity);
 
+        productDao.save(p1);
+        productDao.save(p2);
+        productDao.save(p3);
+        productDao.save(p4);
 
+        List<ShoppingListEntity> allEntities = shoppingListDao.getAllEntities();
+        int expectedListSize = 1;
+        assertEquals(expectedListSize, allEntities.size());
 
+        ShoppingListEntity retrievedListEntity = allEntities.get(0);
+        ForeignCollection<ProductEntity> products = retrievedListEntity.getProducts();
+        int actualNumberOfProducts = products.size();
+        int expectedNumberOfProducts = 4;
+        assertEquals(expectedNumberOfProducts, actualNumberOfProducts);
     }
 
     @Test
