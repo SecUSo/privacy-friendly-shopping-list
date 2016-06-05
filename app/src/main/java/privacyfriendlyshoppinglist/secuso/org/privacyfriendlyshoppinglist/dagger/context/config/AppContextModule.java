@@ -2,6 +2,7 @@ package privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.dagge
 
 import dagger.Module;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.dagger.context.config.product.ProductDaoModule;
+import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.dagger.context.config.shoppingList.ShoppingListDaoModule;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.context.AppModule;
 
 /**
@@ -12,7 +13,8 @@ import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framew
 @Module(
         includes = {
                 // DEPENDENCY_INJECTION add all Modules here
-                ProductDaoModule.class
+                ProductDaoModule.class,
+                ShoppingListDaoModule.class
         }
 )
 public class AppContextModule implements AppModule

@@ -1,7 +1,8 @@
-package privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.services.products.persistence.entity;
+package privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.products.persistence.entity;
 
 import com.j256.ormlite.field.DatabaseField;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.persistence.AbstractEntity;
+import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.shoppingList.persistence.entity.ShoppingListEntity;
 
 import java.util.Date;
 
@@ -29,6 +30,9 @@ public class ProductEntity extends AbstractEntity
 
     @DatabaseField
     private Date lastDate;
+
+    @DatabaseField(canBeNull = false, foreign = true)
+    private ShoppingListEntity shoppingList;
 
     // SETUP_PERSISTENCE: needed for ORMLite
     public ProductEntity()
@@ -101,6 +105,17 @@ public class ProductEntity extends AbstractEntity
         return this;
     }
 
+    public ProductEntity setShoppingList(ShoppingListEntity shoppingList)
+    {
+        this.shoppingList = shoppingList;
+        return this;
+    }
+
+    public ShoppingListEntity getShoppingList()
+    {
+        return shoppingList;
+    }
+
     @Override
     public String toString()
     {
@@ -111,6 +126,7 @@ public class ProductEntity extends AbstractEntity
                 ", category='" + category + '\'' +
                 ", store='" + store + '\'' +
                 ", lastDate=" + lastDate +
+                ", shoppingList=" + shoppingList +
                 '}';
     }
 }

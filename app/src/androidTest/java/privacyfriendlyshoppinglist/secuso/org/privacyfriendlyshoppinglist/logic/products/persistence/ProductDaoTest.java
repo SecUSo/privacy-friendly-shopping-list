@@ -1,11 +1,14 @@
-package privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.services.products.persistence;
+package privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.products.persistence;
 
 import org.joda.time.DateTime;
 import org.junit.Test;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.AbstractTest;
+import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.dagger.context.config.AppContextModule;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.context.ContextManager;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.persistence.DB;
-import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.services.products.persistence.entity.ProductEntity;
+import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.products.persistence.entity.ProductEntity;
+import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.shoppingList.persistence.ShoppingListDao;
+import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.shoppingList.persistence.entity.ShoppingListEntity;
 
 import java.util.Date;
 import java.util.List;
@@ -18,11 +21,13 @@ import java.util.List;
 public class ProductDaoTest extends AbstractTest
 {
     private ProductDao productDao;
+    private ShoppingListDao shoppingListDao;
 
     @Override
     public void setupBeforeEachTest()
     {
         productDao = new ContextManager<ProductDao>().getInstance(getContext(), DB.TEST, ProductDao.class);
+        shoppingListDao = new ContextManager<ShoppingListDao>().getInstance(getContext(), DB.TEST, ShoppingListDao.class);
         // delete database before each test
         getContext().deleteDatabase(DB.TEST.getDbName());
     }
@@ -35,15 +40,20 @@ public class ProductDaoTest extends AbstractTest
     }
 
     @Test
-    public void testSave() throws Exception
+    public void testSave()
     {
+        ShoppingListEntity listEntity = new ShoppingListEntity()
+                .setListName("listName");
+        shoppingListDao.save(listEntity);
+
         ProductEntity entity = new ProductEntity()
                 .setProductName("name")
                 .setDescription("description")
                 .setPrice(100.0)
                 .setStore("store")
                 .setCategory("category")
-                .setLastDate(new DateTime("2015-05-31").toDate());
+                .setLastDate(new DateTime("2015-05-31").toDate())
+                .setShoppingList(listEntity);
 
         Long id = productDao.save(entity);
 
@@ -52,8 +62,12 @@ public class ProductDaoTest extends AbstractTest
 
 
     @Test
-    public void testGetById() throws Exception
+    public void testGetById()
     {
+        ShoppingListEntity listEntity = new ShoppingListEntity()
+                .setListName("listName");
+        Long expectedListId = shoppingListDao.save(listEntity);
+
         String expectedName = "name";
         String expectedDescription = "description";
         double expectedPrice = 100.0;
@@ -67,7 +81,8 @@ public class ProductDaoTest extends AbstractTest
                 .setPrice(expectedPrice)
                 .setStore(expectedStore)
                 .setCategory(expectedCategory)
-                .setLastDate(expectedDate);
+                .setLastDate(expectedDate)
+                .setShoppingList(listEntity);
 
         Long id = productDao.save(entity);
 
@@ -78,11 +93,16 @@ public class ProductDaoTest extends AbstractTest
         assertEquals(expectedStore, newEntity.getStore());
         assertEquals(expectedCategory, newEntity.getCategory());
         assertEquals(expectedDate, newEntity.getLastDate());
+        assertEquals(expectedListId, newEntity.getShoppingList().getId());
     }
 
     @Test
-    public void testUpdate() throws Exception
+    public void testUpdate()
     {
+        ShoppingListEntity listEntity = new ShoppingListEntity()
+                .setListName("listName");
+        shoppingListDao.save(listEntity);
+
         String name = "name";
         String description = "description";
         double price = 100.0;
@@ -96,7 +116,8 @@ public class ProductDaoTest extends AbstractTest
                 .setPrice(price)
                 .setStore(store)
                 .setCategory(category)
-                .setLastDate(date);
+                .setLastDate(date)
+                .setShoppingList(listEntity);
 
         // save an entity
         Long id = productDao.save(entity1);
@@ -135,11 +156,15 @@ public class ProductDaoTest extends AbstractTest
     @Test
     public void testGetAllEntities()
     {
-        ProductEntity entity1 = new ProductEntity().setProductName("name1");
-        ProductEntity entity2 = new ProductEntity().setProductName("name2");
-        ProductEntity entity3 = new ProductEntity().setProductName("name3");
-        ProductEntity entity4 = new ProductEntity().setProductName("name4");
-        ProductEntity entity5 = new ProductEntity().setProductName("name5");
+        ShoppingListEntity listEntity = new ShoppingListEntity()
+                .setListName("listName");
+        shoppingListDao.save(listEntity);
+
+        ProductEntity entity1 = new ProductEntity().setProductName("name1").setShoppingList(listEntity);
+        ProductEntity entity2 = new ProductEntity().setProductName("name2").setShoppingList(listEntity);
+        ProductEntity entity3 = new ProductEntity().setProductName("name3").setShoppingList(listEntity);
+        ProductEntity entity4 = new ProductEntity().setProductName("name4").setShoppingList(listEntity);
+        ProductEntity entity5 = new ProductEntity().setProductName("name5").setShoppingList(listEntity);
 
         productDao.save(entity1);
         productDao.save(entity2);
@@ -155,14 +180,31 @@ public class ProductDaoTest extends AbstractTest
     @Test(expected = Exception.class)
     public void testNameCannotBeNull()
     {
-        ProductEntity entity = new ProductEntity();
+        ShoppingListEntity listEntity = new ShoppingListEntity()
+                .setListName("listName");
+        shoppingListDao.save(listEntity);
+
+        ProductEntity entity = new ProductEntity()
+                .setShoppingList(listEntity);
+        productDao.save(entity);
+    }
+
+    @Test(expected = Exception.class)
+    public void testShoppingListCannotBeNull()
+    {
+        ProductEntity entity = new ProductEntity()
+                .setProductName("name");
         productDao.save(entity);
     }
 
     @Test
     public void testDeleteById()
     {
-        ProductEntity entity = new ProductEntity().setProductName("name");
+        ShoppingListEntity listEntity = new ShoppingListEntity()
+                .setListName("listName");
+        shoppingListDao.save(listEntity);
+
+        ProductEntity entity = new ProductEntity().setProductName("name").setShoppingList(listEntity);
         Long id = productDao.save(entity);
         boolean deleted = productDao.deleteById(id);
         assertTrue(deleted);

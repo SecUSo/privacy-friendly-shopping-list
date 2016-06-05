@@ -1,8 +1,19 @@
 #
-# generated on 2016/05/31 09:29:51
+# generated on 2016/06/05 02:30:12
 #
 # --table-start--
-dataClass=privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.services.products.persistence.entity.ProductEntity
+dataClass=privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.persistence.AbstractEntity
+tableName=abstractentity
+# --table-fields-start--
+# --field-start--
+fieldName=id
+generatedId=true
+# --field-end--
+# --table-fields-end--
+# --table-end--
+#################################
+# --table-start--
+dataClass=privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.products.persistence.entity.ProductEntity
 tableName=productentity
 # --table-fields-start--
 # --field-start--
@@ -25,6 +36,11 @@ fieldName=store
 fieldName=lastDate
 # --field-end--
 # --field-start--
+fieldName=shoppingList
+canBeNull=false
+foreign=true
+# --field-end--
+# --field-start--
 fieldName=id
 generatedId=true
 # --field-end--
@@ -32,9 +48,17 @@ generatedId=true
 # --table-end--
 #################################
 # --table-start--
-dataClass=privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.persistence.AbstractEntity
-tableName=abstractentity
+dataClass=privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.shoppingList.persistence.entity.ShoppingListEntity
+tableName=shoppinglistentity
 # --table-fields-start--
+# --field-start--
+fieldName=listName
+canBeNull=false
+# --field-end--
+# --field-start--
+fieldName=products
+foreignCollection=true
+# --field-end--
 # --field-start--
 fieldName=id
 generatedId=true
