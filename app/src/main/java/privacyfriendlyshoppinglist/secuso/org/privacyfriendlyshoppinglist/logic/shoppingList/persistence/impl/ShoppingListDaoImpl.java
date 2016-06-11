@@ -36,7 +36,7 @@ public class ShoppingListDaoImpl extends AbstractDao<ShoppingListEntity> impleme
     }
 
     @Override
-    public boolean deleteById(Long id)
+    public Boolean deleteById(Long id)
     {
         return deleteById(id, ShoppingListEntity.class);
     }

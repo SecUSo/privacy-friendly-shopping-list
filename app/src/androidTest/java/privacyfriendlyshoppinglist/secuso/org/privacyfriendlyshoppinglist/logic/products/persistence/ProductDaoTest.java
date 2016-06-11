@@ -2,8 +2,7 @@ package privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic
 
 import org.joda.time.DateTime;
 import org.junit.Test;
-import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.AbstractTest;
-import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.dagger.context.config.AppContextModule;
+import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.AbstractDatabaseTest;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.context.ContextManager;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.persistence.DB;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.products.persistence.entity.ProductEntity;
@@ -18,7 +17,7 @@ import java.util.List;
  * Author: Grebiel Jose Ifill Brito
  * Created: 16.05.16 18:33 creation date
  */
-public class ProductDaoTest extends AbstractTest
+public class ProductDaoTest extends AbstractDatabaseTest
 {
     private ProductDao productDao;
     private ShoppingListDao shoppingListDao;
@@ -28,15 +27,6 @@ public class ProductDaoTest extends AbstractTest
     {
         productDao = new ContextManager<ProductDao>().getInstance(getContext(), DB.TEST, ProductDao.class);
         shoppingListDao = new ContextManager<ShoppingListDao>().getInstance(getContext(), DB.TEST, ShoppingListDao.class);
-        // delete database before each test
-        getContext().deleteDatabase(DB.TEST.getDbName());
-    }
-
-    @Override
-    protected void cleanAfterEachTest()
-    {
-        // uncomment to delete data base after each test
-        // getContext().deleteDatabase(DB.TEST.getDbName());
     }
 
     @Test

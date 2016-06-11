@@ -19,5 +19,5 @@ public interface ShoppingListDao extends ContextSetter
 
     List<ShoppingListEntity> getAllEntities();
 
-    boolean deleteById(Long id);
+    Boolean deleteById(Long id);
 }

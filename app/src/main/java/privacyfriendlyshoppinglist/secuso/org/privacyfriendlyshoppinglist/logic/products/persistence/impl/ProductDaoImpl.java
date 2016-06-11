@@ -36,7 +36,7 @@ public class ProductDaoImpl extends AbstractDao<ProductEntity> implements Produc
     }
 
     @Override
-    public boolean deleteById(Long id)
+    public Boolean deleteById(Long id)
     {
         return deleteById(id, ProductEntity.class);
     }

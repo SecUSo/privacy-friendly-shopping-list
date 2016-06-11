@@ -3,6 +3,7 @@ package privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist;
 import android.support.test.runner.AndroidJUnit4;
 import android.test.AndroidTestCase;
 import org.junit.runner.RunWith;
+import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.persistence.DB;
 
 /**
  * Description:
@@ -10,13 +11,15 @@ import org.junit.runner.RunWith;
  * Created: 31.05.16 creation date
  */
 @RunWith(AndroidJUnit4.class)
-abstract public class AbstractTest extends AndroidTestCase
+abstract public class AbstractDatabaseTest extends AndroidTestCase
 {
 
     protected void setUp() throws Exception
     {
         super.setUp();
         setupBeforeEachTest();
+        // delete database before each test
+        getContext().deleteDatabase(DB.TEST.getDbName());
     }
 
     protected void tearDown() throws Exception
@@ -27,5 +30,5 @@ abstract public class AbstractTest extends AndroidTestCase
 
     abstract protected void setupBeforeEachTest();
 
-    abstract protected void cleanAfterEachTest();
+    protected void cleanAfterEachTest(){}
 }

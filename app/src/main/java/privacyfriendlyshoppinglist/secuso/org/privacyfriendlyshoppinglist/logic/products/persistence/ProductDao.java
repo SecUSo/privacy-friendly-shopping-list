@@ -18,5 +18,5 @@ public interface ProductDao extends ContextSetter
 
     List<ProductEntity> getAllEntities();
 
-    boolean deleteById(Long id);
+    Boolean deleteById(Long id);
 }
