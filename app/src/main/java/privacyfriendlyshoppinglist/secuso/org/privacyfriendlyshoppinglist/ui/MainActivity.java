@@ -40,10 +40,11 @@ public class MainActivity extends AppCompatActivity
         mDrawerList = (ListView) findViewById(R.id.left_drawer);
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, R.layout.drawer_list_item, R.id.menu_item, listItemTitles);
         mDrawerList.setAdapter(adapter);
-        mDrawerList.setOnItemClickListener(new DrawerItemClickListener());
-
+        mDrawerList.setOnItemClickListener(new DrawerItemClickListener(this));
 
     }
+
+
 
 
     @Override
