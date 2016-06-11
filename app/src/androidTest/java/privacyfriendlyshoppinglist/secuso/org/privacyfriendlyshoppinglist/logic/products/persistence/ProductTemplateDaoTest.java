@@ -129,8 +129,8 @@ public class ProductTemplateDaoTest extends AbstractDatabaseTest
         ProductTemplateEntity entity2 = new ProductTemplateEntity();
         ProductTemplateEntity entity3 = new ProductTemplateEntity();
         entity1.setProductName("entity1");
-        entity1.setProductName("entity2");
-        entity1.setProductName("entity3");
+        entity2.setProductName("entity2");
+        entity3.setProductName("entity3");
 
         productTemplateDao.save(entity1);
         productTemplateDao.save(entity2);

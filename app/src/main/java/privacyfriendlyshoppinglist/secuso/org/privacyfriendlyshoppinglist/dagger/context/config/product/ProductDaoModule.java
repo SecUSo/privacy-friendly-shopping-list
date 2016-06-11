@@ -3,10 +3,8 @@ package privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.dagge
 import dagger.Module;
 import dagger.Provides;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.context.AppModule;
-import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.products.persistence.ProductDao;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.products.persistence.ProductItemDao;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.products.persistence.ProductTemplateDao;
-import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.products.persistence.impl.ProductDaoImpl;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.products.persistence.impl.ProductItemDaoImpl;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.products.persistence.impl.ProductTemplateDaoImpl;
 
@@ -19,20 +17,12 @@ import javax.inject.Singleton;
  */
 @Module(
         injects = {
-                ProductDao.class,
                 ProductTemplateDao.class,
                 ProductItemDao.class
         }
 )
 public class ProductDaoModule implements AppModule
 {
-    @Provides
-    @Singleton
-    ProductDao provideProductDao()
-    {
-        return new ProductDaoImpl();
-    }
-
     @Provides
     @Singleton
     ProductTemplateDao provideProductTemplateDao()

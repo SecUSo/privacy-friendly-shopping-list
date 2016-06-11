@@ -1,5 +1,5 @@
 #
-# generated on 2016/06/11 04:38:58
+# generated on 2016/06/11 05:44:35
 #
 # --table-start--
 dataClass=privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.persistence.AbstractEntity
@@ -82,60 +82,6 @@ fieldName=defaultStore
 # --field-end--
 # --field-start--
 fieldName=defaultIcon
-# --field-end--
-# --field-start--
-fieldName=products
-foreignCollection=true
-# --field-end--
-# --field-start--
-fieldName=id
-generatedId=true
-# --field-end--
-# --table-fields-end--
-# --table-end--
-#################################
-# --table-start--
-dataClass=privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.products.persistence.entity.ProductEntity
-tableName=productentity
-# --table-fields-start--
-# --field-start--
-fieldName=productName
-canBeNull=false
-# --field-end--
-# --field-start--
-fieldName=price
-# --field-end--
-# --field-start--
-fieldName=description
-# --field-end--
-# --field-start--
-fieldName=category
-# --field-end--
-# --field-start--
-fieldName=store
-# --field-end--
-# --field-start--
-fieldName=lastDate
-# --field-end--
-# --field-start--
-fieldName=shoppingList
-canBeNull=false
-foreign=true
-# --field-end--
-# --field-start--
-fieldName=id
-generatedId=true
-# --field-end--
-# --table-fields-end--
-# --table-end--
-#################################
-# --table-start--
-dataClass=privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.shoppingList.persistence.entity.ShoppingListEntity
-tableName=shoppinglistentity
-# --table-fields-start--
-# --field-start--
-fieldName=listName
-canBeNull=false
 # --field-end--
 # --field-start--
 fieldName=products
