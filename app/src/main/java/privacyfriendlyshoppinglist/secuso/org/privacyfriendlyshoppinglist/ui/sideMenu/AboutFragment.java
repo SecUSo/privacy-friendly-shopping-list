@@ -20,7 +20,7 @@ public class AboutFragment extends Fragment
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         View rootView = inflater.inflate(R.layout.fragment_about, container, false);
-        //((ActionBarActivity)getActivity()).getSupportActionBar().setSubtitle(R.string.action_about);
+        activity.setTitle(R.string.action_about);
         container.removeAllViews();
         return rootView;
     }

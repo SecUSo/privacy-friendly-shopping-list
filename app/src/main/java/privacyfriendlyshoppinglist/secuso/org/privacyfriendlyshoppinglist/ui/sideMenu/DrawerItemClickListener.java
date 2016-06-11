@@ -7,6 +7,7 @@ import android.os.Bundle;
 
 
 import android.support.v4.app.ListFragment;
+import android.support.v4.widget.DrawerLayout;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -20,26 +21,30 @@ import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.Mai
 public class DrawerItemClickListener implements ListView.OnItemClickListener
 {
     private final Activity activity;
+    private DrawerLayout mDrawerLayout;
+    private ListView mDrawerList;
 
-    public DrawerItemClickListener(Activity activity)
+    public DrawerItemClickListener(Activity activity, DrawerLayout mDrawerLayout, ListView mdrawerList)
     {
         this.activity = activity;
+        this.mDrawerLayout = mDrawerLayout;
+        this.mDrawerList = mdrawerList;
     }
+
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id)
     {
         Fragment fragment;
 
-        switch (position) {
+        switch ( position )
+        {
             case 0:
                 fragment = new AboutFragment();
                 break;
             default:
                 fragment = new AboutFragment();
                 break;
-//            default:
-//                break;
         }
 
         FragmentManager fragmentManager = activity.getFragmentManager();
@@ -48,15 +53,8 @@ public class DrawerItemClickListener implements ListView.OnItemClickListener
                 .replace(R.id.content_frame, fragment)
                 .commit();
 
-        //selectItem(position);
+        mDrawerLayout.closeDrawer(mDrawerList);
+
+
     }
-
-    /*private void selectItem(int position){
-        Fragment fragment = new ListFragment();
-        Bundle args = new Bundle();
-        args.putInt(ListItemFragment.ARG_LISTITEM_NUMBER, position);
-        fragment.setArguments(args);
-    }*/
-
-
 }

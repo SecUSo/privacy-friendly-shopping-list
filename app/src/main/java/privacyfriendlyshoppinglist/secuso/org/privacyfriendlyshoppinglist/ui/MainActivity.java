@@ -27,6 +27,7 @@ public class MainActivity extends AppCompatActivity
     private CharSequence mDrawerTitle;
     private CharSequence mTitle;
 
+
     @Override
     protected final void onCreate(final Bundle savedInstanceState)
     {
@@ -40,12 +41,9 @@ public class MainActivity extends AppCompatActivity
         mDrawerList = (ListView) findViewById(R.id.left_drawer);
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, R.layout.drawer_list_item, R.id.menu_item, listItemTitles);
         mDrawerList.setAdapter(adapter);
-        mDrawerList.setOnItemClickListener(new DrawerItemClickListener(this));
+        mDrawerList.setOnItemClickListener(new DrawerItemClickListener(this, mDrawerLayout, mDrawerList));
 
     }
-
-
-
 
     @Override
     protected final void onStart()
