@@ -5,13 +5,14 @@ import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framew
 /**
  * Description:
  * Author: Grebiel Jose Ifill Brito
- * Created: 11.06.16 creation date
+ * Created: 18.05.16 creation date
  */
-public class InstanceFactory extends AbstractInstanceFactory
+public class InstanceFactoryForTests extends AbstractInstanceFactory
 {
+
     @Override
     protected DB getDB()
     {
-        return DB.APP;
+        return DB.TEST;
     }
 }

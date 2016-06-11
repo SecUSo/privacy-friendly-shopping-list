@@ -8,7 +8,7 @@ package privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.frame
 public enum DB
 {
     TEST("ShoppingList_test.db", 1), // for test purposes
-    PRODUCTION("ShippingList.db", 1); // for the app
+    APP("ShippingList.db", 1); // for the app
 
     private String dbName;
     private int dbVersion;

@@ -3,8 +3,7 @@ package privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic
 import org.joda.time.DateTime;
 import org.junit.Test;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.AbstractDatabaseTest;
-import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.context.InstanceFactory;
-import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.persistence.DB;
+import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.context.InstanceFactoryForTests;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.product.persistence.entity.ProductTemplateEntity;
 
 import java.util.Date;
@@ -22,7 +21,7 @@ public class ProductTemplateDaoTest extends AbstractDatabaseTest
     @Override
     protected void setupBeforeEachTest()
     {
-        InstanceFactory instanceFactory = new InstanceFactory<>(DB.TEST);
+        InstanceFactoryForTests instanceFactory = new InstanceFactoryForTests();
         productTemplateDao = (ProductTemplateDao) instanceFactory.createInstance(getContext(), ProductTemplateDao.class);
     }
 

@@ -3,8 +3,7 @@ package privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic
 import org.joda.time.DateTime;
 import org.junit.Test;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.AbstractDatabaseTest;
-import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.context.InstanceFactory;
-import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.persistence.DB;
+import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.context.InstanceFactoryForTests;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.shoppingList.business.domain.ListDto;
 
 /**
@@ -20,7 +19,8 @@ public class ShoppingListServiceTest extends AbstractDatabaseTest
     @Override
     protected void setupBeforeEachTest()
     {
-        shoppingListService = new InstanceFactory<ShoppingListService>(DB.TEST).createInstance(getContext(), ShoppingListService.class);
+        InstanceFactoryForTests instanceFactory = new InstanceFactoryForTests();
+        shoppingListService = (ShoppingListService) instanceFactory.createInstance(getContext(), ShoppingListService.class);
     }
 
     @Test
@@ -34,6 +34,6 @@ public class ShoppingListServiceTest extends AbstractDatabaseTest
         dto.setNotes("notes");
 
         shoppingListService.saveOrUpdate(dto);
-        assertNotNull(dto.getId()); //todo gif
+        assertNotNull(dto.getId());
     }
 }
