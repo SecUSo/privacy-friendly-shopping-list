@@ -21,7 +21,7 @@ import javax.inject.Singleton;
                 ProductItemDao.class
         }
 )
-public class ProductDaoModule implements AppModule
+public class ProductModule implements AppModule
 {
     @Provides
     @Singleton

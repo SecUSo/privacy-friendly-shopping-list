@@ -1,37 +1,30 @@
-package privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.shoppingList.persistence.entity;
+package privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.shoppingList.business.domain;
 
-import com.j256.ormlite.dao.ForeignCollection;
-import com.j256.ormlite.field.DatabaseField;
-import com.j256.ormlite.field.ForeignCollectionField;
-import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.persistence.AbstractEntity;
-import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.product.persistence.entity.ProductItemEntity;
+import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.business.AbstractDto;
+import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.product.business.domain.ProductDto;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  * Description:
  * Author: Grebiel Jose Ifill Brito
- * Created: 09.06.16 creation date
+ * Created: 11.06.16 creation date
  */
-public class ShoppingListEntityNew extends AbstractEntity
+public class ListDto extends AbstractDto
 {
-    @DatabaseField(canBeNull = false)
+
+    public enum VariableName
+    {
+        ID, LIST_NAME, PRIORITY, ICON, DEADLINE, NOTES
+    }
+
     private String listName;
-
-    @DatabaseField
     private String priority;
-
-    @DatabaseField
     private Integer icon;
-
-    @DatabaseField
     private Date deadline;
-
-    @DatabaseField
     private String notes;
-
-    @ForeignCollectionField(eager = false)
-    ForeignCollection<ProductItemEntity> products;
+    private List<ProductDto> products;
 
     public String getListName()
     {
@@ -83,12 +76,12 @@ public class ShoppingListEntityNew extends AbstractEntity
         this.notes = notes;
     }
 
-    public ForeignCollection<ProductItemEntity> getProducts()
+    public List<ProductDto> getProducts()
     {
         return products;
     }
 
-    public void setProducts(ForeignCollection<ProductItemEntity> products)
+    public void setProducts(List<ProductDto> products)
     {
         this.products = products;
     }
@@ -96,7 +89,7 @@ public class ShoppingListEntityNew extends AbstractEntity
     @Override
     public String toString()
     {
-        return "ShoppingListEntityNew{" +
+        return "ListDto{" +
                 "listName='" + listName + '\'' +
                 ", priority='" + priority + '\'' +
                 ", icon=" + icon +
