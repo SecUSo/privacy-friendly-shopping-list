@@ -7,8 +7,10 @@ import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.shoppingList.business.impl.converter.ShoppingListConverter;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.shoppingList.persistence.ShoppingListDao;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.shoppingList.persistence.entity.ShoppingListEntity;
+import rx.Observable;
 
 import javax.inject.Inject;
+import java.util.List;
 
 /**
  * Description:
@@ -41,8 +43,39 @@ public class ShoppingListServiceImpl implements ShoppingListService
     public void saveOrUpdate(ListDto dto)
     {
         ShoppingListEntity entity = new ShoppingListEntity();
-        shoppingListConverter.copyDtoToEntity(dto, entity);
+        shoppingListConverter.convertDtoToEntity(dto, entity);
         Long id = shoppingListDao.save(entity);
-        dto.setId(id);
+        dto.setId(id.toString());
+    }
+
+    @Override
+    public ListDto getById(String id)
+    {
+        ListDto dto = new ListDto();
+        ShoppingListEntity entity = shoppingListDao.getById(Long.valueOf(id));
+        shoppingListConverter.convertEntityToDto(entity, dto);
+        return dto;
+    }
+
+    @Override
+    public void deleteById(String id)
+    {
+        shoppingListDao.deleteById(Long.valueOf(id));
+    }
+
+    @Override
+    public List<ListDto> getAllListDtos()
+    {
+        Observable<ListDto> dtos = Observable
+                .from(shoppingListDao.getAllEntities())
+                .map(this::getDto);
+        return dtos.toList().toBlocking().single();
+    }
+
+    private ListDto getDto(ShoppingListEntity entity)
+    {
+        ListDto dto = new ListDto();
+        shoppingListConverter.convertEntityToDto(entity, dto);
+        return dto;
     }
 }

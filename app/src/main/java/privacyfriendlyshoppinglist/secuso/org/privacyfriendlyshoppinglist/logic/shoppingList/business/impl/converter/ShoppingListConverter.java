@@ -10,7 +10,7 @@ import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.
  */
 public interface ShoppingListConverter
 {
-    void copyDtoToEntity(ListDto dto, ShoppingListEntity entity);
+    void convertDtoToEntity(ListDto dto, ShoppingListEntity entity);
 
-    void copyEntityToDto(ShoppingListEntity entity, ListDto dto);
+    void convertEntityToDto(ShoppingListEntity entity, ListDto dto);
 }

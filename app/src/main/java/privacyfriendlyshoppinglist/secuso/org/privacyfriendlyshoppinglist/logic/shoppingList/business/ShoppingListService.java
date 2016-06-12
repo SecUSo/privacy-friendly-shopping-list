@@ -3,6 +3,8 @@ package privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.context.ContextSetter;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.shoppingList.business.domain.ListDto;
 
+import java.util.List;
+
 /**
  * Description:
  * Author: Grebiel Jose Ifill Brito
@@ -11,4 +13,10 @@ import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.
 public interface ShoppingListService extends ContextSetter
 {
     void saveOrUpdate(ListDto dto);
+
+    ListDto getById (String id);
+
+    void deleteById (String id);
+
+    List<ListDto> getAllListDtos();
 }

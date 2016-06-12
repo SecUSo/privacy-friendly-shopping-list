@@ -12,9 +12,10 @@ import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.
 public class ShoppingListConverterImpl implements ShoppingListConverter
 {
     @Override
-    public void copyDtoToEntity(ListDto dto, ShoppingListEntity entity)
+    public void convertDtoToEntity(ListDto dto, ShoppingListEntity entity)
     {
-        entity.setId(dto.getId());
+        Long id = getIdAsLong(dto);
+        entity.setId(id);
         entity.setListName(dto.getListName());
         entity.setDeadline(dto.getDeadline());
         entity.setIcon(dto.getIcon());
@@ -23,13 +24,19 @@ public class ShoppingListConverterImpl implements ShoppingListConverter
     }
 
     @Override
-    public void copyEntityToDto(ShoppingListEntity entity, ListDto dto)
+    public void convertEntityToDto(ShoppingListEntity entity, ListDto dto)
     {
-        dto.setId(entity.getId());
+        dto.setId(entity.getId().toString());
         dto.setListName(entity.getListName());
         dto.setDeadline(entity.getDeadline());
         dto.setIcon(entity.getIcon());
         dto.setNotes(entity.getNotes());
         dto.setPriority(entity.getPriority());
+    }
+
+    private Long getIdAsLong(ListDto dto)
+    {
+        String stringId = dto.getId();
+        return stringId == null ? null : Long.valueOf(stringId);
     }
 }

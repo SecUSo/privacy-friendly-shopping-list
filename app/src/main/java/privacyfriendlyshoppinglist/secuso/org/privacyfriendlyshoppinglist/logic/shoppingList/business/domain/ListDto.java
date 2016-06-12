@@ -21,10 +21,9 @@ public class ListDto extends AbstractDto
 
     private String listName;
     private String priority;
-    private Integer icon;
+    private int icon;
     private Date deadline;
     private String notes;
-    private List<ProductDto> products;
 
     public String getListName()
     {
@@ -46,12 +45,12 @@ public class ListDto extends AbstractDto
         this.priority = priority;
     }
 
-    public Integer getIcon()
+    public int getIcon()
     {
         return icon;
     }
 
-    public void setIcon(Integer icon)
+    public void setIcon(int icon)
     {
         this.icon = icon;
     }
@@ -76,16 +75,6 @@ public class ListDto extends AbstractDto
         this.notes = notes;
     }
 
-    public List<ProductDto> getProducts()
-    {
-        return products;
-    }
-
-    public void setProducts(List<ProductDto> products)
-    {
-        this.products = products;
-    }
-
     @Override
     public String toString()
     {
@@ -95,7 +84,6 @@ public class ListDto extends AbstractDto
                 ", icon=" + icon +
                 ", deadline=" + deadline +
                 ", notes='" + notes + '\'' +
-                ", products=" + products +
                 '}';
     }
 }
