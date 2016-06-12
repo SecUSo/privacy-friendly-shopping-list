@@ -12,7 +12,14 @@ import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framew
  */
 abstract public class AbstractInstanceFactory
 {
-    public Object createInstance(Context context, Class aClass)
+    private Context context;
+
+    public AbstractInstanceFactory(Context context)
+    {
+        this.context = context;
+    }
+
+    public Object createInstance(Class aClass)
     {
         ObjectGraph objectGraph = ObjectGraph.create(new AppContextModule());
         Object classInstance = objectGraph.get(aClass);

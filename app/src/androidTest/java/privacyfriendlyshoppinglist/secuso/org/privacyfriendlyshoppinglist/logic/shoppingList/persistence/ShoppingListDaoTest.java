@@ -21,8 +21,8 @@ public class ShoppingListDaoTest extends AbstractDatabaseTest
     @Override
     protected void setupBeforeEachTest()
     {
-        InstanceFactoryForTests instanceFactory = new InstanceFactoryForTests();
-        shoppingListDao = (ShoppingListDao) instanceFactory.createInstance(getContext(), ShoppingListDao.class);
+        InstanceFactoryForTests instanceFactory = new InstanceFactoryForTests(getContext());
+        shoppingListDao = (ShoppingListDao) instanceFactory.createInstance(ShoppingListDao.class);
     }
 
     @Test

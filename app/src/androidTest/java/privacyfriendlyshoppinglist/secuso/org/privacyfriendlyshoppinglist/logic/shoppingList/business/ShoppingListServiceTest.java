@@ -22,8 +22,8 @@ public class ShoppingListServiceTest extends AbstractDatabaseTest
     @Override
     protected void setupBeforeEachTest()
     {
-        InstanceFactoryForTests instanceFactory = new InstanceFactoryForTests();
-        shoppingListService = (ShoppingListService) instanceFactory.createInstance(getContext(), ShoppingListService.class);
+        InstanceFactoryForTests instanceFactory = new InstanceFactoryForTests(getContext());
+        shoppingListService = (ShoppingListService) instanceFactory.createInstance(ShoppingListService.class);
     }
 
     @Test
@@ -56,7 +56,6 @@ public class ShoppingListServiceTest extends AbstractDatabaseTest
         assertEquals(deadline, newDto.getDeadline());
         assertEquals(notes, newDto.getNotes());
 
-
         // test update
         String expectedName = "newName";
         newDto.setListName(expectedName);
@@ -79,7 +78,6 @@ public class ShoppingListServiceTest extends AbstractDatabaseTest
         int expectedSizeAfterDelete = 1;
         List<ListDto> allListDtosAfterDelete = shoppingListService.getAllListDtos();
         assertEquals(expectedSizeAfterDelete, allListDtosAfterDelete.size());
-
     }
 
 

@@ -21,8 +21,8 @@ public class ProductTemplateDaoTest extends AbstractDatabaseTest
     @Override
     protected void setupBeforeEachTest()
     {
-        InstanceFactoryForTests instanceFactory = new InstanceFactoryForTests();
-        productTemplateDao = (ProductTemplateDao) instanceFactory.createInstance(getContext(), ProductTemplateDao.class);
+        InstanceFactoryForTests instanceFactory = new InstanceFactoryForTests(getContext());
+        productTemplateDao = (ProductTemplateDao) instanceFactory.createInstance(ProductTemplateDao.class);
     }
 
     @Test

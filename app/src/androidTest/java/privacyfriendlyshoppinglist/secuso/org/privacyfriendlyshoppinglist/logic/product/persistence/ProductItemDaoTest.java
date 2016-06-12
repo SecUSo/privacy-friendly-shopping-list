@@ -27,11 +27,11 @@ public class ProductItemDaoTest extends AbstractDatabaseTest
     @Override
     protected void setupBeforeEachTest()
     {
-        InstanceFactoryForTests instanceFactory = new InstanceFactoryForTests();
+        InstanceFactoryForTests instanceFactory = new InstanceFactoryForTests(getContext());
 
-        shoppingListDao = (ShoppingListDao) instanceFactory.createInstance(getContext(), ShoppingListDao.class);
-        productTemplateDao = (ProductTemplateDao) instanceFactory.createInstance(getContext(), ProductTemplateDao.class);
-        productItemDao = (ProductItemDao) instanceFactory.createInstance(getContext(), ProductItemDao.class);
+        shoppingListDao = (ShoppingListDao) instanceFactory.createInstance(ShoppingListDao.class);
+        productTemplateDao = (ProductTemplateDao) instanceFactory.createInstance(ProductTemplateDao.class);
+        productItemDao = (ProductItemDao) instanceFactory.createInstance(ProductItemDao.class);
 
         shoppingList = new ShoppingListEntity();
         productTemplate = new ProductTemplateEntity();
