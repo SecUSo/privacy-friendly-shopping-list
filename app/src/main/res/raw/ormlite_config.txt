@@ -1,28 +1,54 @@
 #
-# generated on 2016/05/31 09:29:51
+# generated on 2016/06/11 08:38:16
 #
 # --table-start--
-dataClass=privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.services.products.persistence.entity.ProductEntity
-tableName=productentity
+dataClass=privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.persistence.AbstractEntity
+tableName=abstractentity
 # --table-fields-start--
 # --field-start--
-fieldName=productName
+fieldName=id
+generatedId=true
+# --field-end--
+# --table-fields-end--
+# --table-end--
+#################################
+# --table-start--
+dataClass=privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.product.persistence.entity.ProductItemEntity
+tableName=productitementity
+# --table-fields-start--
+# --field-start--
+fieldName=productTemplate
 canBeNull=false
+foreign=true
 # --field-end--
 # --field-start--
-fieldName=price
+fieldName=quantity
 # --field-end--
 # --field-start--
-fieldName=description
+fieldName=quantityPurchased
 # --field-end--
 # --field-start--
-fieldName=category
+fieldName=notes
 # --field-end--
 # --field-start--
 fieldName=store
 # --field-end--
 # --field-start--
-fieldName=lastDate
+fieldName=price
+# --field-end--
+# --field-start--
+fieldName=purchasedDate
+# --field-end--
+# --field-start--
+fieldName=icon
+# --field-end--
+# --field-start--
+fieldName=selected
+# --field-end--
+# --field-start--
+fieldName=shoppingList
+canBeNull=false
+foreign=true
 # --field-end--
 # --field-start--
 fieldName=id
@@ -32,9 +58,66 @@ generatedId=true
 # --table-end--
 #################################
 # --table-start--
-dataClass=privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.persistence.AbstractEntity
-tableName=abstractentity
+dataClass=privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.product.persistence.entity.ProductTemplateEntity
+tableName=producttemplateentity
 # --table-fields-start--
+# --field-start--
+fieldName=productName
+canBeNull=false
+# --field-end--
+# --field-start--
+fieldName=category
+# --field-end--
+# --field-start--
+fieldName=historyCount
+# --field-end--
+# --field-start--
+fieldName=lastTimePurchased
+# --field-end--
+# --field-start--
+fieldName=defaultNotes
+# --field-end--
+# --field-start--
+fieldName=defaultStore
+# --field-end--
+# --field-start--
+fieldName=defaultIcon
+# --field-end--
+# --field-start--
+fieldName=products
+foreignCollection=true
+# --field-end--
+# --field-start--
+fieldName=id
+generatedId=true
+# --field-end--
+# --table-fields-end--
+# --table-end--
+#################################
+# --table-start--
+dataClass=privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.shoppingList.persistence.entity.ShoppingListEntity
+tableName=shoppinglistentity
+# --table-fields-start--
+# --field-start--
+fieldName=listName
+canBeNull=false
+# --field-end--
+# --field-start--
+fieldName=priority
+# --field-end--
+# --field-start--
+fieldName=icon
+# --field-end--
+# --field-start--
+fieldName=deadline
+# --field-end--
+# --field-start--
+fieldName=notes
+# --field-end--
+# --field-start--
+fieldName=products
+foreignCollection=true
+# --field-end--
 # --field-start--
 fieldName=id
 generatedId=true

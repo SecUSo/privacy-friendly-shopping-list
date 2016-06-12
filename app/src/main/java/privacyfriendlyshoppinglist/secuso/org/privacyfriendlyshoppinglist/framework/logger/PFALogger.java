@@ -9,18 +9,13 @@ import android.util.Log;
  */
 public class PFALogger
 {
-    public static void info(String className, String methodName, Object object)
+    public static void info(String className, String methodName, String result)
     {
-        Log.i(className, "METHOD=" + methodName + "; PARAMETER=" + object.toString());
+        Log.i(className, "METHOD=" + methodName + "; RESULT=" + result);
     }
 
-    public static void info(String className, String methodName, String status)
+    public static void error(String className, String methodName, Throwable t)
     {
-        Log.i(className, "METHOD=" + methodName + "; STATUS=" + status);
-    }
-
-    public static void error(String className, String methodName, Object object, Throwable t)
-    {
-        Log.e(className, "METHOD" + methodName + "; PARAMETER=" + object.toString(), t);
+        Log.e(className, "METHOD" + methodName, t);
     }
 }

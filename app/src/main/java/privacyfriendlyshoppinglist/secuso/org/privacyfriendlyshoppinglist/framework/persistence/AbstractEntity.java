@@ -12,12 +12,12 @@ public abstract class AbstractEntity
     @DatabaseField(generatedId = true)
     private Long id;
 
-    Long getId()
+    public Long getId()
     {
         return id;
     }
 
-    void setId(Long id)
+    public void setId(Long id)
     {
         this.id = id;
     }

@@ -8,7 +8,9 @@ import com.j256.ormlite.support.ConnectionSource;
 import com.j256.ormlite.table.TableUtils;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.R;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.logger.PFALogger;
-import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.services.products.persistence.entity.ProductEntity;
+import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.product.persistence.entity.ProductItemEntity;
+import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.product.persistence.entity.ProductTemplateEntity;
+import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.shoppingList.persistence.entity.ShoppingListEntity;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -32,8 +34,10 @@ class DataBaseHelper extends OrmLiteSqliteOpenHelper
     private void setupClasses()
     {
         entityClasses = new ArrayList<>();
-        // SETUP_PERSISTENCE: add all Entity classes to this list
-        entityClasses.add(ProductEntity.class);
+        // SETUP_PERSISTENCE: add all Entity clases to this list
+        entityClasses.add(ProductItemEntity.class);
+        entityClasses.add(ProductTemplateEntity.class);
+        entityClasses.add(ShoppingListEntity.class);
     }
 
     @Override
@@ -50,7 +54,7 @@ class DataBaseHelper extends OrmLiteSqliteOpenHelper
         }
         catch ( Exception e )
         {
-            PFALogger.error(getClass().getName(), "onCreate", entityClasses, e);
+            PFALogger.error(getClass().getName(), "onCreate", e);
         }
     }
 
@@ -68,7 +72,7 @@ class DataBaseHelper extends OrmLiteSqliteOpenHelper
         }
         catch ( SQLException e )
         {
-            PFALogger.error(getClass().getName(), "onUpgrade", entityClasses, e);
+            PFALogger.error(getClass().getName(), "onUpgrade", e);
         }
     }
 
