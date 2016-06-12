@@ -25,7 +25,6 @@ public abstract class AbstractDao<T extends AbstractEntity> implements ContextSe
 
     protected Long saveOrUpdate(T entity)
     {
-        PFALogger.info(getClass().getName(), "saveOrUpdate", entity);
         try
         {
             @SuppressWarnings("unchecked")
@@ -36,14 +35,13 @@ public abstract class AbstractDao<T extends AbstractEntity> implements ContextSe
         }
         catch ( SQLException e )
         {
-            PFALogger.error(getClass().getName(), "saveOrUpdate", entity, e);
+            PFALogger.error(getClass().getName(), "saveOrUpdate, ENTITY=" + entity.toString(), e);
             return null;
         }
     }
 
     protected T getById(Long id, Class<T> type)
     {
-        PFALogger.info(getClass().getName(), "getById", id);
         try
         {
             Dao<T, Long> dao = database.getDao(type);
@@ -53,7 +51,7 @@ public abstract class AbstractDao<T extends AbstractEntity> implements ContextSe
         }
         catch ( SQLException e )
         {
-            PFALogger.error(getClass().getName(), "getById", id, e);
+            PFALogger.error(getClass().getName(), "getById, ID=" + id, e);
             return null;
         }
     }
@@ -61,7 +59,6 @@ public abstract class AbstractDao<T extends AbstractEntity> implements ContextSe
     protected List<T> getAllEntities(Class<T> type)
     {
         List<T> entities;
-        PFALogger.info(getClass().getName(), "getAllEntities", "start");
         try
         {
             Dao<T, Long> dao = database.getDao(type);
@@ -71,14 +68,13 @@ public abstract class AbstractDao<T extends AbstractEntity> implements ContextSe
         }
         catch ( SQLException e )
         {
-            PFALogger.error(getClass().getName(), "getAllEntities", type, e);
+            PFALogger.error(getClass().getName(), "getAllEntities", e);
             return null;
         }
     }
 
     protected boolean deleteById(Long id, Class<T> type)
     {
-        PFALogger.info(getClass().getName(), "deleteById", id);
         try
         {
             Dao<T, Long> dao = database.getDao(type);
@@ -88,14 +84,13 @@ public abstract class AbstractDao<T extends AbstractEntity> implements ContextSe
         }
         catch ( SQLException e )
         {
-            PFALogger.error(getClass().getName(), "deleteById", id, e);
+            PFALogger.error(getClass().getName(), "deleteById, ID=" + id, e);
             return false;
         }
     }
 
     protected Dao<T, Long> getDao(Class<T> type)
     {
-        PFALogger.info(getClass().getName(), "getDao", "start");
         try
         {
             Dao<T, Long> dao = database.getDao(type);
@@ -104,7 +99,7 @@ public abstract class AbstractDao<T extends AbstractEntity> implements ContextSe
         }
         catch ( SQLException e )
         {
-            PFALogger.error(getClass().getName(), "getDao", type, e);
+            PFALogger.error(getClass().getName(), "getDao", e);
             return null;
         }
     }

@@ -54,7 +54,7 @@ class DataBaseHelper extends OrmLiteSqliteOpenHelper
         }
         catch ( Exception e )
         {
-            PFALogger.error(getClass().getName(), "onCreate", entityClasses, e);
+            PFALogger.error(getClass().getName(), "onCreate", e);
         }
     }
 
@@ -72,7 +72,7 @@ class DataBaseHelper extends OrmLiteSqliteOpenHelper
         }
         catch ( SQLException e )
         {
-            PFALogger.error(getClass().getName(), "onUpgrade", entityClasses, e);
+            PFALogger.error(getClass().getName(), "onUpgrade", e);
         }
     }
 
