@@ -2,7 +2,7 @@ package privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic
 
 import com.j256.ormlite.field.DatabaseField;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.persistence.AbstractEntity;
-import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.shoppingList.persistence.entity.ShoppingListEntityNew;
+import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.shoppingList.persistence.entity.ShoppingListEntity;
 
 import java.util.Date;
 
@@ -41,7 +41,7 @@ public class ProductItemEntity extends AbstractEntity
     private Boolean selected;
 
     @DatabaseField(foreign = true, canBeNull = false)
-    private ShoppingListEntityNew shoppingList;
+    private ShoppingListEntity shoppingList;
 
     public ProductItemEntity()
     {
@@ -137,12 +137,12 @@ public class ProductItemEntity extends AbstractEntity
         this.selected = selected;
     }
 
-    public ShoppingListEntityNew getShoppingList()
+    public ShoppingListEntity getShoppingList()
     {
         return shoppingList;
     }
 
-    public void setShoppingList(ShoppingListEntityNew shoppingList)
+    public void setShoppingList(ShoppingListEntity shoppingList)
     {
         this.shoppingList = shoppingList;
     }

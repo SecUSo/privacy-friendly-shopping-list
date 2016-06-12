@@ -3,12 +3,12 @@ package privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic
 import com.j256.ormlite.dao.ForeignCollection;
 import org.junit.Test;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.AbstractDatabaseTest;
-import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.context.ContextManager;
-import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.persistence.DB;
+import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.context.AbstractInstanceFactory;
+import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.context.InstanceFactoryForTests;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.product.persistence.entity.ProductItemEntity;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.product.persistence.entity.ProductTemplateEntity;
-import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.shoppingList.persistence.ShoppingListDaoNew;
-import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.shoppingList.persistence.entity.ShoppingListEntityNew;
+import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.shoppingList.persistence.ShoppingListDao;
+import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.shoppingList.persistence.entity.ShoppingListEntity;
 
 /**
  * Description:
@@ -18,21 +18,23 @@ import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.
 public class ProductItemDaoTest extends AbstractDatabaseTest
 {
 
-    private ShoppingListDaoNew shoppingListDao;
+    private ShoppingListDao shoppingListDao;
     private ProductTemplateDao productTemplateDao;
     private ProductItemDao productItemDao;
     private ProductTemplateEntity productTemplate;
-    private ShoppingListEntityNew shoppingList;
+    private ShoppingListEntity shoppingList;
 
 
     @Override
     protected void setupBeforeEachTest()
     {
-        shoppingListDao = new ContextManager<ShoppingListDaoNew>().getInstance(getContext(), DB.TEST, ShoppingListDaoNew.class);
-        productTemplateDao = new ContextManager<ProductTemplateDao>().getInstance(getContext(), DB.TEST, ProductTemplateDao.class);
-        productItemDao = new ContextManager<ProductItemDao>().getInstance(getContext(), DB.TEST, ProductItemDao.class);
+        AbstractInstanceFactory instanceFactory = new InstanceFactoryForTests(getContext());
 
-        shoppingList = new ShoppingListEntityNew();
+        shoppingListDao = (ShoppingListDao) instanceFactory.createInstance(ShoppingListDao.class);
+        productTemplateDao = (ProductTemplateDao) instanceFactory.createInstance(ProductTemplateDao.class);
+        productItemDao = (ProductItemDao) instanceFactory.createInstance(ProductItemDao.class);
+
+        shoppingList = new ShoppingListEntity();
         productTemplate = new ProductTemplateEntity();
 
         shoppingList.setListName("shoppingList");
@@ -54,7 +56,7 @@ public class ProductItemDaoTest extends AbstractDatabaseTest
 
         // Shopping List and Product Template must be able to find the new Product Item
         int expectedSize = 1;
-        ShoppingListEntityNew shoppingList = shoppingListDao.getAllEntities().get(0);
+        ShoppingListEntity shoppingList = shoppingListDao.getAllEntities().get(0);
         ForeignCollection<ProductItemEntity> products1 = shoppingList.getProducts();
         assertEquals(expectedSize, products1.size());
 

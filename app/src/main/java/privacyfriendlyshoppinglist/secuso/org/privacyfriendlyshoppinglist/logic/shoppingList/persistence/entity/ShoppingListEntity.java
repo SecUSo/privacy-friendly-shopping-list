@@ -13,7 +13,7 @@ import java.util.Date;
  * Author: Grebiel Jose Ifill Brito
  * Created: 09.06.16 creation date
  */
-public class ShoppingListEntityNew extends AbstractEntity
+public class ShoppingListEntity extends AbstractEntity
 {
     @DatabaseField(canBeNull = false)
     private String listName;
@@ -96,7 +96,7 @@ public class ShoppingListEntityNew extends AbstractEntity
     @Override
     public String toString()
     {
-        return "ShoppingListEntityNew{" +
+        return "ShoppingListEntity{" +
                 "listName='" + listName + '\'' +
                 ", priority='" + priority + '\'' +
                 ", icon=" + icon +

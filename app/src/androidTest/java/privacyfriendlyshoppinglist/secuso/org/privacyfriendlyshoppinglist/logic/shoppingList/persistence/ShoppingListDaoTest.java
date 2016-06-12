@@ -3,9 +3,9 @@ package privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic
 import org.joda.time.DateTime;
 import org.junit.Test;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.AbstractDatabaseTest;
-import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.context.ContextManager;
-import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.persistence.DB;
-import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.shoppingList.persistence.entity.ShoppingListEntityNew;
+import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.context.AbstractInstanceFactory;
+import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.context.InstanceFactoryForTests;
+import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.shoppingList.persistence.entity.ShoppingListEntity;
 
 import java.util.Date;
 import java.util.List;
@@ -15,20 +15,21 @@ import java.util.List;
  * Author: Grebiel Jose Ifill Brito
  * Created: 10.06.16 creation date
  */
-public class ShoppingListDaoNewDatabaseTest extends AbstractDatabaseTest
+public class ShoppingListDaoTest extends AbstractDatabaseTest
 {
-    private ShoppingListDaoNew shoppingListDao;
+    private ShoppingListDao shoppingListDao;
 
     @Override
     protected void setupBeforeEachTest()
     {
-        shoppingListDao = new ContextManager<ShoppingListDaoNew>().getInstance(getContext(), DB.TEST, ShoppingListDaoNew.class);
+        AbstractInstanceFactory instanceFactory = new InstanceFactoryForTests(getContext());
+        shoppingListDao = (ShoppingListDao) instanceFactory.createInstance(ShoppingListDao.class);
     }
 
     @Test
     public void testSave()
     {
-        ShoppingListEntityNew entity = new ShoppingListEntityNew();
+        ShoppingListEntity entity = new ShoppingListEntity();
         entity.setListName("name");
         entity.setPriority("HIGH");
         entity.setNotes("notes");
@@ -48,7 +49,7 @@ public class ShoppingListDaoNewDatabaseTest extends AbstractDatabaseTest
         Date expectedDeadLine = new DateTime("2016-06-10").toDate();
         int expectedIcon = 10;
 
-        ShoppingListEntityNew entity = new ShoppingListEntityNew();
+        ShoppingListEntity entity = new ShoppingListEntity();
         entity.setListName(expectedName);
         entity.setPriority(expectedPriority);
         entity.setNotes(expectedNotes);
@@ -57,7 +58,7 @@ public class ShoppingListDaoNewDatabaseTest extends AbstractDatabaseTest
 
         Long id = shoppingListDao.save(entity);
 
-        ShoppingListEntityNew newEntity = shoppingListDao.getById(id);
+        ShoppingListEntity newEntity = shoppingListDao.getById(id);
         assertEquals(expectedName, newEntity.getListName());
         assertEquals(expectedPriority, newEntity.getPriority());
         assertEquals(expectedNotes, newEntity.getNotes());
@@ -68,15 +69,15 @@ public class ShoppingListDaoNewDatabaseTest extends AbstractDatabaseTest
     @Test
     public void testGetAllEntities()
     {
-        ShoppingListEntityNew entity1 = new ShoppingListEntityNew();
-        ShoppingListEntityNew entity2 = new ShoppingListEntityNew();
+        ShoppingListEntity entity1 = new ShoppingListEntity();
+        ShoppingListEntity entity2 = new ShoppingListEntity();
         entity1.setListName("entity1");
         entity2.setListName("entity2");
 
         shoppingListDao.save(entity1);
         shoppingListDao.save(entity2);
 
-        List<ShoppingListEntityNew> allEntities = shoppingListDao.getAllEntities();
+        List<ShoppingListEntity> allEntities = shoppingListDao.getAllEntities();
         int expectedSize = 2;
         assertEquals(expectedSize, allEntities.size());
     }
@@ -84,15 +85,15 @@ public class ShoppingListDaoNewDatabaseTest extends AbstractDatabaseTest
     @Test
     public void testDeleteById()
     {
-        ShoppingListEntityNew entity1 = new ShoppingListEntityNew();
-        ShoppingListEntityNew entity2 = new ShoppingListEntityNew();
+        ShoppingListEntity entity1 = new ShoppingListEntity();
+        ShoppingListEntity entity2 = new ShoppingListEntity();
         entity1.setListName("entity1");
         entity2.setListName("entity2");
 
         Long id1 = shoppingListDao.save(entity1);
         Long id2 = shoppingListDao.save(entity2);
 
-        List<ShoppingListEntityNew> allEntities = shoppingListDao.getAllEntities();
+        List<ShoppingListEntity> allEntities = shoppingListDao.getAllEntities();
         int expectedSize = 2;
         assertEquals(expectedSize, allEntities.size());
     }
