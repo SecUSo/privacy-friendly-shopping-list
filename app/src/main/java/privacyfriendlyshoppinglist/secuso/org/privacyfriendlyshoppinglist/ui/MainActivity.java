@@ -28,23 +28,6 @@ import java.util.List;
  */
 public class MainActivity extends AppCompatActivity
 {
-    private String[] listItemTitles;
-    private DrawerLayout mDrawerLayout;
-    private ListView mDrawerList;
-    private static final String HELP = "Help";
-
-    private ArrayAdapter<String> mAdapter;
-
-    private ActionBarDrawerToggle mDrawerToggle;
-    private CharSequence mDrawerTitle;
-    private CharSequence mTitle;
-
-    private ActionBarDrawerToggle getmDrawerToggle;
-
-    ArrayList<MenuItem> mMenuItems = new ArrayList<MenuItem>();
-    CoordinatorLayout mDrawerPane;
-
-
     @Override
     protected final void onCreate(final Bundle savedInstanceState)
     {
@@ -52,39 +35,6 @@ public class MainActivity extends AppCompatActivity
         setContentView(R.layout.activity_main);
         initToolbar();
 
-        mMenuItems.add(new MenuItem("Home", "Home Screen", android.R.drawable.ic_menu_edit));
-        mMenuItems.add(new MenuItem("About", "Version 1.0", android.R.drawable.ic_menu_edit));
-        mMenuItems.add(new MenuItem("Help", "Get Help", android.R.drawable.ic_menu_edit));
-
-        mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
-
-        mDrawerPane = (CoordinatorLayout) findViewById(R.id.coordinatorLayout);
-        mDrawerList = (ListView) findViewById(R.id.left_drawer);
-        DrawerListAdapter adapter = new DrawerListAdapter(this, mMenuItems);
-        mDrawerList.setAdapter(adapter);
-
-        mDrawerList.setOnItemClickListener(new DrawerItemClickListener(this, mDrawerLayout, mDrawerList));
-
-
-       /* // TODO Put Help and About in the String.xml
-        String[] listItemTitles = {HELP, "About"};
-        mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
-
-        mDrawerList = (ListView) findViewById(R.id.left_drawer);
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, R.layout.drawer_list_item, R.id.menu_item, listItemTitles);
-        mDrawerList.setAdapter(adapter);
-        mDrawerList.setOnItemClickListener(new DrawerItemClickListener(this, mDrawerLayout, mDrawerList));
-*/
-       /* mDraw erToggle = new ActionBarDrawerToggle(
-                this,
-                mDrawerLayout
-                android.R.layout.ic_menu_sort_by_size);
-
-
-        )*/
-
-        RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
-        setupRecyclerView(recyclerView);
     }
 
     private void initToolbar() {
@@ -92,20 +42,6 @@ public class MainActivity extends AppCompatActivity
         setSupportActionBar(mToolbar);
         setTitle(getString(R.string.app_name));
         mToolbar.setTitleTextColor(getResources().getColor(android.R.color.white));
-    }
-
-    private void setupRecyclerView(RecyclerView recyclerView) {
-        recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
-        ShoppingListAdapter shoppingListAdapter = new ShoppingListAdapter(createItemList());
-        recyclerView.setAdapter(shoppingListAdapter);
-    }
-
-    private List<String> createItemList() {
-        List<String> itemList = new ArrayList<>();
-            for (int i = 0; i < 20; i++) {
-                itemList.add("Item " + i);
-            }
-        return itemList;
     }
 
     @Override

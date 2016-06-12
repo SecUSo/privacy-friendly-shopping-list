@@ -5,6 +5,7 @@
 
     <string name="action_about">About</string>
 
+
     <!-- AboutFragment-->
     <string name="version_number">Version 1.0</string>
     <string name="about_author">Developer: Grebiel and Chris</string>
