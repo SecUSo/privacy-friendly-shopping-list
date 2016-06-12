@@ -2,4 +2,15 @@
     <string name="app_name">Privacy Friendly Shopping List</string>
     <string name="tab_2">TAB 2</string>
     <string name="tab_1">TAB 1</string>
+
+    <string name="action_about">About</string>
+
+    <!-- AboutFragment-->
+    <string name="version_number">Version 1.0</string>
+    <string name="about_author">Developer: Grebiel and Chris</string>
+    <string name="about_affiliation">In affiliation with</string>
+    <string name="privacy_friendly">This application belongs to the Privacy Friendly Apps.</string>
+    <string name="more_info">More information can be found on:</string>
+    <string name="url"><a href="https://www.secuso.informatik.tu-darmstadt.de/en/research/results/privacy-friendly-apps">https://www.secuso.org</a></string>
+
 </resources>
