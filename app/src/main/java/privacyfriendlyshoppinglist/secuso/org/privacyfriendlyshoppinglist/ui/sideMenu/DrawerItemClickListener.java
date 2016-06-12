@@ -51,7 +51,7 @@ public class DrawerItemClickListener implements ListView.OnItemClickListener
         FragmentManager fragmentManager = activity.getFragmentManager();
         fragmentManager
                 .beginTransaction()
-                .replace(R.id.content_frame, fragment)
+                .replace(R.id.coordinatorLayout, fragment)
                 .commit();
 
         mDrawerLayout.closeDrawer(mDrawerList);

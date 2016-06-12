@@ -1,19 +1,25 @@
 package privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui;
 
 import android.os.Bundle;
+import android.support.design.widget.CoordinatorLayout;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.R;
+import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.shoppingList.ShoppingListAdapter;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.sideMenu.DrawerItemClickListener;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.sideMenu.DrawerListAdapter;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.sideMenu.MenuItem;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Description:
@@ -36,7 +42,7 @@ public class MainActivity extends AppCompatActivity
     private ActionBarDrawerToggle getmDrawerToggle;
 
     ArrayList<MenuItem> mMenuItems = new ArrayList<MenuItem>();
-    RelativeLayout mDrawerPane;
+    CoordinatorLayout mDrawerPane;
 
 
     @Override
@@ -52,7 +58,7 @@ public class MainActivity extends AppCompatActivity
 
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
 
-        mDrawerPane = (RelativeLayout) findViewById(R.id.content_frame);
+        mDrawerPane = (CoordinatorLayout) findViewById(R.id.coordinatorLayout);
         mDrawerList = (ListView) findViewById(R.id.left_drawer);
         DrawerListAdapter adapter = new DrawerListAdapter(this, mMenuItems);
         mDrawerList.setAdapter(adapter);
