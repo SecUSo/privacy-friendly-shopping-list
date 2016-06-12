@@ -15,20 +15,45 @@
   limitations under the License.
   -->
 
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="?android:attr/activatedBackgroundIndicator"
-                android:padding="10dp" >
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:background="?android:attr/activatedBackgroundIndicator"
+              android:orientation="horizontal"
+              android:weightSum="5">
 
+    <ImageView
+            android:id="@+id/icon"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginRight="20dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"/>
 
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                  android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:background="?android:attr/activatedBackgroundIndicator"
+                  android:orientation="vertical"
+                  android:padding="10dp">
 
-<TextView xmlns:android="http://schemas.android.com/apk/res/android"
-          android:id="@+id/menu_item"
-          android:text="Hallo"
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:layout_centerVertical="true"
-          android:textColor="@color/black"
-          android:padding="10dp"/>
-</RelativeLayout>
+        <TextView xmlns:android="http://schemas.android.com/apk/res/android"
+                  android:id="@+id/menu_item"
+                  android:text="Hallo"
+                  android:textSize="16sp"
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:layout_centerVertical="true"
+                  android:textColor="@color/black"
+        />
+
+        <TextView android:id="@+id/menu_subTitle"
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:text="Line 2"
+                  android:layout_alignParentRight="true"
+                  android:layout_alignParentEnd="false"/>
+    </LinearLayout>
+</LinearLayout>

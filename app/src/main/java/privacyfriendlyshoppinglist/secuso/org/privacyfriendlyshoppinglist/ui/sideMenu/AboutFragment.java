@@ -21,6 +21,7 @@ public class AboutFragment extends Fragment
 
         View rootView = inflater.inflate(R.layout.fragment_about, container, false);
         activity.setTitle(R.string.action_about);
+
         container.removeAllViews();
         return rootView;
     }
