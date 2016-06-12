@@ -10,6 +10,7 @@ import android.widget.TextView;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.R;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Chris on 12.06.2016.
@@ -18,9 +19,9 @@ public class DrawerListAdapter extends BaseAdapter
 {
 
     Context mContext;
-    ArrayList<MenuItem> mMenuItems;
+    List<MenuItem> mMenuItems;
 
-    public DrawerListAdapter(Context context, ArrayList<MenuItem> menuItems) {
+    public DrawerListAdapter(Context context, List<MenuItem> menuItems) {
         mContext = context;
         mMenuItems = menuItems;
     }
