@@ -3,6 +3,7 @@ package privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic
 import org.joda.time.DateTime;
 import org.junit.Test;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.AbstractDatabaseTest;
+import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.context.AbstractInstanceFactory;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.context.InstanceFactoryForTests;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.shoppingList.business.domain.ListDto;
 
@@ -22,7 +23,7 @@ public class ShoppingListServiceTest extends AbstractDatabaseTest
     @Override
     protected void setupBeforeEachTest()
     {
-        InstanceFactoryForTests instanceFactory = new InstanceFactoryForTests(getContext());
+        AbstractInstanceFactory instanceFactory = new InstanceFactoryForTests(getContext());
         shoppingListService = (ShoppingListService) instanceFactory.createInstance(ShoppingListService.class);
     }
 
@@ -78,6 +79,22 @@ public class ShoppingListServiceTest extends AbstractDatabaseTest
         int expectedSizeAfterDelete = 1;
         List<ListDto> allListDtosAfterDelete = shoppingListService.getAllListDtos();
         assertEquals(expectedSizeAfterDelete, allListDtosAfterDelete.size());
+    }
+
+    @Test
+    public void testSaveWithInvalidInput()
+    {
+        ListDto dto = new ListDto();
+        dto.setNotes("notes");
+
+        shoppingListService.saveOrUpdate(dto);
+        String id = dto.getId(); // if the list is not saved, then the id is equals null
+        assertNull(id);
+
+        assertTrue(dto.hasErrors());
+
+        String errorFieldName = dto.getValidationErrorsList().get(0);
+        assertEquals(ListDto.ErrorFieldName.LIST_NAME.name(), errorFieldName);
     }
 
 

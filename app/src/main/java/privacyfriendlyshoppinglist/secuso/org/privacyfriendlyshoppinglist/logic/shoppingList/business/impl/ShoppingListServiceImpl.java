@@ -5,6 +5,7 @@ import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framew
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.shoppingList.business.ShoppingListService;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.shoppingList.business.domain.ListDto;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.shoppingList.business.impl.converter.ShoppingListConverter;
+import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.shoppingList.business.impl.validator.ShoppingListValidator;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.shoppingList.persistence.ShoppingListDao;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.shoppingList.persistence.entity.ShoppingListEntity;
 import rx.Observable;
@@ -22,15 +23,18 @@ public class ShoppingListServiceImpl implements ShoppingListService
 
     private ShoppingListDao shoppingListDao;
     private ShoppingListConverter shoppingListConverter;
+    private ShoppingListValidator shoppingListValidator;
 
     @Inject
     public ShoppingListServiceImpl(
             ShoppingListDao shoppingListDao,
-            ShoppingListConverter shoppingListConverter
+            ShoppingListConverter shoppingListConverter,
+            ShoppingListValidator shoppingListValidator
     )
     {
         this.shoppingListDao = shoppingListDao;
         this.shoppingListConverter = shoppingListConverter;
+        this.shoppingListValidator = shoppingListValidator;
     }
 
     @Override
@@ -44,8 +48,12 @@ public class ShoppingListServiceImpl implements ShoppingListService
     {
         ShoppingListEntity entity = new ShoppingListEntity();
         shoppingListConverter.convertDtoToEntity(dto, entity);
-        Long id = shoppingListDao.save(entity);
-        dto.setId(id.toString());
+        shoppingListValidator.validate(dto);
+        if (!dto.hasErrors())
+        {
+            Long id = shoppingListDao.save(entity);
+            dto.setId(id.toString());
+        }
     }
 
     @Override

@@ -14,9 +14,9 @@ import java.util.List;
 public class ListDto extends AbstractDto
 {
 
-    public enum VariableName
+    public enum ErrorFieldName
     {
-        ID, LIST_NAME, PRIORITY, ICON, DEADLINE, NOTES
+        LIST_NAME
     }
 
     private String listName;
