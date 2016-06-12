@@ -1,9 +1,7 @@
 <resources>
     <string name="app_name">Privacy Friendly Shopping List</string>
-    <string name="tab_2">TAB 2</string>
-    <string name="tab_1">TAB 1</string>
-
-    <string name="action_about">About</string>
+    <string name="menu_item_about">About</string>
+    <string name="menu_item_home">@string/app_name</string>
 
 
     <!-- AboutFragment-->

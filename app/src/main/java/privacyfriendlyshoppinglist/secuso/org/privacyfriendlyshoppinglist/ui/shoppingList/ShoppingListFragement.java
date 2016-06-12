@@ -1,6 +1,5 @@
 package privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.shoppingList;
 
-import android.app.Activity;
 import android.app.Fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -20,22 +19,18 @@ import java.util.List;
  */
 public class ShoppingListFragement extends Fragment
 {
-    Activity activity;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState)
     {
         super.onCreateView(inflater, container, savedInstanceState);
+        getActivity().setTitle(R.string.menu_item_home);
 
-        View rootView = inflater.inflate(R.layout.shopping_list_layout, container, false);
-
-        RecyclerView recyclerView = (RecyclerView) rootView.findViewById(R.id.recyclerView);
+        RecyclerView recyclerView = (RecyclerView) inflater.inflate(R.layout.shopping_list_layout, container, false);
         setupRecyclerView(recyclerView);
 
-        container.removeAllViews();
-        return rootView;
-
+        return recyclerView;
     }
 
     private void setupRecyclerView(RecyclerView recyclerView) {
@@ -51,11 +46,5 @@ public class ShoppingListFragement extends Fragment
         }
         return itemList;
     }
-
-    public void onAttach(Activity activity) {
-        super.onAttach(activity);
-        this.activity = activity;
-    }
-
 
 }
