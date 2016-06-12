@@ -23,7 +23,7 @@ public class ShoppingListAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         Context context = parent.getContext();
-        View view = LayoutInflater.from(context).inflate(R.layout.shoppinglist_item, parent, false);
+        View view = LayoutInflater.from(context).inflate(R.layout.shopping_list_item, parent, false);
         return ShoppingListItemViewHolder.newInstance(view);
     }
 
