@@ -9,5 +9,5 @@ import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.
  */
 public interface ShoppingListValidator
 {
-    public void validate(ListDto dto);
+    void validate(ListDto dto);
 }

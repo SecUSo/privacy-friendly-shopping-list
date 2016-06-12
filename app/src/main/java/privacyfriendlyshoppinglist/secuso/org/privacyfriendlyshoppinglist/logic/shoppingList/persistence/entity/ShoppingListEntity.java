@@ -30,8 +30,8 @@ public class ShoppingListEntity extends AbstractEntity
     @DatabaseField
     private String notes;
 
-    @ForeignCollectionField(eager = false)
-    ForeignCollection<ProductItemEntity> products;
+    @ForeignCollectionField
+    private ForeignCollection<ProductItemEntity> products;
 
     public String getListName()
     {
