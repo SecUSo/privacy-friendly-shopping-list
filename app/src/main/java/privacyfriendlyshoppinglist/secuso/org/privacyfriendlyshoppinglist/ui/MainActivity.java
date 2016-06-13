@@ -45,10 +45,17 @@ public class MainActivity extends AppCompatActivity
         mMenuItems.add(new MenuItem("Home", "Home Screen", android.R.drawable.ic_menu_edit));
         mMenuItems.add(new MenuItem("About", "Version 1.0", android.R.drawable.ic_menu_edit));
         mMenuItems.add(new MenuItem("Help", "Get Help", android.R.drawable.ic_menu_edit));
+        mMenuItems.add(new MenuItem("Statistics", "Get Shopping Statistics", android.R.drawable.ic_menu_edit));
+
+        mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+
+        mDrawerPane = (CoordinatorLayout) findViewById(R.id.coordinatorLayout);
+        mDrawerList = (ListView) findViewById(R.id.left_drawer);
         DrawerListAdapter adapter = new DrawerListAdapter(this, mMenuItems);
 
         mDrawerList = (ListView) findViewById(R.id.left_drawer);
         mDrawerList.setAdapter(adapter);
+
         mDrawerList.setOnItemClickListener(new DrawerItemClickListener(this, mDrawerLayout, mDrawerList));
 
         Fragment initialFragment = new ShoppingListFragement();
