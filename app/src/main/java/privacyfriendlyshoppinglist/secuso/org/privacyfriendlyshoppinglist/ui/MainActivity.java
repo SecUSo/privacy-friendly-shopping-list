@@ -5,9 +5,14 @@ import android.app.Fragment;
 import android.app.FragmentManager;
 import android.os.Bundle;
 import android.support.design.widget.CoordinatorLayout;
+
 import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
+
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.View;
 import android.widget.ListView;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.R;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.shoppingList.ShoppingListFragement;
@@ -32,6 +37,11 @@ public class MainActivity extends AppCompatActivity
     private List<MenuItem> mMenuItems = new ArrayList<>();
     private CoordinatorLayout mDrawerPane;
 
+    private ActionBarDrawerToggle mDrawerToggle;
+    private CharSequence mDrawerTitle;
+    private CharSequence mTitle;
+
+
     @Override
     protected final void onCreate(final Bundle savedInstanceState)
     {
@@ -47,7 +57,38 @@ public class MainActivity extends AppCompatActivity
         mMenuItems.add(new MenuItem("Help", "Get Help", android.R.drawable.ic_menu_edit));
         mMenuItems.add(new MenuItem("Statistics", "Get Shopping Statistics", android.R.drawable.ic_menu_edit));
 
+        mTitle = mDrawerTitle = getTitle();
+
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setHomeButtonEnabled(true);
+
+        mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout,
+                R.string.drawer_open, R.string.drawer_close) {
+
+            /** Called when a drawer has settled in a completely closed state. */
+            public void onDrawerClosed(View view) {
+                super.onDrawerClosed(view);
+                getActionBar().setTitle(mTitle);
+                invalidateOptionsMenu(); // creates call to onPrepareOptionsMenu()
+            }
+
+            /** Called when a drawer has settled in a completely open state. */
+            public void onDrawerOpened(View drawerView) {
+                super.onDrawerOpened(drawerView);
+                getActionBar().setTitle(mDrawerTitle);
+                invalidateOptionsMenu(); // creates call to onPrepareOptionsMenu()
+            }
+        };
+
+        // Set the drawer toggle as the DrawerListener
+        mDrawerLayout.setDrawerListener(mDrawerToggle);
+        mDrawerToggle.syncState();
+
+
+
+        //mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
 
         mDrawerPane = (CoordinatorLayout) findViewById(R.id.coordinatorLayout);
         mDrawerList = (ListView) findViewById(R.id.left_drawer);
@@ -61,6 +102,8 @@ public class MainActivity extends AppCompatActivity
         Fragment initialFragment = new ShoppingListFragement();
         MainActivityUtils.replaceFragmentPlaceholder(initialFragment, this);
     }
+
+
 
     @Override
     protected final void onStart()
@@ -80,4 +123,13 @@ public class MainActivity extends AppCompatActivity
         setTitle(getString(R.string.app_name));
         mToolbar.setTitleTextColor(getResources().getColor(android.R.color.white));
     }
+
+
+    /*@Override
+    public boolean onPrepareOptionsMenu(Menu menu) {
+        // If the nav drawer is open, hide action items related to the content view
+        boolean drawerOpen = mDrawerLayout.isDrawerOpen(mDrawerList);
+        menu.findItem(R.id.action_websearch).setVisible(!drawerOpen);
+        return super.onPrepareOptionsMenu(menu);
+    }*/
 }
