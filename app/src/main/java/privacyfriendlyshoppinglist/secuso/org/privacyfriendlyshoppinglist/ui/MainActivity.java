@@ -3,9 +3,11 @@ package privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui;
 import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.design.widget.CoordinatorLayout;
 
+import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
@@ -38,7 +40,7 @@ public class MainActivity extends AppCompatActivity
     private CoordinatorLayout mDrawerPane;
 
     private ActionBarDrawerToggle mDrawerToggle;
-    private CharSequence mDrawerTitle;
+    private CharSequence mDrawerTitle = "drawer";
     private CharSequence mTitle;
 
 
@@ -57,9 +59,11 @@ public class MainActivity extends AppCompatActivity
         mMenuItems.add(new MenuItem("Help", "Get Help", android.R.drawable.ic_menu_edit));
         mMenuItems.add(new MenuItem("Statistics", "Get Shopping Statistics", android.R.drawable.ic_menu_edit));
 
-        mTitle = mDrawerTitle = getTitle();
+        mDrawerTitle = getTitle();
+        //mTitle = mDrawerTitle = getTitle();
+        mTitle = mDrawerTitle;
 
-        mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+        mDrawerTitle = "Navigation";
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
@@ -70,25 +74,27 @@ public class MainActivity extends AppCompatActivity
             /** Called when a drawer has settled in a completely closed state. */
             public void onDrawerClosed(View view) {
                 super.onDrawerClosed(view);
-                getActionBar().setTitle(mTitle);
+                getSupportActionBar().setTitle(mTitle);
                 invalidateOptionsMenu(); // creates call to onPrepareOptionsMenu()
             }
 
             /** Called when a drawer has settled in a completely open state. */
             public void onDrawerOpened(View drawerView) {
                 super.onDrawerOpened(drawerView);
-                getActionBar().setTitle(mDrawerTitle);
+                //getActionBar().setTitle(mDrawerTitle);
+                getSupportActionBar().setTitle(mDrawerTitle);
                 invalidateOptionsMenu(); // creates call to onPrepareOptionsMenu()
             }
         };
+
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setHomeButtonEnabled(true);
+
 
         // Set the drawer toggle as the DrawerListener
         mDrawerLayout.setDrawerListener(mDrawerToggle);
         mDrawerToggle.syncState();
 
-
-
-        //mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
 
         mDrawerPane = (CoordinatorLayout) findViewById(R.id.coordinatorLayout);
         mDrawerList = (ListView) findViewById(R.id.left_drawer);
@@ -101,9 +107,9 @@ public class MainActivity extends AppCompatActivity
 
         Fragment initialFragment = new ShoppingListFragement();
         MainActivityUtils.replaceFragmentPlaceholder(initialFragment, this);
+
+
     }
-
-
 
     @Override
     protected final void onStart()
@@ -124,12 +130,50 @@ public class MainActivity extends AppCompatActivity
         mToolbar.setTitleTextColor(getResources().getColor(android.R.color.white));
     }
 
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+        mDrawerToggle.onConfigurationChanged(newConfig);
+    }
 
-    /*@Override
+
+    @Override
+    public boolean onOptionsItemSelected(android.view.MenuItem item) {
+        // Pass the event to ActionBarDrawerToggle, if it returns
+        // true, then it has handled the app icon touch event
+        if (mDrawerToggle.onOptionsItemSelected((android.view.MenuItem) item)) {
+            mDrawerLayout.openDrawer(GravityCompat.START);
+            return true;
+        }
+
+        /*switch (item.getItemId()) {
+            // THIS IS YOUR DRAWER/HAMBURGER BUTTON
+            case android.R.id.home:
+                mDrawerLayout.openDrawer(GravityCompat.START);  // OPEN DRAWER
+                return true;
+
+        }*/
+
+        return super.onOptionsItemSelected((android.view.MenuItem) item);
+    }
+
+
+    @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
         // If the nav drawer is open, hide action items related to the content view
+
+        /*super.onPrepareOptionsMenu(menu);
         boolean drawerOpen = mDrawerLayout.isDrawerOpen(mDrawerList);
-        menu.findItem(R.id.action_websearch).setVisible(!drawerOpen);
+        menu.findItem(R.id.menu_search).setVisible(!drawerOpen);*/
         return super.onPrepareOptionsMenu(menu);
-    }*/
+    }
+
+
+    @Override
+    protected void onPostCreate(Bundle savedInstanceState) {
+        super.onPostCreate(savedInstanceState);
+        // Sync the toggle state after onRestoreInstanceState has occurred.
+        mDrawerToggle.syncState();
+    }
+
 }
