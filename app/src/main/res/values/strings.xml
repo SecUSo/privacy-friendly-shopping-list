@@ -2,6 +2,7 @@
     <string name="app_name">Privacy Friendly Shopping List</string>
     <string name="menu_item_about">About</string>
     <string name="menu_item_home">@string/app_name</string>
+    <string name="menu_item_help">Help</string>
 
 
     <!-- AboutFragment-->
@@ -11,6 +12,13 @@
     <string name="privacy_friendly">This application belongs to the Privacy Friendly Apps.</string>
     <string name="more_info">More information can be found on:</string>
     <string name="url"><a href="https://www.secuso.informatik.tu-darmstadt.de/en/research/results/privacy-friendly-apps">https://www.secuso.org</a></string>
+
+    <!-- HelpFragment-->
+
+
+
+
+    <!-- Navigation Menu-->
 
     <string name="drawer_open">Open navigation drawer</string>
     <string name="drawer_close">Close navigation drawer</string>

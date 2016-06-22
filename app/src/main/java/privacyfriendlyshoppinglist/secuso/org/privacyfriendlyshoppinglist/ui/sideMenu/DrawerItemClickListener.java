@@ -42,6 +42,15 @@ public class DrawerItemClickListener implements ListView.OnItemClickListener
             case 0:
                 fragment = new ShoppingListFragement();
                 break;
+
+            case 1:
+                fragment = new AboutFragment();
+                break;
+
+            case 2:
+                fragment = new HelpFragment();
+                break;
+
             default:
                 fragment = new AboutFragment();
                 break;

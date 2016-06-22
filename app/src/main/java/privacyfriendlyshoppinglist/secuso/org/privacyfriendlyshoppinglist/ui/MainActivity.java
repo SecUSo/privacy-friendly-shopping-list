@@ -1,8 +1,6 @@
 package privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui;
 
-import android.app.Activity;
 import android.app.Fragment;
-import android.app.FragmentManager;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.design.widget.CoordinatorLayout;
@@ -40,7 +38,7 @@ public class MainActivity extends AppCompatActivity
     private CoordinatorLayout mDrawerPane;
 
     private ActionBarDrawerToggle mDrawerToggle;
-    private CharSequence mDrawerTitle = "drawer";
+    private CharSequence mDrawerTitle;
     private CharSequence mTitle;
 
 
@@ -54,15 +52,12 @@ public class MainActivity extends AppCompatActivity
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         mDrawerPane = (CoordinatorLayout) findViewById(R.id.coordinatorLayout);
 
-        mMenuItems.add(new MenuItem("Home", "Home Screen", android.R.drawable.ic_menu_edit));
-        mMenuItems.add(new MenuItem("About", "Version 1.0", android.R.drawable.ic_menu_edit));
-        mMenuItems.add(new MenuItem("Help", "Get Help", android.R.drawable.ic_menu_edit));
+        mMenuItems.add(new MenuItem("Home", "Home Screen", R.drawable.ic_action_home));
+        mMenuItems.add(new MenuItem("About", "Version 1.0", android.R.drawable.ic_menu_info_details));
+        mMenuItems.add(new MenuItem("Help", "Get Help", android.R.drawable.ic_menu_help));
         mMenuItems.add(new MenuItem("Statistics", "Get Shopping Statistics", android.R.drawable.ic_menu_edit));
 
-        mDrawerTitle = getTitle();
-        //mTitle = mDrawerTitle = getTitle();
-        mTitle = mDrawerTitle;
-
+        mTitle = getTitle();
         mDrawerTitle = "Navigation";
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
