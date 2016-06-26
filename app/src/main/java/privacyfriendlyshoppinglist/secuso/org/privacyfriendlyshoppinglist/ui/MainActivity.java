@@ -103,7 +103,6 @@ public class MainActivity extends AppCompatActivity
         Fragment initialFragment = new ShoppingListFragement();
         MainActivityUtils.replaceFragmentPlaceholder(initialFragment, this);
 
-
     }
 
     @Override
@@ -146,7 +145,6 @@ public class MainActivity extends AppCompatActivity
             case android.R.id.home:
                 mDrawerLayout.openDrawer(GravityCompat.START);  // OPEN DRAWER
                 return true;
-
         }*/
 
         return super.onOptionsItemSelected((android.view.MenuItem) item);
@@ -170,5 +168,4 @@ public class MainActivity extends AppCompatActivity
         // Sync the toggle state after onRestoreInstanceState has occurred.
         mDrawerToggle.syncState();
     }
-
 }
