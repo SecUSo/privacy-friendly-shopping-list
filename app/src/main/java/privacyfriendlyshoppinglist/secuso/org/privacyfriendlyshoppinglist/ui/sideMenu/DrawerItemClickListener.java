@@ -2,12 +2,12 @@ package privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.si
 
 import android.app.Activity;
 import android.app.Fragment;
-import android.app.FragmentManager;
 import android.support.v4.widget.DrawerLayout;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
-import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.R;
+import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.shoppingList.ShoppingListFragement;
+import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.utils.MainActivityUtils;
 
 /**
  * Created by Chris on 11.06.2016.
@@ -29,26 +29,32 @@ public class DrawerItemClickListener implements ListView.OnItemClickListener
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id)
     {
-        Fragment fragment;
+        Fragment fragment = getFragment(position);
+        MainActivityUtils.replaceFragmentPlaceholder(fragment, activity);
+        mDrawerLayout.closeDrawer(mDrawerList);
+    }
 
+    private Fragment getFragment(int position)
+    {
+        Fragment fragment;
         switch ( position )
         {
             case 0:
+                fragment = new ShoppingListFragement();
+                break;
+
+            case 1:
                 fragment = new AboutFragment();
                 break;
+
+            case 2:
+                fragment = new HelpFragment();
+                break;
+
             default:
                 fragment = new AboutFragment();
                 break;
         }
-
-        FragmentManager fragmentManager = activity.getFragmentManager();
-        fragmentManager
-                .beginTransaction()
-                .replace(R.id.coordinatorLayout, fragment)
-                .commit();
-
-        mDrawerLayout.closeDrawer(mDrawerList);
-
-
+        return fragment;
     }
 }
