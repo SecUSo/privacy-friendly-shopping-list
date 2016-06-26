@@ -34,7 +34,6 @@ public class MainActivity extends AppCompatActivity
     private DrawerLayout mDrawerLayout;
     private ListView mDrawerList;
 
-    private List<MenuItem> mMenuItems = new ArrayList<>();
     private CoordinatorLayout mDrawerPane;
 
     private ActionBarDrawerToggle mDrawerToggle;
@@ -52,10 +51,12 @@ public class MainActivity extends AppCompatActivity
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         mDrawerPane = (CoordinatorLayout) findViewById(R.id.coordinatorLayout);
 
-        mMenuItems.add(new MenuItem("Home", "Home Screen", R.drawable.ic_action_home));
-        mMenuItems.add(new MenuItem("About", "Version 1.0", android.R.drawable.ic_menu_info_details));
-        mMenuItems.add(new MenuItem("Help", "Get Help", android.R.drawable.ic_menu_help));
-        mMenuItems.add(new MenuItem("Statistics", "Get Shopping Statistics", android.R.drawable.ic_menu_edit));
+        List<MenuItem> menuItems = new ArrayList<>();
+        String homeTitle = getResources().getString(R.string.menu_home_title);
+        menuItems.add(new MenuItem(homeTitle, "Home Screen", R.drawable.ic_action_home));
+        menuItems.add(new MenuItem("About", "Version 1.0", android.R.drawable.ic_menu_info_details));
+        menuItems.add(new MenuItem("Help", "Get Help", android.R.drawable.ic_menu_help));
+        menuItems.add(new MenuItem("Statistics", "Get Shopping Statistics", android.R.drawable.ic_menu_edit));
 
         mTitle = getTitle();
         mDrawerTitle = "Navigation";
@@ -93,7 +94,7 @@ public class MainActivity extends AppCompatActivity
 
         mDrawerPane = (CoordinatorLayout) findViewById(R.id.coordinatorLayout);
         mDrawerList = (ListView) findViewById(R.id.left_drawer);
-        DrawerListAdapter adapter = new DrawerListAdapter(this, mMenuItems);
+        DrawerListAdapter adapter = new DrawerListAdapter(this, menuItems);
 
         mDrawerList = (ListView) findViewById(R.id.left_drawer);
         mDrawerList.setAdapter(adapter);
