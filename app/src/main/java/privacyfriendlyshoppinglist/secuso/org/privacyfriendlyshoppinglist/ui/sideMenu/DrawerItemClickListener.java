@@ -44,10 +44,14 @@ public class DrawerItemClickListener implements ListView.OnItemClickListener
                 break;
 
             case 1:
-                fragment = new AboutFragment();
+                fragment = new SettingsFragment();
                 break;
 
             case 2:
+                fragment = new AboutFragment();
+                break;
+
+            case 3:
                 fragment = new HelpFragment();
                 break;
 

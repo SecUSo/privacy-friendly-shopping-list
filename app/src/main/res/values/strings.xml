@@ -24,7 +24,18 @@
     <string name="drawer_close">Close navigation drawer</string>
     <string name="action_websearch">Web search</string>
     <string name="app_not_available">Sorry, there\'s no web browser available</string>
+
     <!--## Menu item values-->
     <string name="menu_home_title">Home</string>
+    <string name="menu_settings_title">Settings</string>
+    <string name="menu_help_title">Help</string>
+    <string name="menu_about_title">About</string>
+    <string name="menu_statistics_title">Statistcs</string>
+
+    <string name="menu_home_subtitle">Home Screen</string>
+    <string name="menu_settings_subtitle">Change your Settings</string>
+    <string name="menu_help_subtitle">Get Help</string>
+    <string name="menu_about_subtitle">Version 1.0</string>
+    <string name="menu_statistics_subtitle">Get Shopping Statistics</string>
 
 </resources>
