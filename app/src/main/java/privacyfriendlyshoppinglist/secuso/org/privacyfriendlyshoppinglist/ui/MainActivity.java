@@ -59,7 +59,7 @@ public class MainActivity extends BaseActivity
     private void setupRecyclerView(RecyclerView recyclerView)
     {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        ShoppingListAdapter shoppingListAdapter = new ShoppingListAdapter(shoppingListService.getAllListDtos(), getSupportFragmentManager());
+        ShoppingListAdapter shoppingListAdapter = new ShoppingListAdapter(shoppingListService.getAllListDtos(), this);
         recyclerView.setAdapter(shoppingListAdapter);
     }
 

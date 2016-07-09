@@ -1,10 +1,12 @@
 package privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.shoppingList;
 
+import android.content.Intent;
 import android.support.v4.app.DialogFragment;
-import android.support.v4.app.FragmentManager;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.shoppingList.business.domain.ListDto;
+import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.ShoppingListActivity;
 
 /**
  * Created by Chris on 05.06.2016.
@@ -13,7 +15,7 @@ public class ShoppingListItemViewHolder extends RecyclerView.ViewHolder {
 
     private ListCache cache;
 
-    public ShoppingListItemViewHolder(final View parent, FragmentManager fragmentManager)
+    public ShoppingListItemViewHolder(final View parent, AppCompatActivity activity)
     {
         super(parent);
         this.cache = new ListCache(parent);
@@ -22,8 +24,9 @@ public class ShoppingListItemViewHolder extends RecyclerView.ViewHolder {
         {
             public void onClick(View v)
             {
-                DialogFragment productFragement = new EditDialogFragment();
-                productFragement.show(fragmentManager, "Liste");
+                Intent intent = new Intent(activity, ShoppingListActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                activity.startActivity(intent);
             }
         });
 
@@ -33,7 +36,7 @@ public class ShoppingListItemViewHolder extends RecyclerView.ViewHolder {
             public boolean onLongClick(View view)
             {
                 DialogFragment productFragement = new EditDialogFragment();
-                productFragement.show(fragmentManager, "Liste");
+                productFragement.show(activity.getSupportFragmentManager(), "Liste");
 
                 return true;
             }
@@ -45,5 +48,6 @@ public class ShoppingListItemViewHolder extends RecyclerView.ViewHolder {
         cache.getListNameTextView().setText(dto.getListName());
         cache.getNrProductsTextView().setText("0");
     }
+
 
 }
