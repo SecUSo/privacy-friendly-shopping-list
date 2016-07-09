@@ -84,8 +84,15 @@
     <string name="main_button_welcomedialog_text">Use the button in the lower left corner to call the Welcome Dialog.
     </string>
 
-    <!-- Item Card -->
+    <!-- Product Dialog -->
 
-    <string name="item_name">Enter List</string>
+    <string name="product_name">Enter Product</string>
+    <string name="quantity">0</string>
+
+    <!-- Shopping List Dialog -->
+    <string name="list_name">Enter List Name</string>
+    <string name="priority_high">high</string>
+    <string name="priority_low">low</string>
+
 
 </resources>

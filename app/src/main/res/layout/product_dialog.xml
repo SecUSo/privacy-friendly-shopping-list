@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content">
+
+    <EditText
+            android:id="@+id/product_layout"
+            android:inputType="text"
+            android:layout_width="263dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginLeft="4dp"
+            android:layout_marginRight="4dp"
+            android:layout_marginBottom="4dp"
+            android:hint="@string/product_name"/>
+
+
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+        <Button
+                style="?android:attr/buttonStyleSmall"
+                android:layout_width="41dp"
+                android:layout_height="wrap_content"
+                android:text="-"
+                android:id="@+id/button"/>
+        <Button style="?android:attr/buttonStyleSmall" android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="+" android:id="@+id/button2"/>
+        <EditText
+                android:id="@+id/quantity"
+                android:inputType="number"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:layout_marginLeft="4dp"
+                android:layout_marginRight="4dp"
+                android:layout_marginBottom="16dp"
+                android:fontFamily="sans-serif" android:layout_weight="0.26">
+            android:hint="@string/quantity"/>
+        </EditText>
+    </LinearLayout>
+</LinearLayout>
