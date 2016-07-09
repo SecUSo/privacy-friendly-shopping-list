@@ -38,4 +38,8 @@
     <string name="menu_about_subtitle">Version 1.0</string>
     <string name="menu_statistics_subtitle">Get Shopping Statistics</string>
 
+    <!-- Item Card -->
+
+    <string name="item_name">Enter List</string>
+
 </resources>

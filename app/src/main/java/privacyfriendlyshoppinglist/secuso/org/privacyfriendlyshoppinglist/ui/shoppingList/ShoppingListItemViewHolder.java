@@ -1,5 +1,9 @@
 package privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.shoppingList;
 
+import android.app.Dialog;
+import android.support.v4.app.DialogFragment;
+import android.support.v4.app.Fragment;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.TextView;
@@ -19,7 +23,34 @@ public class ShoppingListItemViewHolder extends RecyclerView.ViewHolder {
 
     public static ShoppingListItemViewHolder newInstance(View parent) {
         TextView shoppingListName = (TextView) parent.findViewById(R.id.shoppinglist_name_textview);
-        return new ShoppingListItemViewHolder(parent, shoppingListName);
+
+        CardView itemCard = (CardView) parent.findViewById(R.id.item_card_view);
+
+        itemCard.setOnClickListener(new View.OnClickListener()
+        {
+            public void onClick(View v)
+            {
+
+                // open ProductDialogFragement
+                DialogFragment productFragement = new EditDialogFragment();
+                productFragement.show(productFragement.getFragmentManager(), "Liste");
+
+            }
+        });
+
+        itemCard.setOnLongClickListener(new View.OnLongClickListener()
+        {
+            @Override
+            public boolean onLongClick(View view)
+            {
+                DialogFragment productFragement = new EditDialogFragment();
+                productFragement.show(productFragement.getFragmentManager(), "Liste");
+
+                return true;
+            }
+        });
+
+            return new ShoppingListItemViewHolder(parent, shoppingListName);
     }
 
     public void setItemText(CharSequence text) {
