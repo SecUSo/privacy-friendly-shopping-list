@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.R;
+import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.shoppingList.business.domain.ListDto;
 
 import java.util.List;
 
@@ -15,10 +16,10 @@ import java.util.List;
  */
 public class ShoppingListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
-    private List<String> shoppingList;
+    private List<ListDto> shoppingList;
     private FragmentManager fragmentManager;
 
-    public ShoppingListAdapter(List<String> shoppingList, FragmentManager fragmentManager)
+    public ShoppingListAdapter(List<ListDto> shoppingList, FragmentManager fragmentManager)
     {
         this.shoppingList = shoppingList;
         this.fragmentManager = fragmentManager;
@@ -28,14 +29,14 @@ public class ShoppingListAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         Context context = parent.getContext();
         View view = LayoutInflater.from(context).inflate(R.layout.shopping_list_item, parent, false);
-        return ShoppingListItemViewHolder.newInstance(view, fragmentManager);
+        return new ShoppingListItemViewHolder(view, fragmentManager);
     }
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder viewHolder, int position) {
         ShoppingListItemViewHolder holder = (ShoppingListItemViewHolder) viewHolder;
-        String itemName = shoppingList.get(position);
-        holder.setItemText(itemName);
+        ListDto dto = shoppingList.get(position);
+        holder.processDto(dto);
     }
 
     @Override

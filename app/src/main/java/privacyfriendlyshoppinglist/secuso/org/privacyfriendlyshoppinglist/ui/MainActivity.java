@@ -59,7 +59,9 @@ public class MainActivity extends BaseActivity
         List<ListDto> itemList = new ArrayList<>();
         for ( int i = 0; i < 20; i++ )
         {
-            itemList.add("Item " + i);
+            ListDto dto = new ListDto();
+            dto.setListName("Item " + i);
+            itemList.add(dto);
         }
         return itemList;
     }
