@@ -1,25 +1,16 @@
 package privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui;
 
-import android.app.Fragment;
-import android.content.res.Configuration;
+import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.Dialog;
+import android.app.DialogFragment;
+import android.content.DialogInterface;
 import android.os.Bundle;
-import android.support.design.widget.CoordinatorLayout;
-
-import android.support.v4.view.GravityCompat;
-import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v7.app.AppCompatActivity;
-
-import android.support.v7.widget.Toolbar;
-import android.view.Menu;
-import android.view.View;
-import android.widget.ListView;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.R;
-import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.shoppingList.ShoppingListFragement;
-import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.sideMenu.DrawerItemClickListener;
-import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.sideMenu.DrawerListAdapter;
-import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.sideMenu.MenuItem;
-import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.utils.MainActivityUtils;
+import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.shoppingList.ShoppingListAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,162 +20,76 @@ import java.util.List;
  * Author: Grebiel Jose Ifill Brito
  * Created: 17.05.16 creation date
  */
-public class MainActivity extends AppCompatActivity
+public class MainActivity extends BaseActivity
 {
-    private DrawerLayout drawerLayout;
-    private ListView drawerList;
-
-    private CoordinatorLayout mDrawerPane;
-
-    private ActionBarDrawerToggle mDrawerToggle;
-    private CharSequence mDrawerTitle;
-    private CharSequence mTitle;
-
-
     @Override
     protected final void onCreate(final Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        initToolbar();
 
-        drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
-        mDrawerPane = (CoordinatorLayout) findViewById(R.id.coordinatorLayout);
+        RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
+        setupRecyclerView(recyclerView);
 
-        List<MenuItem> menuItems = createMenuItems();
+        WelcomeDialog welcomeDialog = new WelcomeDialog();
+        welcomeDialog.show(getFragmentManager(), "WelcomeDialog");
 
-        mTitle = getTitle();
-        mDrawerTitle = "Navigation";
-
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setHomeButtonEnabled(true);
-
-        mDrawerToggle = new ActionBarDrawerToggle(this, drawerLayout,
-                R.string.drawer_open, R.string.drawer_close) {
-
-            /** Called when a drawer has settled in a completely closed state. */
-            public void onDrawerClosed(View view) {
-                super.onDrawerClosed(view);
-                getSupportActionBar().setTitle(mTitle);
-                invalidateOptionsMenu(); // creates call to onPrepareOptionsMenu()
-            }
-
-            /** Called when a drawer has settled in a completely open state. */
-            public void onDrawerOpened(View drawerView) {
-                super.onDrawerOpened(drawerView);
-                //getActionBar().setTitle(mDrawerTitle);
-                getSupportActionBar().setTitle(mDrawerTitle);
-                invalidateOptionsMenu(); // creates call to onPrepareOptionsMenu()
-            }
-        };
-
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setHomeButtonEnabled(true);
-
-
-        // Set the drawer toggle as the DrawerListener
-        drawerLayout.setDrawerListener(mDrawerToggle);
-        mDrawerToggle.syncState();
-
-
-        mDrawerPane = (CoordinatorLayout) findViewById(R.id.coordinatorLayout);
-        drawerList = (ListView) findViewById(R.id.left_drawer);
-        DrawerListAdapter adapter = new DrawerListAdapter(this, menuItems);
-
-        drawerList = (ListView) findViewById(R.id.left_drawer);
-        drawerList.setAdapter(adapter);
-
-        drawerList.setOnItemClickListener(new DrawerItemClickListener(this, drawerLayout, drawerList));
-
-        Fragment initialFragment = new ShoppingListFragement();
-        MainActivityUtils.replaceFragmentPlaceholder(initialFragment, this);
+        overridePendingTransition(0, 0);
 
     }
 
-    private List<MenuItem> createMenuItems()
+    private void setupRecyclerView(RecyclerView recyclerView)
     {
-        List<MenuItem> menuItems = new ArrayList<>();
-
-        String homeTitle = getResources().getString(R.string.menu_home_title);
-        String homeSubtitle = getResources().getString(R.string.menu_home_subtitle);
-        String settingsTitle = getResources().getString(R.string.menu_settings_title);
-        String settingsSubtitle = getResources().getString(R.string.menu_settings_subtitle);
-        String aboutTitle = getResources().getString(R.string.menu_about_title);
-        String aboutSubtitle = getResources().getString(R.string.menu_about_subtitle);
-        String helpTitle = getResources().getString(R.string.menu_help_title);
-        String helpSubtitle = getResources().getString(R.string.menu_help_subtitle);
-        String statisticsTitle = getResources().getString(R.string.menu_statistics_title);
-        String statisticsSubtitle = getResources().getString(R.string.menu_statistics_subtitle);
-
-        menuItems.add(new MenuItem(homeTitle, homeSubtitle, R.drawable.ic_menu_home));
-        menuItems.add(new MenuItem(settingsTitle, settingsSubtitle, android.R.drawable.ic_menu_preferences));
-        menuItems.add(new MenuItem(aboutTitle, aboutSubtitle, android.R.drawable.ic_menu_info_details));
-        menuItems.add(new MenuItem(helpTitle, helpSubtitle, android.R.drawable.ic_menu_help));
-        menuItems.add(new MenuItem(statisticsTitle, statisticsSubtitle, android.R.drawable.ic_menu_edit));
-        return menuItems;
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        ShoppingListAdapter shoppingListAdapter = new ShoppingListAdapter(getDummyItemList());
+        recyclerView.setAdapter(shoppingListAdapter);
     }
 
-    @Override
-    protected final void onStart()
+    private List<String> getDummyItemList()
     {
-        super.onStart();
+        List<String> itemList = new ArrayList<>();
+        for ( int i = 0; i < 20; i++ )
+        {
+            itemList.add("Item " + i);
+        }
+        return itemList;
     }
 
     @Override
-    protected final void onStop()
+    protected int getNavigationDrawerID()
     {
-        super.onStop();
+        return R.id.nav_example;
     }
 
-    private void initToolbar() {
-        Toolbar mToolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(mToolbar);
-        setTitle(getString(R.string.app_name));
-        mToolbar.setTitleTextColor(getResources().getColor(android.R.color.white));
-    }
+    public static class WelcomeDialog extends DialogFragment
+    {
 
-    @Override
-    public void onConfigurationChanged(Configuration newConfig) {
-        super.onConfigurationChanged(newConfig);
-        mDrawerToggle.onConfigurationChanged(newConfig);
-    }
-
-
-    @Override
-    public boolean onOptionsItemSelected(android.view.MenuItem item) {
-        // Pass the event to ActionBarDrawerToggle, if it returns
-        // true, then it has handled the app icon touch event
-        if (mDrawerToggle.onOptionsItemSelected((android.view.MenuItem) item)) {
-            drawerLayout.openDrawer(GravityCompat.START);
-            return true;
+        @Override
+        public void onAttach(Activity activity)
+        {
+            super.onAttach(activity);
         }
 
-        /*switch (item.getItemId()) {
-            // THIS IS YOUR DRAWER/HAMBURGER BUTTON
-            case android.R.id.home:
-                drawerLayout.openDrawer(GravityCompat.START);  // OPEN DRAWER
-                return true;
-        }*/
+        @Override
+        public Dialog onCreateDialog(Bundle savedInstanceState)
+        {
 
-        return super.onOptionsItemSelected((android.view.MenuItem) item);
-    }
+            LayoutInflater i = getActivity().getLayoutInflater();
+            AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+            builder.setView(i.inflate(R.layout.welcome_dialog, null));
+            builder.setIcon(R.mipmap.ic_launcher);
+            builder.setTitle(getActivity().getString(R.string.welcome));
+            builder.setPositiveButton(getActivity().getString(R.string.okay), null);
+            builder.setNegativeButton(getActivity().getString(R.string.viewhelp), new DialogInterface.OnClickListener()
+            {
+                @Override
+                public void onClick(DialogInterface dialog, int which)
+                {
+                    ((MainActivity) getActivity()).goToNavigationItem(R.id.nav_help);
+                }
+            });
 
-
-    @Override
-    public boolean onPrepareOptionsMenu(Menu menu) {
-        // If the nav drawer is open, hide action items related to the content view
-
-        /*super.onPrepareOptionsMenu(menu);
-        boolean drawerOpen = drawerLayout.isDrawerOpen(drawerList);
-        menu.findItem(R.id.menu_search).setVisible(!drawerOpen);*/
-        return super.onPrepareOptionsMenu(menu);
-    }
-
-
-    @Override
-    protected void onPostCreate(Bundle savedInstanceState) {
-        super.onPostCreate(savedInstanceState);
-        // Sync the toggle state after onRestoreInstanceState has occurred.
-        mDrawerToggle.syncState();
+            return builder.create();
+        }
     }
 }
