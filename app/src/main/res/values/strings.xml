@@ -1,8 +1,5 @@
 <resources>
     <string name="app_name">Privacy Friendly Shopping List</string>
-    <string name="menu_item_about">About</string>
-    <string name="menu_item_home">@string/app_name</string>
-    <string name="menu_item_help">Help</string>
 
     <!--###ABOUT###-->
     <string name="about">About</string>
@@ -17,28 +14,6 @@
     <string name="url" translatable="false">
         <a href="https://www.secuso.org/pfa">https://www.secuso.org/pfa</a>
     </string>
-
-    <!-- HelpFragment-->
-
-    <!-- Navigation Menu-->
-    <!--## Drawer API -->
-    <string name="drawer_open">Open navigation drawer</string>
-    <string name="drawer_close">Close navigation drawer</string>
-    <string name="action_websearch">Web search</string>
-    <string name="app_not_available">Sorry, there\'s no web browser available</string>
-
-    <!--## Menu item values-->
-    <string name="menu_home_title">Home</string>
-    <string name="menu_settings_title">Settings</string>
-    <string name="menu_help_title">Help</string>
-    <string name="menu_about_title">About</string>
-    <string name="menu_statistics_title">Statistcs</string>
-
-    <string name="menu_home_subtitle">Home Screen</string>
-    <string name="menu_settings_subtitle">Change your Settings</string>
-    <string name="menu_help_subtitle">Get Help</string>
-    <string name="menu_about_subtitle">Version 1.0</string>
-    <string name="menu_statistics_subtitle">Get Shopping Statistics</string>
 
     <!--NEW MENU-->
     <!-- ###DRAWER###-->
@@ -82,27 +57,6 @@
     <string name="help_permissions_description">Privacy Friendly Example does not use any permissions</string>
     <string name="help_intro">Welcome to the help page. This app shows the basic design of Privacy Friendly Apps. The
         functionality of the app should be introduced with 1 to 2 sentences in this section.
-    </string>
-
-    <!-- ###MAIN### -->
-    <string name="main_button_text">Full Width Button</string>
-    <string name="main_button_disabled_text">Inactive Button</string>
-    <string name="main_button_1">1</string>
-    <string name="main_button_2">2</string>
-    <string name="main_button_3">3</string>
-    <string name="main_button_4">4</string>
-    <string name="main_button_5">5</string>
-    <string name="main_text_fullwithbutton_desc">A button that uses the full width of the screen looks like this:
-    </string>
-    <string name="main_text_disabledbutton_desc">A disabled button looks like this (any size):</string>
-    <string name="main_text_title">This is an example app to demonstrate the design of a Privacy Friendly App. Further
-        explanations can be found in the Privacy Friendly App Guide.
-    </string>
-    <string name="main_text_normalbutton_desc">There are multiple ways to display basic buttons. Button 1 is the basic
-        button. If you wish to separate a button visually, use button 2. The buttons 3&#8211;5 are examples for
-        highlighted buttons. Depending on the app other colors are possible.
-    </string>
-    <string name="main_button_welcomedialog_text">Use the button in the lower left corner to call the Welcome Dialog.
     </string>
 
 </resources>

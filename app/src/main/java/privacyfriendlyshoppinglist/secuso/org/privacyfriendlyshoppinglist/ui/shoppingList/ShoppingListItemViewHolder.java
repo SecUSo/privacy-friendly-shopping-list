@@ -18,7 +18,7 @@ public class ShoppingListItemViewHolder extends RecyclerView.ViewHolder {
     }
 
     public static ShoppingListItemViewHolder newInstance(View parent) {
-        TextView shoppingListName = (TextView) parent.findViewById(R.id.shoppinglist_name_textview);
+        TextView shoppingListName = (TextView) parent.findViewById(R.id.textview_list_name);
         return new ShoppingListItemViewHolder(parent, shoppingListName);
     }
 
