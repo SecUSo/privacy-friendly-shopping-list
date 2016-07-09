@@ -10,6 +10,10 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.R;
+import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.context.AbstractInstanceFactory;
+import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.context.InstanceFactory;
+import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.shoppingList.business.ShoppingListService;
+import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.shoppingList.business.domain.ListDto;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.shoppingList.ShoppingListAdapter;
 
 import java.util.ArrayList;
@@ -22,11 +26,16 @@ import java.util.List;
  */
 public class MainActivity extends BaseActivity
 {
+    private ShoppingListService shoppingListService;
+
     @Override
     protected final void onCreate(final Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        AbstractInstanceFactory instanceFactory = new InstanceFactory(getApplicationContext());
+        shoppingListService = (ShoppingListService) instanceFactory.createInstance(ShoppingListService.class);
 
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
         setupRecyclerView(recyclerView);
@@ -45,9 +54,9 @@ public class MainActivity extends BaseActivity
         recyclerView.setAdapter(shoppingListAdapter);
     }
 
-    private List<String> getDummyItemList()
+    private List<ListDto> getDummyItemList()
     {
-        List<String> itemList = new ArrayList<>();
+        List<ListDto> itemList = new ArrayList<>();
         for ( int i = 0; i < 20; i++ )
         {
             itemList.add("Item " + i);

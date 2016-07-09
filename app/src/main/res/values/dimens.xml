@@ -3,6 +3,13 @@
 
     <dimen name="menu_width">240dp</dimen>
 
+    <dimen name="text_medium">16dp</dimen>
+    <dimen name="text_small">12dp</dimen>
+
+    <!--Lists-->
+    <dimen name="list_margin">16dp</dimen>
+    <dimen name="list_padding">8dp</dimen>
+
 
     <!-- Default screen margins, per the Android Design guidelines. -->
     <dimen name="nav_header_vertical_spacing">16dp</dimen>
