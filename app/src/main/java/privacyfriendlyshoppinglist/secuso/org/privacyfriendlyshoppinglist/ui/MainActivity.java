@@ -12,12 +12,10 @@ import android.view.LayoutInflater;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.R;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.context.AbstractInstanceFactory;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.context.InstanceFactory;
+import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.persistence.DB;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.shoppingList.business.ShoppingListService;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.shoppingList.business.domain.ListDto;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.shoppingList.ShoppingListAdapter;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Description:
@@ -34,8 +32,13 @@ public class MainActivity extends BaseActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        getApplicationContext().deleteDatabase(DB.APP.getDbName());
+
         AbstractInstanceFactory instanceFactory = new InstanceFactory(getApplicationContext());
         shoppingListService = (ShoppingListService) instanceFactory.createInstance(ShoppingListService.class);
+
+        createTestData();
+
 
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
         setupRecyclerView(recyclerView);
@@ -47,29 +50,27 @@ public class MainActivity extends BaseActivity
 
     }
 
-    private void setupRecyclerView(RecyclerView recyclerView)
-    {
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        ShoppingListAdapter shoppingListAdapter = new ShoppingListAdapter(getDummyItemList(), getSupportFragmentManager());
-        recyclerView.setAdapter(shoppingListAdapter);
-    }
-
-    private List<ListDto> getDummyItemList()
-    {
-        List<ListDto> itemList = new ArrayList<>();
-        for ( int i = 0; i < 20; i++ )
-        {
-            ListDto dto = new ListDto();
-            dto.setListName("Item " + i);
-            itemList.add(dto);
-        }
-        return itemList;
-    }
-
     @Override
     protected int getNavigationDrawerID()
     {
         return R.id.nav_example;
+    }
+
+    private void setupRecyclerView(RecyclerView recyclerView)
+    {
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        ShoppingListAdapter shoppingListAdapter = new ShoppingListAdapter(shoppingListService.getAllListDtos(), getSupportFragmentManager());
+        recyclerView.setAdapter(shoppingListAdapter);
+    }
+
+    private void createTestData()
+    {
+        for ( int i = 0; i < 10; i++ )
+        {
+            ListDto dto = new ListDto();
+            dto.setListName("List Name " + i);
+            shoppingListService.saveOrUpdate(dto);
+        }
     }
 
     public static class WelcomeDialog extends DialogFragment

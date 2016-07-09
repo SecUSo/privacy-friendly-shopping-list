@@ -22,10 +22,8 @@ public class ShoppingListItemViewHolder extends RecyclerView.ViewHolder {
         {
             public void onClick(View v)
             {
-                // open ProductDialogFragement
                 DialogFragment productFragement = new EditDialogFragment();
                 productFragement.show(fragmentManager, "Liste");
-
             }
         });
 
@@ -45,7 +43,7 @@ public class ShoppingListItemViewHolder extends RecyclerView.ViewHolder {
     public void processDto(ListDto dto)
     {
         cache.getListNameTextView().setText(dto.getListName());
-        cache.getNrProductsTextView().setText("2");
+        cache.getNrProductsTextView().setText("0");
     }
 
 }

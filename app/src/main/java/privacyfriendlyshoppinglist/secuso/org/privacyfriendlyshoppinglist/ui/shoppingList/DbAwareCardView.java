@@ -9,21 +9,21 @@ import android.util.AttributeSet;
  * Author: Grebiel Jose Ifill Brito
  * Created: 09.07.16 creation date
  */
-public class DBAwareCardView extends CardView
+public class DbAwareCardView extends CardView
 {
     private Long databaseId;
 
-    public DBAwareCardView(Context context)
+    public DbAwareCardView(Context context)
     {
         super(context);
     }
 
-    public DBAwareCardView(Context context, AttributeSet attrs)
+    public DbAwareCardView(Context context, AttributeSet attrs)
     {
         super(context, attrs);
     }
 
-    public DBAwareCardView(Context context, AttributeSet attrs, int defStyleAttr)
+    public DbAwareCardView(Context context, AttributeSet attrs, int defStyleAttr)
     {
         super(context, attrs, defStyleAttr);
     }

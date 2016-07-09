@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.shoppingList.DBAwareCardView
+<privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.shoppingList.DbAwareCardView
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:card_view="http://schemas.android.com/apk/res-auto"
         android:id="@+id/item_card_view"
@@ -35,4 +35,4 @@
                 android:textColor="@color/middlegrey"
                 style="@style/Base.TextAppearance.AppCompat.Body2"/>
     </RelativeLayout>
-</privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.shoppingList.DBAwareCardView>
+</privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.shoppingList.DbAwareCardView>

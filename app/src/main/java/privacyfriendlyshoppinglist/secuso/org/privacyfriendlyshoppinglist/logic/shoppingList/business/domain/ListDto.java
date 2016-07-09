@@ -22,6 +22,7 @@ public class ListDto extends AbstractDto
     private int icon;
     private Date deadline;
     private String notes;
+    private String nrItems;
 
     public String getListName()
     {
@@ -73,6 +74,16 @@ public class ListDto extends AbstractDto
         this.notes = notes;
     }
 
+    public String getNrItems()
+    {
+        return nrItems;
+    }
+
+    public void setNrItems(String nrItems)
+    {
+        this.nrItems = nrItems;
+    }
+
     @Override
     public String toString()
     {
@@ -82,6 +93,7 @@ public class ListDto extends AbstractDto
                 ", icon=" + icon +
                 ", deadline=" + deadline +
                 ", notes='" + notes + '\'' +
+                ", nrItems='" + nrItems + '\'' +
                 '}';
     }
 }
