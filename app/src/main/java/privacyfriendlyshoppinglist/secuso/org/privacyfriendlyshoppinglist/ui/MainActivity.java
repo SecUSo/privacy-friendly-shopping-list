@@ -50,7 +50,7 @@ public class MainActivity extends BaseActivity
     private void setupRecyclerView(RecyclerView recyclerView)
     {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        ShoppingListAdapter shoppingListAdapter = new ShoppingListAdapter(getDummyItemList());
+        ShoppingListAdapter shoppingListAdapter = new ShoppingListAdapter(getDummyItemList(), getSupportFragmentManager());
         recyclerView.setAdapter(shoppingListAdapter);
     }
 
