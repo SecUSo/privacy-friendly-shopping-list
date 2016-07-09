@@ -1,7 +1,7 @@
 package privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.shoppingList;
 
 import android.content.Context;
-import android.support.v4.app.FragmentManager;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,19 +17,19 @@ import java.util.List;
 public class ShoppingListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     private List<ListDto> shoppingList;
-    private FragmentManager fragmentManager;
+    private AppCompatActivity activity;
 
-    public ShoppingListAdapter(List<ListDto> shoppingList, FragmentManager fragmentManager)
+    public ShoppingListAdapter(List<ListDto> shoppingList, AppCompatActivity activity)
     {
         this.shoppingList = shoppingList;
-        this.fragmentManager = fragmentManager;
+        this.activity = activity;
     }
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         Context context = parent.getContext();
         View view = LayoutInflater.from(context).inflate(R.layout.shopping_list_item, parent, false);
-        return new ShoppingListItemViewHolder(view, fragmentManager);
+        return new ShoppingListItemViewHolder(view, activity);
     }
 
     @Override

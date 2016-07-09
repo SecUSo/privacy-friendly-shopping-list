@@ -18,6 +18,17 @@
             </intent-filter>
         </activity>
 
+
+        <activity
+                android:name=".ui.ShoppingListActivity"
+                android:label="@string/activity_shopping_list"
+                android:parentActivityName=".ui.MainActivity"
+                android:screenOrientation="portrait"
+                android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                    android:name="android.support.PARENT_ACTIVITY"
+                    android:value=".ui.MainActivity"/>
+        </activity>
         <activity
                 android:name=".ui.AboutActivity"
                 android:label="@string/about"

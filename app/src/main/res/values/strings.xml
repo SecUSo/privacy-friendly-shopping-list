@@ -6,6 +6,9 @@
     <string name="ph_list_name" translatable="false">List Name</string>
     <string name="ph_list_nr_items" translatable="false">X</string>
 
+    <!-- ### SHOPPING LIST ### -->
+    <string name="activity_shopping_list">Shopping List:</string>
+
     <!--### ABOUT ###-->
     <string name="about">About</string>
     <string name="version_number">Version 1.5</string>
