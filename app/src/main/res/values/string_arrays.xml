@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array
+            name="shopping_list_priority_spinner">
+        <item>high</item>
+        <item>medium</item>
+        <item>low</item>
+    </string-array>
+
+
+</resources>

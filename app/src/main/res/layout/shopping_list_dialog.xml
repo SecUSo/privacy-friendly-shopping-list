@@ -5,7 +5,7 @@
               android:layout_height="wrap_content">
 
     <EditText
-            android:id="@+id/product_layout"
+            android:id="@+id/list_name"
             android:inputType="text"
             android:layout_width="263dp"
             android:layout_height="wrap_content"
@@ -21,10 +21,34 @@
             android:layout_height="match_parent"
             android:orientation="horizontal">
 
+        <TextView
+
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+
+        />
         <Spinner
                 android:id="@+id/priority_spinner"
                 android:layout_width="fill_parent"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content"
+
+        />
+
+
+        <Button
+                android:id="@+id/set_date_button"
+                android:drawableLeft="@android:drawable/ic_dialog_info"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="70dp"
+                android:onClick="setDate"
+                android:text="@string/set_date_button"/>
+
+
+        />
+
     </LinearLayout>
 
 </LinearLayout>

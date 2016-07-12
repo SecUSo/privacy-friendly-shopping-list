@@ -5,7 +5,7 @@
               android:layout_height="wrap_content">
 
     <EditText
-            android:id="@+id/product_layout"
+            android:id="@+id/product_name"
             android:inputType="text"
             android:layout_width="263dp"
             android:layout_height="wrap_content"
