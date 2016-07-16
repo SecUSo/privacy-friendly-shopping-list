@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.TextView;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.R;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.shoppingList.business.domain.ListDto;
+import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.deletelists.DeleteListsActivity;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.shoppinglist.listadapter.ListItemCache;
 
 /**
@@ -17,17 +18,19 @@ public class DeleteListsItemViewHolder extends RecyclerView.ViewHolder
 {
 
     private ListItemCache cache;
+    private AppCompatActivity activity;
 
     public DeleteListsItemViewHolder(final View parent, AppCompatActivity activity)
     {
         super(parent);
         this.cache = new ListItemCache(parent);
+        this.activity = activity;
     }
 
     public void processDto(ListDto dto)
     {
         cache.getListNameTextView().setText(dto.getListName());
-        cache.getNrProductsTextView().setText("0"); // todo: read from data base
+        cache.getNrProductsTextView().setText("0"); // todo: read from database
         updateVisibilityFormat(dto);
 
         cache.getListCard().setOnClickListener(new View.OnClickListener()
@@ -35,6 +38,8 @@ public class DeleteListsItemViewHolder extends RecyclerView.ViewHolder
             public void onClick(View v)
             {
                 dto.setSelected(!dto.isSelected());
+                DeleteListsActivity host = (DeleteListsActivity) activity;
+                host.reorderListView();
                 updateVisibilityFormat(dto);
             }
         });

@@ -38,7 +38,7 @@ public class MainActivity extends BaseActivity
 //        welcomeDialog.show(getFragmentManager(), "WelcomeDialog");
 
         cache.getNewListFab().setOnClickListener(new AddOnClickListener(cache));
-        cache.getSortImageView().setOnClickListener(new SortOnClickListener());
+        cache.getSortImageView().setOnClickListener(new SortOnClickListener(cache));
         cache.getDeleteImageView().setOnClickListener(new ShowDeleteViewOnClickListener(cache));
 
         overridePendingTransition(0, 0);

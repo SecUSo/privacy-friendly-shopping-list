@@ -32,7 +32,7 @@ public class DeleteOnClickListener implements View.OnClickListener
     public void onClick(View v)
     {
         Snackbar.make(v, R.string.delele_lists_confirmation, Snackbar.LENGTH_LONG)
-                .setAction(R.string.ok, new View.OnClickListener()
+                .setAction(R.string.okay, new View.OnClickListener()
                 {
                     @Override
                     public void onClick(View v)

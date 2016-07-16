@@ -91,6 +91,23 @@ public class ShoppingListServiceImpl implements ShoppingListService
                 );
     }
 
+    @Override
+    public List<ListDto> moveSelectedToEnd(List<ListDto> shoppingListDtos)
+    {
+        List<ListDto> nonSelectedDtos = Observable
+                .from(shoppingListDtos)
+                .filter(dto -> !dto.isSelected())
+                .toList().toBlocking().single();
+
+        List<ListDto> selectedDtos = Observable
+                .from(shoppingListDtos)
+                .filter(dto -> dto.isSelected())
+                .toList().toBlocking().single();
+        nonSelectedDtos.addAll(selectedDtos);
+        shoppingListDtos = nonSelectedDtos;
+        return shoppingListDtos;
+    }
+
     private ListDto getDto(ShoppingListEntity entity)
     {
         ListDto dto = new ListDto();

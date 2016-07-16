@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+    <LinearLayout
+            android:padding="@dimen/dialog_padding"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+        <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Ascending/Descending"/>
+        <RadioGroup
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+            <RadioButton
+                    android:text="Ascending"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+            <RadioButton
+                    android:text="Descending"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+        </RadioGroup>
+
+        <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Sort By:"
+        />
+        <RadioGroup
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+            <RadioButton
+                    android:text="Name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+            <RadioButton
+                    android:text="Priority"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+        </RadioGroup>
+
+    </LinearLayout>
+</ScrollView>

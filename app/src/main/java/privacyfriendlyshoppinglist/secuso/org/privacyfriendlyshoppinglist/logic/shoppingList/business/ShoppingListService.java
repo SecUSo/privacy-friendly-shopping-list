@@ -21,4 +21,6 @@ public interface ShoppingListService extends ContextSetter
     List<ListDto> getAllListDtos();
 
     void deleteSelected(List<ListDto> shoppingListDtos);
+
+    List<ListDto> moveSelectedToEnd(List<ListDto> shoppingListDtos);
 }
