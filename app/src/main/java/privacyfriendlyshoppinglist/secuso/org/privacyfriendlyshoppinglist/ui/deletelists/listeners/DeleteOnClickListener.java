@@ -1,6 +1,8 @@
 package privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.deletelists.listeners;
 
+import android.support.design.widget.Snackbar;
 import android.view.View;
+import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.R;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.context.AbstractInstanceFactory;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.context.InstanceFactory;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.shoppingList.business.ShoppingListService;
@@ -29,15 +31,23 @@ public class DeleteOnClickListener implements View.OnClickListener
     @Override
     public void onClick(View v)
     {
-        List<ListDto> shoppingList = cache.getDeleteListsAdapter().getShoppingList();
-        for ( ListDto dto : shoppingList )
-        {
-            if ( dto.isSelected() )
-            {
-                shoppingListService.deleteById(dto.getId());
-            }
-        }
-        updateListView();
+        Snackbar.make(v, R.string.delele_lists_confirmation, Snackbar.LENGTH_LONG)
+                .setAction(R.string.ok, new View.OnClickListener()
+                {
+                    @Override
+                    public void onClick(View v)
+                    {
+                        List<ListDto> shoppingList = cache.getDeleteListsAdapter().getShoppingList();
+                        for ( ListDto dto : shoppingList )
+                        {
+                            if ( dto.isSelected() )
+                            {
+                                shoppingListService.deleteById(dto.getId());
+                            }
+                        }
+                        updateListView();
+                    }
+                }).show();
     }
 
     public void updateListView()

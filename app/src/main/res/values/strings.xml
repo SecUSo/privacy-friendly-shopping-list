@@ -11,6 +11,10 @@
 
     <!-- ### DELETE SHOPPING LISTS ### -->
     <string name="activity_delete_lists">Delete Shopping Lists</string>
+    <string name="delele_lists_confirmation">Do you really want to delete the selected items? This operation cannot be
+        undone.
+    </string>
+    <string name="ok">ok</string>
 
     <!--### ABOUT ###-->
     <string name="about">About</string>
