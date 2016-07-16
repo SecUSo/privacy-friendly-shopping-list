@@ -1,4 +1,4 @@
-package privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.main.listeners.addlist;
+package privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.main.listeners;
 
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;

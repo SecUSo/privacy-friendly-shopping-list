@@ -1,4 +1,4 @@
-package privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.main.listeners.deletelists;
+package privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.main.listeners;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -11,11 +11,11 @@ import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.mai
  * Author: Grebiel Jose Ifill Brito
  * Created: 16.07.16 creation date
  */
-public class DeleteOnClickListener implements View.OnClickListener
+public class ShowDeleteViewOnClickListener implements View.OnClickListener
 {
     ShoppingListCache cache;
 
-    public DeleteOnClickListener(ShoppingListCache cache)
+    public ShowDeleteViewOnClickListener(ShoppingListCache cache)
     {
         this.cache = cache;
     }

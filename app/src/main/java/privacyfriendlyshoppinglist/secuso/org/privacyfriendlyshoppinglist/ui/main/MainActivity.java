@@ -7,10 +7,9 @@ import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framew
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.persistence.DB;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.shoppingList.business.ShoppingListService;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.baseactivity.BaseActivity;
-import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.main.listeners.addlist.AddOnClickListener;
-import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.main.listeners.deletelists.DeleteOnClickListener;
-import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.main.listeners.sortlists.SortOnClickListener;
-import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.main.welcome.WelcomeDialog;
+import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.main.listeners.AddOnClickListener;
+import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.main.listeners.ShowDeleteViewOnClickListener;
+import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.main.listeners.SortOnClickListener;
 
 /**
  * Description:
@@ -36,12 +35,12 @@ public class MainActivity extends BaseActivity
 
         updateListView();
 
-        WelcomeDialog welcomeDialog = new WelcomeDialog();
-        welcomeDialog.show(getFragmentManager(), "WelcomeDialog");
+//        WelcomeDialog welcomeDialog = new WelcomeDialog();
+//        welcomeDialog.show(getFragmentManager(), "WelcomeDialog");
 
         cache.getNewListFab().setOnClickListener(new AddOnClickListener(cache));
         cache.getSortImageView().setOnClickListener(new SortOnClickListener());
-        cache.getDeleteImageView().setOnClickListener(new DeleteOnClickListener(cache));
+        cache.getDeleteImageView().setOnClickListener(new ShowDeleteViewOnClickListener(cache));
 
         overridePendingTransition(0, 0);
     }
