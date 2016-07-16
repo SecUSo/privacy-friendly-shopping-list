@@ -9,6 +9,9 @@
     <!-- ### SHOPPING LIST ### -->
     <string name="activity_shopping_list">Shopping List:</string>
 
+    <!-- ### DELETE SHOPPING LISTS ### -->
+    <string name="activity_delete_lists">Delete Shopping Lists</string>
+
     <!--### ABOUT ###-->
     <string name="about">About</string>
     <string name="version_number">Version 1.5</string>

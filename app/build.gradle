@@ -42,6 +42,7 @@ android {
                             'src/main/res/layouts/preferences',
                             'src/main/res/layouts/settings',
                             'src/main/res/layouts/shoppinglist',
+                            'src/main/res/layouts/deletelists',
                             'src/main/res/layouts/shared',
                             'src/main/res'
                     ]

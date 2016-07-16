@@ -1,4 +1,4 @@
-package privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.main.listeners.addlist;
+package privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.main.listeners.sortlists;
 
 import android.support.design.widget.Snackbar;
 import android.view.View;
@@ -10,6 +10,7 @@ import android.view.View;
  */
 public class SortOnClickListener implements View.OnClickListener
 {
+
     @Override
     public void onClick(View v)
     {

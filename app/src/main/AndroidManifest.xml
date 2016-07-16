@@ -29,6 +29,17 @@
                     android:value=".ui.main.MainActivity"/>
         </activity>
         <activity
+                android:name=".ui.deletelists.DeleteListsActivity"
+                android:label="@string/activity_delete_lists"
+                android:parentActivityName=".ui.main.MainActivity"
+                android:screenOrientation="portrait">
+            <meta-data
+                    android:name="android.support.PARENT_ACTIVITY"
+                    android:value=".ui.main.MainActivity"/>
+        </activity>
+
+        <!-- Menu Activities -->
+        <activity
                 android:name=".ui.about.AboutActivity"
                 android:label="@string/about"
                 android:parentActivityName=".ui.main.MainActivity"
