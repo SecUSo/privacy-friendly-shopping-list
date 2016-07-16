@@ -7,7 +7,9 @@ import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framew
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.persistence.DB;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.shoppingList.business.ShoppingListService;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.baseactivity.BaseActivity;
-import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.main.listeners.fab.AddOnClickListener;
+import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.main.listeners.addlist.AddOnClickListener;
+import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.main.listeners.addlist.DeleteOnClickListener;
+import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.main.listeners.addlist.SortOnClickListener;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.main.welcome.WelcomeDialog;
 
 /**
@@ -38,6 +40,8 @@ public class MainActivity extends BaseActivity
         welcomeDialog.show(getFragmentManager(), "WelcomeDialog");
 
         cache.getNewListFab().setOnClickListener(new AddOnClickListener(cache));
+        cache.getSortImageView().setOnClickListener(new SortOnClickListener());
+        cache.getDeleteImageView().setOnClickListener(new DeleteOnClickListener());
 
         overridePendingTransition(0, 0);
     }
