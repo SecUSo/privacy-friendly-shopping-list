@@ -1,4 +1,4 @@
-package privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui;
+package privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.baseactivity;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -18,6 +18,10 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.R;
+import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.about.AboutActivity;
+import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.help.HelpActivity;
+import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.main.MainActivity;
+import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.settings.SettingsActivity;
 
 /**
  * Created by Chris on 04.07.2016.
@@ -26,11 +30,11 @@ public class BaseActivity extends AppCompatActivity implements OnNavigationItemS
 {
 
     // delay to launch nav drawer item, to allow close animation to play
-    static final int NAVDRAWER_LAUNCH_DELAY = 250;
+    public static final int NAVDRAWER_LAUNCH_DELAY = 250;
     // fade in and fade out durations for the main content when switching between
     // different Activities of the app through the Nav Drawer
-    static final int MAIN_CONTENT_FADEOUT_DURATION = 150;
-    static final int MAIN_CONTENT_FADEIN_DURATION = 250;
+    public static final int MAIN_CONTENT_FADEOUT_DURATION = 150;
+    public static final int MAIN_CONTENT_FADEIN_DURATION = 250;
 
     // Navigation drawer:
     private DrawerLayout mDrawerLayout;

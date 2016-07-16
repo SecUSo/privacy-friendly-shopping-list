@@ -1,8 +1,9 @@
-package privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui;
+package privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.help;
 
 import android.os.Bundle;
 import android.preference.PreferenceFragment;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.R;
+import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.baseactivity.BaseActivity;
 
 /**
  * Created by yonjuni on 17.06.16.

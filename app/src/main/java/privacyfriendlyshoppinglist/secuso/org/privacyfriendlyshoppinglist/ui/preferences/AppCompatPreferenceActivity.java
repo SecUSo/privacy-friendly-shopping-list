@@ -1,4 +1,4 @@
-package privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui;
+package privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.preferences;
 
 import android.content.res.Configuration;
 import android.os.Bundle;

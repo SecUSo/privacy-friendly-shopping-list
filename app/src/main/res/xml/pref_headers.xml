@@ -3,7 +3,7 @@
     <!-- These settings headers are only used on tablets. -->
 
     <header
-            android:fragment="privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.SettingsActivity$GeneralPreferenceFragment"
+            android:fragment="privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.settings.SettingsActivity$GeneralPreferenceFragment"
             android:icon="@drawable/ic_info_black_24dp"
             android:title="@string/pref_header_general"/>
 

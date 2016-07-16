@@ -1,4 +1,4 @@
-package privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui;
+package privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.settings;
 
 
 import android.annotation.TargetApi;
@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.preference.*;
 import android.view.MenuItem;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.R;
+import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.baseactivity.BaseActivity;
 
 /**
  * A {@link PreferenceActivity} that presents a set of application settings. On

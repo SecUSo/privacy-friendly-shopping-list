@@ -13,7 +13,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:fitsSystemWindows="true"
-            tools:context=".ui.HelpActivity">
+            tools:context=".ui.settings.SettingsActivity">
 
         <include layout="@layout/toolbar"/>
 
@@ -21,15 +21,16 @@
                 android:id="@+id/main_content"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@color/white"
+                android:background="#FFFFFF"
                 android:fitsSystemWindows="true"
-                android:layout_marginTop="?attr/actionBarSize"
                 android:orientation="vertical"
-                tools:context=".HelpActivity"
+                tools:context=".SettingsActivity"
+                android:layout_marginTop="?attr/actionBarSize"
                 android:weightSum="1">
+
             <fragment
-                    android:name="privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.HelpActivity$HelpFragment"
-                    android:id="@+id/help_fragment"
+                    android:name="privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.settings.SettingsActivity$GeneralPreferenceFragment"
+                    android:id="@+id/settings_fragment"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"/>
 

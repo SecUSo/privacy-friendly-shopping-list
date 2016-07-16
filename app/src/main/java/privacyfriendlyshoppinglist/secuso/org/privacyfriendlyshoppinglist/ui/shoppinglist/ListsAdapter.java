@@ -14,12 +14,13 @@ import java.util.List;
 /**
  * Created by Chris on 05.06.2016.
  */
-public class ShoppingListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public class ListsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
+{
 
     private List<ListDto> shoppingList;
     private AppCompatActivity activity;
 
-    public ShoppingListAdapter(List<ListDto> shoppingList, AppCompatActivity activity)
+    public ListsAdapter(List<ListDto> shoppingList, AppCompatActivity activity)
     {
         this.shoppingList = shoppingList;
         this.activity = activity;
@@ -29,12 +30,12 @@ public class ShoppingListAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         Context context = parent.getContext();
         View view = LayoutInflater.from(context).inflate(R.layout.shopping_list_item, parent, false);
-        return new ShoppingListItemViewHolder(view, activity);
+        return new ListsItemViewHolder(view, activity);
     }
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder viewHolder, int position) {
-        ShoppingListItemViewHolder holder = (ShoppingListItemViewHolder) viewHolder;
+        ListsItemViewHolder holder = (ListsItemViewHolder) viewHolder;
         ListDto dto = shoppingList.get(position);
         holder.processDto(dto);
     }

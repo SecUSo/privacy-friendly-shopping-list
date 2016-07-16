@@ -1,4 +1,4 @@
-package privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui;
+package privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.main;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -15,7 +15,8 @@ import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framew
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.persistence.DB;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.shoppingList.business.ShoppingListService;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.shoppingList.business.domain.ListDto;
-import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.shoppinglist.ShoppingListAdapter;
+import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.baseactivity.BaseActivity;
+import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.shoppinglist.ListsAdapter;
 
 /**
  * Description:
@@ -59,8 +60,8 @@ public class MainActivity extends BaseActivity
     private void setupRecyclerView(RecyclerView recyclerView)
     {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        ShoppingListAdapter shoppingListAdapter = new ShoppingListAdapter(shoppingListService.getAllListDtos(), this);
-        recyclerView.setAdapter(shoppingListAdapter);
+        ListsAdapter listsAdapter = new ListsAdapter(shoppingListService.getAllListDtos(), this);
+        recyclerView.setAdapter(listsAdapter);
     }
 
     private void createTestData()
