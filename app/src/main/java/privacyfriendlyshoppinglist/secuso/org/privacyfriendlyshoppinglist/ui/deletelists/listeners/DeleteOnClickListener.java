@@ -38,13 +38,7 @@ public class DeleteOnClickListener implements View.OnClickListener
                     public void onClick(View v)
                     {
                         List<ListDto> shoppingList = cache.getDeleteListsAdapter().getShoppingList();
-                        for ( ListDto dto : shoppingList )
-                        {
-                            if ( dto.isSelected() )
-                            {
-                                shoppingListService.deleteById(dto.getId());
-                            }
-                        }
+                        shoppingListService.deleteSelected(shoppingList);
                         updateListView();
                     }
                 }).show();

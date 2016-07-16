@@ -19,4 +19,6 @@ public interface ShoppingListService extends ContextSetter
     void deleteById (String id);
 
     List<ListDto> getAllListDtos();
+
+    void deleteSelected(List<ListDto> shoppingListDtos);
 }

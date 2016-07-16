@@ -80,6 +80,17 @@ public class ShoppingListServiceImpl implements ShoppingListService
         return dtos.toList().toBlocking().single();
     }
 
+    @Override
+    public void deleteSelected(List<ListDto> shoppingListDtos)
+    {
+        Observable
+                .from(shoppingListDtos)
+                .filter(dto -> dto.isSelected())
+                .subscribe(
+                        dto -> deleteById(dto.getId())
+                );
+    }
+
     private ListDto getDto(ShoppingListEntity entity)
     {
         ListDto dto = new ListDto();
