@@ -8,7 +8,6 @@ import android.view.View;
 import android.widget.TextView;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.R;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.shoppingList.business.domain.ListDto;
-import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.deletelists.DeleteListsActivity;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.shoppinglist.listadapter.ListItemCache;
 
 /**
@@ -38,8 +37,8 @@ public class DeleteListsItemViewHolder extends RecyclerView.ViewHolder
             public void onClick(View v)
             {
                 dto.setSelected(!dto.isSelected());
-                DeleteListsActivity host = (DeleteListsActivity) activity;
-                host.reorderListView();
+//                DeleteListsActivity host = (DeleteListsActivity) activity;
+//                host.reorderListView();
                 updateVisibilityFormat(dto);
             }
         });
