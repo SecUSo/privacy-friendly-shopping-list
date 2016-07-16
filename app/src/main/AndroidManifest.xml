@@ -20,7 +20,7 @@
 
 
         <activity
-                android:name=".ui.shoppinglist.ListsActivity"
+                android:name=".ui.products.ProductsActivity"
                 android:label="@string/activity_shopping_list"
                 android:parentActivityName=".ui.main.MainActivity"
                 android:screenOrientation="portrait">

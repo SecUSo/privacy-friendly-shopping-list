@@ -10,17 +10,17 @@ import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.R;
  * Author: Grebiel Jose Ifill Brito
  * Created: 09.07.16 creation date
  */
-public class ListsCache
+public class ListCache
 {
     TextView listNameTextView;
     TextView nrProductsTextView;
     CardView listCard;
 
-    public ListsCache(View parent)
+    public ListCache(View parent)
     {
         listNameTextView = (TextView) parent.findViewById(R.id.textview_list_name);
         nrProductsTextView = (TextView) parent.findViewById(R.id.textview_nr_products);
-        listCard = (CardView) parent.findViewById(R.id.item_card_view);
+        listCard = (CardView) parent.findViewById(R.id.cardview_item);
     }
 
     public TextView getListNameTextView()

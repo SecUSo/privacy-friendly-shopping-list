@@ -30,7 +30,7 @@ public abstract class AbstractDao<T extends AbstractEntity> implements ContextSe
             @SuppressWarnings("unchecked")
             Dao<T, Long> dao = database.getDao((Class) entity.getClass());
             dao.createOrUpdate(entity);
-            PFALogger.info(getClass().getName(), "saveOrUpdate", "successful");
+            PFALogger.debug(getClass().getName(), "saveOrUpdate", "successful");
             return entity.getId();
         }
         catch ( SQLException e )
@@ -46,7 +46,7 @@ public abstract class AbstractDao<T extends AbstractEntity> implements ContextSe
         {
             Dao<T, Long> dao = database.getDao(type);
             T entity = dao.queryForId(id);
-            PFALogger.info(getClass().getName(), "getById", "successful");
+            PFALogger.debug(getClass().getName(), "getById", "successful");
             return entity;
         }
         catch ( SQLException e )
@@ -63,7 +63,7 @@ public abstract class AbstractDao<T extends AbstractEntity> implements ContextSe
         {
             Dao<T, Long> dao = database.getDao(type);
             entities = dao.queryForAll();
-            PFALogger.info(getClass().getName(), "getAllEntities", "successful");
+            PFALogger.debug(getClass().getName(), "getAllEntities", "successful");
             return entities;
         }
         catch ( SQLException e )
@@ -79,7 +79,7 @@ public abstract class AbstractDao<T extends AbstractEntity> implements ContextSe
         {
             Dao<T, Long> dao = database.getDao(type);
             dao.deleteById(id);
-            PFALogger.info(getClass().getName(), "deleteById", "successful");
+            PFALogger.debug(getClass().getName(), "deleteById", "successful");
             return true;
         }
         catch ( SQLException e )
@@ -94,7 +94,7 @@ public abstract class AbstractDao<T extends AbstractEntity> implements ContextSe
         try
         {
             Dao<T, Long> dao = database.getDao(type);
-            PFALogger.info(getClass().getName(), "getDao", "successful");
+            PFALogger.debug(getClass().getName(), "getDao", "successful");
             return dao;
         }
         catch ( SQLException e )

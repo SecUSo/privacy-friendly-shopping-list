@@ -46,7 +46,7 @@ class DataBaseHelper extends OrmLiteSqliteOpenHelper
         try
         {
             setupClasses();
-            PFALogger.info(getClass().getName(), "onCreate", "start");
+            PFALogger.debug(getClass().getName(), "onCreate", "start");
             for ( Class aClass : entityClasses )
             {
                 TableUtils.createTable(connectionSource, aClass);

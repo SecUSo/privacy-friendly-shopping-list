@@ -1,4 +1,4 @@
-package privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.shoppinglist;
+package privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.products;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -9,7 +9,7 @@ import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.R;
  * Author: Grebiel Jose Ifill Brito
  * Created: 09.07.16 creation date
  */
-public class ListsActivity extends AppCompatActivity
+public class ProductsActivity extends AppCompatActivity
 {
     @Override
     protected final void onCreate(final Bundle savedInstanceState)

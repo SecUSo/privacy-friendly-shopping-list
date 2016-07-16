@@ -1,4 +1,4 @@
-package privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.shoppinglist;
+package privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.shoppinglist.listadapter;
 
 import android.content.Context;
 import android.support.v7.app.AppCompatActivity;
@@ -24,6 +24,11 @@ public class ListsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
     {
         this.shoppingList = shoppingList;
         this.activity = activity;
+    }
+
+    public void setShoppingList(List<ListDto> shoppingList)
+    {
+        this.shoppingList = shoppingList;
     }
 
     @Override
