@@ -4,6 +4,7 @@ import android.content.Context;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.persistence.DB;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.shoppingList.business.ShoppingListService;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.shoppingList.business.domain.ListDto;
+import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.shoppingList.business.impl.comparators.ListsComparators;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.shoppingList.business.impl.converter.ShoppingListConverter;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.shoppingList.business.impl.validator.ShoppingListValidator;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.shoppingList.persistence.ShoppingListDao;
@@ -11,6 +12,7 @@ import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.
 import rx.Observable;
 
 import javax.inject.Inject;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -49,7 +51,7 @@ public class ShoppingListServiceImpl implements ShoppingListService
         ShoppingListEntity entity = new ShoppingListEntity();
         shoppingListConverter.convertDtoToEntity(dto, entity);
         shoppingListValidator.validate(dto);
-        if (!dto.hasErrors())
+        if ( !dto.hasErrors() )
         {
             Long id = shoppingListDao.save(entity);
             dto.setId(id.toString());
@@ -106,6 +108,16 @@ public class ShoppingListServiceImpl implements ShoppingListService
         nonSelectedDtos.addAll(selectedDtos);
         shoppingListDtos = nonSelectedDtos;
         return shoppingListDtos;
+    }
+
+    @Override
+    public void getSortedList(List<ListDto> lists, String criteria, boolean ascending)
+    {
+        if ( ShoppingListService.SORT_BY_NAME.equals(criteria) )
+        {
+            Collections.sort(lists, ListsComparators.getNameComparator(ascending));
+        }
+
     }
 
     private ListDto getDto(ShoppingListEntity entity)

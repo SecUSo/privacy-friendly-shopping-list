@@ -10,16 +10,18 @@
         <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Ascending/Descending"/>
+                android:text="@string/sort_ascencing_descending"/>
         <RadioGroup
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
             <RadioButton
-                    android:text="Ascending"
+                    android:id="@+id/radiobutton_ascending"
+                    android:text="@string/sort_ascencing"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"/>
             <RadioButton
-                    android:text="Descending"
+                    android:id="@+id/radiobutton_descending"
+                    android:text="@string/sort_descending"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"/>
         </RadioGroup>
@@ -27,17 +29,18 @@
         <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Sort By:"
-        />
+                android:text="@string/sort_by"/>
         <RadioGroup
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
             <RadioButton
-                    android:text="Name"
+                    android:id="@+id/radiobutton_name"
+                    android:text="@string/sort_by_name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"/>
             <RadioButton
-                    android:text="Priority"
+                    android:id="@+id/radiobutton_priority"
+                    android:text="@string/sort_by_priority"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"/>
         </RadioGroup>

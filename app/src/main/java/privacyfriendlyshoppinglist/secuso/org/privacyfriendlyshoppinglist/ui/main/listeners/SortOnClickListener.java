@@ -22,7 +22,7 @@ public class SortOnClickListener implements View.OnClickListener
     @Override
     public void onClick(View v)
     {
-        SortListsDialog sortListsDialog = new SortListsDialog();
+        SortListsDialog sortListsDialog = SortListsDialog.newInstance(cache.getActivity());
         sortListsDialog.show(cache.getActivity().getFragmentManager(), "SortDialog");
     }
 }

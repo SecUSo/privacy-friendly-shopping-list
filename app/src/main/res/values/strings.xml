@@ -12,6 +12,13 @@
     <!-- ### SHOPPING LIST ### -->
     <string name="activity_shopping_list">Shopping List:</string>
     <string name="sort_lists">Sort Options</string>
+    <string name="sort_ascencing_descending">Ascending/Descending</string>
+    <string name="sort_ascencing">Ascending</string>
+    <string name="sort_descending">Descending</string>
+    <string name="sort_by">Sort By</string>
+    <string name="sort_by_name">Name</string>
+    <string name="sort_by_priority">Priority</string>
+
 
     <!-- ### DELETE SHOPPING LISTS ### -->
     <string name="activity_delete_lists">Delete Shopping Lists</string>

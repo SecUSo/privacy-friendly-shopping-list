@@ -12,6 +12,9 @@ import java.util.List;
  */
 public interface ShoppingListService extends ContextSetter
 {
+    String SORT_BY_NAME = "name";
+    String SORT_BY_PRIORITY = "name";
+
     void saveOrUpdate(ListDto dto);
 
     ListDto getById (String id);
@@ -23,4 +26,6 @@ public interface ShoppingListService extends ContextSetter
     void deleteSelected(List<ListDto> shoppingListDtos);
 
     List<ListDto> moveSelectedToEnd(List<ListDto> shoppingListDtos);
+
+    void getSortedList(List<ListDto> lists, String criteria, boolean ascending);
 }
