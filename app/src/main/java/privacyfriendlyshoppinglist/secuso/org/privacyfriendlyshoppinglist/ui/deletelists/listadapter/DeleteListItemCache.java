@@ -1,4 +1,4 @@
-package privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.shoppinglist;
+package privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.deletelists.listadapter;
 
 import android.support.v7.widget.CardView;
 import android.view.View;
@@ -8,15 +8,15 @@ import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.R;
 /**
  * Description:
  * Author: Grebiel Jose Ifill Brito
- * Created: 09.07.16 creation date
+ * Created: 16.07.16 creation date
  */
-public class ListCache
+public class DeleteListItemCache
 {
     TextView listNameTextView;
     TextView nrProductsTextView;
     CardView listCard;
 
-    public ListCache(View parent)
+    public DeleteListItemCache(View parent)
     {
         listNameTextView = (TextView) parent.findViewById(R.id.textview_list_name);
         nrProductsTextView = (TextView) parent.findViewById(R.id.textview_nr_products);

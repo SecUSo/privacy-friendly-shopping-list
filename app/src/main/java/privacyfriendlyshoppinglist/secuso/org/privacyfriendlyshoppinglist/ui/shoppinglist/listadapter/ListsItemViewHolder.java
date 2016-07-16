@@ -8,7 +8,6 @@ import android.view.View;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.shoppingList.business.domain.ListDto;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.products.ProductsActivity;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.shoppinglist.EditDialogFragment;
-import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.shoppinglist.ListCache;
 
 /**
  * Created by Chris on 05.06.2016.
@@ -16,12 +15,12 @@ import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.sho
 public class ListsItemViewHolder extends RecyclerView.ViewHolder
 {
 
-    private ListCache cache;
+    private ListItemCache cache;
 
     public ListsItemViewHolder(final View parent, AppCompatActivity activity)
     {
         super(parent);
-        this.cache = new ListCache(parent);
+        this.cache = new ListItemCache(parent);
 
         cache.getListCard().setOnClickListener(new View.OnClickListener()
         {

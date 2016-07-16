@@ -23,6 +23,7 @@ public class ListDto extends AbstractDto
     private Date deadline;
     private String notes;
     private String nrItems;
+    private boolean selected;
 
     public String getListName()
     {
@@ -82,6 +83,16 @@ public class ListDto extends AbstractDto
     public void setNrItems(String nrItems)
     {
         this.nrItems = nrItems;
+    }
+
+    public boolean isSelected()
+    {
+        return selected;
+    }
+
+    public void setSelected(boolean selected)
+    {
+        this.selected = selected;
     }
 
     @Override
