@@ -9,6 +9,7 @@
     <!--Lists-->
     <dimen name="list_margin">16dp</dimen>
     <dimen name="list_padding">8dp</dimen>
+    <dimen name="icon_padding">16dp</dimen>
 
 
     <!-- Default screen margins, per the Android Design guidelines. -->

@@ -8,7 +8,7 @@
             android:supportsRtl="true"
             android:theme="@style/AppTheme">
         <activity
-                android:name=".ui.MainActivity"
+                android:name=".ui.main.MainActivity"
                 android:label="@string/app_name"
                 android:screenOrientation="portrait"
                 android:theme="@style/AppTheme.NoActionBar">
@@ -20,43 +20,53 @@
 
 
         <activity
-                android:name=".ui.ShoppingListActivity"
+                android:name=".ui.products.ProductsActivity"
                 android:label="@string/activity_shopping_list"
-                android:parentActivityName=".ui.MainActivity"
-                android:screenOrientation="portrait"
-                android:theme="@style/AppTheme.NoActionBar">
-            <meta-data
-                    android:name="android.support.PARENT_ACTIVITY"
-                    android:value=".ui.MainActivity"/>
-        </activity>
-        <activity
-                android:name=".ui.AboutActivity"
-                android:label="@string/about"
-                android:parentActivityName=".ui.MainActivity"
+                android:parentActivityName=".ui.main.MainActivity"
                 android:screenOrientation="portrait">
             <meta-data
                     android:name="android.support.PARENT_ACTIVITY"
-                    android:value=".ui.MainActivity"/>
+                    android:value=".ui.main.MainActivity"/>
         </activity>
         <activity
-                android:name=".ui.HelpActivity"
+                android:name=".ui.deletelists.DeleteListsActivity"
+                android:label="@string/activity_delete_lists"
+                android:parentActivityName=".ui.main.MainActivity"
+                android:screenOrientation="portrait">
+            <meta-data
+                    android:name="android.support.PARENT_ACTIVITY"
+                    android:value=".ui.main.MainActivity"/>
+        </activity>
+
+        <!-- Menu Activities -->
+        <activity
+                android:name=".ui.about.AboutActivity"
+                android:label="@string/about"
+                android:parentActivityName=".ui.main.MainActivity"
+                android:screenOrientation="portrait">
+            <meta-data
+                    android:name="android.support.PARENT_ACTIVITY"
+                    android:value=".ui.main.MainActivity"/>
+        </activity>
+        <activity
+                android:name=".ui.help.HelpActivity"
                 android:label="@string/help"
-                android:parentActivityName=".ui.MainActivity"
+                android:parentActivityName=".ui.main.MainActivity"
                 android:screenOrientation="portrait"
                 android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                     android:name="android.support.PARENT_ACTIVITY"
-                    android:value=".ui.MainActivity"/>
+                    android:value=".ui.main.MainActivity"/>
         </activity>
         <activity
-                android:name=".ui.SettingsActivity"
+                android:name=".ui.settings.SettingsActivity"
                 android:label="@string/title_activity_settings"
-                android:parentActivityName=".ui.MainActivity"
+                android:parentActivityName=".ui.main.MainActivity"
                 android:screenOrientation="portrait"
                 android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                     android:name="android.support.PARENT_ACTIVITY"
-                    android:value=".ui.MainActivity"/>
+                    android:value=".ui.main.MainActivity"/>
         </activity>
     </application>
 

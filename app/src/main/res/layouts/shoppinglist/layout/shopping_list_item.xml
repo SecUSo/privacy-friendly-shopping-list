@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.shoppinglist.DbAwareCardView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:card_view="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/cardview_item"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_margin="8dp"
+        card_view:cardCornerRadius="4dp">
+
+    <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent">
+        <TextView
+                android:id="@+id/textview_list_name"
+                android:text="@string/ph_list_name"
+                android:layout_width="wrap_content"
+                android:layout_height="?attr/listPreferredItemHeight"
+                android:gravity="center_vertical"
+                android:padding="@dimen/list_padding"
+                android:layout_marginLeft="@dimen/list_margin"
+                android:textSize="@dimen/text_medium"
+                style="@style/Base.TextAppearance.AppCompat.Body2"/>
+        <TextView
+                android:id="@+id/textview_nr_products"
+                android:text="@string/ph_list_nr_items"
+                android:layout_width="wrap_content"
+                android:layout_height="?attr/listPreferredItemHeight"
+                android:layout_alignParentRight="true"
+                android:gravity="center_vertical"
+                android:padding="@dimen/list_padding"
+                android:layout_marginRight="@dimen/list_margin"
+                android:textSize="@dimen/text_small"
+                android:textColor="@color/middlegrey"
+                style="@style/Base.TextAppearance.AppCompat.Body2"/>
+    </RelativeLayout>
+</privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.shoppinglist.DbAwareCardView>

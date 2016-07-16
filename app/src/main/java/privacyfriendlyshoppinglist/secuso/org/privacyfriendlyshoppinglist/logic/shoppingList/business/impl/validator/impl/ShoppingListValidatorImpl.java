@@ -19,7 +19,7 @@ public class ShoppingListValidatorImpl implements ShoppingListValidator
         if ( StringUtils.isEmpty(listName) )
         {
             dto.getValidationErrorsList().add(ListDto.ErrorFieldName.LIST_NAME.name());
-            PFALogger.info(getClass().getSimpleName(), "validate", "validation error, DTO=" + dto.toString());
+            PFALogger.debug(getClass().getSimpleName(), "validate", "validation error, DTO=" + dto.toString());
         }
     }
 }

@@ -30,6 +30,24 @@ android {
             returnDefaultValues = true
         }
     }
+
+    sourceSets {
+        main {
+            res.srcDirs =
+                    [
+                            'src/main/res/layouts/about',
+                            'src/main/res/layouts/baseactivity',
+                            'src/main/res/layouts/help',
+                            'src/main/res/layouts/main',
+                            'src/main/res/layouts/preferences',
+                            'src/main/res/layouts/settings',
+                            'src/main/res/layouts/shoppinglist',
+                            'src/main/res/layouts/deletelists',
+                            'src/main/res/layouts/shared',
+                            'src/main/res'
+                    ]
+        }
+    }
 }
 
 dependencies {
