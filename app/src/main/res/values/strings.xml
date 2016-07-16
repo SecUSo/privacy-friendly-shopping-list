@@ -97,8 +97,11 @@
 
     <!-- Shopping List Dialog -->
     <string name="list_name">Enter List Name</string>
+    <string name="priority">Priority</string>
     <string name="priority_high">high</string>
     <string name="priority_low">low</string>
+
+    <string name="set_date_button">Set Date</string>
 
 
 </resources>
