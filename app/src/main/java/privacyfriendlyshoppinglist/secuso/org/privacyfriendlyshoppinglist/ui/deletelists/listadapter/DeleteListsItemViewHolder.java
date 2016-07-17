@@ -37,6 +37,7 @@ public class DeleteListsItemViewHolder extends RecyclerView.ViewHolder
             public void onClick(View v)
             {
                 dto.setSelected(!dto.isSelected());
+                // todo: do not use here. But can be taken as an example for the products
 //                DeleteListsActivity host = (DeleteListsActivity) activity;
 //                host.reorderListView();
                 updateVisibilityFormat(dto);

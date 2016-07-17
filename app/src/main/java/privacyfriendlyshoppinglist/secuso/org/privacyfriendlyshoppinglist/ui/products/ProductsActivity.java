@@ -15,7 +15,7 @@ public class ProductsActivity extends AppCompatActivity
     protected final void onCreate(final Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.shopping_list_activity);
+        setContentView(R.layout.products_activity);
 
         setTitle("My List!");
 

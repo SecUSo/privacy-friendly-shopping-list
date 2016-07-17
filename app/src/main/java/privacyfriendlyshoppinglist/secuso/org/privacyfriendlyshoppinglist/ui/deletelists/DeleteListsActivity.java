@@ -47,6 +47,7 @@ public class DeleteListsActivity extends AppCompatActivity
 
     public void reorderListView()
     {
+        // todo: do not use here. But can be taken as an example for the products
         DeleteListsAdapter deleteListsAdapter = cache.getDeleteListsAdapter();
         List<ListDto> shoppingList = deleteListsAdapter.getShoppingList();
         List<ListDto> reorderedList = shoppingListService.moveSelectedToEnd(shoppingList);

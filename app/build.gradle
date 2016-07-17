@@ -40,6 +40,7 @@ android {
                             'src/main/res/layouts/help',
                             'src/main/res/layouts/main',
                             'src/main/res/layouts/preferences',
+                            'src/main/res/layouts/products',
                             'src/main/res/layouts/settings',
                             'src/main/res/layouts/shoppinglist',
                             'src/main/res/layouts/deletelists',
