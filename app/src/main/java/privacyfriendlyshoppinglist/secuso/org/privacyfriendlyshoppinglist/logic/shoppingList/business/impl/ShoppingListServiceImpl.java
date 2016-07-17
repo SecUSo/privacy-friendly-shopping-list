@@ -68,6 +68,12 @@ public class ShoppingListServiceImpl implements ShoppingListService
     }
 
     @Override
+    public ShoppingListEntity getEntityById(String id)
+    {
+        return shoppingListDao.getById(Long.valueOf(id));
+    }
+
+    @Override
     public void deleteById(String id)
     {
         shoppingListDao.deleteById(Long.valueOf(id));
@@ -111,7 +117,7 @@ public class ShoppingListServiceImpl implements ShoppingListService
     }
 
     @Override
-    public void getSortedList(List<ListDto> lists, String criteria, boolean ascending)
+    public void sortList(List<ListDto> lists, String criteria, boolean ascending)
     {
         if ( ShoppingListService.SORT_BY_NAME.equals(criteria) )
         {

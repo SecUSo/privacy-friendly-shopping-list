@@ -3,6 +3,9 @@
 
     <!--### GENERAL ### -->
     <string name="cancel">Cancel</string>
+    <string name="language">US</string>
+    <string name="date_long_pattern">EE MM/dd/yyyy HH:mm</string>
+    <string name="date_short_pattern">MM/dd/yyyy</string>
 
     <!--### MAIN ###-->
     <!-- Lists Placeholders-->

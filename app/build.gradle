@@ -64,6 +64,7 @@ dependencies {
     testCompile "org.mockito:mockito-core:1.9.5"
     androidTestCompile 'com.android.support.test:runner:0.4'
     androidTestCompile 'com.android.support.test:rules:0.4'
+    testCompile group: 'pl.pragmatists', name: 'JUnitParams', version: '0.3.6'
     // dependency injection
     compile 'com.squareup.dagger:dagger:1.2.+'
     provided 'com.squareup.dagger:dagger-compiler:1.2.+'

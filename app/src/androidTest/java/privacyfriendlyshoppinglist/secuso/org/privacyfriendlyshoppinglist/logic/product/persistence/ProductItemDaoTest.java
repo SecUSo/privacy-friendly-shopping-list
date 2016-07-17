@@ -66,7 +66,7 @@ public class ProductItemDaoTest extends AbstractDatabaseTest
     }
 
     @Test(expected = Exception.class)
-    public void testSaveWithoutProduct()
+    public void testSaveWithoutProductTemplate()
     {
         ProductItemEntity entity = new ProductItemEntity();
         entity.setShoppingList(shoppingList);
