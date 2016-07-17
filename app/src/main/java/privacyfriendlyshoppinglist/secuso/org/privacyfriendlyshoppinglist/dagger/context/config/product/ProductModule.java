@@ -24,16 +24,16 @@ import javax.inject.Singleton;
  * Created: 17.05.16 creation date
  */
 @Module(
+        includes = {
+                ShoppingListModule.class
+        },
         injects = {
+                ProductService.class,
                 ProductTemplateDao.class,
                 ProductItemDao.class,
                 ProductConverterService.class,
                 ProductValidatorService.class
-        },
-        includes = {
-                ShoppingListModule.class
-        },
-        library = true
+        }
 )
 public class ProductModule implements AppModule
 {

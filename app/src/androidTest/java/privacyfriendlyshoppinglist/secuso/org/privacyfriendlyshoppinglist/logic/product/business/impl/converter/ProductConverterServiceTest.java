@@ -57,6 +57,7 @@ public class ProductConverterServiceTest extends AbstractDatabaseTest
         assertEquals(expectedNotes, entity.getNotes());
         assertEquals(expectedStore, entity.getStore());
         assertEquals(Double.valueOf(expectedPrice), entity.getPrice());
+        assertTrue(entity.getSelected());
 
         Date expectedDate = new DateTime("2016-07-12").withHourOfDay(15).withMinuteOfHour(52).toDate();
         assertEquals(expectedDate, entity.getPurchasedDate());
