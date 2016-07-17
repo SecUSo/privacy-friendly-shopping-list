@@ -5,10 +5,13 @@ import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.R;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.context.AbstractInstanceFactory;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.context.InstanceFactory;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.shoppingList.business.ShoppingListService;
+import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.shoppingList.business.domain.ListDto;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.baseactivity.BaseActivity;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.main.listeners.AddOnClickListener;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.main.listeners.ShowDeleteViewOnClickListener;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.main.listeners.SortOnClickListener;
+
+import java.util.List;
 
 /**
  * Description:
@@ -30,7 +33,7 @@ public class MainActivity extends BaseActivity
         this.shoppingListService = (ShoppingListService) instanceFactory.createInstance(ShoppingListService.class);
         cache = new ShoppingListCache(this);
 
-        //getApplicationContext().deleteDatabase(DB.APP.getDbName());
+//        getApplicationContext().deleteDatabase(DB.APP.getDbName());
 
         updateListView();
 
@@ -38,7 +41,7 @@ public class MainActivity extends BaseActivity
 //        welcomeDialog.show(getFragmentManager(), "WelcomeDialog");
 
         cache.getNewListFab().setOnClickListener(new AddOnClickListener(cache));
-        cache.getSortImageView().setOnClickListener(new SortOnClickListener());
+        cache.getSortImageView().setOnClickListener(new SortOnClickListener(cache));
         cache.getDeleteImageView().setOnClickListener(new ShowDeleteViewOnClickListener(cache));
 
         overridePendingTransition(0, 0);
@@ -53,6 +56,12 @@ public class MainActivity extends BaseActivity
     public void updateListView()
     {
         cache.getListAdapter().setShoppingList(shoppingListService.getAllListDtos());
+        cache.getListAdapter().notifyDataSetChanged();
+    }
+
+    public void reorderListView(List<ListDto> sortedList)
+    {
+        cache.getListAdapter().setShoppingList(sortedList);
         cache.getListAdapter().notifyDataSetChanged();
     }
 }

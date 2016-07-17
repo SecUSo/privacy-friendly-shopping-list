@@ -1,7 +1,8 @@
 package privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.main.listeners;
 
-import android.support.design.widget.Snackbar;
 import android.view.View;
+import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.main.ShoppingListCache;
+import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.main.sort.SortListsDialog;
 
 /**
  * Description:
@@ -11,9 +12,17 @@ import android.view.View;
 public class SortOnClickListener implements View.OnClickListener
 {
 
+    private ShoppingListCache cache;
+
+    public SortOnClickListener(ShoppingListCache cache)
+    {
+        this.cache = cache;
+    }
+
     @Override
     public void onClick(View v)
     {
-        Snackbar.make(v, "Sort Listener (To be implemented)...", Snackbar.LENGTH_SHORT).show();
+        SortListsDialog sortListsDialog = SortListsDialog.newInstance(cache.getActivity());
+        sortListsDialog.show(cache.getActivity().getFragmentManager(), "SortDialog");
     }
 }

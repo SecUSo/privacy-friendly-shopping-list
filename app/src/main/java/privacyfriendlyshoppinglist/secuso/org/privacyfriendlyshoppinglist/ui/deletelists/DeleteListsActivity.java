@@ -6,7 +6,11 @@ import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.R;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.context.AbstractInstanceFactory;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.context.InstanceFactory;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.shoppingList.business.ShoppingListService;
+import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.shoppingList.business.domain.ListDto;
+import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.deletelists.listadapter.DeleteListsAdapter;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.deletelists.listeners.DeleteOnClickListener;
+
+import java.util.List;
 
 /**
  * Description:
@@ -39,5 +43,15 @@ public class DeleteListsActivity extends AppCompatActivity
     {
         cache.getDeleteListsAdapter().setShoppingList(shoppingListService.getAllListDtos());
         cache.getDeleteListsAdapter().notifyDataSetChanged();
+    }
+
+    public void reorderListView()
+    {
+        // todo: do not use here. But can be taken as an example for the products
+        DeleteListsAdapter deleteListsAdapter = cache.getDeleteListsAdapter();
+        List<ListDto> shoppingList = deleteListsAdapter.getShoppingList();
+        List<ListDto> reorderedList = shoppingListService.moveSelectedToEnd(shoppingList);
+        deleteListsAdapter.setShoppingList(reorderedList);
+        deleteListsAdapter.notifyDataSetChanged();
     }
 }

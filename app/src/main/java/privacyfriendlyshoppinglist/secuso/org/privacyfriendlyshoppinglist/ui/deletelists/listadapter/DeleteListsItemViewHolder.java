@@ -17,17 +17,19 @@ public class DeleteListsItemViewHolder extends RecyclerView.ViewHolder
 {
 
     private ListItemCache cache;
+    private AppCompatActivity activity;
 
     public DeleteListsItemViewHolder(final View parent, AppCompatActivity activity)
     {
         super(parent);
         this.cache = new ListItemCache(parent);
+        this.activity = activity;
     }
 
     public void processDto(ListDto dto)
     {
         cache.getListNameTextView().setText(dto.getListName());
-        cache.getNrProductsTextView().setText("0"); // todo: read from data base
+        cache.getNrProductsTextView().setText("0"); // todo: read from database
         updateVisibilityFormat(dto);
 
         cache.getListCard().setOnClickListener(new View.OnClickListener()
@@ -35,6 +37,9 @@ public class DeleteListsItemViewHolder extends RecyclerView.ViewHolder
             public void onClick(View v)
             {
                 dto.setSelected(!dto.isSelected());
+                // todo: do not use here. But can be taken as an example for the products
+//                DeleteListsActivity host = (DeleteListsActivity) activity;
+//                host.reorderListView();
                 updateVisibilityFormat(dto);
             }
         });

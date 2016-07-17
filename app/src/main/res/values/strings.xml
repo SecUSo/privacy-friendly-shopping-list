@@ -1,6 +1,12 @@
 <resources>
     <string name="app_name">Privacy Friendly Shopping List</string>
 
+    <!--### GENERAL ### -->
+    <string name="cancel">Cancel</string>
+    <string name="language">US</string>
+    <string name="date_long_pattern">EE MM/dd/yyyy HH:mm</string>
+    <string name="date_short_pattern">MM/dd/yyyy</string>
+
     <!--### MAIN ###-->
     <!-- Lists Placeholders-->
     <string name="ph_list_name" translatable="false">List Name</string>
@@ -8,9 +14,20 @@
 
     <!-- ### SHOPPING LIST ### -->
     <string name="activity_shopping_list">Shopping List:</string>
+    <string name="sort_lists">Sort Options</string>
+    <string name="sort_ascencing_descending">Ascending/Descending</string>
+    <string name="sort_ascencing">Ascending</string>
+    <string name="sort_descending">Descending</string>
+    <string name="sort_by">Sort By</string>
+    <string name="sort_by_name">Name</string>
+    <string name="sort_by_priority">Priority</string>
+
 
     <!-- ### DELETE SHOPPING LISTS ### -->
     <string name="activity_delete_lists">Delete Shopping Lists</string>
+    <string name="delele_lists_confirmation">Do you really want to delete the selected items? This operation cannot be
+        undone.
+    </string>
 
     <!--### ABOUT ###-->
     <string name="about">About</string>

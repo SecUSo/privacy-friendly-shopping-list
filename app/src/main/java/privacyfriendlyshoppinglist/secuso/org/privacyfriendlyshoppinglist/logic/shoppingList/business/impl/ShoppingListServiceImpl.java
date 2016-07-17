@@ -6,6 +6,7 @@ import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framew
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.utils.StringUtils;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.shoppingList.business.ShoppingListService;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.shoppingList.business.domain.ListDto;
+import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.shoppingList.business.impl.comparators.ListsComparators;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.shoppingList.business.impl.converter.ShoppingListConverter;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.shoppingList.business.impl.validator.ShoppingListValidator;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.shoppingList.persistence.ShoppingListDao;
@@ -13,6 +14,7 @@ import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.
 import rx.Observable;
 
 import javax.inject.Inject;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -59,7 +61,7 @@ public class ShoppingListServiceImpl implements ShoppingListService
 
         shoppingListConverter.convertDtoToEntity(dto, entity);
         shoppingListValidator.validate(dto);
-        if (!dto.hasErrors())
+        if ( !dto.hasErrors() )
         {
             Long id = shoppingListDao.save(entity);
             dto.setId(id.toString());
@@ -76,6 +78,12 @@ public class ShoppingListServiceImpl implements ShoppingListService
     }
 
     @Override
+    public ShoppingListEntity getEntityById(String id)
+    {
+        return shoppingListDao.getById(Long.valueOf(id));
+    }
+
+    @Override
     public void deleteById(String id)
     {
         shoppingListDao.deleteById(Long.valueOf(id));
@@ -88,6 +96,44 @@ public class ShoppingListServiceImpl implements ShoppingListService
                 .from(shoppingListDao.getAllEntities())
                 .map(this::getDto);
         return dtos.toList().toBlocking().single();
+    }
+
+    @Override
+    public void deleteSelected(List<ListDto> shoppingListDtos)
+    {
+        Observable
+                .from(shoppingListDtos)
+                .filter(dto -> dto.isSelected())
+                .subscribe(
+                        dto -> deleteById(dto.getId())
+                );
+    }
+
+    @Override
+    public List<ListDto> moveSelectedToEnd(List<ListDto> shoppingListDtos)
+    {
+        List<ListDto> nonSelectedDtos = Observable
+                .from(shoppingListDtos)
+                .filter(dto -> !dto.isSelected())
+                .toList().toBlocking().single();
+
+        List<ListDto> selectedDtos = Observable
+                .from(shoppingListDtos)
+                .filter(dto -> dto.isSelected())
+                .toList().toBlocking().single();
+        nonSelectedDtos.addAll(selectedDtos);
+        shoppingListDtos = nonSelectedDtos;
+        return shoppingListDtos;
+    }
+
+    @Override
+    public void sortList(List<ListDto> lists, String criteria, boolean ascending)
+    {
+        if ( ShoppingListService.SORT_BY_NAME.equals(criteria) )
+        {
+            Collections.sort(lists, ListsComparators.getNameComparator(ascending));
+        }
+
     }
 
     private ListDto getDto(ShoppingListEntity entity)

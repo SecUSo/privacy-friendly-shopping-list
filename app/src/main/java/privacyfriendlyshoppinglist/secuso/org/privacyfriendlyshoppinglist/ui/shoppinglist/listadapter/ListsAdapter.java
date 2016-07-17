@@ -31,6 +31,11 @@ public class ListsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         this.shoppingList = shoppingList;
     }
 
+    public List<ListDto> getShoppingList()
+    {
+        return shoppingList;
+    }
+
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         Context context = parent.getContext();

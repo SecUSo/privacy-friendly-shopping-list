@@ -32,7 +32,8 @@
                 android:name=".ui.deletelists.DeleteListsActivity"
                 android:label="@string/activity_delete_lists"
                 android:parentActivityName=".ui.main.MainActivity"
-                android:screenOrientation="portrait">
+                android:screenOrientation="portrait"
+                android:theme="@style/DeleteTheme">
             <meta-data
                     android:name="android.support.PARENT_ACTIVITY"
                     android:value=".ui.main.MainActivity"/>
