@@ -35,7 +35,7 @@
         />
 
 
-        <Button
+        <TextView
                 android:id="@+id/set_date_button"
                 android:drawableLeft="@android:drawable/ic_dialog_info"
                 android:layout_width="wrap_content"
