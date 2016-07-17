@@ -1,7 +1,9 @@
 package privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.shoppingList.business.impl;
 
 import android.content.Context;
+import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.R;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.persistence.DB;
+import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.utils.StringUtils;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.shoppingList.business.ShoppingListService;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.shoppingList.business.domain.ListDto;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.shoppingList.business.impl.converter.ShoppingListConverter;
@@ -24,6 +26,7 @@ public class ShoppingListServiceImpl implements ShoppingListService
     private ShoppingListDao shoppingListDao;
     private ShoppingListConverter shoppingListConverter;
     private ShoppingListValidator shoppingListValidator;
+    private Context context;
 
     @Inject
     public ShoppingListServiceImpl(
@@ -41,12 +44,19 @@ public class ShoppingListServiceImpl implements ShoppingListService
     public void setContext(Context context, DB db)
     {
         shoppingListDao.setContext(context, db);
+        this.context = context;
     }
 
     @Override
     public void saveOrUpdate(ListDto dto)
     {
         ShoppingListEntity entity = new ShoppingListEntity();
+
+        if ( StringUtils.isEmpty(dto.getListName()) )
+        {
+            dto.setListName(context.getResources().getString(R.string.default_list_name));
+        }
+
         shoppingListConverter.convertDtoToEntity(dto, entity);
         shoppingListValidator.validate(dto);
         if (!dto.hasErrors())

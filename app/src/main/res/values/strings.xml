@@ -49,7 +49,8 @@
         the start page.
     </string>
     <string name="welcome">Welcome</string>
-    <string name="okay">Okay</string>
+    <string name="okay">OK</string>
+    <string name="cancel">Cancel</string>
     <string name="viewhelp">View Help</string>
     <string name="main_button_welcomedialog">Show Welcome</string>
 
@@ -97,11 +98,19 @@
 
     <!-- Shopping List Dialog -->
     <string name="list_name">Enter List Name</string>
-    <string name="priority">Priority</string>
-    <string name="priority_high">high</string>
-    <string name="priority_low">low</string>
 
-    <string name="set_date_button">Set Date</string>
+
+    <string name="priority">Priority</string>
+    <string name="priority_high">High</string>
+    <string name="priority_normal">Normal</string>
+    <string name="priority_low">Low</string>
+
+    <string name="set_deadline_date">Set Date</string>
+    <string name="set_deadline_time">Set Time</string>
+    <string name="set_deadline">Set Deadline</string>
+    <string name="set_reminder">Remind me on:</string>
+    <string name="list_notes">Notes</string>
+    <string name="default_list_name">New Shopping List</string>
 
 
 </resources>

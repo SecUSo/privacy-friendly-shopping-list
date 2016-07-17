@@ -3,9 +3,10 @@
 
     <string-array
             name="shopping_list_priority_spinner">
-        <item>high</item>
-        <item>medium</item>
-        <item>low</item>
+        <item>High</item>
+        <item>Normal</item>
+        <item>Low</item>
+        <item>Priority</item>
     </string-array>
 
 

@@ -27,7 +27,7 @@ public class ShoppingListCache
     {
         this.activity = activity;
 
-        listAdapter = new ListsAdapter(new ArrayList<>(), activity);
+        listAdapter = new ListsAdapter(new ArrayList<>(), this);
 
         RecyclerView recyclerView = (RecyclerView) activity.findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(activity));
