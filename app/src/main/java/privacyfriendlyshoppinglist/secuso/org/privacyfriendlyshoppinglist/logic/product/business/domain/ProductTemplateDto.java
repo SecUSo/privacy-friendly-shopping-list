@@ -20,6 +20,8 @@ public class ProductTemplateDto extends AbstractDto
 
     private String defaultStore;
 
+    private String lastTimePurchased;
+
     public String getProductName()
     {
         return productName;
@@ -69,5 +71,49 @@ public class ProductTemplateDto extends AbstractDto
     public void setDefaultStore(String defaultStore)
     {
         this.defaultStore = defaultStore;
+    }
+
+    public String getLastTimePurchased()
+    {
+        return lastTimePurchased;
+    }
+
+    public void setLastTimePurchased(String lastTimePurchased)
+    {
+        this.lastTimePurchased = lastTimePurchased;
+    }
+
+    @Override
+    public boolean equals(Object o)
+    {
+        if ( this == o ) return true;
+        if ( o == null || getClass() != o.getClass() ) return false;
+
+        ProductTemplateDto dto = (ProductTemplateDto) o;
+
+        if ( getProductName() != null ? !getProductName().equals(dto.getProductName()) : dto.getProductName() != null )
+            return false;
+        if ( getProductCategory() != null ? !getProductCategory().equals(dto.getProductCategory()) : dto.getProductCategory() != null )
+            return false;
+        if ( getHistoryCount() != null ? !getHistoryCount().equals(dto.getHistoryCount()) : dto.getHistoryCount() != null )
+            return false;
+        if ( getDefaultNotes() != null ? !getDefaultNotes().equals(dto.getDefaultNotes()) : dto.getDefaultNotes() != null )
+            return false;
+        if ( getDefaultStore() != null ? !getDefaultStore().equals(dto.getDefaultStore()) : dto.getDefaultStore() != null )
+            return false;
+        return getLastTimePurchased() != null ? getLastTimePurchased().equals(dto.getLastTimePurchased()) : dto.getLastTimePurchased() == null;
+
+    }
+
+    @Override
+    public int hashCode()
+    {
+        int result = getProductName() != null ? getProductName().hashCode() : 0;
+        result = 31 * result + (getProductCategory() != null ? getProductCategory().hashCode() : 0);
+        result = 31 * result + (getHistoryCount() != null ? getHistoryCount().hashCode() : 0);
+        result = 31 * result + (getDefaultNotes() != null ? getDefaultNotes().hashCode() : 0);
+        result = 31 * result + (getDefaultStore() != null ? getDefaultStore().hashCode() : 0);
+        result = 31 * result + (getLastTimePurchased() != null ? getLastTimePurchased().hashCode() : 0);
+        return result;
     }
 }

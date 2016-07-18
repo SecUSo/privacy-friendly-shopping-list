@@ -11,14 +11,20 @@ import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.
  */
 public class ShoppingListValidatorImpl implements ShoppingListValidator
 {
+
+    private static final int MAXIMUM_LIST_LENGTH = 40;
+
     @Override
     public void validate(ListDto dto)
     {
         String listName = dto.getListName();
-        if ( listName.length() > 40 )
+        if ( listName != null )
         {
-            dto.getValidationErrorsList().add(ListDto.ErrorFieldName.LIST_NAME.name());
-            PFALogger.debug(getClass().getSimpleName(), "validate", "validation error, DTO=" + dto.toString());
+            if ( listName.length() > MAXIMUM_LIST_LENGTH )
+            {
+                dto.getValidationErrorsList().add(ListDto.ErrorFieldName.LIST_NAME.name());
+                PFALogger.debug(getClass().getSimpleName(), "validate", "validation error, DTO=" + dto.toString());
+            }
         }
     }
 }

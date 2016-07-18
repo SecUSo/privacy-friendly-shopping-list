@@ -42,7 +42,7 @@ public class ProductConverterServiceImpl implements ProductConverterService
         entity.setStore(dto.getProductStore());
         entity.setPrice(Double.parseDouble(dto.getProductPrice()));
 
-        Date purchasedDate = DateUtils.getDateFromString(dto.getPurchasedDate(), dateLongPattern, language).toDate();
+        Date purchasedDate = DateUtils.getDateFromString(dto.getLastTimePurchased(), dateLongPattern, language).toDate();
         entity.setPurchasedDate(purchasedDate);
         entity.setSelected(dto.isSelected());
     }
@@ -58,7 +58,7 @@ public class ProductConverterServiceImpl implements ProductConverterService
         entity.setCategory(dto.getProductCategory());
         entity.setHistoryCount(Integer.valueOf(dto.getHistoryCount()));
 
-        Date purchasedDate = DateUtils.getDateFromString(dto.getPurchasedDate(), dateLongPattern, language).toDate();
+        Date purchasedDate = DateUtils.getDateFromString(dto.getLastTimePurchased(), dateLongPattern, language).toDate();
         entity.setLastTimePurchased(purchasedDate);
 
         entity.setDefaultNotes(dto.getDefaultNotes());
@@ -68,12 +68,34 @@ public class ProductConverterServiceImpl implements ProductConverterService
     @Override
     public void convertTemplateEntityToDto(ProductTemplateEntity entity, ProductTemplateDto dto)
     {
+        dto.setId(String.valueOf(entity.getId()));
+        dto.setProductName(entity.getProductName());
+        dto.setProductCategory(entity.getCategory());
+        dto.setHistoryCount(String.valueOf(entity.getHistoryCount()));
 
+        String dateAsString = DateUtils.getDateAsString(entity.getLastTimePurchased().getTime(), dateLongPattern, language);
+        dto.setLastTimePurchased(dateAsString);
+
+        dto.setDefaultNotes(entity.getDefaultNotes());
+        dto.setDefaultStore(entity.getDefaultStore());
     }
 
     @Override
     public void convertEntitiesToDto(ProductTemplateEntity templateEntity, ProductItemEntity entity, ProductDto dto)
     {
 
+        convertTemplateEntityToDto(templateEntity, dto);
+
+        // from product
+        dto.setProductId(String.valueOf(entity.getId()));
+        dto.setQuantity(String.valueOf(entity.getQuantity()));
+        dto.setQuantityPurchased(String.valueOf(entity.getQuantityPurchased()));
+        dto.setProductNotes(entity.getNotes());
+        dto.setProductStore(entity.getStore());
+        dto.setProductPrice(String.valueOf(entity.getPrice()));
+
+        String dateAsString = DateUtils.getDateAsString(entity.getPurchasedDate().getTime(), dateLongPattern, language);
+        dto.setLastTimePurchased(dateAsString);
+        dto.setSelected(entity.getSelected());
     }
 }
