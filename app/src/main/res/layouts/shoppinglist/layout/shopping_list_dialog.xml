@@ -33,7 +33,7 @@
         />
         <Spinner
                 android:id="@+id/priority_spinner"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
     </LinearLayout>
 
@@ -50,18 +50,19 @@
                 android:layout_centerHorizontal="true"
                 android:paddingRight="5dp"
                 android:paddingLeft="10dp"
-                android:onClick="set_deadline"
                 android:text="@string/set_deadline"/>
 
         <CheckBox
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content"
+                android:id="@+id/list_dialog_checkbox"/>
 
     </LinearLayout>
 
     <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:id="@+id/set_deadline_layout"
             android:orientation="vertical"
             android:background="@drawable/list_dialog_border"
             android:layout_margin="10dp"
@@ -70,6 +71,7 @@
         <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:id="@+id/set_deadline_date"
                 android:paddingTop="15dp"
         >
 
@@ -77,6 +79,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:src="@drawable/ic_perm_group_calendar"
+                    android:tint="@color/colorAccent"
                     android:layout_marginLeft="15dp"
                     android:layout_marginRight="10dp"
                     android:adjustViewBounds="true"
@@ -84,22 +87,25 @@
                     android:maxWidth="30dp"
                     android:maxHeight="30dp"/>
             <TextView
-                    android:id="@+id/set_deadline_date"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentTop="true"
                     android:layout_gravity="center"
-                    android:onClick="setDate"
                     android:text="@string/set_deadline_date"/>
         </LinearLayout>
+
         <LinearLayout
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:id="@+id/set_deadline_time"
+                android:paddingTop="3dp"
+                android:paddingBottom="3dp">
 
             <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/ic_perm_group_calendar"
+                    android:tint="@color/colorAccent"
+                    android:src="@drawable/ic_perm_group_system_clock"
                     android:layout_marginLeft="15dp"
                     android:layout_marginRight="10dp"
                     android:adjustViewBounds="true"
@@ -108,25 +114,25 @@
                     android:maxHeight="30dp"/>
 
             <TextView
-                    android:id="@+id/set_deadline_time"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentTop="true"
                     android:layout_gravity="center"
-                    android:onClick="setTime"
                     android:text="@string/set_deadline_time"/>
         </LinearLayout>
 
         <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:id="@+id/set_deadline_reminder"
                 android:orientation="horizontal"
                 android:paddingBottom="15dp">
 
             <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/perm_group_device_alarms"
+                    android:tint="@color/colorAccent"
+                    android:src="@drawable/ic_perm_group_device_alarms"
                     android:adjustViewBounds="true"
                     android:layout_marginLeft="15dp"
                     android:layout_marginRight="10dp"
@@ -135,14 +141,11 @@
                     android:maxHeight="30dp"/>
 
             <TextView
-                    android:id="@+id/set_reminder"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentTop="true"
                     android:layout_gravity="center"
-                    android:onClick="setReminder"
                     android:text="@string/set_reminder"/>
-
         </LinearLayout>
 
     </LinearLayout>

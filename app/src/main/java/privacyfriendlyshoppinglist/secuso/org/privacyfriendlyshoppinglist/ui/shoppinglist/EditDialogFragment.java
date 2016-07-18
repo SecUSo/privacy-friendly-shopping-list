@@ -1,18 +1,14 @@
 package privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.shoppinglist;
 
-import android.app.Activity;
-import android.app.AlertDialog;
-import android.app.Dialog;
+import android.app.*;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
-import android.widget.EditText;
-import android.widget.Spinner;
-import android.widget.TextView;
+import android.widget.*;
+import org.joda.time.DateTime;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.R;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.context.AbstractInstanceFactory;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.context.InstanceFactory;
@@ -20,6 +16,9 @@ import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.shoppingList.business.domain.ListDto;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.main.MainActivity;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.main.ShoppingListCache;
+
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 
 /**
  * Created by Chris on 09.07.2016.
@@ -33,6 +32,15 @@ public class EditDialogFragment extends DialogFragment
 
     private EditText listEditText;
     private EditText listNotes;
+    private CheckBox checkBox;
+    private LinearLayout setDeadlineLayout;
+    private LinearLayout setDate;
+    private LinearLayout setTime;
+    private LinearLayout setReminder;
+    private Calendar currentDate;
+    private int year, month, day, hour, minute;
+    private DateTime deadlineDateTime;
+
 
 
     public static EditDialogFragment newInstance(ListDto dto, ShoppingListCache cache)
@@ -75,20 +83,89 @@ public class EditDialogFragment extends DialogFragment
         LayoutInflater inflater = (LayoutInflater) getActivity().getSystemService(getActivity().LAYOUT_INFLATER_SERVICE);
         View v = inflater.inflate(R.layout.shopping_list_dialog, null);
 
-        TextView setDate;
-        setDate = (TextView) v.findViewById(R.id.set_deadline_date);
+        Spinner spinner = (Spinner) v.findViewById(R.id.priority_spinner);
+        listEditText = (EditText) v.findViewById(R.id.list_name);
+        listNotes = (EditText) v.findViewById(R.id.list_notes);
+        checkBox = (CheckBox) v.findViewById(R.id.list_dialog_checkbox);
+        setDeadlineLayout = (LinearLayout) v.findViewById(R.id.set_deadline_layout);
+        setDate = (LinearLayout) v.findViewById(R.id.set_deadline_date);
+        setTime = (LinearLayout) v.findViewById(R.id.set_deadline_time);
+        setReminder = (LinearLayout) v.findViewById(R.id.set_deadline_reminder);
+
+        setDeadlineLayout.setVisibility(View.GONE);
+        checkBox.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View view)
+            {
+                if ( setDeadlineLayout.getVisibility() == View.GONE )
+                {
+                    setDeadlineLayout.setVisibility(View.VISIBLE);
+                }
+                else
+                {
+                    setDeadlineLayout.setVisibility(View.GONE);
+                }
+            }
+        });
 
 
         setDate.setOnClickListener(new View.OnClickListener()
         {
+            @Override
             public void onClick(View v)
             {
+                DatePickerDialog datePickerDialog;
+                datePickerDialog = new DatePickerDialog(getActivity(), new DatePickerDialog.OnDateSetListener()
+                {
+                    @Override
+                    public void onDateSet(final DatePicker dp, final int currentYear,
+                                          final int currentMonth, final int currentDay)
+                    {
+                        currentDate.set(currentYear, currentMonth, currentDay,
+                                currentDate.get(Calendar.HOUR_OF_DAY), currentDate.get(Calendar.MINUTE));
+                    }
+                }, year, month, day);
+                datePickerDialog.setTitle("Date");
+                datePickerDialog.show();
             }
         });
 
-        Spinner spinner = (Spinner) v.findViewById(R.id.priority_spinner);
-        listEditText = (EditText) v.findViewById(R.id.list_name);
-        listNotes = (EditText) v.findViewById(R.id.list_notes);
+
+        currentDate = new GregorianCalendar();
+        year = currentDate.get(Calendar.YEAR);
+        month = currentDate.get(Calendar.MONTH);
+        day = currentDate.get(Calendar.DAY_OF_MONTH);
+        hour = currentDate.get(Calendar.HOUR_OF_DAY);
+        minute = currentDate.get(Calendar.MINUTE);
+        setTime.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                TimePickerDialog timePickerDialog;
+                timePickerDialog = new TimePickerDialog(getActivity(), new TimePickerDialog.OnTimeSetListener()
+                {
+                    @Override
+                    public void onTimeSet(final TimePicker tp, final int currentHour, final int currentMinute)
+                    {
+                        currentDate.set(currentDate.get(Calendar.YEAR), currentDate.get(Calendar.MONTH),
+                                currentDate.get(Calendar.DAY_OF_MONTH), currentHour, currentMinute);
+                    }
+                }, hour, minute, true);
+                timePickerDialog.setTitle("Time");
+                timePickerDialog.show();
+            }
+        });
+
+        setReminder.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View view)
+            {
+
+            }
+        });
 
         listEditText.setText(dto.getListName());
         listNotes.setText(dto.getNotes());
@@ -121,6 +198,8 @@ public class EditDialogFragment extends DialogFragment
         spinner.setSelection(Integer.valueOf(dto.getPriority()));
 
         builder.setView(v);
+
+
         builder.setPositiveButton(cache.getActivity().getResources().getString(R.string.okay), new DialogInterface.OnClickListener()
         {
             @Override

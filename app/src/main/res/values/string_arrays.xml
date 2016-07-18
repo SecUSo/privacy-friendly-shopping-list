@@ -5,7 +5,6 @@
             name="shopping_list_priority_spinner">
         <item>High</item>
         <item>Normal</item>
-        <item>Low</item>
         <item>Priority</item>
     </string-array>
 
