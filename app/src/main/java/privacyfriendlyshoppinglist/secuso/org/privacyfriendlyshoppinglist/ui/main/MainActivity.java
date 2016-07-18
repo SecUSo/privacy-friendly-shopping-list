@@ -33,6 +33,7 @@ public class MainActivity extends BaseActivity
         this.shoppingListService = (ShoppingListService) instanceFactory.createInstance(ShoppingListService.class);
         cache = new ShoppingListCache(this);
 
+        //getApplicationContext().deleteDatabase(DB.APP.getDbName());
 //        getApplicationContext().deleteDatabase(DB.APP.getDbName());
 
         updateListView();

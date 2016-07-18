@@ -1,13 +1,13 @@
 package privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.shoppinglist.listadapter;
 
 import android.content.Context;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.R;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.shoppingList.business.domain.ListDto;
+import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.main.ShoppingListCache;
 
 import java.util.List;
 
@@ -18,12 +18,12 @@ public class ListsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
 {
 
     private List<ListDto> shoppingList;
-    private AppCompatActivity activity;
+    private ShoppingListCache cache;
 
-    public ListsAdapter(List<ListDto> shoppingList, AppCompatActivity activity)
+    public ListsAdapter(List<ListDto> shoppingList, ShoppingListCache cache)
     {
         this.shoppingList = shoppingList;
-        this.activity = activity;
+        this.cache = cache;
     }
 
     public void setShoppingList(List<ListDto> shoppingList)
@@ -40,7 +40,7 @@ public class ListsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         Context context = parent.getContext();
         View view = LayoutInflater.from(context).inflate(R.layout.shopping_list_item, parent, false);
-        return new ListsItemViewHolder(view, activity);
+        return new ListsItemViewHolder(view, cache);
     }
 
     @Override
