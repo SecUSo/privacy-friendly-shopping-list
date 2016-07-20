@@ -52,17 +52,15 @@ public class ShoppingListServiceImpl implements ShoppingListService
     @Override
     public void saveOrUpdate(ListDto dto)
     {
-        ShoppingListEntity entity = new ShoppingListEntity();
-
-        if ( StringUtils.isEmpty(dto.getListName()) )
-        {
-            dto.setListName(context.getResources().getString(R.string.default_list_name));
-        }
-
-        shoppingListConverter.convertDtoToEntity(dto, entity);
         shoppingListValidator.validate(dto);
         if ( !dto.hasErrors() )
         {
+            if ( StringUtils.isEmpty(dto.getListName()) )
+            {
+                dto.setListName(context.getResources().getString(R.string.default_list_name));
+            }
+            ShoppingListEntity entity = new ShoppingListEntity();
+            shoppingListConverter.convertDtoToEntity(dto, entity);
             Long id = shoppingListDao.save(entity);
             dto.setId(id.toString());
         }

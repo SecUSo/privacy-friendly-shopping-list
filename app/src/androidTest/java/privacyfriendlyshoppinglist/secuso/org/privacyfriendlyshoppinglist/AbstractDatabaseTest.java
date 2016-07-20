@@ -17,9 +17,9 @@ abstract public class AbstractDatabaseTest extends AndroidTestCase
     protected void setUp() throws Exception
     {
         super.setUp();
-        setupBeforeEachTest();
         // delete database before each test
         getContext().deleteDatabase(DB.TEST.getDbName());
+        setupBeforeEachTest();
     }
 
     protected void tearDown() throws Exception

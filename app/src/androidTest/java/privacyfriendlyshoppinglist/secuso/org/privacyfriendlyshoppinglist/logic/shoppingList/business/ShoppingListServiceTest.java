@@ -85,7 +85,7 @@ public class ShoppingListServiceTest extends AbstractDatabaseTest
     public void testSaveWithInvalidInput()
     {
         ListDto dto = new ListDto();
-        dto.setNotes("notes");
+        dto.setListName("Lorem ipsum dolor sit amet, consectetuer."); // length = 41; maximum is 40.
 
         shoppingListService.saveOrUpdate(dto);
         String id = dto.getId(); // if the list is not saved, then the id is equals null

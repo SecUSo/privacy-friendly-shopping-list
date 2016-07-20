@@ -6,6 +6,7 @@ import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.Abstra
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.context.AbstractInstanceFactory;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.context.InstanceFactoryForTests;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.product.business.domain.ProductDto;
+import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.product.business.domain.ProductTemplateDto;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.product.persistence.entity.ProductItemEntity;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.product.persistence.entity.ProductTemplateEntity;
 
@@ -45,7 +46,7 @@ public class ProductConverterServiceTest extends AbstractDatabaseTest
         dto.setProductNotes(expectedNotes);
         dto.setProductStore(expectedStore);
         dto.setProductPrice(expectedPrice);
-        dto.setPurchasedDate(purchaseDate);
+        dto.setLastTimePurchased(purchaseDate);
         dto.setSelected(true);
 
         ProductItemEntity entity = new ProductItemEntity();
@@ -79,7 +80,7 @@ public class ProductConverterServiceTest extends AbstractDatabaseTest
         dto.setProductName(expectedProductName);
         dto.setProductCategory(expectedCategory);
         dto.setHistoryCount(expectedHistoryCount);
-        dto.setPurchasedDate(lastTimePurchased);
+        dto.setLastTimePurchased(lastTimePurchased);
         dto.setDefaultNotes(expectedDefaultNotes);
         dto.setDefaultStore(expectedDefaultStore);
 
@@ -99,14 +100,93 @@ public class ProductConverterServiceTest extends AbstractDatabaseTest
     }
 
     @Test
-    public void convertTemplateEntityToDto() throws Exception
+    public void testConvertTemplateEntityToDto() throws Exception
     {
+        Long templateId = 1L;
+        String expectedProductName = "product";
+        String expectedCategory = "category";
+        int expectedHistoryCount = 5;
+        Date expectedDate = new DateTime("2016-07-12").withHourOfDay(15).withMinuteOfHour(52).toDate();
+        String expectedDefaultNotes = "default notes";
+        String expectedDefaultStore = "store";
 
+        ProductTemplateEntity entity = new ProductTemplateEntity();
+        entity.setId(templateId);
+        entity.setProductName(expectedProductName);
+        entity.setCategory(expectedCategory);
+        entity.setHistoryCount(expectedHistoryCount);
+        entity.setLastTimePurchased(expectedDate);
+        entity.setDefaultNotes(expectedDefaultNotes);
+        entity.setDefaultStore(expectedDefaultStore);
+
+        ProductTemplateDto dto = new ProductTemplateDto();
+        converterService.convertTemplateEntityToDto(entity, dto);
+
+        assertEquals(String.valueOf(templateId), dto.getId());
+        assertEquals(expectedProductName, dto.getProductName());
+        assertEquals(expectedCategory, dto.getProductCategory());
+        assertEquals(String.valueOf(expectedHistoryCount), dto.getHistoryCount());
+        String lastTimePurchased = "Tue 07/12/2016 15:52";
+        assertEquals(lastTimePurchased, dto.getLastTimePurchased());
+        assertEquals(expectedDefaultNotes, dto.getDefaultNotes());
+        assertEquals(expectedDefaultStore, dto.getDefaultStore());
     }
 
     @Test
-    public void convertEntitiesToDto() throws Exception
+    public void testConvertEntitiesToDto() throws Exception
     {
+        Long templateId = 1L;
+        String expectedProductName = "product";
+        String expectedCategory = "category";
+        int expectedHistoryCount = 5;
+        Date expectedDate = new DateTime("2016-07-12").withHourOfDay(15).withMinuteOfHour(52).toDate();
+        String expectedDefaultNotes = "default notes";
+        String expectedDefaultStore = "store";
 
+        ProductTemplateEntity templateEntity = new ProductTemplateEntity();
+        templateEntity.setId(templateId);
+        templateEntity.setProductName(expectedProductName);
+        templateEntity.setCategory(expectedCategory);
+        templateEntity.setHistoryCount(expectedHistoryCount);
+        templateEntity.setLastTimePurchased(expectedDate);
+        templateEntity.setDefaultNotes(expectedDefaultNotes);
+        templateEntity.setDefaultStore(expectedDefaultStore);
+
+        Long expectedProductId = 5L;
+        int expectedQuantity = 10;
+        int expectedQuantityPurchased = 9;
+        String expectedNotes = "Some Notes";
+        String expectedStore = "Store";
+        double expectedPrice = 10.0;
+
+        ProductItemEntity entity = new ProductItemEntity();
+        entity.setId(expectedProductId);
+        entity.setQuantity(expectedQuantity);
+        entity.setQuantityPurchased(expectedQuantityPurchased);
+        entity.setNotes(expectedNotes);
+        entity.setStore(expectedStore);
+        entity.setPrice(expectedPrice);
+        entity.setPurchasedDate(expectedDate);
+        entity.setSelected(true);
+
+        ProductDto dto = new ProductDto();
+        converterService.convertEntitiesToDto(templateEntity, entity, dto);
+
+        assertEquals(String.valueOf(templateId), dto.getId());
+        assertEquals(expectedProductName, dto.getProductName());
+        assertEquals(expectedCategory, dto.getProductCategory());
+        assertEquals(String.valueOf(expectedHistoryCount), dto.getHistoryCount());
+        String lastTimePurchased = "Tue 07/12/2016 15:52";
+        assertEquals(lastTimePurchased, dto.getLastTimePurchased());
+        assertEquals(expectedDefaultNotes, dto.getDefaultNotes());
+        assertEquals(expectedDefaultStore, dto.getDefaultStore());
+
+        assertEquals(String.valueOf(expectedProductId), dto.getProductId());
+        assertEquals(String.valueOf(expectedQuantity), dto.getQuantity());
+        assertEquals(String.valueOf(expectedQuantityPurchased), dto.getQuantityPurchased());
+        assertEquals(expectedNotes, dto.getProductNotes());
+        assertEquals(expectedStore, dto.getProductStore());
+        assertEquals(String.valueOf(expectedPrice), dto.getProductPrice());
+        assertTrue(entity.getSelected());
     }
 }

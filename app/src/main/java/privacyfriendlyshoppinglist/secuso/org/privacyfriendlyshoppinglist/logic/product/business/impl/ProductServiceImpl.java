@@ -79,9 +79,15 @@ public class ProductServiceImpl implements ProductService
     }
 
     @Override
-    public ProductDto getById(String id)
+    public ProductDto getById(String entityId)
     {
-        return null;
+        ProductItemEntity productEntity = productItemDao.getById(Long.valueOf(entityId));
+        Long templateId = productEntity.getProductTemplate().getId();
+        ProductTemplateEntity templateEntity = productTemplateDao.getById(Long.valueOf(templateId));
+
+        ProductDto dto = new ProductDto();
+        converterService.convertEntitiesToDto(templateEntity, productEntity, dto);
+        return dto;
     }
 
     @Override
