@@ -10,6 +10,7 @@
     <!--### MAIN ###-->
     <!-- Lists Placeholders-->
     <string name="ph_list_name" translatable="false">List Name</string>
+    <string name="ph_product_name" translatable="false">Product Name</string>
     <string name="ph_list_nr_items" translatable="false">X</string>
 
     <!-- ### SHOPPING LIST ### -->

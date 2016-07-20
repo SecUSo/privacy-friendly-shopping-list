@@ -15,6 +15,8 @@ import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.sho
 public class ListsItemViewHolder extends RecyclerView.ViewHolder
 {
 
+    public static final String LIST_NAME_KEY = "list.name";
+    public static final String LIST_ID_KEY = "list.id";
     private ListItemCache listItemCache;
     private ShoppingListCache shoppingListCache;
 
@@ -37,6 +39,8 @@ public class ListsItemViewHolder extends RecyclerView.ViewHolder
             {
                 Intent intent = new Intent(shoppingListCache.getActivity(), ProductsActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                intent.putExtra(LIST_NAME_KEY, dto.getListName());
+                intent.putExtra(LIST_ID_KEY, dto.getId());
                 shoppingListCache.getActivity().startActivity(intent);
             }
         });

@@ -12,9 +12,9 @@ import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.R;
  */
 public class ListItemCache
 {
-    TextView listNameTextView;
-    TextView nrProductsTextView;
-    CardView listCard;
+    private TextView listNameTextView;
+    private TextView nrProductsTextView;
+    private CardView listCard;
 
     public ListItemCache(View parent)
     {
