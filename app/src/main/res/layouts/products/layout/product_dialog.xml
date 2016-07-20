@@ -41,11 +41,16 @@
                     style="?android:attr/buttonStyleSmall"
                     android:layout_width="41dp"
                     android:layout_height="wrap_content"
+                    android:background="@drawable/button_normal"
                     android:text="-"
-                    android:id="@+id/button"/>
-            <Button style="?android:attr/buttonStyleSmall" android:layout_width="wrap_content"
+                    android:id="@+id/product_button_minus"/>
+            <Button style="?android:attr/buttonStyleSmall"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="+" android:id="@+id/button2"/>
+                    android:layout_marginLeft="3dp"
+                    android:background="@drawable/button_normal"
+                    android:text="+"
+                    android:id="@+id/product_button_plus"/>
             <EditText
                     android:id="@+id/quantity"
                     android:inputType="number"
