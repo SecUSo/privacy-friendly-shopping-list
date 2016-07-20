@@ -31,7 +31,7 @@ public interface ProductService extends ContextSetter
 
     List<ProductTemplateDto> getAllTemplateProducts();
 
-    List<ProductDto> getAllSortedBySelection(List<ProductDto> productDtos);
+    List<ProductDto> moveSelectedToEnd(List<ProductDto> productDtos);
 
     void sortProducts(List<ProductDto> products, String criteria, boolean ascending);
 }

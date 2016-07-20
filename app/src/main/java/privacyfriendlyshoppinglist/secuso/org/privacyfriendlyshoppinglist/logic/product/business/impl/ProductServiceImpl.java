@@ -13,6 +13,7 @@ import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.product.persistence.entity.ProductTemplateEntity;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.shoppingList.business.ShoppingListService;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.shoppingList.persistence.entity.ShoppingListEntity;
+import rx.Observable;
 
 import javax.inject.Inject;
 import java.util.List;
@@ -82,6 +83,7 @@ public class ProductServiceImpl implements ProductService
     public ProductDto getById(String entityId)
     {
         ProductItemEntity productEntity = productItemDao.getById(Long.valueOf(entityId));
+        if ( productEntity == null ) return null;
         Long templateId = productEntity.getProductTemplate().getId();
         ProductTemplateEntity templateEntity = productTemplateDao.getById(Long.valueOf(templateId));
 
@@ -93,36 +95,74 @@ public class ProductServiceImpl implements ProductService
     @Override
     public void deleteById(String id)
     {
-
+        productItemDao.deleteById(Long.valueOf(id));
     }
 
     @Override
     public void deleteSelected(List<ProductDto> productDtos)
     {
-
+        Observable.from(productDtos)
+                .filter(dto -> dto.isSelected())
+                .subscribe(dto -> deleteById(dto.getProductId()));
     }
 
     @Override
     public List<ProductDto> getAllProducts(String listId)
     {
-        return null;
+        Observable<ProductDto> dtos = Observable
+                .from(productItemDao.getAllEntities())
+                .map(this::getDto);
+
+        return dtos.toList().toBlocking().single();
     }
 
     @Override
     public List<ProductTemplateDto> getAllTemplateProducts()
     {
-        return null;
+        Observable<ProductTemplateDto> dtos = Observable
+                .from(productTemplateDao.getAllEntities())
+                .map(this::getDto);
+
+        return dtos.toList().toBlocking().single();
     }
 
     @Override
-    public List<ProductDto> getAllSortedBySelection(List<ProductDto> productDtos)
+    public List<ProductDto> moveSelectedToEnd(List<ProductDto> productDtos)
     {
-        return null;
+        List<ProductDto> nonSelectedDtos = Observable
+                .from(productDtos)
+                .filter(dto -> !dto.isSelected())
+                .toList().toBlocking().single();
+
+        List<ProductDto> selectedDtos = Observable
+                .from(productDtos)
+                .filter(dto -> dto.isSelected())
+                .toList().toBlocking().single();
+        nonSelectedDtos.addAll(selectedDtos);
+        productDtos = nonSelectedDtos;
+        return productDtos;
     }
 
     @Override
     public void sortProducts(List<ProductDto> products, String criteria, boolean ascending)
     {
 
+    }
+
+    private ProductDto getDto(ProductItemEntity entity)
+    {
+        // the next line contains only the id. The whole entity is needed
+        ProductTemplateEntity templateReference = entity.getProductTemplate();
+        ProductTemplateEntity productTemplateEntity = productTemplateDao.getById(templateReference.getId());
+        ProductDto dto = new ProductDto();
+        converterService.convertEntitiesToDto(productTemplateEntity, entity, dto);
+        return dto;
+    }
+
+    private ProductTemplateDto getDto(ProductTemplateEntity entity)
+    {
+        ProductTemplateDto dto = new ProductTemplateDto();
+        converterService.convertTemplateEntityToDto(entity, dto);
+        return dto;
     }
 }
