@@ -2,8 +2,6 @@ package privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic
 
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.business.AbstractDto;
 
-import java.util.Date;
-
 /**
  * Description:
  * Author: Grebiel Jose Ifill Brito
@@ -20,7 +18,8 @@ public class ListDto extends AbstractDto
     private String listName;
     private String priority;
     private int icon;
-    private Date deadline;
+    private String deadlineDate;
+    private String deadlineTime;
     private String notes;
     private String nrItems;
     private boolean selected;
@@ -55,14 +54,24 @@ public class ListDto extends AbstractDto
         this.icon = icon;
     }
 
-    public Date getDeadline()
+    public String getDeadlineDate()
     {
-        return deadline;
+        return deadlineDate;
     }
 
-    public void setDeadline(Date deadline)
+    public void setDeadlineDate(String deadlineDate)
     {
-        this.deadline = deadline;
+        this.deadlineDate = deadlineDate;
+    }
+
+    public String getDeadlineTime()
+    {
+        return deadlineTime;
+    }
+
+    public void setDeadlineTime(String deadlineTime)
+    {
+        this.deadlineTime = deadlineTime;
     }
 
     public String getNotes()
@@ -102,9 +111,11 @@ public class ListDto extends AbstractDto
                 "listName='" + listName + '\'' +
                 ", priority='" + priority + '\'' +
                 ", icon=" + icon +
-                ", deadline=" + deadline +
+                ", deadlineDate='" + deadlineDate + '\'' +
+                ", deadlineTime='" + deadlineTime + '\'' +
                 ", notes='" + notes + '\'' +
                 ", nrItems='" + nrItems + '\'' +
+                ", selected=" + selected +
                 '}';
     }
 }

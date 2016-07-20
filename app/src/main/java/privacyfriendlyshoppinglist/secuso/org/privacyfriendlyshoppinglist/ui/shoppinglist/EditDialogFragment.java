@@ -8,10 +8,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.*;
-import org.joda.time.DateTime;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.R;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.context.AbstractInstanceFactory;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.context.InstanceFactory;
+import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.utils.DateUtils;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.shoppingList.business.ShoppingListService;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.shoppingList.business.domain.ListDto;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.main.MainActivity;
@@ -39,7 +39,9 @@ public class EditDialogFragment extends DialogFragment
     private LinearLayout setReminder;
     private Calendar currentDate;
     private int year, month, day, hour, minute;
-    private DateTime deadlineDateTime;
+    private String deadlineDateTime;
+    private TextView setDateTextView;
+    private TextView setTimeTextView;
 
 
 
@@ -83,7 +85,8 @@ public class EditDialogFragment extends DialogFragment
         LayoutInflater inflater = (LayoutInflater) getActivity().getSystemService(getActivity().LAYOUT_INFLATER_SERVICE);
         View v = inflater.inflate(R.layout.shopping_list_dialog, null);
 
-        Spinner spinner = (Spinner) v.findViewById(R.id.priority_spinner);
+        Spinner prioritySpinner = (Spinner) v.findViewById(R.id.priority_spinner);
+        Spinner reminderSpinner = (Spinner) v.findViewById(R.id.reminder_spinner);
         listEditText = (EditText) v.findViewById(R.id.list_name);
         listNotes = (EditText) v.findViewById(R.id.list_notes);
         checkBox = (CheckBox) v.findViewById(R.id.list_dialog_checkbox);
@@ -92,15 +95,38 @@ public class EditDialogFragment extends DialogFragment
         setTime = (LinearLayout) v.findViewById(R.id.set_deadline_time);
         setReminder = (LinearLayout) v.findViewById(R.id.set_deadline_reminder);
 
+        setDateTextView = (TextView) v.findViewById(R.id.set_date_view);
+        setTimeTextView = (TextView) v.findViewById(R.id.set_time_view);
+
+
         setDeadlineLayout.setVisibility(View.GONE);
         checkBox.setOnClickListener(new View.OnClickListener()
         {
             @Override
             public void onClick(View view)
             {
+                currentDate = new GregorianCalendar();
+                String language;
+                String datePattern;
+                String timePattern;
+                language = cache.getActivity().getResources().getString(R.string.language);
+                datePattern = cache.getActivity().getResources().getString(R.string.date_short_pattern);
+                timePattern = cache.getActivity().getResources().getString(R.string.time_pattern);
+
                 if ( setDeadlineLayout.getVisibility() == View.GONE )
                 {
                     setDeadlineLayout.setVisibility(View.VISIBLE);
+
+//                    if ( StringUtils.isEmpty((String) setDateTextView.getText()) && StringUtils.isEmpty((String) setTimeTextView.getText())) {
+
+                    setDateTextView.setText(DateUtils.getDateAsString(currentDate.getTimeInMillis(), datePattern, language));
+                    setTimeTextView.setText(DateUtils.getDateAsString(currentDate.getTimeInMillis(), timePattern, language));
+//                    }
+//                    else
+//                    {
+//                        setDateTextView.setText(dto.getDeadlineDate());
+//                        setTimeTextView.setText(dto.getDeadlineTime());
+//                    }
                 }
                 else
                 {
@@ -109,6 +135,12 @@ public class EditDialogFragment extends DialogFragment
             }
         });
 
+        currentDate = new GregorianCalendar();
+        year = currentDate.get(Calendar.YEAR);
+        month = currentDate.get(Calendar.MONTH);
+        day = currentDate.get(Calendar.DAY_OF_MONTH);
+        hour = currentDate.get(Calendar.HOUR_OF_DAY);
+        minute = currentDate.get(Calendar.MINUTE);
 
         setDate.setOnClickListener(new View.OnClickListener()
         {
@@ -124,20 +156,18 @@ public class EditDialogFragment extends DialogFragment
                     {
                         currentDate.set(currentYear, currentMonth, currentDay,
                                 currentDate.get(Calendar.HOUR_OF_DAY), currentDate.get(Calendar.MINUTE));
+
+                        setDateTextView.setText(DateUtils.getDateAsString(currentDate.getTimeInMillis(), cache.getActivity().getResources().getString(R.string.date_short_pattern), cache.getActivity().getResources().getString(R.string.language)));
+
                     }
                 }, year, month, day);
-                datePickerDialog.setTitle("Date");
+                datePickerDialog.setTitle("Set Date:");
                 datePickerDialog.show();
+
             }
         });
 
 
-        currentDate = new GregorianCalendar();
-        year = currentDate.get(Calendar.YEAR);
-        month = currentDate.get(Calendar.MONTH);
-        day = currentDate.get(Calendar.DAY_OF_MONTH);
-        hour = currentDate.get(Calendar.HOUR_OF_DAY);
-        minute = currentDate.get(Calendar.MINUTE);
         setTime.setOnClickListener(new View.OnClickListener()
         {
             @Override
@@ -151,9 +181,13 @@ public class EditDialogFragment extends DialogFragment
                     {
                         currentDate.set(currentDate.get(Calendar.YEAR), currentDate.get(Calendar.MONTH),
                                 currentDate.get(Calendar.DAY_OF_MONTH), currentHour, currentMinute);
+
+                        setTimeTextView.setText(DateUtils.getDateAsString(currentDate.getTimeInMillis(), cache.getActivity().getResources().getString(R.string.time_pattern), cache.getActivity().getResources().getString(R.string.language)));
+
+
                     }
                 }, hour, minute, true);
-                timePickerDialog.setTitle("Time");
+                timePickerDialog.setTitle("Set Time: ");
                 timePickerDialog.show();
             }
         });
@@ -170,7 +204,7 @@ public class EditDialogFragment extends DialogFragment
         listEditText.setText(dto.getListName());
         listNotes.setText(dto.getNotes());
 
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_dropdown_item)
+        ArrayAdapter<String> prioritySpinnerAdapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_dropdown_item)
         {
             @Override
             public View getView(int position, View convertView, ViewGroup parent)
@@ -189,13 +223,39 @@ public class EditDialogFragment extends DialogFragment
                 return super.getCount() - 1; // you dont display last item. It is used as hint.
             }
         };
-
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        prioritySpinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         String[] priorityList = cache.getActivity().getResources().getStringArray(R.array.shopping_list_priority_spinner);
+        prioritySpinnerAdapter.addAll(priorityList);
+        prioritySpinner.setAdapter(prioritySpinnerAdapter);
+        prioritySpinner.setSelection(Integer.valueOf(dto.getPriority()));
 
-        adapter.addAll(priorityList);
-        spinner.setAdapter(adapter);
-        spinner.setSelection(Integer.valueOf(dto.getPriority()));
+
+        ArrayAdapter<String> reminderSpinnerAdapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_dropdown_item)
+        {
+            @Override
+            public View getView(int position, View convertView, ViewGroup parent)
+            {
+                View v = super.getView(position, convertView, parent);
+                if ( position == getCount() )
+                {
+                    ((TextView) v.findViewById(android.R.id.text1)).setText("");
+                    ((TextView) v.findViewById(android.R.id.text1)).setHint(getItem(getCount()));
+                }
+                return v;
+            }
+
+            @Override
+            public int getCount()
+            {
+                return super.getCount() - 1; // you dont display last item. It is used as hint.
+            }
+        };
+        reminderSpinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        String[] reminderItemList = cache.getActivity().getResources().getStringArray(R.array.shopping_list_reminder_spinner);
+        reminderSpinnerAdapter.addAll(reminderItemList);
+        reminderSpinner.setAdapter(reminderSpinnerAdapter);
+        //reminderSpinner.setSelection(Integer.valueOf(dto.getPriority()));
+
 
         builder.setView(v);
 
@@ -210,7 +270,11 @@ public class EditDialogFragment extends DialogFragment
                 dto.setNotes(listNotes.getText().toString());
 
                 //TODO Set priority to be Integer
-                dto.setPriority(String.valueOf(spinner.getSelectedItemPosition()));
+                dto.setPriority(String.valueOf(prioritySpinner.getSelectedItemPosition()));
+
+
+                dto.setDeadlineDate((String) setDateTextView.getText());
+                dto.setDeadlineTime((String) setTimeTextView.getText());
 
                 shoppingListService.saveOrUpdate(dto);
                 MainActivity mainActivity = (MainActivity) cache.getActivity();
