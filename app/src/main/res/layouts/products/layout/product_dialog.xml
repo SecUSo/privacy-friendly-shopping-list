@@ -39,7 +39,7 @@
                 android:orientation="horizontal">
             <Button
                     style="?android:attr/buttonStyleSmall"
-                    android:layout_width="41dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@drawable/button_normal"
                     android:text="-"
