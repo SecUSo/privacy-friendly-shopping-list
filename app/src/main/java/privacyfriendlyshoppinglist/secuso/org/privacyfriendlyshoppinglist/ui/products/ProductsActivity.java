@@ -62,6 +62,7 @@ public class ProductsActivity extends AppCompatActivity
         cache.getProductsAdapter().setProductsList(productService.getAllProducts(cache.getListId()));
         cache.getProductsAdapter().notifyDataSetChanged();
 
+        reorderProductView();
         updateTotals();
     }
 
@@ -79,6 +80,18 @@ public class ProductsActivity extends AppCompatActivity
         {
             cache.getTotalLayout().setVisibility(View.VISIBLE);
         }
+    }
+
+    public void changeItemPosition(ProductDto dto)
+    {
+        ProductsAdapter productsAdapter = cache.getProductsAdapter();
+        List<ProductDto> productsList = productsAdapter.getProductsList();
+        List<ProductDto> productDtos = productService.moveSelectedToEnd(productsList);
+        productsAdapter.setProductsList(productDtos);
+
+        int initialPosition = productsList.indexOf(dto);
+        int finalPosition = productDtos.indexOf(dto);
+        productsAdapter.notifyItemMoved(initialPosition, finalPosition);
     }
 
     public void reorderProductView()
