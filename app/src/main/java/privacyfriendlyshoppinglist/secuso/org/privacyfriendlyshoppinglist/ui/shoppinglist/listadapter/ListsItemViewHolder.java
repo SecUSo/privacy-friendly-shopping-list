@@ -4,6 +4,9 @@ import android.content.Intent;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.context.AbstractInstanceFactory;
+import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.context.InstanceFactory;
+import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.product.business.ProductService;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.shoppingList.business.domain.ListDto;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.main.MainActivity;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.main.ShoppingListCache;
@@ -17,19 +20,23 @@ public class ListsItemViewHolder extends RecyclerView.ViewHolder
 {
     private ListItemCache listItemCache;
     private ShoppingListCache shoppingListCache;
+    private ProductService productService;
 
     public ListsItemViewHolder(final View parent, ShoppingListCache cache)
     {
         super(parent);
         this.listItemCache = new ListItemCache(parent);
         this.shoppingListCache = cache;
-
+        AbstractInstanceFactory instanceFactory = new InstanceFactory(cache.getActivity());
+        this.productService = (ProductService) instanceFactory.createInstance(ProductService.class);
     }
 
     public void processDto(ListDto dto)
     {
         listItemCache.getListNameTextView().setText(dto.getListName());
-        listItemCache.getNrProductsTextView().setText("0");
+
+        int nrProducts = productService.getAllProducts(dto.getId()).size();
+        listItemCache.getNrProductsTextView().setText(String.valueOf(nrProducts));
 
         listItemCache.getListCard().setOnClickListener(new View.OnClickListener()
         {

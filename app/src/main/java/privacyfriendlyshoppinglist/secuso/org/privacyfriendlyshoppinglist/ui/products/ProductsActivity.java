@@ -7,10 +7,14 @@ import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.R;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.context.AbstractInstanceFactory;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.context.InstanceFactory;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.product.business.ProductService;
+import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.product.business.domain.ProductDto;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.product.business.domain.TotalDto;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.main.MainActivity;
+import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.products.listadapter.ProductsAdapter;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.products.listeners.AddProductOnClickListener;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.products.listeners.ShowDeleteProductsOnClickListener;
+
+import java.util.List;
 
 /**
  * Description:
@@ -75,5 +79,14 @@ public class ProductsActivity extends AppCompatActivity
         {
             cache.getTotalLayout().setVisibility(View.VISIBLE);
         }
+    }
+
+    public void reorderProductView()
+    {
+        ProductsAdapter productsAdapter = cache.getProductsAdapter();
+        List<ProductDto> productsList = productsAdapter.getProductsList();
+        List<ProductDto> productDtos = productService.moveSelectedToEnd(productsList);
+        productsAdapter.setProductsList(productDtos);
+        productsAdapter.notifyDataSetChanged();
     }
 }

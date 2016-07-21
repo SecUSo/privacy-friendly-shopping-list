@@ -49,6 +49,7 @@ public class ProductsItemViewHolder extends RecyclerView.ViewHolder
 
                 ProductsActivity host = (ProductsActivity) productActivityCache.getActivity();
                 host.updateTotals();
+                host.reorderProductView();
             }
         });
 

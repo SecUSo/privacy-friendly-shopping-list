@@ -7,6 +7,9 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.TextView;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.R;
+import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.context.AbstractInstanceFactory;
+import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.context.InstanceFactory;
+import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.product.business.ProductService;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.shoppingList.business.domain.ListDto;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.shoppinglist.listadapter.ListItemCache;
 
@@ -17,19 +20,23 @@ public class DeleteListsItemViewHolder extends RecyclerView.ViewHolder
 {
 
     private ListItemCache cache;
-    private AppCompatActivity activity;
+    private ProductService productService;
 
     public DeleteListsItemViewHolder(final View parent, AppCompatActivity activity)
     {
         super(parent);
         this.cache = new ListItemCache(parent);
-        this.activity = activity;
+        AbstractInstanceFactory instanceFactory = new InstanceFactory(activity.getApplicationContext());
+        this.productService = (ProductService) instanceFactory.createInstance(ProductService.class);
     }
 
     public void processDto(ListDto dto)
     {
         cache.getListNameTextView().setText(dto.getListName());
-        cache.getNrProductsTextView().setText("0"); // todo: read from database
+
+        int nrProducts = productService.getAllProducts(dto.getId()).size();
+        cache.getNrProductsTextView().setText(String.valueOf(nrProducts));
+
         updateVisibilityFormat(dto);
 
         cache.getListCard().setOnClickListener(new View.OnClickListener()
@@ -37,9 +44,6 @@ public class DeleteListsItemViewHolder extends RecyclerView.ViewHolder
             public void onClick(View v)
             {
                 dto.setSelected(!dto.isSelected());
-                // todo: do not use here. But can be taken as an example for the products
-//                DeleteListsActivity host = (DeleteListsActivity) activity;
-//                host.reorderListView();
                 updateVisibilityFormat(dto);
             }
         });

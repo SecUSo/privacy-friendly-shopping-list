@@ -30,6 +30,7 @@
                 android:padding="@dimen/list_padding"
                 android:layout_height="?attr/listPreferredItemHeight"
                 android:gravity="center_vertical"
+                android:buttonTint="?attr/colorAccent"
                 android:layout_alignParentRight="true"
         />
 

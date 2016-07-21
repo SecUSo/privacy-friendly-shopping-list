@@ -18,32 +18,32 @@ public class AddProductOnClickListener implements View.OnClickListener
 {
     private ProductActivityCache cache;
     private ProductService productService;
+    private int temporaryCounterForFakeData;
 
     public AddProductOnClickListener(ProductActivityCache cache)
     {
         this.cache = cache;
+        AppCompatActivity activity = cache.getActivity();
+        AbstractInstanceFactory instanceFactory = new InstanceFactory(activity.getApplicationContext());
+        this.productService = (ProductService) instanceFactory.createInstance(ProductService.class);
     }
 
     @Override
     public void onClick(View v)
     {
-        AppCompatActivity activity = cache.getActivity();
-        AbstractInstanceFactory instanceFactory = new InstanceFactory(activity.getApplicationContext());
-        this.productService = (ProductService) instanceFactory.createInstance(ProductService.class);
-
-
         String expectedQuantity = "5";
         String expectedQuantityPurchased = "4";
         String expectedNotes = "Some Notes";
         String expectedStore = "Store";
-        String expectedPrice = "10.0";
-        String expectedProductName = "Product Name";
+        String expectedPrice = String.valueOf(temporaryCounterForFakeData);
+        String expectedProductName = "Product Name " + temporaryCounterForFakeData++;
         String expectedCategory = "category";
         String expectedHistoryCount = "5";
         String lastTimePurchased = "Tue 07/12/2016 15:52";
         String expectedDefaultNotes = "default notes";
         String expectedDefaultStore = "store";
 
+        // todo: this data has to be set in a dialog!
         ProductDto dto = new ProductDto();
         dto.setQuantity(expectedQuantity);
         dto.setQuantityPurchased(expectedQuantityPurchased);
