@@ -4,13 +4,13 @@ import android.content.Context;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.R;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.persistence.DB;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.utils.DateUtils;
+import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.utils.StringUtils;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.product.business.domain.ProductDto;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.product.business.domain.ProductTemplateDto;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.product.business.impl.converter.ProductConverterService;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.product.persistence.entity.ProductItemEntity;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.product.persistence.entity.ProductTemplateEntity;
 
-import java.text.DecimalFormat;
 import java.util.Date;
 
 /**
@@ -97,12 +97,16 @@ public class ProductConverterServiceImpl implements ProductConverterService
         dto.setProductNotes(entity.getNotes());
         dto.setProductStore(entity.getStore());
 
-        DecimalFormat df = new DecimalFormat(priceFormat);
-        String priceFormatted = df.format(entity.getPrice());
-        dto.setProductPrice(priceFormatted);
+        dto.setProductPrice(getDoubleAsString(entity.getPrice()));
 
         String dateAsString = DateUtils.getDateAsString(entity.getPurchasedDate().getTime(), dateLongPattern, language);
         dto.setLastTimePurchased(dateAsString);
         dto.setChecked(entity.getSelected());
+    }
+
+    @Override
+    public String getDoubleAsString(Double price)
+    {
+        return StringUtils.getDoubleAsString(price, priceFormat);
     }
 }

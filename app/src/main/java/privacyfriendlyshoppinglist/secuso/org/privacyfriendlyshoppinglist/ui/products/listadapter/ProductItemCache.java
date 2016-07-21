@@ -13,36 +13,36 @@ import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.R;
  */
 public class ProductItemCache
 {
-    private TextView productName;
-    private TextView nrProducts;
-    private CheckBox isSelected;
-    private CardView listCard;
+    private TextView productNameTextView;
+    private TextView quantityTextView;
+    private CheckBox checkbox;
+    private CardView productCard;
 
     public ProductItemCache(View parent)
     {
-        productName = (TextView) parent.findViewById(R.id.textview_product_name);
-        nrProducts = (TextView) parent.findViewById(R.id.textview_prod_quantity);
-        isSelected = (CheckBox) parent.findViewById(R.id.checkbox_is_selected);
-        listCard = (CardView) parent.findViewById(R.id.cardview_item);
+        productNameTextView = (TextView) parent.findViewById(R.id.textview_product_name);
+        quantityTextView = (TextView) parent.findViewById(R.id.textview_prod_quantity);
+        checkbox = (CheckBox) parent.findViewById(R.id.checkbox_is_selected);
+        productCard = (CardView) parent.findViewById(R.id.cardview_item);
     }
 
-    public TextView getProductName()
+    public TextView getProductNameTextView()
     {
-        return productName;
+        return productNameTextView;
     }
 
-    public TextView getNrProducts()
+    public TextView getQuantityTextView()
     {
-        return nrProducts;
+        return quantityTextView;
     }
 
-    public CheckBox getIsSelected()
+    public CheckBox getCheckbox()
     {
-        return isSelected;
+        return checkbox;
     }
 
-    public CardView getListCard()
+    public CardView getProductCard()
     {
-        return listCard;
+        return productCard;
     }
 }

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/layout_total"
         android:orientation="horizontal"
         android:background="@color/black"
         android:layout_width="match_parent"
@@ -20,6 +21,7 @@
             android:textStyle="bold"/>
 
     <TextView
+            android:id="@+id/textview_total_checked"
             android:gravity="center_vertical"
             android:text="@string/ph_total_in_shopping_cart"
             android:textColor="@color/yellow"
@@ -38,6 +40,7 @@
             android:textStyle="bold"/>
 
     <TextView
+            android:id="@+id/textview_total_amount"
             android:gravity="center_vertical"
             android:text="@string/ph_total_amount"
             android:textColor="@color/white"

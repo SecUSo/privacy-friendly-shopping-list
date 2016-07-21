@@ -31,7 +31,8 @@ public class DeleteProductsItemViewHolder extends RecyclerView.ViewHolder
     public void processDto(ProductDto dto)
     {
         cache.getProductNameTextView().setText(dto.getProductName());
-        cache.getProductQuantityTextView().setText("0");
+        cache.getProductQuantityTextView().setText(dto.getQuantity());
+        cache.getCheckBox().setChecked(dto.isChecked());
         updateVisibilityFormat(dto);
 
         cache.getProductCard().setOnClickListener(new View.OnClickListener()

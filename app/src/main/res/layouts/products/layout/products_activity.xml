@@ -44,7 +44,6 @@
     </android.support.design.widget.CoordinatorLayout>
 
     <include
-            android:id="@+id/layout_total"
             layout="@layout/products_total_amount"/>
 
 </RelativeLayout>

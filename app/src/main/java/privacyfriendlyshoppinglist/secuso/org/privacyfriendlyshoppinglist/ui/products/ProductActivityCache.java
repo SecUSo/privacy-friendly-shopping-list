@@ -5,6 +5,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.R;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.products.listadapter.ProductsAdapter;
 
@@ -22,6 +24,9 @@ public class ProductActivityCache
     private ProductsAdapter productsAdapter;
     private ImageView sortImageView;
     private ImageView deleteImageView;
+    private TextView totalAmountTextView;
+    private TextView totalCheckedTextView;
+    private LinearLayout totalLayout;
     private String listId;
 
     public ProductActivityCache(AppCompatActivity activity, String listId)
@@ -38,6 +43,9 @@ public class ProductActivityCache
         newListFab = (FloatingActionButton) activity.findViewById(R.id.fab_new_product);
         sortImageView = (ImageView) activity.findViewById(R.id.imageview_sort);
         deleteImageView = (ImageView) activity.findViewById(R.id.imageview_delete);
+        totalAmountTextView = (TextView) activity.findViewById(R.id.textview_total_amount);
+        totalCheckedTextView = (TextView) activity.findViewById(R.id.textview_total_checked);
+        totalLayout = (LinearLayout) activity.findViewById(R.id.layout_total);
     }
 
     public AppCompatActivity getActivity()
@@ -68,5 +76,20 @@ public class ProductActivityCache
     public String getListId()
     {
         return listId;
+    }
+
+    public TextView getTotalAmountTextView()
+    {
+        return totalAmountTextView;
+    }
+
+    public TextView getTotalCheckedTextView()
+    {
+        return totalCheckedTextView;
+    }
+
+    public LinearLayout getTotalLayout()
+    {
+        return totalLayout;
     }
 }

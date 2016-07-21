@@ -5,6 +5,7 @@ import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framew
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.product.business.ProductService;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.product.business.domain.ProductDto;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.product.business.domain.ProductTemplateDto;
+import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.product.business.domain.TotalDto;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.product.business.impl.converter.ProductConverterService;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.product.business.impl.validator.ProductValidatorService;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.product.persistence.ProductItemDao;
@@ -142,6 +143,37 @@ public class ProductServiceImpl implements ProductService
         nonSelectedDtos.addAll(selectedDtos);
         productDtos = nonSelectedDtos;
         return productDtos;
+    }
+
+    @Override
+    public TotalDto computeTotals(List<ProductDto> productDtos)
+    {
+        double totalAmount = 0.0;
+        double checkedAmount = 0.0;
+        for ( ProductDto dto : productDtos )
+        {
+            String price = dto.getProductPrice();
+            if ( price != null )
+            {
+                double priceAsDouble = Double.parseDouble(price);
+                totalAmount += priceAsDouble;
+                if ( dto.isChecked() )
+                {
+                    checkedAmount += priceAsDouble;
+                }
+            }
+        }
+
+        TotalDto totalDto = new TotalDto();
+
+        if ( totalAmount == 0.0 )
+        {
+            totalDto.setEqualsZero(true);
+        }
+        totalDto.setTotalAmount(converterService.getDoubleAsString(totalAmount));
+        totalDto.setCheckedAmount(converterService.getDoubleAsString(checkedAmount));
+
+        return totalDto;
     }
 
     @Override

@@ -2,10 +2,12 @@ package privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.pr
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.R;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.context.AbstractInstanceFactory;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.context.InstanceFactory;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.product.business.ProductService;
+import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.product.business.domain.TotalDto;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.main.MainActivity;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.products.listeners.AddProductOnClickListener;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.products.listeners.ShowDeleteProductsOnClickListener;
@@ -55,5 +57,23 @@ public class ProductsActivity extends AppCompatActivity
     {
         cache.getProductsAdapter().setProductsList(productService.getAllProducts(cache.getListId()));
         cache.getProductsAdapter().notifyDataSetChanged();
+
+        updateTotals();
+    }
+
+    public void updateTotals()
+    {
+        TotalDto totalDto = productService.computeTotals(cache.getProductsAdapter().getProductsList());
+        cache.getTotalAmountTextView().setText(totalDto.getTotalAmount());
+        cache.getTotalCheckedTextView().setText(totalDto.getCheckedAmount());
+
+        if ( totalDto.isEqualsZero() )
+        {
+            cache.getTotalLayout().setVisibility(View.GONE);
+        }
+        else
+        {
+            cache.getTotalLayout().setVisibility(View.VISIBLE);
+        }
     }
 }
