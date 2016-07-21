@@ -158,6 +158,7 @@ public class ProductConverterServiceTest extends AbstractDatabaseTest
         String expectedNotes = "Some Notes";
         String expectedStore = "Store";
         double expectedPrice = 10.0;
+        String expectedPriceString = "10.00";
 
         ProductItemEntity entity = new ProductItemEntity();
         entity.setId(expectedProductId);
@@ -186,7 +187,7 @@ public class ProductConverterServiceTest extends AbstractDatabaseTest
         assertEquals(String.valueOf(expectedQuantityPurchased), dto.getQuantityPurchased());
         assertEquals(expectedNotes, dto.getProductNotes());
         assertEquals(expectedStore, dto.getProductStore());
-        assertEquals(String.valueOf(expectedPrice), dto.getProductPrice());
+        assertEquals(expectedPriceString, dto.getProductPrice());
         assertTrue(entity.getSelected());
     }
 }

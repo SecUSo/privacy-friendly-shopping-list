@@ -10,6 +10,7 @@ import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.product.persistence.entity.ProductItemEntity;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.product.persistence.entity.ProductTemplateEntity;
 
+import java.text.DecimalFormat;
 import java.util.Date;
 
 /**
@@ -21,12 +22,15 @@ public class ProductConverterServiceImpl implements ProductConverterService
 {
     private String language;
     private String dateLongPattern;
+    private String priceFormat;
 
     @Override
     public void setContext(Context context, DB db)
     {
         this.language = context.getResources().getString(R.string.language);
         this.dateLongPattern = context.getResources().getString(R.string.date_long_pattern);
+        this.priceFormat = context.getResources().getString(R.string.price_format);
+
     }
 
     @Override
@@ -92,7 +96,10 @@ public class ProductConverterServiceImpl implements ProductConverterService
         dto.setQuantityPurchased(String.valueOf(entity.getQuantityPurchased()));
         dto.setProductNotes(entity.getNotes());
         dto.setProductStore(entity.getStore());
-        dto.setProductPrice(String.valueOf(entity.getPrice()));
+
+        DecimalFormat df = new DecimalFormat(priceFormat);
+        String priceFormatted = df.format(entity.getPrice());
+        dto.setProductPrice(priceFormatted);
 
         String dateAsString = DateUtils.getDateAsString(entity.getPurchasedDate().getTime(), dateLongPattern, language);
         dto.setLastTimePurchased(dateAsString);

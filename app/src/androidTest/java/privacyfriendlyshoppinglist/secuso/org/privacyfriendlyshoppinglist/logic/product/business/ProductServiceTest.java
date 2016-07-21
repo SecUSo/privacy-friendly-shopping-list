@@ -160,7 +160,7 @@ public class ProductServiceTest extends AbstractDatabaseTest
         String expectedQuantityPurchased = "4";
         String expectedNotes = "Some Notes";
         String expectedStore = "Store";
-        String expectedPrice = "10.0";
+        String expectedPrice = "10.00";
         String templateId = "3";
         String expectedProductName = "product";
         String expectedCategory = "category";

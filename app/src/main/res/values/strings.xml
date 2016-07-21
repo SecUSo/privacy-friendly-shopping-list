@@ -6,6 +6,7 @@
     <string name="language">US</string>
     <string name="date_long_pattern">EE MM/dd/yyyy HH:mm</string>
     <string name="date_short_pattern">MM/dd/yyyy</string>
+    <string name="price_format">#,##0.00</string>
 
     <!--### MAIN ###-->
     <!-- Lists Placeholders-->
