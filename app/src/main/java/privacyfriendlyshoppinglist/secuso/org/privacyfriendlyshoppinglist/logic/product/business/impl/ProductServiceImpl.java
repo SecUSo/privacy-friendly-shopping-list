@@ -155,7 +155,8 @@ public class ProductServiceImpl implements ProductService
             String price = dto.getProductPrice();
             if ( price != null )
             {
-                double priceAsDouble = Double.parseDouble(price);
+                Integer quantity = Integer.valueOf(dto.getQuantity());
+                double priceAsDouble = Double.parseDouble(price) * quantity;
                 totalAmount += priceAsDouble;
                 if ( dto.isChecked() )
                 {
