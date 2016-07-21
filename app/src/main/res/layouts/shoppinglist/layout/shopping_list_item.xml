@@ -23,7 +23,7 @@
                 android:textSize="@dimen/text_medium"
                 style="@style/Base.TextAppearance.AppCompat.Body2"/>
         <TextView
-                android:id="@+id/textview_nr_products"
+                android:id="@+id/textview_prod_quantity"
                 android:text="@string/ph_list_nr_items"
                 android:layout_width="wrap_content"
                 android:layout_height="?attr/listPreferredItemHeight"

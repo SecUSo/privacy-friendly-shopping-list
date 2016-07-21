@@ -29,6 +29,16 @@
                     android:value=".ui.main.MainActivity"/>
         </activity>
         <activity
+                android:name=".ui.deleteproducts.DeleteProductsActivity"
+                android:label="@string/activity_delete_products"
+                android:parentActivityName=".ui.deleteproducts.DeleteProductsActivity"
+                android:screenOrientation="portrait"
+                android:theme="@style/DeleteTheme">
+            <meta-data
+                    android:name="android.support.PARENT_ACTIVITY"
+                    android:value=".ui.deleteproducts.DeleteProductsActivity"/>
+        </activity>
+        <activity
                 android:name=".ui.deletelists.DeleteListsActivity"
                 android:label="@string/activity_delete_lists"
                 android:parentActivityName=".ui.main.MainActivity"

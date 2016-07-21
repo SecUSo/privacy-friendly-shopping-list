@@ -11,11 +11,11 @@ import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.mai
  * Author: Grebiel Jose Ifill Brito
  * Created: 16.07.16 creation date
  */
-public class ShowDeleteViewOnClickListener implements View.OnClickListener
+public class ShowDeleteListsOnClickListener implements View.OnClickListener
 {
-    ShoppingListCache cache;
+    private ShoppingListCache cache;
 
-    public ShowDeleteViewOnClickListener(ShoppingListCache cache)
+    public ShowDeleteListsOnClickListener(ShoppingListCache cache)
     {
         this.cache = cache;
     }

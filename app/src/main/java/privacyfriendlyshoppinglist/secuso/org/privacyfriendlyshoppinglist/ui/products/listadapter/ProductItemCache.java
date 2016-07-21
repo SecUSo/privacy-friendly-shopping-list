@@ -21,7 +21,7 @@ public class ProductItemCache
     public ProductItemCache(View parent)
     {
         productName = (TextView) parent.findViewById(R.id.textview_product_name);
-        nrProducts = (TextView) parent.findViewById(R.id.textview_nr_products);
+        nrProducts = (TextView) parent.findViewById(R.id.textview_prod_quantity);
         isSelected = (CheckBox) parent.findViewById(R.id.checkbox_is_selected);
         listCard = (CardView) parent.findViewById(R.id.cardview_item);
     }

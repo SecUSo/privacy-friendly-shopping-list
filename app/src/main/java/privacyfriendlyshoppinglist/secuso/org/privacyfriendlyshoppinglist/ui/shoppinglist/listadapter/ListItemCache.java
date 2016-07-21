@@ -19,7 +19,7 @@ public class ListItemCache
     public ListItemCache(View parent)
     {
         listNameTextView = (TextView) parent.findViewById(R.id.textview_list_name);
-        nrProductsTextView = (TextView) parent.findViewById(R.id.textview_nr_products);
+        nrProductsTextView = (TextView) parent.findViewById(R.id.textview_prod_quantity);
         listCard = (CardView) parent.findViewById(R.id.cardview_item);
     }
 

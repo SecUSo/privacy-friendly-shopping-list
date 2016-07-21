@@ -28,6 +28,8 @@
                 android:id="@+id/checkbox_is_selected"
                 android:layout_width="wrap_content"
                 android:padding="@dimen/list_padding"
+                android:buttonTint="@color/black"
+                android:enabled="false"
                 android:layout_height="?attr/listPreferredItemHeight"
                 android:gravity="center_vertical"
                 android:layout_alignParentRight="true"

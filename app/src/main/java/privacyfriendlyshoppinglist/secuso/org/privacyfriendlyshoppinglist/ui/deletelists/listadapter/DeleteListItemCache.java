@@ -12,14 +12,14 @@ import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.R;
  */
 public class DeleteListItemCache
 {
-    TextView listNameTextView;
-    TextView nrProductsTextView;
-    CardView listCard;
+    private TextView listNameTextView;
+    private TextView nrProductsTextView;
+    private CardView listCard;
 
     public DeleteListItemCache(View parent)
     {
         listNameTextView = (TextView) parent.findViewById(R.id.textview_list_name);
-        nrProductsTextView = (TextView) parent.findViewById(R.id.textview_nr_products);
+        nrProductsTextView = (TextView) parent.findViewById(R.id.textview_prod_quantity);
         listCard = (CardView) parent.findViewById(R.id.cardview_item);
     }
 

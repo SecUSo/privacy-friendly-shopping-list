@@ -6,8 +6,9 @@ import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.R;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.context.AbstractInstanceFactory;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.context.InstanceFactory;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.product.business.ProductService;
+import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.main.MainActivity;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.products.listeners.AddProductOnClickListener;
-import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.shoppinglist.listadapter.ListsItemViewHolder;
+import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.products.listeners.ShowDeleteProductsOnClickListener;
 
 /**
  * Description:
@@ -25,10 +26,10 @@ public class ProductsActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.products_activity);
 
-        String listName = getIntent().getStringExtra(ListsItemViewHolder.LIST_NAME_KEY);
+        String listName = getIntent().getStringExtra(MainActivity.LIST_NAME_KEY);
         setTitle(listName);
 
-        String listId = getIntent().getStringExtra(ListsItemViewHolder.LIST_ID_KEY);
+        String listId = getIntent().getStringExtra(MainActivity.LIST_ID_KEY);
         cache = new ProductActivityCache(this, listId);
 
         AbstractInstanceFactory instanceFactory = new InstanceFactory(getApplicationContext());
@@ -38,6 +39,7 @@ public class ProductsActivity extends AppCompatActivity
         updateListView();
 
         cache.getNewListFab().setOnClickListener(new AddProductOnClickListener(cache));
+        cache.getDeleteImageView().setOnClickListener(new ShowDeleteProductsOnClickListener(cache));
 
         overridePendingTransition(0, 0);
     }

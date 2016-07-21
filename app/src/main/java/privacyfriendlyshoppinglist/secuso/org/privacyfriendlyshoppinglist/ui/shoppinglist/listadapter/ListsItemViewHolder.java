@@ -5,6 +5,7 @@ import android.support.v4.app.DialogFragment;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.shoppingList.business.domain.ListDto;
+import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.main.MainActivity;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.main.ShoppingListCache;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.products.ProductsActivity;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.shoppinglist.EditDialogFragment;
@@ -14,9 +15,6 @@ import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.sho
  */
 public class ListsItemViewHolder extends RecyclerView.ViewHolder
 {
-
-    public static final String LIST_NAME_KEY = "list.name";
-    public static final String LIST_ID_KEY = "list.id";
     private ListItemCache listItemCache;
     private ShoppingListCache shoppingListCache;
 
@@ -39,8 +37,8 @@ public class ListsItemViewHolder extends RecyclerView.ViewHolder
             {
                 Intent intent = new Intent(shoppingListCache.getActivity(), ProductsActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                intent.putExtra(LIST_NAME_KEY, dto.getListName());
-                intent.putExtra(LIST_ID_KEY, dto.getId());
+                intent.putExtra(MainActivity.LIST_NAME_KEY, dto.getListName());
+                intent.putExtra(MainActivity.LIST_ID_KEY, dto.getId());
                 shoppingListCache.getActivity().startActivity(intent);
             }
         });
