@@ -111,6 +111,7 @@ public class ProductServiceImpl implements ProductService
     {
         Observable<ProductDto> dtos = Observable
                 .from(productItemDao.getAllEntities())
+                .filter(entity -> entity.getShoppingList().getId() == Long.valueOf(listId))
                 .map(this::getDto);
 
         return dtos.toList().toBlocking().single();

@@ -11,6 +11,8 @@
     <!-- Lists Placeholders-->
     <string name="ph_list_name" translatable="false">List Name</string>
     <string name="ph_product_name" translatable="false">Product Name</string>
+    <string name="ph_total_amount" translatable="false">50.00</string>
+    <string name="ph_total_in_shopping_cart" translatable="false">35.00</string>
     <string name="ph_list_nr_items" translatable="false">X</string>
 
     <!-- ### SHOPPING LIST ### -->
@@ -22,6 +24,10 @@
     <string name="sort_by">Sort By</string>
     <string name="sort_by_name">Name</string>
     <string name="sort_by_priority">Priority</string>
+
+    <!-- ### PRODUCTS -->
+    <string name="total_amount">Total:</string>
+    <string name="total_amount_separator">/</string>
 
 
     <!-- ### DELETE SHOPPING LISTS ### -->
