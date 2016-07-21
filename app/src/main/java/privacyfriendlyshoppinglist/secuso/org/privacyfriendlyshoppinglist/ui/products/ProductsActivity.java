@@ -44,6 +44,13 @@ public class ProductsActivity extends AppCompatActivity
         overridePendingTransition(0, 0);
     }
 
+    @Override
+    protected void onRestart()
+    {
+        super.onRestart();
+        updateListView();
+    }
+
     public void updateListView()
     {
         cache.getProductsAdapter().setProductsList(productService.getAllProducts(cache.getListId()));

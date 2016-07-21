@@ -26,7 +26,9 @@ public class ProductDto extends ProductTemplateDto
 
     private String productPrice;
 
-    private boolean selected;
+    private boolean checked;
+
+    private boolean selectedForDeletion;
 
     public String getProductId()
     {
@@ -88,14 +90,24 @@ public class ProductDto extends ProductTemplateDto
         this.productPrice = productPrice;
     }
 
-    public boolean isSelected()
+    public boolean isChecked()
     {
-        return selected;
+        return checked;
     }
 
-    public void setSelected(boolean selected)
+    public void setChecked(boolean checked)
     {
-        this.selected = selected;
+        this.checked = checked;
+    }
+
+    public boolean isSelectedForDeletion()
+    {
+        return selectedForDeletion;
+    }
+
+    public void setSelectedForDeletion(boolean selectedForDeletion)
+    {
+        this.selectedForDeletion = selectedForDeletion;
     }
 
     @Override
@@ -107,7 +119,7 @@ public class ProductDto extends ProductTemplateDto
 
         ProductDto dto = (ProductDto) o;
 
-        if ( isSelected() != dto.isSelected() ) return false;
+        if ( isChecked() != dto.isChecked() ) return false;
         if ( getProductId() != null ? !getProductId().equals(dto.getProductId()) : dto.getProductId() != null )
             return false;
         if ( getQuantity() != null ? !getQuantity().equals(dto.getQuantity()) : dto.getQuantity() != null )
@@ -144,7 +156,7 @@ public class ProductDto extends ProductTemplateDto
         result = 31 * result + (getProductNotes() != null ? getProductNotes().hashCode() : 0);
         result = 31 * result + (getProductStore() != null ? getProductStore().hashCode() : 0);
         result = 31 * result + (getProductPrice() != null ? getProductPrice().hashCode() : 0);
-        result = 31 * result + (isSelected() ? 1 : 0);
+        result = 31 * result + (isChecked() ? 1 : 0);
         return result;
     }
 }

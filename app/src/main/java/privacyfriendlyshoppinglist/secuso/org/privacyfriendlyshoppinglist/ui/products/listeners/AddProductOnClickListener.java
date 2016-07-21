@@ -51,7 +51,7 @@ public class AddProductOnClickListener implements View.OnClickListener
         dto.setProductStore(expectedStore);
         dto.setProductPrice(expectedPrice);
         dto.setLastTimePurchased(lastTimePurchased);
-        dto.setSelected(false);
+        dto.setChecked(false);
         dto.setProductName(expectedProductName);
         dto.setProductCategory(expectedCategory);
         dto.setHistoryCount(expectedHistoryCount);

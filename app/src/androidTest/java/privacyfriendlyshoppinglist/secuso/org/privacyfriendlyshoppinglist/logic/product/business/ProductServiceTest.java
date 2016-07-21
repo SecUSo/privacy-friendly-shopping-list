@@ -97,14 +97,14 @@ public class ProductServiceTest extends AbstractDatabaseTest
     public void testDeleteSelected()
     {
         ProductDto dto1 = getDefaultDto();
-        dto1.setSelected(false);
+        dto1.setSelectedForDeletion(false);
         productService.saveOrUpdate(dto1, listId);
 
         ProductDto dto2 = getDefaultDto();
         // change ids so we have "another" product
         dto2.setId("2"); // templateId
         dto2.setProductId("4"); // productId
-        dto2.setSelected(true);
+        dto2.setSelectedForDeletion(true);
         productService.saveOrUpdate(dto2, listId);
 
         List<ProductDto> dtos = Arrays.asList(dto1, dto2);
@@ -142,9 +142,9 @@ public class ProductServiceTest extends AbstractDatabaseTest
     public void testMoveSelectedToEnd()
     {
         ProductDto dto1 = getDefaultDto();
-        dto1.setSelected(true);
+        dto1.setChecked(true);
         ProductDto dto2 = getDefaultDto();
-        dto2.setSelected(false);
+        dto2.setChecked(false);
 
         List<ProductDto> productDtos = Arrays.asList(dto1, dto2);
         List<ProductDto> sortedDtos = productService.moveSelectedToEnd(productDtos);
@@ -177,7 +177,7 @@ public class ProductServiceTest extends AbstractDatabaseTest
         dto.setProductStore(expectedStore);
         dto.setProductPrice(expectedPrice);
         dto.setLastTimePurchased(lastTimePurchased);
-        dto.setSelected(false);
+        dto.setChecked(false);
         dto.setId(templateId);
         dto.setProductName(expectedProductName);
         dto.setProductCategory(expectedCategory);

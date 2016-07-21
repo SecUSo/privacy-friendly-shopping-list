@@ -47,7 +47,7 @@ public class ProductConverterServiceTest extends AbstractDatabaseTest
         dto.setProductStore(expectedStore);
         dto.setProductPrice(expectedPrice);
         dto.setLastTimePurchased(purchaseDate);
-        dto.setSelected(true);
+        dto.setChecked(true);
 
         ProductItemEntity entity = new ProductItemEntity();
         converterService.convertDtoToEntity(dto, entity);

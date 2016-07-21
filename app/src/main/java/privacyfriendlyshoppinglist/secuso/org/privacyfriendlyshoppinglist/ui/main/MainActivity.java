@@ -51,6 +51,13 @@ public class MainActivity extends BaseActivity
     }
 
     @Override
+    protected void onRestart()
+    {
+        super.onRestart();
+        updateListView();
+    }
+
+    @Override
     protected int getNavigationDrawerID()
     {
         return R.id.nav_example;

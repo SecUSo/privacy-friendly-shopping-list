@@ -18,7 +18,7 @@ public class DeleteProductsCache
 {
     private AppCompatActivity activity;
     private FloatingActionButton deleteFab;
-    private DeleteProductsAdapter deleteListsAdapter;
+    private DeleteProductsAdapter deleteProductsAdapter;
     private String listId;
 
     public DeleteProductsCache(DeleteProductsActivity activity, String listId)
@@ -26,11 +26,11 @@ public class DeleteProductsCache
         this.activity = activity;
         this.listId = listId;
 
-        deleteListsAdapter = new DeleteProductsAdapter(new ArrayList<>(), activity);
+        deleteProductsAdapter = new DeleteProductsAdapter(new ArrayList<>(), activity);
 
         RecyclerView recyclerView = (RecyclerView) activity.findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(activity));
-        recyclerView.setAdapter(deleteListsAdapter);
+        recyclerView.setAdapter(deleteProductsAdapter);
 
         deleteFab = (FloatingActionButton) activity.findViewById(R.id.fab_delete_products);
     }
@@ -45,9 +45,9 @@ public class DeleteProductsCache
         return deleteFab;
     }
 
-    public DeleteProductsAdapter getDeleteListsAdapter()
+    public DeleteProductsAdapter getDeleteProductsAdapter()
     {
-        return deleteListsAdapter;
+        return deleteProductsAdapter;
     }
 
     public String getListId()

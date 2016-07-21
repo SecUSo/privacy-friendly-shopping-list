@@ -102,7 +102,7 @@ public class ProductServiceImpl implements ProductService
     public void deleteSelected(List<ProductDto> productDtos)
     {
         Observable.from(productDtos)
-                .filter(dto -> dto.isSelected())
+                .filter(dto -> dto.isSelectedForDeletion())
                 .subscribe(dto -> deleteById(dto.getProductId()));
     }
 
@@ -132,12 +132,12 @@ public class ProductServiceImpl implements ProductService
     {
         List<ProductDto> nonSelectedDtos = Observable
                 .from(productDtos)
-                .filter(dto -> !dto.isSelected())
+                .filter(dto -> !dto.isChecked())
                 .toList().toBlocking().single();
 
         List<ProductDto> selectedDtos = Observable
                 .from(productDtos)
-                .filter(dto -> dto.isSelected())
+                .filter(dto -> dto.isChecked())
                 .toList().toBlocking().single();
         nonSelectedDtos.addAll(selectedDtos);
         productDtos = nonSelectedDtos;

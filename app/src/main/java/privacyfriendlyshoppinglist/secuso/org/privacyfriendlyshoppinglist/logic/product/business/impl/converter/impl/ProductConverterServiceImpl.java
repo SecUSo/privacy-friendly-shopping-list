@@ -48,7 +48,7 @@ public class ProductConverterServiceImpl implements ProductConverterService
 
         Date purchasedDate = DateUtils.getDateFromString(dto.getLastTimePurchased(), dateLongPattern, language).toDate();
         entity.setPurchasedDate(purchasedDate);
-        entity.setSelected(dto.isSelected());
+        entity.setSelected(dto.isChecked());
     }
 
     @Override
@@ -103,6 +103,6 @@ public class ProductConverterServiceImpl implements ProductConverterService
 
         String dateAsString = DateUtils.getDateAsString(entity.getPurchasedDate().getTime(), dateLongPattern, language);
         dto.setLastTimePurchased(dateAsString);
-        dto.setSelected(entity.getSelected());
+        dto.setChecked(entity.getSelected());
     }
 }
