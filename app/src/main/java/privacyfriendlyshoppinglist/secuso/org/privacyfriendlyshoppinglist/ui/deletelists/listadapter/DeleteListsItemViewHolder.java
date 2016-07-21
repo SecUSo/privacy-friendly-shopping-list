@@ -3,6 +3,7 @@ package privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.de
 import android.content.res.Resources;
 import android.graphics.Paint;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.TextView;
@@ -51,19 +52,20 @@ public class DeleteListsItemViewHolder extends RecyclerView.ViewHolder
 
     private void updateVisibilityFormat(ListDto dto)
     {
-        Resources resources = cache.getListCard().getContext().getResources();
+        CardView listCard = cache.getListCard();
         TextView listNameTextView = cache.getListNameTextView();
         TextView listNrProdTextView = cache.getNrProductsTextView();
+        Resources resources = listCard.getContext().getResources();
         if ( dto.isSelected() )
         {
-            cache.getListCard().setCardBackgroundColor(resources.getColor(R.color.transparent));
+            listCard.setCardBackgroundColor(resources.getColor(R.color.transparent));
             listNameTextView.setTextColor(resources.getColor(R.color.middlegrey));
             listNameTextView.setPaintFlags(listNameTextView.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
             listNrProdTextView.setPaintFlags(listNrProdTextView.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
         }
         else
         {
-            cache.getListCard().setCardBackgroundColor(resources.getColor(R.color.white));
+            listCard.setCardBackgroundColor(resources.getColor(R.color.white));
             listNameTextView.setTextColor(resources.getColor(R.color.black));
             listNameTextView.setPaintFlags(listNameTextView.getPaintFlags() & (~Paint.STRIKE_THRU_TEXT_FLAG));
             listNrProdTextView.setPaintFlags(listNrProdTextView.getPaintFlags() & (~Paint.STRIKE_THRU_TEXT_FLAG));

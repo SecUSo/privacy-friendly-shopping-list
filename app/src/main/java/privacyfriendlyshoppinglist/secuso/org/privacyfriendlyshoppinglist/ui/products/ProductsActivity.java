@@ -74,11 +74,13 @@ public class ProductsActivity extends AppCompatActivity
 
         if ( totalDto.isEqualsZero() )
         {
+            cache.getTotalLayout().animate().alpha(0.0f).setDuration(1000L);
             cache.getTotalLayout().setVisibility(View.GONE);
         }
         else
         {
             cache.getTotalLayout().setVisibility(View.VISIBLE);
+            cache.getTotalLayout().animate().alpha(1.0f).setDuration(1000L);
         }
     }
 
