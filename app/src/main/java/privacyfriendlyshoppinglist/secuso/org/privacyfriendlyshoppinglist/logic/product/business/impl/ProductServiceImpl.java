@@ -119,6 +119,14 @@ public class ProductServiceImpl implements ProductService
     }
 
     @Override
+    public void deleteAllFromList(String listId)
+    {
+        List<ProductDto> productDtos = getAllProducts(listId);
+        Observable.from(productDtos)
+                .subscribe(dto -> deleteById(dto.getProductId()));
+    }
+
+    @Override
     public List<ProductTemplateDto> getAllTemplateProducts()
     {
         Observable<ProductTemplateDto> dtos = Observable
@@ -185,7 +193,7 @@ public class ProductServiceImpl implements ProductService
 
     private ProductDto getDto(ProductItemEntity entity)
     {
-        // the next line contains only the id. The whole entity is needed
+        // the next line retrieves only the id. The whole entity is needed
         ProductTemplateEntity templateReference = entity.getProductTemplate();
         ProductTemplateEntity productTemplateEntity = productTemplateDao.getById(templateReference.getId());
         ProductDto dto = new ProductDto();

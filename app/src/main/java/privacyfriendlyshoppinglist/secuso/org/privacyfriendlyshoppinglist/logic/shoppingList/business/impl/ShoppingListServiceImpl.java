@@ -4,6 +4,7 @@ import android.content.Context;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.R;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.persistence.DB;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.utils.StringUtils;
+import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.product.business.ProductService;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.shoppingList.business.ShoppingListService;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.shoppingList.business.domain.ListDto;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.shoppingList.business.impl.comparators.ListsComparators;
@@ -14,6 +15,7 @@ import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.
 import rx.Observable;
 
 import javax.inject.Inject;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -28,6 +30,7 @@ public class ShoppingListServiceImpl implements ShoppingListService
     private ShoppingListDao shoppingListDao;
     private ShoppingListConverter shoppingListConverter;
     private ShoppingListValidator shoppingListValidator;
+    private ProductService productService;
     private Context context;
 
     @Inject
@@ -97,14 +100,21 @@ public class ShoppingListServiceImpl implements ShoppingListService
     }
 
     @Override
-    public void deleteSelected(List<ListDto> shoppingListDtos)
+    public List<String> deleteSelected(List<ListDto> shoppingListDtos)
     {
+        List<String> deletedIds = new ArrayList<>();
         Observable
                 .from(shoppingListDtos)
                 .filter(dto -> dto.isSelected())
                 .subscribe(
-                        dto -> deleteById(dto.getId())
+                        dto ->
+                        {
+                            String id = dto.getId();
+                            deleteById(id);
+                            deletedIds.add(id);
+                        }
                 );
+        return deletedIds;
     }
 
     @Override

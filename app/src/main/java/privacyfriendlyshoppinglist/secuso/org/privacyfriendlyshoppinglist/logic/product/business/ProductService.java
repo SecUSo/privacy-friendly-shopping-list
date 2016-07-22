@@ -30,6 +30,8 @@ public interface ProductService extends ContextSetter
 
     List<ProductDto> getAllProducts(String listId);
 
+    void deleteAllFromList(String listId);
+
     List<ProductTemplateDto> getAllTemplateProducts();
 
     List<ProductDto> moveSelectedToEnd(List<ProductDto> productDtos);

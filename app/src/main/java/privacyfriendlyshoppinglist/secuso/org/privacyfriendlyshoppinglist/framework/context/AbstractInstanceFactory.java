@@ -12,7 +12,7 @@ import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framew
  */
 abstract public class AbstractInstanceFactory
 {
-    private Context context;
+    private static Context context;
 
     public AbstractInstanceFactory(Context context)
     {
@@ -24,6 +24,14 @@ abstract public class AbstractInstanceFactory
         ObjectGraph objectGraph = ObjectGraph.create(new AppContextModule());
         Object classInstance = objectGraph.get(aClass);
         ((ContextSetter) classInstance).setContext(context, getDB());
+        return classInstance;
+    }
+
+    public static Object createInstance(Class aClass, DB db)
+    {
+        ObjectGraph objectGraph = ObjectGraph.create(new AppContextModule());
+        Object classInstance = objectGraph.get(aClass);
+        ((ContextSetter) classInstance).setContext(context, db);
         return classInstance;
     }
 

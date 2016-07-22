@@ -152,6 +152,29 @@ public class ProductServiceTest extends AbstractDatabaseTest
         assertEquals(productDtos.get(1), sortedDtos.get(0));
     }
 
+    @Test
+    public void testDeleteProductsWhenListIsDeleted()
+    {
+        ProductDto dto1 = getDefaultDto();
+        dto1.setProductId(null);
+        dto1.setId(null);
+        productService.saveOrUpdate(dto1, listId);
+
+        ProductDto dto2 = getDefaultDto();
+        dto2.setId(null);
+        dto2.setProductId(null);
+        productService.saveOrUpdate(dto2, listId);
+
+        List<ProductDto> products = productService.getAllProducts(listId);
+        assertEquals(2, products.size());
+
+        productService.deleteAllFromList(listId);
+        shoppingListService.deleteById(listId);
+
+        products = productService.getAllProducts(listId);
+        assertEquals(0, products.size());
+    }
+
 
     private ProductDto getDefaultDto()
     {
