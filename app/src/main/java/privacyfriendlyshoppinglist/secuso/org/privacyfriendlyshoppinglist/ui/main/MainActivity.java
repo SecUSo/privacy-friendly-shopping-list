@@ -23,7 +23,7 @@ public class MainActivity extends BaseActivity
     public static final String LIST_NAME_KEY = "list.name";
     public static final String LIST_ID_KEY = "list.id";
     private ShoppingListService shoppingListService;
-    private ShoppingListCache cache;
+    private ShoppingListActivityCache cache;
 
     @Override
     protected final void onCreate(final Bundle savedInstanceState)
@@ -33,7 +33,7 @@ public class MainActivity extends BaseActivity
 
         AbstractInstanceFactory instanceFactory = new InstanceFactory(getApplicationContext());
         this.shoppingListService = (ShoppingListService) instanceFactory.createInstance(ShoppingListService.class);
-        cache = new ShoppingListCache(this);
+        cache = new ShoppingListActivityCache(this);
 
 //        getApplicationContext().deleteDatabase(DB.APP.getDbName());
 

@@ -6,7 +6,7 @@ import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framew
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.context.InstanceFactory;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.shoppingList.business.ShoppingListService;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.shoppingList.business.domain.ListDto;
-import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.main.ShoppingListCache;
+import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.main.ShoppingListActivityCache;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.shoppinglist.EditDialogFragment;
 
 /**
@@ -16,10 +16,10 @@ import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.sho
  */
 public class AddOnClickListener implements View.OnClickListener
 {
-    private ShoppingListCache cache;
+    private ShoppingListActivityCache cache;
     private ShoppingListService shoppingListService;
 
-    public AddOnClickListener(ShoppingListCache cache)
+    public AddOnClickListener(ShoppingListActivityCache cache)
     {
         AppCompatActivity activity = cache.getActivity();
         AbstractInstanceFactory instanceFactory = new InstanceFactory(activity.getApplicationContext());

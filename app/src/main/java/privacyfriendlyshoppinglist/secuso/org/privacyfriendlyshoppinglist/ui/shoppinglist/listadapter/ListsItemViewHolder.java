@@ -9,7 +9,7 @@ import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framew
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.product.business.ProductService;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.shoppingList.business.domain.ListDto;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.main.MainActivity;
-import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.main.ShoppingListCache;
+import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.main.ShoppingListActivityCache;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.products.ProductsActivity;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.shoppinglist.EditDialogFragment;
 
@@ -19,10 +19,10 @@ import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.sho
 public class ListsItemViewHolder extends RecyclerView.ViewHolder
 {
     private ListItemCache listItemCache;
-    private ShoppingListCache shoppingListCache;
+    private ShoppingListActivityCache shoppingListCache;
     private ProductService productService;
 
-    public ListsItemViewHolder(final View parent, ShoppingListCache cache)
+    public ListsItemViewHolder(final View parent, ShoppingListActivityCache cache)
     {
         super(parent);
         this.listItemCache = new ListItemCache(parent);

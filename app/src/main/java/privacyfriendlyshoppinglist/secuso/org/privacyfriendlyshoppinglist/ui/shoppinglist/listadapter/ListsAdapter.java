@@ -7,7 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.R;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.shoppingList.business.domain.ListDto;
-import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.main.ShoppingListCache;
+import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.main.ShoppingListActivityCache;
 
 import java.util.List;
 
@@ -18,9 +18,9 @@ public class ListsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
 {
 
     private List<ListDto> shoppingList;
-    private ShoppingListCache cache;
+    private ShoppingListActivityCache cache;
 
-    public ListsAdapter(List<ListDto> shoppingList, ShoppingListCache cache)
+    public ListsAdapter(List<ListDto> shoppingList, ShoppingListActivityCache cache)
     {
         this.shoppingList = shoppingList;
         this.cache = cache;

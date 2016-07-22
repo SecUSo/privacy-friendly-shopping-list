@@ -19,7 +19,7 @@ public class ListsComparators
 
     public static Comparator<ListDto> getPriorityComparator(boolean ascending)
     {
-        // priority: 1 is lower than 3. Therefore we invert the ascendingFactor
+        // priority: 1 is lower than 0. Therefore we invert the ascendingFactor
         int ascendingFactor = getAsecndingFactor(ascending) * -1;
         return (lhs, rhs) -> (lhs.getPriority().compareTo(rhs.getPriority()) * ascendingFactor);
     }

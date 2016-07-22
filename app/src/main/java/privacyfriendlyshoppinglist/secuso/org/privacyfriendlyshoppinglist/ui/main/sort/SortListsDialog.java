@@ -54,7 +54,7 @@ public class SortListsDialog extends DialogFragment
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         View rootView = i.inflate(R.layout.sort_lists_dialog, null);
 
-        SortDialogCache cache = new SortDialogCache(rootView);
+        SortListsDialogCache cache = new SortListsDialogCache(rootView);
         cache.getAscending().setChecked(true);
         cache.getName().setChecked(true);
 

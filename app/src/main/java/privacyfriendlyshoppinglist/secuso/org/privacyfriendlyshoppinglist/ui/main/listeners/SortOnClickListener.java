@@ -1,7 +1,7 @@
 package privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.main.listeners;
 
 import android.view.View;
-import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.main.ShoppingListCache;
+import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.main.ShoppingListActivityCache;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.main.sort.SortListsDialog;
 
 /**
@@ -12,9 +12,9 @@ import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.mai
 public class SortOnClickListener implements View.OnClickListener
 {
 
-    private ShoppingListCache cache;
+    private ShoppingListActivityCache cache;
 
-    public SortOnClickListener(ShoppingListCache cache)
+    public SortOnClickListener(ShoppingListActivityCache cache)
     {
         this.cache = cache;
     }

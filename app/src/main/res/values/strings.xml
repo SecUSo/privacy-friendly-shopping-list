@@ -19,6 +19,12 @@
 
     <!-- ### SHOPPING LIST ### -->
     <string name="activity_shopping_list">Shopping List:</string>
+
+    <!-- ### PRODUCTS ### -->
+    <string name="total_amount">Total:</string>
+    <string name="total_amount_separator">/</string>
+
+    <!-- ### SORT ### -->
     <string name="sort_lists">Sort Options</string>
     <string name="sort_ascencing_descending">Ascending/Descending</string>
     <string name="sort_ascencing">Ascending</string>
@@ -26,10 +32,10 @@
     <string name="sort_by">Sort By</string>
     <string name="sort_by_name">Name</string>
     <string name="sort_by_priority">Priority</string>
+    <string name="sort_by_quantity">Quantity</string>
+    <string name="sort_by_store">Store</string>
+    <string name="sort_by_price">Price</string>
 
-    <!-- ### PRODUCTS -->
-    <string name="total_amount">Total:</string>
-    <string name="total_amount_separator">/</string>
 
     <!-- ### DELETE SHOPPING LISTS ### -->
     <string name="delele_lists_confirmation">Do you really want to delete the checked items? This operation cannot be

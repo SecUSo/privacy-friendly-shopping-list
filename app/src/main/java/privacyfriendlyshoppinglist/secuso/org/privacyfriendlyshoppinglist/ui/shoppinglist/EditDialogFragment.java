@@ -15,7 +15,7 @@ import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framew
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.shoppingList.business.ShoppingListService;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.shoppingList.business.domain.ListDto;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.main.MainActivity;
-import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.main.ShoppingListCache;
+import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.main.ShoppingListActivityCache;
 
 import java.util.Calendar;
 import java.util.GregorianCalendar;
@@ -26,7 +26,7 @@ import java.util.GregorianCalendar;
 public class EditDialogFragment extends DialogFragment
 {
 
-    private ShoppingListCache cache;
+    private ShoppingListActivityCache cache;
     private ListDto dto;
     private ShoppingListService shoppingListService;
 
@@ -44,8 +44,7 @@ public class EditDialogFragment extends DialogFragment
     private TextView setTimeTextView;
 
 
-
-    public static EditDialogFragment newInstance(ListDto dto, ShoppingListCache cache)
+    public static EditDialogFragment newInstance(ListDto dto, ShoppingListActivityCache cache)
     {
         EditDialogFragment dialogFragment = new EditDialogFragment();
         dialogFragment.setCache(cache);
@@ -56,7 +55,7 @@ public class EditDialogFragment extends DialogFragment
         return dialogFragment;
     }
 
-    public void setCache(ShoppingListCache cache)
+    public void setCache(ShoppingListActivityCache cache)
     {
         this.cache = cache;
     }

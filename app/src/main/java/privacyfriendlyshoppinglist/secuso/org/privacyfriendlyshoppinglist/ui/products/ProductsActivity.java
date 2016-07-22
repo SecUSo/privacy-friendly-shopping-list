@@ -13,6 +13,7 @@ import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.mai
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.products.listadapter.ProductsAdapter;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.products.listeners.AddProductOnClickListener;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.products.listeners.ShowDeleteProductsOnClickListener;
+import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.products.listeners.SortProductsOnClickListener;
 
 import java.util.List;
 
@@ -46,6 +47,7 @@ public class ProductsActivity extends AppCompatActivity
 
         cache.getNewListFab().setOnClickListener(new AddProductOnClickListener(cache));
         cache.getDeleteImageView().setOnClickListener(new ShowDeleteProductsOnClickListener(cache));
+        cache.getSortImageView().setOnClickListener(new SortProductsOnClickListener(cache));
 
         overridePendingTransition(0, 0);
     }

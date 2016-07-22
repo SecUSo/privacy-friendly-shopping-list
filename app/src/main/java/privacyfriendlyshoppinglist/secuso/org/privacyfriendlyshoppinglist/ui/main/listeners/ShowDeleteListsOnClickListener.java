@@ -4,7 +4,7 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.deletelists.DeleteListsActivity;
-import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.main.ShoppingListCache;
+import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.main.ShoppingListActivityCache;
 
 /**
  * Description:
@@ -13,9 +13,9 @@ import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.mai
  */
 public class ShowDeleteListsOnClickListener implements View.OnClickListener
 {
-    private ShoppingListCache cache;
+    private ShoppingListActivityCache cache;
 
-    public ShowDeleteListsOnClickListener(ShoppingListCache cache)
+    public ShowDeleteListsOnClickListener(ShoppingListActivityCache cache)
     {
         this.cache = cache;
     }
