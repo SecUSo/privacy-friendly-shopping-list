@@ -71,7 +71,12 @@ public class SortListsDialog extends DialogFragment
                 ShoppingListService shoppingListService = (ShoppingListService) instanceFactory.createInstance(ShoppingListService.class);
 
                 List<ListDto> listDtos = shoppingListService.getAllListDtos();
-                shoppingListService.sortList(listDtos, ShoppingListService.SORT_BY_NAME, cache.getAscending().isChecked());
+                String criteria = ShoppingListService.SORT_BY_NAME;
+                if ( cache.getPriority().isChecked() )
+                {
+                    criteria = ShoppingListService.SORT_BY_PRIORITY;
+                }
+                shoppingListService.sortList(listDtos, criteria, cache.getAscending().isChecked());
                 host.reorderListView(listDtos);
             }
         });

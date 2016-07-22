@@ -13,12 +13,24 @@ public class ListsComparators
 {
     public static Comparator<ListDto> getNameComparator(boolean ascending)
     {
+        int ascendingFactor = getAsecndingFactor(ascending);
+        return (lhs, rhs) -> (lhs.getListName().compareTo(rhs.getListName()) * ascendingFactor);
+    }
+
+    public static Comparator<ListDto> getPriorityComparator(boolean ascending)
+    {
+        // priority: 1 is lower than 3. Therefore we invert the ascendingFactor
+        int ascendingFactor = getAsecndingFactor(ascending) * -1;
+        return (lhs, rhs) -> (lhs.getPriority().compareTo(rhs.getPriority()) * ascendingFactor);
+    }
+
+    public static int getAsecndingFactor(boolean ascending)
+    {
         int asc = 1;
         if ( !ascending )
         {
             asc = -1;
         }
-        int finalAsc = asc;
-        return (lhs, rhs) -> (lhs.getListName().compareTo(rhs.getListName()) * finalAsc);
+        return asc;
     }
 }

@@ -142,6 +142,10 @@ public class ShoppingListServiceImpl implements ShoppingListService
         {
             Collections.sort(lists, ListsComparators.getNameComparator(ascending));
         }
+        else if ( ShoppingListService.SORT_BY_PRIORITY.equals(criteria) )
+        {
+            Collections.sort(lists, ListsComparators.getPriorityComparator(ascending));
+        }
 
     }
 
