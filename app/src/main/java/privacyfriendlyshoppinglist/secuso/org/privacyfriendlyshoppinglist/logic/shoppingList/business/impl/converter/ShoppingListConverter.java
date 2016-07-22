@@ -1,5 +1,6 @@
 package privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.shoppingList.business.impl.converter;
 
+import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.context.ContextSetter;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.shoppingList.business.domain.ListDto;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.shoppingList.persistence.entity.ShoppingListEntity;
 
@@ -8,7 +9,7 @@ import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.
  * Author: Grebiel Jose Ifill Brito
  * Created: 11.06.16 creation date
  */
-public interface ShoppingListConverter
+public interface ShoppingListConverter extends ContextSetter
 {
     void convertDtoToEntity(ListDto dto, ShoppingListEntity entity);
 

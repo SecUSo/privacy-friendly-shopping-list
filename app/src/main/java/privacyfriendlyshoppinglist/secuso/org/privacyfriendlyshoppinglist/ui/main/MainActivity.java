@@ -4,6 +4,7 @@ import android.os.Bundle;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.R;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.context.AbstractInstanceFactory;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.context.InstanceFactory;
+import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.persistence.DB;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.shoppingList.business.ShoppingListService;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.shoppingList.business.domain.ListDto;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.baseactivity.BaseActivity;
@@ -35,8 +36,7 @@ public class MainActivity extends BaseActivity
         this.shoppingListService = (ShoppingListService) instanceFactory.createInstance(ShoppingListService.class);
         cache = new ShoppingListCache(this);
 
-        //getApplicationContext().deleteDatabase(DB.APP.getDbName());
-//        getApplicationContext().deleteDatabase(DB.APP.getDbName());
+        getApplicationContext().deleteDatabase(DB.APP.getDbName());
 
         updateListView();
 

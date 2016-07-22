@@ -5,7 +5,8 @@
     <string name="cancel">Cancel</string>
     <string name="language">US</string>
     <string name="date_long_pattern">EE MM/dd/yyyy HH:mm</string>
-    <string name="date_short_pattern">MM/dd/yyyy</string>
+    <string name="date_short_pattern">EE MM/dd/yyyy</string>
+    <string name="time_pattern">HH:mm</string>
     <string name="price_format">#,##0.00</string>
 
     <!--### MAIN ###-->
@@ -128,18 +129,31 @@
     <!-- Shopping List Dialog -->
     <string name="list_name">Enter List Name</string>
 
-
     <string name="priority">Priority</string>
     <string name="priority_high">High</string>
     <string name="priority_normal">Normal</string>
-    <string name="priority_low">Low</string>
 
     <string name="set_deadline_date">Set Date</string>
     <string name="set_deadline_time">Set Time</string>
     <string name="set_deadline">Set Deadline</string>
-    <string name="set_reminder">Remind me on:</string>
+    <string name="set_reminder">Reminder in:</string>
     <string name="list_notes">Notes</string>
     <string name="default_list_name">New Shopping List</string>
+
+    <string-array
+            name="shopping_list_priority_spinner">
+        <item>High</item>
+        <item>Normal</item>
+        <item>Priority</item>
+    </string-array>
+
+    <string-array
+            name="shopping_list_reminder_spinner">
+        <item>Hours</item>
+        <item>Days</item>
+        <item>Weeks</item>
+        <item>Reminder</item>
+    </string-array>
 
 
 </resources>

@@ -49,6 +49,7 @@ public class ShoppingListServiceImpl implements ShoppingListService
     public void setContext(Context context, DB db)
     {
         shoppingListDao.setContext(context, db);
+        shoppingListConverter.setContext(context, db);
         this.context = context;
     }
 
