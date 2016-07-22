@@ -1,10 +1,13 @@
 package privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.product.business;
 
+import android.content.res.Resources;
 import org.joda.time.DateTime;
 import org.junit.Test;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.AbstractDatabaseTest;
+import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.R;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.context.AbstractInstanceFactory;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.context.InstanceFactoryForTests;
+import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.utils.DateUtils;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.product.business.domain.ProductDto;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.product.persistence.ProductItemDao;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.product.persistence.ProductTemplateDao;
@@ -13,7 +16,6 @@ import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.shoppingList.business.domain.ListDto;
 
 import java.util.Arrays;
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -29,6 +31,9 @@ public class ProductServiceTest extends AbstractDatabaseTest
     private ProductTemplateDao productTemplateDao;
     private ProductItemDao productItemDao;
     private String listId;
+    private String shortDatePattern;
+    private String timePattern;
+    private String language;
 
     @Override
     protected void setupBeforeEachTest()
@@ -39,17 +44,25 @@ public class ProductServiceTest extends AbstractDatabaseTest
         productTemplateDao = (ProductTemplateDao) instanceFactory.createInstance(ProductTemplateDao.class);
         productItemDao = (ProductItemDao) instanceFactory.createInstance(ProductItemDao.class);
 
+        Resources resources = getContext().getResources();
+        shortDatePattern = resources.getString(R.string.date_short_pattern);
+        timePattern = resources.getString(R.string.time_pattern);
+        language = resources.getString(R.string.language);
+
         String name = "name";
         String priority = "HIGH";
         int icon = 10;
-        Date deadline = new DateTime("2016-06-11").toDate();
+        DateTime datetime = new DateTime("2016-07-05").withHourOfDay(10).withMinuteOfHour(30);
+        String date = DateUtils.getDateAsString(datetime.getMillis(), shortDatePattern, language);
+        String time = DateUtils.getDateAsString(datetime.getMillis(), timePattern, language);
         String notes = "notes";
 
         ListDto dto = new ListDto();
         dto.setListName(name);
         dto.setPriority(priority);
         dto.setIcon(icon);
-        dto.setDeadline(deadline);
+        dto.setDeadlineDate(date);
+        dto.setDeadlineTime(time);
         dto.setNotes(notes);
 
         // save a default list! Needed to save products
