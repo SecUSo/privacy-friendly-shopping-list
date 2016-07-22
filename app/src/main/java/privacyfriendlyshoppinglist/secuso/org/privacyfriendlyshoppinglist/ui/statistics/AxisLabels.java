@@ -3,6 +3,8 @@ package privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.st
 import com.github.mikephil.charting.components.AxisBase;
 import com.github.mikephil.charting.formatter.AxisValueFormatter;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -12,12 +14,15 @@ import java.util.List;
  */
 public class AxisLabels implements AxisValueFormatter
 {
+    public static final String EMPTY = "";
     private List<String> labels;
     private int decimalDigits;
 
-    public AxisLabels(List<String> labels)
+    public AxisLabels(String[] labels)
     {
-        this.labels = labels;
+        this.labels = new ArrayList<>();
+        this.labels.add(EMPTY);
+        this.labels.addAll(Arrays.asList(labels));
         decimalDigits = 0;
     }
 
@@ -29,7 +34,15 @@ public class AxisLabels implements AxisValueFormatter
     @Override
     public String getFormattedValue(float value, AxisBase axis)
     {
-        return labels.get((int) value % labels.size());
+        int nrLabels = labels.size();
+        if ( value < nrLabels )
+        {
+            return labels.get((int) value % nrLabels);
+        }
+        else // ignore the empty label
+        {
+            return labels.get((int) value % nrLabels + 1);
+        }
     }
 
     @Override

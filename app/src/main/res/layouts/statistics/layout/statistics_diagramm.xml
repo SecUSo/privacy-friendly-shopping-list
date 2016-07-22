@@ -9,8 +9,9 @@
     <include layout="@layout/toolbar"/>
 
     <TextView
+            android:id="@+id/textview_stats_title"
             android:padding="16dp"
-            android:text="Title"
+            android:text="@string/ph_stats_title"
             android:textColor="@color/colorPrimaryDark"
             android:textSize="@dimen/text_medium"
             android:gravity="center"

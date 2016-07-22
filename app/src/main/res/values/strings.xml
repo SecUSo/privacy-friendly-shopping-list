@@ -17,6 +17,7 @@
     <string name="ph_total_amount" translatable="false">50.00</string>
     <string name="ph_total_in_shopping_cart" translatable="false">35.00</string>
     <string name="ph_list_nr_items" translatable="false">X</string>
+    <string name="ph_stats_title" translatable="false">Title</string>
 
     <!-- ### SHOPPING LIST ### -->
     <string name="activity_shopping_list">Shopping List:</string>
