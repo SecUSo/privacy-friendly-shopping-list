@@ -1,5 +1,7 @@
 package privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.statistics;
 
+import android.view.MotionEvent;
+import android.view.View;
 import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.components.YAxis;
@@ -32,9 +34,9 @@ public class PFAChart
 {
     private static final String EMPTY = "";
 
-    private String[] xlabels;
     private List<Double> data;
     private BarChart chart;
+    private BarDataSet dataSet;
 
     public PFAChart(BarChart chart)
     {
@@ -59,9 +61,18 @@ public class PFAChart
         rightAxis.setEnabled(false);
     }
 
+    public BarChart getChart()
+    {
+        return chart;
+    }
+
+    public BarDataSet getDataSet()
+    {
+        return dataSet;
+    }
+
     public void setXlabels(String[] xlabels)
     {
-        this.xlabels = xlabels;
         XAxis xAxis = chart.getXAxis();
         xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
         xAxis.setDrawGridLines(false);
@@ -88,7 +99,7 @@ public class PFAChart
             yValues.add(new BarEntry(i + 1, number.floatValue()));
         }
 
-        BarDataSet dataSet;
+
 
         if ( chart.getData() != null && chart.getData().getDataSetCount() > 0 )
         {
@@ -108,8 +119,31 @@ public class PFAChart
             BarData data = new BarData(dataSets);
             data.setValueTextSize(10f);
             data.setBarWidth(0.9f);
+            chart.setOnTouchListener(new View.OnTouchListener()
+            {
+                @Override
+                public boolean onTouch(View v, MotionEvent event)
+                {
+                    updateValuesVisibility();
+                    return false;
+                }
+            });
 
             chart.setData(data);
+            updateValuesVisibility();
+        }
+    }
+
+    public void updateValuesVisibility()
+    {
+        float visibleXRange = chart.getVisibleXRange();
+        if ( visibleXRange <= 15 )
+        {
+            dataSet.setDrawValues(true);
+        }
+        else
+        {
+            dataSet.setDrawValues(false);
         }
     }
 }

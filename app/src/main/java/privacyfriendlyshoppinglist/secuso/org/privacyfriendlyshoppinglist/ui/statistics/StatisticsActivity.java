@@ -40,7 +40,7 @@ public class StatisticsActivity extends BaseActivity
     private List<Double> getFakeDataForChart()
     {
         List<Double> inputData = new ArrayList<>();
-        for ( int i = 0; i < 24; i++ )
+        for ( int i = 0; i < 50; i++ )
         {
             inputData.add((double) i);
         }
