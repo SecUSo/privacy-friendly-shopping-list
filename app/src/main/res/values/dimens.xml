@@ -6,6 +6,9 @@
     <dimen name="text_medium">16dp</dimen>
     <dimen name="text_small">12dp</dimen>
 
+    <!-- Statistics -->
+    <dimen name="statistics_padding">12dp</dimen>
+
     <!-- Lists -->
     <dimen name="list_margin">16dp</dimen>
     <dimen name="list_padding">8dp</dimen>

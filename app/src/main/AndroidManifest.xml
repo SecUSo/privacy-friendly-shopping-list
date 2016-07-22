@@ -48,6 +48,16 @@
                     android:name="android.support.PARENT_ACTIVITY"
                     android:value=".ui.main.MainActivity"/>
         </activity>
+        <activity
+                android:name=".ui.statistics.StatisticsActivity"
+                android:label="@string/statistics"
+                android:parentActivityName=".ui.main.MainActivity"
+                android:screenOrientation="portrait"
+                android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                    android:name="android.support.PARENT_ACTIVITY"
+                    android:value=".ui.main.MainActivity"/>
+        </activity>
 
         <!-- Menu Activities -->
         <activity
