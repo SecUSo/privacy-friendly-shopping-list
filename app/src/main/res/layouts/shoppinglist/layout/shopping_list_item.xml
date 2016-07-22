@@ -22,6 +22,14 @@
                 android:layout_marginLeft="@dimen/list_margin"
                 android:textSize="@dimen/text_medium"
                 style="@style/Base.TextAppearance.AppCompat.Body2"/>
+        <ImageView
+                android:id="@+id/imageview_high_prio_icon"
+                android:tint="@color/yellow"
+                android:src="@drawable/ic_error_black_24dp"
+                android:layout_width="@dimen/icon_size"
+                android:layout_height="@dimen/icon_size"
+                android:layout_centerVertical="true"
+                android:layout_toEndOf="@+id/textview_list_name"/>
         <TextView
                 android:id="@+id/textview_prod_quantity"
                 android:text="@string/ph_list_nr_items"

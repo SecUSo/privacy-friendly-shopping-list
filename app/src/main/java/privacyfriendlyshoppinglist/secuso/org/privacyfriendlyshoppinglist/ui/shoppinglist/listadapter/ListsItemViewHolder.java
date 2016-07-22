@@ -37,6 +37,8 @@ public class ListsItemViewHolder extends RecyclerView.ViewHolder
 
         int nrProducts = productService.getAllProducts(dto.getId()).size();
         listItemCache.getNrProductsTextView().setText(String.valueOf(nrProducts));
+        setupPriorityIcon(dto);
+
 
         listItemCache.getListCard().setOnClickListener(new View.OnClickListener()
         {
@@ -62,6 +64,19 @@ public class ListsItemViewHolder extends RecyclerView.ViewHolder
             }
         });
 
+    }
+
+    public void setupPriorityIcon(ListDto dto)
+    {
+        // todo: do not use hard code values here
+        if ( dto.getPriority().equals("0") )
+        {
+            listItemCache.getHighPriorityImageView().setVisibility(View.VISIBLE);
+        }
+        else
+        {
+            listItemCache.getHighPriorityImageView().setVisibility(View.GONE);
+        }
     }
 
 
