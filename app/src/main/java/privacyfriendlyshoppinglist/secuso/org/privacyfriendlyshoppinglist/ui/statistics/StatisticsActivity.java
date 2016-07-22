@@ -26,14 +26,13 @@ public class StatisticsActivity extends BaseActivity
 
         chart = (BarChart) findViewById(R.id.chart);
 
-        int[] colors = {getResources().getColor(R.color.middleblue)};
         String[] months = getResources().getStringArray(R.array.statistics_months);
-
+        int middleblue = getResources().getColor(R.color.middleblue);
         List<Double> inputData = getFakeDataForChart();
 
         PFAChart pfaChart = new PFAChart(chart);
         pfaChart.setXlabels(months);
-        pfaChart.updateChart(inputData, colors);
+        pfaChart.updateChart(inputData, middleblue);
 
         overridePendingTransition(0, 0);
     }

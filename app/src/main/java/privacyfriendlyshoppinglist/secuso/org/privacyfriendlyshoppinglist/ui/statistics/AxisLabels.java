@@ -41,7 +41,7 @@ public class AxisLabels implements AxisValueFormatter
         }
         else // ignore the empty label
         {
-            return labels.get((int) value % nrLabels + 1);
+            return labels.get(((int) value + 1) % nrLabels);
         }
     }
 

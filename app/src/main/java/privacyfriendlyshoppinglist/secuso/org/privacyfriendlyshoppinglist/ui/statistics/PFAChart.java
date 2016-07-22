@@ -66,7 +66,7 @@ public class PFAChart
         xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
         xAxis.setDrawGridLines(false);
         xAxis.setGranularity(1f);
-        xAxis.setLabelCount(10);
+        xAxis.setLabelCount(5);
         xAxis.setValueFormatter(new AxisLabels(xlabels));
 
     }
