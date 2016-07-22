@@ -13,6 +13,7 @@
     <!-- Lists Placeholders-->
     <string name="ph_list_name" translatable="false">List Name</string>
     <string name="ph_product_name" translatable="false">Product Name</string>
+    <string name="ph_product_info" translatable="false">Store: Aldi, Category: Snacks</string>
     <string name="ph_total_amount" translatable="false">50.00</string>
     <string name="ph_total_in_shopping_cart" translatable="false">35.00</string>
     <string name="ph_list_nr_items" translatable="false">X</string>
@@ -23,6 +24,8 @@
     <!-- ### PRODUCTS ### -->
     <string name="total_amount">Total:</string>
     <string name="total_amount_separator">/</string>
+    <string name="store_label">Store:</string>
+    <string name="category_label">Category:</string>
 
     <!-- ### SORT ### -->
     <string name="sort_lists">Sort Options</string>
@@ -35,6 +38,7 @@
     <string name="sort_by_quantity">Quantity</string>
     <string name="sort_by_store">Store</string>
     <string name="sort_by_price">Price</string>
+    <string name="sort_by_category">Category</string>
 
 
     <!-- ### DELETE SHOPPING LISTS ### -->

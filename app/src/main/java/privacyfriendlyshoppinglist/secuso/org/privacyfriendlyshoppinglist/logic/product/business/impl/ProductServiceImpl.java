@@ -1,11 +1,13 @@
 package privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.product.business.impl;
 
 import android.content.Context;
+import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.comparators.PFAComparators;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.persistence.DB;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.product.business.ProductService;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.product.business.domain.ProductDto;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.product.business.domain.ProductTemplateDto;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.product.business.domain.TotalDto;
+import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.product.business.impl.comparators.ProductComparators;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.product.business.impl.converter.ProductConverterService;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.product.business.impl.validator.ProductValidatorService;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.product.persistence.ProductItemDao;
@@ -17,6 +19,7 @@ import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.
 import rx.Observable;
 
 import javax.inject.Inject;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -31,6 +34,7 @@ public class ProductServiceImpl implements ProductService
     private ProductConverterService converterService;
     private ProductValidatorService validatorService;
     private ShoppingListService shoppingListService;
+    private Context context;
 
     @Inject
     public ProductServiceImpl(
@@ -51,6 +55,7 @@ public class ProductServiceImpl implements ProductService
     @Override
     public void setContext(Context context, DB db)
     {
+        this.context = context;
         productItemDao.setContext(context, db);
         productTemplateDao.setContext(context, db);
         shoppingListService.setContext(context, db);
@@ -188,7 +193,26 @@ public class ProductServiceImpl implements ProductService
     @Override
     public void sortProducts(List<ProductDto> products, String criteria, boolean ascending)
     {
-
+        if ( PFAComparators.SORT_BY_NAME.equals(criteria) )
+        {
+            Collections.sort(products, ProductComparators.getNameComparator(ascending));
+        }
+        else if ( PFAComparators.SORT_BY_QUANTITY.equals(criteria) )
+        {
+            Collections.sort(products, ProductComparators.getQuantityCompartor(ascending));
+        }
+        else if ( PFAComparators.SORT_BY_STORE.equals(criteria) )
+        {
+            Collections.sort(products, ProductComparators.getStoreComparator(ascending));
+        }
+        else if ( PFAComparators.SORT_BY_CATEGORY.equals(criteria) )
+        {
+            Collections.sort(products, ProductComparators.getCategoryComparator(ascending));
+        }
+        else if ( PFAComparators.SORT_BY_PRICE.equals(criteria) )
+        {
+            Collections.sort(products, ProductComparators.getPriceComparator(ascending, context));
+        }
     }
 
     private ProductDto getDto(ProductItemEntity entity)

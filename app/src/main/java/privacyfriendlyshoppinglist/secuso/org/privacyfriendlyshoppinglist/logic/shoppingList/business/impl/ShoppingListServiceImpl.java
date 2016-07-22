@@ -2,6 +2,7 @@ package privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic
 
 import android.content.Context;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.R;
+import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.comparators.PFAComparators;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.persistence.DB;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.utils.StringUtils;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.product.business.ProductService;
@@ -138,11 +139,11 @@ public class ShoppingListServiceImpl implements ShoppingListService
     @Override
     public void sortList(List<ListDto> lists, String criteria, boolean ascending)
     {
-        if ( ShoppingListService.SORT_BY_NAME.equals(criteria) )
+        if ( PFAComparators.SORT_BY_NAME.equals(criteria) )
         {
             Collections.sort(lists, ListsComparators.getNameComparator(ascending));
         }
-        else if ( ShoppingListService.SORT_BY_PRIORITY.equals(criteria) )
+        else if ( PFAComparators.SORT_BY_PRIORITY.equals(criteria) )
         {
             Collections.sort(lists, ListsComparators.getPriorityComparator(ascending));
         }

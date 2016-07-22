@@ -37,23 +37,6 @@ public class DateUtils
         return dateString;
     }
 
-    public static String getFromIsoDate(String aDate, String outputPattern, String language)
-    {
-        DateTime date;
-        try
-        {
-            date = getDateFromString(aDate, ISO_PATTERN_MIN, language);
-        }
-        catch ( Exception e )
-        {
-            date = getDateFromString(aDate, ISO_PATTERN, language);
-        }
-
-        DateTimeFormatter outputFormatter = getDateTimeFormatter(outputPattern, language);
-        String dateString = outputFormatter.print(date);
-        return dateString;
-    }
-
     public static DateTime getDateFromString(String aDate, String inputPattern, String language)
     {
         DateTimeFormatter inputFormatter = getDateTimeFormatter(inputPattern, language);
@@ -65,13 +48,6 @@ public class DateUtils
     {
         String isoDate = new DateTime(date).toString(DateUtils.ISO_PATTERN_MIN);
         return DateUtils.getFormattedDateString(isoDate, DateUtils.ISO_PATTERN_MIN, pattern, language);
-    }
-
-    public static Long getDurationInMinutes(Long arrivalTime, Long departureTime)
-    {
-        Long durationInMilliseconds = Math.abs(arrivalTime - departureTime);
-        Long durationInMinutes = durationInMilliseconds / MILLISECONDS_TO_MINUTES;
-        return durationInMinutes;
     }
 
     private static DateTime getDateFromString(String aDate, DateTimeFormatter formatter)
@@ -92,5 +68,22 @@ public class DateUtils
             formatter = formatter.withLocale(Locale.GERMAN);
         }
         return formatter;
+    }
+
+    public static String getFromIsoDate(String aDate, String outputPattern, String language)
+    {
+        DateTime date;
+        try
+        {
+            date = getDateFromString(aDate, ISO_PATTERN_MIN, language);
+        }
+        catch ( Exception e )
+        {
+            date = getDateFromString(aDate, ISO_PATTERN, language);
+        }
+
+        DateTimeFormatter outputFormatter = getDateTimeFormatter(outputPattern, language);
+        String dateString = outputFormatter.print(date);
+        return dateString;
     }
 }

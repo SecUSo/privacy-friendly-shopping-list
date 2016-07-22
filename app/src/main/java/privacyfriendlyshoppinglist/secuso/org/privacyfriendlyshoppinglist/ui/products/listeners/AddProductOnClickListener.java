@@ -31,13 +31,37 @@ public class AddProductOnClickListener implements View.OnClickListener
     @Override
     public void onClick(View v)
     {
-        String expectedQuantity = "5";
+        ProductDto dto = createFakeDto();
+
+
+        productService.saveOrUpdate(dto, cache.getListId());
+
+        ProductsActivity productsActivity = (ProductsActivity) cache.getActivity();
+        productsActivity.updateListView();
+    }
+
+    public ProductDto createFakeDto()
+    {
+        // todo: temporary test data
+        int mod3 = temporaryCounterForFakeData % 3;
+        int mod2 = temporaryCounterForFakeData % 2;
+        int mod5 = temporaryCounterForFakeData % 5;
+        String expectedQuantity = String.valueOf(mod3);
+        ;
         String expectedQuantityPurchased = "4";
         String expectedNotes = "Some Notes";
-        String expectedStore = "Store";
+        String expectedStore = "";
+        if ( mod5 != 0 )
+        {
+            expectedStore = "Store " + mod2;
+        }
         String expectedPrice = String.valueOf(temporaryCounterForFakeData);
         String expectedProductName = "Product Name " + temporaryCounterForFakeData++;
-        String expectedCategory = "category";
+        String expectedCategory = "";
+        if ( mod3 != 0 )
+        {
+            expectedCategory = "category " + mod5;
+        }
         String expectedHistoryCount = "5";
         String lastTimePurchased = "Tue 07/12/2016 15:52";
         String expectedDefaultNotes = "default notes";
@@ -57,10 +81,6 @@ public class AddProductOnClickListener implements View.OnClickListener
         dto.setHistoryCount(expectedHistoryCount);
         dto.setDefaultNotes(expectedDefaultNotes);
         dto.setDefaultStore(expectedDefaultStore);
-
-        productService.saveOrUpdate(dto, cache.getListId());
-
-        ProductsActivity productsActivity = (ProductsActivity) cache.getActivity();
-        productsActivity.updateListView();
+        return dto;
     }
 }

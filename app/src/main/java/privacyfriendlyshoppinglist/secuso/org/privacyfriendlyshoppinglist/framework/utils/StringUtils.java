@@ -1,6 +1,7 @@
 package privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.utils;
 
 import java.text.DecimalFormat;
+import java.text.ParseException;
 
 /**
  * Description:
@@ -30,5 +31,20 @@ public class StringUtils
             numberAsString = EMPTY;
         }
         return numberAsString;
+    }
+
+    public static Double getStringAsDouble(String numberAsString, String format)
+    {
+        DecimalFormat df = new DecimalFormat(format);
+        try
+        {
+            Number parse = df.parse(numberAsString);
+            return parse.doubleValue();
+
+        }
+        catch ( ParseException e )
+        {
+            return 0.0;
+        }
     }
 }

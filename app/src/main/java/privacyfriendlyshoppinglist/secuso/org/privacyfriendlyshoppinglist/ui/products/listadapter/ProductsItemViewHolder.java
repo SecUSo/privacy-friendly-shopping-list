@@ -43,6 +43,7 @@ public class ProductsItemViewHolder extends RecyclerView.ViewHolder
         checkbox.setChecked(dto.isChecked());
         productItemCache.getProductNameTextView().setText(dto.getProductName());
         productItemCache.getQuantityTextView().setText(dto.getQuantity());
+        productItemCache.getProductExtraInfoTextview().setText(dto.getSummary(productActivityCache.getActivity()));
 
         updateVisibilityFormat(dto);
 

@@ -10,6 +10,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.R;
+import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.comparators.PFAComparators;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.context.AbstractInstanceFactory;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.context.InstanceFactory;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.shoppingList.business.ShoppingListService;
@@ -71,10 +72,10 @@ public class SortListsDialog extends DialogFragment
                 ShoppingListService shoppingListService = (ShoppingListService) instanceFactory.createInstance(ShoppingListService.class);
 
                 List<ListDto> listDtos = shoppingListService.getAllListDtos();
-                String criteria = ShoppingListService.SORT_BY_NAME;
+                String criteria = PFAComparators.SORT_BY_NAME;
                 if ( cache.getPriority().isChecked() )
                 {
-                    criteria = ShoppingListService.SORT_BY_PRIORITY;
+                    criteria = PFAComparators.SORT_BY_PRIORITY;
                 }
                 shoppingListService.sortList(listDtos, criteria, cache.getAscending().isChecked());
                 host.reorderListView(listDtos);

@@ -37,6 +37,7 @@ public class DeleteListsItemViewHolder extends RecyclerView.ViewHolder
 
         int nrProducts = productService.getAllProducts(dto.getId()).size();
         cache.getNrProductsTextView().setText(String.valueOf(nrProducts));
+        setupPriorityIcon(dto);
 
         updateVisibilityFormat(dto);
 
@@ -69,6 +70,19 @@ public class DeleteListsItemViewHolder extends RecyclerView.ViewHolder
             listNameTextView.setTextColor(resources.getColor(R.color.black));
             listNameTextView.setPaintFlags(listNameTextView.getPaintFlags() & (~Paint.STRIKE_THRU_TEXT_FLAG));
             listNrProdTextView.setPaintFlags(listNrProdTextView.getPaintFlags() & (~Paint.STRIKE_THRU_TEXT_FLAG));
+        }
+    }
+
+    public void setupPriorityIcon(ListDto dto)
+    {
+        // todo: do not use hard code values here
+        if ( dto.getPriority().equals("0") )
+        {
+            cache.getHighPriorityImageView().setVisibility(View.VISIBLE);
+        }
+        else
+        {
+            cache.getHighPriorityImageView().setVisibility(View.GONE);
         }
     }
 

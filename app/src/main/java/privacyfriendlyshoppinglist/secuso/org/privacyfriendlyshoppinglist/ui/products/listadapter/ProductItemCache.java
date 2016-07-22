@@ -15,6 +15,7 @@ public class ProductItemCache
 {
     private TextView productNameTextView;
     private TextView quantityTextView;
+    private TextView productExtraInfoTextview;
     private CheckBox checkbox;
     private CardView productCard;
 
@@ -22,6 +23,7 @@ public class ProductItemCache
     {
         productNameTextView = (TextView) parent.findViewById(R.id.textview_product_name);
         quantityTextView = (TextView) parent.findViewById(R.id.textview_prod_quantity);
+        productExtraInfoTextview = (TextView) parent.findViewById(R.id.textview_product_info);
         checkbox = (CheckBox) parent.findViewById(R.id.checkbox_is_selected);
         productCard = (CardView) parent.findViewById(R.id.cardview_item);
     }
@@ -34,6 +36,11 @@ public class ProductItemCache
     public TextView getQuantityTextView()
     {
         return quantityTextView;
+    }
+
+    public TextView getProductExtraInfoTextview()
+    {
+        return productExtraInfoTextview;
     }
 
     public CheckBox getCheckbox()

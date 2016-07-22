@@ -17,6 +17,7 @@ public class SortProductsDialogCache
     private RadioButton quantity;
     private RadioButton price;
     private RadioButton store;
+    private RadioButton category;
 
     public SortProductsDialogCache(View rootview)
     {
@@ -26,6 +27,7 @@ public class SortProductsDialogCache
         quantity = (RadioButton) rootview.findViewById(R.id.radiobutton_quantity);
         price = (RadioButton) rootview.findViewById(R.id.radiobutton_price);
         store = (RadioButton) rootview.findViewById(R.id.radiobutton_store);
+        category = (RadioButton) rootview.findViewById(R.id.radiobutton_category);
     }
 
     public RadioButton getAscending()
@@ -56,5 +58,10 @@ public class SortProductsDialogCache
     public RadioButton getStore()
     {
         return store;
+    }
+
+    public RadioButton getCategory()
+    {
+        return category;
     }
 }

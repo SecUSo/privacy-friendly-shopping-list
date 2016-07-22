@@ -21,7 +21,7 @@ public class SortProductsOnClickListener implements View.OnClickListener
     @Override
     public void onClick(View v)
     {
-        SortProductsDialog sortProductsDialog = SortProductsDialog.newInstance(cache.getActivity());
+        SortProductsDialog sortProductsDialog = SortProductsDialog.newInstance(cache);
         sortProductsDialog.show(cache.getActivity().getFragmentManager(), "SortDialog");
     }
 }

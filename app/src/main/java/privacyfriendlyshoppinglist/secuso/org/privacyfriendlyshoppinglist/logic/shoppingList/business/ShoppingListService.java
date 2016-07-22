@@ -13,9 +13,6 @@ import java.util.List;
  */
 public interface ShoppingListService extends ContextSetter
 {
-    String SORT_BY_NAME = "name";
-    String SORT_BY_PRIORITY = "priority";
-
     void saveOrUpdate(ListDto dto);
 
     ListDto getById (String id);
