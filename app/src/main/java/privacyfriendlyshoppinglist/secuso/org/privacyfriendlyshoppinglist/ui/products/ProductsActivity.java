@@ -97,6 +97,12 @@ public class ProductsActivity extends AppCompatActivity
         int initialPosition = productsList.indexOf(dto);
         int finalPosition = productDtos.indexOf(dto);
         productsAdapter.notifyItemMoved(initialPosition, finalPosition);
+        // Animation ends in final position when the initial position is equals zero.
+        // Therefore the animation needs to be fix by scrolling back to position 0.
+        if ( initialPosition == 0 )
+        {
+            cache.getRecyclerView().scrollToPosition(0);
+        }
     }
 
     public void reorderProductViewBySelection()

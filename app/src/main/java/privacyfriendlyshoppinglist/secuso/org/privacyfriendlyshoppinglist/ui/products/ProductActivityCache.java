@@ -31,6 +31,7 @@ public class ProductActivityCache
     private TextView totalCheckedTextView;
     private TextView currencyTextView;
     private LinearLayout totalLayout;
+    private RecyclerView recyclerView;
     private String listId;
 
     public ProductActivityCache(AppCompatActivity activity, String listId)
@@ -40,7 +41,7 @@ public class ProductActivityCache
 
         productsAdapter = new ProductsAdapter(new ArrayList<>(), this);
 
-        RecyclerView recyclerView = (RecyclerView) activity.findViewById(R.id.recyclerView);
+        recyclerView = (RecyclerView) activity.findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(activity));
         recyclerView.setAdapter(productsAdapter);
 
@@ -95,6 +96,11 @@ public class ProductActivityCache
     public TextView getTotalCheckedTextView()
     {
         return totalCheckedTextView;
+    }
+
+    public RecyclerView getRecyclerView()
+    {
+        return recyclerView;
     }
 
     public LinearLayout getTotalLayout()
