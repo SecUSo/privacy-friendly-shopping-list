@@ -12,42 +12,35 @@ import java.util.List;
  * Author: Grebiel Jose Ifill Brito
  * Created: 22.07.16 creation date
  */
-public class AxisLabels implements AxisValueFormatter
+public class XAxisLabels implements AxisValueFormatter
 {
     public static final String EMPTY = "";
     private List<String> labels;
-    private int decimalDigits;
 
-    public AxisLabels(String[] labels)
+    public XAxisLabels(String[] labels)
     {
         this.labels = new ArrayList<>();
-        this.labels.add(EMPTY);
         this.labels.addAll(Arrays.asList(labels));
-        decimalDigits = 0;
-    }
-
-    public void setDecimalDigits(int decimalDigits)
-    {
-        this.decimalDigits = decimalDigits;
     }
 
     @Override
     public String getFormattedValue(float value, AxisBase axis)
     {
-        int nrLabels = labels.size();
-        if ( value < nrLabels )
+        if ( value == 0.0 )
         {
-            return labels.get((int) value % nrLabels);
+            return EMPTY;
         }
-        else // ignore the empty label
+        else
         {
-            return labels.get(((int) value + 1) % nrLabels);
+            value = value - 1;
+            int labelIndex = (int) value % labels.size();
+            return labels.get(labelIndex);
         }
     }
 
     @Override
     public int getDecimalDigits()
     {
-        return decimalDigits;
+        return 0;
     }
 }

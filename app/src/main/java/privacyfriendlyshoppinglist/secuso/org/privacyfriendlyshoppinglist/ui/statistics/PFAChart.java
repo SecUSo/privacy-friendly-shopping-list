@@ -1,7 +1,6 @@
 package privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.statistics;
 
-import android.view.MotionEvent;
-import android.view.View;
+import android.content.Context;
 import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.components.YAxis;
@@ -37,49 +36,32 @@ public class PFAChart
     private List<Double> data;
     private BarChart chart;
     private BarDataSet dataSet;
+    private Context context;
 
-    public PFAChart(BarChart chart)
+    public PFAChart(BarChart chart, Context context)
     {
         this.chart = chart;
         this.chart.setDrawBarShadow(false);
         this.chart.setDrawValueAboveBar(true);
         this.chart.setDescription(EMPTY);
-
-        // if more than 60 entries are displayed in the chart, no values will be
-        // drawn
-        this.chart.setMaxVisibleValueCount(60);
+        this.chart.setMaxVisibleValueCount(12);
         this.chart.setPinchZoom(false);
         this.chart.setDrawGridBackground(false);
-
-        YAxis leftAxis = this.chart.getAxisLeft();
-        leftAxis.setLabelCount(10, false);
-        leftAxis.setPosition(YAxis.YAxisLabelPosition.OUTSIDE_CHART);
-        leftAxis.setSpaceTop(20f);
-        leftAxis.setAxisMinValue(0f);
-
-        YAxis rightAxis = this.chart.getAxisRight();
-        rightAxis.setEnabled(false);
-    }
-
-    public BarChart getChart()
-    {
-        return chart;
-    }
-
-    public BarDataSet getDataSet()
-    {
-        return dataSet;
+        this.context = context;
+        setupYAxis();
     }
 
     public void setXlabels(String[] xlabels)
     {
+        XAxisLabels xFormatter = new XAxisLabels(xlabels);
+        chart.setMarkerView(new PFAMarkerView(context, xFormatter));
+
         XAxis xAxis = chart.getXAxis();
         xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
         xAxis.setDrawGridLines(false);
         xAxis.setGranularity(1f);
         xAxis.setLabelCount(5);
-        xAxis.setValueFormatter(new AxisLabels(xlabels));
-
+        xAxis.setValueFormatter(xFormatter);
     }
 
     public void updateChart(List<Double> inputData, int... colors)
@@ -99,8 +81,6 @@ public class PFAChart
             yValues.add(new BarEntry(i + 1, number.floatValue()));
         }
 
-
-
         if ( chart.getData() != null && chart.getData().getDataSetCount() > 0 )
         {
             dataSet = (BarDataSet) chart.getData().getDataSetByIndex(0);
@@ -119,31 +99,21 @@ public class PFAChart
             BarData data = new BarData(dataSets);
             data.setValueTextSize(10f);
             data.setBarWidth(0.9f);
-            chart.setOnTouchListener(new View.OnTouchListener()
-            {
-                @Override
-                public boolean onTouch(View v, MotionEvent event)
-                {
-                    updateValuesVisibility();
-                    return false;
-                }
-            });
-
             chart.setData(data);
-            updateValuesVisibility();
+            chart.animateY(2000);
         }
     }
 
-    public void updateValuesVisibility()
+    private void setupYAxis()
     {
-        float visibleXRange = chart.getVisibleXRange();
-        if ( visibleXRange <= 15 )
-        {
-            dataSet.setDrawValues(true);
-        }
-        else
-        {
-            dataSet.setDrawValues(false);
-        }
+        YAxis leftAxis = this.chart.getAxisLeft();
+        leftAxis.setLabelCount(10, false);
+        leftAxis.setPosition(YAxis.YAxisLabelPosition.OUTSIDE_CHART);
+        leftAxis.setSpaceTop(20f);
+        leftAxis.setAxisMinValue(0f);
+        leftAxis.setValueFormatter(new YAxisLabels(context));
+
+        YAxis rightAxis = this.chart.getAxisRight();
+        rightAxis.setEnabled(false);
     }
 }

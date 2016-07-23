@@ -29,7 +29,7 @@ public class ProductConverterServiceImpl implements ProductConverterService
     {
         this.language = context.getResources().getString(R.string.language);
         this.dateLongPattern = context.getResources().getString(R.string.date_long_pattern);
-        this.priceFormat = context.getResources().getString(R.string.price_format);
+        this.priceFormat = context.getResources().getString(R.string.number_format);
 
     }
 

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:backgroundTint="@color/yellow"
+        android:background="@drawable/chart_marker">
+
+    <TextView
+            android:id="@+id/textview_chart_markup"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="7dp"
+            android:text=""
+            android:textSize="@dimen/text_small"
+            android:textColor="@color/black"
+            android:singleLine="true"/>
+
+</RelativeLayout>

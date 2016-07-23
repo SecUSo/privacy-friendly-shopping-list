@@ -49,7 +49,7 @@ public class ProductComparators extends PFAComparators
     public static Comparator<ProductDto> getPriceComparator(boolean ascending, Context context)
     {
         Resources resources = context.getResources();
-        String format = resources.getString(R.string.price_format);
+        String format = resources.getString(R.string.number_format);
 
         int ascendingFactor = getAscendingFactor(ascending);
         return (lhs, rhs) ->

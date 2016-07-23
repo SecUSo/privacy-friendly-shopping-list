@@ -30,7 +30,7 @@ public class StatisticsActivity extends BaseActivity
         int middleblue = getResources().getColor(R.color.middleblue);
         List<Double> inputData = getFakeDataForChart();
 
-        PFAChart pfaChart = new PFAChart(chart);
+        PFAChart pfaChart = new PFAChart(chart, this);
         pfaChart.setXlabels(months);
         pfaChart.updateChart(inputData, middleblue);
 
