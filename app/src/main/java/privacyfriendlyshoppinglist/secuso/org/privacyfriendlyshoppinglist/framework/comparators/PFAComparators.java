@@ -5,7 +5,7 @@ package privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.frame
  * Author: Grebiel Jose Ifill Brito
  * Created: 22.07.16 creation date
  */
-public class PFAComparators
+public abstract class PFAComparators
 {
     public static String SORT_BY_NAME = "sort.by.name";
     public static String SORT_BY_PRIORITY = "sort.by.priority";

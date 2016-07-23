@@ -16,13 +16,13 @@ import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.sho
 /**
  * Created by Chris on 05.06.2016.
  */
-public class ListsItemViewHolder extends RecyclerView.ViewHolder
+class ListsItemViewHolder extends RecyclerView.ViewHolder
 {
     private ListItemCache listItemCache;
     private ShoppingListActivityCache shoppingListCache;
     private ProductService productService;
 
-    public ListsItemViewHolder(final View parent, ShoppingListActivityCache cache)
+    ListsItemViewHolder(final View parent, ShoppingListActivityCache cache)
     {
         super(parent);
         this.listItemCache = new ListItemCache(parent);
@@ -31,7 +31,7 @@ public class ListsItemViewHolder extends RecyclerView.ViewHolder
         this.productService = (ProductService) instanceFactory.createInstance(ProductService.class);
     }
 
-    public void processDto(ListDto dto)
+    void processDto(ListDto dto)
     {
         listItemCache.getListNameTextView().setText(dto.getListName());
 
@@ -40,36 +40,29 @@ public class ListsItemViewHolder extends RecyclerView.ViewHolder
         setupPriorityIcon(dto);
 
 
-        listItemCache.getListCard().setOnClickListener(new View.OnClickListener()
+        listItemCache.getListCard().setOnClickListener(v ->
         {
-            public void onClick(View v)
-            {
-                Intent intent = new Intent(shoppingListCache.getActivity(), ProductsActivity.class);
-                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                intent.putExtra(MainActivity.LIST_NAME_KEY, dto.getListName());
-                intent.putExtra(MainActivity.LIST_ID_KEY, dto.getId());
-                shoppingListCache.getActivity().startActivity(intent);
-            }
+            Intent intent = new Intent(shoppingListCache.getActivity(), ProductsActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            intent.putExtra(MainActivity.LIST_NAME_KEY, dto.getListName());
+            intent.putExtra(MainActivity.LIST_ID_KEY, dto.getId());
+            shoppingListCache.getActivity().startActivity(intent);
         });
 
-        listItemCache.getListCard().setOnLongClickListener(new View.OnLongClickListener()
+        listItemCache.getListCard().setOnLongClickListener(view ->
         {
-            @Override
-            public boolean onLongClick(View view)
-            {
-                DialogFragment productFragement = EditDialogFragment.newInstance(dto, shoppingListCache);
-                productFragement.show(shoppingListCache.getActivity().getSupportFragmentManager(), "Liste");
+            DialogFragment productFragement = EditDialogFragment.newInstance(dto, shoppingListCache);
+            productFragement.show(shoppingListCache.getActivity().getSupportFragmentManager(), "Liste");
 
-                return true;
-            }
+            return true;
         });
 
     }
 
-    public void setupPriorityIcon(ListDto dto)
+    private void setupPriorityIcon(ListDto dto)
     {
         // todo: do not use hard code values here
-        if ( dto.getPriority().equals("0") )
+        if ( "0".equals(dto.getPriority()) )
         {
             listItemCache.getHighPriorityImageView().setVisibility(View.VISIBLE);
         }

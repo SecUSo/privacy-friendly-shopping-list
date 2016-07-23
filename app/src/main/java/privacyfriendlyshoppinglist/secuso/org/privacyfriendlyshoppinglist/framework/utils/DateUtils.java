@@ -11,21 +11,19 @@ import java.util.Locale;
  * Author: Grebiel Jose Ifill Brito
  * Created: 22.06.16 creation date
  */
-public class DateUtils
+public abstract class DateUtils
 {
-    public static final int MILLISECONDS_TO_MINUTES = (1000 * 60);
-    public static final String ISO_PATTERN_MIN = "yyyy-MM-dd HH:mm";
-    public static final String ISO_PATTERN = "yyyy-MM-dd";
-    public static final String US = "US";
-    public static final String DE = "DE";
+    private static final String ISO_PATTERN_MIN = "yyyy-MM-dd HH:mm";
+    private static final String ISO_PATTERN = "yyyy-MM-dd";
+    private static final String US = "US";
+    private static final String DE = "DE";
 
     public static String getFormattedDateString(String aDate, String inputPattern, String outputPattern, String language)
     {
         DateTime date = getDateFromString(aDate, inputPattern, language);
 
         DateTimeFormatter outputFormatter = getDateTimeFormatter(outputPattern, language);
-        String dateString = outputFormatter.print(date);
-        return dateString;
+        return outputFormatter.print(date);
     }
 
     public static String getIsoDate(String aDate, String inputPattern, String language)
@@ -33,15 +31,13 @@ public class DateUtils
         DateTime date = getDateFromString(aDate, inputPattern, language);
 
         DateTimeFormatter outputFormatter = getDateTimeFormatter(ISO_PATTERN, language);
-        String dateString = outputFormatter.print(date);
-        return dateString;
+        return outputFormatter.print(date);
     }
 
     public static DateTime getDateFromString(String aDate, String inputPattern, String language)
     {
         DateTimeFormatter inputFormatter = getDateTimeFormatter(inputPattern, language);
-        DateTime date = getDateFromString(aDate, inputFormatter);
-        return date;
+        return getDateFromString(aDate, inputFormatter);
     }
 
     public static String getDateAsString(Long date, String pattern, String language)
@@ -52,8 +48,7 @@ public class DateUtils
 
     private static DateTime getDateFromString(String aDate, DateTimeFormatter formatter)
     {
-        DateTime dateTime = DateTime.parse(aDate, formatter);
-        return dateTime;
+        return DateTime.parse(aDate, formatter);
     }
 
     private static DateTimeFormatter getDateTimeFormatter(String outputPattern, String language)
@@ -83,7 +78,6 @@ public class DateUtils
         }
 
         DateTimeFormatter outputFormatter = getDateTimeFormatter(outputPattern, language);
-        String dateString = outputFormatter.print(date);
-        return dateString;
+        return outputFormatter.print(date);
     }
 }

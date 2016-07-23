@@ -17,13 +17,13 @@ import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.sho
 /**
  * Created by Chris on 05.06.2016.
  */
-public class DeleteListsItemViewHolder extends RecyclerView.ViewHolder
+class DeleteListsItemViewHolder extends RecyclerView.ViewHolder
 {
 
     private ListItemCache cache;
     private ProductService productService;
 
-    public DeleteListsItemViewHolder(final View parent, AppCompatActivity activity)
+    DeleteListsItemViewHolder(final View parent, AppCompatActivity activity)
     {
         super(parent);
         this.cache = new ListItemCache(parent);
@@ -31,7 +31,7 @@ public class DeleteListsItemViewHolder extends RecyclerView.ViewHolder
         this.productService = (ProductService) instanceFactory.createInstance(ProductService.class);
     }
 
-    public void processDto(ListDto dto)
+    void processDto(ListDto dto)
     {
         cache.getListNameTextView().setText(dto.getListName());
 
@@ -41,13 +41,10 @@ public class DeleteListsItemViewHolder extends RecyclerView.ViewHolder
 
         updateVisibilityFormat(dto);
 
-        cache.getListCard().setOnClickListener(new View.OnClickListener()
+        cache.getListCard().setOnClickListener(v ->
         {
-            public void onClick(View v)
-            {
-                dto.setSelected(!dto.isSelected());
-                updateVisibilityFormat(dto);
-            }
+            dto.setSelected(!dto.isSelected());
+            updateVisibilityFormat(dto);
         });
     }
 
@@ -73,10 +70,10 @@ public class DeleteListsItemViewHolder extends RecyclerView.ViewHolder
         }
     }
 
-    public void setupPriorityIcon(ListDto dto)
+    private void setupPriorityIcon(ListDto dto)
     {
         // todo: do not use hard code values here
-        if ( dto.getPriority().equals("0") )
+        if ( "0".equals(dto.getPriority()) )
         {
             cache.getHighPriorityImageView().setVisibility(View.VISIBLE);
         }

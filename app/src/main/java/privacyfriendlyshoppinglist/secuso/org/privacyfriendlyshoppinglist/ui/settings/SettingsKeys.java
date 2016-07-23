@@ -5,7 +5,7 @@ package privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.se
  * Author: Grebiel Jose Ifill Brito
  * Created: 23.07.16 creation date
  */
-public class SettingsKeys
+public abstract class SettingsKeys
 {
     public static String CURRENCY = "pref_currency";
 }

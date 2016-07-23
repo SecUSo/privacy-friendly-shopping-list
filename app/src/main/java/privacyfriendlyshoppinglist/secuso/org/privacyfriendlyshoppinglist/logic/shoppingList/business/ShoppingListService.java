@@ -15,11 +15,11 @@ public interface ShoppingListService extends ContextSetter
 {
     void saveOrUpdate(ListDto dto);
 
-    ListDto getById (String id);
+    ListDto getById(String id);
 
     ShoppingListEntity getEntityById(String id);
 
-    void deleteById (String id);
+    void deleteById(String id);
 
     List<ListDto> getAllListDtos();
 

@@ -18,7 +18,8 @@ import java.util.Date;
 public class ShoppingListConverterImpl implements ShoppingListConverter
 {
     private static final String SPACE = " ";
-    public static final String EMPTY = "";
+    private static final String EMPTY = "";
+
     private String language;
     private String dateLongPattern;
     private String datePattern;

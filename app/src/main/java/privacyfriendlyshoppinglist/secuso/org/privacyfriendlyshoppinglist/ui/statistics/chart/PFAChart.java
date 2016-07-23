@@ -33,10 +33,8 @@ import java.util.List;
 public class PFAChart
 {
     private static final String EMPTY = "";
-
     private List<Double> data;
     private BarChart chart;
-    private BarDataSet dataSet;
     private Context context;
 
     public PFAChart(StatisticsCache cache)
@@ -75,13 +73,15 @@ public class PFAChart
         chart.getXAxis().setAxisMinValue(start);
         chart.getXAxis().setAxisMaxValue(start + count + 1);
 
-        ArrayList<BarEntry> yValues = new ArrayList<BarEntry>();
+        ArrayList<BarEntry> yValues = new ArrayList<>();
 
         for ( int i = (int) start; i < start + count; i++ )
         {
             BigDecimal number = new BigDecimal(data.get(i));
             yValues.add(new BarEntry(i + 1, number.floatValue()));
         }
+
+        BarDataSet dataSet;
 
         if ( chart.getData() != null && chart.getData().getDataSetCount() > 0 )
         {
@@ -95,7 +95,7 @@ public class PFAChart
             dataSet = new BarDataSet(yValues, EMPTY);
             dataSet.setColors(colors);
 
-            ArrayList<IBarDataSet> dataSets = new ArrayList<IBarDataSet>();
+            ArrayList<IBarDataSet> dataSets = new ArrayList<>();
             dataSets.add(dataSet);
 
             BarData data = new BarData(dataSets);

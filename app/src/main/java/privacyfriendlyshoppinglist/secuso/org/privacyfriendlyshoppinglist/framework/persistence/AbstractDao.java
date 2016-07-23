@@ -15,6 +15,14 @@ import java.util.List;
  */
 public abstract class AbstractDao<T extends AbstractEntity> implements ContextSetter
 {
+    private static final String SUCCESSFUL = "successful";
+    private static final String GET_ALL_ENTITIES = "getAllEntities";
+    private static final String DELETE_BY_ID = "deleteById";
+    private static final String GET_DAO = "getDao";
+    private static final String SAVE_OR_UPDATE = "saveOrUpdate";
+    private static final String GET_BY_ID = "getById";
+    private static final String ID = ", ID=";
+    private static final String ENTITY = ", ENTITY=";
     private DataBaseHelper database;
 
     @Override
@@ -30,12 +38,12 @@ public abstract class AbstractDao<T extends AbstractEntity> implements ContextSe
             @SuppressWarnings("unchecked")
             Dao<T, Long> dao = database.getDao((Class) entity.getClass());
             dao.createOrUpdate(entity);
-            PFALogger.debug(getClass().getName(), "saveOrUpdate", "successful");
+            PFALogger.debug(getClass().getName(), SAVE_OR_UPDATE, SUCCESSFUL);
             return entity.getId();
         }
         catch ( SQLException e )
         {
-            PFALogger.error(getClass().getName(), "saveOrUpdate, ENTITY=" + entity.toString(), e);
+            PFALogger.error(getClass().getName(), SAVE_OR_UPDATE + ENTITY + entity.toString(), e);
             return null;
         }
     }
@@ -46,12 +54,12 @@ public abstract class AbstractDao<T extends AbstractEntity> implements ContextSe
         {
             Dao<T, Long> dao = database.getDao(type);
             T entity = dao.queryForId(id);
-            PFALogger.debug(getClass().getName(), "getById", "successful");
+            PFALogger.debug(getClass().getName(), GET_BY_ID, SUCCESSFUL);
             return entity;
         }
         catch ( SQLException e )
         {
-            PFALogger.error(getClass().getName(), "getById, ID=" + id, e);
+            PFALogger.error(getClass().getName(), GET_BY_ID + ID + id, e);
             return null;
         }
     }
@@ -63,12 +71,12 @@ public abstract class AbstractDao<T extends AbstractEntity> implements ContextSe
         {
             Dao<T, Long> dao = database.getDao(type);
             entities = dao.queryForAll();
-            PFALogger.debug(getClass().getName(), "getAllEntities", "successful");
+            PFALogger.debug(getClass().getName(), GET_ALL_ENTITIES, SUCCESSFUL);
             return entities;
         }
         catch ( SQLException e )
         {
-            PFALogger.error(getClass().getName(), "getAllEntities", e);
+            PFALogger.error(getClass().getName(), GET_ALL_ENTITIES, e);
             return null;
         }
     }
@@ -79,12 +87,12 @@ public abstract class AbstractDao<T extends AbstractEntity> implements ContextSe
         {
             Dao<T, Long> dao = database.getDao(type);
             dao.deleteById(id);
-            PFALogger.debug(getClass().getName(), "deleteById", "successful");
+            PFALogger.debug(getClass().getName(), DELETE_BY_ID, SUCCESSFUL);
             return true;
         }
         catch ( SQLException e )
         {
-            PFALogger.error(getClass().getName(), "deleteById, ID=" + id, e);
+            PFALogger.error(getClass().getName(), DELETE_BY_ID + ID + id, e);
             return false;
         }
     }
@@ -94,12 +102,12 @@ public abstract class AbstractDao<T extends AbstractEntity> implements ContextSe
         try
         {
             Dao<T, Long> dao = database.getDao(type);
-            PFALogger.debug(getClass().getName(), "getDao", "successful");
+            PFALogger.debug(getClass().getName(), GET_DAO, SUCCESSFUL);
             return dao;
         }
         catch ( SQLException e )
         {
-            PFALogger.error(getClass().getName(), "getDao", e);
+            PFALogger.error(getClass().getName(), GET_DAO, e);
             return null;
         }
     }

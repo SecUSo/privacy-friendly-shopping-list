@@ -14,7 +14,7 @@ import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.pro
  */
 public class ShowDeleteProductsOnClickListener implements View.OnClickListener
 {
-    ProductActivityCache cache;
+    private ProductActivityCache cache;
 
     public ShowDeleteProductsOnClickListener(ProductActivityCache cache)
     {

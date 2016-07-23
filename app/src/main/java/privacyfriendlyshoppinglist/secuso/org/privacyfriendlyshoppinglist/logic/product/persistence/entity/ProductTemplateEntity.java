@@ -35,8 +35,8 @@ public class ProductTemplateEntity extends AbstractEntity
     @DatabaseField
     private Integer defaultIcon;
 
-    @ForeignCollectionField(eager = false)
-    ForeignCollection<ProductItemEntity> products;
+    @ForeignCollectionField
+    private ForeignCollection<ProductItemEntity> products;
 
     public ProductTemplateEntity()
     {// SETUP_PERSISTENCE: needed for ORMLite

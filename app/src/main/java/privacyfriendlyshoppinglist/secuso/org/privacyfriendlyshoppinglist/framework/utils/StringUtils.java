@@ -8,10 +8,10 @@ import java.text.ParseException;
  * Author: Grebiel Jose Ifill Brito
  * Created: 12.06.16 creation date
  */
-public class StringUtils
+public abstract class StringUtils
 {
 
-    public static final String EMPTY = "";
+    private static final String EMPTY = "";
 
     public static boolean isEmpty(String string)
     {

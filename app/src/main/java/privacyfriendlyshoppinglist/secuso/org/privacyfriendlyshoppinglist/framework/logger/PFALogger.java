@@ -7,7 +7,7 @@ import android.util.Log;
  * Author: Grebiel Jose Ifill Brito
  * Created: 31.05.16 creation date
  */
-public class PFALogger
+public abstract class PFALogger
 {
     public static void debug(String className, String methodName, String result)
     {

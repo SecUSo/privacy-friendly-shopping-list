@@ -12,7 +12,6 @@ import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.product.persistence.entity.ProductTemplateEntity;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.shoppingList.persistence.entity.ShoppingListEntity;
 
-import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -24,6 +23,10 @@ import java.util.List;
  */
 class DataBaseHelper extends OrmLiteSqliteOpenHelper
 {
+    private static final String ON_CREATE = "onCreate";
+    private static final String START = "start";
+    private static final String ON_UPGRADE = "onUpgrade";
+    private static final String ORMLITE_CONFIG_TXT = "ormlite_config.txt";
     private static List<Class<? extends AbstractEntity>> entityClasses;
 
     DataBaseHelper(Context context, DB db)
@@ -46,7 +49,7 @@ class DataBaseHelper extends OrmLiteSqliteOpenHelper
         try
         {
             setupClasses();
-            PFALogger.debug(getClass().getName(), "onCreate", "start");
+            PFALogger.debug(getClass().getName(), ON_CREATE, START);
             for ( Class aClass : entityClasses )
             {
                 TableUtils.createTable(connectionSource, aClass);
@@ -54,7 +57,7 @@ class DataBaseHelper extends OrmLiteSqliteOpenHelper
         }
         catch ( Exception e )
         {
-            PFALogger.error(getClass().getName(), "onCreate", e);
+            PFALogger.error(getClass().getName(), ON_CREATE, e);
         }
     }
 
@@ -72,17 +75,20 @@ class DataBaseHelper extends OrmLiteSqliteOpenHelper
         }
         catch ( SQLException e )
         {
-            PFALogger.error(getClass().getName(), "onUpgrade", e);
+            PFALogger.error(getClass().getName(), ON_UPGRADE, e);
         }
     }
 
     private static class DataBaseConfig extends OrmLiteConfigUtil
     {
         // SETUP_PERSISTENCE: run every time the DB schema changes
-        // Run Configuration: make sure to set "privacy-friendly-shopping-list/app/src/main" as Working directory
-        public static void main(String[] args) throws SQLException, IOException
+
+        /**
+         * Run Configuration: make sure to set "privacy-friendly-shopping-list/app/src/main" as Working directory
+         */
+        public static void main(String[] args) throws Exception
         {
-            writeConfigFile("ormlite_config.txt");
+            writeConfigFile(ORMLITE_CONFIG_TXT);
         }
     }
 }

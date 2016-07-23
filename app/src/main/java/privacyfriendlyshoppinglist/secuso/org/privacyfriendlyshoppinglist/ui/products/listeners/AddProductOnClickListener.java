@@ -40,14 +40,14 @@ public class AddProductOnClickListener implements View.OnClickListener
         productsActivity.updateListView();
     }
 
-    public ProductDto createFakeDto()
+    private ProductDto createFakeDto()
     {
         // todo: temporary test data
         int mod3 = temporaryCounterForFakeData % 3;
         int mod2 = temporaryCounterForFakeData % 2;
         int mod5 = temporaryCounterForFakeData % 5;
         String expectedQuantity = String.valueOf(mod3);
-        ;
+
         String expectedQuantityPurchased = "4";
         String expectedNotes = "Some Notes";
         String expectedStore = "";

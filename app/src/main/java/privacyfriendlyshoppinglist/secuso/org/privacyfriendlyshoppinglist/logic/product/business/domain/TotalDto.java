@@ -7,9 +7,9 @@ package privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic
  */
 public class TotalDto
 {
-    String totalAmount;
-    String checkedAmount;
-    boolean equalsZero;
+    private String totalAmount;
+    private String checkedAmount;
+    private boolean equalsZero;
 
     public String getTotalAmount()
     {

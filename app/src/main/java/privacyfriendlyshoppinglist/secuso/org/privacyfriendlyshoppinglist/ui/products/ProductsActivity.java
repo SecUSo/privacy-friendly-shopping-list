@@ -24,6 +24,7 @@ import java.util.List;
  */
 public class ProductsActivity extends AppCompatActivity
 {
+    private static final long DURATION = 1000L;
     private ProductService productService;
     private ProductActivityCache cache;
 
@@ -76,13 +77,13 @@ public class ProductsActivity extends AppCompatActivity
 
         if ( totalDto.isEqualsZero() )
         {
-            cache.getTotalLayout().animate().alpha(0.0f).setDuration(1000L);
+            cache.getTotalLayout().animate().alpha(0.0f).setDuration(DURATION);
             cache.getTotalLayout().setVisibility(View.GONE);
         }
         else
         {
             cache.getTotalLayout().setVisibility(View.VISIBLE);
-            cache.getTotalLayout().animate().alpha(1.0f).setDuration(1000L);
+            cache.getTotalLayout().animate().alpha(1.0f).setDuration(DURATION);
         }
     }
 
