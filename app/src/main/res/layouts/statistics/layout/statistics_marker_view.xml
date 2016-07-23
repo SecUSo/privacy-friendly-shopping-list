@@ -12,7 +12,9 @@
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="7dp"
-            android:text=""
+            android:paddingRight="@dimen/statistics_padding"
+            android:paddingLeft="@dimen/statistics_padding"
+            android:text="@string/ph_total_amount"
             android:textSize="@dimen/text_small"
             android:textColor="@color/black"
             android:singleLine="true"/>
