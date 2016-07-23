@@ -1,9 +1,12 @@
 package privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.statistics;
 
 import android.os.Bundle;
+import org.joda.time.DateTime;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.R;
+import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.utils.DateUtils;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.baseactivity.BaseActivity;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.statistics.chart.PFAChart;
+import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.statistics.listeners.DateOnClickListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,7 +35,22 @@ public class StatisticsActivity extends BaseActivity
         pfaChart.setXlabels(months);
         pfaChart.updateChart(inputData, middleblue);
 
+        setupInitialDates(cache);
+
         overridePendingTransition(0, 0);
+    }
+
+    private void setupInitialDates(StatisticsCache cache)
+    {
+        // todo: setup the correct ranges here
+        DateTime currentDate = new DateTime();
+        String stringDate = DateUtils.getDateAsString(currentDate.getMillis(), cache.getDatePattern(), cache.getDateLanguage());
+
+        cache.getRangeFromTextView().setText(stringDate);
+        cache.getRangeToTextView().setText(stringDate);
+
+        cache.getRangeFromTextView().setOnClickListener(new DateOnClickListener(cache, cache.getRangeFromTextView()));
+        cache.getRangeToTextView().setOnClickListener(new DateOnClickListener(cache, cache.getRangeToTextView()));
     }
 
     private List<Double> getFakeDataForChart()
