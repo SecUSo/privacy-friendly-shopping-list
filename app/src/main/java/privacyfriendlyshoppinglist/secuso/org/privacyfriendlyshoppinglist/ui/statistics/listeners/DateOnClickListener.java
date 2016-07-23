@@ -45,6 +45,8 @@ public class DateOnClickListener implements View.OnClickListener
             @Override
             public void onDateSet(final DatePicker dp, final int currentYear,
                                   final int currentMonth, final int currentDay)
+
+
             {
                 Calendar currentDate = new GregorianCalendar();
                 currentDate.set(

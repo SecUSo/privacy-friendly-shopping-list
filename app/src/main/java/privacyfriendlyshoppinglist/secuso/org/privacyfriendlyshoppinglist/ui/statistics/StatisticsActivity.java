@@ -1,6 +1,7 @@
 package privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.statistics;
 
 import android.os.Bundle;
+import android.widget.ArrayAdapter;
 import org.joda.time.DateTime;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.R;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.utils.DateUtils;
@@ -36,8 +37,15 @@ public class StatisticsActivity extends BaseActivity
         pfaChart.updateChart(inputData, middleblue);
 
         setupInitialDates(cache);
+        setupSpinner(cache);
 
         overridePendingTransition(0, 0);
+    }
+
+    @Override
+    protected int getNavigationDrawerID()
+    {
+        return R.id.nav_statistics;
     }
 
     private void setupInitialDates(StatisticsCache cache)
@@ -53,6 +61,13 @@ public class StatisticsActivity extends BaseActivity
         cache.getRangeToTextView().setOnClickListener(new DateOnClickListener(cache, cache.getRangeToTextView()));
     }
 
+    private void setupSpinner(StatisticsCache cache)
+    {
+        String[] spinnerParams = getResources().getStringArray(R.array.statistics_spinner_params);
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, R.layout.spinner, spinnerParams);
+        cache.getGroupBySpinner().setAdapter(adapter);
+    }
+
     private List<Double> getFakeDataForChart()
     {
         List<Double> inputData = new ArrayList<>();
@@ -61,11 +76,5 @@ public class StatisticsActivity extends BaseActivity
             inputData.add((double) i);
         }
         return inputData;
-    }
-
-    @Override
-    protected int getNavigationDrawerID()
-    {
-        return R.id.nav_statistics;
     }
 }

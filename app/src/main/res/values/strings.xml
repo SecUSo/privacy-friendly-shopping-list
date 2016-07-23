@@ -178,7 +178,7 @@
         <item>Reminder</item>
     </string-array>
 
-    <string-array name="search_param">
+    <string-array name="statistics_spinner_params">
         <item>Months</item>
         <item>Weeks</item>
         <item>Days</item>
