@@ -1,13 +1,16 @@
 
-package privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.statistics;
+package privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.statistics.chart;
 
 import android.content.Context;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 import android.widget.TextView;
 import com.github.mikephil.charting.components.MarkerView;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.formatter.AxisValueFormatter;
 import com.github.mikephil.charting.highlight.Highlight;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.R;
+import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.settings.SettingsKeys;
 
 import java.text.DecimalFormat;
 
@@ -19,6 +22,7 @@ public class PFAMarkerView extends MarkerView
     private AxisValueFormatter xValueFormatter;
     private DecimalFormat format;
     private Context context;
+    private String currency;
 
     public PFAMarkerView(Context context, AxisValueFormatter xValueFormatter)
     {
@@ -29,12 +33,14 @@ public class PFAMarkerView extends MarkerView
         markup = (TextView) findViewById(R.id.textview_chart_markup);
         String numberFormat = this.context.getResources().getString(R.string.number_format);
         format = new DecimalFormat(numberFormat);
+
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
+        currency = prefs.getString(SettingsKeys.CURRENCY, null);
     }
 
     @Override
     public void refreshContent(Entry e, Highlight highlight)
     {
-        String currency = context.getResources().getString(R.string.currency);
         markup.setText(
                 xValueFormatter.getFormattedValue(e.getX(), null) + SEPARATION +
                         format.format(e.getY()) + SPACE +

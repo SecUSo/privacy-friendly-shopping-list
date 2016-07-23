@@ -1,9 +1,9 @@
 package privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.statistics;
 
 import android.os.Bundle;
-import com.github.mikephil.charting.charts.BarChart;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.R;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.baseactivity.BaseActivity;
+import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.statistics.chart.PFAChart;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,8 +15,6 @@ import java.util.List;
  */
 public class StatisticsActivity extends BaseActivity
 {
-    private BarChart chart;
-
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -24,13 +22,13 @@ public class StatisticsActivity extends BaseActivity
 
         setContentView(R.layout.statistics_activity);
 
-        chart = (BarChart) findViewById(R.id.chart);
+        StatisticsCache cache = new StatisticsCache(this);
 
         String[] months = getResources().getStringArray(R.array.statistics_months);
         int middleblue = getResources().getColor(R.color.middleblue);
         List<Double> inputData = getFakeDataForChart();
 
-        PFAChart pfaChart = new PFAChart(chart, this);
+        PFAChart pfaChart = new PFAChart(cache);
         pfaChart.setXlabels(months);
         pfaChart.updateChart(inputData, middleblue);
 

@@ -1,4 +1,4 @@
-package privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.statistics;
+package privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.statistics.chart;
 
 import android.content.Context;
 import com.github.mikephil.charting.charts.BarChart;
@@ -8,6 +8,7 @@ import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
 import com.github.mikephil.charting.interfaces.datasets.IBarDataSet;
+import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.statistics.StatisticsCache;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -38,16 +39,17 @@ public class PFAChart
     private BarDataSet dataSet;
     private Context context;
 
-    public PFAChart(BarChart chart, Context context)
+    public PFAChart(StatisticsCache cache)
     {
-        this.chart = chart;
+        this.context = cache.getActivity().getApplicationContext();
+
+        this.chart = cache.getChart();
         this.chart.setDrawBarShadow(false);
         this.chart.setDrawValueAboveBar(true);
         this.chart.setDescription(EMPTY);
         this.chart.setMaxVisibleValueCount(12);
         this.chart.setPinchZoom(false);
         this.chart.setDrawGridBackground(false);
-        this.context = context;
         setupYAxis();
     }
 

@@ -2,15 +2,26 @@
         xmlns:android="http://schemas.android.com/apk/res/android">
 
     <PreferenceCategory
-            android:title="Example Category">
+            android:title="@string/pref_header_notifications">
         <SwitchPreference
-                android:id="@+id/pref_example_switch"
-                android:key="pref_example_switch"
-                android:title="@string/pref_example_switch"
-                android:summary="@string/pref_example_switch_summary"
+                android:id="@+id/pref_notifications"
+                android:key="pref_notifications"
+                android:title="@string/pref_notifications_title"
+                android:summary="@string/pref_notifications_summary"
                 android:defaultValue="false"/>
-        <Preference android:title="Test Setting"
-                    android:summary="Text Summary"/>
+    </PreferenceCategory>
+    <PreferenceCategory
+            android:title="@string/pref_header_currency">
+        <EditTextPreference
+                android:key="pref_currency"
+                android:title="@string/pref_currency_title"
+                android:capitalize="words"
+                android:inputType="textCapWords"
+                android:maxLines="1"
+                android:maxLength="3"
+                android:selectAllOnFocus="true"
+                android:defaultValue="@string/currency"
+                android:singleLine="true"/>
     </PreferenceCategory>
 
     <!-- NOTE: EditTextPreference accepts EditText attributes. -->
@@ -27,13 +38,14 @@
 
 
     <ListPreference
-        android:defaultValue="-1"
-        android:entries="@array/pref_example_list_titles"
-        android:entryValues="@array/pref_example_list_values"
-        android:key="example_list"
-        android:negativeButtonText="@null"
-        android:positiveButtonText="@null"
-        android:title="@string/pref_title_add_friends_to_messages" />
+                android:id="@+id/pref_currency"
+                android:key="pref_currency"
+                android:title="@string/pref_currency_title"
+                android:summary="%s"
+                android:dialogTitle="Larger sample rates create better sound quality but larger file sizes."
+                android:entries="@array/statistics_months"
+                android:entryValues="@array/statistics_months"
+                android:defaultValue="0"/>
         -->
 
 </PreferenceScreen>

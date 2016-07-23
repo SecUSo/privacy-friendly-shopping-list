@@ -1,5 +1,7 @@
 package privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.products;
 
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -9,6 +11,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.R;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.products.listadapter.ProductsAdapter;
+import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.settings.SettingsKeys;
 
 import java.util.ArrayList;
 
@@ -26,6 +29,7 @@ public class ProductActivityCache
     private ImageView deleteImageView;
     private TextView totalAmountTextView;
     private TextView totalCheckedTextView;
+    private TextView currencyTextView;
     private LinearLayout totalLayout;
     private String listId;
 
@@ -46,6 +50,11 @@ public class ProductActivityCache
         totalAmountTextView = (TextView) activity.findViewById(R.id.textview_total_amount);
         totalCheckedTextView = (TextView) activity.findViewById(R.id.textview_total_checked);
         totalLayout = (LinearLayout) activity.findViewById(R.id.layout_total);
+        currencyTextView = (TextView) activity.findViewById(R.id.textview_currency);
+
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(activity);
+        String currency = prefs.getString(SettingsKeys.CURRENCY, null);
+        currencyTextView.setText(currency);
     }
 
     public AppCompatActivity getActivity()
