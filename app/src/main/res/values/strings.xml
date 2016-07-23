@@ -6,6 +6,8 @@
     <string name="language">US</string>
     <string name="date_long_pattern">EE MM/dd/yyyy HH:mm</string>
     <string name="date_short_pattern">EE MM/dd/yyyy</string>
+    <string name="date_day_stats_pattern">MM/dd/yy</string>
+    <string name="date_month_pattern">MMM yy</string>
     <string name="time_pattern">HH:mm</string>
     <string name="number_format">"###,###,###,##0.00"</string>
     <string name="currency">$</string>
@@ -32,6 +34,12 @@
     <string name="statistics_total_amout">Total:</string>
     <string name="statistics_range">Range:</string>
     <string name="statistics_group_by">Group by:</string>
+    <string name="statistics_amount_vs_months">Amount vs. Months</string>
+    <string name="statistics_amount_vs_weeks">Amount vs. Weeks</string>
+    <string name="statistics_amount_vs_days">Amount vs. Days</string>
+    <string name="statistics_amount_vs_categories">Amount vs. Categories</string>
+    <string name="statistics_amount_vs_products">Amount vs. Products</string>
+    <string name="statistics_amount_vs_stores">Amount vs. Stores</string>
 
     <!-- ### SORT ### -->
     <string name="sort_lists">Sort Options</string>
@@ -179,9 +187,9 @@
     </string-array>
 
     <string-array name="statistics_spinner_params">
-        <item>Months</item>
-        <item>Weeks</item>
-        <item>Days</item>
+        <item>Month</item>
+        <item>Week</item>
+        <item>Day</item>
         <item>Category</item>
         <item>Store</item>
         <item>Product</item>

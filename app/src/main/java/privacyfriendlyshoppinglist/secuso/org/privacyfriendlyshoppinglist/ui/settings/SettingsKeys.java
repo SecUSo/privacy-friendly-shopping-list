@@ -7,5 +7,5 @@ package privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.se
  */
 public abstract class SettingsKeys
 {
-    public static String CURRENCY = "pref_currency";
+    public static final String CURRENCY = "pref_currency";
 }

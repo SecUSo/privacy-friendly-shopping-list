@@ -26,6 +26,7 @@ public class StatisticsCache
     private AppCompatActivity activity;
     private String datePattern;
     private String dateLanguage;
+    private String numberFormat;
 
     public StatisticsCache(AppCompatActivity activity)
     {
@@ -46,6 +47,7 @@ public class StatisticsCache
 
         datePattern = activity.getResources().getString(R.string.date_short_pattern);
         dateLanguage = activity.getResources().getString(R.string.language);
+        numberFormat = activity.getResources().getString(R.string.number_format);
     }
 
     public AppCompatActivity getActivity()
@@ -91,5 +93,10 @@ public class StatisticsCache
     public String getDateLanguage()
     {
         return dateLanguage;
+    }
+
+    public String getNumberFormat()
+    {
+        return numberFormat;
     }
 }

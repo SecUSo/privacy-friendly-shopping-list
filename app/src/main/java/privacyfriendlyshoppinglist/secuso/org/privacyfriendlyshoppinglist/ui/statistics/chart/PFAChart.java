@@ -33,7 +33,7 @@ import java.util.List;
 public class PFAChart
 {
     private static final String EMPTY = "";
-    private List<Double> data;
+    private static final int ANIMATION_DURATION = 2000;
     private BarChart chart;
     private Context context;
 
@@ -48,26 +48,14 @@ public class PFAChart
         this.chart.setMaxVisibleValueCount(12);
         this.chart.setPinchZoom(false);
         this.chart.setDrawGridBackground(false);
+        this.chart.getLegend().setEnabled(false);
         setupYAxis();
     }
 
-    public void setXlabels(String[] xlabels)
+    public void updateChart(List<Double> inputData, List<String> labels, int... colors)
     {
-        XAxisLabels xFormatter = new XAxisLabels(xlabels);
-        chart.setMarkerView(new PFAMarkerView(context, xFormatter));
-
-        XAxis xAxis = chart.getXAxis();
-        xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
-        xAxis.setDrawGridLines(false);
-        xAxis.setGranularity(1f);
-        xAxis.setLabelCount(5);
-        xAxis.setValueFormatter(xFormatter);
-    }
-
-    public void updateChart(List<Double> inputData, int... colors)
-    {
-        this.data = inputData;
-        int count = this.data.size();
+        int count = inputData.size();
+        setXlabels(labels);
 
         float start = 0f;
         chart.getXAxis().setAxisMinValue(start);
@@ -77,7 +65,7 @@ public class PFAChart
 
         for ( int i = (int) start; i < start + count; i++ )
         {
-            BigDecimal number = new BigDecimal(data.get(i));
+            BigDecimal number = new BigDecimal(inputData.get(i));
             yValues.add(new BarEntry(i + 1, number.floatValue()));
         }
 
@@ -89,6 +77,7 @@ public class PFAChart
             dataSet.setValues(yValues);
             chart.getData().notifyDataChanged();
             chart.notifyDataSetChanged();
+            chart.invalidate();
         }
         else
         {
@@ -102,8 +91,25 @@ public class PFAChart
             data.setValueTextSize(10f);
             data.setBarWidth(0.9f);
             chart.setData(data);
-            chart.animateY(2000);
         }
+        chart.animateY(ANIMATION_DURATION);
+        chart.fitScreen();
+    }
+
+    private void setXlabels(List<String> labelList)
+    {
+        String[] labels = new String[ labelList.size() ];
+        labelList.toArray(labels);
+
+        XAxisLabels xFormatter = new XAxisLabels(labels);
+        chart.setMarkerView(new PFAMarkerView(context, xFormatter));
+
+        XAxis xAxis = chart.getXAxis();
+        xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
+        xAxis.setDrawGridLines(false);
+        xAxis.setGranularity(1f);
+        xAxis.setLabelCount(5);
+        xAxis.setValueFormatter(xFormatter);
     }
 
     private void setupYAxis()

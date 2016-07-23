@@ -12,12 +12,12 @@ import java.util.List;
  * Author: Grebiel Jose Ifill Brito
  * Created: 22.07.16 creation date
  */
-public class XAxisLabels implements AxisValueFormatter
+class XAxisLabels implements AxisValueFormatter
 {
-    public static final String EMPTY = "";
+    private static final String EMPTY = "";
     private List<String> labels;
 
-    public XAxisLabels(String[] labels)
+    XAxisLabels(String[] labels)
     {
         this.labels = new ArrayList<>();
         this.labels.addAll(Arrays.asList(labels));
@@ -26,15 +26,21 @@ public class XAxisLabels implements AxisValueFormatter
     @Override
     public String getFormattedValue(float value, AxisBase axis)
     {
-        if ( value == 0.0 )
+        if ( value == 0.0 || labels.isEmpty() )
         {
             return EMPTY;
         }
         else
         {
             value = value - 1;
-            int labelIndex = (int) value % labels.size();
-            return labels.get(labelIndex);
+            if ( value >= labels.size() )
+            {
+                return EMPTY;
+            }
+            else
+            {
+                return labels.get((int) value);
+            }
         }
     }
 

@@ -11,6 +11,7 @@ import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framew
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.product.persistence.entity.ProductItemEntity;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.product.persistence.entity.ProductTemplateEntity;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.shoppingList.persistence.entity.ShoppingListEntity;
+import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.statistics.persistence.entity.StatisticEntryEntity;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -36,11 +37,12 @@ class DataBaseHelper extends OrmLiteSqliteOpenHelper
 
     private void setupClasses()
     {
-        entityClasses = new ArrayList<>();
         // SETUP_PERSISTENCE: add all Entity clases to this list
+        entityClasses = new ArrayList<>();
         entityClasses.add(ProductItemEntity.class);
         entityClasses.add(ProductTemplateEntity.class);
         entityClasses.add(ShoppingListEntity.class);
+        entityClasses.add(StatisticEntryEntity.class);
     }
 
     @Override

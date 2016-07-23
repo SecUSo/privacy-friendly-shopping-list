@@ -3,6 +3,7 @@ package privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.dagge
 import dagger.Module;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.dagger.context.config.product.ProductModule;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.dagger.context.config.shoppingList.ShoppingListModule;
+import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.dagger.context.config.statistics.StatisticsModule;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.context.AppModule;
 
 /**
@@ -14,7 +15,8 @@ import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framew
         includes = {
                 // DEPENDENCY_INJECTION add all Modules here
                 ProductModule.class,
-                ShoppingListModule.class
+                ShoppingListModule.class,
+                StatisticsModule.class
         }
 )
 public class AppContextModule implements AppModule

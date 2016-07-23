@@ -7,12 +7,12 @@ package privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.frame
  */
 public abstract class PFAComparators
 {
-    public static String SORT_BY_NAME = "sort.by.name";
-    public static String SORT_BY_PRIORITY = "sort.by.priority";
-    public static String SORT_BY_PRICE = "sort.by.price";
-    public static String SORT_BY_QUANTITY = "sort.by.quantity";
-    public static String SORT_BY_STORE = "sort.by.store";
-    public static String SORT_BY_CATEGORY = "sort.by.category";
+    public static final String SORT_BY_NAME = "sort.by.name";
+    public static final String SORT_BY_PRIORITY = "sort.by.priority";
+    public static final String SORT_BY_PRICE = "sort.by.price";
+    public static final String SORT_BY_QUANTITY = "sort.by.quantity";
+    public static final String SORT_BY_STORE = "sort.by.store";
+    public static final String SORT_BY_CATEGORY = "sort.by.category";
 
     protected static int getAscendingFactor(boolean ascending)
     {

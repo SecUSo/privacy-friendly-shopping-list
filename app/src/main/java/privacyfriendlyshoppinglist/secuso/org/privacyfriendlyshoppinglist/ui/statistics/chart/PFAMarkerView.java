@@ -14,9 +14,9 @@ import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.set
 
 import java.text.DecimalFormat;
 
-public class PFAMarkerView extends MarkerView
+class PFAMarkerView extends MarkerView
 {
-    private static final String SEPARATION = ", ";
+    private static final String SEPARATION = " - ";
     private static final String SPACE = " ";
     private TextView markup;
     private AxisValueFormatter xValueFormatter;
@@ -24,7 +24,7 @@ public class PFAMarkerView extends MarkerView
     private Context context;
     private String currency;
 
-    public PFAMarkerView(Context context, AxisValueFormatter xValueFormatter)
+    PFAMarkerView(Context context, AxisValueFormatter xValueFormatter)
     {
         super(context, R.layout.statistics_marker_view);
 
@@ -41,10 +41,10 @@ public class PFAMarkerView extends MarkerView
     @Override
     public void refreshContent(Entry e, Highlight highlight)
     {
-        markup.setText(
-                xValueFormatter.getFormattedValue(e.getX(), null) + SEPARATION +
-                        format.format(e.getY()) + SPACE +
-                        currency);
+        String markupText = xValueFormatter.getFormattedValue(e.getX(), null) + SEPARATION +
+                format.format(e.getY()) + SPACE +
+                currency;
+        markup.setText(markupText);
     }
 
     @Override
