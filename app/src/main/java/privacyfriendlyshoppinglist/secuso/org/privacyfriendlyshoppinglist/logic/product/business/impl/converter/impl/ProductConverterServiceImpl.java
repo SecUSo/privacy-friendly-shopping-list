@@ -45,7 +45,8 @@ public class ProductConverterServiceImpl implements ProductConverterService
         entity.setNotes(dto.getProductNotes());
         entity.setStore(dto.getProductStore());
 
-        Double price = StringUtils.getStringAsDouble(dto.getProductPrice(), priceFormat);
+        String priceString = dto.getProductPrice();
+        Double price = getStringAsDouble(priceString);
         entity.setPrice(price);
 
         Date purchasedDate = DateUtils.getDateFromString(dto.getLastTimePurchased(), dateLongPattern, language).toDate();
@@ -110,5 +111,11 @@ public class ProductConverterServiceImpl implements ProductConverterService
     public String getDoubleAsString(Double price)
     {
         return StringUtils.getDoubleAsString(price, priceFormat);
+    }
+
+    @Override
+    public Double getStringAsDouble(String priceString)
+    {
+        return StringUtils.getStringAsDouble(priceString, priceFormat);
     }
 }

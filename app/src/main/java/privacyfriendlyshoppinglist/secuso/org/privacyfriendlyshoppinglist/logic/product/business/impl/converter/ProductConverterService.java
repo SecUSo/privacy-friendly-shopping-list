@@ -22,4 +22,6 @@ public interface ProductConverterService extends ContextSetter
     void convertEntitiesToDto(ProductTemplateEntity templateEntity, ProductItemEntity entity, ProductDto dto);
 
     String getDoubleAsString(Double price);
+
+    Double getStringAsDouble(String priceString);
 }
