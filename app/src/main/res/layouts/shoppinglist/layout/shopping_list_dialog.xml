@@ -34,7 +34,8 @@
         <Spinner
                 android:id="@+id/priority_spinner"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/colorAccent"/>
     </LinearLayout>
 
 
@@ -92,7 +93,7 @@
                     android:id="@+id/set_date_view"
                     android:layout_alignParentTop="true"
                     android:layout_gravity="center"
-                    android:text="@string/set_deadline_date"/>
+            />
         </LinearLayout>
 
         <LinearLayout
@@ -120,7 +121,7 @@
                     android:id="@+id/set_time_view"
                     android:layout_alignParentTop="true"
                     android:layout_gravity="center"
-                    android:text="@string/set_deadline_time"/>
+            />
         </LinearLayout>
 
         <LinearLayout
@@ -160,6 +161,7 @@
                     android:id="@+id/reminder_spinner"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:backgroundTint="@color/colorAccent"
                     android:layout_marginLeft="5dp"/>
 
         </LinearLayout>

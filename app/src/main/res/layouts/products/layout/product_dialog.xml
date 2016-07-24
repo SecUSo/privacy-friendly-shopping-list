@@ -1,9 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:orientation="vertical"
-              android:layout_width="wrap_content"
-              android:layout_height="wrap_content"
-              android:padding="5dp">
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="fill_parent"
+            android:layout_height="wrap_content">
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                  android:orientation="vertical"
+                  android:layout_width="wrap_content"
+                  android:layout_height="100dp"
+                  android:padding="5dp">
 
     <LinearLayout
             android:layout_width="wrap_content"
@@ -17,7 +20,7 @@
         <EditText
                 android:id="@+id/product_name"
                 android:inputType="text"
-                android:layout_width="263dp"
+                android:layout_width="225dp"
                 android:layout_height="wrap_content"
                 android:hint="@string/product_name">
         </EditText>
@@ -27,6 +30,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"/>
     </LinearLayout>
+
 
     <LinearLayout
             android:layout_width="wrap_content"
@@ -39,14 +43,16 @@
                 android:orientation="horizontal">
             <Button
                     style="?android:attr/buttonStyleSmall"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_marginLeft="10dp"
                     android:background="@drawable/button_normal"
                     android:text="-"
                     android:id="@+id/product_button_minus"/>
-            <Button style="?android:attr/buttonStyleSmall"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+            <Button
+                    style="?android:attr/buttonStyleSmall"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
                     android:layout_marginLeft="3dp"
                     android:background="@drawable/button_normal"
                     android:text="+"
@@ -58,7 +64,7 @@
                     android:layout_height="wrap_content"
                     android:padding="15dp"
                     android:layout_marginTop="4dp"
-                    android:layout_marginLeft="4dp"
+                    android:layout_marginLeft="10dp"
                     android:layout_marginRight="4dp"
                     android:layout_marginBottom="16dp"
                     android:fontFamily="sans-serif" android:layout_weight="0.26"
@@ -79,6 +85,7 @@
             <EditText
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:id="@+id/product_price"
                     android:inputType="numberDecimal"
                     android:padding="15dp"
                     android:hint="0.00"/>
@@ -105,10 +112,14 @@
                     android:layout_height="wrap_content"
                     android:text="Category"/>
 
-            <Spinner
-                    android:id="@+id/category_spinner"
+            <EditText
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
+                    android:layout_height="wrap_content"
+                    android:id="@+id/category_input"
+                    android:layout_marginLeft="5dp"
+                    android:inputType="textAutoComplete"
+                    android:maxLength="40"
+                    android:hint="Enter Category:"/>
 
         </LinearLayout>
 
@@ -116,18 +127,21 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:padding="5dp"
-        >
+                android:padding="5dp">
 
             <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Store"/>
 
-            <Spinner
-                    android:id="@+id/store_spinner"
+            <EditText
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
+                    android:layout_height="wrap_content"
+                    android:id="@+id/store_input"
+                    android:layout_marginLeft="23dp"
+                    android:inputType="textAutoComplete"
+                    android:maxLength="40"
+                    android:hint="Enter Store:"/>
 
         </LinearLayout>
 
@@ -144,4 +158,6 @@
             android:layout_marginBottom="4dp"
             android:hint="@string/list_notes"/>
 
-</LinearLayout>
+
+    </LinearLayout>
+</ScrollView>

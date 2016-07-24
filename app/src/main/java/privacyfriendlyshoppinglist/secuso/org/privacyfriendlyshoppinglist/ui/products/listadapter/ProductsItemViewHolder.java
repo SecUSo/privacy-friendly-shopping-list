@@ -2,6 +2,7 @@ package privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.pr
 
 import android.content.res.ColorStateList;
 import android.content.res.Resources;
+import android.support.v4.app.DialogFragment;
 import android.support.v7.widget.AppCompatCheckBox;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
@@ -14,6 +15,7 @@ import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framew
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.product.business.ProductService;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.product.business.domain.ProductDto;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.products.ProductActivityCache;
+import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.products.ProductDialogFragment;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.products.ProductsActivity;
 
 /**
@@ -69,6 +71,10 @@ public class ProductsItemViewHolder extends RecyclerView.ViewHolder
             public void onClick(View v)
             {
                 // todo: show seek bar to modify bought quantity
+
+                DialogFragment productFragement = ProductDialogFragment.newInstance(dto, productActivityCache);
+                productFragement.show(productActivityCache.getActivity().getSupportFragmentManager(), "Product");
+
             }
         });
 

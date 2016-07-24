@@ -42,7 +42,6 @@ public class ProductsActivity extends AppCompatActivity
 
         AbstractInstanceFactory instanceFactory = new InstanceFactory(getApplicationContext());
         this.productService = (ProductService) instanceFactory.createInstance(ProductService.class);
-        cache = new ProductActivityCache(this, listId);
 
         updateListView();
 

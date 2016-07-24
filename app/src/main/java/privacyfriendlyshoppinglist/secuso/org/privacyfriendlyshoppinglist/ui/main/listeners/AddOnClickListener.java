@@ -7,7 +7,7 @@ import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framew
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.shoppingList.business.ShoppingListService;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.shoppingList.business.domain.ListDto;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.main.ShoppingListActivityCache;
-import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.shoppinglist.EditDialogFragment;
+import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.shoppinglist.ListDialogFragment;
 
 /**
  * Description:
@@ -34,9 +34,9 @@ public class AddOnClickListener implements View.OnClickListener
         ListDto dto = new ListDto();
         String priority = "1";
         dto.setPriority(priority);
-        EditDialogFragment editDialogFragment = EditDialogFragment.newInstance(dto, cache);
+        ListDialogFragment listDialogFragment = ListDialogFragment.newInstance(dto, cache);
 
-        editDialogFragment.show(cache.getActivity().getSupportFragmentManager(), "DialogFragment");
+        listDialogFragment.show(cache.getActivity().getSupportFragmentManager(), "DialogFragment");
 
 
 
