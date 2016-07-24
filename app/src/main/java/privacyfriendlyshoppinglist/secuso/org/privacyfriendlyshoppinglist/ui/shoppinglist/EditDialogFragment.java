@@ -163,7 +163,6 @@ public class EditDialogFragment extends DialogFragment
                 }, year, month, day);
                 datePickerDialog.setTitle("Set Date:");
                 datePickerDialog.show();
-
             }
         });
 
