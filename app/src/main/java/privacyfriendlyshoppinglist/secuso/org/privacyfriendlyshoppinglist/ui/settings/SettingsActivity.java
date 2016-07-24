@@ -185,7 +185,7 @@ public class SettingsActivity extends BaseActivity
             // to their values. When their values change, their summaries are
             // updated to reflect the new value, per the Android Design
             // guidelines.
-            //bindPreferenceSummaryToValue(findPreference("example_text"));
+            bindPreferenceSummaryToValue(findPreference(SettingsKeys.CURRENCY));
             //bindPreferenceSummaryToValue(findPreference("example_list"));
         }
 

@@ -4,6 +4,7 @@ import android.content.Context;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.R;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.persistence.DB;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.utils.DateUtils;
+import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.utils.StringUtils;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.product.business.domain.ProductDto;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.product.business.domain.ProductTemplateDto;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.product.business.impl.converter.ProductConverterService;
@@ -21,12 +22,15 @@ public class ProductConverterServiceImpl implements ProductConverterService
 {
     private String language;
     private String dateLongPattern;
+    private String priceFormat;
 
     @Override
     public void setContext(Context context, DB db)
     {
         this.language = context.getResources().getString(R.string.language);
         this.dateLongPattern = context.getResources().getString(R.string.date_long_pattern);
+        this.priceFormat = context.getResources().getString(R.string.number_format);
+
     }
 
     @Override
@@ -44,7 +48,7 @@ public class ProductConverterServiceImpl implements ProductConverterService
 
         Date purchasedDate = DateUtils.getDateFromString(dto.getLastTimePurchased(), dateLongPattern, language).toDate();
         entity.setPurchasedDate(purchasedDate);
-        entity.setSelected(dto.isSelected());
+        entity.setSelected(dto.isChecked());
     }
 
     @Override
@@ -92,10 +96,17 @@ public class ProductConverterServiceImpl implements ProductConverterService
         dto.setQuantityPurchased(String.valueOf(entity.getQuantityPurchased()));
         dto.setProductNotes(entity.getNotes());
         dto.setProductStore(entity.getStore());
-        dto.setProductPrice(String.valueOf(entity.getPrice()));
+
+        dto.setProductPrice(getDoubleAsString(entity.getPrice()));
 
         String dateAsString = DateUtils.getDateAsString(entity.getPurchasedDate().getTime(), dateLongPattern, language);
         dto.setLastTimePurchased(dateAsString);
-        dto.setSelected(entity.getSelected());
+        dto.setChecked(entity.getSelected());
+    }
+
+    @Override
+    public String getDoubleAsString(Double price)
+    {
+        return StringUtils.getDoubleAsString(price, priceFormat);
     }
 }

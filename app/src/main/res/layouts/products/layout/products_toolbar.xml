@@ -15,29 +15,8 @@
             app:layout_scrollFlags="scroll|enterAlways"
             app:popupTheme="@style/AppTheme.PopupOverlay">
 
-        <LinearLayout
-                android:background="?attr/colorAccent"
-                android:orientation="horizontal"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="right">
+        <include layout="@layout/toolbar_icons"/>
 
-            <ImageView
-                    android:id="@+id/imageview_sort"
-                    android:padding="@dimen/icon_padding"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:tint="@color/white"
-                    android:src="@drawable/ic_sort_white_24dp"/>
-
-            <ImageView
-                    android:id="@+id/imageview_delete"
-                    android:padding="@dimen/icon_padding"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:tint="@color/white"
-                    android:src="@drawable/ic_delete_white_24dp"/>
-        </LinearLayout>
     </android.support.v7.widget.Toolbar>
 
 </android.support.design.widget.AppBarLayout>

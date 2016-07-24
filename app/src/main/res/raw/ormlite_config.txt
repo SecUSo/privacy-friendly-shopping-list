@@ -1,5 +1,5 @@
 #
-# generated on 2016/06/11 08:38:16
+# generated on 2016/07/23 03:17:12
 #
 # --table-start--
 dataClass=privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.persistence.AbstractEntity
@@ -13,42 +13,57 @@ generatedId=true
 # --table-end--
 #################################
 # --table-start--
-dataClass=privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.product.persistence.entity.ProductItemEntity
-tableName=productitementity
+dataClass=privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.statistics.persistence.entity.StatisticEntryEntity
+tableName=statisticentryentity
 # --table-fields-start--
 # --field-start--
-fieldName=productTemplate
-canBeNull=false
-foreign=true
+fieldName=recordDate
+# --field-end--
+# --field-start--
+fieldName=productName
 # --field-end--
 # --field-start--
 fieldName=quantity
 # --field-end--
 # --field-start--
-fieldName=quantityPurchased
+fieldName=unitPrice
 # --field-end--
 # --field-start--
-fieldName=notes
+fieldName=productCategory
 # --field-end--
 # --field-start--
-fieldName=store
+fieldName=productStore
 # --field-end--
 # --field-start--
-fieldName=price
+fieldName=id
+generatedId=true
+# --field-end--
+# --table-fields-end--
+# --table-end--
+#################################
+# --table-start--
+dataClass=privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.shoppingList.persistence.entity.ShoppingListEntity
+tableName=shoppinglistentity
+# --table-fields-start--
+# --field-start--
+fieldName=listName
+canBeNull=false
 # --field-end--
 # --field-start--
-fieldName=purchasedDate
+fieldName=priority
 # --field-end--
 # --field-start--
 fieldName=icon
 # --field-end--
 # --field-start--
-fieldName=selected
+fieldName=deadline
 # --field-end--
 # --field-start--
-fieldName=shoppingList
-canBeNull=false
-foreign=true
+fieldName=notes
+# --field-end--
+# --field-start--
+fieldName=products
+foreignCollection=true
 # --field-end--
 # --field-start--
 fieldName=id
@@ -95,28 +110,42 @@ generatedId=true
 # --table-end--
 #################################
 # --table-start--
-dataClass=privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.shoppingList.persistence.entity.ShoppingListEntity
-tableName=shoppinglistentity
+dataClass=privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.product.persistence.entity.ProductItemEntity
+tableName=productitementity
 # --table-fields-start--
 # --field-start--
-fieldName=listName
+fieldName=productTemplate
 canBeNull=false
+foreign=true
 # --field-end--
 # --field-start--
-fieldName=priority
+fieldName=quantity
 # --field-end--
 # --field-start--
-fieldName=icon
-# --field-end--
-# --field-start--
-fieldName=deadline
+fieldName=quantityPurchased
 # --field-end--
 # --field-start--
 fieldName=notes
 # --field-end--
 # --field-start--
-fieldName=products
-foreignCollection=true
+fieldName=store
+# --field-end--
+# --field-start--
+fieldName=price
+# --field-end--
+# --field-start--
+fieldName=purchasedDate
+# --field-end--
+# --field-start--
+fieldName=icon
+# --field-end--
+# --field-start--
+fieldName=selected
+# --field-end--
+# --field-start--
+fieldName=shoppingList
+canBeNull=false
+foreign=true
 # --field-end--
 # --field-start--
 fieldName=id

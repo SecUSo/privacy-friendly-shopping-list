@@ -13,20 +13,17 @@ import java.util.List;
  */
 public interface ShoppingListService extends ContextSetter
 {
-    String SORT_BY_NAME = "name";
-    String SORT_BY_PRIORITY = "priority";
-
     void saveOrUpdate(ListDto dto);
 
-    ListDto getById (String id);
+    ListDto getById(String id);
 
     ShoppingListEntity getEntityById(String id);
 
-    void deleteById (String id);
+    void deleteById(String id);
 
     List<ListDto> getAllListDtos();
 
-    void deleteSelected(List<ListDto> shoppingListDtos);
+    List<String> deleteSelected(List<ListDto> shoppingListDtos);
 
     List<ListDto> moveSelectedToEnd(List<ListDto> shoppingListDtos);
 

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    <include layout="@layout/toolbar"/>
+
+    <TextView
+            android:id="@+id/textview_stats_title"
+            android:padding="16dp"
+            android:text="@string/ph_stats_title"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="@dimen/text_medium"
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"/>
+
+    <RelativeLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_above="@+id/parameters">
+            <com.github.mikephil.charting.charts.BarChart
+                    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+                    android:id="@+id/chart"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"/>
+        </LinearLayout>
+
+        <include layout="@layout/statistics_parameters"/>
+
+    </RelativeLayout>
+
+</LinearLayout>

@@ -10,13 +10,13 @@ import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framew
  * Author: Grebiel Jose Ifill Brito
  * Created: 11.06.16 creation date
  */
-abstract public class AbstractInstanceFactory
+public abstract class AbstractInstanceFactory
 {
-    private Context context;
+    private static Context context;
 
     public AbstractInstanceFactory(Context context)
     {
-        this.context = context;
+        AbstractInstanceFactory.context = context;
     }
 
     public Object createInstance(Class aClass)
@@ -27,5 +27,13 @@ abstract public class AbstractInstanceFactory
         return classInstance;
     }
 
-    abstract protected DB getDB();
+    public static Object createInstance(Class aClass, DB db)
+    {
+        ObjectGraph objectGraph = ObjectGraph.create(new AppContextModule());
+        Object classInstance = objectGraph.get(aClass);
+        ((ContextSetter) classInstance).setContext(context, db);
+        return classInstance;
+    }
+
+    protected abstract DB getDB();
 }

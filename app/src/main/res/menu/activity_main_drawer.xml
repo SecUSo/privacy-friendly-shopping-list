@@ -5,8 +5,12 @@
            android:checkableBehavior="all">
         <item
                 android:id="@+id/nav_example"
-                android:icon="@drawable/ic_menu_gallery"
+                android:icon="@drawable/ic_home_white_24dp"
                 android:title="@string/action_main"/>
+        <item
+                android:id="@+id/nav_statistics"
+                android:icon="@drawable/ic_insert_chart_white_24dp"
+                android:title="@string/statistics"/>
     </group>
 
     <group android:id="@+id/nav_group_add"

@@ -9,7 +9,7 @@ import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.shoppingList.business.domain.ListDto;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.baseactivity.BaseActivity;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.main.listeners.AddOnClickListener;
-import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.main.listeners.ShowDeleteViewOnClickListener;
+import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.main.listeners.ShowDeleteListsOnClickListener;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.main.listeners.SortOnClickListener;
 
 import java.util.List;
@@ -21,8 +21,10 @@ import java.util.List;
  */
 public class MainActivity extends BaseActivity
 {
+    public static final String LIST_NAME_KEY = "list.name";
+    public static final String LIST_ID_KEY = "list.id";
     private ShoppingListService shoppingListService;
-    private ShoppingListCache cache;
+    private ShoppingListActivityCache cache;
 
     @Override
     protected final void onCreate(final Bundle savedInstanceState)
@@ -32,7 +34,7 @@ public class MainActivity extends BaseActivity
 
         AbstractInstanceFactory instanceFactory = new InstanceFactory(getApplicationContext());
         this.shoppingListService = (ShoppingListService) instanceFactory.createInstance(ShoppingListService.class);
-        cache = new ShoppingListCache(this);
+        cache = new ShoppingListActivityCache(this);
 
         getApplicationContext().deleteDatabase(DB.APP.getDbName());
 
@@ -43,9 +45,16 @@ public class MainActivity extends BaseActivity
 
         cache.getNewListFab().setOnClickListener(new AddOnClickListener(cache));
         cache.getSortImageView().setOnClickListener(new SortOnClickListener(cache));
-        cache.getDeleteImageView().setOnClickListener(new ShowDeleteViewOnClickListener(cache));
+        cache.getDeleteImageView().setOnClickListener(new ShowDeleteListsOnClickListener(cache));
 
         overridePendingTransition(0, 0);
+    }
+
+    @Override
+    protected void onRestart()
+    {
+        super.onRestart();
+        updateListView();
     }
 
     @Override

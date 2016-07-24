@@ -15,7 +15,7 @@ import java.util.ArrayList;
  * Author: Grebiel Jose Ifill Brito
  * Created: 16.07.16 creation date
  */
-public class ShoppingListCache
+public class ShoppingListActivityCache
 {
     private AppCompatActivity activity;
     private FloatingActionButton newListFab;
@@ -23,7 +23,7 @@ public class ShoppingListCache
     private ImageView sortImageView;
     private ImageView deleteImageView;
 
-    public ShoppingListCache(AppCompatActivity activity)
+    public ShoppingListActivityCache(AppCompatActivity activity)
     {
         this.activity = activity;
 

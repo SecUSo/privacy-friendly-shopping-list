@@ -1,10 +1,13 @@
 package privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.product.business.impl;
 
 import android.content.Context;
+import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.comparators.PFAComparators;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.persistence.DB;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.product.business.ProductService;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.product.business.domain.ProductDto;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.product.business.domain.ProductTemplateDto;
+import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.product.business.domain.TotalDto;
+import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.product.business.impl.comparators.ProductComparators;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.product.business.impl.converter.ProductConverterService;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.product.business.impl.validator.ProductValidatorService;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.product.persistence.ProductItemDao;
@@ -13,8 +16,10 @@ import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.product.persistence.entity.ProductTemplateEntity;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.shoppingList.business.ShoppingListService;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.shoppingList.persistence.entity.ShoppingListEntity;
+import rx.Observable;
 
 import javax.inject.Inject;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -29,6 +34,7 @@ public class ProductServiceImpl implements ProductService
     private ProductConverterService converterService;
     private ProductValidatorService validatorService;
     private ShoppingListService shoppingListService;
+    private Context context;
 
     @Inject
     public ProductServiceImpl(
@@ -49,6 +55,7 @@ public class ProductServiceImpl implements ProductService
     @Override
     public void setContext(Context context, DB db)
     {
+        this.context = context;
         productItemDao.setContext(context, db);
         productTemplateDao.setContext(context, db);
         shoppingListService.setContext(context, db);
@@ -82,6 +89,7 @@ public class ProductServiceImpl implements ProductService
     public ProductDto getById(String entityId)
     {
         ProductItemEntity productEntity = productItemDao.getById(Long.valueOf(entityId));
+        if ( productEntity == null ) return null;
         Long templateId = productEntity.getProductTemplate().getId();
         ProductTemplateEntity templateEntity = productTemplateDao.getById(Long.valueOf(templateId));
 
@@ -93,36 +101,134 @@ public class ProductServiceImpl implements ProductService
     @Override
     public void deleteById(String id)
     {
-
+        productItemDao.deleteById(Long.valueOf(id));
     }
 
     @Override
     public void deleteSelected(List<ProductDto> productDtos)
     {
-
+        Observable.from(productDtos)
+                .filter(dto -> dto.isSelectedForDeletion())
+                .subscribe(dto -> deleteById(dto.getProductId()));
     }
 
     @Override
     public List<ProductDto> getAllProducts(String listId)
     {
-        return null;
+        Observable<ProductDto> dtos = Observable
+                .from(productItemDao.getAllEntities())
+                .filter(entity -> entity.getShoppingList().getId() == Long.valueOf(listId))
+                .map(this::getDto);
+
+        return dtos.toList().toBlocking().single();
+    }
+
+    @Override
+    public void deleteAllFromList(String listId)
+    {
+        List<ProductDto> productDtos = getAllProducts(listId);
+        Observable.from(productDtos)
+                .subscribe(dto -> deleteById(dto.getProductId()));
     }
 
     @Override
     public List<ProductTemplateDto> getAllTemplateProducts()
     {
-        return null;
+        Observable<ProductTemplateDto> dtos = Observable
+                .from(productTemplateDao.getAllEntities())
+                .map(this::getDto);
+
+        return dtos.toList().toBlocking().single();
     }
 
     @Override
-    public List<ProductDto> getAllSortedBySelection(List<ProductDto> productDtos)
+    public List<ProductDto> moveSelectedToEnd(List<ProductDto> productDtos)
     {
-        return null;
+        List<ProductDto> nonSelectedDtos = Observable
+                .from(productDtos)
+                .filter(dto -> !dto.isChecked())
+                .toList().toBlocking().single();
+
+        List<ProductDto> selectedDtos = Observable
+                .from(productDtos)
+                .filter(dto -> dto.isChecked())
+                .toList().toBlocking().single();
+        nonSelectedDtos.addAll(selectedDtos);
+        productDtos = nonSelectedDtos;
+        return productDtos;
+    }
+
+    @Override
+    public TotalDto computeTotals(List<ProductDto> productDtos)
+    {
+        double totalAmount = 0.0;
+        double checkedAmount = 0.0;
+        for ( ProductDto dto : productDtos )
+        {
+            String price = dto.getProductPrice();
+            if ( price != null )
+            {
+                Integer quantity = Integer.valueOf(dto.getQuantity());
+                double priceAsDouble = Double.parseDouble(price) * quantity;
+                totalAmount += priceAsDouble;
+                if ( dto.isChecked() )
+                {
+                    checkedAmount += priceAsDouble;
+                }
+            }
+        }
+
+        TotalDto totalDto = new TotalDto();
+
+        if ( totalAmount == 0.0 )
+        {
+            totalDto.setEqualsZero(true);
+        }
+        totalDto.setTotalAmount(converterService.getDoubleAsString(totalAmount));
+        totalDto.setCheckedAmount(converterService.getDoubleAsString(checkedAmount));
+
+        return totalDto;
     }
 
     @Override
     public void sortProducts(List<ProductDto> products, String criteria, boolean ascending)
     {
+        if ( PFAComparators.SORT_BY_NAME.equals(criteria) )
+        {
+            Collections.sort(products, ProductComparators.getNameComparator(ascending));
+        }
+        else if ( PFAComparators.SORT_BY_QUANTITY.equals(criteria) )
+        {
+            Collections.sort(products, ProductComparators.getQuantityCompartor(ascending));
+        }
+        else if ( PFAComparators.SORT_BY_STORE.equals(criteria) )
+        {
+            Collections.sort(products, ProductComparators.getStoreComparator(ascending));
+        }
+        else if ( PFAComparators.SORT_BY_CATEGORY.equals(criteria) )
+        {
+            Collections.sort(products, ProductComparators.getCategoryComparator(ascending));
+        }
+        else if ( PFAComparators.SORT_BY_PRICE.equals(criteria) )
+        {
+            Collections.sort(products, ProductComparators.getPriceComparator(ascending, context));
+        }
+    }
 
+    private ProductDto getDto(ProductItemEntity entity)
+    {
+        // the next line retrieves only the id. The whole entity is needed
+        ProductTemplateEntity templateReference = entity.getProductTemplate();
+        ProductTemplateEntity productTemplateEntity = productTemplateDao.getById(templateReference.getId());
+        ProductDto dto = new ProductDto();
+        converterService.convertEntitiesToDto(productTemplateEntity, entity, dto);
+        return dto;
+    }
+
+    private ProductTemplateDto getDto(ProductTemplateEntity entity)
+    {
+        ProductTemplateDto dto = new ProductTemplateDto();
+        converterService.convertTemplateEntityToDto(entity, dto);
+        return dto;
     }
 }

@@ -6,15 +6,42 @@
     <string name="language">US</string>
     <string name="date_long_pattern">EE MM/dd/yyyy HH:mm</string>
     <string name="date_short_pattern">EE MM/dd/yyyy</string>
+    <string name="date_day_stats_pattern">MM/dd/yy</string>
+    <string name="date_month_pattern">MMM yy</string>
     <string name="time_pattern">HH:mm</string>
+    <string name="number_format">"###,###,###,##0.00"</string>
+    <string name="currency">$</string>
 
-    <!--### MAIN ###-->
-    <!-- Lists Placeholders-->
+    <!-- Placeholders-->
     <string name="ph_list_name" translatable="false">List Name</string>
+    <string name="ph_product_name" translatable="false">Product Name</string>
+    <string name="ph_product_info" translatable="false">Store: Aldi, Category: Snacks</string>
+    <string name="ph_total_amount" translatable="false">50.00</string>
+    <string name="ph_total_in_shopping_cart" translatable="false">35.00</string>
     <string name="ph_list_nr_items" translatable="false">X</string>
+    <string name="ph_stats_title" translatable="false">Title</string>
 
     <!-- ### SHOPPING LIST ### -->
     <string name="activity_shopping_list">Shopping List:</string>
+
+    <!-- ### PRODUCTS ### -->
+    <string name="total_amount">Total:</string>
+    <string name="total_amount_separator">/</string>
+    <string name="store_label">Store:</string>
+    <string name="category_label">Category:</string>
+
+    <!-- ### Statistics -->
+    <string name="statistics_total_amout">Total:</string>
+    <string name="statistics_range">Range:</string>
+    <string name="statistics_group_by">Group by:</string>
+    <string name="statistics_amount_vs_months">Amount vs. Months</string>
+    <string name="statistics_amount_vs_weeks">Amount vs. Weeks</string>
+    <string name="statistics_amount_vs_days">Amount vs. Days</string>
+    <string name="statistics_amount_vs_categories">Amount vs. Categories</string>
+    <string name="statistics_amount_vs_products">Amount vs. Products</string>
+    <string name="statistics_amount_vs_stores">Amount vs. Stores</string>
+
+    <!-- ### SORT ### -->
     <string name="sort_lists">Sort Options</string>
     <string name="sort_ascencing_descending">Ascending/Descending</string>
     <string name="sort_ascencing">Ascending</string>
@@ -22,13 +49,26 @@
     <string name="sort_by">Sort By</string>
     <string name="sort_by_name">Name</string>
     <string name="sort_by_priority">Priority</string>
+    <string name="sort_by_quantity">Quantity</string>
+    <string name="sort_by_store">Store</string>
+    <string name="sort_by_price">Price</string>
+    <string name="sort_by_category">Category</string>
 
 
     <!-- ### DELETE SHOPPING LISTS ### -->
-    <string name="activity_delete_lists">Delete Shopping Lists</string>
-    <string name="delele_lists_confirmation">Do you really want to delete the selected items? This operation cannot be
+    <string name="delele_lists_confirmation">Do you really want to delete the checked items? This operation cannot be
         undone.
     </string>
+    <string name="activity_delete_lists">Delete Shopping Lists</string>
+    <!-- ### DELETE PRODUCTS LISTS ### -->
+    <string name="delele_products_confirmation">Do you really want to delete the checked products? This operation
+        cannot be
+        undone.
+    </string>
+    <string name="activity_delete_products">Delete Products</string>
+
+    <!-- ### STATISTICS ### -->
+    <string name="statistics">Statistics</string>
 
     <!--### ABOUT ###-->
     <string name="about">About</string>
@@ -54,11 +94,14 @@
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
     <!-- ### SETTINGS ### -->
-    <string name="title_activity_settings">Settings</string>
     <string name="pref_header_general">General</string>
-    <string name="pref_example_switch">Example Switch</string>
-    <string name="pref_example_switch_summary">Example Switch Summary</string>
-    <string name="pref_example_summary">Example Summary</string>
+    <string name="title_activity_settings">Settings</string>
+    <string name="pref_header_notifications">Notifications</string>
+    <string name="pref_notifications_title">Notifications</string>
+    <string name="pref_notifications_summary">Turn notifications on/off</string>
+    <string name="pref_header_currency">Currency</string>
+    <string name="pref_currency_title">Currency</string>
+    <string name="pref_currency_summary">Select currency</string>
 
     <!-- ### WELCOME DIALOG ### -->
     <string name="welcome_text">Welcome to the Privacy Friendly Example App. This App serves as a guideline to see the
@@ -75,6 +118,7 @@
     <string name="help">Help</string>
     <string name="help_overview_heading">Overview</string>
     <string name="help_example">Example Help Entry</string>
+    <string name="help_example_summary">Example help summary</string>
     <string name="help_category_example">Example Help Category</string>
     <string name="help_privacy_heading">Privacy Info</string>
     <string name="help_permissionXY_heading">Permission XY</string>
@@ -140,6 +184,30 @@
         <item>Days</item>
         <item>Weeks</item>
         <item>Reminder</item>
+    </string-array>
+
+    <string-array name="statistics_spinner_params">
+        <item>Month</item>
+        <item>Week</item>
+        <item>Day</item>
+        <item>Category</item>
+        <item>Store</item>
+        <item>Product</item>
+    </string-array>
+
+    <string-array name="statistics_months">
+        <item>Jan</item>
+        <item>Feb</item>
+        <item>Mar</item>
+        <item>Apr</item>
+        <item>May</item>
+        <item>Jun</item>
+        <item>Jul</item>
+        <item>Aug</item>
+        <item>Sep</item>
+        <item>Oct</item>
+        <item>Nov</item>
+        <item>Dec</item>
     </string-array>
 
 

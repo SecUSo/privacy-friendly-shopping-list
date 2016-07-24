@@ -5,9 +5,11 @@ import android.view.View;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.R;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.context.AbstractInstanceFactory;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.context.InstanceFactory;
+import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.product.business.ProductService;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.shoppingList.business.ShoppingListService;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.shoppingList.business.domain.ListDto;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.deletelists.DeleteListsCache;
+import rx.Observable;
 
 import java.util.List;
 
@@ -19,6 +21,7 @@ import java.util.List;
 public class DeleteOnClickListener implements View.OnClickListener
 {
     private ShoppingListService shoppingListService;
+    private ProductService productService;
     private DeleteListsCache cache;
 
     public DeleteOnClickListener(DeleteListsCache cache)
@@ -26,6 +29,7 @@ public class DeleteOnClickListener implements View.OnClickListener
         this.cache = cache;
         AbstractInstanceFactory instanceFactory = new InstanceFactory(cache.getActivity().getApplicationContext());
         this.shoppingListService = (ShoppingListService) instanceFactory.createInstance(ShoppingListService.class);
+        this.productService = (ProductService) instanceFactory.createInstance(ProductService.class);
     }
 
     @Override
@@ -38,7 +42,8 @@ public class DeleteOnClickListener implements View.OnClickListener
                     public void onClick(View v)
                     {
                         List<ListDto> shoppingList = cache.getDeleteListsAdapter().getShoppingList();
-                        shoppingListService.deleteSelected(shoppingList);
+                        List<String> deletedIds = shoppingListService.deleteSelected(shoppingList);
+                        Observable.from(deletedIds).subscribe(id -> productService.deleteAllFromList(id));
                         updateListView();
                     }
                 }).show();

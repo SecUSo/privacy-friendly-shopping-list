@@ -3,6 +3,7 @@ package privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.context.ContextSetter;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.product.business.domain.ProductDto;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.product.business.domain.ProductTemplateDto;
+import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.product.business.domain.TotalDto;
 
 import java.util.List;
 
@@ -29,9 +30,13 @@ public interface ProductService extends ContextSetter
 
     List<ProductDto> getAllProducts(String listId);
 
+    void deleteAllFromList(String listId);
+
     List<ProductTemplateDto> getAllTemplateProducts();
 
-    List<ProductDto> getAllSortedBySelection(List<ProductDto> productDtos);
+    List<ProductDto> moveSelectedToEnd(List<ProductDto> productDtos);
+
+    TotalDto computeTotals(List<ProductDto> productDtos);
 
     void sortProducts(List<ProductDto> products, String criteria, boolean ascending);
 }
