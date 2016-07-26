@@ -8,10 +8,13 @@ import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.R;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.context.AbstractInstanceFactory;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.context.InstanceFactory;
+import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.utils.StringUtils;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.product.business.ProductService;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.product.business.domain.ProductDto;
 
@@ -31,6 +34,9 @@ public class ProductDialogFragment extends DialogFragment
     private EditText category;
     private EditText productNotes;
 
+    private Button buttonPlus;
+    private Button buttonMinus;
+    private CheckBox productCheckBox;
 
     public static ProductDialogFragment newInstance(ProductDto dto, ProductActivityCache cache)
     {
@@ -76,12 +82,76 @@ public class ProductDialogFragment extends DialogFragment
         category = (EditText) v.findViewById(R.id.category_input);
         productNotes = (EditText) v.findViewById(R.id.product_notes);
 
+        buttonPlus = (Button) v.findViewById(R.id.product_button_plus);
+        buttonMinus = (Button) v.findViewById(R.id.product_button_minus);
+        productCheckBox = (CheckBox) v.findViewById(R.id.product_checkbox);
+
+
+
         productName.setText(dto.getProductName());
         productNotes.setText(dto.getProductNotes());
         quantity.setText(dto.getQuantity());
         price.setText(dto.getProductPrice());
         category.setText(dto.getProductCategory());
         customStore.setText(dto.getProductStore());
+
+        if ( dto.isChecked() )
+        {
+            productCheckBox.setChecked(true);
+        }
+
+        productCheckBox.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View view)
+            {
+                if ( !productCheckBox.isChecked() )
+                {
+                    productCheckBox.setChecked(true);
+                }
+                else
+                {
+                    productCheckBox.setChecked(false);
+                }
+
+            }
+        });
+
+        buttonPlus.setOnClickListener(new View.OnClickListener()
+        {
+            int value;
+            String newQuantity;
+
+            @Override
+            public void onClick(View view)
+            {
+                if ( !StringUtils.isEmpty(String.valueOf(quantity.getText())) )
+                {
+                    value = Integer.parseInt(String.valueOf(quantity.getText()));
+                    value++;
+                    newQuantity = String.valueOf(value);
+                    quantity.setText(newQuantity);
+                }
+            }
+        });
+
+        buttonMinus.setOnClickListener(new View.OnClickListener()
+        {
+            int value;
+            String newQuantity;
+
+            @Override
+            public void onClick(View view)
+            {
+                value = Integer.parseInt(String.valueOf(quantity.getText()));
+                if ( value > 0 )
+                {
+                    value--;
+                    newQuantity = String.valueOf(value);
+                    quantity.setText(newQuantity);
+                }
+            }
+        });
 
         builder.setPositiveButton(cache.getActivity().getResources().getString(R.string.okay), new DialogInterface.OnClickListener()
         {
@@ -94,6 +164,11 @@ public class ProductDialogFragment extends DialogFragment
                 dto.setProductPrice(String.valueOf(price.getText()));
                 dto.setProductCategory(String.valueOf(category.getText()));
                 dto.setProductStore(String.valueOf(customStore.getText()));
+
+                if ( productCheckBox.isChecked() )
+                {
+                    dto.setChecked(true);
+                }
 
                 productService.saveOrUpdate(dto, cache.getListId());
                 ProductsActivity productsActivity = (ProductsActivity) cache.getActivity();

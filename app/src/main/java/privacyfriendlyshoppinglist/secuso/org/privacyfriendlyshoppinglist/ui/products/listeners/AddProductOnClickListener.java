@@ -33,6 +33,12 @@ public class AddProductOnClickListener implements View.OnClickListener
     {
         ProductDto dto = createFakeDto();
 
+//        ProductDto dto = new ProductDto();
+//        dto.setQuantity("0");
+//        dto.setProductPrice("0.00");
+//        dto.setHistoryCount("0");
+//        ProductDialogFragment productDialogFragment = ProductDialogFragment.newInstance(dto, cache);
+//        productDialogFragment.show(cache.getActivity().getSupportFragmentManager(), "ProductDialog");
 
         productService.saveOrUpdate(dto, cache.getListId());
 

@@ -156,6 +156,7 @@
 
     <string name="product_name">Enter Product</string>
     <string name="quantity">0</string>
+    <string name="price">0.00</string>
 
     <!-- Shopping List Dialog -->
     <string name="list_name">Enter List Name</string>

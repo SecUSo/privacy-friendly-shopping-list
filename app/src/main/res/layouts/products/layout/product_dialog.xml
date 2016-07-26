@@ -1,12 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="fill_parent"
-            android:layout_height="wrap_content">
 
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                  android:orientation="vertical"
-                  android:layout_width="wrap_content"
-                  android:layout_height="100dp"
-                  android:padding="5dp">
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:orientation="vertical"
+>
+
+    <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fillViewport="true">
+
+        <LinearLayout android:layout_width="match_parent"
+                      android:layout_height="match_parent"
+                      android:orientation="vertical"
+                      android:scrollbars="vertical"
+                      android:scrollbarAlwaysDrawVerticalTrack="true">
 
     <LinearLayout
             android:layout_width="wrap_content"
@@ -28,9 +38,10 @@
         <CheckBox
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:id="@+id/product_checkbox"
+                android:layout_marginLeft="10dp"
                 android:layout_alignParentRight="true"/>
     </LinearLayout>
-
 
     <LinearLayout
             android:layout_width="wrap_content"
@@ -62,6 +73,7 @@
                     android:inputType="number"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:maxLength="3"
                     android:padding="15dp"
                     android:layout_marginTop="4dp"
                     android:layout_marginLeft="10dp"
@@ -80,7 +92,7 @@
 
             <TextView android:layout_width="wrap_content"
                       android:layout_height="wrap_content"
-                      android:text="Prize: "/>
+                      android:text="Price: "/>
 
             <EditText
                     android:layout_width="wrap_content"
@@ -88,7 +100,7 @@
                     android:id="@+id/product_price"
                     android:inputType="numberDecimal"
                     android:padding="15dp"
-                    android:hint="0.00"/>
+                    android:hint="@string/price"/>
 
         </LinearLayout>
 
@@ -158,6 +170,8 @@
             android:layout_marginBottom="4dp"
             android:hint="@string/list_notes"/>
 
-
     </LinearLayout>
 </ScrollView>
+
+</LinearLayout>
+
