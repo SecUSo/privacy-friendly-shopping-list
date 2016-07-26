@@ -3,8 +3,12 @@ package privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.pr
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.app.Fragment;
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.support.v4.app.DialogFragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -39,6 +43,9 @@ public class ProductDialogFragment extends DialogFragment
     private Button buttonPlus;
     private Button buttonMinus;
     private CheckBox productCheckBox;
+
+    private Button cameraButton;
+    private ImageView cameraImage;
 
     public static ProductDialogFragment newInstance(ProductDto dto, ProductActivityCache cache)
     {
@@ -91,6 +98,9 @@ public class ProductDialogFragment extends DialogFragment
         expandableLayout = (LinearLayout) v.findViewById(R.id.expandable_product_view);
         expandableHint = (TextView) v.findViewById(R.id.expand_text);
         expandableButton = (Button) v.findViewById(R.id.expand_button);
+
+        cameraButton = (Button) v.findViewById(R.id.camera_button);
+        cameraImage = (ImageView) v.findViewById(R.id.image_view);
 
 
         expandableLayout.setVisibility(View.GONE);
@@ -177,6 +187,34 @@ public class ProductDialogFragment extends DialogFragment
                     expandableHint.setText("Expand Details");
                 }
             }
+        });
+
+
+        final int CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE = 100;
+        Uri fileUri;
+        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+
+
+        cameraButton.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View view)
+            {
+//                fileUri = getOutputMediaFileUri(MEDIA_TYPE_IMAGE); // create a file to save the image
+//                intent.putExtra(MediaStore.EXTRA_OUTPUT, fileUri); // set the image file name
+
+//                activity.startActivityForResult(intent, 0);
+//                Bitmap bp = (Bitmap) intent.getExtras().get("data");
+//                cameraImage.setImageBitmap(bp);
+
+                final Fragment homeFragment = activity.getFragmentManager().findFragmentById(R.id.cont);
+
+                homeFragment.startActivityForResult(intent, 0);
+
+                ProductDialogFragment.super.onActivityResult( int requestCode, intent);
+
+            }
+
         });
 
 

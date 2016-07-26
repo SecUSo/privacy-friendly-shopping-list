@@ -122,54 +122,79 @@
             android:orientation="vertical"
             android:id="@+id/expandable_product_view">
 
-    <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="10dp">
-
         <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
-            <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Category"/>
 
-            <EditText
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/category_input"
-                    android:layout_marginLeft="5dp"
-                    android:inputType="textAutoComplete"
-                    android:maxLength="40"
-                    android:hint="Enter Category:"/>
+            <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="10dp">
+
+                <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                    <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Category"/>
+
+                    <EditText
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/category_input"
+                            android:layout_gravity="left"
+
+                            android:inputType="textAutoComplete"
+                            android:maxLength="40"
+                            android:hint="Enter Category:"/>
+                </LinearLayout>
+
+                <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_marginTop="3dp"
+                        android:padding="5dp">
+
+                    <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Store"/>
+
+                    <EditText
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/store_input"
+                            android:layout_gravity="left"
+                            android:inputType="textAutoComplete"
+                            android:maxLength="40"
+                            android:hint="Enter Store:"/>
+                </LinearLayout>
 
         </LinearLayout>
 
-        <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:padding="5dp">
-
-            <TextView
+            <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Store"/>
+                    android:orientation="vertical">
 
-            <EditText
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/store_input"
-                    android:layout_marginLeft="23dp"
-                    android:inputType="textAutoComplete"
-                    android:maxLength="40"
-                    android:hint="Enter Store:"/>
+                <Button android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="camera"
+                        android:id="@+id/camera_button"/>
 
-        </LinearLayout>
+                <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/image_view"/>
+
+            </LinearLayout>
 
     </LinearLayout>
 
@@ -180,10 +205,7 @@
             android:inputType="textMultiLine"
             android:layout_width="263dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
             android:layout_marginLeft="4dp"
-            android:layout_marginRight="4dp"
-            android:layout_marginBottom="4dp"
             android:hint="@string/list_notes"/>
 
 
