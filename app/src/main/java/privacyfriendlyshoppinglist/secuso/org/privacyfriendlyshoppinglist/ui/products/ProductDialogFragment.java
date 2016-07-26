@@ -169,14 +169,13 @@ public class ProductDialogFragment extends DialogFragment
                 if ( expandableLayout.getVisibility() == View.GONE )
                 {
                     expandableLayout.setVisibility(View.VISIBLE);
-                    expandableHint.setText("Collapse");
+                    expandableHint.setText("Collapse Details");
                 }
                 else
                 {
                     expandableLayout.setVisibility(View.GONE);
-                    expandableHint.setText("Expand");
+                    expandableHint.setText("Expand Details");
                 }
-
             }
         });
 
