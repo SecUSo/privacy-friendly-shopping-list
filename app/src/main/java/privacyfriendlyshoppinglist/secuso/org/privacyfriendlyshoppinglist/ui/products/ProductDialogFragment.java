@@ -8,9 +8,7 @@ import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.Button;
-import android.widget.CheckBox;
-import android.widget.EditText;
+import android.widget.*;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.R;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.context.AbstractInstanceFactory;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.context.InstanceFactory;
@@ -26,6 +24,10 @@ public class ProductDialogFragment extends DialogFragment
     private ProductActivityCache cache;
     private ProductDto dto;
     private ProductService productService;
+
+    private LinearLayout expandableLayout;
+    private TextView expandableHint;
+    private Button expandableButton;
 
     private EditText productName;
     private EditText quantity;
@@ -86,7 +88,12 @@ public class ProductDialogFragment extends DialogFragment
         buttonMinus = (Button) v.findViewById(R.id.product_button_minus);
         productCheckBox = (CheckBox) v.findViewById(R.id.product_checkbox);
 
+        expandableLayout = (LinearLayout) v.findViewById(R.id.expandable_product_view);
+        expandableHint = (TextView) v.findViewById(R.id.expand_text);
+        expandableButton = (Button) v.findViewById(R.id.expand_button);
 
+
+        expandableLayout.setVisibility(View.GONE);
 
         productName.setText(dto.getProductName());
         productNotes.setText(dto.getProductNotes());
@@ -152,6 +159,27 @@ public class ProductDialogFragment extends DialogFragment
                 }
             }
         });
+
+
+        expandableButton.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View view)
+            {
+                if ( expandableLayout.getVisibility() == View.GONE )
+                {
+                    expandableLayout.setVisibility(View.VISIBLE);
+                    expandableHint.setText("Collapse");
+                }
+                else
+                {
+                    expandableLayout.setVisibility(View.GONE);
+                    expandableHint.setText("Expand");
+                }
+
+            }
+        });
+
 
         builder.setPositiveButton(cache.getActivity().getResources().getString(R.string.okay), new DialogInterface.OnClickListener()
         {
