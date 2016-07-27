@@ -3,13 +3,13 @@ package privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.pr
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
-import android.app.Fragment;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.v4.app.DialogFragment;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.*;
@@ -112,27 +112,7 @@ public class ProductDialogFragment extends DialogFragment
         category.setText(dto.getProductCategory());
         customStore.setText(dto.getProductStore());
 
-        if ( dto.isChecked() )
-        {
-            productCheckBox.setChecked(true);
-        }
-
-        productCheckBox.setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View view)
-            {
-                if ( !productCheckBox.isChecked() )
-                {
-                    productCheckBox.setChecked(true);
-                }
-                else
-                {
-                    productCheckBox.setChecked(false);
-                }
-
-            }
-        });
+        productCheckBox.setChecked(dto.isChecked());
 
         buttonPlus.setOnClickListener(new View.OnClickListener()
         {
@@ -207,11 +187,11 @@ public class ProductDialogFragment extends DialogFragment
 //                Bitmap bp = (Bitmap) intent.getExtras().get("data");
 //                cameraImage.setImageBitmap(bp);
 
-                final Fragment homeFragment = activity.getFragmentManager().findFragmentById(R.id.cont);
+                //final Fragment homeFragment = activity.getFragmentManager().findFragmentById(R.id.cont);
 
-                homeFragment.startActivityForResult(intent, 0);
+                //homeFragment.startActivityForResult(intent, 0);
 
-                ProductDialogFragment.super.onActivityResult( int requestCode, intent);
+                //ProductDialogFragment.super.onActivityResult( int requestCode, intent);
 
             }
 
@@ -219,25 +199,40 @@ public class ProductDialogFragment extends DialogFragment
 
 
         builder.setPositiveButton(cache.getActivity().getResources().getString(R.string.okay), new DialogInterface.OnClickListener()
+
         {
             @Override
             public void onClick(DialogInterface dialogInterface, int i)
             {
-                dto.setProductName(String.valueOf(productName.getText()));
+/*                if ( StringUtils.isEmpty(String.valueOf(productName.getText())))
+                {
+                    Toast toast = Toast.makeText(activity.getApplicationContext(), "Bitte Produktnamen eingeben", Toast.LENGTH_LONG  );
+                    toast.setGravity(Gravity.CENTER, 0, 0);
+                    toast.show();
+                }
+                else { dto.setProductName(String.valueOf(productName.getText())); }
+
                 dto.setProductNotes(String.valueOf(productNotes.getText()));
                 dto.setQuantity(String.valueOf(quantity.getText()));
-                dto.setProductPrice(String.valueOf(price.getText()));
-                dto.setProductCategory(String.valueOf(category.getText()));
-                dto.setProductStore(String.valueOf(customStore.getText()));
-
-                if ( productCheckBox.isChecked() )
+                if ( !StringUtils.isEmpty(String.valueOf(quantity.getText())) && StringUtils.isEmpty(String.valueOf(price.getText())) )
                 {
-                    dto.setChecked(true);
+                    Toast toast = Toast.makeText(activity.getApplicationContext(), "Bitte Preis eingeben", Toast.LENGTH_LONG  );
+                    toast.setGravity(Gravity.CENTER, 0, 0);
+                    toast.show();
                 }
+                else
+                {
+                    dto.setProductPrice(String.valueOf(price.getText()));
 
-                productService.saveOrUpdate(dto, cache.getListId());
-                ProductsActivity productsActivity = (ProductsActivity) cache.getActivity();
-                productsActivity.updateListView();
+                    dto.setProductCategory(String.valueOf(category.getText()));
+                    dto.setProductStore(String.valueOf(customStore.getText()));
+
+                    dto.setChecked(productCheckBox.isChecked());
+
+                    productService.saveOrUpdate(dto, cache.getListId());
+                    ProductsActivity productsActivity = (ProductsActivity) cache.getActivity();
+                    productsActivity.updateListView();
+                }*/
             }
         });
 
@@ -250,7 +245,52 @@ public class ProductDialogFragment extends DialogFragment
         });
 
         builder.setView(v);
-        return builder.create();
+
+        AlertDialog dialogCreate = builder.create();
+
+        dialogCreate.show();
+        dialogCreate.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View view)
+            {
+                if ( StringUtils.isEmpty(String.valueOf(productName.getText())) )
+                {
+                    Toast toast = Toast.makeText(activity.getApplicationContext(), "Bitte Produktnamen eingeben", Toast.LENGTH_LONG);
+                    toast.setGravity(Gravity.CENTER, 0, 0);
+                    toast.show();
+                }
+                else
+                {
+                    dto.setProductName(String.valueOf(productName.getText()));
+                }
+
+                dto.setProductNotes(String.valueOf(productNotes.getText()));
+                dto.setQuantity(String.valueOf(quantity.getText()));
+                if ( !StringUtils.isEmpty(String.valueOf(quantity.getText())) && StringUtils.isEmpty(String.valueOf(price.getText())) )
+                {
+                    Toast toast = Toast.makeText(activity.getApplicationContext(), "Bitte Preis eingeben", Toast.LENGTH_LONG);
+                    toast.setGravity(Gravity.CENTER, 0, 0);
+                    toast.show();
+                }
+                else
+                {
+                    dto.setProductPrice(String.valueOf(price.getText()));
+
+                    dto.setProductCategory(String.valueOf(category.getText()));
+                    dto.setProductStore(String.valueOf(customStore.getText()));
+
+                    dto.setChecked(productCheckBox.isChecked());
+
+                    productService.saveOrUpdate(dto, cache.getListId());
+                    ProductsActivity productsActivity = (ProductsActivity) cache.getActivity();
+                    productsActivity.updateListView();
+
+                    dialogCreate.dismiss();
+                }
+            }
+        });
+        return dialogCreate;
     }
 
 }

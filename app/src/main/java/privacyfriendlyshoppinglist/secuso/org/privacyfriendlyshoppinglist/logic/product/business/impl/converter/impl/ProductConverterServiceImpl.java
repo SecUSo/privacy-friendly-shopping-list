@@ -41,7 +41,12 @@ public class ProductConverterServiceImpl implements ProductConverterService
             entity.setId(Long.valueOf(dto.getProductId()));
         }
         entity.setQuantity(Integer.valueOf(dto.getQuantity()));
-        entity.setQuantityPurchased(Integer.valueOf(dto.getQuantityPurchased()));
+
+        // TODO Implement or Remove
+        if ( dto.getQuantityPurchased() != null )
+        {
+            entity.setQuantityPurchased(Integer.valueOf(dto.getQuantityPurchased()));
+        }
         entity.setNotes(dto.getProductNotes());
         entity.setStore(dto.getProductStore());
 
@@ -49,8 +54,12 @@ public class ProductConverterServiceImpl implements ProductConverterService
         Double price = getStringAsDouble(priceString);
         entity.setPrice(price);
 
-        Date purchasedDate = DateUtils.getDateFromString(dto.getLastTimePurchased(), dateLongPattern, language).toDate();
-        entity.setPurchasedDate(purchasedDate);
+        if ( dto.getLastTimePurchased() != null )
+        {
+            Date purchasedDate = DateUtils.getDateFromString(dto.getLastTimePurchased(), dateLongPattern, language).toDate();
+            entity.setPurchasedDate(purchasedDate);
+        }
+
         entity.setSelected(dto.isChecked());
     }
 
@@ -63,10 +72,17 @@ public class ProductConverterServiceImpl implements ProductConverterService
         }
         entity.setProductName(dto.getProductName());
         entity.setCategory(dto.getProductCategory());
-        entity.setHistoryCount(Integer.valueOf(dto.getHistoryCount()));
 
-        Date purchasedDate = DateUtils.getDateFromString(dto.getLastTimePurchased(), dateLongPattern, language).toDate();
-        entity.setLastTimePurchased(purchasedDate);
+        if ( dto.getHistoryCount() != null )
+        {
+            entity.setHistoryCount(Integer.valueOf(dto.getHistoryCount()));
+        }
+
+        if ( dto.getLastTimePurchased() != null )
+        {
+            Date purchasedDate = DateUtils.getDateFromString(dto.getLastTimePurchased(), dateLongPattern, language).toDate();
+            entity.setLastTimePurchased(purchasedDate);
+        }
 
         entity.setDefaultNotes(dto.getDefaultNotes());
         entity.setDefaultStore(dto.getDefaultStore());
@@ -78,10 +94,17 @@ public class ProductConverterServiceImpl implements ProductConverterService
         dto.setId(String.valueOf(entity.getId()));
         dto.setProductName(entity.getProductName());
         dto.setProductCategory(entity.getCategory());
-        dto.setHistoryCount(String.valueOf(entity.getHistoryCount()));
 
-        String dateAsString = DateUtils.getDateAsString(entity.getLastTimePurchased().getTime(), dateLongPattern, language);
-        dto.setLastTimePurchased(dateAsString);
+        if ( entity.getHistoryCount() != null )
+        {
+            dto.setHistoryCount(String.valueOf(entity.getHistoryCount()));
+        }
+
+        if ( entity.getLastTimePurchased() != null )
+        {
+            String dateAsString = DateUtils.getDateAsString(entity.getLastTimePurchased().getTime(), dateLongPattern, language);
+            dto.setLastTimePurchased(dateAsString);
+        }
 
         dto.setDefaultNotes(entity.getDefaultNotes());
         dto.setDefaultStore(entity.getDefaultStore());
@@ -96,14 +119,21 @@ public class ProductConverterServiceImpl implements ProductConverterService
         // from product
         dto.setProductId(String.valueOf(entity.getId()));
         dto.setQuantity(String.valueOf(entity.getQuantity()));
-        dto.setQuantityPurchased(String.valueOf(entity.getQuantityPurchased()));
+
+        if ( entity.getQuantityPurchased() != null )
+        {
+            dto.setQuantityPurchased(String.valueOf(entity.getQuantityPurchased()));
+        }
         dto.setProductNotes(entity.getNotes());
         dto.setProductStore(entity.getStore());
 
         dto.setProductPrice(getDoubleAsString(entity.getPrice()));
 
-        String dateAsString = DateUtils.getDateAsString(entity.getPurchasedDate().getTime(), dateLongPattern, language);
-        dto.setLastTimePurchased(dateAsString);
+        if ( entity.getPurchasedDate() != null )
+        {
+            String dateAsString = DateUtils.getDateAsString(entity.getPurchasedDate().getTime(), dateLongPattern, language);
+            dto.setLastTimePurchased(dateAsString);
+        }
         dto.setChecked(entity.getSelected());
     }
 

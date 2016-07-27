@@ -7,7 +7,7 @@ import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framew
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.product.business.ProductService;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.product.business.domain.ProductDto;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.products.ProductActivityCache;
-import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.products.ProductsActivity;
+import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.products.ProductDialogFragment;
 
 /**
  * Description:
@@ -31,19 +31,20 @@ public class AddProductOnClickListener implements View.OnClickListener
     @Override
     public void onClick(View v)
     {
-        ProductDto dto = createFakeDto();
+        //ProductDto dto = createFakeDto();
 
-//        ProductDto dto = new ProductDto();
-//        dto.setQuantity("0");
-//        dto.setProductPrice("0.00");
-//        dto.setHistoryCount("0");
-//        ProductDialogFragment productDialogFragment = ProductDialogFragment.newInstance(dto, cache);
-//        productDialogFragment.show(cache.getActivity().getSupportFragmentManager(), "ProductDialog");
+        ProductDto dto = new ProductDto();
+        //dto.setQuantity("0");
+        //dto.setProductPrice("0.00");
+        //dto.setHistoryCount("0");
+        ProductDialogFragment productDialogFragment = ProductDialogFragment.newInstance(dto, cache);
 
-        productService.saveOrUpdate(dto, cache.getListId());
+        productDialogFragment.show(cache.getActivity().getSupportFragmentManager(), "ProductDialog");
 
-        ProductsActivity productsActivity = (ProductsActivity) cache.getActivity();
-        productsActivity.updateListView();
+        //productService.saveOrUpdate(dto, cache.getListId());
+
+        // ProductsActivity productsActivity = (ProductsActivity) cache.getActivity();
+        // productsActivity.updateListView();
     }
 
     private ProductDto createFakeDto()

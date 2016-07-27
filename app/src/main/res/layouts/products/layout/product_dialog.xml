@@ -21,6 +21,7 @@
                 android:inputType="text"
                 android:layout_width="225dp"
                 android:layout_height="wrap_content"
+                android:selectAllOnFocus="true"
                 android:hint="@string/product_name">
         </EditText>
 
@@ -62,6 +63,7 @@
                     android:inputType="number"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:selectAllOnFocus="true"
                     android:maxLength="3"
                     android:padding="15dp"
                     android:layout_marginLeft="5dp"
@@ -86,6 +88,7 @@
                     android:layout_height="wrap_content"
                     android:id="@+id/product_price"
                     android:inputType="numberDecimal"
+                    android:selectAllOnFocus="true"
                     android:padding="15dp"
                     android:hint="@string/price"/>
 
