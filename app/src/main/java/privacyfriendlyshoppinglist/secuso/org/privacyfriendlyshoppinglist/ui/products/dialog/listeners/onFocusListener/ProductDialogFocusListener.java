@@ -7,11 +7,11 @@ import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.pro
 /**
  * Created by Chris on 30.07.2016.
  */
-public class FocusListener implements View.OnFocusChangeListener
+public class ProductDialogFocusListener implements View.OnFocusChangeListener
 {
     private ProductDialogCache dialogCache;
 
-    public FocusListener(ProductDialogCache cache)
+    public ProductDialogFocusListener(ProductDialogCache cache)
     {
         this.dialogCache = cache;
     }

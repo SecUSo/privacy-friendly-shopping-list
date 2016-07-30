@@ -1,12 +1,10 @@
 package privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.products.dialog;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.v4.app.DialogFragment;
@@ -23,7 +21,7 @@ import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.product.business.domain.ProductDto;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.products.ProductActivityCache;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.products.ProductsActivity;
-import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.products.dialog.listeners.onFocusListener.FocusListener;
+import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.products.dialog.listeners.onFocusListener.ProductDialogFocusListener;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.products.dialog.listeners.price.PriceInputFilter;
 
 import static android.app.Activity.RESULT_OK;
@@ -39,18 +37,18 @@ public class ProductDialogFragment extends DialogFragment
     private ProductDto dto;
     private ProductService productService;
 
-    private static boolean edited;
+    private static boolean editDialog;
 
     public static ProductDialogFragment newEditDialogInstance(ProductDto dto, ProductActivityCache cache)
     {
-        edited = true;
+        editDialog = true;
         ProductDialogFragment dialogFragment = getProductDialogFragment(dto, cache);
         return dialogFragment;
     }
 
     public static ProductDialogFragment newAddDialogInstance(ProductDto dto, ProductActivityCache cache)
     {
-        edited = false;
+        editDialog = false;
         ProductDialogFragment dialogFragment = getProductDialogFragment(dto, cache);
         return dialogFragment;
     }
@@ -85,9 +83,6 @@ public class ProductDialogFragment extends DialogFragment
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState)
     {
-        // Read DTO contents and activity from cache
-        Activity activity = cache.getActivity();
-
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         LayoutInflater inflater = (LayoutInflater) getActivity().getSystemService(getActivity().LAYOUT_INFLATER_SERVICE);
         View v = inflater.inflate(R.layout.product_dialog, null);
@@ -102,16 +97,15 @@ public class ProductDialogFragment extends DialogFragment
         dialogCache.getPrice().setText(dto.getProductPrice());
         dialogCache.getCategory().setText(dto.getProductCategory());
         dialogCache.getCustomStore().setText(dto.getProductStore());
-
         dialogCache.getProductCheckBox().setChecked(dto.isChecked());
 
-        if ( edited == true )
+        if ( editDialog )
         {
-            dialogCache.getTitleTextView().setText(activity.getResources().getString(R.string.product_name_edit));
+            dialogCache.getTitleTextView().setText(getActivity().getResources().getString(R.string.product_name_edit));
         }
         else
         {
-            dialogCache.getTitleTextView().setText(activity.getResources().getString(R.string.product_name_new));
+            dialogCache.getTitleTextView().setText(getActivity().getResources().getString(R.string.product_name_new));
         }
 
         dialogCache.getButtonPlus().setOnClickListener(new View.OnClickListener()
@@ -180,24 +174,11 @@ public class ProductDialogFragment extends DialogFragment
             @Override
             public void onClick(View view)
             {
-                Uri fileUri;
-
-//                fileUri = getOutputMediaFileUri(MEDIA_TYPE_IMAGE); // create a file to save the image
-//                intent.putExtra(MediaStore.EXTRA_OUTPUT, fileUri); // set the image file name
-
                 Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
                 if ( takePictureIntent.resolveActivity(cache.getActivity().getPackageManager()) != null )
                 {
                     startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
                 }
-//                Bitmap bp = (Bitmap) intent.getExtras().get("data");
-//                dialogCache.getProductImage().setImageBitmap(bp);
-
-                //final Fragment homeFragment = activity.getFragmentManager().findFragmentById(R.id.cont);
-
-                //homeFragment.startActivityForResult(intent, 0);
-
-                //ProductDialogFragment.super.onActivityResult( int requestCode, intent);
 
             }
 
@@ -206,10 +187,10 @@ public class ProductDialogFragment extends DialogFragment
         dialogCache.getPrice().setFilters(new InputFilter[]{new PriceInputFilter(dialogCache)});
 
 
-        dialogCache.getProductNotes().setOnFocusChangeListener(new FocusListener(dialogCache));
-        dialogCache.getProductName().setOnFocusChangeListener(new FocusListener(dialogCache));
-        dialogCache.getQuantity().setOnFocusChangeListener(new FocusListener(dialogCache));
-        dialogCache.getPrice().setOnFocusChangeListener(new FocusListener(dialogCache));
+        dialogCache.getProductNotes().setOnFocusChangeListener(new ProductDialogFocusListener(dialogCache));
+        dialogCache.getProductName().setOnFocusChangeListener(new ProductDialogFocusListener(dialogCache));
+        dialogCache.getQuantity().setOnFocusChangeListener(new ProductDialogFocusListener(dialogCache));
+        dialogCache.getPrice().setOnFocusChangeListener(new ProductDialogFocusListener(dialogCache));
 
 
         builder.setPositiveButton(cache.getActivity().getResources().getString(R.string.okay), new DialogInterface.OnClickListener()
@@ -242,7 +223,7 @@ public class ProductDialogFragment extends DialogFragment
             {
                 if ( StringUtils.isEmpty(String.valueOf(dialogCache.getProductName().getText())) )
                 {
-                    Toast toast = Toast.makeText(activity.getApplicationContext(), R.string.alert_missing_product_name, Toast.LENGTH_LONG);
+                    Toast toast = Toast.makeText(getActivity().getApplicationContext(), R.string.alert_missing_product_name, Toast.LENGTH_LONG);
                     toast.setGravity(Gravity.CENTER, 0, 0);
                     toast.show();
                 }

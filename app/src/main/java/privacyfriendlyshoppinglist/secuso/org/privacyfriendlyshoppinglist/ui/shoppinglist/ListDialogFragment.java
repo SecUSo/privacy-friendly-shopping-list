@@ -1,13 +1,19 @@
 package privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.shoppinglist;
 
-import android.app.*;
+import android.app.AlertDialog;
+import android.app.DatePickerDialog;
+import android.app.Dialog;
+import android.app.TimePickerDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.*;
+import android.widget.ArrayAdapter;
+import android.widget.DatePicker;
+import android.widget.TextView;
+import android.widget.TimePicker;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.R;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.context.AbstractInstanceFactory;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.context.InstanceFactory;
@@ -17,6 +23,7 @@ import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.shoppingList.business.domain.ListDto;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.main.MainActivity;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.main.ShoppingListActivityCache;
+import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.shoppinglist.listeners.ListsDialogFocusListener;
 
 import java.util.Calendar;
 import java.util.GregorianCalendar;
@@ -30,33 +37,22 @@ public class ListDialogFragment extends DialogFragment
     private ShoppingListActivityCache cache;
     private ListDto dto;
     private ShoppingListService shoppingListService;
-
-    private EditText listEditText;
-    private EditText listNotes;
-    private CheckBox checkBox;
-    private LinearLayout deadlineLayout;
-    private LinearLayout dateLayout;
-    private LinearLayout timeLayout;
-    private LinearLayout reminderLayout;
     private Calendar currentDate;
     private int year, month, day, hour, minute;
-    private String deadlineDateTime;
-    private TextView setDateTextView;
-    private TextView setTimeTextView;
-    private ImageButton deadlineExpensionButton;
-    private static boolean edited;
+    private static boolean editDialog;
+    private ListDialogCache dialogCache;
 
 
     public static ListDialogFragment newEditInstance(ListDto dto, ShoppingListActivityCache cache)
     {
-        edited = true;
+        editDialog = true;
         ListDialogFragment dialogFragment = getListDialogFragment(dto, cache);
         return dialogFragment;
     }
 
     public static ListDialogFragment newAddInstance(ListDto dto, ShoppingListActivityCache cache)
     {
-        edited = false;
+        editDialog = false;
         ListDialogFragment dialogFragment = getListDialogFragment(dto, cache);
         return dialogFragment;
     }
@@ -87,56 +83,30 @@ public class ListDialogFragment extends DialogFragment
         this.shoppingListService = shoppingListService;
     }
 
-
-
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState)
     {
-        // Read DTO contents and activity from cache
-
-        Activity activity = cache.getActivity();
-        String priority = dto.getPriority();
-
-
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         LayoutInflater inflater = (LayoutInflater) getActivity().getSystemService(getActivity().LAYOUT_INFLATER_SERVICE);
         View v = inflater.inflate(R.layout.shopping_list_dialog, null);
+        dialogCache = new ListDialogCache(v);
 
-        Spinner prioritySpinner = (Spinner) v.findViewById(R.id.priority_spinner);
-        Spinner reminderSpinner = (Spinner) v.findViewById(R.id.reminder_spinner);
-        listEditText = (EditText) v.findViewById(R.id.list_name);
-        listNotes = (EditText) v.findViewById(R.id.list_notes);
-        checkBox = (CheckBox) v.findViewById(R.id.list_dialog_checkbox);
-        deadlineExpensionButton = (ImageButton) v.findViewById(R.id.expand_button_list);
-        deadlineLayout = (LinearLayout) v.findViewById(R.id.set_deadline_layout);
-        dateLayout = (LinearLayout) v.findViewById(R.id.set_deadline_date);
-        timeLayout = (LinearLayout) v.findViewById(R.id.set_deadline_time);
-        reminderLayout = (LinearLayout) v.findViewById(R.id.set_deadline_reminder);
 
-        setDateTextView = (TextView) v.findViewById(R.id.set_date_view);
-        setTimeTextView = (TextView) v.findViewById(R.id.set_time_view);
-
-        if ( edited )
+        if ( editDialog )
         {
-            listEditText.setHint(R.string.list_name_edit);
+            dialogCache.getTitleTextView().setText(getActivity().getResources().getString(R.string.list_name_edit));
         }
-
-        if ( dto.isSelected() )
-        {
-            deadlineExpensionButton.setVisibility(View.VISIBLE);
-            deadlineExpensionButton.setImageResource(R.drawable.expander_ic_maximized);
-        }
-
-        if ( StringUtils.isEmpty(dto.getDeadlineDate()) )
-        {
-            deadlineLayout.setVisibility(View.GONE);
-        }
-
         else
         {
-            deadlineLayout.setVisibility(View.VISIBLE);
-            checkBox.setChecked(true);
+            dialogCache.getTitleTextView().setText(getActivity().getResources().getString(R.string.list_name_new));
+        }
 
+        if ( !StringUtils.isEmpty(dto.getDeadlineDate()) )
+        {
+            dialogCache.getDeadlineExpansionButton().setVisibility(View.VISIBLE);
+            dialogCache.getDeadlineExpansionButton().setImageResource(R.drawable.expander_ic_minimized);
+
+            dialogCache.getCheckBox().setChecked(true);
             String language;
             String datePatternInput;
             String datePattern;
@@ -148,30 +118,30 @@ public class ListDialogFragment extends DialogFragment
             timePatternInput = cache.getActivity().getResources().getString(R.string.time_pattern);
             timePattern = cache.getActivity().getResources().getString(R.string.time_pattern);
 
-            setDateTextView.setText(DateUtils.getFormattedDateString(dto.getDeadlineDate(), datePatternInput, datePattern, language));
-            setTimeTextView.setText(DateUtils.getFormattedDateString(dto.getDeadlineTime(), timePatternInput, timePattern, language));
+            dialogCache.getDateTextView().setText(DateUtils.getFormattedDateString(dto.getDeadlineDate(), datePatternInput, datePattern, language));
+            dialogCache.getTimeTextView().setText(DateUtils.getFormattedDateString(dto.getDeadlineTime(), timePatternInput, timePattern, language));
         }
 
 
-        deadlineExpensionButton.setOnClickListener(new View.OnClickListener()
+        dialogCache.getDeadlineExpansionButton().setOnClickListener(new View.OnClickListener()
         {
             @Override
             public void onClick(View view)
             {
-                if ( deadlineLayout.getVisibility() == View.VISIBLE )
+                if ( dialogCache.getDeadlineLayout().getVisibility() == View.VISIBLE )
                 {
-                    deadlineLayout.setVisibility(View.GONE);
-                    deadlineExpensionButton.setImageResource(R.drawable.expander_ic_minimized);
+                    dialogCache.getDeadlineLayout().setVisibility(View.GONE);
+                    dialogCache.getDeadlineExpansionButton().setImageResource(R.drawable.expander_ic_minimized);
                 }
                 else
                 {
-                    deadlineLayout.setVisibility(View.VISIBLE);
-                    deadlineExpensionButton.setImageResource(R.drawable.expander_ic_maximized);
+                    dialogCache.getDeadlineLayout().setVisibility(View.VISIBLE);
+                    dialogCache.getDeadlineExpansionButton().setImageResource(R.drawable.expander_ic_maximized);
                 }
             }
         });
 
-        checkBox.setOnClickListener(new View.OnClickListener()
+        dialogCache.getCheckBox().setOnClickListener(new View.OnClickListener()
         {
             @Override
             public void onClick(View view)
@@ -184,20 +154,20 @@ public class ListDialogFragment extends DialogFragment
                 datePattern = cache.getActivity().getResources().getString(R.string.date_short_pattern);
                 timePattern = cache.getActivity().getResources().getString(R.string.time_pattern);
 
-                if ( checkBox.isChecked() )
+                if ( dialogCache.getCheckBox().isChecked() )
                 {
-                    deadlineExpensionButton.setVisibility(View.VISIBLE);
-                    deadlineExpensionButton.setImageResource(R.drawable.expander_ic_maximized);
-                    deadlineLayout.setVisibility(View.VISIBLE);
-                    setDateTextView.setText(DateUtils.getDateAsString(currentDate.getTimeInMillis(), datePattern, language));
-                    setTimeTextView.setText(DateUtils.getDateAsString(currentDate.getTimeInMillis(), timePattern, language));
+                    dialogCache.getDeadlineExpansionButton().setVisibility(View.VISIBLE);
+                    dialogCache.getDeadlineExpansionButton().setImageResource(R.drawable.expander_ic_maximized);
+                    dialogCache.getDeadlineLayout().setVisibility(View.VISIBLE);
+                    dialogCache.getDateTextView().setText(DateUtils.getDateAsString(currentDate.getTimeInMillis(), datePattern, language));
+                    dialogCache.getTimeTextView().setText(DateUtils.getDateAsString(currentDate.getTimeInMillis(), timePattern, language));
                 }
                 else
                 {
-                    deadlineExpensionButton.setVisibility(View.GONE);
-                    setDateTextView.setText("");
-                    setTimeTextView.setText("");
-                    deadlineLayout.setVisibility(View.GONE);
+                    dialogCache.getDeadlineExpansionButton().setVisibility(View.GONE);
+                    dialogCache.getDateTextView().setText("");
+                    dialogCache.getTimeTextView().setText("");
+                    dialogCache.getDeadlineLayout().setVisibility(View.GONE);
                 }
             }
         });
@@ -209,7 +179,7 @@ public class ListDialogFragment extends DialogFragment
         hour = currentDate.get(Calendar.HOUR_OF_DAY);
         minute = currentDate.get(Calendar.MINUTE);
 
-        dateLayout.setOnClickListener(new View.OnClickListener()
+        dialogCache.getDateLayout().setOnClickListener(new View.OnClickListener()
         {
             @Override
             public void onClick(View v)
@@ -224,7 +194,7 @@ public class ListDialogFragment extends DialogFragment
                         currentDate.set(currentYear, currentMonth, currentDay,
                                 currentDate.get(Calendar.HOUR_OF_DAY), currentDate.get(Calendar.MINUTE));
 
-                        setDateTextView.setText(DateUtils.getDateAsString(currentDate.getTimeInMillis(), cache.getActivity().getResources().getString(R.string.date_short_pattern), cache.getActivity().getResources().getString(R.string.language)));
+                        dialogCache.getDateTextView().setText(DateUtils.getDateAsString(currentDate.getTimeInMillis(), cache.getActivity().getResources().getString(R.string.date_short_pattern), cache.getActivity().getResources().getString(R.string.language)));
 
                     }
                 }, year, month, day);
@@ -234,7 +204,7 @@ public class ListDialogFragment extends DialogFragment
         });
 
 
-        timeLayout.setOnClickListener(new View.OnClickListener()
+        dialogCache.getTimeLayout().setOnClickListener(new View.OnClickListener()
         {
             @Override
             public void onClick(View v)
@@ -248,7 +218,7 @@ public class ListDialogFragment extends DialogFragment
                         currentDate.set(currentDate.get(Calendar.YEAR), currentDate.get(Calendar.MONTH),
                                 currentDate.get(Calendar.DAY_OF_MONTH), currentHour, currentMinute);
 
-                        setTimeTextView.setText(DateUtils.getDateAsString(currentDate.getTimeInMillis(), cache.getActivity().getResources().getString(R.string.time_pattern), cache.getActivity().getResources().getString(R.string.language)));
+                        dialogCache.getTimeTextView().setText(DateUtils.getDateAsString(currentDate.getTimeInMillis(), cache.getActivity().getResources().getString(R.string.time_pattern), cache.getActivity().getResources().getString(R.string.language)));
 
                     }
                 }, hour, minute, true);
@@ -257,7 +227,7 @@ public class ListDialogFragment extends DialogFragment
             }
         });
 
-        reminderLayout.setOnClickListener(new View.OnClickListener()
+        dialogCache.getReminderLayout().setOnClickListener(new View.OnClickListener()
         {
             @Override
             public void onClick(View view)
@@ -266,8 +236,8 @@ public class ListDialogFragment extends DialogFragment
             }
         });
 
-        listEditText.setText(dto.getListName());
-        listNotes.setText(dto.getNotes());
+        dialogCache.getListNameText().setText(dto.getListName());
+        dialogCache.getListNotes().setText(dto.getNotes());
         String[] priorityList = cache.getActivity().getResources().getStringArray(R.array.shopping_list_priority_spinner);
         ArrayAdapter<String> prioritySpinnerAdapter = new ArrayAdapter<String>(getActivity(), R.layout.spinner, priorityList)
         {
@@ -282,6 +252,7 @@ public class ListDialogFragment extends DialogFragment
                 }
                 return v;
             }
+
             @Override
             public int getCount()
             {
@@ -289,8 +260,8 @@ public class ListDialogFragment extends DialogFragment
             }
         };
 
-        prioritySpinner.setAdapter(prioritySpinnerAdapter);
-        prioritySpinner.setSelection(Integer.valueOf(dto.getPriority()));
+        dialogCache.getPrioritySpinner().setAdapter(prioritySpinnerAdapter);
+        dialogCache.getPrioritySpinner().setSelection(Integer.valueOf(dto.getPriority()));
 
         String[] reminderItemList = cache.getActivity().getResources().getStringArray(R.array.shopping_list_reminder_spinner);
         ArrayAdapter<String> reminderSpinnerAdapter = new ArrayAdapter<String>(getActivity(), R.layout.spinner, reminderItemList)
@@ -314,25 +285,26 @@ public class ListDialogFragment extends DialogFragment
             }
         };
 
-        reminderSpinner.setAdapter(reminderSpinnerAdapter);
-        //reminderSpinner.setSelection(Integer.valueOf(dto.getPriority()));
+        dialogCache.getReminderSpinner().setAdapter(reminderSpinnerAdapter);
 
         builder.setView(v);
+
+        dialogCache.getListNameText().setOnFocusChangeListener(new ListsDialogFocusListener(dialogCache));
+        dialogCache.getListNotes().setOnFocusChangeListener(new ListsDialogFocusListener(dialogCache));
 
         builder.setPositiveButton(cache.getActivity().getResources().getString(R.string.okay), new DialogInterface.OnClickListener()
         {
             @Override
             public void onClick(DialogInterface dialogInterface, int i)
             {
-                //saveListName("storedListName", listEditText.getText().toString() );
-                dto.setListName(listEditText.getText().toString());
-                dto.setNotes(listNotes.getText().toString());
+                dto.setListName(dialogCache.getListNameText().getText().toString());
+                dto.setNotes(dialogCache.getListNotes().getText().toString());
 
                 //TODO Set priority to be Integer
-                dto.setPriority(String.valueOf(prioritySpinner.getSelectedItemPosition()));
+                dto.setPriority(String.valueOf(dialogCache.getPrioritySpinner().getSelectedItemPosition()));
 
-                dto.setDeadlineDate((String) setDateTextView.getText());
-                dto.setDeadlineTime((String) setTimeTextView.getText());
+                dto.setDeadlineDate((String) dialogCache.getDateTextView().getText());
+                dto.setDeadlineTime((String) dialogCache.getTimeTextView().getText());
 
                 shoppingListService.saveOrUpdate(dto);
                 MainActivity mainActivity = (MainActivity) cache.getActivity();

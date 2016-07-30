@@ -7,7 +7,7 @@
               android:orientation="vertical">
     <TextView
             android:id="@+id/dialog_title"
-            android:paddingTop="@dimen/pro_dia_padding_top"
+            android:paddingTop="@dimen/dialog_padding_top"
             android:gravity="center"
             android:text="@string/product_dialog_title"
             android:textColor="@color/colorPrimaryDark"
@@ -19,8 +19,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:paddingRight="@dimen/pro_dia_padding_horizontal"
-            android:paddingLeft="@dimen/pro_dia_padding_horizontal">
+            android:paddingRight="@dimen/dialog_padding_horizontal"
+            android:paddingLeft="@dimen/dialog_padding_horizontal">
 
         <android.support.design.widget.TextInputLayout
                 android:layout_toStartOf="@+id/product_checkbox"
@@ -50,17 +50,17 @@
             android:layout_height="wrap_content"
             android:weightSum="1"
             android:orientation="horizontal"
-            android:paddingRight="@dimen/pro_dia_padding_horizontal"
-            android:paddingLeft="@dimen/pro_dia_padding_horizontal">
+            android:paddingRight="@dimen/dialog_padding_horizontal"
+            android:paddingLeft="@dimen/dialog_padding_horizontal">
 
         <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="0.3"
-                android:gravity="bottom"
+                android:gravity="center_vertical"
                 android:orientation="horizontal">
             <Button
-                    android:layout_marginRight="@dimen/pro_dia_margin_buttons"
+                    android:layout_marginRight="@dimen/dialog_margin_buttons"
                     style="?android:attr/buttonStyleSmall"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
@@ -99,12 +99,6 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
-            <TextView
-                    android:paddingLeft="@dimen/pro_dia_padding_horizontal_big"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/price_text"/>
-
             <android.support.design.widget.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
@@ -125,9 +119,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:paddingBottom="@dimen/pro_dia_padding_vertical"
-            android:paddingRight="@dimen/pro_dia_padding_horizontal"
-            android:paddingLeft="@dimen/pro_dia_padding_horizontal">
+            android:paddingBottom="@dimen/dialog_padding_vertical"
+            android:paddingRight="@dimen/dialog_padding_horizontal"
+            android:paddingLeft="@dimen/dialog_padding_horizontal">
 
         <android.support.design.widget.TextInputLayout
                 android:layout_toStartOf="@+id/expand_button"
@@ -157,8 +151,8 @@
             android:layout_height="match_parent"
             android:orientation="vertical"
             android:id="@+id/expandable_product_view"
-            android:paddingRight="@dimen/pro_dia_padding_horizontal"
-            android:paddingLeft="@dimen/pro_dia_padding_horizontal">
+            android:paddingRight="@dimen/dialog_padding_horizontal"
+            android:paddingLeft="@dimen/dialog_padding_horizontal">
 
         <LinearLayout
                 android:layout_width="match_parent"
@@ -205,7 +199,7 @@
                     android:orientation="vertical">
 
                 <ImageView
-                        android:paddingRight="@dimen/pro_dia_padding_horizontal"
+                        android:paddingRight="@dimen/dialog_padding_horizontal"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:tint="@color/colorAccent"

@@ -1,23 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:orientation="vertical"
-              android:layout_width="wrap_content"
-              android:layout_height="wrap_content"
-              android:padding="3dp">
+              android:layout_width="match_parent"
+              android:paddingLeft="@dimen/dialog_padding_horizontal"
+              android:paddingRight="@dimen/dialog_padding_horizontal"
+              android:layout_height="wrap_content">
 
-    <EditText
-            android:id="@+id/list_name"
-            android:inputType="text"
-            android:layout_width="263dp"
+    <TextView
+            android:id="@+id/dialog_title"
+            android:paddingTop="@dimen/dialog_padding_top"
+            android:gravity="center"
+            android:text="@string/product_dialog_title"
+            android:textColor="@color/colorPrimaryDark"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:layout_marginLeft="4dp"
-            android:layout_marginRight="4dp"
-            android:layout_marginBottom="4dp"
-            android:hint="@string/list_name"/>
+            android:textStyle="bold"/>
+
+    <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+        <EditText
+                android:id="@+id/list_name"
+                android:inputType="text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/list_name"/>
+    </android.support.design.widget.TextInputLayout>
 
 
     <LinearLayout
+            android:gravity="center_vertical"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
@@ -26,135 +38,107 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/priority_spinner_content"
-                android:text="Priority: "
-                android:paddingRight="5dp"
-                android:paddingLeft="10dp"
-
-        />
+                android:text="Priority: "/>
         <Spinner
                 android:id="@+id/priority_spinner"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:backgroundTint="@color/colorAccent"/>
-    </LinearLayout>
 
-
-    <RelativeLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
         <TextView
                 android:id="@+id/set_deadline"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:paddingRight="5dp"
-                android:paddingLeft="10dp"
-                android:text="@string/set_deadline" android:layout_centerVertical="true"
-                android:layout_alignParentStart="true"/>
+                android:text="@string/set_deadline"/>
 
         <CheckBox
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/list_dialog_checkbox"
-                android:layout_centerVertical="true" android:layout_toEndOf="@+id/set_deadline"/>
+                android:layout_toEndOf="@+id/set_deadline"/>
 
-
-        <ImageButton
+        <ImageView
                 android:id="@+id/expand_button_list"
                 android:layout_width="wrap_content"
                 android:layout_height="25dp"
+                android:tint="@color/colorAccent"
                 android:src="@drawable/expander_ic_minimized"
-
-                android:layout_centerInParent="true"
-                android:visibility="gone"
-                android:layout_marginLeft="40dp"
-                android:layout_gravity="right" android:layout_alignParentTop="true"
-                android:layout_alignParentEnd="true"/>
-
-
-    </RelativeLayout>
+                android:visibility="gone"/>
+    </LinearLayout>
 
     <LinearLayout
+            android:visibility="gone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/set_deadline_layout"
-            android:orientation="vertical"
-            android:layout_margin="5dp"
-    >
-
+            android:paddingRight="@dimen/dialog_padding_top"
+            android:paddingLeft="@dimen/dialog_padding_top"
+            android:orientation="vertical">
         <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/set_deadline_date"
-                android:paddingTop="15dp"
-        >
+                android:padding="@dimen/dialog_padding_top"
+                android:orientation="horizontal"
+                android:weightSum="2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+            <LinearLayout
+                    android:layout_weight="1"
+                    android:orientation="horizontal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/set_deadline_date">
 
-            <ImageView
+                <ImageView
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:src="@drawable/ic_perm_group_calendar"
+                        android:tint="@color/colorAccent"/>
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/set_date_view"
+                        android:layout_alignParentTop="true"
+                        android:layout_gravity="center"/>
+            </LinearLayout>
+
+            <LinearLayout
+                    android:layout_weight="1"
+                    android:orientation="horizontal"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/ic_perm_group_calendar"
-                    android:tint="@color/colorAccent"
-                    android:layout_marginLeft="15dp"
-                    android:layout_marginRight="10dp"
-                    android:adjustViewBounds="true"
-                    android:scaleType="fitXY"
-                    android:maxWidth="30dp"
-                    android:maxHeight="30dp"/>
-            <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/set_date_view"
-                    android:layout_alignParentTop="true"
-                    android:layout_gravity="center"
-            />
+                    android:id="@+id/set_deadline_time">
+
+                <ImageView
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:tint="@color/colorAccent"
+                        android:src="@drawable/ic_perm_group_system_clock"
+                        android:adjustViewBounds="true"/>
+
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/set_time_view"
+                        android:layout_alignParentTop="true"
+                        android:layout_gravity="center"
+                />
+            </LinearLayout>
         </LinearLayout>
 
         <LinearLayout
+                android:paddingRight="@dimen/dialog_padding_top"
+                android:paddingLeft="@dimen/dialog_padding_top"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/set_deadline_time"
-                android:paddingTop="3dp"
-                android:paddingBottom="3dp">
-
-            <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:tint="@color/colorAccent"
-                    android:src="@drawable/ic_perm_group_system_clock"
-                    android:layout_marginLeft="15dp"
-                    android:layout_marginRight="10dp"
-                    android:adjustViewBounds="true"
-                    android:scaleType="fitXY"
-                    android:maxWidth="30dp"
-                    android:maxHeight="30dp"/>
-
-            <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/set_time_view"
-                    android:layout_alignParentTop="true"
-                    android:layout_gravity="center"
-            />
-        </LinearLayout>
-
-        <LinearLayout
-                android:layout_width="wrap_content"
+                android:gravity="center"
                 android:layout_height="wrap_content"
                 android:id="@+id/set_deadline_reminder"
-                android:orientation="horizontal"
-                android:paddingBottom="15dp">
+                android:orientation="horizontal">
 
             <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
                     android:tint="@color/colorAccent"
                     android:src="@drawable/ic_perm_group_device_alarms"
-                    android:adjustViewBounds="true"
-                    android:layout_marginLeft="15dp"
-                    android:layout_marginRight="10dp"
-                    android:scaleType="fitXY"
-                    android:maxWidth="30dp"
-                    android:maxHeight="30dp"/>
+                    android:adjustViewBounds="true"/>
 
             <TextView
                     android:layout_width="wrap_content"
@@ -162,35 +146,50 @@
                     android:layout_alignParentTop="true"
                     android:layout_gravity="center"
                     android:text="@string/set_reminder"/>
+        </LinearLayout>
+
+        <LinearLayout
+                android:paddingLeft="@dimen/dialog_padding_horizontal_big"
+                android:layout_width="wrap_content"
+                android:gravity="center"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
 
             <EditText
                     android:layout_width="40dp"
                     android:layout_height="wrap_content"
                     android:inputType="number"
-                    android:layout_marginLeft="10dp"
+                    android:gravity="center"
+                    android:hint="0"
                     android:maxLength="3"/>
 
             <Spinner
                     android:id="@+id/reminder_spinner"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:backgroundTint="@color/colorAccent"
                     android:layout_marginLeft="5dp"/>
 
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_gravity="center"
+                    android:text="@string/reminder_before"/>
         </LinearLayout>
+
 
     </LinearLayout>
 
-
-    <EditText
-            android:id="@+id/list_notes"
-            android:inputType="textMultiLine"
-            android:layout_width="263dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:layout_marginLeft="4dp"
-            android:layout_marginRight="4dp"
-            android:layout_marginBottom="4dp"
-            android:hint="@string/list_notes"/>
+    <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+        <EditText
+                android:id="@+id/list_notes"
+                android:inputType="textMultiLine"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/list_notes"/>
+    </android.support.design.widget.TextInputLayout>
 
 </LinearLayout>

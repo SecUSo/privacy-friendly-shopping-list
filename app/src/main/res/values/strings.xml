@@ -181,8 +181,9 @@
     <string name="store_text">Store</string>
 
     <!-- Shopping List Dialog -->
-    <string name="list_name">Enter List Name</string>
-    <string name="list_name_edit">Edit List Name</string>
+    <string name="list_name">Shopping List Name</string>
+    <string name="list_name_new">New Shopping List</string>
+    <string name="list_name_edit">Edit Shopping List</string>
 
     <string name="priority">Priority</string>
     <string name="priority_high">High</string>
@@ -191,7 +192,8 @@
     <string name="set_deadline_date">Set Date</string>
     <string name="set_deadline_time">Set Time</string>
     <string name="set_deadline">Set Deadline</string>
-    <string name="set_reminder">Reminder in:</string>
+    <string name="set_reminder">Reminder</string>
+    <string name="reminder_before">before</string>
     <string name="list_notes">Notes</string>
     <string name="default_list_name">New Shopping List</string>
 
