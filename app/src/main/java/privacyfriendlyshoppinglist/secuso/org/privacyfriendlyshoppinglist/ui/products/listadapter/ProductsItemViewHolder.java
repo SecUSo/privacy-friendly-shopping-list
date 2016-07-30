@@ -79,7 +79,7 @@ public class ProductsItemViewHolder extends RecyclerView.ViewHolder
             {
                 // todo: show seek bar to modify bought quantity
 
-                DialogFragment productFragement = ProductDialogFragment.newInstance(dto, productActivityCache);
+                DialogFragment productFragement = ProductDialogFragment.newEditDialogInstance(dto, productActivityCache);
                 productFragement.show(productActivityCache.getActivity().getSupportFragmentManager(), "Product");
 
             }

@@ -31,7 +31,7 @@ public class ProductDialogFragment extends DialogFragment
 
     private LinearLayout expandableLayout;
     private TextView expandableHint;
-    private Button expandableButton;
+    private ImageView expandableImageView;
 
     private EditText productName;
     private EditText quantity;
@@ -47,7 +47,23 @@ public class ProductDialogFragment extends DialogFragment
     private Button cameraButton;
     private ImageView cameraImage;
 
-    public static ProductDialogFragment newInstance(ProductDto dto, ProductActivityCache cache)
+    private static boolean edited;
+
+    public static ProductDialogFragment newEditDialogInstance(ProductDto dto, ProductActivityCache cache)
+    {
+        edited = true;
+        ProductDialogFragment dialogFragment = getProductDialogFragment(dto, cache);
+        return dialogFragment;
+    }
+
+    public static ProductDialogFragment newAddDialogInstance(ProductDto dto, ProductActivityCache cache)
+    {
+        edited = false;
+        ProductDialogFragment dialogFragment = getProductDialogFragment(dto, cache);
+        return dialogFragment;
+    }
+
+    private static ProductDialogFragment getProductDialogFragment(ProductDto dto, ProductActivityCache cache)
     {
         ProductDialogFragment dialogFragment = new ProductDialogFragment();
         dialogFragment.setCache(cache);
@@ -96,12 +112,11 @@ public class ProductDialogFragment extends DialogFragment
         productCheckBox = (CheckBox) v.findViewById(R.id.product_checkbox);
 
         expandableLayout = (LinearLayout) v.findViewById(R.id.expandable_product_view);
-        expandableHint = (TextView) v.findViewById(R.id.expand_text);
-        expandableButton = (Button) v.findViewById(R.id.expand_button);
+        //expandableHint = (TextView) v.findViewById(R.id.expand_text);
+        expandableImageView = (ImageView) v.findViewById(R.id.expand_button);
 
         cameraButton = (Button) v.findViewById(R.id.camera_button);
         cameraImage = (ImageView) v.findViewById(R.id.image_view);
-
 
         expandableLayout.setVisibility(View.GONE);
 
@@ -113,6 +128,11 @@ public class ProductDialogFragment extends DialogFragment
         customStore.setText(dto.getProductStore());
 
         productCheckBox.setChecked(dto.isChecked());
+
+        if ( edited == true )
+        {
+            productName.setHint(R.string.product_name_edit);
+        }
 
         buttonPlus.setOnClickListener(new View.OnClickListener()
         {
@@ -151,20 +171,22 @@ public class ProductDialogFragment extends DialogFragment
         });
 
 
-        expandableButton.setOnClickListener(new View.OnClickListener()
+        expandableImageView.setOnClickListener(new View.OnClickListener()
         {
             @Override
             public void onClick(View view)
             {
                 if ( expandableLayout.getVisibility() == View.GONE )
                 {
+                    expandableImageView.setImageResource(R.drawable.expander_ic_maximized);
                     expandableLayout.setVisibility(View.VISIBLE);
-                    expandableHint.setText("Collapse Details");
+                    //expandableHint.setText("Collapse Details");
                 }
                 else
                 {
+                    expandableImageView.setImageResource(R.drawable.expander_ic_minimized);
                     expandableLayout.setVisibility(View.GONE);
-                    expandableHint.setText("Expand Details");
+                    //expandableHint.setText("Expand Details");
                 }
             }
         });
@@ -256,25 +278,17 @@ public class ProductDialogFragment extends DialogFragment
             {
                 if ( StringUtils.isEmpty(String.valueOf(productName.getText())) )
                 {
-                    Toast toast = Toast.makeText(activity.getApplicationContext(), "Bitte Produktnamen eingeben", Toast.LENGTH_LONG);
+                    Toast toast = Toast.makeText(activity.getApplicationContext(), R.string.alert_missing_product_name, Toast.LENGTH_LONG);
                     toast.setGravity(Gravity.CENTER, 0, 0);
                     toast.show();
                 }
                 else
                 {
                     dto.setProductName(String.valueOf(productName.getText()));
-                }
 
-                dto.setProductNotes(String.valueOf(productNotes.getText()));
-                dto.setQuantity(String.valueOf(quantity.getText()));
-                if ( !StringUtils.isEmpty(String.valueOf(quantity.getText())) && StringUtils.isEmpty(String.valueOf(price.getText())) )
-                {
-                    Toast toast = Toast.makeText(activity.getApplicationContext(), "Bitte Preis eingeben", Toast.LENGTH_LONG);
-                    toast.setGravity(Gravity.CENTER, 0, 0);
-                    toast.show();
-                }
-                else
-                {
+                    dto.setProductNotes(String.valueOf(productNotes.getText()));
+                    dto.setQuantity(String.valueOf(quantity.getText()));
+
                     dto.setProductPrice(String.valueOf(price.getText()));
 
                     dto.setProductCategory(String.valueOf(category.getText()));
