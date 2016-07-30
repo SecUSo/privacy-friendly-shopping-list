@@ -5,10 +5,12 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.v4.app.DialogFragment;
+import android.text.InputFilter;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -24,11 +26,15 @@ import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.pro
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.products.dialog.listeners.onFocusListener.FocusListener;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.products.dialog.listeners.price.PriceInputFilter;
 
+import static android.app.Activity.RESULT_OK;
+
 /**
  * Created by Chris on 18.07.2016.
  */
 public class ProductDialogFragment extends DialogFragment
 {
+    private static final int REQUEST_IMAGE_CAPTURE = 1;
+    private ProductDialogCache dialogCache;
     private ProductActivityCache cache;
     private ProductDto dto;
     private ProductService productService;
@@ -86,7 +92,7 @@ public class ProductDialogFragment extends DialogFragment
         LayoutInflater inflater = (LayoutInflater) getActivity().getSystemService(getActivity().LAYOUT_INFLATER_SERVICE);
         View v = inflater.inflate(R.layout.product_dialog, null);
 
-        ProductDialogCache dialogCache = new ProductDialogCache(v);
+        dialogCache = new ProductDialogCache(v);
 
         dialogCache.getExpandableLayout().setVisibility(View.GONE);
 
@@ -165,22 +171,23 @@ public class ProductDialogFragment extends DialogFragment
         });
 
 
-        final int CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE = 100;
-        Uri fileUri;
-        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-
-
         dialogCache.getCameraButton().setOnClickListener(new View.OnClickListener()
         {
             @Override
             public void onClick(View view)
             {
+                Uri fileUri;
+
 //                fileUri = getOutputMediaFileUri(MEDIA_TYPE_IMAGE); // create a file to save the image
 //                intent.putExtra(MediaStore.EXTRA_OUTPUT, fileUri); // set the image file name
 
-                activity.startActivityForResult(intent, 0);
-                Bitmap bp = (Bitmap) intent.getExtras().get("data");
-                dialogCache.getCameraImage().setImageBitmap(bp);
+                Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                if ( takePictureIntent.resolveActivity(cache.getActivity().getPackageManager()) != null )
+                {
+                    startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
+                }
+//                Bitmap bp = (Bitmap) intent.getExtras().get("data");
+//                dialogCache.getCameraImage().setImageBitmap(bp);
 
                 //final Fragment homeFragment = activity.getFragmentManager().findFragmentById(R.id.cont);
 
@@ -261,4 +268,14 @@ public class ProductDialogFragment extends DialogFragment
         return dialogCreate;
     }
 
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data)
+    {
+        if ( requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK )
+        {
+            Bundle extras = data.getExtras();
+            Bitmap imageBitmap = (Bitmap) extras.get("data");
+            dialogCache.getCameraImage().setImageBitmap(imageBitmap);
+        }
+    }
 }
