@@ -5,6 +5,7 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -21,6 +22,7 @@ import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.product.business.domain.ProductDto;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.products.ProductActivityCache;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.products.ProductsActivity;
+import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.products.dialog.listeners.onFocusListener.FocusListener;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.products.dialog.listeners.price.PriceTextWatcher;
 
 /**
@@ -111,12 +113,17 @@ public class ProductDialogFragment extends DialogFragment
             @Override
             public void onClick(View view)
             {
+
                 if ( !StringUtils.isEmpty(String.valueOf(dialogCache.getQuantity().getText())) )
                 {
                     value = Integer.parseInt(String.valueOf(dialogCache.getQuantity().getText()));
                     value++;
                     newQuantity = String.valueOf(value);
                     dialogCache.getQuantity().setText(newQuantity);
+                }
+                else
+                {
+                    dialogCache.getQuantity().setText("1");
                 }
             }
         });
@@ -172,9 +179,9 @@ public class ProductDialogFragment extends DialogFragment
 //                fileUri = getOutputMediaFileUri(MEDIA_TYPE_IMAGE); // create a file to save the image
 //                intent.putExtra(MediaStore.EXTRA_OUTPUT, fileUri); // set the image file name
 
-//                activity.startActivityForResult(intent, 0);
-//                Bitmap bp = (Bitmap) intent.getExtras().get("data");
-//                cameraImage.setImageBitmap(bp);
+                activity.startActivityForResult(intent, 0);
+                Bitmap bp = (Bitmap) intent.getExtras().get("data");
+                dialogCache.getCameraImage().setImageBitmap(bp);
 
                 //final Fragment homeFragment = activity.getFragmentManager().findFragmentById(R.id.cont);
 
@@ -189,41 +196,20 @@ public class ProductDialogFragment extends DialogFragment
         dialogCache.getPrice().addTextChangedListener(new PriceTextWatcher(dialogCache));
 
 
+        dialogCache.getProductNotes().setOnFocusChangeListener(new FocusListener(dialogCache));
+        dialogCache.getProductName().setOnFocusChangeListener(new FocusListener(dialogCache));
+        dialogCache.getQuantity().setOnFocusChangeListener(new FocusListener(dialogCache));
+        dialogCache.getPrice().setOnFocusChangeListener(new FocusListener(dialogCache));
+
+
+
         builder.setPositiveButton(cache.getActivity().getResources().getString(R.string.okay), new DialogInterface.OnClickListener()
 
         {
             @Override
             public void onClick(DialogInterface dialogInterface, int i)
             {
-/*                if ( StringUtils.isEmpty(String.valueOf(productName.getText())))
-                {
-                    Toast toast = Toast.makeText(activity.getApplicationContext(), "Bitte Produktnamen eingeben", Toast.LENGTH_LONG  );
-                    toast.setGravity(Gravity.CENTER, 0, 0);
-                    toast.show();
-                }
-                else { dto.setProductName(String.valueOf(productName.getText())); }
 
-                dto.setProductNotes(String.valueOf(productNotes.getText()));
-                dto.setQuantity(String.valueOf(quantity.getText()));
-                if ( !StringUtils.isEmpty(String.valueOf(quantity.getText())) && StringUtils.isEmpty(String.valueOf(price.getText())) )
-                {
-                    Toast toast = Toast.makeText(activity.getApplicationContext(), "Bitte Preis eingeben", Toast.LENGTH_LONG  );
-                    toast.setGravity(Gravity.CENTER, 0, 0);
-                    toast.show();
-                }
-                else
-                {
-                    dto.setProductPrice(String.valueOf(price.getText()));
-
-                    dto.setProductCategory(String.valueOf(category.getText()));
-                    dto.setProductStore(String.valueOf(customStore.getText()));
-
-                    dto.setChecked(productCheckBox.isChecked());
-
-                    productService.saveOrUpdate(dto, cache.getListId());
-                    ProductsActivity productsActivity = (ProductsActivity) cache.getActivity();
-                    productsActivity.updateListView();
-                }*/
             }
         });
 
