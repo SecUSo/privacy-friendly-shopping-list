@@ -6,6 +6,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.SwitchCompat;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -32,6 +33,7 @@ public class ProductActivityCache
     private TextView currencyTextView;
     private LinearLayout totalLayout;
     private RecyclerView recyclerView;
+    private SwitchCompat statisticsSwitch;
     private String listId;
 
     public ProductActivityCache(AppCompatActivity activity, String listId)
@@ -52,10 +54,14 @@ public class ProductActivityCache
         totalCheckedTextView = (TextView) activity.findViewById(R.id.textview_total_checked);
         totalLayout = (LinearLayout) activity.findViewById(R.id.layout_total);
         currencyTextView = (TextView) activity.findViewById(R.id.textview_currency);
+        statisticsSwitch = (SwitchCompat) activity.findViewById(R.id.switch_statistics);
 
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(activity);
-        String currency = prefs.getString(SettingsKeys.CURRENCY, null);
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(activity);
+        String currency = sharedPreferences.getString(SettingsKeys.CURRENCY, null);
         currencyTextView.setText(currency);
+
+        boolean statisticsEnabled = sharedPreferences.getBoolean(SettingsKeys.STATISTICS_ENABLED, false);
+        statisticsSwitch.setChecked(statisticsEnabled);
     }
 
     public AppCompatActivity getActivity()
@@ -106,5 +112,10 @@ public class ProductActivityCache
     public LinearLayout getTotalLayout()
     {
         return totalLayout;
+    }
+
+    public SwitchCompat getStatisticsSwitch()
+    {
+        return statisticsSwitch;
     }
 }

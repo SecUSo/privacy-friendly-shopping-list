@@ -1,4 +1,4 @@
-package privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.products;
+package privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.products.dialog;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -12,13 +12,16 @@ import android.support.v4.app.DialogFragment;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.*;
+import android.widget.Toast;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.R;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.context.AbstractInstanceFactory;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.context.InstanceFactory;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.utils.StringUtils;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.product.business.ProductService;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.product.business.domain.ProductDto;
+import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.products.ProductActivityCache;
+import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.products.ProductsActivity;
+import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.products.dialog.listeners.price.PriceTextWatcher;
 
 /**
  * Created by Chris on 18.07.2016.
@@ -28,24 +31,6 @@ public class ProductDialogFragment extends DialogFragment
     private ProductActivityCache cache;
     private ProductDto dto;
     private ProductService productService;
-
-    private LinearLayout expandableLayout;
-    private TextView expandableHint;
-    private ImageView expandableImageView;
-
-    private EditText productName;
-    private EditText quantity;
-    private EditText price;
-    private EditText customStore;
-    private EditText category;
-    private EditText productNotes;
-
-    private Button buttonPlus;
-    private Button buttonMinus;
-    private CheckBox productCheckBox;
-
-    private Button cameraButton;
-    private ImageView cameraImage;
 
     private static boolean edited;
 
@@ -100,41 +85,25 @@ public class ProductDialogFragment extends DialogFragment
         LayoutInflater inflater = (LayoutInflater) getActivity().getSystemService(getActivity().LAYOUT_INFLATER_SERVICE);
         View v = inflater.inflate(R.layout.product_dialog, null);
 
-        productName = (EditText) v.findViewById(R.id.product_name);
-        quantity = (EditText) v.findViewById(R.id.quantity);
-        price = (EditText) v.findViewById(R.id.product_price);
-        customStore = (EditText) v.findViewById(R.id.store_input);
-        category = (EditText) v.findViewById(R.id.category_input);
-        productNotes = (EditText) v.findViewById(R.id.product_notes);
+        ProductDialogCache dialogCache = new ProductDialogCache(v);
 
-        buttonPlus = (Button) v.findViewById(R.id.product_button_plus);
-        buttonMinus = (Button) v.findViewById(R.id.product_button_minus);
-        productCheckBox = (CheckBox) v.findViewById(R.id.product_checkbox);
+        dialogCache.getExpandableLayout().setVisibility(View.GONE);
 
-        expandableLayout = (LinearLayout) v.findViewById(R.id.expandable_product_view);
-        //expandableHint = (TextView) v.findViewById(R.id.expand_text);
-        expandableImageView = (ImageView) v.findViewById(R.id.expand_button);
+        dialogCache.getProductName().setText(dto.getProductName());
+        dialogCache.getProductNotes().setText(dto.getProductNotes());
+        dialogCache.getQuantity().setText(dto.getQuantity());
+        dialogCache.getPrice().setText(dto.getProductPrice());
+        dialogCache.getCategory().setText(dto.getProductCategory());
+        dialogCache.getCustomStore().setText(dto.getProductStore());
 
-        cameraButton = (Button) v.findViewById(R.id.camera_button);
-        cameraImage = (ImageView) v.findViewById(R.id.image_view);
-
-        expandableLayout.setVisibility(View.GONE);
-
-        productName.setText(dto.getProductName());
-        productNotes.setText(dto.getProductNotes());
-        quantity.setText(dto.getQuantity());
-        price.setText(dto.getProductPrice());
-        category.setText(dto.getProductCategory());
-        customStore.setText(dto.getProductStore());
-
-        productCheckBox.setChecked(dto.isChecked());
+        dialogCache.getProductCheckBox().setChecked(dto.isChecked());
 
         if ( edited == true )
         {
-            productName.setHint(R.string.product_name_edit);
+            dialogCache.getProductName().setHint(R.string.product_name_edit);
         }
 
-        buttonPlus.setOnClickListener(new View.OnClickListener()
+        dialogCache.getButtonPlus().setOnClickListener(new View.OnClickListener()
         {
             int value;
             String newQuantity;
@@ -142,17 +111,17 @@ public class ProductDialogFragment extends DialogFragment
             @Override
             public void onClick(View view)
             {
-                if ( !StringUtils.isEmpty(String.valueOf(quantity.getText())) )
+                if ( !StringUtils.isEmpty(String.valueOf(dialogCache.getQuantity().getText())) )
                 {
-                    value = Integer.parseInt(String.valueOf(quantity.getText()));
+                    value = Integer.parseInt(String.valueOf(dialogCache.getQuantity().getText()));
                     value++;
                     newQuantity = String.valueOf(value);
-                    quantity.setText(newQuantity);
+                    dialogCache.getQuantity().setText(newQuantity);
                 }
             }
         });
 
-        buttonMinus.setOnClickListener(new View.OnClickListener()
+        dialogCache.getButtonMinus().setOnClickListener(new View.OnClickListener()
         {
             int value;
             String newQuantity;
@@ -160,33 +129,31 @@ public class ProductDialogFragment extends DialogFragment
             @Override
             public void onClick(View view)
             {
-                value = Integer.parseInt(String.valueOf(quantity.getText()));
+                value = Integer.parseInt(String.valueOf(dialogCache.getQuantity().getText()));
                 if ( value > 0 )
                 {
                     value--;
                     newQuantity = String.valueOf(value);
-                    quantity.setText(newQuantity);
+                    dialogCache.getQuantity().setText(newQuantity);
                 }
             }
         });
 
 
-        expandableImageView.setOnClickListener(new View.OnClickListener()
+        dialogCache.getExpandableImageView().setOnClickListener(new View.OnClickListener()
         {
             @Override
             public void onClick(View view)
             {
-                if ( expandableLayout.getVisibility() == View.GONE )
+                if ( dialogCache.getExpandableLayout().getVisibility() == View.GONE )
                 {
-                    expandableImageView.setImageResource(R.drawable.expander_ic_maximized);
-                    expandableLayout.setVisibility(View.VISIBLE);
-                    //expandableHint.setText("Collapse Details");
+                    dialogCache.getExpandableImageView().setImageResource(R.drawable.expander_ic_maximized);
+                    dialogCache.getExpandableLayout().setVisibility(View.VISIBLE);
                 }
                 else
                 {
-                    expandableImageView.setImageResource(R.drawable.expander_ic_minimized);
-                    expandableLayout.setVisibility(View.GONE);
-                    //expandableHint.setText("Expand Details");
+                    dialogCache.getExpandableImageView().setImageResource(R.drawable.expander_ic_minimized);
+                    dialogCache.getExpandableLayout().setVisibility(View.GONE);
                 }
             }
         });
@@ -197,7 +164,7 @@ public class ProductDialogFragment extends DialogFragment
         Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
 
 
-        cameraButton.setOnClickListener(new View.OnClickListener()
+        dialogCache.getCameraButton().setOnClickListener(new View.OnClickListener()
         {
             @Override
             public void onClick(View view)
@@ -218,6 +185,8 @@ public class ProductDialogFragment extends DialogFragment
             }
 
         });
+
+        dialogCache.getPrice().addTextChangedListener(new PriceTextWatcher(dialogCache));
 
 
         builder.setPositiveButton(cache.getActivity().getResources().getString(R.string.okay), new DialogInterface.OnClickListener()
@@ -276,7 +245,7 @@ public class ProductDialogFragment extends DialogFragment
             @Override
             public void onClick(View view)
             {
-                if ( StringUtils.isEmpty(String.valueOf(productName.getText())) )
+                if ( StringUtils.isEmpty(String.valueOf(dialogCache.getProductName().getText())) )
                 {
                     Toast toast = Toast.makeText(activity.getApplicationContext(), R.string.alert_missing_product_name, Toast.LENGTH_LONG);
                     toast.setGravity(Gravity.CENTER, 0, 0);
@@ -284,17 +253,17 @@ public class ProductDialogFragment extends DialogFragment
                 }
                 else
                 {
-                    dto.setProductName(String.valueOf(productName.getText()));
+                    dto.setProductName(String.valueOf(dialogCache.getProductName().getText()));
 
-                    dto.setProductNotes(String.valueOf(productNotes.getText()));
-                    dto.setQuantity(String.valueOf(quantity.getText()));
+                    dto.setProductNotes(String.valueOf(dialogCache.getProductNotes().getText()));
+                    dto.setQuantity(String.valueOf(dialogCache.getQuantity().getText()));
 
-                    dto.setProductPrice(String.valueOf(price.getText()));
+                    dto.setProductPrice(String.valueOf(dialogCache.getPrice().getText()));
 
-                    dto.setProductCategory(String.valueOf(category.getText()));
-                    dto.setProductStore(String.valueOf(customStore.getText()));
+                    dto.setProductCategory(String.valueOf(dialogCache.getCategory().getText()));
+                    dto.setProductStore(String.valueOf(dialogCache.getCustomStore().getText()));
 
-                    dto.setChecked(productCheckBox.isChecked());
+                    dto.setChecked(dialogCache.getProductCheckBox().isChecked());
 
                     productService.saveOrUpdate(dto, cache.getListId());
                     ProductsActivity productsActivity = (ProductsActivity) cache.getActivity();

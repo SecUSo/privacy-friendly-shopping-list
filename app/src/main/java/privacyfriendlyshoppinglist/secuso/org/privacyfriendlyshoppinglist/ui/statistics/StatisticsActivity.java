@@ -17,9 +17,6 @@ import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.sta
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.statistics.listeners.DataFromOnClickListener;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.statistics.listeners.DataToOnClickListener;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.statistics.listeners.SpinnerOnItemSelectListener;
-import rx.Subscriber;
-import rx.android.schedulers.AndroidSchedulers;
-import rx.schedulers.Schedulers;
 
 import java.util.Observable;
 import java.util.Observer;
@@ -53,27 +50,18 @@ public class StatisticsActivity extends BaseActivity implements Observer
         cache = new StatisticsCache(this);
         chart = new PFAChart(cache);
 
-        rx.Observable
-                .create((Subscriber<? super Integer> subscriber) ->
-                {
-                    subscriber.onNext(createFakeDataInDatabase());
-                    subscriber.onCompleted();
-                })
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribeOn(Schedulers.newThread())
-                .subscribe(
-                        integer ->
-                        {
-                        },
-                        throwable ->
-                        {
-                        },
-                        () ->
-                        {
-                            setupInitialDates(cache);
-                            setupSpinner(cache);
-                        }
-                );
+//        rx.Observable
+//                .create((Subscriber<? super Integer> subscriber) ->
+//                {
+//                    subscriber.onNext(createFakeDataInDatabase());
+//                    subscriber.onCompleted();
+//                })
+//                .observeOn(AndroidSchedulers.mainThread())
+//                .subscribeOn(Schedulers.newThread())
+//                .subscribe();
+
+        setupInitialDates(cache);
+        setupSpinner(cache);
 
         overridePendingTransition(0, 0);
     }

@@ -26,7 +26,7 @@ public class YAxisLabels implements AxisValueFormatter
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
         currency = prefs.getString(SettingsKeys.CURRENCY, null);
 
-        String numberFormat = context.getResources().getString(R.string.number_format);
+        String numberFormat = context.getResources().getString(R.string.number_format_2_decimals);
         this.format = new DecimalFormat(numberFormat);
     }
 

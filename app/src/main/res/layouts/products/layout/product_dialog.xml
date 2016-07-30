@@ -48,6 +48,7 @@
                     android:layout_height="30dp"
                     android:layout_marginLeft="10dp"
                     android:background="@drawable/button_normal"
+                    android:textColor="@color/white"
                     android:text="-"
                     android:id="@+id/product_button_minus"/>
             <Button
@@ -56,6 +57,7 @@
                     android:layout_height="30dp"
                     android:layout_marginLeft="3dp"
                     android:background="@drawable/button_normal"
+                    android:textColor="@color/white"
                     android:text="+"
                     android:id="@+id/product_button_plus"/>
             <EditText

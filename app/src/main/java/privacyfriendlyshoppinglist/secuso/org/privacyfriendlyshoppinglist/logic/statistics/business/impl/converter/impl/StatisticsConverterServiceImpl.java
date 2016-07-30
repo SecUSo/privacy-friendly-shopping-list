@@ -24,7 +24,9 @@ public class StatisticsConverterServiceImpl implements StatisticsConverterServic
     private String dateShortPattern;
     private String dateMonthPattern;
     private String dateDayPattern;
-    private String priceFormat;
+    private String priceFormat0;
+    private String priceFormat1;
+    private String priceFormat2;
 
     @Override
     public void setContext(Context context, DB db)
@@ -33,7 +35,9 @@ public class StatisticsConverterServiceImpl implements StatisticsConverterServic
         this.dateShortPattern = context.getResources().getString(R.string.date_short_pattern);
         this.dateMonthPattern = context.getResources().getString(R.string.date_month_pattern);
         this.dateDayPattern = context.getResources().getString(R.string.date_day_stats_pattern);
-        this.priceFormat = context.getResources().getString(R.string.number_format);
+        this.priceFormat0 = context.getResources().getString(R.string.number_format_0_decimals);
+        this.priceFormat1 = context.getResources().getString(R.string.number_format_1_decimal);
+        this.priceFormat2 = context.getResources().getString(R.string.number_format_2_decimals);
     }
 
     @Override
@@ -41,15 +45,34 @@ public class StatisticsConverterServiceImpl implements StatisticsConverterServic
     {
         entryEntity.setProductName(dto.getProductName());
         entryEntity.setProductCategory(dto.getProductCategory());
-        entryEntity.setQuantity(Integer.valueOf(dto.getQuantityPurchased()));
+
+        if ( !StringUtils.isEmpty(dto.getQuantity()) )
+        {
+            entryEntity.setQuantity(Integer.valueOf(dto.getQuantity()));
+        }
+        else
+        {
+            entryEntity.setQuantity(0);
+        }
+
         entryEntity.setProductStore(dto.getProductStore());
 
         String date = dto.getLastTimePurchased();
-        Date purchasedDate = getDateTimeFromString(date).toDate();
-        entryEntity.setRecordDate(purchasedDate);
+        if ( !StringUtils.isEmpty(date) )
+        {
+            Date purchasedDate = getDateTimeFromString(date).toDate();
+            entryEntity.setRecordDate(purchasedDate);
+        }
 
         String productPrice = dto.getProductPrice();
-        entryEntity.setUnitPrice(getStringAsDouble(productPrice));
+        if ( !StringUtils.isEmpty(productPrice) )
+        {
+            entryEntity.setUnitPrice(getStringAsDouble(productPrice));
+        }
+        else
+        {
+            entryEntity.setUnitPrice(0.0);
+        }
     }
 
     @Override
@@ -58,13 +81,24 @@ public class StatisticsConverterServiceImpl implements StatisticsConverterServic
         dto.setProductName(entryEntity.getProductName());
         dto.setProductStore(entryEntity.getProductStore());
         dto.setProductCategory(dto.getProductCategory());
-        dto.setQuantity(String.valueOf(entryEntity.getQuantity()));
+
+        if ( entryEntity.getQuantity() != null )
+        {
+            dto.setQuantity(String.valueOf(entryEntity.getQuantity()));
+        }
 
         Date recordDate = entryEntity.getRecordDate();
-        String dateAsString = getStringFromDate(recordDate);
-        dto.setRecordDate(dateAsString);
 
-        dto.setUnitPrice(StringUtils.getDoubleAsString(entryEntity.getUnitPrice(), priceFormat));
+        if ( recordDate != null )
+        {
+            String dateAsString = getStringFromDate(recordDate);
+            dto.setRecordDate(dateAsString);
+        }
+
+        if ( entryEntity.getUnitPrice() != null )
+        {
+            dto.setUnitPrice(StringUtils.getDoubleAsString(entryEntity.getUnitPrice(), priceFormat2));
+        }
     }
 
     @Override
@@ -94,6 +128,6 @@ public class StatisticsConverterServiceImpl implements StatisticsConverterServic
     @Override
     public Double getStringAsDouble(String productPrice)
     {
-        return StringUtils.getStringAsDouble(productPrice, priceFormat);
+        return StringUtils.getStringAsDouble(productPrice, priceFormat2, priceFormat1, priceFormat0);
     }
 }

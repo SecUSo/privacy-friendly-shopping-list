@@ -22,39 +22,61 @@ public class ProductConverterServiceImpl implements ProductConverterService
 {
     private String language;
     private String dateLongPattern;
-    private String priceFormat;
+    private String priceFormat0;
+    private String priceFormat1;
+    private String priceFormat2;
 
     @Override
     public void setContext(Context context, DB db)
     {
         this.language = context.getResources().getString(R.string.language);
         this.dateLongPattern = context.getResources().getString(R.string.date_long_pattern);
-        this.priceFormat = context.getResources().getString(R.string.number_format);
+        this.priceFormat0 = context.getResources().getString(R.string.number_format_0_decimals);
+        this.priceFormat1 = context.getResources().getString(R.string.number_format_1_decimal);
+        this.priceFormat2 = context.getResources().getString(R.string.number_format_2_decimals);
 
     }
 
     @Override
     public void convertDtoToEntity(ProductDto dto, ProductItemEntity entity)
     {
-        if ( dto.getProductId() != null )
+        if ( !StringUtils.isEmpty(dto.getProductId()) )
         {
             entity.setId(Long.valueOf(dto.getProductId()));
         }
-        entity.setQuantity(Integer.valueOf(dto.getQuantity()));
 
-        // TODO Implement or Remove
-        if ( dto.getQuantityPurchased() != null )
+        if ( !StringUtils.isEmpty(dto.getQuantity()) )
+        {
+            entity.setQuantity(Integer.valueOf(dto.getQuantity()));
+        }
+        else
+        {
+            entity.setQuantity(0);
+        }
+
+        if ( !StringUtils.isEmpty(dto.getQuantityPurchased()) )
         {
             entity.setQuantityPurchased(Integer.valueOf(dto.getQuantityPurchased()));
+        }
+        else
+        {
+            entity.setQuantityPurchased(0);
         }
         entity.setNotes(dto.getProductNotes());
         entity.setStore(dto.getProductStore());
 
         String priceString = dto.getProductPrice();
-        Double price = getStringAsDouble(priceString);
-        entity.setPrice(price);
+        if ( !StringUtils.isEmpty(priceString) )
+        {
+            Double price = getStringAsDouble(priceString);
+            entity.setPrice(price);
+        }
+        else
+        {
+            entity.setPrice(0.0);
+        }
 
-        if ( dto.getLastTimePurchased() != null )
+        if ( !StringUtils.isEmpty(dto.getLastTimePurchased()) )
         {
             Date purchasedDate = DateUtils.getDateFromString(dto.getLastTimePurchased(), dateLongPattern, language).toDate();
             entity.setPurchasedDate(purchasedDate);
@@ -66,19 +88,19 @@ public class ProductConverterServiceImpl implements ProductConverterService
     @Override
     public void convertDtoToTemplateEntity(ProductDto dto, ProductTemplateEntity entity)
     {
-        if ( dto.getId() != null )
+        if ( !StringUtils.isEmpty(dto.getId()) )
         {
             entity.setId(Long.valueOf(dto.getId()));
         }
         entity.setProductName(dto.getProductName());
         entity.setCategory(dto.getProductCategory());
 
-        if ( dto.getHistoryCount() != null )
+        if ( !StringUtils.isEmpty(dto.getHistoryCount()) )
         {
             entity.setHistoryCount(Integer.valueOf(dto.getHistoryCount()));
         }
 
-        if ( dto.getLastTimePurchased() != null )
+        if ( !StringUtils.isEmpty(dto.getLastTimePurchased()) )
         {
             Date purchasedDate = DateUtils.getDateFromString(dto.getLastTimePurchased(), dateLongPattern, language).toDate();
             entity.setLastTimePurchased(purchasedDate);
@@ -91,7 +113,11 @@ public class ProductConverterServiceImpl implements ProductConverterService
     @Override
     public void convertTemplateEntityToDto(ProductTemplateEntity entity, ProductTemplateDto dto)
     {
-        dto.setId(String.valueOf(entity.getId()));
+        if ( entity.getId() != null )
+        {
+            dto.setId(String.valueOf(entity.getId()));
+        }
+
         dto.setProductName(entity.getProductName());
         dto.setProductCategory(entity.getCategory());
 
@@ -117,8 +143,15 @@ public class ProductConverterServiceImpl implements ProductConverterService
         convertTemplateEntityToDto(templateEntity, dto);
 
         // from product
-        dto.setProductId(String.valueOf(entity.getId()));
-        dto.setQuantity(String.valueOf(entity.getQuantity()));
+        if ( entity.getId() != null )
+        {
+            dto.setProductId(String.valueOf(entity.getId()));
+        }
+
+        if ( entity.getQuantity() != null )
+        {
+            dto.setQuantity(String.valueOf(entity.getQuantity()));
+        }
 
         if ( entity.getQuantityPurchased() != null )
         {
@@ -127,7 +160,10 @@ public class ProductConverterServiceImpl implements ProductConverterService
         dto.setProductNotes(entity.getNotes());
         dto.setProductStore(entity.getStore());
 
-        dto.setProductPrice(getDoubleAsString(entity.getPrice()));
+        if ( entity.getPrice() != null )
+        {
+            dto.setProductPrice(getDoubleAsString(entity.getPrice()));
+        }
 
         if ( entity.getPurchasedDate() != null )
         {
@@ -140,12 +176,12 @@ public class ProductConverterServiceImpl implements ProductConverterService
     @Override
     public String getDoubleAsString(Double price)
     {
-        return StringUtils.getDoubleAsString(price, priceFormat);
+        return StringUtils.getDoubleAsString(price, priceFormat2);
     }
 
     @Override
     public Double getStringAsDouble(String priceString)
     {
-        return StringUtils.getStringAsDouble(priceString, priceFormat);
+        return StringUtils.getStringAsDouble(priceString, priceFormat2, priceFormat1, priceFormat0);
     }
 }

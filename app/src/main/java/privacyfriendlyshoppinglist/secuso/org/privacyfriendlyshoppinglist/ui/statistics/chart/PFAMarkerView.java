@@ -31,7 +31,7 @@ class PFAMarkerView extends MarkerView
         this.xValueFormatter = xValueFormatter;
         this.context = context;
         markup = (TextView) findViewById(R.id.textview_chart_markup);
-        String numberFormat = this.context.getResources().getString(R.string.number_format);
+        String numberFormat = this.context.getResources().getString(R.string.number_format_2_decimals);
         format = new DecimalFormat(numberFormat);
 
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);

@@ -8,8 +8,13 @@ import android.content.res.Configuration;
 import android.os.Build;
 import android.os.Bundle;
 import android.preference.*;
+import android.support.design.widget.Snackbar;
 import android.view.MenuItem;
+import android.view.View;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.R;
+import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.context.AbstractInstanceFactory;
+import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.context.InstanceFactory;
+import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.statistics.business.StatisticsService;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.baseactivity.BaseActivity;
 
 /**
@@ -186,6 +191,27 @@ public class SettingsActivity extends BaseActivity
             // updated to reflect the new value, per the Android Design
             // guidelines.
             bindPreferenceSummaryToValue(findPreference(SettingsKeys.CURRENCY));
+
+            Preference statisticsDeletePref = findPreference(SettingsKeys.STATISTICS_DELETE);
+            statisticsDeletePref.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener()
+            {
+                @Override
+                public boolean onPreferenceClick(Preference preference)
+                {
+                    Snackbar.make(getView(), R.string.delele_statistics_confirmation, Snackbar.LENGTH_LONG)
+                            .setAction(R.string.okay, new View.OnClickListener()
+                            {
+                                @Override
+                                public void onClick(View v)
+                                {
+                                    AbstractInstanceFactory instanceFactory = new InstanceFactory(getActivity().getApplicationContext());
+                                    StatisticsService statisticsService = (StatisticsService) instanceFactory.createInstance(StatisticsService.class);
+                                    statisticsService.deleteAll();
+                                }
+                            }).show();
+                    return false;
+                }
+            });
             //bindPreferenceSummaryToValue(findPreference("example_list"));
         }
 
