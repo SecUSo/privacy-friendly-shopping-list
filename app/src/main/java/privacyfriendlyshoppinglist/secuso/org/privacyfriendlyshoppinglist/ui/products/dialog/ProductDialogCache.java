@@ -26,8 +26,9 @@ public class ProductDialogCache
     private Button buttonMinus;
     private CheckBox productCheckBox;
 
-    private Button cameraButton;
-    private ImageView cameraImage;
+    private ImageView cameraIcon;
+    private ImageView productImage;
+    private TextView titleTextView;
 
     public ProductDialogCache(View rootview)
     {
@@ -42,8 +43,9 @@ public class ProductDialogCache
         productCheckBox = (CheckBox) rootview.findViewById(R.id.product_checkbox);
         expandableLayout = (LinearLayout) rootview.findViewById(R.id.expandable_product_view);
         expandableImageView = (ImageView) rootview.findViewById(R.id.expand_button);
-        cameraButton = (Button) rootview.findViewById(R.id.camera_button);
-        cameraImage = (ImageView) rootview.findViewById(R.id.image_view);
+        cameraIcon = (ImageView) rootview.findViewById(R.id.camera_button);
+        productImage = (ImageView) rootview.findViewById(R.id.image_view);
+        titleTextView = (TextView) rootview.findViewById(R.id.dialog_title);
     }
 
     public LinearLayout getExpandableLayout()
@@ -101,13 +103,18 @@ public class ProductDialogCache
         return productCheckBox;
     }
 
-    public Button getCameraButton()
+    public ImageView getCameraIcon()
     {
-        return cameraButton;
+        return cameraIcon;
     }
 
-    public ImageView getCameraImage()
+    public ImageView getProductImage()
     {
-        return cameraImage;
+        return productImage;
+    }
+
+    public TextView getTitleTextView()
+    {
+        return titleTextView;
     }
 }

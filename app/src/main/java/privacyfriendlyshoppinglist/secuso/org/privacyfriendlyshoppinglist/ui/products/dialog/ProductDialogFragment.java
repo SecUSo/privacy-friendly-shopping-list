@@ -107,7 +107,11 @@ public class ProductDialogFragment extends DialogFragment
 
         if ( edited == true )
         {
-            dialogCache.getProductName().setHint(R.string.product_name_edit);
+            dialogCache.getTitleTextView().setText(activity.getResources().getString(R.string.product_name_edit));
+        }
+        else
+        {
+            dialogCache.getTitleTextView().setText(activity.getResources().getString(R.string.product_name_new));
         }
 
         dialogCache.getButtonPlus().setOnClickListener(new View.OnClickListener()
@@ -171,7 +175,7 @@ public class ProductDialogFragment extends DialogFragment
         });
 
 
-        dialogCache.getCameraButton().setOnClickListener(new View.OnClickListener()
+        dialogCache.getCameraIcon().setOnClickListener(new View.OnClickListener()
         {
             @Override
             public void onClick(View view)
@@ -187,7 +191,7 @@ public class ProductDialogFragment extends DialogFragment
                     startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
                 }
 //                Bitmap bp = (Bitmap) intent.getExtras().get("data");
-//                dialogCache.getCameraImage().setImageBitmap(bp);
+//                dialogCache.getProductImage().setImageBitmap(bp);
 
                 //final Fragment homeFragment = activity.getFragmentManager().findFragmentById(R.id.cont);
 
@@ -206,7 +210,6 @@ public class ProductDialogFragment extends DialogFragment
         dialogCache.getProductName().setOnFocusChangeListener(new FocusListener(dialogCache));
         dialogCache.getQuantity().setOnFocusChangeListener(new FocusListener(dialogCache));
         dialogCache.getPrice().setOnFocusChangeListener(new FocusListener(dialogCache));
-
 
 
         builder.setPositiveButton(cache.getActivity().getResources().getString(R.string.okay), new DialogInterface.OnClickListener()
@@ -229,10 +232,10 @@ public class ProductDialogFragment extends DialogFragment
 
         builder.setView(v);
 
-        AlertDialog dialogCreate = builder.create();
+        AlertDialog dialog = builder.create();
+        dialog.show();
 
-        dialogCreate.show();
-        dialogCreate.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener(new View.OnClickListener()
+        dialog.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener(new View.OnClickListener()
         {
             @Override
             public void onClick(View view)
@@ -261,11 +264,11 @@ public class ProductDialogFragment extends DialogFragment
                     ProductsActivity productsActivity = (ProductsActivity) cache.getActivity();
                     productsActivity.updateListView();
 
-                    dialogCreate.dismiss();
+                    dialog.dismiss();
                 }
             }
         });
-        return dialogCreate;
+        return dialog;
     }
 
     @Override
@@ -275,7 +278,7 @@ public class ProductDialogFragment extends DialogFragment
         {
             Bundle extras = data.getExtras();
             Bitmap imageBitmap = (Bitmap) extras.get("data");
-            dialogCache.getCameraImage().setImageBitmap(imageBitmap);
+            dialogCache.getProductImage().setImageBitmap(imageBitmap);
         }
     }
 }

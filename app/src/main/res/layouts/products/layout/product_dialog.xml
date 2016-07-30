@@ -2,51 +2,68 @@
 
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:layout_width="wrap_content"
+              android:layout_width="match_parent"
               android:layout_height="wrap_content"
               android:orientation="vertical">
+    <TextView
+            android:id="@+id/dialog_title"
+            android:paddingTop="@dimen/pro_dia_padding_top"
+            android:gravity="center"
+            android:text="@string/product_dialog_title"
+            android:textColor="@color/colorPrimaryDark"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"/>
 
-
-    <LinearLayout
-            android:layout_width="wrap_content"
+    <RelativeLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:layout_marginTop="16dp"
-            android:layout_marginLeft="4dp"
-            android:layout_marginRight="4dp"
-            android:layout_marginBottom="4dp">
+            android:paddingRight="@dimen/pro_dia_padding_horizontal"
+            android:paddingLeft="@dimen/pro_dia_padding_horizontal">
 
-        <EditText
-                android:id="@+id/product_name"
-                android:inputType="text"
-                android:layout_width="225dp"
-                android:layout_height="wrap_content"
-                android:selectAllOnFocus="true"
-                android:hint="@string/product_name">
-        </EditText>
+        <android.support.design.widget.TextInputLayout
+                android:layout_toStartOf="@+id/product_checkbox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+            <EditText
+                    android:id="@+id/product_name"
+                    android:inputType="text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:selectAllOnFocus="true"
+                    android:hint="@string/product_name">
+            </EditText>
+        </android.support.design.widget.TextInputLayout>
 
         <CheckBox
+                android:id="@+id/product_checkbox"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/product_checkbox"
-                android:layout_marginLeft="10dp"
-                android:layout_alignParentRight="true"/>
-    </LinearLayout>
+                android:layout_centerVertical="true"
+                android:layout_alignParentEnd="true"/>
+
+    </RelativeLayout>
 
     <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:weightSum="1"
+            android:orientation="horizontal"
+            android:paddingRight="@dimen/pro_dia_padding_horizontal"
+            android:paddingLeft="@dimen/pro_dia_padding_horizontal">
 
         <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_weight="0.3"
+                android:gravity="bottom"
                 android:orientation="horizontal">
             <Button
+                    android:layout_marginRight="@dimen/pro_dia_margin_buttons"
                     style="?android:attr/buttonStyleSmall"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
-                    android:layout_marginLeft="10dp"
                     android:background="@drawable/button_normal"
                     android:textColor="@color/white"
                     android:text="-"
@@ -55,180 +72,158 @@
                     style="?android:attr/buttonStyleSmall"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
-                    android:layout_marginLeft="3dp"
                     android:background="@drawable/button_normal"
                     android:textColor="@color/white"
                     android:text="+"
                     android:id="@+id/product_button_plus"/>
+
+            <android.support.design.widget.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
             <EditText
                     android:id="@+id/quantity"
                     android:inputType="number"
-                    android:layout_width="70dp"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:selectAllOnFocus="true"
+                    android:gravity="center"
                     android:maxLength="3"
-                    android:padding="15dp"
-                    android:layout_marginLeft="5dp"
-
-                    android:fontFamily="sans-serif" android:layout_weight="0.26"
-                    android:hint="@string/quantity">
+                    android:hint="@string/quantity_text">
             </EditText>
+            </android.support.design.widget.TextInputLayout>
         </LinearLayout>
 
         <LinearLayout
+                android:layout_weight="0.7"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:paddingLeft="20dp">
+                android:orientation="horizontal">
 
-            <TextView android:layout_width="wrap_content"
-                      android:layout_height="wrap_content"
-                      android:text="Price: "/>
+            <TextView
+                    android:paddingLeft="@dimen/pro_dia_padding_horizontal_big"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/price_text"/>
 
+            <android.support.design.widget.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
             <EditText
-                    android:layout_width="80dp"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:id="@+id/product_price"
+                    android:gravity="center"
                     android:inputType="numberDecimal"
                     android:selectAllOnFocus="true"
-                    android:padding="15dp"
-                    android:hint="@string/price"/>
+                    android:hint="@string/price_text"/>
+            </android.support.design.widget.TextInputLayout>
 
         </LinearLayout>
-
     </LinearLayout>
 
-    <LinearLayout
+    <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
             android:orientation="horizontal"
-            android:weightSum="10"
+            android:paddingBottom="@dimen/pro_dia_padding_vertical"
+            android:paddingRight="@dimen/pro_dia_padding_horizontal"
+            android:paddingLeft="@dimen/pro_dia_padding_horizontal">
 
-    >
-
-        <TextView
+        <android.support.design.widget.TextInputLayout
+                android:layout_toStartOf="@+id/expand_button"
                 android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@color/middleblue"
-                android:layout_weight="4"
-                android:layout_marginLeft="5dp"
-                android:layout_gravity="center"
-        />
+                android:layout_height="wrap_content">
+            <EditText
+                    android:id="@+id/product_notes"
+                    android:inputType="textMultiLine"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/list_notes"/>
+        </android.support.design.widget.TextInputLayout>
 
         <ImageView
                 android:id="@+id/expand_button"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
+                android:tint="@color/colorAccent"
                 android:layout_height="25dp"
                 android:src="@drawable/expander_ic_minimized"
                 android:layout_gravity="center"
-                android:layout_weight="2"
-        />
-
-        <TextView
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_weight="4"
-                android:background="@color/middleblue"
-                android:layout_marginRight="5dp"
-                android:layout_gravity="center"
-
-        />
-
-    </LinearLayout>
-
+                android:layout_centerVertical="true"
+                android:layout_alignParentEnd="true"/>
+    </RelativeLayout>
 
     <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
-            android:id="@+id/expandable_product_view">
+            android:id="@+id/expandable_product_view"
+            android:paddingRight="@dimen/pro_dia_padding_horizontal"
+            android:paddingLeft="@dimen/pro_dia_padding_horizontal">
 
         <LinearLayout
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:weightSum="1"
                 android:orientation="horizontal">
 
-
             <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="10dp">
-
-                <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical">
-
-                    <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Category"/>
-
-                    <EditText
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:id="@+id/category_input"
-                            android:layout_gravity="left"
-
-                            android:inputType="textAutoComplete"
-                            android:maxLength="40"
-                            android:hint="Enter Category:"/>
-                </LinearLayout>
-
-                <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        android:layout_marginTop="3dp"
-                        android:padding="5dp">
-
-                    <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Store"/>
-
-                    <EditText
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:id="@+id/store_input"
-                            android:layout_gravity="left"
-                            android:inputType="textAutoComplete"
-                            android:maxLength="40"
-                            android:hint="Enter Store:"/>
-                </LinearLayout>
-
-        </LinearLayout>
-
-            <LinearLayout
+                    android:layout_weight="0.5"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
 
-                <Button android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="camera"
-                        android:id="@+id/camera_button"/>
+                <android.support.design.widget.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+                    <EditText
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/category_input"
+                            android:inputType="textAutoComplete"
+                            android:hint="@string/category_text"
+                            android:maxLength="40"/>
+                </android.support.design.widget.TextInputLayout>
+
+                <android.support.design.widget.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+                    <EditText
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/store_input"
+                            android:inputType="textAutoComplete"
+                            android:hint="@string/store_text"
+                            android:maxLength="40"/>
+                </android.support.design.widget.TextInputLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                    android:layout_weight="0.5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
 
                 <ImageView
+                        android:paddingRight="@dimen/pro_dia_padding_horizontal"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:tint="@color/colorAccent"
+                        android:src="@android:drawable/ic_menu_camera"
+                        android:id="@+id/camera_button"
+                        android:layout_gravity="right"/>
+
+                <ImageView
+                        android:src="@android:drawable/ic_menu_camera"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
                         android:id="@+id/image_view"/>
 
             </LinearLayout>
 
-    </LinearLayout>
+        </LinearLayout>
 
     </LinearLayout>
-
-    <EditText
-            android:id="@+id/product_notes"
-            android:inputType="textMultiLine"
-            android:layout_width="263dp"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="4dp"
-            android:hint="@string/list_notes"/>
 
 
 </LinearLayout>
