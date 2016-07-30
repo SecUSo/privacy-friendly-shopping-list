@@ -165,6 +165,7 @@
 
     <!-- Shopping List Dialog -->
     <string name="list_name">Enter List Name</string>
+    <string name="list_name_edit">Edit List Name</string>
 
     <string name="priority">Priority</string>
     <string name="priority_high">High</string>

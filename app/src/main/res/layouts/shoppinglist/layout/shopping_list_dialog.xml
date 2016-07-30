@@ -59,7 +59,7 @@
                 android:layout_centerVertical="true" android:layout_toEndOf="@+id/set_deadline"/>
 
 
-        <ImageView
+        <ImageButton
                 android:id="@+id/expand_button_list"
                 android:layout_width="wrap_content"
                 android:layout_height="25dp"
