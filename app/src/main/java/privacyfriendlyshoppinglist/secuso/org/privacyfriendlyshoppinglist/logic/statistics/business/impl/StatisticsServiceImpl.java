@@ -62,10 +62,19 @@ public class StatisticsServiceImpl implements StatisticsService
     @Override
     public List<StatisticEntryDto> getAll()
     {
-        Observable<StatisticEntryDto> dtos = Observable
-                .from(statisticsDao.getAllEntities())
-                .map(this::getDto);
-        return dtos.toList().toBlocking().single();
+        List<StatisticEntryEntity> entities = statisticsDao.getAllEntities();
+
+        if ( !entities.isEmpty() )
+        {
+            Observable<StatisticEntryDto> dtos = Observable
+                    .from(entities)
+                    .map(this::getDto);
+            return dtos.toList().toBlocking().single();
+        }
+        else
+        {
+            return new ArrayList<>();
+        }
     }
 
     @Override
@@ -80,11 +89,16 @@ public class StatisticsServiceImpl implements StatisticsService
     @Override
     public String getMaxDate()
     {
-        Date maxDate = Observable
-                .from(statisticsDao.getAllEntities())
-                .map(StatisticEntryEntity::getRecordDate)
-                .reduce((date1, date2) -> date1.getTime() > date2.getTime() ? date1 : date2)
-                .toSingle().toBlocking().value();
+        List<StatisticEntryEntity> entities = statisticsDao.getAllEntities();
+        Date maxDate = new Date();
+        if ( !entities.isEmpty() )
+        {
+            maxDate = Observable
+                    .from(entities)
+                    .map(StatisticEntryEntity::getRecordDate)
+                    .reduce((date1, date2) -> date1.getTime() > date2.getTime() ? date1 : date2)
+                    .toSingle().toBlocking().value();
+        }
 
         return converterService.getStringFromDate(maxDate);
     }
@@ -92,13 +106,18 @@ public class StatisticsServiceImpl implements StatisticsService
     @Override
     public String getMinDate()
     {
-        Date maxDate = Observable
-                .from(statisticsDao.getAllEntities())
-                .map(StatisticEntryEntity::getRecordDate)
-                .reduce((date1, date2) -> date1.getTime() < date2.getTime() ? date1 : date2)
-                .toSingle().toBlocking().value();
+        List<StatisticEntryEntity> entities = statisticsDao.getAllEntities();
+        Date minDate = new Date();
+        if ( !entities.isEmpty() )
+        {
+            minDate = Observable
+                    .from(entities)
+                    .map(StatisticEntryEntity::getRecordDate)
+                    .reduce((date1, date2) -> date1.getTime() < date2.getTime() ? date1 : date2)
+                    .toSingle().toBlocking().value();
+        }
 
-        return converterService.getStringFromDate(maxDate);
+        return converterService.getStringFromDate(minDate);
     }
 
     @Override
