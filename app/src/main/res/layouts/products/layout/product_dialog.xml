@@ -63,7 +63,7 @@
             <EditText
                     android:id="@+id/quantity"
                     android:inputType="number"
-                    android:layout_width="wrap_content"
+                    android:layout_width="70dp"
                     android:layout_height="wrap_content"
                     android:selectAllOnFocus="true"
                     android:maxLength="3"
@@ -79,14 +79,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:paddingLeft="40dp">
+                android:paddingLeft="20dp">
 
             <TextView android:layout_width="wrap_content"
                       android:layout_height="wrap_content"
                       android:text="Price: "/>
 
             <EditText
-                    android:layout_width="wrap_content"
+                    android:layout_width="80dp"
                     android:layout_height="wrap_content"
                     android:id="@+id/product_price"
                     android:inputType="numberDecimal"
