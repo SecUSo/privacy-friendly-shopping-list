@@ -24,7 +24,9 @@ public class StatisticsConverterServiceImpl implements StatisticsConverterServic
     private String dateShortPattern;
     private String dateMonthPattern;
     private String dateDayPattern;
-    private String priceFormat;
+    private String priceFormat0;
+    private String priceFormat1;
+    private String priceFormat2;
 
     @Override
     public void setContext(Context context, DB db)
@@ -33,7 +35,9 @@ public class StatisticsConverterServiceImpl implements StatisticsConverterServic
         this.dateShortPattern = context.getResources().getString(R.string.date_short_pattern);
         this.dateMonthPattern = context.getResources().getString(R.string.date_month_pattern);
         this.dateDayPattern = context.getResources().getString(R.string.date_day_stats_pattern);
-        this.priceFormat = context.getResources().getString(R.string.number_format);
+        this.priceFormat0 = context.getResources().getString(R.string.number_format_0_decimals);
+        this.priceFormat1 = context.getResources().getString(R.string.number_format_1_decimal);
+        this.priceFormat2 = context.getResources().getString(R.string.number_format_2_decimals);
     }
 
     @Override
@@ -93,7 +97,7 @@ public class StatisticsConverterServiceImpl implements StatisticsConverterServic
 
         if ( entryEntity.getUnitPrice() != null )
         {
-            dto.setUnitPrice(StringUtils.getDoubleAsString(entryEntity.getUnitPrice(), priceFormat));
+            dto.setUnitPrice(StringUtils.getDoubleAsString(entryEntity.getUnitPrice(), priceFormat2));
         }
     }
 
@@ -124,6 +128,6 @@ public class StatisticsConverterServiceImpl implements StatisticsConverterServic
     @Override
     public Double getStringAsDouble(String productPrice)
     {
-        return StringUtils.getStringAsDouble(productPrice, priceFormat);
+        return StringUtils.getStringAsDouble(productPrice, priceFormat2, priceFormat1, priceFormat0);
     }
 }

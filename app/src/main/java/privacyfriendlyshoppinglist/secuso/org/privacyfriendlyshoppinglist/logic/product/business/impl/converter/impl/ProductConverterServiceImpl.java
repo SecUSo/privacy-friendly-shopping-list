@@ -22,14 +22,18 @@ public class ProductConverterServiceImpl implements ProductConverterService
 {
     private String language;
     private String dateLongPattern;
-    private String priceFormat;
+    private String priceFormat0;
+    private String priceFormat1;
+    private String priceFormat2;
 
     @Override
     public void setContext(Context context, DB db)
     {
         this.language = context.getResources().getString(R.string.language);
         this.dateLongPattern = context.getResources().getString(R.string.date_long_pattern);
-        this.priceFormat = context.getResources().getString(R.string.number_format);
+        this.priceFormat0 = context.getResources().getString(R.string.number_format_0_decimals);
+        this.priceFormat1 = context.getResources().getString(R.string.number_format_1_decimal);
+        this.priceFormat2 = context.getResources().getString(R.string.number_format_2_decimals);
 
     }
 
@@ -172,12 +176,12 @@ public class ProductConverterServiceImpl implements ProductConverterService
     @Override
     public String getDoubleAsString(Double price)
     {
-        return StringUtils.getDoubleAsString(price, priceFormat);
+        return StringUtils.getDoubleAsString(price, priceFormat2);
     }
 
     @Override
     public Double getStringAsDouble(String priceString)
     {
-        return StringUtils.getStringAsDouble(priceString, priceFormat);
+        return StringUtils.getStringAsDouble(priceString, priceFormat2, priceFormat1, priceFormat0);
     }
 }

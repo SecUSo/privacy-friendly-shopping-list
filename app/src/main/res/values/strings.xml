@@ -9,7 +9,10 @@
     <string name="date_day_stats_pattern">MM/dd/yy</string>
     <string name="date_month_pattern">MMM yy</string>
     <string name="time_pattern">HH:mm</string>
-    <string name="number_format">"###,###,###,##0.00"</string>
+    <string name="number_format_0_decimals">"###,###,###,##0"</string>
+    <string name="number_format_1_decimal">"###,###,###,##0.0"</string>
+    <string name="number_format_2_decimals">"###,###,###,##0.00"</string>
+    <string name="number_decimal_separator">.</string>
     <string name="currency">$</string>
 
     <!-- Placeholders-->
