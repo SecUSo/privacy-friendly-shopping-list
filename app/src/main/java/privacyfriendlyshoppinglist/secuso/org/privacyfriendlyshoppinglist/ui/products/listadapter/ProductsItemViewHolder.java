@@ -14,6 +14,7 @@ import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framew
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.context.InstanceFactory;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.product.business.ProductService;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.product.business.domain.ProductDto;
+import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.statistics.business.StatisticsService;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.products.ProductActivityCache;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.products.ProductDialogFragment;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.products.ProductsActivity;
@@ -28,6 +29,7 @@ public class ProductsItemViewHolder extends RecyclerView.ViewHolder
     private ProductItemCache productItemCache;
     private ProductActivityCache productActivityCache;
     private ProductService productService;
+    private StatisticsService statisticsService;
 
     public ProductsItemViewHolder(final View parent, ProductActivityCache cache)
     {
@@ -36,6 +38,7 @@ public class ProductsItemViewHolder extends RecyclerView.ViewHolder
         this.productActivityCache = cache;
         AbstractInstanceFactory instanceFactory = new InstanceFactory(productActivityCache.getActivity());
         this.productService = (ProductService) instanceFactory.createInstance(ProductService.class);
+        this.statisticsService = (StatisticsService) instanceFactory.createInstance(StatisticsService.class);
 
     }
 
@@ -56,6 +59,10 @@ public class ProductsItemViewHolder extends RecyclerView.ViewHolder
             {
                 dto.setChecked(checkbox.isChecked());
                 productService.saveOrUpdate(dto, productActivityCache.getListId());
+                if ( checkbox.isChecked() )
+                {
+                    statisticsService.saveRecord(dto);
+                }
 
                 ProductsActivity host = (ProductsActivity) productActivityCache.getActivity();
                 host.updateTotals();

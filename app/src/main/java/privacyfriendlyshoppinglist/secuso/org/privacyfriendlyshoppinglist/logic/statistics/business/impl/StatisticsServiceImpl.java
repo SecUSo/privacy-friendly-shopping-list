@@ -55,6 +55,7 @@ public class StatisticsServiceImpl implements StatisticsService
     {
         StatisticEntryEntity entity = new StatisticEntryEntity();
         converterService.convertDtoToEntity(dto, entity);
+        entity.setRecordDate(new Date());
         statisticsDao.save(entity);
     }
 
@@ -65,6 +66,15 @@ public class StatisticsServiceImpl implements StatisticsService
                 .from(statisticsDao.getAllEntities())
                 .map(this::getDto);
         return dtos.toList().toBlocking().single();
+    }
+
+    @Override
+    public void deleteAll()
+    {
+        Observable
+                .from(statisticsDao.getAllEntities())
+                .map(entity -> statisticsDao.deleteById(entity.getId()))
+                .subscribe();
     }
 
     @Override

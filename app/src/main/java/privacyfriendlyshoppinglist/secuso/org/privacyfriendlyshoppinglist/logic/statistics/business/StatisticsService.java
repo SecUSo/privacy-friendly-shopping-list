@@ -19,6 +19,8 @@ public interface StatisticsService extends ContextSetter
 
     List<StatisticEntryDto> getAll();
 
+    void deleteAll();
+
     String getMaxDate();
 
     String getMinDate();

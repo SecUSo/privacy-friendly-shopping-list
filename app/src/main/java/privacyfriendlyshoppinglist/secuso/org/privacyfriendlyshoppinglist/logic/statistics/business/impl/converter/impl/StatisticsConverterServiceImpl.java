@@ -41,15 +41,34 @@ public class StatisticsConverterServiceImpl implements StatisticsConverterServic
     {
         entryEntity.setProductName(dto.getProductName());
         entryEntity.setProductCategory(dto.getProductCategory());
-        entryEntity.setQuantity(Integer.valueOf(dto.getQuantityPurchased()));
+
+        if ( !StringUtils.isEmpty(dto.getQuantity()) )
+        {
+            entryEntity.setQuantity(Integer.valueOf(dto.getQuantity()));
+        }
+        else
+        {
+            entryEntity.setQuantity(0);
+        }
+
         entryEntity.setProductStore(dto.getProductStore());
 
         String date = dto.getLastTimePurchased();
-        Date purchasedDate = getDateTimeFromString(date).toDate();
-        entryEntity.setRecordDate(purchasedDate);
+        if ( !StringUtils.isEmpty(date) )
+        {
+            Date purchasedDate = getDateTimeFromString(date).toDate();
+            entryEntity.setRecordDate(purchasedDate);
+        }
 
         String productPrice = dto.getProductPrice();
-        entryEntity.setUnitPrice(getStringAsDouble(productPrice));
+        if ( !StringUtils.isEmpty(productPrice) )
+        {
+            entryEntity.setUnitPrice(getStringAsDouble(productPrice));
+        }
+        else
+        {
+            entryEntity.setUnitPrice(0.0);
+        }
     }
 
     @Override
@@ -58,13 +77,24 @@ public class StatisticsConverterServiceImpl implements StatisticsConverterServic
         dto.setProductName(entryEntity.getProductName());
         dto.setProductStore(entryEntity.getProductStore());
         dto.setProductCategory(dto.getProductCategory());
-        dto.setQuantity(String.valueOf(entryEntity.getQuantity()));
+
+        if ( entryEntity.getQuantity() != null )
+        {
+            dto.setQuantity(String.valueOf(entryEntity.getQuantity()));
+        }
 
         Date recordDate = entryEntity.getRecordDate();
-        String dateAsString = getStringFromDate(recordDate);
-        dto.setRecordDate(dateAsString);
 
-        dto.setUnitPrice(StringUtils.getDoubleAsString(entryEntity.getUnitPrice(), priceFormat));
+        if ( recordDate != null )
+        {
+            String dateAsString = getStringFromDate(recordDate);
+            dto.setRecordDate(dateAsString);
+        }
+
+        if ( entryEntity.getUnitPrice() != null )
+        {
+            dto.setUnitPrice(StringUtils.getDoubleAsString(entryEntity.getUnitPrice(), priceFormat));
+        }
     }
 
     @Override
