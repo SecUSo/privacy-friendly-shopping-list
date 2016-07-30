@@ -11,6 +11,15 @@
                 android:defaultValue="false"/>
     </PreferenceCategory>
     <PreferenceCategory
+            android:title="@string/pref_header_statistics">
+        <SwitchPreference
+                android:id="@+id/pref_statistics"
+                android:key="pref_statistics"
+                android:title="@string/pref_statistics_title"
+                android:summary="@string/pref_statistics_summary"
+                android:defaultValue="false"/>
+    </PreferenceCategory>
+    <PreferenceCategory
             android:title="@string/pref_header_currency">
         <EditTextPreference
                 android:key="pref_currency"
