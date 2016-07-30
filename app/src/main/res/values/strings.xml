@@ -157,9 +157,11 @@
 
     <!-- Product Dialog -->
 
-    <string name="product_name">Enter Product</string>
+    <string name="product_name">New Product</string>
+    <string name="product_name_edit">Edit Product</string>
     <string name="quantity">0</string>
     <string name="price">0.00</string>
+    <string name="alert_missing_product_name">Please provide a product name!</string>
 
     <!-- Shopping List Dialog -->
     <string name="list_name">Enter List Name</string>

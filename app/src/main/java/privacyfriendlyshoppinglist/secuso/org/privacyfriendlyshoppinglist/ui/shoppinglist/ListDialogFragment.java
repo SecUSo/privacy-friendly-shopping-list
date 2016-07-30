@@ -43,6 +43,7 @@ public class ListDialogFragment extends DialogFragment
     private String deadlineDateTime;
     private TextView setDateTextView;
     private TextView setTimeTextView;
+    private ImageView expandableDeadlineView;
 
 
     public static ListDialogFragment newInstance(ListDto dto, ShoppingListActivityCache cache)
@@ -90,6 +91,7 @@ public class ListDialogFragment extends DialogFragment
         listEditText = (EditText) v.findViewById(R.id.list_name);
         listNotes = (EditText) v.findViewById(R.id.list_notes);
         checkBox = (CheckBox) v.findViewById(R.id.list_dialog_checkbox);
+        expandableDeadlineView = (ImageView) v.findViewById(R.id.expand_button_list);
         setDeadlineLayout = (LinearLayout) v.findViewById(R.id.set_deadline_layout);
         setDate = (LinearLayout) v.findViewById(R.id.set_deadline_date);
         setTime = (LinearLayout) v.findViewById(R.id.set_deadline_time);
@@ -98,6 +100,10 @@ public class ListDialogFragment extends DialogFragment
         setDateTextView = (TextView) v.findViewById(R.id.set_date_view);
         setTimeTextView = (TextView) v.findViewById(R.id.set_time_view);
 
+        if ( dto.isSelected() )
+        {
+            expandableDeadlineView.setVisibility(View.VISIBLE);
+        }
 
         if ( StringUtils.isEmpty(dto.getDeadlineDate()) )
         {
@@ -125,6 +131,22 @@ public class ListDialogFragment extends DialogFragment
         }
 
 
+        expandableDeadlineView.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View view)
+            {
+                if ( setDeadlineLayout.getVisibility() == View.VISIBLE )
+                {
+                    setDeadlineLayout.setVisibility(View.GONE);
+                }
+                else
+                {
+                    setDeadlineLayout.setVisibility(View.VISIBLE);
+                }
+            }
+        });
+
         checkBox.setOnClickListener(new View.OnClickListener()
         {
             @Override
@@ -140,12 +162,14 @@ public class ListDialogFragment extends DialogFragment
 
                 if ( checkBox.isChecked() )
                 {
+                    expandableDeadlineView.setVisibility(View.VISIBLE);
                     setDeadlineLayout.setVisibility(View.VISIBLE);
                     setDateTextView.setText(DateUtils.getDateAsString(currentDate.getTimeInMillis(), datePattern, language));
                     setTimeTextView.setText(DateUtils.getDateAsString(currentDate.getTimeInMillis(), timePattern, language));
                 }
                 else
                 {
+                    expandableDeadlineView.setVisibility(View.GONE);
                     setDateTextView.setText("");
                     setTimeTextView.setText("");
                     setDeadlineLayout.setVisibility(View.GONE);
