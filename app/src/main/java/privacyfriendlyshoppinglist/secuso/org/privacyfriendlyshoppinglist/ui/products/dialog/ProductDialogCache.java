@@ -15,11 +15,11 @@ public class ProductDialogCache
     private LinearLayout expandableLayout;
     private ImageView expandableImageView;
 
-    private EditText productName;
+    private AutoCompleteTextView productName;
     private EditText quantity;
     private EditText price;
-    private EditText customStore;
-    private EditText category;
+    private AutoCompleteTextView customStore;
+    private AutoCompleteTextView category;
     private EditText productNotes;
 
     private Button buttonPlus;
@@ -32,11 +32,11 @@ public class ProductDialogCache
 
     public ProductDialogCache(View rootview)
     {
-        productName = (EditText) rootview.findViewById(R.id.product_name);
+        productName = (AutoCompleteTextView) rootview.findViewById(R.id.product_name);
         quantity = (EditText) rootview.findViewById(R.id.quantity);
         price = (EditText) rootview.findViewById(R.id.product_price);
-        customStore = (EditText) rootview.findViewById(R.id.store_input);
-        category = (EditText) rootview.findViewById(R.id.category_input);
+        customStore = (AutoCompleteTextView) rootview.findViewById(R.id.store_input);
+        category = (AutoCompleteTextView) rootview.findViewById(R.id.category_input);
         productNotes = (EditText) rootview.findViewById(R.id.product_notes);
         buttonPlus = (Button) rootview.findViewById(R.id.product_button_plus);
         buttonMinus = (Button) rootview.findViewById(R.id.product_button_minus);
@@ -58,7 +58,7 @@ public class ProductDialogCache
         return expandableImageView;
     }
 
-    public EditText getProductName()
+    public AutoCompleteTextView getProductName()
     {
         return productName;
     }
@@ -73,12 +73,12 @@ public class ProductDialogCache
         return price;
     }
 
-    public EditText getCustomStore()
+    public AutoCompleteTextView getCustomStore()
     {
         return customStore;
     }
 
-    public EditText getCategory()
+    public AutoCompleteTextView getCategory()
     {
         return category;
     }

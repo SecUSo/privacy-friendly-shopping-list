@@ -1,9 +1,11 @@
 package privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.product.business;
 
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.context.ContextSetter;
+import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.product.business.domain.AutoCompleteLists;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.product.business.domain.ProductDto;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.product.business.domain.ProductTemplateDto;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.product.business.domain.TotalDto;
+import rx.Observable;
 
 import java.util.List;
 
@@ -37,6 +39,8 @@ public interface ProductService extends ContextSetter
     List<ProductDto> moveSelectedToEnd(List<ProductDto> productDtos);
 
     TotalDto computeTotals(List<ProductDto> productDtos);
+
+    Observable<AutoCompleteLists> getRxAutoCompleteLists();
 
     void sortProducts(List<ProductDto> products, String criteria, boolean ascending);
 }

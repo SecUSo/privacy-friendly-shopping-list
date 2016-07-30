@@ -4,6 +4,7 @@ import android.content.Context;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.comparators.PFAComparators;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.persistence.DB;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.product.business.ProductService;
+import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.product.business.domain.AutoCompleteLists;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.product.business.domain.ProductDto;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.product.business.domain.ProductTemplateDto;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.product.business.domain.TotalDto;
@@ -188,6 +189,32 @@ public class ProductServiceImpl implements ProductService
         totalDto.setCheckedAmount(converterService.getDoubleAsString(checkedAmount));
 
         return totalDto;
+    }
+
+    @Override
+    public Observable<AutoCompleteLists> getRxAutoCompleteLists()
+    {
+        Observable<AutoCompleteLists> autoCompleteListsObservable = Observable
+                .create(subscriber ->
+                {
+                    subscriber.onNext(getAutoCompleteLists());
+                    subscriber.onCompleted();
+                });
+
+        return autoCompleteListsObservable;
+    }
+
+    private AutoCompleteLists getAutoCompleteLists()
+    {
+        AutoCompleteLists autoCompleteLists = new AutoCompleteLists();
+
+        Observable
+                .from(productItemDao.getAllEntities())
+                .map(this::getDto)
+                .subscribe(
+                        dto -> autoCompleteLists.updateLists(dto)
+                );
+        return autoCompleteLists;
     }
 
     @Override

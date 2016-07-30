@@ -115,7 +115,7 @@ public class StatisticsActivity extends BaseActivity implements Observer
     private void setupSpinner(StatisticsCache cache)
     {
         String[] spinnerParams = getResources().getStringArray(R.array.statistics_spinner_params);
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, R.layout.spinner, spinnerParams);
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, R.layout.pfa_lists, spinnerParams);
         cache.getGroupBySpinner().setAdapter(adapter);
 
         cache.getGroupBySpinner().setOnItemSelectedListener(new SpinnerOnItemSelectListener(query));

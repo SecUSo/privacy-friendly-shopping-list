@@ -26,14 +26,14 @@
                 android:layout_toStartOf="@+id/product_checkbox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
-            <EditText
+            <AutoCompleteTextView
                     android:id="@+id/product_name"
                     android:inputType="text"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:selectAllOnFocus="true"
                     android:hint="@string/product_name">
-            </EditText>
+            </AutoCompleteTextView>
         </android.support.design.widget.TextInputLayout>
 
         <CheckBox
@@ -169,7 +169,7 @@
                 <android.support.design.widget.TextInputLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content">
-                    <EditText
+                    <AutoCompleteTextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:id="@+id/category_input"
@@ -181,7 +181,7 @@
                 <android.support.design.widget.TextInputLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content">
-                    <EditText
+                    <AutoCompleteTextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:id="@+id/store_input"

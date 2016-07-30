@@ -12,17 +12,22 @@ import android.text.InputFilter;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Toast;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.R;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.context.AbstractInstanceFactory;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.context.InstanceFactory;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.utils.StringUtils;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.product.business.ProductService;
+import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.product.business.domain.AutoCompleteLists;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.product.business.domain.ProductDto;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.products.ProductActivityCache;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.products.ProductsActivity;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.products.dialog.listeners.onFocusListener.ProductDialogFocusListener;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.products.dialog.listeners.price.PriceInputFilter;
+import rx.Observable;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.schedulers.Schedulers;
 
 import static android.app.Activity.RESULT_OK;
 
@@ -192,6 +197,17 @@ public class ProductDialogFragment extends DialogFragment
         dialogCache.getQuantity().setOnFocusChangeListener(new ProductDialogFocusListener(dialogCache));
         dialogCache.getPrice().setOnFocusChangeListener(new ProductDialogFocusListener(dialogCache));
 
+        Observable<AutoCompleteLists> rxAutoCompleteLists = productService.getRxAutoCompleteLists();
+
+        AutoCompleteLists autoCompleteLists = new AutoCompleteLists();
+        rxAutoCompleteLists
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.newThread())
+                .subscribe(
+                        result -> result.copyTo(autoCompleteLists),
+                        Throwable::printStackTrace,
+                        () -> setupAutoCompleteLists(autoCompleteLists));
+
 
         builder.setPositiveButton(cache.getActivity().getResources().getString(R.string.okay), new DialogInterface.OnClickListener()
 
@@ -250,6 +266,21 @@ public class ProductDialogFragment extends DialogFragment
             }
         });
         return dialog;
+    }
+
+    private void setupAutoCompleteLists(AutoCompleteLists autoCompleteLists)
+    {
+        String[] productsArray = autoCompleteLists.getProductsArray();
+        ArrayAdapter<String> productNamesAdapter = new ArrayAdapter<>(getActivity(), R.layout.pfa_lists, productsArray);
+        dialogCache.getProductName().setAdapter(productNamesAdapter);
+
+        String[] storesArray = autoCompleteLists.getStoresArray();
+        ArrayAdapter<String> storesAdapter = new ArrayAdapter<>(getActivity(), R.layout.pfa_lists, storesArray);
+        dialogCache.getCustomStore().setAdapter(storesAdapter);
+
+        String[] categoryArray = autoCompleteLists.getCategoryArray();
+        ArrayAdapter<String> categoryAdapter = new ArrayAdapter<>(getActivity(), R.layout.pfa_lists, categoryArray);
+        dialogCache.getCategory().setAdapter(categoryAdapter);
     }
 
     @Override

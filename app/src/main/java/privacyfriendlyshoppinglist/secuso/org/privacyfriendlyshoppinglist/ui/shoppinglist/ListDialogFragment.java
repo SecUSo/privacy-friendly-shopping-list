@@ -239,7 +239,7 @@ public class ListDialogFragment extends DialogFragment
         dialogCache.getListNameText().setText(dto.getListName());
         dialogCache.getListNotes().setText(dto.getNotes());
         String[] priorityList = cache.getActivity().getResources().getStringArray(R.array.shopping_list_priority_spinner);
-        ArrayAdapter<String> prioritySpinnerAdapter = new ArrayAdapter<String>(getActivity(), R.layout.spinner, priorityList)
+        ArrayAdapter<String> prioritySpinnerAdapter = new ArrayAdapter<String>(getActivity(), R.layout.pfa_lists, priorityList)
         {
             @Override
             public View getView(int position, View convertView, ViewGroup parent)
@@ -264,7 +264,7 @@ public class ListDialogFragment extends DialogFragment
         dialogCache.getPrioritySpinner().setSelection(Integer.valueOf(dto.getPriority()));
 
         String[] reminderItemList = cache.getActivity().getResources().getStringArray(R.array.shopping_list_reminder_spinner);
-        ArrayAdapter<String> reminderSpinnerAdapter = new ArrayAdapter<String>(getActivity(), R.layout.spinner, reminderItemList)
+        ArrayAdapter<String> reminderSpinnerAdapter = new ArrayAdapter<String>(getActivity(), R.layout.pfa_lists, reminderItemList)
         {
             @Override
             public View getView(int position, View convertView, ViewGroup parent)
