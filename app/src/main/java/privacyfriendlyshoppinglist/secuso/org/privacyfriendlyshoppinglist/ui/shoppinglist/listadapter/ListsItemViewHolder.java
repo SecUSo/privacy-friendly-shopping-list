@@ -51,7 +51,8 @@ class ListsItemViewHolder extends RecyclerView.ViewHolder
 
         listItemCache.getListCard().setOnLongClickListener(view ->
         {
-            DialogFragment productFragement = ListDialogFragment.newInstance(dto, shoppingListCache);
+
+            DialogFragment productFragement = ListDialogFragment.newEditInstance(dto, shoppingListCache);
             productFragement.show(shoppingListCache.getActivity().getSupportFragmentManager(), "Liste");
 
             return true;

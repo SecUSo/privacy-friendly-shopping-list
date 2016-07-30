@@ -34,19 +34,34 @@ public class ListDialogFragment extends DialogFragment
     private EditText listEditText;
     private EditText listNotes;
     private CheckBox checkBox;
-    private LinearLayout setDeadlineLayout;
-    private LinearLayout setDate;
-    private LinearLayout setTime;
-    private LinearLayout setReminder;
+    private LinearLayout deadlineLayout;
+    private LinearLayout dateLayout;
+    private LinearLayout timeLayout;
+    private LinearLayout reminderLayout;
     private Calendar currentDate;
     private int year, month, day, hour, minute;
     private String deadlineDateTime;
     private TextView setDateTextView;
     private TextView setTimeTextView;
-    private ImageView expandableDeadlineView;
+    private ImageButton deadlineExpensionButton;
+    private static boolean edited;
 
 
-    public static ListDialogFragment newInstance(ListDto dto, ShoppingListActivityCache cache)
+    public static ListDialogFragment newEditInstance(ListDto dto, ShoppingListActivityCache cache)
+    {
+        edited = true;
+        ListDialogFragment dialogFragment = getListDialogFragment(dto, cache);
+        return dialogFragment;
+    }
+
+    public static ListDialogFragment newAddInstance(ListDto dto, ShoppingListActivityCache cache)
+    {
+        edited = false;
+        ListDialogFragment dialogFragment = getListDialogFragment(dto, cache);
+        return dialogFragment;
+    }
+
+    private static ListDialogFragment getListDialogFragment(ListDto dto, ShoppingListActivityCache cache)
     {
         ListDialogFragment dialogFragment = new ListDialogFragment();
         dialogFragment.setCache(cache);
@@ -82,6 +97,7 @@ public class ListDialogFragment extends DialogFragment
         Activity activity = cache.getActivity();
         String priority = dto.getPriority();
 
+
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         LayoutInflater inflater = (LayoutInflater) getActivity().getSystemService(getActivity().LAYOUT_INFLATER_SERVICE);
         View v = inflater.inflate(R.layout.shopping_list_dialog, null);
@@ -91,28 +107,34 @@ public class ListDialogFragment extends DialogFragment
         listEditText = (EditText) v.findViewById(R.id.list_name);
         listNotes = (EditText) v.findViewById(R.id.list_notes);
         checkBox = (CheckBox) v.findViewById(R.id.list_dialog_checkbox);
-        expandableDeadlineView = (ImageView) v.findViewById(R.id.expand_button_list);
-        setDeadlineLayout = (LinearLayout) v.findViewById(R.id.set_deadline_layout);
-        setDate = (LinearLayout) v.findViewById(R.id.set_deadline_date);
-        setTime = (LinearLayout) v.findViewById(R.id.set_deadline_time);
-        setReminder = (LinearLayout) v.findViewById(R.id.set_deadline_reminder);
+        deadlineExpensionButton = (ImageButton) v.findViewById(R.id.expand_button_list);
+        deadlineLayout = (LinearLayout) v.findViewById(R.id.set_deadline_layout);
+        dateLayout = (LinearLayout) v.findViewById(R.id.set_deadline_date);
+        timeLayout = (LinearLayout) v.findViewById(R.id.set_deadline_time);
+        reminderLayout = (LinearLayout) v.findViewById(R.id.set_deadline_reminder);
 
         setDateTextView = (TextView) v.findViewById(R.id.set_date_view);
         setTimeTextView = (TextView) v.findViewById(R.id.set_time_view);
 
+        if ( edited )
+        {
+            listEditText.setHint(R.string.list_name_edit);
+        }
+
         if ( dto.isSelected() )
         {
-            expandableDeadlineView.setVisibility(View.VISIBLE);
+            deadlineExpensionButton.setVisibility(View.VISIBLE);
+            deadlineExpensionButton.setImageResource(R.drawable.expander_ic_maximized);
         }
 
         if ( StringUtils.isEmpty(dto.getDeadlineDate()) )
         {
-            setDeadlineLayout.setVisibility(View.GONE);
+            deadlineLayout.setVisibility(View.GONE);
         }
 
         else
         {
-            setDeadlineLayout.setVisibility(View.VISIBLE);
+            deadlineLayout.setVisibility(View.VISIBLE);
             checkBox.setChecked(true);
 
             String language;
@@ -131,18 +153,20 @@ public class ListDialogFragment extends DialogFragment
         }
 
 
-        expandableDeadlineView.setOnClickListener(new View.OnClickListener()
+        deadlineExpensionButton.setOnClickListener(new View.OnClickListener()
         {
             @Override
             public void onClick(View view)
             {
-                if ( setDeadlineLayout.getVisibility() == View.VISIBLE )
+                if ( deadlineLayout.getVisibility() == View.VISIBLE )
                 {
-                    setDeadlineLayout.setVisibility(View.GONE);
+                    deadlineLayout.setVisibility(View.GONE);
+                    deadlineExpensionButton.setImageResource(R.drawable.expander_ic_minimized);
                 }
                 else
                 {
-                    setDeadlineLayout.setVisibility(View.VISIBLE);
+                    deadlineLayout.setVisibility(View.VISIBLE);
+                    deadlineExpensionButton.setImageResource(R.drawable.expander_ic_maximized);
                 }
             }
         });
@@ -162,17 +186,18 @@ public class ListDialogFragment extends DialogFragment
 
                 if ( checkBox.isChecked() )
                 {
-                    expandableDeadlineView.setVisibility(View.VISIBLE);
-                    setDeadlineLayout.setVisibility(View.VISIBLE);
+                    deadlineExpensionButton.setVisibility(View.VISIBLE);
+                    deadlineExpensionButton.setImageResource(R.drawable.expander_ic_maximized);
+                    deadlineLayout.setVisibility(View.VISIBLE);
                     setDateTextView.setText(DateUtils.getDateAsString(currentDate.getTimeInMillis(), datePattern, language));
                     setTimeTextView.setText(DateUtils.getDateAsString(currentDate.getTimeInMillis(), timePattern, language));
                 }
                 else
                 {
-                    expandableDeadlineView.setVisibility(View.GONE);
+                    deadlineExpensionButton.setVisibility(View.GONE);
                     setDateTextView.setText("");
                     setTimeTextView.setText("");
-                    setDeadlineLayout.setVisibility(View.GONE);
+                    deadlineLayout.setVisibility(View.GONE);
                 }
             }
         });
@@ -184,7 +209,7 @@ public class ListDialogFragment extends DialogFragment
         hour = currentDate.get(Calendar.HOUR_OF_DAY);
         minute = currentDate.get(Calendar.MINUTE);
 
-        setDate.setOnClickListener(new View.OnClickListener()
+        dateLayout.setOnClickListener(new View.OnClickListener()
         {
             @Override
             public void onClick(View v)
@@ -209,7 +234,7 @@ public class ListDialogFragment extends DialogFragment
         });
 
 
-        setTime.setOnClickListener(new View.OnClickListener()
+        timeLayout.setOnClickListener(new View.OnClickListener()
         {
             @Override
             public void onClick(View v)
@@ -232,7 +257,7 @@ public class ListDialogFragment extends DialogFragment
             }
         });
 
-        setReminder.setOnClickListener(new View.OnClickListener()
+        reminderLayout.setOnClickListener(new View.OnClickListener()
         {
             @Override
             public void onClick(View view)
