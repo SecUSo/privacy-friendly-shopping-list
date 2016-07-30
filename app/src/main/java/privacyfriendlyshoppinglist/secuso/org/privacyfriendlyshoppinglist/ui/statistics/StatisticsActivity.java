@@ -2,13 +2,10 @@ package privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.st
 
 import android.os.Bundle;
 import android.widget.ArrayAdapter;
-import org.joda.time.DateTime;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.R;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.context.AbstractInstanceFactory;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.context.InstanceFactory;
-import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.utils.DateUtils;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.utils.StringUtils;
-import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.product.business.domain.ProductDto;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.statistics.business.StatisticsService;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.statistics.business.domain.StatisticsChartData;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.statistics.business.domain.StatisticsQuery;
@@ -49,16 +46,6 @@ public class StatisticsActivity extends BaseActivity implements Observer
         query.addObserver(this);
         cache = new StatisticsCache(this);
         chart = new PFAChart(cache);
-
-//        rx.Observable
-//                .create((Subscriber<? super Integer> subscriber) ->
-//                {
-//                    subscriber.onNext(createFakeDataInDatabase());
-//                    subscriber.onCompleted();
-//                })
-//                .observeOn(AndroidSchedulers.mainThread())
-//                .subscribeOn(Schedulers.newThread())
-//                .subscribe();
 
         setupInitialDates(cache);
         setupSpinner(cache);
@@ -121,45 +108,5 @@ public class StatisticsActivity extends BaseActivity implements Observer
         cache.getGroupBySpinner().setOnItemSelectedListener(new SpinnerOnItemSelectListener(query));
         query.setGroupBy(cache.getGroupBySpinner().getSelectedItemPosition());
         query.notifyObservers();
-    }
-
-    private int createFakeDataInDatabase()
-    {
-        int counter = 0;
-        for ( int i = 0; i < 365; i++ )
-        {
-            int mod3 = i % 3;
-            int mod2 = i % 2;
-            int mod5 = i % 5;
-
-            String expectedQuantityPurchased = String.valueOf(mod3);
-            ;
-            String expectedStore = "";
-            if ( mod5 != 0 )
-            {
-                expectedStore = "Store " + mod2;
-            }
-            String expectedPrice = String.valueOf(i);
-            String expectedProductName = (i++ % 30) + " Product Name";
-            String expectedCategory = "";
-            if ( mod3 != 0 )
-            {
-                expectedCategory = "Cat. " + mod5;
-            }
-
-            DateTime currentDate = new DateTime().minusDays(100).plusDays(i);
-            String stringDate = DateUtils.getDateAsString(currentDate.getMillis(), cache.getDatePattern(), cache.getDateLanguage());
-
-            ProductDto dto = new ProductDto();
-            dto.setQuantityPurchased(expectedQuantityPurchased);
-            dto.setProductStore(expectedStore);
-            dto.setProductPrice(expectedPrice);
-            dto.setLastTimePurchased(stringDate);
-            dto.setProductName(expectedProductName);
-            dto.setProductCategory(expectedCategory);
-            statisticsService.saveRecord(dto);
-            counter++;
-        }
-        return counter;
     }
 }

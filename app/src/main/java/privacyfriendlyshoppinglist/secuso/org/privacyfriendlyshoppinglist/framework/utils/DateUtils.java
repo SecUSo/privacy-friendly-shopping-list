@@ -13,10 +13,10 @@ import java.util.Locale;
  */
 public abstract class DateUtils
 {
-    private static final String ISO_PATTERN_MIN = "yyyy-MM-dd HH:mm";
-    private static final String ISO_PATTERN = "yyyy-MM-dd";
-    private static final String US = "US";
-    private static final String DE = "DE";
+    public static final String ISO_PATTERN_MIN = "yyyy-MM-dd HH:mm";
+    public static final String ISO_PATTERN = "yyyy-MM-dd";
+    public static final String US = "US";
+    public static final String DE = "DE";
 
     public static String getFormattedDateString(String aDate, String inputPattern, String outputPattern, String language)
     {

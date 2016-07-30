@@ -36,8 +36,6 @@ public class MainActivity extends BaseActivity
         cache = new ShoppingListActivityCache(this);
 
 //        getApplicationContext().deleteDatabase(DB.APP.getDbName());
-//        StatisticsService statisticsService = (StatisticsService) instanceFactory.createInstance(StatisticsService.class);
-//        statisticsService.deleteAll();
 
         updateListView();
 
