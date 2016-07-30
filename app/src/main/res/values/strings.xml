@@ -99,6 +99,9 @@
     <string name="pref_header_notifications">Notifications</string>
     <string name="pref_notifications_title">Notifications</string>
     <string name="pref_notifications_summary">Turn notifications on/off</string>
+    <string name="pref_header_statistics">Statistics</string>
+    <string name="pref_statistics_title">Statistics</string>
+    <string name="pref_statistics_summary">Turn statistics on/off</string>
     <string name="pref_header_currency">Currency</string>
     <string name="pref_currency_title">Currency</string>
     <string name="pref_currency_summary">Select currency</string>

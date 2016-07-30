@@ -15,7 +15,49 @@
             app:layout_scrollFlags="scroll|enterAlways"
             app:popupTheme="@style/AppTheme.PopupOverlay">
 
-        <include layout="@layout/toolbar_icons"/>
+        <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                        android:background="?attr/colorAccent"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="right">
+            <ImageView
+                    android:id="@+id/imageview_statistics"
+                    android:paddingTop="@dimen/icon_padding"
+                    android:paddingBottom="@dimen/icon_padding"
+                    android:layout_width="24dp"
+                    android:layout_height="wrap_content"
+                    android:tint="@color/white"
+                    android:src="@drawable/ic_insert_chart_white_24dp"
+                    android:layout_alignParentStart="true"/>
+
+            <android.support.v7.widget.SwitchCompat
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentTop="true"
+                    android:layout_toEndOf="@+id/imageview_statistics"
+                    android:checked="false"
+                    app:theme="@style/AppTheme.ProductsSwitcher">
+
+            </android.support.v7.widget.SwitchCompat>
+
+            <ImageView
+                    android:id="@+id/imageview_sort"
+                    android:padding="@dimen/icon_padding"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:tint="@color/white"
+                    android:src="@drawable/ic_sort_white_24dp"
+                    android:layout_toStartOf="@+id/imageview_delete"/>
+
+            <ImageView
+                    android:id="@+id/imageview_delete"
+                    android:padding="@dimen/icon_padding"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:tint="@color/white"
+                    android:src="@drawable/ic_delete_white_24dp"
+                    android:layout_alignParentEnd="true"/>
+        </RelativeLayout>
 
     </android.support.v7.widget.Toolbar>
 
