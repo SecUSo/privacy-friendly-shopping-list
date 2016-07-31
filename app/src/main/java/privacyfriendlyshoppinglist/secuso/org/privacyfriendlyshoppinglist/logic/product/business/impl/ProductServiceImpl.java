@@ -192,7 +192,7 @@ public class ProductServiceImpl implements ProductService
     }
 
     @Override
-    public Observable<AutoCompleteLists> getRxAutoCompleteLists()
+    public Observable<AutoCompleteLists> getAutoCompleteListsObservable()
     {
         Observable<AutoCompleteLists> autoCompleteListsObservable = Observable
                 .create(subscriber ->

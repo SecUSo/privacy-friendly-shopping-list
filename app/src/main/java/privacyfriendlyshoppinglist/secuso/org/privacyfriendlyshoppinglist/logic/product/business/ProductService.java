@@ -40,7 +40,7 @@ public interface ProductService extends ContextSetter
 
     TotalDto computeTotals(List<ProductDto> productDtos);
 
-    Observable<AutoCompleteLists> getRxAutoCompleteLists();
+    Observable<AutoCompleteLists> getAutoCompleteListsObservable();
 
     void sortProducts(List<ProductDto> products, String criteria, boolean ascending);
 }

@@ -193,7 +193,7 @@ public class ProductDialogFragment extends DialogFragment
         dialogCache.getQuantity().setOnFocusChangeListener(new ProductDialogFocusListener(dialogCache));
         dialogCache.getPrice().setOnFocusChangeListener(new ProductDialogFocusListener(dialogCache));
 
-        Observable<AutoCompleteLists> rxAutoCompleteLists = productService.getRxAutoCompleteLists();
+        Observable<AutoCompleteLists> rxAutoCompleteLists = productService.getAutoCompleteListsObservable();
 
         AutoCompleteLists autoCompleteLists = new AutoCompleteLists();
         rxAutoCompleteLists
