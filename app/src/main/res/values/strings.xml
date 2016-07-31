@@ -59,20 +59,19 @@
 
 
     <!-- ### DELETE SHOPPING LISTS ### -->
-    <string name="delele_lists_confirmation">Do you really want to delete the checked items? This operation cannot be
+    <string name="delele_lists_confirmation">Do you want to delete the checked items? This operation cannot be
         undone.
     </string>
     <string name="activity_delete_lists">Delete Shopping Lists</string>
     <!-- ### DELETE PRODUCTS LISTS ### -->
-    <string name="delele_products_confirmation">Do you really want to delete the checked products? This operation cannot
+    <string name="delele_products_confirmation">Do you want to delete the checked products? This operation cannot
         be undone.
     </string>
     <string name="activity_delete_products">Delete Products</string>
 
     <!-- ### STATISTICS ### -->
     <string name="statistics">Statistics</string>
-    <string name="delele_statistics_confirmation">Do you really want to all records from the statistics? This operation
-        cannot be undone. Shopping lists and products will not be deleted.
+    <string name="delele_statistics_confirmation">Do you want to all statistics? This operation cannot be undone.
     </string>
 
     <!--### ABOUT ###-->
