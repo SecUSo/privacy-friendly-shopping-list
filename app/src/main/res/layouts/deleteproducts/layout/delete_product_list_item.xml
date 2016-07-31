@@ -2,7 +2,6 @@
 <android.support.v7.widget.CardView
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:card_view="http://schemas.android.com/apk/res-auto"
-        android:id="@+id/cardview_item"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
@@ -28,12 +27,11 @@
                 android:id="@+id/checkbox_is_selected"
                 android:layout_width="wrap_content"
                 android:padding="@dimen/list_padding"
-                android:buttonTint="@color/black"
                 android:enabled="false"
+                android:buttonTint="@color/black"
                 android:layout_height="?attr/listPreferredItemHeight"
                 android:gravity="center_vertical"
-                android:layout_alignParentRight="true"
-        />
+                android:layout_alignParentRight="true"/>
 
         <TextView
                 android:id="@+id/textview_prod_quantity"
@@ -45,5 +43,15 @@
                 android:layout_marginRight="@dimen/list_margin"
                 android:textSize="@dimen/text_small"
                 style="@style/Base.TextAppearance.AppCompat.Body2"/>
+
+        <android.support.v7.widget.CardView
+                android:id="@+id/cardview_item"
+                android:layout_width="match_parent"
+                android:backgroundTint="@color/transparent"
+                android:layout_height="?attr/listPreferredItemHeight"
+                android:layout_gravity="center"
+                card_view:cardCornerRadius="4dp"
+        />
+
     </RelativeLayout>
 </android.support.v7.widget.CardView>
