@@ -10,17 +10,28 @@ Nowadays there are many apps that require many or all permissions available in A
 
 ## Versioning
 
-Version 0.0: no UI available. Only a part of the backend has been developed.
+Version 0.1 (Beta). Features:
+- Lists can be added, edited and removed
+- Lists can be sorted by name or priority
+- Products can be added, edited and removed from lists
+- Products can be sorted by name, store, quantity, price or category
+- Statistics (total amount) can be visualized in a chart
+- Statistics' chart can be filtered by range and the results can be showed grouped by month, week, day, category, store or product.
+- Statistics can be turned on/off inside a list
+- Statistics option can per default be set to be turned on/off in the settings
+- Statistics can be fully deleted from the settings menu
+- Currency can be set by the user in the setings menu (up to 3 characters)
 
 ## Installation
 
 The app can be installed by using IntelliJ or Android Studio.
 
 1. Download the source code: $ git clone https://github.com/SecUSo/privacy-friendly-shopping-list.git
-2. Open the IDE of your choice
-3. Connect the mobile device to the computer
-4. Setup a Run Configuration "Android Application" and select "app" under Module
-5. Click run and select "Choose a running device" from the "Device Chooser" Dialog
+2. Add the local.properties and the build.properties file to the root by removing the extension ".copy" from "local.properties.copy" and "build.gradle.copy"
+3. Open the IDE of your choice (recomened: IntelliJ or Android Studio)
+4. Connect the mobile device to the computer
+5. Setup a Run Configuration "Android Application" and select "app" under Module
+6. Click run and select "Choose a running device" from the "Device Chooser" Dialog
 
 
 ## License
