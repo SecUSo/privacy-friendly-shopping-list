@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Privacy Friendly Shopping List</string>
+    <string name="app_name">Shopping List</string>
 
     <!--### GENERAL ### -->
     <string name="cancel">Cancel</string>
@@ -71,13 +71,17 @@
 
     <!-- ### STATISTICS ### -->
     <string name="statistics">Statistics</string>
-    <string name="delele_statistics_confirmation">Do you want to all statistics? This operation cannot be undone.
+    <string name="delele_statistics_confirmation">Delete all currently saved statistics? This operation cannot be
+        undone!
     </string>
 
     <!--### ABOUT ###-->
     <string name="about">About</string>
-    <string name="version_number">Version 1.5</string>
-    <string name="about_author">Developer: Grebiel and Chris</string>
+    <string name="version_number">Version 1.0</string>
+    <string name="about_developper">Developer:</string>
+    <string name="about_author_greb">Grebiel José Ifill Brito</string>
+    <string name="about_author_cri">Christian König</string>
+
     <string name="about_author_contributors">contributors...</string>
     <string name="about_affiliation">In affiliation with</string>
     <string name="privacy_friendly">This application belongs to the group of Privacy Friendly Apps developed by
@@ -104,13 +108,17 @@
     <string name="pref_header_notifications">Notifications</string>
     <string name="pref_notifications_title">Notifications</string>
     <string name="pref_notifications_summary">Turn on/off</string>
+    <string name="pref_notifications_toast_on">Notifications turned on!</string>
+    <string name="pref_notifications_toast_off">Notifications turned off!</string>
 
     <string name="pref_header_statistics">Statistics</string>
     <string name="pref_statistics_title">Set default</string>
-    <string name="pref_statistics_summary">Set default on/off</string>
+    <string name="pref_statistics_summary">Set Statistics per default to be on/off</string>
+    <string name="pref_statistics_toast_on">Statistics turned on!</string>
+    <string name="pref_statistics_toast_off">Statistics turned off!</string>
 
     <string name="pref_statistics_delete">Delete</string>
-    <string name="pref_statistics_delete_summary">Delete all data from the statistics</string>
+    <string name="pref_statistics_delete_summary">Delete all data from saved Statistics</string>
 
     <string name="pref_header_currency">Currency</string>
     <string name="pref_currency_title">Select currency</string>
@@ -130,18 +138,35 @@
     <!--### HELP ###-->
     <string name="help">Help</string>
     <string name="help_overview_heading">Overview</string>
-    <string name="help_example">Example Help Entry</string>
-    <string name="help_example_summary">Example help summary</string>
-    <string name="help_category_example">Example Help Category</string>
+    <string name="help_settings_heading">Settings</string>
+    <string name="help_customize">Customizing Settings</string>
+    <string name="help_customize_summary">In the settings section of the menu you can set default behaviour for the
+        statistics and notifications.
+        Initially both are turned off. By switching the corresponding button you can choose to turn statistics and
+        notifications on / off per default.
+    </string>
+    <string name="help_category_example">Functions and Usage</string>
     <string name="help_privacy_heading">Privacy Info</string>
-    <string name="help_permissionXY_heading">Permission XY</string>
-    <string name="help_permissionXY_description">is needed because &#8230; If XY is not granted feature YZ is not
-        usable.
+    <string name="help_permissionXY_heading">Permission for camera access</string>
+    <string name="help_permissionXY_description">is needed in order to make images of items in the item dialog box. If
+        this permission is denied, this feature can\'t be used, but won\'t affect the other usages of the application.
+
     </string>
     <string name="help_permissions_heading">Permissions</string>
-    <string name="help_permissions_description">Privacy Friendly Example does not use any permissions</string>
-    <string name="help_intro">Welcome to the help page. This app shows the basic design of Privacy Friendly Apps. The
-        functionality of the app should be introduced with 1 to 2 sentences in this section.
+    <string name="help_permissions_description">Other permissions are not required.</string>
+    <string name="help_intro_long">Inside a list you are able to add new custom items, edit them, and remove them
+        through a checkbox.
+        With the camera symbol in the product dialog you can add pictures to items in your lists. You are also able to
+        set a reminder for your lists.
+        This will cause a notification on the phone when you given deadline approaches. You can choose to activate
+        statistics for your shopping lists
+        and by clicking the statistics menu item you get an overview of your purchases based on the information you
+        provided in the items.
+    </string>
+    <string name="help_intro">Welcome to the help page of Privacy Friendly Shopping List. This app lets you create
+        personal lists of products or other custom items.
+        Start by creating a list with the + button.
+
     </string>
 
     <!-- ###MAIN### -->

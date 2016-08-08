@@ -10,5 +10,7 @@ public abstract class SettingsKeys
     public static final String CURRENCY = "pref_currency";
     public static final String STATISTICS_DELETE = "pref_statistics_delete";
     public static final String STATISTICS_ENABLED = "pref_statistics";
+    public static final String NOTIFICATIONS_ENABLED = "pref_notifications";
+
 
 }
