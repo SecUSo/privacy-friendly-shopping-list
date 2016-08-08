@@ -203,11 +203,28 @@ public class SettingsActivity extends BaseActivity
                     if ( notificationsSetting.isChecked() )
                     {
                         Toast.makeText(getActivity(), R.string.pref_notifications_toast_on, Toast.LENGTH_SHORT).show();
-
                     }
                     else
                     {
                         Toast.makeText(getActivity(), R.string.pref_notifications_toast_off, Toast.LENGTH_SHORT).show();
+                    }
+                    return false;
+                }
+            });
+
+            SwitchPreference statisticsSetting = (SwitchPreference) findPreference(SettingsKeys.STATISTICS_ENABLED);
+            statisticsSetting.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener()
+            {
+                @Override
+                public boolean onPreferenceClick(Preference preference)
+                {
+                    if ( statisticsSetting.isChecked() )
+                    {
+                        Toast.makeText(getActivity(), R.string.pref_statistics_toast_on, Toast.LENGTH_SHORT).show();
+                    }
+                    else
+                    {
+                        Toast.makeText(getActivity(), R.string.pref_statistics_toast_off, Toast.LENGTH_SHORT).show();
                     }
                     return false;
                 }

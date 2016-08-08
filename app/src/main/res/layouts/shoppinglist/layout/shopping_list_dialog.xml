@@ -24,6 +24,7 @@
                 android:inputType="text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:maxLength="30"
                 android:hint="@string/list_name"/>
     </android.support.design.widget.TextInputLayout>
 

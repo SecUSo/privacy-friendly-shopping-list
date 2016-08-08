@@ -4,7 +4,9 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.support.v4.app.DialogFragment;
 import android.text.InputFilter;
 import android.view.Gravity;
@@ -26,6 +28,8 @@ import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.pro
 import rx.Observable;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
+
+import static android.app.Activity.RESULT_OK;
 
 /**
  * Created by Chris on 18.07.2016.
@@ -175,11 +179,11 @@ public class ProductDialogFragment extends DialogFragment
             @Override
             public void onClick(View view)
             {
-//                Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-//                if ( takePictureIntent.resolveActivity(cache.getActivity().getPackageManager()) != null )
-//                {
-//                    startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
-//                }
+                Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                if ( takePictureIntent.resolveActivity(cache.getActivity().getPackageManager()) != null )
+                {
+                    startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
+                }
 
             }
 
@@ -282,11 +286,11 @@ public class ProductDialogFragment extends DialogFragment
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data)
     {
-//        if ( requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK )
-//        {
-//            Bundle extras = data.getExtras();
-//            Bitmap imageBitmap = (Bitmap) extras.get("data");
-//            dialogCache.getProductImage().setImageBitmap(imageBitmap);
-//        }
+        if ( requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK )
+        {
+            Bundle extras = data.getExtras();
+            Bitmap imageBitmap = (Bitmap) extras.get("data");
+            dialogCache.getProductImage().setImageBitmap(imageBitmap);
+        }
     }
 }
