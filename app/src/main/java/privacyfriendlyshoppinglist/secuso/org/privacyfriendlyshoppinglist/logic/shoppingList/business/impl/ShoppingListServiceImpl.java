@@ -5,12 +5,10 @@ import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.R;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.comparators.PFAComparators;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.persistence.DB;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.utils.StringUtils;
-import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.product.business.ProductService;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.shoppingList.business.ShoppingListService;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.shoppingList.business.domain.ListDto;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.shoppingList.business.impl.comparators.ListsComparators;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.shoppingList.business.impl.converter.ShoppingListConverter;
-import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.shoppingList.business.impl.validator.ShoppingListValidator;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.shoppingList.persistence.ShoppingListDao;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.shoppingList.persistence.entity.ShoppingListEntity;
 import rx.Observable;
@@ -30,20 +28,16 @@ public class ShoppingListServiceImpl implements ShoppingListService
 
     private ShoppingListDao shoppingListDao;
     private ShoppingListConverter shoppingListConverter;
-    private ShoppingListValidator shoppingListValidator;
-    private ProductService productService;
     private Context context;
 
     @Inject
     public ShoppingListServiceImpl(
             ShoppingListDao shoppingListDao,
-            ShoppingListConverter shoppingListConverter,
-            ShoppingListValidator shoppingListValidator
+            ShoppingListConverter shoppingListConverter
     )
     {
         this.shoppingListDao = shoppingListDao;
         this.shoppingListConverter = shoppingListConverter;
-        this.shoppingListValidator = shoppingListValidator;
     }
 
     @Override
@@ -57,18 +51,14 @@ public class ShoppingListServiceImpl implements ShoppingListService
     @Override
     public void saveOrUpdate(ListDto dto)
     {
-        shoppingListValidator.validate(dto);
-        if ( !dto.hasErrors() )
+        if ( StringUtils.isEmpty(dto.getListName()) )
         {
-            if ( StringUtils.isEmpty(dto.getListName()) )
-            {
-                dto.setListName(context.getResources().getString(R.string.default_list_name));
-            }
-            ShoppingListEntity entity = new ShoppingListEntity();
-            shoppingListConverter.convertDtoToEntity(dto, entity);
-            Long id = shoppingListDao.save(entity);
-            dto.setId(id.toString());
+            dto.setListName(context.getResources().getString(R.string.default_list_name));
         }
+        ShoppingListEntity entity = new ShoppingListEntity();
+        shoppingListConverter.convertDtoToEntity(dto, entity);
+        Long id = shoppingListDao.save(entity);
+        dto.setId(id.toString());
     }
 
     @Override
