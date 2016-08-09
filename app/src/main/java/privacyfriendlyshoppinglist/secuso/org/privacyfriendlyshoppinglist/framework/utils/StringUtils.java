@@ -40,11 +40,20 @@ public abstract class StringUtils
         {
             Number parse = df.parse(numberAsString);
             return parse.doubleValue();
-
         }
+
         catch ( ParseException e )
         {
-            return 0.0;
+            try
+            {
+                Number parse = df.parse(numberAsString.replace(".", ","));
+                return parse.doubleValue();
+            }
+
+            catch ( ParseException e1 )
+            {
+                return 0.0;
+            }
         }
     }
 
