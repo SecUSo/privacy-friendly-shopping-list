@@ -82,6 +82,7 @@ public class EditDeleteListDialog extends DialogFragment
                 {
                     public void onClick(DialogInterface dialog, int id)
                     {
+                        // TODO Delete still to be implemented
 
 
                     }

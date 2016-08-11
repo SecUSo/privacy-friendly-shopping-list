@@ -79,6 +79,7 @@ public class EditDeleteProductDialog extends DialogFragment
                     public void onClick(DialogInterface dialog, int id)
                     {
 
+                        // TODO Delete still to be implemented
 //                        Snackbar.make(cache.getRecyclerView(), R.string.delele_products_confirmation, Snackbar.LENGTH_LONG)
 //                                .setAction(R.string.okay, new View.OnClickListener()
 //                                {
