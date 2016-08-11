@@ -17,6 +17,7 @@ import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.statistics.business.StatisticsService;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.products.ProductActivityCache;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.products.ProductsActivity;
+import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.products.dialog.EditDeleteProductDialog;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.products.dialog.ProductDialogFragment;
 
 /**
@@ -90,6 +91,9 @@ public class ProductsItemViewHolder extends RecyclerView.ViewHolder
             @Override
             public boolean onLongClick(View view)
             {
+                DialogFragment editDeleteFragment = EditDeleteProductDialog.newEditDeleteInstance(dto, productActivityCache);
+                editDeleteFragment.show(productActivityCache.getActivity().getSupportFragmentManager(), "Product");
+
                 // todo: show dialog
                 return true;
             }

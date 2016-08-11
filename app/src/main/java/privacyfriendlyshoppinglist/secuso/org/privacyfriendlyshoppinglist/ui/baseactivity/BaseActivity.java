@@ -206,6 +206,7 @@ public class BaseActivity extends AppCompatActivity implements OnNavigationItemS
         mDrawerLayout.addDrawerListener(toggle);
         toggle.syncState();
 
+
         mNavigationView = (NavigationView) findViewById(R.id.nav_view);
         mNavigationView.setNavigationItemSelectedListener(this);
 

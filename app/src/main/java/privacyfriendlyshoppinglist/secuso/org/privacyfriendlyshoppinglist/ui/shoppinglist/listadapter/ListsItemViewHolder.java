@@ -11,7 +11,7 @@ import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.main.MainActivity;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.main.ShoppingListActivityCache;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.products.ProductsActivity;
-import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.shoppinglist.ListDialogFragment;
+import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.shoppinglist.EditDeleteListDialog;
 
 /**
  * Created by Chris on 05.06.2016.
@@ -52,8 +52,11 @@ class ListsItemViewHolder extends RecyclerView.ViewHolder
         listItemCache.getListCard().setOnLongClickListener(view ->
         {
 
-            DialogFragment productFragement = ListDialogFragment.newEditInstance(dto, shoppingListCache);
-            productFragement.show(shoppingListCache.getActivity().getSupportFragmentManager(), "Liste");
+            DialogFragment editDeleteFragment = EditDeleteListDialog.newEditDeleteInstance(dto, shoppingListCache);
+            editDeleteFragment.show(shoppingListCache.getActivity().getSupportFragmentManager(), "Liste");
+
+//            DialogFragment productFragement = ListDialogFragment.newEditInstance(dto, shoppingListCache);
+//            productFragement.show(shoppingListCache.getActivity().getSupportFragmentManager(), "Liste");
 
             return true;
         });

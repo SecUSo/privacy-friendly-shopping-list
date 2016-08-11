@@ -23,7 +23,7 @@
             android:paddingLeft="@dimen/dialog_padding_horizontal">
 
         <android.support.design.widget.TextInputLayout
-                android:layout_toStartOf="@+id/product_checkbox"
+
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
             <AutoCompleteTextView
@@ -37,12 +37,6 @@
             </AutoCompleteTextView>
         </android.support.design.widget.TextInputLayout>
 
-        <CheckBox
-                android:id="@+id/product_checkbox"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_alignParentEnd="true"/>
 
     </RelativeLayout>
 
