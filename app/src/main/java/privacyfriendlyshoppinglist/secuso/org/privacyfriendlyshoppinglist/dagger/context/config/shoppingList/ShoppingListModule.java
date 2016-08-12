@@ -7,8 +7,6 @@ import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.shoppingList.business.impl.ShoppingListServiceImpl;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.shoppingList.business.impl.converter.ShoppingListConverter;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.shoppingList.business.impl.converter.impl.ShoppingListConverterImpl;
-import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.shoppingList.business.impl.validator.ShoppingListValidator;
-import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.shoppingList.business.impl.validator.impl.ShoppingListValidatorImpl;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.shoppingList.persistence.ShoppingListDao;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.shoppingList.persistence.impl.ShoppingListDaoImpl;
 
@@ -45,23 +43,14 @@ public class ShoppingListModule implements AppModule
 
     @Provides
     @Singleton
-    ShoppingListValidator provideShoppingListValidator()
-    {
-        return new ShoppingListValidatorImpl();
-    }
-
-    @Provides
-    @Singleton
     ShoppingListService provideShoppingListService(
             ShoppingListDao shoppingListDao,
-            ShoppingListConverter shoppingListConverter,
-            ShoppingListValidator shoppingListValidator
+            ShoppingListConverter shoppingListConverter
     )
     {
         return new ShoppingListServiceImpl(
                 shoppingListDao,
-                shoppingListConverter,
-                shoppingListValidator
+                shoppingListConverter
         );
     }
 }

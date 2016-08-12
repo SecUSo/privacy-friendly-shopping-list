@@ -11,6 +11,7 @@ import android.preference.*;
 import android.support.design.widget.Snackbar;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.R;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.context.AbstractInstanceFactory;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.context.InstanceFactory;
@@ -191,6 +192,44 @@ public class SettingsActivity extends BaseActivity
             // updated to reflect the new value, per the Android Design
             // guidelines.
             bindPreferenceSummaryToValue(findPreference(SettingsKeys.CURRENCY));
+
+
+            SwitchPreference notificationsSetting = (SwitchPreference) findPreference(SettingsKeys.NOTIFICATIONS_ENABLED);
+            notificationsSetting.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener()
+            {
+                @Override
+                public boolean onPreferenceClick(Preference preference)
+                {
+                    if ( notificationsSetting.isChecked() )
+                    {
+                        Toast.makeText(getActivity(), R.string.pref_notifications_toast_on, Toast.LENGTH_SHORT).show();
+                    }
+                    else
+                    {
+                        Toast.makeText(getActivity(), R.string.pref_notifications_toast_off, Toast.LENGTH_SHORT).show();
+                    }
+                    return false;
+                }
+            });
+
+            SwitchPreference statisticsSetting = (SwitchPreference) findPreference(SettingsKeys.STATISTICS_ENABLED);
+            statisticsSetting.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener()
+            {
+                @Override
+                public boolean onPreferenceClick(Preference preference)
+                {
+                    if ( statisticsSetting.isChecked() )
+                    {
+                        Toast.makeText(getActivity(), R.string.pref_statistics_toast_on, Toast.LENGTH_SHORT).show();
+                    }
+                    else
+                    {
+                        Toast.makeText(getActivity(), R.string.pref_statistics_toast_off, Toast.LENGTH_SHORT).show();
+                    }
+                    return false;
+                }
+            });
+
 
             Preference statisticsDeletePref = findPreference(SettingsKeys.STATISTICS_DELETE);
             statisticsDeletePref.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener()

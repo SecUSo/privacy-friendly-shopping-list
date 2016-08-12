@@ -7,13 +7,16 @@
                 android:persistent="false"
                 android:title=""
                 android:summary="@string/help_intro"/>
-    </PreferenceCategory>
+        <Preference
+                android:title="@string/help_category_example"
+                android:summary="@string/help_intro_long"
+                android:selectable="false"/>
 
-    <PreferenceCategory android:title="@string/help_category_example">
-        <Preference android:title="@string/help_example"
-                    android:summary="@string/help_example_summary"
+        <Preference android:title="@string/help_customize"
+                    android:summary="@string/help_customize_summary"
                     android:selectable="false"/>
     </PreferenceCategory>
+
 
     <PreferenceCategory android:title="@string/help_privacy_heading">
         <Preference

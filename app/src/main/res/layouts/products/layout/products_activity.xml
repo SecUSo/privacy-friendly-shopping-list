@@ -16,7 +16,6 @@
                 android:layout_height="wrap_content">
 
             <include
-                    app:layout_scrollFlags="scroll|enterAlways"
                     layout="@layout/products_toolbar"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"/>
