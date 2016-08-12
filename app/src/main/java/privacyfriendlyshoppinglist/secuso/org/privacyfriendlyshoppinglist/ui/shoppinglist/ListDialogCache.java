@@ -14,6 +14,7 @@ public class ListDialogCache
 
     private EditText listNameText;
     private EditText listNotes;
+    private EditText reminderText;
     private CheckBox checkBox;
     private LinearLayout deadlineLayout;
     private LinearLayout dateLayout;
@@ -31,6 +32,7 @@ public class ListDialogCache
         prioritySpinner = (Spinner) rootview.findViewById(R.id.priority_spinner);
         reminderSpinner = (Spinner) rootview.findViewById(R.id.reminder_spinner);
         listNameText = (EditText) rootview.findViewById(R.id.list_name);
+        reminderText = (EditText) rootview.findViewById(R.id.edittext_reminder);
         listNotes = (EditText) rootview.findViewById(R.id.list_notes);
         checkBox = (CheckBox) rootview.findViewById(R.id.list_dialog_checkbox);
         deadlineExpansionButton = (ImageView) rootview.findViewById(R.id.expand_button_list);
@@ -106,5 +108,10 @@ public class ListDialogCache
     public TextView getTitleTextView()
     {
         return titleTextView;
+    }
+
+    public EditText getReminderText()
+    {
+        return reminderText;
     }
 }

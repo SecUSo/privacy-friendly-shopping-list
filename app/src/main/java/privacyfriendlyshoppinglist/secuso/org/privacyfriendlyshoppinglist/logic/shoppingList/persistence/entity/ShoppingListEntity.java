@@ -36,6 +36,12 @@ public class ShoppingListEntity extends AbstractEntity
     @DatabaseField
     private boolean sortAscending;
 
+    @DatabaseField
+    private Integer reminderCount;
+
+    @DatabaseField
+    private Integer reminderUnit; // index of spinner
+
     @ForeignCollectionField
     private ForeignCollection<ProductItemEntity> products;
 
@@ -119,6 +125,26 @@ public class ShoppingListEntity extends AbstractEntity
         this.sortAscending = sortAscending;
     }
 
+    public Integer getReminderCount()
+    {
+        return reminderCount;
+    }
+
+    public void setReminderCount(Integer reminderCount)
+    {
+        this.reminderCount = reminderCount;
+    }
+
+    public Integer getReminderUnit()
+    {
+        return reminderUnit;
+    }
+
+    public void setReminderUnit(Integer reminderUnit)
+    {
+        this.reminderUnit = reminderUnit;
+    }
+
     @Override
     public String toString()
     {
@@ -130,6 +156,8 @@ public class ShoppingListEntity extends AbstractEntity
                 ", notes='" + notes + '\'' +
                 ", sortCriteria='" + sortCriteria + '\'' +
                 ", sortAscending=" + sortAscending +
+                ", reminderCount=" + reminderCount +
+                ", reminderUnit=" + reminderUnit +
                 ", products=" + products +
                 '}';
     }

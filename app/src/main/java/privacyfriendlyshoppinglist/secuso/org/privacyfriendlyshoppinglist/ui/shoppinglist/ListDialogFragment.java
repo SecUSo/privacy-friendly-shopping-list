@@ -287,6 +287,16 @@ public class ListDialogFragment extends DialogFragment
 
         dialogCache.getReminderSpinner().setAdapter(reminderSpinnerAdapter);
 
+        String reminderCount = dto.getReminderCount();
+        String reminderUnit = dto.getReminderUnit();
+
+        if ( reminderCount != null )
+        {
+            dialogCache.getReminderText().setText(reminderCount);
+            dialogCache.getReminderSpinner().setSelection(Integer.valueOf(reminderUnit));
+        }
+
+
         builder.setView(v);
 
         dialogCache.getListNameText().setOnFocusChangeListener(new ListsDialogFocusListener(dialogCache));
@@ -300,11 +310,14 @@ public class ListDialogFragment extends DialogFragment
                 dto.setListName(dialogCache.getListNameText().getText().toString());
                 dto.setNotes(dialogCache.getListNotes().getText().toString());
 
-                //TODO Set priority to be Integer
                 dto.setPriority(String.valueOf(dialogCache.getPrioritySpinner().getSelectedItemPosition()));
 
                 dto.setDeadlineDate((String) dialogCache.getDateTextView().getText());
                 dto.setDeadlineTime((String) dialogCache.getTimeTextView().getText());
+
+                dto.setReminderUnit(String.valueOf(dialogCache.getReminderSpinner().getSelectedItemPosition()));
+                dto.setReminderCount(dialogCache.getReminderText().getText().toString());
+                dto.setReminderEnabled(true); //todo: change this true by checkbox value or something similar
 
                 shoppingListService.saveOrUpdate(dto);
                 MainActivity mainActivity = (MainActivity) cache.getActivity();

@@ -1,5 +1,5 @@
 #
-# generated on 2016/08/12 03:55:03
+# generated on 2016/08/12 09:02:09
 #
 # --table-start--
 dataClass=privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.persistence.AbstractEntity
@@ -66,6 +66,12 @@ fieldName=sortCriteria
 # --field-end--
 # --field-start--
 fieldName=sortAscending
+# --field-end--
+# --field-start--
+fieldName=reminderCount
+# --field-end--
+# --field-start--
+fieldName=reminderUnit
 # --field-end--
 # --field-start--
 fieldName=products

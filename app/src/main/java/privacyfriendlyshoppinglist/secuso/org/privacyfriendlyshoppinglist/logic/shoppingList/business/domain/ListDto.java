@@ -20,8 +20,9 @@ public class ListDto extends AbstractDto
     private boolean sortAscending;
     private String sortCriteria;
     private String info;
-    private String reminderDate;
-    private String reminderTime;
+    private boolean reminderEnabled;
+    private String reminderCount;
+    private String reminderUnit;
 
     public String getListName()
     {
@@ -123,26 +124,6 @@ public class ListDto extends AbstractDto
         this.sortCriteria = sortCriteria;
     }
 
-    public String getReminderDate()
-    {
-        return reminderDate;
-    }
-
-    public void setReminderDate(String reminderDate)
-    {
-        this.reminderDate = reminderDate;
-    }
-
-    public String getReminderTime()
-    {
-        return reminderTime;
-    }
-
-    public void setReminderTime(String reminderTime)
-    {
-        this.reminderTime = reminderTime;
-    }
-
     public String getInfo()
     {
         return info;
@@ -151,6 +132,36 @@ public class ListDto extends AbstractDto
     public void setInfo(String info)
     {
         this.info = info;
+    }
+
+    public String getReminderCount()
+    {
+        return reminderCount;
+    }
+
+    public void setReminderCount(String reminderCount)
+    {
+        this.reminderCount = reminderCount;
+    }
+
+    public String getReminderUnit()
+    {
+        return reminderUnit;
+    }
+
+    public void setReminderUnit(String reminderUnit)
+    {
+        this.reminderUnit = reminderUnit;
+    }
+
+    public boolean isReminderEnabled()
+    {
+        return reminderEnabled;
+    }
+
+    public void setReminderEnabled(boolean reminderEnabled)
+    {
+        this.reminderEnabled = reminderEnabled;
     }
 
     @Override
@@ -168,8 +179,10 @@ public class ListDto extends AbstractDto
                 ", sortAscending=" + sortAscending +
                 ", sortCriteria='" + sortCriteria + '\'' +
                 ", info='" + info + '\'' +
-                ", reminderDate='" + reminderDate + '\'' +
-                ", reminderTime='" + reminderTime + '\'' +
+                ", reminderEnabled=" + reminderEnabled +
+                ", reminderCount='" + reminderCount + '\'' +
+                ", reminderUnit='" + reminderUnit + '\'' +
                 '}';
     }
+
 }

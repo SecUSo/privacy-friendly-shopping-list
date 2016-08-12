@@ -54,14 +54,37 @@ public class ShoppingListConverterImpl implements ShoppingListConverter
         {
             Date deadline = DateUtils.getDateFromString(fullDate, dateLongPattern, language).toDate();
             entity.setDeadline(deadline);
+            setReminder(dto, entity);
         }
         else
         {
             entity.setDeadline(null);
+            entity.setReminderCount(null);
+            entity.setReminderUnit(null);
         }
         entity.setIcon(dto.getIcon());
         entity.setNotes(dto.getNotes());
         entity.setPriority(dto.getPriority());
+    }
+
+    private void setReminder(ListDto dto, ShoppingListEntity entity)
+    {
+        if ( dto.getReminderCount() != null && dto.isReminderEnabled() )
+        {
+            if ( !StringUtils.isEmpty(dto.getReminderCount()) )
+            {
+                entity.setReminderCount(Integer.valueOf(dto.getReminderCount()));
+            }
+            else
+            {
+                entity.setReminderCount(0);
+            }
+        }
+        else
+        {
+            entity.setReminderCount(null);
+        }
+        entity.setReminderUnit(Integer.valueOf(dto.getReminderUnit()));
     }
 
     @Override
@@ -94,6 +117,12 @@ public class ShoppingListConverterImpl implements ShoppingListConverter
             dto.setDeadlineTime(EMPTY);
         }
 
+        if ( entity.getReminderCount() != null )
+        {
+            dto.setReminderCount(String.valueOf(entity.getReminderCount()));
+            dto.setReminderUnit(String.valueOf(entity.getReminderUnit()));
+        }
+
         dto.setIcon(entity.getIcon());
         dto.setNotes(entity.getNotes());
         dto.setPriority(entity.getPriority());
@@ -111,7 +140,6 @@ public class ShoppingListConverterImpl implements ShoppingListConverter
     {
         String priorityLabel = context.getResources().getString(R.string.priority);
         String deadLineLabel = context.getResources().getString(R.string.deadline);
-        String reminderLabel = context.getResources().getString(R.string.reminder);
         String notesLabel = context.getResources().getString(R.string.list_notes);
 
         StringBuilder sb = new StringBuilder();
@@ -134,13 +162,10 @@ public class ShoppingListConverterImpl implements ShoppingListConverter
             sb.append(dto.getDeadlineTime());
             sb.append(NEW_LINE);
         }
-        if ( !StringUtils.isEmpty(dto.getReminderDate()) )
+        if ( !StringUtils.isEmpty(dto.getReminderCount()) )
         {
-            sb.append(reminderLabel);
-            sb.append(DETAIL_SEPARATOR);
-            sb.append(dto.getReminderDate());
-            sb.append(SPACE);
-            sb.append(dto.getReminderTime());
+            String reminderText = context.getResources().getString(R.string.reminder_text, Integer.valueOf(dto.getReminderCount()), dto.getReminderUnit());
+            sb.append(reminderText);
             sb.append(NEW_LINE);
         }
         if ( !StringUtils.isEmpty(dto.getNotes()) )

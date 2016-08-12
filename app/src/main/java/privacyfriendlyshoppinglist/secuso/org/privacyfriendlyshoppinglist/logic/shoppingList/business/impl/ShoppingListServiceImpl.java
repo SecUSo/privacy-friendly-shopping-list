@@ -85,10 +85,15 @@ public class ShoppingListServiceImpl implements ShoppingListService
     @Override
     public List<ListDto> getAllListDtos()
     {
-        Observable<ListDto> dtos = Observable
-                .from(shoppingListDao.getAllEntities())
-                .map(this::getDto);
-        return dtos.toList().toBlocking().single();
+        List<ShoppingListEntity> allEntities = shoppingListDao.getAllEntities();
+        if ( allEntities != null )
+        {
+            Observable<ListDto> dtos = Observable
+                    .from(allEntities)
+                    .map(this::getDto);
+            return dtos.toList().toBlocking().single();
+        }
+        return new ArrayList<>();
     }
 
     @Override
