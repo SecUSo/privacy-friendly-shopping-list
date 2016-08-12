@@ -2,7 +2,7 @@ package privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.pr
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
-import android.view.View;
+import android.view.MenuItem;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.deleteproducts.DeleteProductsActivity;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.main.MainActivity;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.products.ProductActivityCache;
@@ -12,7 +12,7 @@ import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.pro
  * Author: Grebiel Jose Ifill Brito
  * Created: 21.07.16 creation date
  */
-public class ShowDeleteProductsOnClickListener implements View.OnClickListener
+public class ShowDeleteProductsOnClickListener implements MenuItem.OnMenuItemClickListener
 {
     private ProductActivityCache cache;
 
@@ -22,12 +22,13 @@ public class ShowDeleteProductsOnClickListener implements View.OnClickListener
     }
 
     @Override
-    public void onClick(View v)
+    public boolean onMenuItemClick(MenuItem item)
     {
         AppCompatActivity activity = cache.getActivity();
         Intent intent = new Intent(activity, DeleteProductsActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         intent.putExtra(MainActivity.LIST_ID_KEY, cache.getListId());
         activity.startActivity(intent);
+        return true;
     }
 }

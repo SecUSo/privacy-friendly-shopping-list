@@ -2,6 +2,8 @@ package privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.pr
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.R;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.context.AbstractInstanceFactory;
@@ -46,10 +48,26 @@ public class ProductsActivity extends AppCompatActivity
         updateListView();
 
         cache.getNewListFab().setOnClickListener(new AddProductOnClickListener(cache));
-        cache.getDeleteImageView().setOnClickListener(new ShowDeleteProductsOnClickListener(cache));
-        cache.getSortImageView().setOnClickListener(new SortProductsOnClickListener(cache));
 
         overridePendingTransition(0, 0);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu)
+    {
+        getMenuInflater().inflate(R.menu.lists_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onPrepareOptionsMenu(Menu menu)
+    {
+        MenuItem sortItem = menu.findItem(R.id.imageview_sort);
+        sortItem.setOnMenuItemClickListener(new SortProductsOnClickListener(cache));
+
+        MenuItem deleteItem = menu.findItem(R.id.imageview_delete);
+        deleteItem.setOnMenuItemClickListener(new ShowDeleteProductsOnClickListener(cache));
+        return super.onPrepareOptionsMenu(menu);
     }
 
     @Override

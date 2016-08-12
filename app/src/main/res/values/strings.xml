@@ -47,7 +47,7 @@
     <string name="statistics_amount_vs_stores">Amount vs. Stores</string>
 
     <!-- ### SORT ### -->
-    <string name="sort_lists">Sort Options</string>
+    <string name="sort_options">Sort Options</string>
     <string name="sort_ascencing_descending">Ascending/Descending</string>
     <string name="sort_ascencing">Ascending</string>
     <string name="sort_descending">Descending</string>

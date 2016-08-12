@@ -60,7 +60,7 @@ public class SortListsDialog extends DialogFragment
         cache.getName().setChecked(true);
 
         builder.setView(rootView);
-        builder.setTitle(getActivity().getString(R.string.sort_lists));
+        builder.setTitle(getActivity().getString(R.string.sort_options));
         builder.setNegativeButton(getActivity().getString(R.string.cancel), null);
         builder.setPositiveButton(getActivity().getString(R.string.okay), new DialogInterface.OnClickListener()
         {

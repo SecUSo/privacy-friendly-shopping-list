@@ -1,6 +1,8 @@
 package privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.main;
 
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.R;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.context.AbstractInstanceFactory;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.context.InstanceFactory;
@@ -43,8 +45,6 @@ public class MainActivity extends BaseActivity
 //        welcomeDialog.show(getFragmentManager(), "WelcomeDialog");
 
         cache.getNewListFab().setOnClickListener(new AddOnClickListener(cache));
-        cache.getSortImageView().setOnClickListener(new SortOnClickListener(cache));
-        cache.getDeleteImageView().setOnClickListener(new ShowDeleteListsOnClickListener(cache));
 
         overridePendingTransition(0, 0);
     }
@@ -54,6 +54,24 @@ public class MainActivity extends BaseActivity
     {
         super.onRestart();
         updateListView();
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu)
+    {
+        getMenuInflater().inflate(R.menu.lists_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onPrepareOptionsMenu(Menu menu)
+    {
+        MenuItem sortItem = menu.findItem(R.id.imageview_sort);
+        sortItem.setOnMenuItemClickListener(new SortOnClickListener(cache));
+
+        MenuItem deleteItem = menu.findItem(R.id.imageview_delete);
+        deleteItem.setOnMenuItemClickListener(new ShowDeleteListsOnClickListener(cache));
+        return super.onPrepareOptionsMenu(menu);
     }
 
     @Override

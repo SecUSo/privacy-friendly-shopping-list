@@ -7,7 +7,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SwitchCompat;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.R;
@@ -26,8 +25,6 @@ public class ProductActivityCache
     private AppCompatActivity activity;
     private FloatingActionButton newListFab;
     private ProductsAdapter productsAdapter;
-    private ImageView sortImageView;
-    private ImageView deleteImageView;
     private TextView totalAmountTextView;
     private TextView totalCheckedTextView;
     private TextView currencyTextView;
@@ -48,8 +45,6 @@ public class ProductActivityCache
         recyclerView.setAdapter(productsAdapter);
 
         newListFab = (FloatingActionButton) activity.findViewById(R.id.fab_new_product);
-        sortImageView = (ImageView) activity.findViewById(R.id.imageview_sort);
-        deleteImageView = (ImageView) activity.findViewById(R.id.imageview_delete);
         totalAmountTextView = (TextView) activity.findViewById(R.id.textview_total_amount);
         totalCheckedTextView = (TextView) activity.findViewById(R.id.textview_total_checked);
         totalLayout = (LinearLayout) activity.findViewById(R.id.layout_total);
@@ -77,16 +72,6 @@ public class ProductActivityCache
     public ProductsAdapter getProductsAdapter()
     {
         return productsAdapter;
-    }
-
-    public ImageView getSortImageView()
-    {
-        return sortImageView;
-    }
-
-    public ImageView getDeleteImageView()
-    {
-        return deleteImageView;
     }
 
     public String getListId()
