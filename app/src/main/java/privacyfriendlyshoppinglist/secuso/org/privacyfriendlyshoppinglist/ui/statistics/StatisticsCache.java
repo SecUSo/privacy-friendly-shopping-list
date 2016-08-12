@@ -23,6 +23,7 @@ public class StatisticsCache
     private TextView rangeFromTextView;
     private TextView rangeToTextView;
     private Spinner groupBySpinner;
+    private Spinner valuesSpinner;
     private AppCompatActivity activity;
     private String datePattern;
     private String dateLanguage;
@@ -44,6 +45,7 @@ public class StatisticsCache
         rangeFromTextView = (TextView) activity.findViewById(R.id.textview_stats_range_from);
         rangeToTextView = (TextView) activity.findViewById(R.id.textview_stats_range_to);
         groupBySpinner = (Spinner) activity.findViewById(R.id.spinner_stats_group_by);
+        valuesSpinner = (Spinner) activity.findViewById(R.id.spinner_stats_values);
 
         datePattern = activity.getResources().getString(R.string.date_short_pattern);
         dateLanguage = activity.getResources().getString(R.string.language);
@@ -98,5 +100,10 @@ public class StatisticsCache
     public String getNumberFormat()
     {
         return numberFormat;
+    }
+
+    public Spinner getValuesSpinner()
+    {
+        return valuesSpinner;
     }
 }

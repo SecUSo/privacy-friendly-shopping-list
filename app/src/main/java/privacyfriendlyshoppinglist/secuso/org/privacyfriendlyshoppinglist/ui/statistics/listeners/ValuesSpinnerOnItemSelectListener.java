@@ -9,11 +9,11 @@ import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.
  * Author: Grebiel Jose Ifill Brito
  * Created: 23.07.16 creation date
  */
-public class SpinnerOnItemSelectListener implements AdapterView.OnItemSelectedListener
+public class ValuesSpinnerOnItemSelectListener implements AdapterView.OnItemSelectedListener
 {
     private StatisticsQuery query;
 
-    public SpinnerOnItemSelectListener(StatisticsQuery query)
+    public ValuesSpinnerOnItemSelectListener(StatisticsQuery query)
     {
         this.query = query;
     }
@@ -21,7 +21,7 @@ public class SpinnerOnItemSelectListener implements AdapterView.OnItemSelectedLi
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id)
     {
-        query.setGroupBy(position);
+        query.setValuesY(position);
         query.notifyObservers();
     }
 

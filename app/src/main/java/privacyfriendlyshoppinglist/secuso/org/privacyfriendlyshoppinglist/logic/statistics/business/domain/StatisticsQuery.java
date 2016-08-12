@@ -16,6 +16,9 @@ public class StatisticsQuery extends Observable
     public static int STORE = 4;
     public static int PRODUCT = 5;
 
+    public static int PRICE = 0;
+    public static int QTY = 1;
+
     private String dateFrom;
 
     private String dateTo;
@@ -26,6 +29,8 @@ public class StatisticsQuery extends Observable
     {
         return dateFrom;
     }
+
+    public int valuesY;
 
     public void setDateFrom(String dateFrom)
     {
@@ -52,6 +57,17 @@ public class StatisticsQuery extends Observable
     public void setGroupBy(int groupBy)
     {
         this.groupBy = groupBy;
+        setChanged();
+    }
+
+    public int getValuesY()
+    {
+        return valuesY;
+    }
+
+    public void setValuesY(int valuesY)
+    {
+        this.valuesY = valuesY;
         setChanged();
     }
 }

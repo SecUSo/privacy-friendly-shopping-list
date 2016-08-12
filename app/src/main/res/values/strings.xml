@@ -42,6 +42,7 @@
     <string name="statistics_total_amout">Total:</string>
     <string name="statistics_range">Range:</string>
     <string name="statistics_group_by">Group by:</string>
+    <string name="statistics_y_values">Show:</string>
     <string name="statistics_amount_vs_months">Amount vs. Months</string>
     <string name="statistics_amount_vs_weeks">Amount vs. Weeks</string>
     <string name="statistics_amount_vs_days">Amount vs. Days</string>
@@ -243,13 +244,18 @@
         <item>Reminder</item>
     </string-array>
 
-    <string-array name="statistics_spinner_params">
+    <string-array name="statistics_spinner_group_by">
         <item>Month</item>
         <item>Week</item>
         <item>Day</item>
         <item>Category</item>
         <item>Store</item>
         <item>Product</item>
+    </string-array>
+
+    <string-array name="statistics_spinner_values">
+        <item>Price</item>
+        <item>Qty.</item>
     </string-array>
 
     <string-array name="statistics_months">

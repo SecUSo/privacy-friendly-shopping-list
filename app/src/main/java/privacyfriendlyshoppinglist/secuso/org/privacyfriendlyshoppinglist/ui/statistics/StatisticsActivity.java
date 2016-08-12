@@ -13,7 +13,8 @@ import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.bas
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.statistics.chart.PFAChart;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.statistics.listeners.DataFromOnClickListener;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.statistics.listeners.DataToOnClickListener;
-import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.statistics.listeners.SpinnerOnItemSelectListener;
+import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.statistics.listeners.GroupBySpinnerOnItemSelectListener;
+import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.statistics.listeners.ValuesSpinnerOnItemSelectListener;
 
 import java.util.Observable;
 import java.util.Observer;
@@ -42,6 +43,7 @@ public class StatisticsActivity extends BaseActivity implements Observer
 
         AbstractInstanceFactory instanceFactory = new InstanceFactory(getApplicationContext());
         statisticsService = (StatisticsService) instanceFactory.createInstance(StatisticsService.class);
+
         query = new StatisticsQuery();
         query.addObserver(this);
         cache = new StatisticsCache(this);
@@ -101,12 +103,20 @@ public class StatisticsActivity extends BaseActivity implements Observer
 
     private void setupSpinner(StatisticsCache cache)
     {
-        String[] spinnerParams = getResources().getStringArray(R.array.statistics_spinner_params);
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, R.layout.pfa_lists, spinnerParams);
-        cache.getGroupBySpinner().setAdapter(adapter);
+        String[] groupBySpinner = getResources().getStringArray(R.array.statistics_spinner_group_by);
+        ArrayAdapter<String> groupByAdapter = new ArrayAdapter<>(this, R.layout.pfa_lists, groupBySpinner);
+        cache.getGroupBySpinner().setAdapter(groupByAdapter);
 
-        cache.getGroupBySpinner().setOnItemSelectedListener(new SpinnerOnItemSelectListener(query));
+        String[] valueSpinner = getResources().getStringArray(R.array.statistics_spinner_values);
+        ArrayAdapter<String> valueAdapter = new ArrayAdapter<>(this, R.layout.pfa_lists, valueSpinner);
+        cache.getValuesSpinner().setAdapter(valueAdapter);
+
+        cache.getGroupBySpinner().setOnItemSelectedListener(new GroupBySpinnerOnItemSelectListener(query));
         query.setGroupBy(cache.getGroupBySpinner().getSelectedItemPosition());
+
+        cache.getValuesSpinner().setOnItemSelectedListener(new ValuesSpinnerOnItemSelectListener(query));
+        query.setValuesY(cache.getValuesSpinner().getSelectedItemPosition());
+
         query.notifyObservers();
     }
 }

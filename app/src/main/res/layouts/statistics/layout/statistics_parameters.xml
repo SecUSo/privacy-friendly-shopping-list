@@ -48,13 +48,27 @@
             android:weightSum="1">
         <TextView
                 android:text="@string/statistics_group_by"
-                android:layout_weight="0.5"
+                android:layout_weight="0.25"
                 android:padding="@dimen/statistics_padding"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
         <Spinner
                 android:id="@+id/spinner_stats_group_by"
-                android:layout_weight="0.5"
+                android:layout_weight="0.25"
+                android:backgroundTint="@color/colorAccent"
+                android:spinnerMode="dropdown"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent">
+        </Spinner>
+        <TextView
+                android:text="@string/statistics_y_values"
+                android:layout_weight="0.25"
+                android:padding="@dimen/statistics_padding"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+        <Spinner
+                android:id="@+id/spinner_stats_values"
+                android:layout_weight="0.25"
                 android:backgroundTint="@color/colorAccent"
                 android:spinnerMode="dropdown"
                 android:layout_width="wrap_content"
