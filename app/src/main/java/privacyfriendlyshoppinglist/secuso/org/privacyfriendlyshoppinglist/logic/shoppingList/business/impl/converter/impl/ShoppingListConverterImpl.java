@@ -164,7 +164,9 @@ public class ShoppingListConverterImpl implements ShoppingListConverter
         }
         if ( !StringUtils.isEmpty(dto.getReminderCount()) )
         {
-            String reminderText = context.getResources().getString(R.string.reminder_text, Integer.valueOf(dto.getReminderCount()), dto.getReminderUnit());
+            String[] timeUnitArray = context.getResources().getStringArray(R.array.shopping_list_reminder_spinner);
+            String reminderUnit = timeUnitArray[ Integer.valueOf(dto.getReminderUnit()) ];
+            String reminderText = context.getResources().getString(R.string.reminder_text, Integer.valueOf(dto.getReminderCount()), reminderUnit);
             sb.append(reminderText);
             sb.append(NEW_LINE);
         }
