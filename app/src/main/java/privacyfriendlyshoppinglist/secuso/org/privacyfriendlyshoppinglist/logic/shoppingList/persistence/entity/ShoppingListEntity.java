@@ -30,6 +30,12 @@ public class ShoppingListEntity extends AbstractEntity
     @DatabaseField
     private String notes;
 
+    @DatabaseField
+    private String sortCriteria;
+
+    @DatabaseField
+    private boolean sortAscending;
+
     @ForeignCollectionField
     private ForeignCollection<ProductItemEntity> products;
 
@@ -93,6 +99,26 @@ public class ShoppingListEntity extends AbstractEntity
         this.products = products;
     }
 
+    public String getSortCriteria()
+    {
+        return sortCriteria;
+    }
+
+    public void setSortCriteria(String sortCriteria)
+    {
+        this.sortCriteria = sortCriteria;
+    }
+
+    public boolean getSortAscending()
+    {
+        return sortAscending;
+    }
+
+    public void setSortAscending(boolean sortAscending)
+    {
+        this.sortAscending = sortAscending;
+    }
+
     @Override
     public String toString()
     {
@@ -102,6 +128,8 @@ public class ShoppingListEntity extends AbstractEntity
                 ", icon=" + icon +
                 ", deadline=" + deadline +
                 ", notes='" + notes + '\'' +
+                ", sortCriteria='" + sortCriteria + '\'' +
+                ", sortAscending=" + sortAscending +
                 ", products=" + products +
                 '}';
     }

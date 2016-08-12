@@ -71,7 +71,7 @@ class DataBaseHelper extends OrmLiteSqliteOpenHelper
             setupClasses();
             for ( Class aClass : entityClasses )
             {
-                TableUtils.dropTable(connectionSource, aClass.getClass(), true);
+                TableUtils.dropTable(connectionSource, aClass, true);
             }
             onCreate(database, connectionSource);
         }

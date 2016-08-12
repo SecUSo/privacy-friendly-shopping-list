@@ -2,6 +2,7 @@ package privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic
 
 import android.content.Context;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.R;
+import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.comparators.PFAComparators;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.persistence.DB;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.utils.DateUtils;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.shoppingList.business.domain.ListDto;
@@ -41,6 +42,8 @@ public class ShoppingListConverterImpl implements ShoppingListConverter
         Long id = getIdAsLong(dto);
         entity.setId(id);
         entity.setListName(dto.getListName());
+        entity.setSortAscending(dto.isSortAscending());
+        entity.setSortCriteria(dto.getSortCriteria());
 
         String fullDate = dto.getDeadlineDate() + SPACE + dto.getDeadlineTime();
         if ( !SPACE.equals(fullDate) )
@@ -62,6 +65,17 @@ public class ShoppingListConverterImpl implements ShoppingListConverter
     {
         dto.setId(entity.getId().toString());
         dto.setListName(entity.getListName());
+
+        if ( entity.getSortCriteria() != null )
+        {
+            dto.setSortCriteria(entity.getSortCriteria());
+            dto.setSortAscending(entity.getSortAscending());
+        }
+        else // default sort config
+        {
+            dto.setSortCriteria(PFAComparators.SORT_BY_NAME);
+            dto.setSortAscending(true);
+        }
 
         if ( entity.getDeadline() != null )
         {

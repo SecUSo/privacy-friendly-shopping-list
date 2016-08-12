@@ -82,14 +82,14 @@ public class SortListsDialog extends DialogFragment
                 }
                 boolean ascending = cache.getAscending().isChecked();
                 shoppingListService.sortList(listDtos, criteria, ascending);
+                host.reorderListView(listDtos);
 
+                // save sort options
                 SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(activity);
                 SharedPreferences.Editor editor = sharedPref.edit();
                 editor.putString(SettingsKeys.LIST_SORT_BY, criteria);
                 editor.putBoolean(SettingsKeys.LIST_SORT_ASCENDING, ascending);
                 editor.commit();
-
-                host.reorderListView(listDtos);
             }
         });
 

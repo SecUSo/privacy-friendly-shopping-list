@@ -1,5 +1,5 @@
 #
-# generated on 2016/07/23 03:17:12
+# generated on 2016/08/12 03:55:03
 #
 # --table-start--
 dataClass=privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.persistence.AbstractEntity
@@ -60,6 +60,12 @@ fieldName=deadline
 # --field-end--
 # --field-start--
 fieldName=notes
+# --field-end--
+# --field-start--
+fieldName=sortCriteria
+# --field-end--
+# --field-start--
+fieldName=sortAscending
 # --field-end--
 # --field-start--
 fieldName=products

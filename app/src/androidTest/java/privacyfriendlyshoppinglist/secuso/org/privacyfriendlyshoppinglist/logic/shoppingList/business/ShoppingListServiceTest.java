@@ -95,21 +95,5 @@ public class ShoppingListServiceTest extends AbstractDatabaseTest
         assertEquals(expectedSizeAfterDelete, allListDtosAfterDelete.size());
     }
 
-    @Test
-    public void testSaveWithInvalidInput()
-    {
-        ListDto dto = new ListDto();
-        dto.setListName("Lorem ipsum dolor sit amet, consectetuer."); // length = 41; maximum is 40.
-
-        shoppingListService.saveOrUpdate(dto);
-        String id = dto.getId(); // if the list is not saved, then the id is equals null
-        assertNull(id);
-
-        assertTrue(dto.hasErrors());
-
-        String errorFieldName = dto.getValidationErrorsList().get(0);
-        assertEquals(ListDto.ErrorFieldName.LIST_NAME.name(), errorFieldName);
-    }
-
 
 }

@@ -6,8 +6,13 @@ import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.R;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.context.AbstractInstanceFactory;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.context.InstanceFactory;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.product.business.ProductService;
+import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.product.business.domain.ProductDto;
+import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.shoppingList.business.ShoppingListService;
+import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.shoppingList.business.domain.ListDto;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.deleteproducts.listeners.DeleteProductOnClickListener;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.main.MainActivity;
+
+import java.util.List;
 
 /**
  * Description:
@@ -17,7 +22,9 @@ import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.mai
 public class DeleteProductsActivity extends AppCompatActivity
 {
     private ProductService productService;
+    private ShoppingListService shoppingListService;
     private DeleteProductsCache cache;
+    private String listId;
 
     @Override
     protected final void onCreate(final Bundle savedInstanceState)
@@ -27,8 +34,9 @@ public class DeleteProductsActivity extends AppCompatActivity
 
         AbstractInstanceFactory instanceFactory = new InstanceFactory(getApplicationContext());
         this.productService = (ProductService) instanceFactory.createInstance(ProductService.class);
+        this.shoppingListService = (ShoppingListService) instanceFactory.createInstance(ShoppingListService.class);
 
-        String listId = getIntent().getStringExtra(MainActivity.LIST_ID_KEY);
+        listId = getIntent().getStringExtra(MainActivity.LIST_ID_KEY);
         cache = new DeleteProductsCache(this, listId);
 
         updateListView();
@@ -40,7 +48,15 @@ public class DeleteProductsActivity extends AppCompatActivity
 
     public void updateListView()
     {
-        cache.getDeleteProductsAdapter().setProductsList(productService.getAllProducts(cache.getListId()));
+        List<ProductDto> allProducts = productService.getAllProducts(cache.getListId());
+
+        // sort according to last sort selection
+        ListDto listDto = shoppingListService.getById(listId);
+        String sortBy = listDto.getSortCriteria();
+        boolean sortAscending = listDto.isSortAscending();
+        productService.sortProducts(allProducts, sortBy, sortAscending);
+
+        cache.getDeleteProductsAdapter().setProductsList(allProducts);
         cache.getDeleteProductsAdapter().notifyDataSetChanged();
     }
 }

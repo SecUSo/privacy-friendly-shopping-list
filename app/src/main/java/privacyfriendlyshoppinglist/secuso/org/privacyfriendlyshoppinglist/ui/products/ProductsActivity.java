@@ -11,6 +11,8 @@ import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framew
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.product.business.ProductService;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.product.business.domain.ProductDto;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.product.business.domain.TotalDto;
+import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.shoppingList.business.ShoppingListService;
+import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.shoppingList.business.domain.ListDto;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.main.MainActivity;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.products.listadapter.ProductsAdapter;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.products.listeners.AddProductOnClickListener;
@@ -28,7 +30,9 @@ public class ProductsActivity extends AppCompatActivity
 {
     private static final long DURATION = 1000L;
     private ProductService productService;
+    private ShoppingListService shoppingListService;
     private ProductActivityCache cache;
+    private String listId;
 
     @Override
     protected final void onCreate(final Bundle savedInstanceState)
@@ -39,11 +43,12 @@ public class ProductsActivity extends AppCompatActivity
         String listName = getIntent().getStringExtra(MainActivity.LIST_NAME_KEY);
         setTitle(listName);
 
-        String listId = getIntent().getStringExtra(MainActivity.LIST_ID_KEY);
+        listId = getIntent().getStringExtra(MainActivity.LIST_ID_KEY);
         cache = new ProductActivityCache(this, listId);
 
         AbstractInstanceFactory instanceFactory = new InstanceFactory(getApplicationContext());
         this.productService = (ProductService) instanceFactory.createInstance(ProductService.class);
+        this.shoppingListService = (ShoppingListService) instanceFactory.createInstance(ShoppingListService.class);
 
         updateListView();
 
@@ -79,7 +84,15 @@ public class ProductsActivity extends AppCompatActivity
 
     public void updateListView()
     {
-        cache.getProductsAdapter().setProductsList(productService.getAllProducts(cache.getListId()));
+        List<ProductDto> allProducts = productService.getAllProducts(cache.getListId());
+
+        // sort according to last sort selection
+        ListDto listDto = shoppingListService.getById(listId);
+        String sortBy = listDto.getSortCriteria();
+        boolean sortAscending = listDto.isSortAscending();
+        productService.sortProducts(allProducts, sortBy, sortAscending);
+
+        cache.getProductsAdapter().setProductsList(allProducts);
         cache.getProductsAdapter().notifyDataSetChanged();
 
         reorderProductViewBySelection();

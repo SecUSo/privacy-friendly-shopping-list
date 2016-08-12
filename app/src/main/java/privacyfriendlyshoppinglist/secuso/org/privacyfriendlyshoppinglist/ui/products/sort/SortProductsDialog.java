@@ -14,6 +14,8 @@ import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framew
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.context.InstanceFactory;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.product.business.ProductService;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.product.business.domain.ProductDto;
+import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.shoppingList.business.ShoppingListService;
+import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.shoppingList.business.domain.ListDto;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.products.ProductActivityCache;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.products.ProductsActivity;
 
@@ -68,8 +70,10 @@ public class SortProductsDialog extends DialogFragment
                 ProductsActivity host = (ProductsActivity) productActivityCache.getActivity();
                 AbstractInstanceFactory instanceFactory = new InstanceFactory(host.getApplicationContext());
                 ProductService productService = (ProductService) instanceFactory.createInstance(ProductService.class);
+                ShoppingListService shoppingListService = (ShoppingListService) instanceFactory.createInstance(ShoppingListService.class);
 
-                List<ProductDto> productDtos = productService.getAllProducts(productActivityCache.getListId());
+                String listId = productActivityCache.getListId();
+                List<ProductDto> productDtos = productService.getAllProducts(listId);
                 String criteria = PFAComparators.SORT_BY_NAME;
                 if ( cache.getQuantity().isChecked() )
                 {
@@ -87,9 +91,16 @@ public class SortProductsDialog extends DialogFragment
                 {
                     criteria = PFAComparators.SORT_BY_CATEGORY;
                 }
-                productService.sortProducts(productDtos, criteria, cache.getAscending().isChecked());
+                boolean ascending = cache.getAscending().isChecked();
+                productService.sortProducts(productDtos, criteria, ascending);
                 host.reorderProductView(productDtos);
                 host.reorderProductViewBySelection();
+
+                // save sort options
+                ListDto dto = shoppingListService.getById(listId);
+                dto.setSortAscending(ascending);
+                dto.setSortCriteria(criteria);
+                shoppingListService.saveOrUpdate(dto);
             }
         });
 

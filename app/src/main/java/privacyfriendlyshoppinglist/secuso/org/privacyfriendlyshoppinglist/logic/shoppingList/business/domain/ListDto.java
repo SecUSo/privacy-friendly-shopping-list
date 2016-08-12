@@ -9,12 +9,6 @@ import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framew
  */
 public class ListDto extends AbstractDto
 {
-
-    public enum ErrorFieldName
-    {
-        LIST_NAME
-    }
-
     private String listName;
     private String priority;
     private int icon;
@@ -23,6 +17,8 @@ public class ListDto extends AbstractDto
     private String notes;
     private String nrItems;
     private boolean selected;
+    private boolean sortAscending;
+    private String sortCriteria;
 
     public String getListName()
     {
@@ -104,6 +100,26 @@ public class ListDto extends AbstractDto
         this.selected = selected;
     }
 
+    public boolean isSortAscending()
+    {
+        return sortAscending;
+    }
+
+    public void setSortAscending(boolean sortAscending)
+    {
+        this.sortAscending = sortAscending;
+    }
+
+    public String getSortCriteria()
+    {
+        return sortCriteria;
+    }
+
+    public void setSortCriteria(String sortCriteria)
+    {
+        this.sortCriteria = sortCriteria;
+    }
+
     @Override
     public String toString()
     {
@@ -116,6 +132,8 @@ public class ListDto extends AbstractDto
                 ", notes='" + notes + '\'' +
                 ", nrItems='" + nrItems + '\'' +
                 ", selected=" + selected +
+                ", sortAscending=" + sortAscending +
+                ", sortCriteria='" + sortCriteria + '\'' +
                 '}';
     }
 }
