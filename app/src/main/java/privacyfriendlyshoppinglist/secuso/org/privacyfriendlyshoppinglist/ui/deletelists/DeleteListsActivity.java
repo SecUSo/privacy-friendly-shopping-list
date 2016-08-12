@@ -6,7 +6,7 @@ import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.R;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.context.AbstractInstanceFactory;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.context.InstanceFactory;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.shoppingList.business.ShoppingListService;
-import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.deletelists.listeners.DeleteOnClickListener;
+import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.deletelists.listeners.DeleteListsOnClickListener;
 
 /**
  * Description:
@@ -30,7 +30,7 @@ public class DeleteListsActivity extends AppCompatActivity
 
         updateListView();
 
-        cache.getDeleteFab().setOnClickListener(new DeleteOnClickListener(cache));
+        cache.getDeleteFab().setOnClickListener(new DeleteListsOnClickListener(cache));
 
         overridePendingTransition(0, 0);
     }

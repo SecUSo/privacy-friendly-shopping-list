@@ -1,6 +1,8 @@
 package privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.deletelists.listeners;
 
+import android.content.Intent;
 import android.support.design.widget.Snackbar;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.R;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.context.AbstractInstanceFactory;
@@ -9,6 +11,7 @@ import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.shoppingList.business.ShoppingListService;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.shoppingList.business.domain.ListDto;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.deletelists.DeleteListsCache;
+import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.main.MainActivity;
 import rx.Observable;
 
 import java.util.List;
@@ -18,13 +21,13 @@ import java.util.List;
  * Author: Grebiel Jose Ifill Brito
  * Created: 16.07.16 creation date
  */
-public class DeleteOnClickListener implements View.OnClickListener
+public class DeleteListsOnClickListener implements View.OnClickListener
 {
     private ShoppingListService shoppingListService;
     private ProductService productService;
     private DeleteListsCache cache;
 
-    public DeleteOnClickListener(DeleteListsCache cache)
+    public DeleteListsOnClickListener(DeleteListsCache cache)
     {
         this.cache = cache;
         AbstractInstanceFactory instanceFactory = new InstanceFactory(cache.getActivity().getApplicationContext());
@@ -41,10 +44,19 @@ public class DeleteOnClickListener implements View.OnClickListener
                     @Override
                     public void onClick(View v)
                     {
+                        // delete product
                         List<ListDto> shoppingList = cache.getDeleteListsAdapter().getShoppingList();
                         List<String> deletedIds = shoppingListService.deleteSelected(shoppingList);
                         Observable.from(deletedIds).subscribe(id -> productService.deleteAllFromList(id));
+
+                        // update ui
                         updateListView();
+
+                        // go back to list overview
+                        AppCompatActivity activity = cache.getActivity();
+                        Intent intent = new Intent(activity, MainActivity.class);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                        activity.startActivity(intent);
                     }
                 }).show();
     }
