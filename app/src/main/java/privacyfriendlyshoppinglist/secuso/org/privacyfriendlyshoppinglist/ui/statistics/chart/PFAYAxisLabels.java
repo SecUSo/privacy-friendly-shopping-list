@@ -6,6 +6,7 @@ import android.preference.PreferenceManager;
 import com.github.mikephil.charting.components.AxisBase;
 import com.github.mikephil.charting.formatter.AxisValueFormatter;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.R;
+import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.statistics.business.domain.StatisticsQuery;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.settings.SettingsKeys;
 
 import java.text.DecimalFormat;
@@ -15,25 +16,33 @@ import java.text.DecimalFormat;
  * Author: Grebiel Jose Ifill Brito
  * Created: 23.07.16 creation date
  */
-public class YAxisLabels implements AxisValueFormatter
+public class PFAYAxisLabels implements AxisValueFormatter
 {
     private static final String SPACE = " ";
-    private String currency;
+    private String unit;
     private DecimalFormat format;
 
-    public YAxisLabels(Context context)
+    public PFAYAxisLabels(Context context, int valuesSelectedItemPos)
     {
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
-        currency = prefs.getString(SettingsKeys.CURRENCY, null);
-
-        String numberFormat = context.getResources().getString(R.string.number_format_2_decimals);
+        String numberFormat;
+        if ( valuesSelectedItemPos == StatisticsQuery.PRICE )
+        {
+            SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
+            this.unit = prefs.getString(SettingsKeys.CURRENCY, null);
+            numberFormat = context.getResources().getString(R.string.number_format_2_decimals);
+        }
+        else
+        {
+            this.unit = context.getResources().getString(R.string.statistics_quantity_unit);
+            numberFormat = context.getResources().getString(R.string.number_format_0_decimals);
+        }
         this.format = new DecimalFormat(numberFormat);
     }
 
     @Override
     public String getFormattedValue(float value, AxisBase axis)
     {
-        return format.format(value) + SPACE + currency;
+        return format.format(value) + SPACE + unit;
     }
 
     @Override

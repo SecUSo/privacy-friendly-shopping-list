@@ -70,6 +70,16 @@ public class StatisticsActivity extends BaseActivity implements Observer
 
         chart.updateChart(chartData.getData(), chartData.getLabels(), middleblue);
         String totalAmount = StringUtils.getDoubleAsString(chartData.getTotal(), cache.getNumberFormat());
+        cache.getUnitsTextView().setText(cache.getCurrency());
+
+        if ( cache.getValuesSpinner().getSelectedItemPosition() == StatisticsQuery.QUANTITY )
+        {
+            // don't show decimals for quantities
+            totalAmount = totalAmount.replace(".00", "").replace(",00", "");
+            String unit = getResources().getString(R.string.statistics_quantity_unit);
+            cache.getUnitsTextView().setText(unit);
+        }
+
         cache.getTotalTextView().setText(totalAmount);
         cache.getTitleTextView().setText(chartData.getTitle());
     }

@@ -12,12 +12,12 @@ import java.util.List;
  * Author: Grebiel Jose Ifill Brito
  * Created: 22.07.16 creation date
  */
-class XAxisLabels implements AxisValueFormatter
+class PFAXAxisLabels implements AxisValueFormatter
 {
     private static final String EMPTY = "";
     private List<String> labels;
 
-    XAxisLabels(String[] labels)
+    PFAXAxisLabels(String[] labels)
     {
         this.labels = new ArrayList<>();
         this.labels.addAll(Arrays.asList(labels));

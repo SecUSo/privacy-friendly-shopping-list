@@ -42,13 +42,8 @@
     <string name="statistics_total_amout">Total:</string>
     <string name="statistics_range">Range:</string>
     <string name="statistics_group_by">Group by:</string>
-    <string name="statistics_y_values">Show:</string>
-    <string name="statistics_amount_vs_months">Amount vs. Months</string>
-    <string name="statistics_amount_vs_weeks">Amount vs. Weeks</string>
-    <string name="statistics_amount_vs_days">Amount vs. Days</string>
-    <string name="statistics_amount_vs_categories">Amount vs. Categories</string>
-    <string name="statistics_amount_vs_products">Amount vs. Products</string>
-    <string name="statistics_amount_vs_stores">Amount vs. Stores</string>
+    <string name="statistics_y_values">Values:</string>
+    <string name="statistics_quantity_unit">Units</string>
 
     <!-- ### SORT ### -->
     <string name="sort_options">Sort Options</string>
@@ -255,7 +250,7 @@
 
     <string-array name="statistics_spinner_values">
         <item>Price</item>
-        <item>Qty.</item>
+        <item>Quantity</item>
     </string-array>
 
     <string-array name="statistics_months">

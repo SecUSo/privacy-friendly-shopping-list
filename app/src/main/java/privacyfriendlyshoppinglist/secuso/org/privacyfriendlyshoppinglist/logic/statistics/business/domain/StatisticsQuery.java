@@ -17,7 +17,7 @@ public class StatisticsQuery extends Observable
     public static int PRODUCT = 5;
 
     public static int PRICE = 0;
-    public static int QTY = 1;
+    public static int QUANTITY = 1;
 
     private String dateFrom;
 

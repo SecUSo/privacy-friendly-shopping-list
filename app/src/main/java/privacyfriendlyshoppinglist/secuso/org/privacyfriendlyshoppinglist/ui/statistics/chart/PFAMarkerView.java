@@ -10,6 +10,7 @@ import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.formatter.AxisValueFormatter;
 import com.github.mikephil.charting.highlight.Highlight;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.R;
+import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.statistics.business.domain.StatisticsQuery;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.settings.SettingsKeys;
 
 import java.text.DecimalFormat;
@@ -22,28 +23,40 @@ class PFAMarkerView extends MarkerView
     private AxisValueFormatter xValueFormatter;
     private DecimalFormat format;
     private Context context;
-    private String currency;
+    private String unit;
 
-    PFAMarkerView(Context context, AxisValueFormatter xValueFormatter)
+    PFAMarkerView(Context context, AxisValueFormatter xValueFormatter, int valuesSelectedItemPos)
     {
         super(context, R.layout.statistics_marker_view);
 
         this.xValueFormatter = xValueFormatter;
         this.context = context;
         markup = (TextView) findViewById(R.id.textview_chart_markup);
-        String numberFormat = this.context.getResources().getString(R.string.number_format_2_decimals);
-        format = new DecimalFormat(numberFormat);
 
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
-        currency = prefs.getString(SettingsKeys.CURRENCY, null);
+        String numberFormat;
+        if ( valuesSelectedItemPos == StatisticsQuery.PRICE )
+        {
+            numberFormat = context.getResources().getString(R.string.number_format_2_decimals);
+            SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
+            this.unit = prefs.getString(SettingsKeys.CURRENCY, null);
+        }
+        else
+        {
+            numberFormat = context.getResources().getString(R.string.number_format_0_decimals);
+            this.unit = context.getResources().getString(R.string.statistics_quantity_unit);
+        }
+
+        format = new DecimalFormat(numberFormat);
     }
 
     @Override
     public void refreshContent(Entry e, Highlight highlight)
     {
-        String markupText = xValueFormatter.getFormattedValue(e.getX(), null) + SEPARATION +
-                format.format(e.getY()) + SPACE +
-                currency;
+        String markupText =
+                xValueFormatter.getFormattedValue(e.getX(), null) +
+                        SEPARATION +
+                        format.format(e.getY()) + SPACE +
+                        unit;
         markup.setText(markupText);
     }
 

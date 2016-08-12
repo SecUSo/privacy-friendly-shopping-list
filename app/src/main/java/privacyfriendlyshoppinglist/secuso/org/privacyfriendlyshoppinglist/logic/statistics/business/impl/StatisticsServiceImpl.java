@@ -31,6 +31,8 @@ public class StatisticsServiceImpl implements StatisticsService
     private StatisticsDao statisticsDao;
     private StatisticsConverterService converterService;
     private Context context;
+    private String yAxisName;
+    private String xAxisName;
 
     @Inject
     public StatisticsServiceImpl(
@@ -132,7 +134,8 @@ public class StatisticsServiceImpl implements StatisticsService
         DateTime dateFrom = converterService.getDateTimeFromString(query.getDateFrom());
         DateTime dateTo = converterService.getDateTimeFromString(query.getDateTo());
         int groupBy = query.getGroupBy();
-        int values = query.getValuesY();
+        int valuesIndex = query.getValuesY();
+        setAxisNames(groupBy, valuesIndex);
 
         // filter by Range
         List<StatisticEntryEntity> filteredEntities = Observable
@@ -144,41 +147,50 @@ public class StatisticsServiceImpl implements StatisticsService
                 }).toSortedList((entity1, entity2) -> entity1.getRecordDate().compareTo(entity2.getRecordDate()))
                 .toBlocking().single();
 
-        StatisticsChartData chartData = getStatisticsChartData(groupBy, values, filteredEntities);
+        StatisticsChartData chartData = getStatisticsChartData(groupBy, valuesIndex, filteredEntities);
         return chartData;
     }
 
-    private StatisticsChartData getStatisticsChartData(int groupBy, int values, List<StatisticEntryEntity> filteredEntities)
+    private void setAxisNames(int groupBy, int valuesIndex)
+    {
+        String[] groupByStrings = context.getResources().getStringArray(R.array.statistics_spinner_group_by);
+        String[] valuesStrings = context.getResources().getStringArray(R.array.statistics_spinner_values);
+
+        xAxisName = groupByStrings[ groupBy ];
+        yAxisName = valuesStrings[ valuesIndex ];
+    }
+
+    private StatisticsChartData getStatisticsChartData(int groupBy, int valuesIndex, List<StatisticEntryEntity> filteredEntities)
     {
         StatisticsChartData chartData = null;
         if ( groupBy == StatisticsQuery.MONTH )
         {
-            chartData = getStatisticsChartDataByMonth(values, filteredEntities);
+            chartData = getStatisticsChartDataByMonth(valuesIndex, filteredEntities);
         }
         else if ( groupBy == StatisticsQuery.WEEK )
         {
-            chartData = getStatisticsChartDataByWeek(values, filteredEntities);
+            chartData = getStatisticsChartDataByWeek(valuesIndex, filteredEntities);
         }
         else if ( groupBy == StatisticsQuery.DAY )
         {
-            chartData = getStatisticsChartDataByDay(values, filteredEntities);
+            chartData = getStatisticsChartDataByDay(valuesIndex, filteredEntities);
         }
         else if ( groupBy == StatisticsQuery.CATEGORY )
         {
-            chartData = getStatisticsChartDataByCategory(values, filteredEntities);
+            chartData = getStatisticsChartDataByCategory(valuesIndex, filteredEntities);
         }
         else if ( groupBy == StatisticsQuery.STORE )
         {
-            chartData = getStatisticsChartDataByStore(values, filteredEntities);
+            chartData = getStatisticsChartDataByStore(valuesIndex, filteredEntities);
         }
         else if ( groupBy == StatisticsQuery.PRODUCT )
         {
-            chartData = getStatisticsChartDataByProduct(values, filteredEntities);
+            chartData = getStatisticsChartDataByProduct(valuesIndex, filteredEntities);
         }
         return chartData;
     }
 
-    private StatisticsChartData getStatisticsChartDataByMonth(int values, List<StatisticEntryEntity> filteredEntities)
+    private StatisticsChartData getStatisticsChartDataByMonth(int valuesIndex, List<StatisticEntryEntity> filteredEntities)
     {
         Map<String, Double> chartMap = new TreeMap<>();
         List<String> labels = new ArrayList<>();
@@ -186,7 +198,7 @@ public class StatisticsServiceImpl implements StatisticsService
 
         for ( StatisticEntryEntity entity : filteredEntities )
         {
-            double currentTotal = getCurrentTotal(values, entity);
+            double currentTotal = getCurrentTotal(valuesIndex, entity);
             total += currentTotal;
 
             String month = converterService.getMonthFromDate(entity.getRecordDate());
@@ -204,11 +216,11 @@ public class StatisticsServiceImpl implements StatisticsService
         }
 
         StatisticsChartData chartData = new StatisticsChartData();
-        chartData.setTitle(context.getResources().getString(R.string.statistics_amount_vs_months));
+        chartData.setTitle(getTitle());
         return setupChartData(chartMap, labels, total, chartData);
     }
 
-    private StatisticsChartData getStatisticsChartDataByWeek(int values, List<StatisticEntryEntity> filteredEntities)
+    private StatisticsChartData getStatisticsChartDataByWeek(int valuesIndex, List<StatisticEntryEntity> filteredEntities)
     {
         Map<String, Double> chartMap = new TreeMap<>();
         List<String> labels = new ArrayList<>();
@@ -216,7 +228,7 @@ public class StatisticsServiceImpl implements StatisticsService
 
         for ( StatisticEntryEntity entity : filteredEntities )
         {
-            double currentTotal = getCurrentTotal(values, entity);
+            double currentTotal = getCurrentTotal(valuesIndex, entity);
             total += currentTotal;
 
             DateTime dateTime = new DateTime(entity.getRecordDate()).withDayOfWeek(1);
@@ -238,11 +250,11 @@ public class StatisticsServiceImpl implements StatisticsService
         }
 
         StatisticsChartData chartData = new StatisticsChartData();
-        chartData.setTitle(context.getResources().getString(R.string.statistics_amount_vs_weeks));
+        chartData.setTitle(getTitle());
         return setupChartData(chartMap, labels, total, chartData);
     }
 
-    private StatisticsChartData getStatisticsChartDataByDay(int values, List<StatisticEntryEntity> filteredEntities)
+    private StatisticsChartData getStatisticsChartDataByDay(int valuesIndex, List<StatisticEntryEntity> filteredEntities)
     {
         Map<String, Double> chartMap = new TreeMap<>();
         List<String> labels = new ArrayList<>();
@@ -250,7 +262,7 @@ public class StatisticsServiceImpl implements StatisticsService
 
         for ( StatisticEntryEntity entity : filteredEntities )
         {
-            double currentTotal = getCurrentTotal(values, entity);
+            double currentTotal = getCurrentTotal(valuesIndex, entity);
             total += currentTotal;
 
             String day = converterService.getDayFromDate(entity.getRecordDate());
@@ -268,11 +280,11 @@ public class StatisticsServiceImpl implements StatisticsService
         }
 
         StatisticsChartData chartData = new StatisticsChartData();
-        chartData.setTitle(context.getResources().getString(R.string.statistics_amount_vs_days));
+        chartData.setTitle(getTitle());
         return setupChartData(chartMap, labels, total, chartData);
     }
 
-    private StatisticsChartData getStatisticsChartDataByCategory(int values, List<StatisticEntryEntity> filteredEntities)
+    private StatisticsChartData getStatisticsChartDataByCategory(int valuesIndex, List<StatisticEntryEntity> filteredEntities)
     {
         Map<String, Double> chartMap = new TreeMap<>();
         List<String> labels = new ArrayList<>();
@@ -280,7 +292,7 @@ public class StatisticsServiceImpl implements StatisticsService
 
         for ( StatisticEntryEntity entity : filteredEntities )
         {
-            double currentTotal = getCurrentTotal(values, entity);
+            double currentTotal = getCurrentTotal(valuesIndex, entity);
             total += currentTotal;
 
             String fullCategoryName = entity.getProductCategory();
@@ -299,11 +311,11 @@ public class StatisticsServiceImpl implements StatisticsService
         }
 
         StatisticsChartData chartData = new StatisticsChartData();
-        chartData.setTitle(context.getResources().getString(R.string.statistics_amount_vs_categories));
+        chartData.setTitle(getTitle());
         return setupChartData(chartMap, labels, total, chartData);
     }
 
-    private StatisticsChartData getStatisticsChartDataByStore(int values, List<StatisticEntryEntity> filteredEntities)
+    private StatisticsChartData getStatisticsChartDataByStore(int valuesIndex, List<StatisticEntryEntity> filteredEntities)
     {
         Map<String, Double> chartMap = new TreeMap<>();
         List<String> labels = new ArrayList<>();
@@ -311,7 +323,7 @@ public class StatisticsServiceImpl implements StatisticsService
 
         for ( StatisticEntryEntity entity : filteredEntities )
         {
-            double currentTotal = getCurrentTotal(values, entity);
+            double currentTotal = getCurrentTotal(valuesIndex, entity);
             total += currentTotal;
 
             String fullStoreName = entity.getProductStore();
@@ -330,11 +342,11 @@ public class StatisticsServiceImpl implements StatisticsService
         }
 
         StatisticsChartData chartData = new StatisticsChartData();
-        chartData.setTitle(context.getResources().getString(R.string.statistics_amount_vs_stores));
+        chartData.setTitle(getTitle());
         return setupChartData(chartMap, labels, total, chartData);
     }
 
-    private StatisticsChartData getStatisticsChartDataByProduct(int values, List<StatisticEntryEntity> filteredEntities)
+    private StatisticsChartData getStatisticsChartDataByProduct(int valuesIndex, List<StatisticEntryEntity> filteredEntities)
     {
         Map<String, Double> chartMap = new TreeMap<>();
         List<String> labels = new ArrayList<>();
@@ -342,7 +354,7 @@ public class StatisticsServiceImpl implements StatisticsService
 
         for ( StatisticEntryEntity entity : filteredEntities )
         {
-            double currentTotal = getCurrentTotal(values, entity);
+            double currentTotal = getCurrentTotal(valuesIndex, entity);
             total += currentTotal;
 
             String fullProductName = entity.getProductName();
@@ -361,14 +373,14 @@ public class StatisticsServiceImpl implements StatisticsService
         }
 
         StatisticsChartData chartData = new StatisticsChartData();
-        chartData.setTitle(context.getResources().getString(R.string.statistics_amount_vs_products));
+        chartData.setTitle(getTitle());
         return setupChartData(chartMap, labels, total, chartData);
     }
 
-    private double getCurrentTotal(int values, StatisticEntryEntity entity)
+    private double getCurrentTotal(int valuesIndex, StatisticEntryEntity entity)
     {
         double currentTotal;
-        if ( values == StatisticsQuery.PRICE )
+        if ( valuesIndex == StatisticsQuery.PRICE )
         {
             currentTotal = entity.getUnitPrice() * entity.getQuantity();
         }
@@ -398,5 +410,10 @@ public class StatisticsServiceImpl implements StatisticsService
         StatisticEntryDto dto = new StatisticEntryDto();
         converterService.convertEntityToDto(entryEntity, dto);
         return dto;
+    }
+
+    public String getTitle()
+    {
+        return yAxisName + " vs. " + xAxisName;
     }
 }

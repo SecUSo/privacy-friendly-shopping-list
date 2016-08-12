@@ -8,6 +8,7 @@ import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
 import com.github.mikephil.charting.interfaces.datasets.IBarDataSet;
+import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.statistics.business.domain.StatisticsQuery;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.statistics.StatisticsCache;
 
 import java.math.BigDecimal;
@@ -36,9 +37,11 @@ public class PFAChart
     private static final int ANIMATION_DURATION = 2000;
     private BarChart chart;
     private Context context;
+    private StatisticsCache cache;
 
     public PFAChart(StatisticsCache cache)
     {
+        this.cache = cache;
         this.context = cache.getActivity().getApplicationContext();
 
         this.chart = cache.getChart();
@@ -55,6 +58,7 @@ public class PFAChart
     public void updateChart(List<Double> inputData, List<String> labels, int... colors)
     {
         int count = inputData.size();
+        setupYAxis();
         setXlabels(labels);
 
         float start = 0f;
@@ -70,11 +74,15 @@ public class PFAChart
         }
 
         BarDataSet dataSet;
+        int valuesSelectedItemPos = cache.getValuesSpinner().getSelectedItemPosition();
 
         if ( chart.getData() != null && chart.getData().getDataSetCount() > 0 )
         {
             dataSet = (BarDataSet) chart.getData().getDataSetByIndex(0);
             dataSet.setValues(yValues);
+
+            chart.getData().setValueFormatter(new PFAValueFormatter(context, valuesSelectedItemPos));
+
             chart.getData().notifyDataChanged();
             chart.notifyDataSetChanged();
             chart.invalidate();
@@ -88,6 +96,7 @@ public class PFAChart
             dataSets.add(dataSet);
 
             BarData data = new BarData(dataSets);
+            data.setValueFormatter(new PFAValueFormatter(context, valuesSelectedItemPos));
             data.setValueTextSize(10f);
             data.setBarWidth(0.9f);
             chart.setData(data);
@@ -98,11 +107,12 @@ public class PFAChart
 
     private void setXlabels(List<String> labelList)
     {
+        int valuesSelectedItemPos = cache.getValuesSpinner().getSelectedItemPosition();
         String[] labels = new String[ labelList.size() ];
         labelList.toArray(labels);
 
-        XAxisLabels xFormatter = new XAxisLabels(labels);
-        chart.setMarkerView(new PFAMarkerView(context, xFormatter));
+        PFAXAxisLabels xFormatter = new PFAXAxisLabels(labels);
+        chart.setMarkerView(new PFAMarkerView(context, xFormatter, valuesSelectedItemPos));
 
         XAxis xAxis = chart.getXAxis();
         xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
@@ -114,12 +124,18 @@ public class PFAChart
 
     private void setupYAxis()
     {
+        int valuesSelectedItemPos = cache.getValuesSpinner().getSelectedItemPosition();
         YAxis leftAxis = this.chart.getAxisLeft();
         leftAxis.setLabelCount(10, false);
         leftAxis.setPosition(YAxis.YAxisLabelPosition.OUTSIDE_CHART);
         leftAxis.setSpaceTop(20f);
         leftAxis.setAxisMinValue(0f);
-        leftAxis.setValueFormatter(new YAxisLabels(context));
+        leftAxis.setValueFormatter(new PFAYAxisLabels(context, valuesSelectedItemPos));
+
+        if ( valuesSelectedItemPos == StatisticsQuery.QUANTITY )
+        {
+            leftAxis.setGranularity(1f); // interval 1
+        }
 
         YAxis rightAxis = this.chart.getAxisRight();
         rightAxis.setEnabled(false);

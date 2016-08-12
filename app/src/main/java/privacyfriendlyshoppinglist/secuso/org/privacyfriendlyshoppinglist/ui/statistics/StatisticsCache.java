@@ -19,7 +19,7 @@ public class StatisticsCache
     private TextView titleTextView;
     private BarChart chart;
     private TextView totalTextView;
-    private TextView currencyTextView;
+    private TextView unitsTextView;
     private TextView rangeFromTextView;
     private TextView rangeToTextView;
     private Spinner groupBySpinner;
@@ -28,6 +28,7 @@ public class StatisticsCache
     private String datePattern;
     private String dateLanguage;
     private String numberFormat;
+    private String currency;
 
     public StatisticsCache(AppCompatActivity activity)
     {
@@ -37,10 +38,10 @@ public class StatisticsCache
         chart = (BarChart) activity.findViewById(R.id.chart);
         totalTextView = (TextView) activity.findViewById(R.id.textview_stats_total);
 
-        currencyTextView = (TextView) activity.findViewById(R.id.textview_stats_currency);
+        unitsTextView = (TextView) activity.findViewById(R.id.textview_stats_currency);
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(activity);
-        String currency = prefs.getString(SettingsKeys.CURRENCY, null);
-        currencyTextView.setText(currency);
+        currency = prefs.getString(SettingsKeys.CURRENCY, null);
+        unitsTextView.setText(currency);
 
         rangeFromTextView = (TextView) activity.findViewById(R.id.textview_stats_range_from);
         rangeToTextView = (TextView) activity.findViewById(R.id.textview_stats_range_to);
@@ -105,5 +106,15 @@ public class StatisticsCache
     public Spinner getValuesSpinner()
     {
         return valuesSpinner;
+    }
+
+    public TextView getUnitsTextView()
+    {
+        return unitsTextView;
+    }
+
+    public String getCurrency()
+    {
+        return currency;
     }
 }
