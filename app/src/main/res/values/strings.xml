@@ -28,9 +28,12 @@
     <string name="ph_total_in_shopping_cart" translatable="false">35.00</string>
     <string name="ph_list_nr_items" translatable="false">X</string>
     <string name="ph_stats_title" translatable="false">Title</string>
+    <string name="ph_lists_details" translatable="false">Priority: High\nNotes: some notes here</string>
 
     <!-- ### SHOPPING LIST ### -->
     <string name="activity_shopping_list">Shopping List:</string>
+    <string name="nr_items">Nr. Items</string>
+    <string name="total_list_amount">Total Amount</string>
 
     <!-- ### PRODUCTS ### -->
     <string name="total_amount">Total:</string>
@@ -216,10 +219,10 @@
     <string name="priority_high">High</string>
     <string name="priority_normal">Normal</string>
 
-    <string name="set_deadline_date">Set Date</string>
-    <string name="set_deadline_time">Set Time</string>
-    <string name="set_deadline">Set Deadline</string>
-    <string name="set_reminder">Reminder</string>
+    <string name="deadline_date">Date</string>
+    <string name="deadline_time">Time</string>
+    <string name="deadline">Deadline</string>
+    <string name="reminder">Reminder</string>
     <string name="reminder_before">before</string>
     <string name="list_notes">Notes</string>
     <string name="default_list_name">New Shopping List</string>

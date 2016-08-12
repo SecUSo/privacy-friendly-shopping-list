@@ -10,6 +10,7 @@ public class TotalDto
     private String totalAmount;
     private String checkedAmount;
     private boolean equalsZero;
+    private int nrProducts;
 
     public String getTotalAmount()
     {
@@ -39,5 +40,15 @@ public class TotalDto
     public void setEqualsZero(boolean equalsZero)
     {
         this.equalsZero = equalsZero;
+    }
+
+    public void setNrProducts(int nrProducts)
+    {
+        this.nrProducts = nrProducts;
+    }
+
+    public int getNrProducts()
+    {
+        return nrProducts;
     }
 }

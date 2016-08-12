@@ -57,7 +57,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
-                android:text="@string/set_deadline"/>
+                android:text="@string/deadline"/>
 
         <CheckBox
                 android:layout_width="wrap_content"
@@ -153,7 +153,7 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentTop="true"
                     android:layout_gravity="center"
-                    android:text="@string/set_reminder"/>
+                    android:text="@string/reminder"/>
         </LinearLayout>
 
         <LinearLayout

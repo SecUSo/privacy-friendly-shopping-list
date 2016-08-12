@@ -19,6 +19,9 @@ public class ListDto extends AbstractDto
     private boolean selected;
     private boolean sortAscending;
     private String sortCriteria;
+    private String info;
+    private String reminderDate;
+    private String reminderTime;
 
     public String getListName()
     {
@@ -120,6 +123,36 @@ public class ListDto extends AbstractDto
         this.sortCriteria = sortCriteria;
     }
 
+    public String getReminderDate()
+    {
+        return reminderDate;
+    }
+
+    public void setReminderDate(String reminderDate)
+    {
+        this.reminderDate = reminderDate;
+    }
+
+    public String getReminderTime()
+    {
+        return reminderTime;
+    }
+
+    public void setReminderTime(String reminderTime)
+    {
+        this.reminderTime = reminderTime;
+    }
+
+    public String getInfo()
+    {
+        return info;
+    }
+
+    public void setInfo(String info)
+    {
+        this.info = info;
+    }
+
     @Override
     public String toString()
     {
@@ -134,6 +167,9 @@ public class ListDto extends AbstractDto
                 ", selected=" + selected +
                 ", sortAscending=" + sortAscending +
                 ", sortCriteria='" + sortCriteria + '\'' +
+                ", info='" + info + '\'' +
+                ", reminderDate='" + reminderDate + '\'' +
+                ", reminderTime='" + reminderTime + '\'' +
                 '}';
     }
 }

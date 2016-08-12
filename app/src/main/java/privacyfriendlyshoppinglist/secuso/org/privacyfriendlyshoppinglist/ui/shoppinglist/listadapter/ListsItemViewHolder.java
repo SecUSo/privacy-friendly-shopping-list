@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.ImageButton;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.R;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.context.AbstractInstanceFactory;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.context.InstanceFactory;
@@ -56,6 +57,9 @@ class ListsItemViewHolder extends RecyclerView.ViewHolder
         listItemCache.getNrProductsTextView().setText(String.valueOf(nrProducts));
         setupPriorityIcon(dto);
 
+        String productsInfo = productService.getInfo(dto.getId(), listItemCache.getCurrency());
+        listItemCache.getListDetails().setText(productsInfo + dto.getInfo());
+
 
         listItemCache.getListCard().setOnClickListener(v ->
         {
@@ -73,6 +77,23 @@ class ListsItemViewHolder extends RecyclerView.ViewHolder
             editDeleteFragment.show(shoppingListCache.getActivity().getSupportFragmentManager(), "Liste");
 
             return true;
+        });
+
+        ImageButton showDetailsButton = listItemCache.getShowDetailsImageButton();
+        showDetailsButton.setOnClickListener(v ->
+        {
+            listItemCache.setDetailsVisible(!listItemCache.isDetailsVisible());
+            if ( listItemCache.isDetailsVisible() )
+            {
+                showDetailsButton.setImageResource(R.drawable.ic_keyboard_arrow_up_white_24dp);
+                listItemCache.getListDetails().setVisibility(View.VISIBLE);
+
+            }
+            else
+            {
+                showDetailsButton.setImageResource(R.drawable.ic_keyboard_arrow_down_white_24dp);
+                listItemCache.getListDetails().setVisibility(View.GONE);
+            }
         });
 
     }
