@@ -15,12 +15,14 @@ public class ListItemCache
 {
     private TextView listNameTextView;
     private TextView nrProductsTextView;
+    private TextView notesTextView;
     private CardView listCard;
     private ImageView highPriorityImageView;
 
     public ListItemCache(View parent)
     {
         listNameTextView = (TextView) parent.findViewById(R.id.textview_list_name);
+        notesTextView = (TextView) parent.findViewById(R.id.textview_list_info);
         nrProductsTextView = (TextView) parent.findViewById(R.id.textview_prod_quantity);
         listCard = (CardView) parent.findViewById(R.id.cardview_item);
         highPriorityImageView = (ImageView) parent.findViewById(R.id.imageview_high_prio_icon);
@@ -34,6 +36,11 @@ public class ListItemCache
     public TextView getNrProductsTextView()
     {
         return nrProductsTextView;
+    }
+
+    public TextView getNotesTextView()
+    {
+        return notesTextView;
     }
 
     public CardView getListCard()

@@ -34,6 +34,7 @@ class ListsItemViewHolder extends RecyclerView.ViewHolder
     void processDto(ListDto dto)
     {
         listItemCache.getListNameTextView().setText(dto.getListName());
+        listItemCache.getNotesTextView().setText(dto.getNotes());
 
         int nrProducts = productService.getAllProducts(dto.getId()).size();
         listItemCache.getNrProductsTextView().setText(String.valueOf(nrProducts));
@@ -54,9 +55,6 @@ class ListsItemViewHolder extends RecyclerView.ViewHolder
 
             DialogFragment editDeleteFragment = EditDeleteListDialog.newEditDeleteInstance(dto, shoppingListCache);
             editDeleteFragment.show(shoppingListCache.getActivity().getSupportFragmentManager(), "Liste");
-
-//            DialogFragment productFragement = ListDialogFragment.newEditInstance(dto, shoppingListCache);
-//            productFragement.show(shoppingListCache.getActivity().getSupportFragmentManager(), "Liste");
 
             return true;
         });

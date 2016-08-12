@@ -22,6 +22,22 @@
                 android:layout_marginLeft="@dimen/list_margin"
                 android:textSize="@dimen/text_medium"
                 style="@style/Base.TextAppearance.AppCompat.Body2"/>
+        <TextView
+                android:id="@+id/textview_list_info"
+                android:text="@string/ph_list_info"
+                android:ellipsize="end"
+                android:singleLine="true"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:padding="@dimen/list_padding"
+                android:layout_marginLeft="@dimen/list_margin"
+                android:layout_marginRight="@dimen/list_margin_big"
+                android:textSize="@dimen/text_small"
+                android:textColor="@color/middlegrey"
+                style="@style/Base.TextAppearance.AppCompat.Body2"
+                android:layout_alignParentBottom="true"
+                android:layout_alignStart="@+id/textview_list_name"/>
         <ImageView
                 android:id="@+id/imageview_high_prio_icon"
                 android:tint="@color/yellow"
