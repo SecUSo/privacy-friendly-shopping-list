@@ -16,6 +16,7 @@ public class ListItemCache
     private TextView listNameTextView;
     private TextView nrProductsTextView;
     private TextView notesTextView;
+    private ImageView reminderBar;
     private CardView listCard;
     private ImageView highPriorityImageView;
 
@@ -26,6 +27,7 @@ public class ListItemCache
         nrProductsTextView = (TextView) parent.findViewById(R.id.textview_prod_quantity);
         listCard = (CardView) parent.findViewById(R.id.cardview_item);
         highPriorityImageView = (ImageView) parent.findViewById(R.id.imageview_high_prio_icon);
+        reminderBar = (ImageView) parent.findViewById(R.id.reminder_bar);
     }
 
     public TextView getListNameTextView()
@@ -51,5 +53,10 @@ public class ListItemCache
     public ImageView getHighPriorityImageView()
     {
         return highPriorityImageView;
+    }
+
+    public ImageView getReminderBar()
+    {
+        return reminderBar;
     }
 }

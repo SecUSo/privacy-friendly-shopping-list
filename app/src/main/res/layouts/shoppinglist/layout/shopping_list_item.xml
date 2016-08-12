@@ -7,11 +7,18 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_margin="8dp"
-        card_view:cardCornerRadius="4dp">
+        card_view:cardCornerRadius="@dimen/card_corner_radius">
 
     <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="match_parent">
+        <ImageView
+                android:id="@+id/reminder_bar"
+                android:layout_width="@dimen/status_width"
+                android:layout_height="?attr/listPreferredItemHeight"
+                android:src="@drawable/button_normal"
+                android:layout_alignParentLeft="true"
+        />
         <TextView
                 android:id="@+id/textview_list_name"
                 android:text="@string/ph_list_name"

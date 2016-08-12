@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.R;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.context.AbstractInstanceFactory;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.context.InstanceFactory;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.product.business.ProductService;
@@ -35,6 +36,21 @@ class ListsItemViewHolder extends RecyclerView.ViewHolder
     {
         listItemCache.getListNameTextView().setText(dto.getListName());
         listItemCache.getNotesTextView().setText(dto.getNotes());
+
+        // todo: remove these block of ifs. It is only there to visualize the colors
+        int tmpColorBarCode = Integer.valueOf(dto.getId()) % 3;
+        if ( tmpColorBarCode == 0 )
+        {
+            listItemCache.getReminderBar().setImageResource(R.drawable.reminder_status_neutral);
+        }
+        else if ( tmpColorBarCode == 1 )
+        {
+            listItemCache.getReminderBar().setImageResource(R.drawable.reminder_status_triggered);
+        }
+        else if ( tmpColorBarCode == 2 )
+        {
+            listItemCache.getReminderBar().setImageResource(R.drawable.reminder_status_time_over);
+        }
 
         int nrProducts = productService.getAllProducts(dto.getId()).size();
         listItemCache.getNrProductsTextView().setText(String.valueOf(nrProducts));

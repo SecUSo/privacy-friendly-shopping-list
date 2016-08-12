@@ -16,6 +16,10 @@
     <dimen name="icon_padding">16dp</dimen>
     <dimen name="icon_size">20dp</dimen>
     <dimen name="dialog_title_height">50dp</dimen>
+    <dimen name="card_corner_radius">4dp</dimen>
+    <dimen name="status_corner_radius">0dp</dimen>
+    <dimen name="status_width">4dp</dimen>
+
 
     <!-- Sort Dialog -->
     <dimen name="dialog_padding">20dp</dimen>
