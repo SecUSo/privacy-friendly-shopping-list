@@ -12,5 +12,8 @@ public abstract class SettingsKeys
     public static final String STATISTICS_ENABLED = "pref_statistics";
     public static final String NOTIFICATIONS_ENABLED = "pref_notifications";
 
+    public static final String LIST_SORT_BY = "sort_by_key";
+    public static final String LIST_SORT_ASCENDING = "sort_asc_dec_key";
+
 
 }

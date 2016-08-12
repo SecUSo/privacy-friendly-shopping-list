@@ -5,7 +5,9 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
 import android.content.DialogInterface;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,6 +18,7 @@ import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framew
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.shoppingList.business.ShoppingListService;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.shoppingList.business.domain.ListDto;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.main.MainActivity;
+import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.settings.SettingsKeys;
 
 import java.util.List;
 
@@ -77,7 +80,15 @@ public class SortListsDialog extends DialogFragment
                 {
                     criteria = PFAComparators.SORT_BY_PRIORITY;
                 }
-                shoppingListService.sortList(listDtos, criteria, cache.getAscending().isChecked());
+                boolean ascending = cache.getAscending().isChecked();
+                shoppingListService.sortList(listDtos, criteria, ascending);
+
+                SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(activity);
+                SharedPreferences.Editor editor = sharedPref.edit();
+                editor.putString(SettingsKeys.LIST_SORT_BY, criteria);
+                editor.putBoolean(SettingsKeys.LIST_SORT_ASCENDING, ascending);
+                editor.commit();
+
                 host.reorderListView(listDtos);
             }
         });

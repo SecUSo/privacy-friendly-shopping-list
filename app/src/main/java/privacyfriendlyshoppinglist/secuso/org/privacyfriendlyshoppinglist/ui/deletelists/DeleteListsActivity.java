@@ -1,12 +1,19 @@
 package privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.deletelists;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.R;
+import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.comparators.PFAComparators;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.context.AbstractInstanceFactory;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.context.InstanceFactory;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.shoppingList.business.ShoppingListService;
+import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.shoppingList.business.domain.ListDto;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.deletelists.listeners.DeleteListsOnClickListener;
+import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.settings.SettingsKeys;
+
+import java.util.List;
 
 /**
  * Description:
@@ -37,7 +44,15 @@ public class DeleteListsActivity extends AppCompatActivity
 
     public void updateListView()
     {
-        cache.getDeleteListsAdapter().setShoppingList(shoppingListService.getAllListDtos());
+        List<ListDto> allListDtos = shoppingListService.getAllListDtos();
+
+        // sort according to last sort selection
+        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
+        String sortBy = sharedPref.getString(SettingsKeys.LIST_SORT_BY, PFAComparators.SORT_BY_NAME);
+        boolean sortAscending = sharedPref.getBoolean(SettingsKeys.LIST_SORT_ASCENDING, true);
+        shoppingListService.sortList(allListDtos, sortBy, sortAscending);
+
+        cache.getDeleteListsAdapter().setShoppingList(allListDtos);
         cache.getDeleteListsAdapter().notifyDataSetChanged();
     }
 }

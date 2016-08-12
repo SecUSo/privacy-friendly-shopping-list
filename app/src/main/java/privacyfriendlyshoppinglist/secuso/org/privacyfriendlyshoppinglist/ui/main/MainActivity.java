@@ -1,9 +1,12 @@
 package privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.main;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.view.Menu;
 import android.view.MenuItem;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.R;
+import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.comparators.PFAComparators;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.context.AbstractInstanceFactory;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.context.InstanceFactory;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.shoppingList.business.ShoppingListService;
@@ -12,6 +15,7 @@ import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.bas
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.main.listeners.AddOnClickListener;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.main.listeners.ShowDeleteListsOnClickListener;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.main.listeners.SortOnClickListener;
+import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.settings.SettingsKeys;
 
 import java.util.List;
 
@@ -43,6 +47,16 @@ public class MainActivity extends BaseActivity
 
 //        WelcomeDialog welcomeDialog = new WelcomeDialog();
 //        welcomeDialog.show(getFragmentManager(), "WelcomeDialog");
+
+        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
+        String sortBy = sharedPref.getString(SettingsKeys.LIST_SORT_BY, null);
+        if ( sortBy == null )
+        {
+            SharedPreferences.Editor editor = sharedPref.edit();
+            editor.putString(SettingsKeys.LIST_SORT_BY, PFAComparators.SORT_BY_NAME);
+            editor.putBoolean(SettingsKeys.LIST_SORT_ASCENDING, true);
+            editor.commit();
+        }
 
         cache.getNewListFab().setOnClickListener(new AddOnClickListener(cache));
 
@@ -82,7 +96,15 @@ public class MainActivity extends BaseActivity
 
     public void updateListView()
     {
-        cache.getListAdapter().setShoppingList(shoppingListService.getAllListDtos());
+        List<ListDto> allListDtos = shoppingListService.getAllListDtos();
+
+        // sort according to last sort selection
+        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
+        String sortBy = sharedPref.getString(SettingsKeys.LIST_SORT_BY, PFAComparators.SORT_BY_NAME);
+        boolean sortAscending = sharedPref.getBoolean(SettingsKeys.LIST_SORT_ASCENDING, true);
+        shoppingListService.sortList(allListDtos, sortBy, sortAscending);
+
+        cache.getListAdapter().setShoppingList(allListDtos);
         cache.getListAdapter().notifyDataSetChanged();
     }
 
