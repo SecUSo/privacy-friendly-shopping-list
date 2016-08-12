@@ -21,8 +21,6 @@ public class ShoppingListConverterImpl implements ShoppingListConverter
 {
     private static final String SPACE = " ";
     private static final String EMPTY = "";
-    private static final String DETAIL_SEPARATOR = ": ";
-    private static final String NEW_LINE = "\n";
 
     private String language;
     private String dateLongPattern;
@@ -126,58 +124,11 @@ public class ShoppingListConverterImpl implements ShoppingListConverter
         dto.setIcon(entity.getIcon());
         dto.setNotes(entity.getNotes());
         dto.setPriority(entity.getPriority());
-
-        setInfo(dto);
     }
 
     private Long getIdAsLong(ListDto dto)
     {
         String stringId = dto.getId();
         return stringId == null ? null : Long.valueOf(stringId);
-    }
-
-    public void setInfo(ListDto dto)
-    {
-        String priorityLabel = context.getResources().getString(R.string.priority);
-        String deadLineLabel = context.getResources().getString(R.string.deadline);
-        String notesLabel = context.getResources().getString(R.string.list_notes);
-
-        StringBuilder sb = new StringBuilder();
-        String priorityIndex = dto.getPriority();
-        if ( !StringUtils.isEmpty(priorityIndex) )
-        {
-            String[] prioritiesArray = context.getResources().getStringArray(R.array.shopping_list_priority_spinner);
-            String priority = prioritiesArray[ Integer.valueOf(priorityIndex) ];
-            sb.append(priorityLabel);
-            sb.append(DETAIL_SEPARATOR);
-            sb.append(priority);
-            sb.append(NEW_LINE);
-        }
-        if ( !StringUtils.isEmpty(dto.getDeadlineDate()) )
-        {
-            sb.append(deadLineLabel);
-            sb.append(DETAIL_SEPARATOR);
-            sb.append(dto.getDeadlineDate());
-            sb.append(SPACE);
-            sb.append(dto.getDeadlineTime());
-            sb.append(NEW_LINE);
-        }
-        if ( !StringUtils.isEmpty(dto.getReminderCount()) )
-        {
-            String[] timeUnitArray = context.getResources().getStringArray(R.array.shopping_list_reminder_spinner);
-            String reminderUnit = timeUnitArray[ Integer.valueOf(dto.getReminderUnit()) ];
-            String reminderText = context.getResources().getString(R.string.reminder_text, Integer.valueOf(dto.getReminderCount()), reminderUnit);
-            sb.append(reminderText);
-            sb.append(NEW_LINE);
-        }
-        if ( !StringUtils.isEmpty(dto.getNotes()) )
-        {
-            sb.append(notesLabel);
-            sb.append(DETAIL_SEPARATOR);
-            sb.append(dto.getNotes());
-            sb.append(NEW_LINE);
-        }
-
-        dto.setInfo(sb.toString());
     }
 }

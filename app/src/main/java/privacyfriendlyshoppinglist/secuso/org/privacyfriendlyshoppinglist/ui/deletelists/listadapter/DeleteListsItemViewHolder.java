@@ -35,6 +35,7 @@ class DeleteListsItemViewHolder extends RecyclerView.ViewHolder
     {
         cache.getListNameTextView().setText(dto.getListName());
         cache.getNotesTextView().setText(dto.getNotes());
+        cache.getShowDetailsImageButton().setVisibility(View.GONE);
 
         int nrProducts = productService.getAllProducts(dto.getId()).size();
         cache.getNrProductsTextView().setText(String.valueOf(nrProducts));

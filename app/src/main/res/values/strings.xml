@@ -42,6 +42,13 @@
     <string name="store_label">Store:</string>
     <string name="category_label">Category:</string>
 
+    <string name="store_detail">Store: %1$s</string>
+    <string name="category_detail">Category: %1$s</string>
+    <string name="quantity_detail">Quantity: %1$s</string>
+    <string name="price_detail">Price: %1$s</string>
+    <string name="total_price_detail">Total Price: %1$s</string>
+    <string name="notes_detail">Notes: %1$s</string>
+
     <!-- ### Statistics -->
     <string name="statistics_total_amout">Total:</string>
     <string name="statistics_range">Range:</string>

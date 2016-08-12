@@ -3,6 +3,7 @@ package privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.pr
 import android.support.v7.widget.CardView;
 import android.view.View;
 import android.widget.CheckBox;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.R;
 
@@ -18,6 +19,9 @@ public class ProductItemCache
     private TextView productExtraInfoTextview;
     private CheckBox checkbox;
     private CardView productCard;
+    private ImageButton showDetailsImageButton;
+    private boolean detailsVisible;
+    private TextView listDetails;
 
     public ProductItemCache(View parent)
     {
@@ -26,6 +30,8 @@ public class ProductItemCache
         productExtraInfoTextview = (TextView) parent.findViewById(R.id.textview_product_info);
         checkbox = (CheckBox) parent.findViewById(R.id.checkbox_is_selected);
         productCard = (CardView) parent.findViewById(R.id.cardview_item);
+        showDetailsImageButton = (ImageButton) parent.findViewById(R.id.expand_button_list);
+        listDetails = (TextView) parent.findViewById(R.id.textview_list_details);
     }
 
     public TextView getProductNameTextView()
@@ -51,5 +57,25 @@ public class ProductItemCache
     public CardView getProductCard()
     {
         return productCard;
+    }
+
+    public ImageButton getShowDetailsImageButton()
+    {
+        return showDetailsImageButton;
+    }
+
+    public boolean isDetailsVisible()
+    {
+        return detailsVisible;
+    }
+
+    public void setDetailsVisible(boolean detailsVisible)
+    {
+        this.detailsVisible = detailsVisible;
+    }
+
+    public TextView getListDetails()
+    {
+        return listDetails;
     }
 }

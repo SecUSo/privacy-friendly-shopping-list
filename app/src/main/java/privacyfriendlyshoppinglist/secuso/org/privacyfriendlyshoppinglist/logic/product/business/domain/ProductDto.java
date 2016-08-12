@@ -13,14 +13,9 @@ import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framew
 public class ProductDto extends ProductTemplateDto
 {
 
+    public static final String NEW_LINE = "\n";
     private static final String SPACE = " ";
     private static final String COMMA = ",";
-
-    public enum ErrorFieldName
-    {
-        PRODUCT_NAME_EMPTY,
-        PRODUCT_NAME_TOO_LONG
-    }
 
     // product fields
     private String productId;
@@ -34,6 +29,8 @@ public class ProductDto extends ProductTemplateDto
     private String productStore;
 
     private String productPrice;
+
+    private String totalProductPrice;
 
     private boolean checked;
 
@@ -119,6 +116,16 @@ public class ProductDto extends ProductTemplateDto
         this.selectedForDeletion = selectedForDeletion;
     }
 
+    public String getTotalProductPrice()
+    {
+        return totalProductPrice;
+    }
+
+    public void setTotalProductPrice(String totalProductPrice)
+    {
+        this.totalProductPrice = totalProductPrice;
+    }
+
     @Override
     public boolean equals(Object o)
     {
@@ -190,6 +197,53 @@ public class ProductDto extends ProductTemplateDto
             }
             sb.append(categoryLabel).append(SPACE).append(getProductCategory());
         }
+        return sb.toString();
+    }
+
+    public String getDetailInfo(Context context)
+    {
+        Resources resources = context.getResources();
+        String quantityDetail = resources.getString(R.string.quantity_detail, quantity);
+        String priceDetail = resources.getString(R.string.price_detail, productPrice);
+        String totalPriceDetail = resources.getString(R.string.total_price_detail, totalProductPrice);
+        String notesDetail = resources.getString(R.string.notes_detail, productNotes);
+        String categoryDetail = resources.getString(R.string.category_detail, getProductCategory());
+        String storeDetail = resources.getString(R.string.store_detail, getProductStore());
+
+        StringBuilder sb = new StringBuilder();
+        if ( !StringUtils.isEmpty(quantity) )
+        {
+            sb.append(quantityDetail);
+            sb.append(NEW_LINE);
+        }
+        if ( !StringUtils.isEmpty(productPrice) )
+        {
+            sb.append(priceDetail);
+            sb.append(NEW_LINE);
+        }
+        if ( !StringUtils.isEmpty(totalProductPrice) )
+        {
+            sb.append(totalPriceDetail);
+            sb.append(NEW_LINE);
+            sb.append(NEW_LINE);
+        }
+        if ( !StringUtils.isEmpty(getProductCategory()) )
+        {
+            sb.append(categoryDetail);
+            sb.append(NEW_LINE);
+        }
+        if ( !StringUtils.isEmpty(getProductStore()) )
+        {
+            sb.append(storeDetail);
+            sb.append(NEW_LINE);
+        }
+        if ( !StringUtils.isEmpty(productNotes) )
+        {
+            sb.append(notesDetail);
+            sb.append(NEW_LINE);
+        }
+
+
         return sb.toString();
     }
 }

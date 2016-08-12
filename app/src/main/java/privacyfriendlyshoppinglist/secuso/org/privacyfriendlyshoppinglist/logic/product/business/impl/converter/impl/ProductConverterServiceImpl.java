@@ -165,6 +165,11 @@ public class ProductConverterServiceImpl implements ProductConverterService
             dto.setProductPrice(getDoubleAsString(entity.getPrice()));
         }
 
+        if ( entity.getQuantity() != null && entity.getPrice() != null )
+        {
+            dto.setTotalProductPrice(getDoubleAsString(entity.getPrice() * entity.getQuantity()));
+        }
+
         if ( entity.getPurchasedDate() != null )
         {
             String dateAsString = DateUtils.getDateAsString(entity.getPurchasedDate().getTime(), dateLongPattern, language);

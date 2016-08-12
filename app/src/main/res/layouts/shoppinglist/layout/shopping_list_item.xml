@@ -64,7 +64,7 @@
                     android:id="@+id/expand_button_list"
                     android:layout_width="50dp"
                     android:layout_height="?attr/listPreferredItemHeight"
-                    android:tint="@color/colorAccent"
+                    android:tint="?attr/colorAccent"
                     android:layout_centerVertical="true"
                     android:layout_alignParentRight="true"
                     android:padding="15dp"

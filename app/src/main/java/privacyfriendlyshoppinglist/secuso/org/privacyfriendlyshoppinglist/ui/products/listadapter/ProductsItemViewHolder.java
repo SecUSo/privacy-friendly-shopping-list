@@ -8,6 +8,7 @@ import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.CheckBox;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.R;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.context.AbstractInstanceFactory;
@@ -50,6 +51,7 @@ public class ProductsItemViewHolder extends RecyclerView.ViewHolder
         productItemCache.getProductNameTextView().setText(dto.getProductName());
         productItemCache.getQuantityTextView().setText(dto.getQuantity());
         productItemCache.getProductExtraInfoTextview().setText(dto.getSummary(productActivityCache.getActivity()));
+        productItemCache.getListDetails().setText(dto.getDetailInfo(productActivityCache.getActivity()));
 
         updateVisibilityFormat(dto);
 
@@ -96,6 +98,23 @@ public class ProductsItemViewHolder extends RecyclerView.ViewHolder
 
                 // todo: show dialog
                 return true;
+            }
+        });
+
+        ImageButton showDetailsButton = productItemCache.getShowDetailsImageButton();
+        showDetailsButton.setOnClickListener(v ->
+        {
+            productItemCache.setDetailsVisible(!productItemCache.isDetailsVisible());
+            if ( productItemCache.isDetailsVisible() )
+            {
+                showDetailsButton.setImageResource(R.drawable.ic_keyboard_arrow_up_white_24dp);
+                productItemCache.getListDetails().setVisibility(View.VISIBLE);
+
+            }
+            else
+            {
+                showDetailsButton.setImageResource(R.drawable.ic_keyboard_arrow_down_white_24dp);
+                productItemCache.getListDetails().setVisibility(View.GONE);
             }
         });
 

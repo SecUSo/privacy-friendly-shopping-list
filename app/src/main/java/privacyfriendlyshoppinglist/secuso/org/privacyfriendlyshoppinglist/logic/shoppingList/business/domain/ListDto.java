@@ -1,6 +1,9 @@
 package privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.shoppingList.business.domain;
 
+import android.content.Context;
+import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.R;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.business.AbstractDto;
+import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.utils.StringUtils;
 
 /**
  * Description:
@@ -9,6 +12,10 @@ import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framew
  */
 public class ListDto extends AbstractDto
 {
+    private static final String DETAIL_SEPARATOR = ": ";
+    private static final String NEW_LINE = "\n";
+    private static final String SPACE = " ";
+    
     private String listName;
     private String priority;
     private int icon;
@@ -19,7 +26,6 @@ public class ListDto extends AbstractDto
     private boolean selected;
     private boolean sortAscending;
     private String sortCriteria;
-    private String info;
     private boolean reminderEnabled;
     private String reminderCount;
     private String reminderUnit;
@@ -124,16 +130,6 @@ public class ListDto extends AbstractDto
         this.sortCriteria = sortCriteria;
     }
 
-    public String getInfo()
-    {
-        return info;
-    }
-
-    public void setInfo(String info)
-    {
-        this.info = info;
-    }
-
     public String getReminderCount()
     {
         return reminderCount;
@@ -164,6 +160,51 @@ public class ListDto extends AbstractDto
         this.reminderEnabled = reminderEnabled;
     }
 
+    public String getDetailInfo(Context context)
+    {
+        String priorityLabel = context.getResources().getString(R.string.priority);
+        String deadLineLabel = context.getResources().getString(R.string.deadline);
+        String notesLabel = context.getResources().getString(R.string.list_notes);
+
+        StringBuilder sb = new StringBuilder();
+        String priorityIndex = this.getPriority();
+        if ( !StringUtils.isEmpty(priorityIndex) )
+        {
+            String[] prioritiesArray = context.getResources().getStringArray(R.array.shopping_list_priority_spinner);
+            String priority = prioritiesArray[ Integer.valueOf(priorityIndex) ];
+            sb.append(priorityLabel);
+            sb.append(DETAIL_SEPARATOR);
+            sb.append(priority);
+            sb.append(NEW_LINE);
+        }
+        if ( !StringUtils.isEmpty(this.getDeadlineDate()) )
+        {
+            sb.append(deadLineLabel);
+            sb.append(DETAIL_SEPARATOR);
+            sb.append(this.getDeadlineDate());
+            sb.append(SPACE);
+            sb.append(this.getDeadlineTime());
+            sb.append(NEW_LINE);
+        }
+        if ( !StringUtils.isEmpty(this.getReminderCount()) )
+        {
+            String[] timeUnitArray = context.getResources().getStringArray(R.array.shopping_list_reminder_spinner);
+            String reminderUnit = timeUnitArray[ Integer.valueOf(this.getReminderUnit()) ];
+            String reminderText = context.getResources().getString(R.string.reminder_text, Integer.valueOf(this.getReminderCount()), reminderUnit);
+            sb.append(reminderText);
+            sb.append(NEW_LINE);
+        }
+        if ( !StringUtils.isEmpty(this.getNotes()) )
+        {
+            sb.append(notesLabel);
+            sb.append(DETAIL_SEPARATOR);
+            sb.append(this.getNotes());
+            sb.append(NEW_LINE);
+        }
+
+        return sb.toString();
+    }
+    
     @Override
     public String toString()
     {
@@ -178,7 +219,6 @@ public class ListDto extends AbstractDto
                 ", selected=" + selected +
                 ", sortAscending=" + sortAscending +
                 ", sortCriteria='" + sortCriteria + '\'' +
-                ", info='" + info + '\'' +
                 ", reminderEnabled=" + reminderEnabled +
                 ", reminderCount='" + reminderCount + '\'' +
                 ", reminderUnit='" + reminderUnit + '\'' +
