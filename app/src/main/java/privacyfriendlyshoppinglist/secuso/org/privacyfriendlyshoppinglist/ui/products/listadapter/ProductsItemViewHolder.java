@@ -95,8 +95,6 @@ public class ProductsItemViewHolder extends RecyclerView.ViewHolder
             {
                 DialogFragment editDeleteFragment = EditDeleteProductDialog.newEditDeleteInstance(dto, productActivityCache);
                 editDeleteFragment.show(productActivityCache.getActivity().getSupportFragmentManager(), "Product");
-
-                // todo: show dialog
                 return true;
             }
         });

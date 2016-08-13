@@ -1,5 +1,5 @@
 #
-# generated on 2016/08/13 11:24:26
+# generated on 2016/08/13 03:42:25
 #
 # --table-start--
 dataClass=privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.persistence.AbstractEntity
@@ -114,6 +114,10 @@ fieldName=selected
 # --field-end--
 # --field-start--
 fieldName=category
+# --field-end--
+# --field-start--
+fieldName=imageBytes
+dataPersister=BYTE_ARRAY
 # --field-end--
 # --field-start--
 fieldName=shoppingList

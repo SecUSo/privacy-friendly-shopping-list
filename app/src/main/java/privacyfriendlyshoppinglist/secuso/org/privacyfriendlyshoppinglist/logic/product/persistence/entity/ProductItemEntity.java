@@ -1,5 +1,6 @@
 package privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.product.persistence.entity;
 
+import com.j256.ormlite.field.DataType;
 import com.j256.ormlite.field.DatabaseField;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.persistence.AbstractEntity;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.shoppingList.persistence.entity.ShoppingListEntity;
@@ -34,6 +35,9 @@ public class ProductItemEntity extends AbstractEntity
 
     @DatabaseField
     private String category;
+
+    @DatabaseField(dataType = DataType.BYTE_ARRAY)
+    byte[] imageBytes;
 
     @DatabaseField(foreign = true, canBeNull = false)
     private ShoppingListEntity shoppingList;
@@ -130,6 +134,16 @@ public class ProductItemEntity extends AbstractEntity
     public void setProductName(String productName)
     {
         this.productName = productName;
+    }
+
+    public byte[] getImageBytes()
+    {
+        return imageBytes;
+    }
+
+    public void setImageBytes(byte[] imageBytes)
+    {
+        this.imageBytes = imageBytes;
     }
 
     @Override

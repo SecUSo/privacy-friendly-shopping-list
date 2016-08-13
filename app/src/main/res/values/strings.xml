@@ -215,6 +215,7 @@
     <string name="category_text">Category</string>
     <string name="store_text">Store</string>
     <string name="product_as_title">Product: %1$s</string>
+    <string name="close_image">Close</string>
 
     <!-- Shopping List Dialog -->
     <string name="list_name">Shopping List Name</string>

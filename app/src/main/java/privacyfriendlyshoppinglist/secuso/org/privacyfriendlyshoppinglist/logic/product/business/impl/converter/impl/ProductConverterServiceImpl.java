@@ -1,12 +1,16 @@
 package privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.product.business.impl.converter.impl;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.R;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.persistence.DB;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.utils.StringUtils;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.product.business.domain.ProductDto;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.product.business.impl.converter.ProductConverterService;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.product.persistence.entity.ProductItemEntity;
+
+import java.io.ByteArrayOutputStream;
 
 /**
  * Description:
@@ -18,14 +22,15 @@ public class ProductConverterServiceImpl implements ProductConverterService
     private String priceFormat0;
     private String priceFormat1;
     private String priceFormat2;
+    private Context context;
 
     @Override
     public void setContext(Context context, DB db)
     {
+        this.context = context;
         this.priceFormat0 = context.getResources().getString(R.string.number_format_0_decimals);
         this.priceFormat1 = context.getResources().getString(R.string.number_format_1_decimal);
         this.priceFormat2 = context.getResources().getString(R.string.number_format_2_decimals);
-
     }
 
     @Override
@@ -63,6 +68,17 @@ public class ProductConverterServiceImpl implements ProductConverterService
 
         entity.setCategory(dto.getProductCategory());
         entity.setSelected(dto.isChecked());
+
+        if ( dto.getBitmapImage() != null )
+        {
+            ByteArrayOutputStream stream = new ByteArrayOutputStream();
+            dto.getBitmapImage().compress(Bitmap.CompressFormat.PNG, 100, stream);
+            entity.setImageBytes(stream.toByteArray());
+        }
+        else
+        {
+            entity.setImageBytes(null);
+        }
     }
 
     @Override
@@ -95,6 +111,18 @@ public class ProductConverterServiceImpl implements ProductConverterService
 
         dto.setProductCategory(entity.getCategory());
         dto.setChecked(entity.getSelected());
+
+        byte[] imageBytes = entity.getImageBytes();
+        if ( imageBytes != null )
+        {
+            Bitmap imageBitMap = BitmapFactory.decodeByteArray(imageBytes, 0, imageBytes.length);
+            dto.setBitmapImage(imageBitMap);
+        }
+        else
+        {
+            Bitmap bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.ic_menu_camera);
+            dto.setBitmapImage(bitmap);
+        }
     }
 
     @Override

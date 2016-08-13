@@ -2,6 +2,7 @@ package privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic
 
 import android.content.Context;
 import android.content.res.Resources;
+import android.graphics.Bitmap;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.R;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.utils.StringUtils;
 
@@ -37,6 +38,8 @@ public class ProductDto
     private boolean checked;
 
     private boolean selectedForDeletion;
+
+    private Bitmap bitmapImage;
 
     public String getId()
     {
@@ -133,6 +136,16 @@ public class ProductDto
         this.productName = productName;
     }
 
+    public Bitmap getBitmapImage()
+    {
+        return bitmapImage;
+    }
+
+    public void setBitmapImage(Bitmap bitmapImage)
+    {
+        this.bitmapImage = bitmapImage;
+    }
+
     public String getSummary(Context context)
     {
         Resources resources = context.getResources();
@@ -181,19 +194,27 @@ public class ProductDto
         if ( !StringUtils.isEmpty(totalProductPrice) )
         {
             sb.append(totalPriceDetail);
+        }
+
+        boolean categoryExists = !StringUtils.isEmpty(productCategory);
+        boolean storeExists = !StringUtils.isEmpty(productStore);
+        boolean notesExists = !StringUtils.isEmpty(productNotes);
+        if ( categoryExists || storeExists || notesExists )
+        {
             sb.append(NEW_LINE);
         }
-        if ( !StringUtils.isEmpty(productCategory) )
+
+        if ( categoryExists )
         {
             sb.append(NEW_LINE);
             sb.append(categoryDetail);
         }
-        if ( !StringUtils.isEmpty(productStore) )
+        if ( storeExists )
         {
             sb.append(NEW_LINE);
             sb.append(storeDetail);
         }
-        if ( !StringUtils.isEmpty(productNotes) )
+        if ( notesExists )
         {
             sb.append(NEW_LINE);
             sb.append(notesDetail);

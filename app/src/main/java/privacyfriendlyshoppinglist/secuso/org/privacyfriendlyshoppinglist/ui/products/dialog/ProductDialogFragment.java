@@ -2,14 +2,11 @@ package privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.pr
 
 import android.app.AlertDialog;
 import android.app.Dialog;
-import android.content.ClipData;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.net.Uri;
 import android.os.Bundle;
-import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.v4.app.DialogFragment;
 import android.text.InputFilter;
@@ -32,8 +29,6 @@ import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.pro
 import rx.Observable;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
-
-import java.io.File;
 
 import static android.app.Activity.RESULT_OK;
 
@@ -108,6 +103,7 @@ public class ProductDialogFragment extends DialogFragment
         dialogCache.getPrice().setText(dto.getProductPrice());
         dialogCache.getCategory().setText(dto.getProductCategory());
         dialogCache.getCustomStore().setText(dto.getProductStore());
+        dialogCache.getProductImage().setImageBitmap(dto.getBitmapImage());
 
         if ( editDialog )
         {
@@ -186,18 +182,10 @@ public class ProductDialogFragment extends DialogFragment
             @Override
             public void onClick(View view)
             {
-                String imageFilePath = Environment.getExternalStorageDirectory().getAbsolutePath() + "/picture.jpg";
-                File imageFile = new File(imageFilePath);
-                Uri imageFileUri = Uri.fromFile(imageFile); // convert path to Uri
-
                 Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                takePictureIntent.setClipData(ClipData.newRawUri(null, imageFileUri));
-
                 if ( takePictureIntent.resolveActivity(cache.getActivity().getPackageManager()) != null )
                 {
-                    takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, imageFileUri);
                     startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
-//                    startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
                 }
 
             }
@@ -222,6 +210,16 @@ public class ProductDialogFragment extends DialogFragment
                         result -> result.copyTo(autoCompleteLists),
                         Throwable::printStackTrace,
                         () -> setupAutoCompleteLists(autoCompleteLists));
+
+        dialogCache.getProductImage().setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                DialogFragment imageViewerDialog = ImageViewerDialog.newEditDeleteInstance(dto, dialogCache);
+                imageViewerDialog.show(cache.getActivity().getSupportFragmentManager(), "ProductViewer");
+            }
+        });
 
 
         builder.setPositiveButton(cache.getActivity().getResources().getString(R.string.okay), new DialogInterface.OnClickListener()
@@ -270,6 +268,12 @@ public class ProductDialogFragment extends DialogFragment
                     dto.setProductCategory(String.valueOf(dialogCache.getCategory().getText()));
                     dto.setProductStore(String.valueOf(dialogCache.getCustomStore().getText()));
 
+                    if ( dialogCache.isImageDeleted() )
+                    {
+                        Bitmap bitmap = BitmapFactory.decodeResource(getContext().getResources(), R.drawable.ic_menu_camera);
+                        dto.setBitmapImage(bitmap);
+                    }
+
                     productService.saveOrUpdate(dto, cache.getListId());
                     ProductsActivity productsActivity = (ProductsActivity) cache.getActivity();
                     productsActivity.updateListView();
@@ -299,41 +303,13 @@ public class ProductDialogFragment extends DialogFragment
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data)
     {
-        String imageFilePath = Environment.getExternalStorageDirectory().getAbsolutePath() + "/picture.jpg";
-
-        super.onActivityResult(requestCode, resultCode, data);
-
         if ( requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK )
         {
-//            Bitmap thumbnail = (Bitmap) data.getExtras().get("data");
-//            ByteArrayOutputStream bytes = new ByteArrayOutputStream();
-//            thumbnail.compress(Bitmap.CompressFormat.JPEG, 90, bytes);
-//            File destination = new File(Environment.getExternalStorageDirectory(),
-//                    System.currentTimeMillis() + ".jpg");
-//            FileOutputStream fo;
-//            try {
-//                destination.createNewFile();
-//                fo = new FileOutputStream(destination);
-//                fo.write(bytes.toByteArray());
-//                fo.close();
-//            } catch (FileNotFoundException e) {
-//                e.printStackTrace();
-//            } catch (IOException e) {
-//                e.printStackTrace();
-//            }
-//            dialogCache.getCameraIcon().setImageBitmap(thumbnail);
+            Bundle extras = data.getExtras();
+            Bitmap imageBitmap = (Bitmap) extras.get("data");
 
-            BitmapFactory.Options bmpFactoryOptions = new BitmapFactory.Options();
-            bmpFactoryOptions.inJustDecodeBounds = false;
-
-            //imageFilePath image path which you pass with intent
-            Bitmap bmp = BitmapFactory.decodeFile(imageFilePath, bmpFactoryOptions);
-            dialogCache.getCameraIcon().setImageBitmap(bmp);
-
-
-//            Bundle extras = data.getExtras();
-//            Bitmap imageBitmap = (Bitmap) extras.get("data");
-//            dialogCache.getProductImage().setImageBitmap(imageBitmap);
+            dto.setBitmapImage(imageBitmap);
+            dialogCache.getProductImage().setImageBitmap(imageBitmap);
         }
     }
 }

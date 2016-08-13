@@ -21,6 +21,7 @@ public class ProductDialogCache
     private AutoCompleteTextView customStore;
     private AutoCompleteTextView category;
     private EditText productNotes;
+    private boolean imageDeleted;
 
     private Button buttonPlus;
     private Button buttonMinus;
@@ -40,7 +41,6 @@ public class ProductDialogCache
         productNotes = (EditText) rootview.findViewById(R.id.product_notes);
         buttonPlus = (Button) rootview.findViewById(R.id.product_button_plus);
         buttonMinus = (Button) rootview.findViewById(R.id.product_button_minus);
-        //productCheckBox = (CheckBox) rootview.findViewById(R.id.product_checkbox);
         expandableLayout = (LinearLayout) rootview.findViewById(R.id.expandable_product_view);
         expandableImageView = (ImageView) rootview.findViewById(R.id.expand_button);
         cameraIcon = (ImageView) rootview.findViewById(R.id.camera_button);
@@ -98,10 +98,15 @@ public class ProductDialogCache
         return buttonMinus;
     }
 
-//    public CheckBox getProductCheckBox()
-//    {
-//        return productCheckBox;
-//    }
+    public boolean isImageDeleted()
+    {
+        return imageDeleted;
+    }
+
+    public void setImageDeleted(boolean imageDeleted)
+    {
+        this.imageDeleted = imageDeleted;
+    }
 
     public ImageView getCameraIcon()
     {

@@ -93,7 +93,10 @@
                 android:layout_width="match_parent"
                 android:textStyle="italic"
                 android:visibility="gone"
-                android:layout_margin="@dimen/list_margin"
+                android:paddingLeft="@dimen/list_padding"
+                android:layout_marginLeft="@dimen/list_margin"
+                android:layout_marginRight="@dimen/list_margin"
+                android:layout_marginBottom="@dimen/list_margin"
                 android:layout_height="wrap_content"/>
     </LinearLayout>
 </android.support.v7.widget.CardView>
