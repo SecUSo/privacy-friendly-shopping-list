@@ -71,14 +71,12 @@
 
 
     <!-- ### DELETE SHOPPING LISTS ### -->
-    <string name="delele_lists_confirmation">Delete all selected lists? This operation cannot be
-        undone.
-    </string>
+    <string name="delele_lists_confirmation">Delete all selected lists? This operation cannot be undone.</string>
+    <string name="delele_list_confirmation">Delete selected list? This operation cannot be undone.</string>
     <string name="activity_delete_lists">Delete Shopping Lists</string>
     <!-- ### DELETE PRODUCTS LISTS ### -->
-    <string name="delele_products_confirmation">Delete all selected products? This operation cannot
-        be undone.
-    </string>
+    <string name="delele_products_confirmation">Delete all selected products? This operation cannot be undone.</string>
+    <string name="delele_product_confirmation">Delete selected product? This operation cannot be undone.</string>
     <string name="activity_delete_products">Delete Products</string>
 
     <!-- ### STATISTICS ### -->
@@ -216,12 +214,13 @@
     <string name="quantity_text">Qty.</string>
     <string name="category_text">Category</string>
     <string name="store_text">Store</string>
-    <string name="edit_dialog_message">Edit or Delete Product?</string>
+    <string name="product_as_title">Product: %1$s</string>
 
     <!-- Shopping List Dialog -->
     <string name="list_name">Shopping List Name</string>
     <string name="list_name_new">New List</string>
     <string name="list_name_edit">Edit Shopping List</string>
+    <string name="list_as_title">List: %1$s</string>
 
     <string name="priority">Priority</string>
     <string name="priority_high">High</string>

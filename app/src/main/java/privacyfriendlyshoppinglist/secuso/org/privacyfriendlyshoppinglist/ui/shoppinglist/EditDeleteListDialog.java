@@ -1,12 +1,14 @@
 package privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.shoppinglist;
 
 import android.app.Dialog;
-import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AlertDialog;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.Button;
+import android.widget.TextView;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.R;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.context.AbstractInstanceFactory;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.context.InstanceFactory;
@@ -65,35 +67,47 @@ public class EditDeleteListDialog extends DialogFragment
     {
 
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-        builder.setMessage(R.string.edit_dialog_message)
-                .setPositiveButton(R.string.edit, new DialogInterface.OnClickListener()
-                {
-                    public void onClick(DialogInterface dialog, int id)
-                    {
+        LayoutInflater inflater = (LayoutInflater) getActivity().getSystemService(getActivity().LAYOUT_INFLATER_SERVICE);
+        View rootView = inflater.inflate(R.layout.edit_delete_dialog, null);
+        Button editButton = (Button) rootView.findViewById(R.id.edit);
+        Button deleteButton = (Button) rootView.findViewById(R.id.delete);
+        TextView titleTextView = (TextView) rootView.findViewById(R.id.title);
 
-                        DialogFragment productFragement = ListDialogFragment.newEditInstance(dto, cache);
-                        productFragement.show(cache.getActivity().getSupportFragmentManager(), "Liste");
+        String listDialogTitle = getContext().getResources().getString(R.string.list_as_title, dto.getListName());
+        titleTextView.setText(listDialogTitle);
 
-                    }
-                })
-                .setNegativeButton(R.string.delete, new DialogInterface.OnClickListener()
-                {
-                    public void onClick(DialogInterface dialog, int id)
-                    {
-                        Snackbar.make(cache.getNewListFab(), R.string.delele_lists_confirmation, Snackbar.LENGTH_LONG)
-                                .setAction(R.string.okay, new View.OnClickListener()
-                                {
-                                    @Override
-                                    public void onClick(View v)
-                                    {
-                                        shoppingListService.deleteById(dto.getId());
-                                        MainActivity activity = (MainActivity) cache.getActivity();
-                                        activity.updateListView();
-                                    }
-                                }).show();
-                    }
-                });
+        editButton.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                dismiss();
+                DialogFragment productFragement = ListDialogFragment.newEditInstance(dto, cache);
+                productFragement.show(cache.getActivity().getSupportFragmentManager(), "List");
+            }
+        });
 
+        deleteButton.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                dismiss();
+                Snackbar.make(cache.getNewListFab(), R.string.delele_list_confirmation, Snackbar.LENGTH_LONG)
+                        .setAction(R.string.okay, new View.OnClickListener()
+                        {
+                            @Override
+                            public void onClick(View v)
+                            {
+                                shoppingListService.deleteById(dto.getId());
+                                MainActivity activity = (MainActivity) cache.getActivity();
+                                activity.updateListView();
+                            }
+                        }).show();
+            }
+        });
+
+        builder.setView(rootView);
         return builder.create();
     }
 

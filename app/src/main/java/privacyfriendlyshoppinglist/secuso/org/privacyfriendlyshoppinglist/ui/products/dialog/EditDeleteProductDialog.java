@@ -2,12 +2,14 @@ package privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.pr
 
 
 import android.app.Dialog;
-import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AlertDialog;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.Button;
+import android.widget.TextView;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.R;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.context.AbstractInstanceFactory;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.context.InstanceFactory;
@@ -62,37 +64,47 @@ public class EditDeleteProductDialog extends DialogFragment
     public Dialog onCreateDialog(Bundle savedInstanceState)
     {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-        builder.setMessage(R.string.edit_dialog_message)
-                .setPositiveButton(R.string.edit, new DialogInterface.OnClickListener()
-                {
-                    public void onClick(DialogInterface dialog, int id)
-                    {
+        LayoutInflater inflater = (LayoutInflater) getActivity().getSystemService(getActivity().LAYOUT_INFLATER_SERVICE);
+        View rootView = inflater.inflate(R.layout.edit_delete_dialog, null);
+        Button editButton = (Button) rootView.findViewById(R.id.edit);
+        Button deleteButton = (Button) rootView.findViewById(R.id.delete);
+        TextView titleTextView = (TextView) rootView.findViewById(R.id.title);
 
-                        DialogFragment productFragement = ProductDialogFragment.newEditDialogInstance(dto, cache);
-                        productFragement.show(cache.getActivity().getSupportFragmentManager(), "Product");
+        String listDialogTitle = getContext().getResources().getString(R.string.product_as_title, dto.getProductName());
+        titleTextView.setText(listDialogTitle);
 
-                    }
-                })
-                .setNegativeButton(R.string.delete, new DialogInterface.OnClickListener()
-                {
-                    public void onClick(DialogInterface dialog, int id)
-                    {
+        editButton.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                dismiss();
+                DialogFragment productFragement = ProductDialogFragment.newEditDialogInstance(dto, cache);
+                productFragement.show(cache.getActivity().getSupportFragmentManager(), "Product");
+            }
+        });
 
-                        Snackbar.make(cache.getNewListFab(), R.string.delele_products_confirmation, Snackbar.LENGTH_LONG)
-                                .setAction(R.string.okay, new View.OnClickListener()
-                                {
-                                    @Override
-                                    public void onClick(View v)
-                                    {
-                                        productService.deleteById(dto.getId());
-                                        ProductsActivity activity = (ProductsActivity) cache.getActivity();
-                                        activity.updateListView();
-                                    }
-                                }).show();
+        deleteButton.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                dismiss();
+                Snackbar.make(cache.getNewListFab(), R.string.delele_product_confirmation, Snackbar.LENGTH_LONG)
+                        .setAction(R.string.okay, new View.OnClickListener()
+                        {
+                            @Override
+                            public void onClick(View v)
+                            {
+                                productService.deleteById(dto.getId());
+                                ProductsActivity activity = (ProductsActivity) cache.getActivity();
+                                activity.updateListView();
+                            }
+                        }).show();
+            }
+        });
 
-                    }
-                });
-
+        builder.setView(rootView);
         return builder.create();
     }
 

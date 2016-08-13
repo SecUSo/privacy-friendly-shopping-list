@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content">
+
+    <TextView
+            android:id="@+id/title"
+            android:text="Title"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            android:background="@color/colorPrimaryDark"
+            android:padding="@dimen/dialog_padding"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+    <Button
+            android:id="@+id/edit"
+            android:text="@string/edit"
+            android:background="@drawable/button_normal"
+            android:layout_margin="@dimen/list_margin_big"
+            android:textColor="@color/white"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+    <Button
+            android:id="@+id/delete"
+            android:text="@string/delete"
+            android:background="@drawable/button_normal"
+            android:layout_margin="@dimen/list_margin_big"
+            android:textColor="@color/white"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+</LinearLayout>
