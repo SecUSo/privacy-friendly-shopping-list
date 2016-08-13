@@ -108,15 +108,17 @@ public class ProductDialogFragment extends DialogFragment
         dialogCache.getPrice().setText(dto.getProductPrice());
         dialogCache.getCategory().setText(dto.getProductCategory());
         dialogCache.getCustomStore().setText(dto.getProductStore());
-        dialogCache.getProductImage().setImageBitmap(dto.getBitmapImage());
 
         if ( editDialog )
         {
             dialogCache.getTitleTextView().setText(getActivity().getResources().getString(R.string.product_name_edit));
+            dialogCache.getProductImage().setImageBitmap(dto.getBitmapImage());
         }
         else
         {
             dialogCache.getTitleTextView().setText(getActivity().getResources().getString(R.string.product_name_new));
+            Bitmap bitmap = BitmapFactory.decodeResource(getContext().getResources(), R.drawable.ic_menu_camera);
+            dialogCache.getProductImage().setImageBitmap(bitmap);
         }
 
         dialogCache.getButtonPlus().setOnClickListener(new View.OnClickListener()
