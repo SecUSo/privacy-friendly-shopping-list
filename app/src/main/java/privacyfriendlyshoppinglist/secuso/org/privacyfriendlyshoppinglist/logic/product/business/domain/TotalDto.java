@@ -1,5 +1,8 @@
 package privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.product.business.domain;
 
+import android.content.Context;
+import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.R;
+
 /**
  * Description:
  * Author: Grebiel Jose Ifill Brito
@@ -7,6 +10,10 @@ package privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic
  */
 public class TotalDto
 {
+    private static final String DETAIL_SEPARATOR = ": ";
+    private static final String NEW_LINE = "\n";
+    private static final String SPACE = " ";
+
     private String totalAmount;
     private String checkedAmount;
     private boolean equalsZero;
@@ -50,5 +57,26 @@ public class TotalDto
     public int getNrProducts()
     {
         return nrProducts;
+    }
+
+    public String getInfo(String currency, Context context)
+    {
+        String nrItemsLabel = context.getResources().getString(R.string.nr_items);
+        String totalAmountLabel = context.getResources().getString(R.string.total_list_amount);
+
+        StringBuilder sb = new StringBuilder();
+        sb.append(nrItemsLabel);
+        sb.append(DETAIL_SEPARATOR);
+        sb.append(this.getNrProducts());
+        sb.append(NEW_LINE);
+        sb.append(totalAmountLabel);
+        sb.append(DETAIL_SEPARATOR);
+        sb.append(this.getTotalAmount());
+        sb.append(SPACE);
+        sb.append(currency);
+        sb.append(NEW_LINE);
+        sb.append(NEW_LINE);
+
+        return sb.toString();
     }
 }

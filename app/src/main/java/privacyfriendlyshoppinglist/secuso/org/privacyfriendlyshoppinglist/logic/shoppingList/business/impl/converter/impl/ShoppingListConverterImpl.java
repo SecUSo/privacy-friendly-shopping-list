@@ -46,6 +46,7 @@ public class ShoppingListConverterImpl implements ShoppingListConverter
         entity.setListName(dto.getListName());
         entity.setSortAscending(dto.isSortAscending());
         entity.setSortCriteria(dto.getSortCriteria());
+        entity.setStatisticsEnabled(dto.isStatisticEnabled());
 
         String fullDate = dto.getDeadlineDate() + SPACE + dto.getDeadlineTime();
         if ( !SPACE.equals(fullDate) )
@@ -93,6 +94,7 @@ public class ShoppingListConverterImpl implements ShoppingListConverter
     {
         dto.setId(entity.getId().toString());
         dto.setListName(entity.getListName());
+        dto.setStatisticEnabled(entity.getStatisticsEnabled());
 
         if ( entity.getSortCriteria() != null )
         {

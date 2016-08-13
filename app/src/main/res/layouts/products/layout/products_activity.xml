@@ -11,17 +11,6 @@
             android:layout_height="match_parent"
             android:layout_above="@+id/layout_total">
 
-        <android.support.design.widget.AppBarLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-            <include
-                    layout="@layout/products_toolbar"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"/>
-
-        </android.support.design.widget.AppBarLayout>
-
         <android.support.v7.widget.RecyclerView
                 android:id="@+id/recyclerView"
                 android:layout_width="match_parent"

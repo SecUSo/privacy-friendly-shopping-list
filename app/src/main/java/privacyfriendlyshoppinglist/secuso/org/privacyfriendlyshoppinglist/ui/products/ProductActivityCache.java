@@ -6,7 +6,6 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.SwitchCompat;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.R;
@@ -30,13 +29,14 @@ public class ProductActivityCache
     private TextView currencyTextView;
     private LinearLayout totalLayout;
     private RecyclerView recyclerView;
-    private SwitchCompat statisticsSwitch;
     private String listId;
+    private Boolean statisticsEnabled;
 
-    public ProductActivityCache(AppCompatActivity activity, String listId)
+    public ProductActivityCache(AppCompatActivity activity, String listId, boolean statisticsEnabled)
     {
         this.activity = activity;
         this.listId = listId;
+        this.statisticsEnabled = statisticsEnabled;
 
         productsAdapter = new ProductsAdapter(new ArrayList<>(), this);
 
@@ -49,14 +49,10 @@ public class ProductActivityCache
         totalCheckedTextView = (TextView) activity.findViewById(R.id.textview_total_checked);
         totalLayout = (LinearLayout) activity.findViewById(R.id.layout_total);
         currencyTextView = (TextView) activity.findViewById(R.id.textview_currency);
-        statisticsSwitch = (SwitchCompat) activity.findViewById(R.id.switch_statistics);
 
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(activity);
         String currency = sharedPreferences.getString(SettingsKeys.CURRENCY, null);
         currencyTextView.setText(currency);
-
-        boolean statisticsEnabled = sharedPreferences.getBoolean(SettingsKeys.STATISTICS_ENABLED, false);
-        statisticsSwitch.setChecked(statisticsEnabled);
     }
 
     public AppCompatActivity getActivity()
@@ -99,8 +95,8 @@ public class ProductActivityCache
         return totalLayout;
     }
 
-    public SwitchCompat getStatisticsSwitch()
+    public Boolean getStatisticsEnabled()
     {
-        return statisticsSwitch;
+        return statisticsEnabled;
     }
 }

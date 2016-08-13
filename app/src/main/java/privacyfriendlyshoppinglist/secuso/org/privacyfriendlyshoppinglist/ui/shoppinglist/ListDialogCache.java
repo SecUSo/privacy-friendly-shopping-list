@@ -1,5 +1,6 @@
 package privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.shoppinglist;
 
+import android.support.v7.widget.SwitchCompat;
 import android.view.View;
 import android.widget.*;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.R;
@@ -26,6 +27,7 @@ public class ListDialogCache
     private Spinner prioritySpinner;
     private Spinner reminderSpinner;
     private TextView titleTextView;
+    private SwitchCompat statisticsSwitch;
 
     public ListDialogCache(View rootview)
     {
@@ -43,6 +45,7 @@ public class ListDialogCache
         dateTextView = (TextView) rootview.findViewById(R.id.set_date_view);
         timeTextView = (TextView) rootview.findViewById(R.id.set_time_view);
         titleTextView = (TextView) rootview.findViewById(R.id.dialog_title);
+        statisticsSwitch = (SwitchCompat) rootview.findViewById(R.id.switch_statistics);
     }
 
     public EditText getListNameText()
@@ -113,5 +116,10 @@ public class ListDialogCache
     public EditText getReminderText()
     {
         return reminderText;
+    }
+
+    public SwitchCompat getStatisticsSwitch()
+    {
+        return statisticsSwitch;
     }
 }

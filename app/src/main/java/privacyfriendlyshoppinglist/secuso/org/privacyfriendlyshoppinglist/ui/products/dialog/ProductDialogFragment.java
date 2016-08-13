@@ -108,7 +108,6 @@ public class ProductDialogFragment extends DialogFragment
         dialogCache.getPrice().setText(dto.getProductPrice());
         dialogCache.getCategory().setText(dto.getProductCategory());
         dialogCache.getCustomStore().setText(dto.getProductStore());
-        //dialogCache.getProductCheckBox().setChecked(dto.isChecked());
 
         if ( editDialog )
         {
@@ -270,8 +269,6 @@ public class ProductDialogFragment extends DialogFragment
 
                     dto.setProductCategory(String.valueOf(dialogCache.getCategory().getText()));
                     dto.setProductStore(String.valueOf(dialogCache.getCustomStore().getText()));
-
-                    //dto.setChecked(dialogCache.getProductCheckBox().isChecked());
 
                     productService.saveOrUpdate(dto, cache.getListId());
                     ProductsActivity productsActivity = (ProductsActivity) cache.getActivity();

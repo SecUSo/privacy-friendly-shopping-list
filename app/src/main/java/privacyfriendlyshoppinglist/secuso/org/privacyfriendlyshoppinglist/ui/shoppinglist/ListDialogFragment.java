@@ -90,6 +90,7 @@ public class ListDialogFragment extends DialogFragment
         View v = inflater.inflate(R.layout.shopping_list_dialog, null);
         dialogCache = new ListDialogCache(v);
 
+        dialogCache.getStatisticsSwitch().setChecked(dto.isStatisticEnabled());
 
         if ( editDialog )
         {
@@ -317,6 +318,7 @@ public class ListDialogFragment extends DialogFragment
                 dto.setReminderUnit(String.valueOf(dialogCache.getReminderSpinner().getSelectedItemPosition()));
                 dto.setReminderCount(dialogCache.getReminderText().getText().toString());
                 dto.setReminderEnabled(true); //todo: change this true by checkbox value or something similar
+                dto.setStatisticEnabled(dialogCache.getStatisticsSwitch().isChecked());
 
                 shoppingListService.saveOrUpdate(dto);
                 MainActivity mainActivity = (MainActivity) cache.getActivity();

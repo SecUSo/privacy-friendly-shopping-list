@@ -9,6 +9,7 @@ import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.R;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.context.AbstractInstanceFactory;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.context.InstanceFactory;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.product.business.ProductService;
+import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.product.business.domain.TotalDto;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.shoppingList.business.domain.ListDto;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.main.MainActivity;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.main.ShoppingListActivityCache;
@@ -53,12 +54,11 @@ class ListsItemViewHolder extends RecyclerView.ViewHolder
             listItemCache.getReminderBar().setImageResource(R.drawable.reminder_status_time_over);
         }
 
-        int nrProducts = productService.getAllProducts(dto.getId()).size();
-        listItemCache.getNrProductsTextView().setText(String.valueOf(nrProducts));
         setupPriorityIcon(dto);
 
-        String productsInfo = productService.getInfo(dto.getId(), listItemCache.getCurrency());
-        listItemCache.getListDetails().setText(productsInfo + dto.getDetailInfo(listItemCache.getListCard().getContext()));
+        TotalDto totalDto = productService.getInfo(dto.getId());
+        listItemCache.getListDetails().setText(totalDto.getInfo(listItemCache.getCurrency(), shoppingListCache.getActivity()) + dto.getDetailInfo(listItemCache.getListCard().getContext()));
+        listItemCache.getNrProductsTextView().setText(String.valueOf(totalDto.getNrProducts()));
 
 
         listItemCache.getListCard().setOnClickListener(v ->
@@ -67,6 +67,7 @@ class ListsItemViewHolder extends RecyclerView.ViewHolder
             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             intent.putExtra(MainActivity.LIST_NAME_KEY, dto.getListName());
             intent.putExtra(MainActivity.LIST_ID_KEY, dto.getId());
+            intent.putExtra(MainActivity.STATISTICS_ID_KEY, dto.isStatisticEnabled());
             shoppingListCache.getActivity().startActivity(intent);
         });
 

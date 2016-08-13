@@ -28,6 +28,7 @@ public class MainActivity extends BaseActivity
 {
     public static final String LIST_NAME_KEY = "list.name";
     public static final String LIST_ID_KEY = "list.id";
+    public static final String STATISTICS_ID_KEY = "statistics.enabled";
     private ShoppingListService shoppingListService;
     private ShoppingListActivityCache cache;
 

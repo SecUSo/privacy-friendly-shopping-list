@@ -1,7 +1,6 @@
 package privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.product.business.impl;
 
 import android.content.Context;
-import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.R;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.comparators.PFAComparators;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.persistence.DB;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.product.business.ProductService;
@@ -27,10 +26,6 @@ import java.util.List;
  */
 public class ProductServiceImpl implements ProductService
 {
-    private static final String DETAIL_SEPARATOR = ": ";
-    private static final String NEW_LINE = "\n";
-    private static final String SPACE = " ";
-
     private ProductItemDao productItemDao;
     private ProductConverterService converterService;
     private ShoppingListService shoppingListService;
@@ -107,28 +102,11 @@ public class ProductServiceImpl implements ProductService
     }
 
     @Override
-    public String getInfo(String listId, String currency)
+    public TotalDto getInfo(String listId)
     {
         List<ProductDto> allProducts = getAllProducts(listId);
         TotalDto totalDto = computeTotals(allProducts);
-
-        String nrItemsLabel = context.getResources().getString(R.string.nr_items);
-        String totalAmountLabel = context.getResources().getString(R.string.total_list_amount);
-
-        StringBuilder sb = new StringBuilder();
-        sb.append(nrItemsLabel);
-        sb.append(DETAIL_SEPARATOR);
-        sb.append(totalDto.getNrProducts());
-        sb.append(NEW_LINE);
-        sb.append(totalAmountLabel);
-        sb.append(DETAIL_SEPARATOR);
-        sb.append(totalDto.getTotalAmount());
-        sb.append(SPACE);
-        sb.append(currency);
-        sb.append(NEW_LINE);
-        sb.append(NEW_LINE);
-
-        return sb.toString();
+        return totalDto;
     }
 
     @Override
@@ -164,11 +142,11 @@ public class ProductServiceImpl implements ProductService
         int nrProducts = 0;
         for ( ProductDto dto : productDtos )
         {
-            nrProducts++;
+            Integer quantity = Integer.valueOf(dto.getQuantity());
+            nrProducts += quantity;
             String price = dto.getProductPrice();
             if ( price != null )
             {
-                Integer quantity = Integer.valueOf(dto.getQuantity());
                 double priceAsDouble = converterService.getStringAsDouble(price) * quantity;
                 totalAmount += priceAsDouble;
                 if ( dto.isChecked() )

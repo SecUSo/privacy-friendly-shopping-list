@@ -28,7 +28,7 @@
         <!-- colorPrimary is used for the default action bar background -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/yellow</item>
+        <item name="colorAccent">@color/colorPrimaryDark</item>
 
     </style>
 

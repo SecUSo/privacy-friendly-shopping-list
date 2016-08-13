@@ -42,6 +42,9 @@ public class ShoppingListEntity extends AbstractEntity
     @DatabaseField
     private Integer reminderUnit; // index of spinner
 
+    @DatabaseField
+    private boolean statisticsEnabled;
+
     @ForeignCollectionField
     private ForeignCollection<ProductItemEntity> products;
 
@@ -145,6 +148,16 @@ public class ShoppingListEntity extends AbstractEntity
         this.reminderUnit = reminderUnit;
     }
 
+    public boolean getStatisticsEnabled()
+    {
+        return statisticsEnabled;
+    }
+
+    public void setStatisticsEnabled(boolean statisticsEnabled)
+    {
+        this.statisticsEnabled = statisticsEnabled;
+    }
+
     @Override
     public String toString()
     {
@@ -158,6 +171,7 @@ public class ShoppingListEntity extends AbstractEntity
                 ", sortAscending=" + sortAscending +
                 ", reminderCount=" + reminderCount +
                 ", reminderUnit=" + reminderUnit +
+                ", statisticsEnabled=" + statisticsEnabled +
                 ", products=" + products +
                 '}';
     }

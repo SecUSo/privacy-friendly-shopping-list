@@ -44,7 +44,9 @@ public class ProductsActivity extends AppCompatActivity
         setTitle(listName);
 
         listId = getIntent().getStringExtra(MainActivity.LIST_ID_KEY);
-        cache = new ProductActivityCache(this, listId);
+        boolean statisticsEnabled = getIntent().getBooleanExtra(MainActivity.STATISTICS_ID_KEY, false);
+        cache = new ProductActivityCache(this, listId, statisticsEnabled);
+
 
         AbstractInstanceFactory instanceFactory = new InstanceFactory(getApplicationContext());
         this.productService = (ProductService) instanceFactory.createInstance(ProductService.class);

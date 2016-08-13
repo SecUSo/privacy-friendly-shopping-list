@@ -31,7 +31,7 @@ public interface ProductService extends ContextSetter
 
     List<ProductDto> getAllProducts(String listId);
 
-    String getInfo(String listId, String currency);
+    TotalDto getInfo(String listId);
 
     void deleteAllFromList(String listId);
 

@@ -22,11 +22,11 @@ public class ListDto extends AbstractDto
     private String deadlineDate;
     private String deadlineTime;
     private String notes;
-    private String nrItems;
     private boolean selected;
     private boolean sortAscending;
     private String sortCriteria;
     private boolean reminderEnabled;
+    private boolean statisticEnabled;
     private String reminderCount;
     private String reminderUnit;
 
@@ -90,16 +90,6 @@ public class ListDto extends AbstractDto
         this.notes = notes;
     }
 
-    public String getNrItems()
-    {
-        return nrItems;
-    }
-
-    public void setNrItems(String nrItems)
-    {
-        this.nrItems = nrItems;
-    }
-
     public boolean isSelected()
     {
         return selected;
@@ -158,6 +148,16 @@ public class ListDto extends AbstractDto
     public void setReminderEnabled(boolean reminderEnabled)
     {
         this.reminderEnabled = reminderEnabled;
+    }
+
+    public boolean isStatisticEnabled()
+    {
+        return statisticEnabled;
+    }
+
+    public void setStatisticEnabled(boolean statisticEnabled)
+    {
+        this.statisticEnabled = statisticEnabled;
     }
 
     public String getDetailInfo(Context context)
@@ -226,7 +226,6 @@ public class ListDto extends AbstractDto
         if ( getDeadlineTime() != null ? !getDeadlineTime().equals(dto.getDeadlineTime()) : dto.getDeadlineTime() != null )
             return false;
         if ( getNotes() != null ? !getNotes().equals(dto.getNotes()) : dto.getNotes() != null ) return false;
-        if ( getNrItems() != null ? !getNrItems().equals(dto.getNrItems()) : dto.getNrItems() != null ) return false;
         if ( getSortCriteria() != null ? !getSortCriteria().equals(dto.getSortCriteria()) : dto.getSortCriteria() != null )
             return false;
         if ( getReminderCount() != null ? !getReminderCount().equals(dto.getReminderCount()) : dto.getReminderCount() != null )
@@ -244,7 +243,6 @@ public class ListDto extends AbstractDto
         result = 31 * result + (getDeadlineDate() != null ? getDeadlineDate().hashCode() : 0);
         result = 31 * result + (getDeadlineTime() != null ? getDeadlineTime().hashCode() : 0);
         result = 31 * result + (getNotes() != null ? getNotes().hashCode() : 0);
-        result = 31 * result + (getNrItems() != null ? getNrItems().hashCode() : 0);
         result = 31 * result + (isSelected() ? 1 : 0);
         result = 31 * result + (isSortAscending() ? 1 : 0);
         result = 31 * result + (getSortCriteria() != null ? getSortCriteria().hashCode() : 0);
@@ -264,11 +262,11 @@ public class ListDto extends AbstractDto
                 ", deadlineDate='" + deadlineDate + '\'' +
                 ", deadlineTime='" + deadlineTime + '\'' +
                 ", notes='" + notes + '\'' +
-                ", nrItems='" + nrItems + '\'' +
                 ", selected=" + selected +
                 ", sortAscending=" + sortAscending +
                 ", sortCriteria='" + sortCriteria + '\'' +
                 ", reminderEnabled=" + reminderEnabled +
+                ", statisticEnabled=" + statisticEnabled +
                 ", reminderCount='" + reminderCount + '\'' +
                 ", reminderUnit='" + reminderUnit + '\'' +
                 '}';
