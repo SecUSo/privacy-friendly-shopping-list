@@ -90,7 +90,6 @@ public class ProductDialogFragment extends DialogFragment
         this.productService = productService;
     }
 
-
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState)
     {
@@ -305,7 +304,7 @@ public class ProductDialogFragment extends DialogFragment
         Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         if ( takePictureIntent.resolveActivity(cache.getActivity().getPackageManager()) != null )
         {
-            startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
+            this.startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
         }
     }
 
