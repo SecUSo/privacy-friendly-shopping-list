@@ -57,13 +57,6 @@ public class StatisticsConverterServiceImpl implements StatisticsConverterServic
 
         entryEntity.setProductStore(dto.getProductStore());
 
-        String date = dto.getLastTimePurchased();
-        if ( !StringUtils.isEmpty(date) )
-        {
-            Date purchasedDate = getDateTimeFromString(date).toDate();
-            entryEntity.setRecordDate(purchasedDate);
-        }
-
         String productPrice = dto.getProductPrice();
         if ( !StringUtils.isEmpty(productPrice) )
         {

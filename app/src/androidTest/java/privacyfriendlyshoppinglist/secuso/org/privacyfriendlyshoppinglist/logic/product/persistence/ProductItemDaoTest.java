@@ -6,7 +6,6 @@ import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.Abstra
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.context.AbstractInstanceFactory;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.context.InstanceFactoryForTests;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.product.persistence.entity.ProductItemEntity;
-import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.product.persistence.entity.ProductTemplateEntity;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.shoppingList.persistence.ShoppingListDao;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.shoppingList.persistence.entity.ShoppingListEntity;
 
@@ -19,9 +18,7 @@ public class ProductItemDaoTest extends AbstractDatabaseTest
 {
 
     private ShoppingListDao shoppingListDao;
-    private ProductTemplateDao productTemplateDao;
     private ProductItemDao productItemDao;
-    private ProductTemplateEntity productTemplate;
     private ShoppingListEntity shoppingList;
 
 
@@ -31,24 +28,18 @@ public class ProductItemDaoTest extends AbstractDatabaseTest
         AbstractInstanceFactory instanceFactory = new InstanceFactoryForTests(getContext());
 
         shoppingListDao = (ShoppingListDao) instanceFactory.createInstance(ShoppingListDao.class);
-        productTemplateDao = (ProductTemplateDao) instanceFactory.createInstance(ProductTemplateDao.class);
         productItemDao = (ProductItemDao) instanceFactory.createInstance(ProductItemDao.class);
 
         shoppingList = new ShoppingListEntity();
-        productTemplate = new ProductTemplateEntity();
 
         shoppingList.setListName("shoppingList");
         shoppingListDao.save(shoppingList);
-
-        productTemplate.setProductName("product");
-        productTemplateDao.save(productTemplate);
     }
 
     @Test
     public void testSave()
     {
         ProductItemEntity entity = new ProductItemEntity();
-        entity.setProductTemplate(productTemplate);
         entity.setShoppingList(shoppingList);
 
         Long id = productItemDao.save(entity);
@@ -59,10 +50,6 @@ public class ProductItemDaoTest extends AbstractDatabaseTest
         ShoppingListEntity shoppingList = shoppingListDao.getAllEntities().get(0);
         ForeignCollection<ProductItemEntity> products1 = shoppingList.getProducts();
         assertEquals(expectedSize, products1.size());
-
-        ProductTemplateEntity productTemplate = productTemplateDao.getAllEntities().get(0);
-        ForeignCollection<ProductItemEntity> products2 = productTemplate.getProducts();
-        assertEquals(expectedSize, products2.size());
     }
 
     @Test(expected = Exception.class)
@@ -78,8 +65,6 @@ public class ProductItemDaoTest extends AbstractDatabaseTest
     public void testSaveWithoutShoppingList()
     {
         ProductItemEntity entity = new ProductItemEntity();
-        entity.setProductTemplate(productTemplate);
-
         productItemDao.save(entity);
     }
 }

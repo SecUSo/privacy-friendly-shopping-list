@@ -10,7 +10,7 @@ import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framew
  * Author: Grebiel Jose Ifill Brito
  * Created: 11.06.16 creation date
  */
-public class ProductDto extends ProductTemplateDto
+public class ProductDto
 {
 
     public static final String NEW_LINE = "\n";
@@ -18,11 +18,13 @@ public class ProductDto extends ProductTemplateDto
     private static final String COMMA = ",";
 
     // product fields
-    private String productId;
+    private String productName;
+
+    private String id;
+
+    private String productCategory;
 
     private String quantity;
-
-    private String quantityPurchased;
 
     private String productNotes;
 
@@ -36,14 +38,14 @@ public class ProductDto extends ProductTemplateDto
 
     private boolean selectedForDeletion;
 
-    public String getProductId()
+    public String getId()
     {
-        return productId;
+        return id;
     }
 
-    public void setProductId(String productId)
+    public void setId(String id)
     {
-        this.productId = productId;
+        this.id = id;
     }
 
     public String getQuantity()
@@ -54,16 +56,6 @@ public class ProductDto extends ProductTemplateDto
     public void setQuantity(String quantity)
     {
         this.quantity = quantity;
-    }
-
-    public String getQuantityPurchased()
-    {
-        return quantityPurchased;
-    }
-
-    public void setQuantityPurchased(String quantityPurchased)
-    {
-        this.quantityPurchased = quantityPurchased;
     }
 
     public String getProductNotes()
@@ -116,64 +108,29 @@ public class ProductDto extends ProductTemplateDto
         this.selectedForDeletion = selectedForDeletion;
     }
 
-    public String getTotalProductPrice()
-    {
-        return totalProductPrice;
-    }
-
     public void setTotalProductPrice(String totalProductPrice)
     {
         this.totalProductPrice = totalProductPrice;
     }
 
-    @Override
-    public boolean equals(Object o)
+    public String getProductCategory()
     {
-        if ( this == o ) return true;
-        if ( o == null || getClass() != o.getClass() ) return false;
-        if ( !super.equals(o) ) return false;
-
-        ProductDto dto = (ProductDto) o;
-
-        if ( isChecked() != dto.isChecked() ) return false;
-        if ( getProductId() != null ? !getProductId().equals(dto.getProductId()) : dto.getProductId() != null )
-            return false;
-        if ( getQuantity() != null ? !getQuantity().equals(dto.getQuantity()) : dto.getQuantity() != null )
-            return false;
-        if ( getQuantityPurchased() != null ? !getQuantityPurchased().equals(dto.getQuantityPurchased()) : dto.getQuantityPurchased() != null )
-            return false;
-        if ( getProductNotes() != null ? !getProductNotes().equals(dto.getProductNotes()) : dto.getProductNotes() != null )
-            return false;
-        if ( getProductStore() != null ? !getProductStore().equals(dto.getProductStore()) : dto.getProductStore() != null )
-            return false;
-        if ( getProductPrice() != null ? !getProductPrice().equals(dto.getProductPrice()) : dto.getProductPrice() != null )
-            return false;
-        if ( getProductName() != null ? !getProductName().equals(dto.getProductName()) : dto.getProductName() != null )
-            return false;
-        if ( getProductCategory() != null ? !getProductCategory().equals(dto.getProductCategory()) : dto.getProductCategory() != null )
-            return false;
-        if ( getHistoryCount() != null ? !getHistoryCount().equals(dto.getHistoryCount()) : dto.getHistoryCount() != null )
-            return false;
-        if ( getDefaultNotes() != null ? !getDefaultNotes().equals(dto.getDefaultNotes()) : dto.getDefaultNotes() != null )
-            return false;
-        if ( getDefaultStore() != null ? !getDefaultStore().equals(dto.getDefaultStore()) : dto.getDefaultStore() != null )
-            return false;
-        return getLastTimePurchased() != null ? getLastTimePurchased().equals(dto.getLastTimePurchased()) : dto.getLastTimePurchased() == null;
-
+        return productCategory;
     }
 
-    @Override
-    public int hashCode()
+    public void setProductCategory(String productCategory)
     {
-        int result = super.hashCode();
-        result = 31 * result + (getProductId() != null ? getProductId().hashCode() : 0);
-        result = 31 * result + (getQuantity() != null ? getQuantity().hashCode() : 0);
-        result = 31 * result + (getQuantityPurchased() != null ? getQuantityPurchased().hashCode() : 0);
-        result = 31 * result + (getProductNotes() != null ? getProductNotes().hashCode() : 0);
-        result = 31 * result + (getProductStore() != null ? getProductStore().hashCode() : 0);
-        result = 31 * result + (getProductPrice() != null ? getProductPrice().hashCode() : 0);
-        result = 31 * result + (isChecked() ? 1 : 0);
-        return result;
+        this.productCategory = productCategory;
+    }
+
+    public String getProductName()
+    {
+        return productName;
+    }
+
+    public void setProductName(String productName)
+    {
+        this.productName = productName;
     }
 
     public String getSummary(Context context)
@@ -207,8 +164,8 @@ public class ProductDto extends ProductTemplateDto
         String priceDetail = resources.getString(R.string.price_detail, productPrice);
         String totalPriceDetail = resources.getString(R.string.total_price_detail, totalProductPrice);
         String notesDetail = resources.getString(R.string.notes_detail, productNotes);
-        String categoryDetail = resources.getString(R.string.category_detail, getProductCategory());
-        String storeDetail = resources.getString(R.string.store_detail, getProductStore());
+        String categoryDetail = resources.getString(R.string.category_detail, productCategory);
+        String storeDetail = resources.getString(R.string.store_detail, productStore);
 
         StringBuilder sb = new StringBuilder();
         if ( !StringUtils.isEmpty(quantity) )
@@ -227,12 +184,12 @@ public class ProductDto extends ProductTemplateDto
             sb.append(NEW_LINE);
             sb.append(NEW_LINE);
         }
-        if ( !StringUtils.isEmpty(getProductCategory()) )
+        if ( !StringUtils.isEmpty(productCategory) )
         {
             sb.append(categoryDetail);
             sb.append(NEW_LINE);
         }
-        if ( !StringUtils.isEmpty(getProductStore()) )
+        if ( !StringUtils.isEmpty(productStore) )
         {
             sb.append(storeDetail);
             sb.append(NEW_LINE);
@@ -243,7 +200,62 @@ public class ProductDto extends ProductTemplateDto
             sb.append(NEW_LINE);
         }
 
-
         return sb.toString();
+    }
+
+    @Override
+    public boolean equals(Object o)
+    {
+        if ( this == o ) return true;
+        if ( o == null || getClass() != o.getClass() ) return false;
+
+        ProductDto dto = (ProductDto) o;
+
+        if ( isChecked() != dto.isChecked() ) return false;
+        if ( isSelectedForDeletion() != dto.isSelectedForDeletion() ) return false;
+        if ( getProductName() != null ? !getProductName().equals(dto.getProductName()) : dto.getProductName() != null )
+            return false;
+        if ( getId() != null ? !getId().equals(dto.getId()) : dto.getId() != null ) return false;
+        if ( getProductCategory() != null ? !getProductCategory().equals(dto.getProductCategory()) : dto.getProductCategory() != null )
+            return false;
+        if ( getQuantity() != null ? !getQuantity().equals(dto.getQuantity()) : dto.getQuantity() != null )
+            return false;
+        if ( getProductNotes() != null ? !getProductNotes().equals(dto.getProductNotes()) : dto.getProductNotes() != null )
+            return false;
+        if ( getProductStore() != null ? !getProductStore().equals(dto.getProductStore()) : dto.getProductStore() != null )
+            return false;
+        return getProductPrice() != null ? getProductPrice().equals(dto.getProductPrice()) : dto.getProductPrice() == null;
+
+    }
+
+    @Override
+    public int hashCode()
+    {
+        int result = getProductName() != null ? getProductName().hashCode() : 0;
+        result = 31 * result + (getId() != null ? getId().hashCode() : 0);
+        result = 31 * result + (getProductCategory() != null ? getProductCategory().hashCode() : 0);
+        result = 31 * result + (getQuantity() != null ? getQuantity().hashCode() : 0);
+        result = 31 * result + (getProductNotes() != null ? getProductNotes().hashCode() : 0);
+        result = 31 * result + (getProductStore() != null ? getProductStore().hashCode() : 0);
+        result = 31 * result + (getProductPrice() != null ? getProductPrice().hashCode() : 0);
+        result = 31 * result + (isChecked() ? 1 : 0);
+        result = 31 * result + (isSelectedForDeletion() ? 1 : 0);
+        return result;
+    }
+
+    @Override
+    public String toString()
+    {
+        return "ProductDto{" +
+                "productName='" + productName + '\'' +
+                ", id='" + id + '\'' +
+                ", productCategory='" + productCategory + '\'' +
+                ", quantity='" + quantity + '\'' +
+                ", productNotes='" + productNotes + '\'' +
+                ", productStore='" + productStore + '\'' +
+                ", productPrice='" + productPrice + '\'' +
+                ", checked=" + checked +
+                ", selectedForDeletion=" + selectedForDeletion +
+                '}';
     }
 }

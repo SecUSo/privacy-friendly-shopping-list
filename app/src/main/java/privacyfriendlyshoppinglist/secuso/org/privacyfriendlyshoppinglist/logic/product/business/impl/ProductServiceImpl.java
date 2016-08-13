@@ -7,15 +7,11 @@ import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framew
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.product.business.ProductService;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.product.business.domain.AutoCompleteLists;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.product.business.domain.ProductDto;
-import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.product.business.domain.ProductTemplateDto;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.product.business.domain.TotalDto;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.product.business.impl.comparators.ProductComparators;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.product.business.impl.converter.ProductConverterService;
-import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.product.business.impl.validator.ProductValidatorService;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.product.persistence.ProductItemDao;
-import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.product.persistence.ProductTemplateDao;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.product.persistence.entity.ProductItemEntity;
-import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.product.persistence.entity.ProductTemplateEntity;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.shoppingList.business.ShoppingListService;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.shoppingList.persistence.entity.ShoppingListEntity;
 import rx.Observable;
@@ -36,25 +32,19 @@ public class ProductServiceImpl implements ProductService
     private static final String SPACE = " ";
 
     private ProductItemDao productItemDao;
-    private ProductTemplateDao productTemplateDao;
     private ProductConverterService converterService;
-    private ProductValidatorService validatorService;
     private ShoppingListService shoppingListService;
     private Context context;
 
     @Inject
     public ProductServiceImpl(
             ProductItemDao productItemDao,
-            ProductTemplateDao productTemplateDao,
             ProductConverterService converterService,
-            ProductValidatorService validatorService,
             ShoppingListService shoppingListService
     )
     {
         this.productItemDao = productItemDao;
-        this.productTemplateDao = productTemplateDao;
         this.converterService = converterService;
-        this.validatorService = validatorService;
         this.shoppingListService = shoppingListService;
     }
 
@@ -63,7 +53,6 @@ public class ProductServiceImpl implements ProductService
     {
         this.context = context;
         productItemDao.setContext(context, db);
-        productTemplateDao.setContext(context, db);
         shoppingListService.setContext(context, db);
         converterService.setContext(context, db);
     }
@@ -71,24 +60,14 @@ public class ProductServiceImpl implements ProductService
     @Override
     public void saveOrUpdate(ProductDto dto, String listId)
     {
-        validatorService.validate(dto);
-        if ( !dto.hasErrors() )
-        {
-            ProductTemplateEntity templateEntity = new ProductTemplateEntity();
-            converterService.convertDtoToTemplateEntity(dto, templateEntity);
-            productTemplateDao.save(templateEntity);
-            dto.setId(templateEntity.getId().toString());
+        ProductItemEntity entity = new ProductItemEntity();
+        converterService.convertDtoToEntity(dto, entity);
 
-            ProductItemEntity entity = new ProductItemEntity();
-            converterService.convertDtoToEntity(dto, entity);
-            entity.setProductTemplate(templateEntity);
+        ShoppingListEntity shoppingListEntity = shoppingListService.getEntityById(listId);
+        entity.setShoppingList(shoppingListEntity);
 
-            ShoppingListEntity shoppingListEntity = shoppingListService.getEntityById(listId);
-            entity.setShoppingList(shoppingListEntity);
-
-            productItemDao.save(entity);
-            dto.setProductId(entity.getId().toString());
-        }
+        productItemDao.save(entity);
+        dto.setId(entity.getId().toString());
     }
 
     @Override
@@ -96,11 +75,9 @@ public class ProductServiceImpl implements ProductService
     {
         ProductItemEntity productEntity = productItemDao.getById(Long.valueOf(entityId));
         if ( productEntity == null ) return null;
-        Long templateId = productEntity.getProductTemplate().getId();
-        ProductTemplateEntity templateEntity = productTemplateDao.getById(Long.valueOf(templateId));
 
         ProductDto dto = new ProductDto();
-        converterService.convertEntitiesToDto(templateEntity, productEntity, dto);
+        converterService.convertEntitiesToDto(productEntity, dto);
         return dto;
     }
 
@@ -115,7 +92,7 @@ public class ProductServiceImpl implements ProductService
     {
         Observable.from(productDtos)
                 .filter(dto -> dto.isSelectedForDeletion())
-                .subscribe(dto -> deleteById(dto.getProductId()));
+                .subscribe(dto -> deleteById(dto.getId()));
     }
 
     @Override
@@ -159,17 +136,7 @@ public class ProductServiceImpl implements ProductService
     {
         List<ProductDto> productDtos = getAllProducts(listId);
         Observable.from(productDtos)
-                .subscribe(dto -> deleteById(dto.getProductId()));
-    }
-
-    @Override
-    public List<ProductTemplateDto> getAllTemplateProducts()
-    {
-        Observable<ProductTemplateDto> dtos = Observable
-                .from(productTemplateDao.getAllEntities())
-                .map(this::getDto);
-
-        return dtos.toList().toBlocking().single();
+                .subscribe(dto -> deleteById(dto.getId()));
     }
 
     @Override
@@ -277,18 +244,8 @@ public class ProductServiceImpl implements ProductService
 
     private ProductDto getDto(ProductItemEntity entity)
     {
-        // the next line retrieves only the id. The whole entity is needed
-        ProductTemplateEntity templateReference = entity.getProductTemplate();
-        ProductTemplateEntity productTemplateEntity = productTemplateDao.getById(templateReference.getId());
         ProductDto dto = new ProductDto();
-        converterService.convertEntitiesToDto(productTemplateEntity, entity, dto);
-        return dto;
-    }
-
-    private ProductTemplateDto getDto(ProductTemplateEntity entity)
-    {
-        ProductTemplateDto dto = new ProductTemplateDto();
-        converterService.convertTemplateEntityToDto(entity, dto);
+        converterService.convertEntitiesToDto(entity, dto);
         return dto;
     }
 }

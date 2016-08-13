@@ -4,8 +4,6 @@ import com.j256.ormlite.field.DatabaseField;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.persistence.AbstractEntity;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.shoppingList.persistence.entity.ShoppingListEntity;
 
-import java.util.Date;
-
 /**
  * Description:
  * Author: Grebiel Jose Ifill Brito
@@ -13,14 +11,11 @@ import java.util.Date;
  */
 public class ProductItemEntity extends AbstractEntity
 {
-    @DatabaseField(foreign = true, canBeNull = false)
-    private ProductTemplateEntity productTemplate;
+    @DatabaseField
+    private String productName;
 
     @DatabaseField
     private Integer quantity;
-
-    @DatabaseField
-    private Integer quantityPurchased;
 
     @DatabaseField
     private String notes;
@@ -32,29 +27,19 @@ public class ProductItemEntity extends AbstractEntity
     private Double price;
 
     @DatabaseField
-    private Date purchasedDate;
-
-    @DatabaseField
     private Integer icon;
 
     @DatabaseField
     private Boolean selected;
+
+    @DatabaseField
+    private String category;
 
     @DatabaseField(foreign = true, canBeNull = false)
     private ShoppingListEntity shoppingList;
 
     public ProductItemEntity()
     {
-    }
-
-    public ProductTemplateEntity getProductTemplate()
-    {
-        return productTemplate;
-    }
-
-    public void setProductTemplate(ProductTemplateEntity productTemplate)
-    {
-        this.productTemplate = productTemplate;
     }
 
     public Integer getQuantity()
@@ -65,16 +50,6 @@ public class ProductItemEntity extends AbstractEntity
     public void setQuantity(Integer quantity)
     {
         this.quantity = quantity;
-    }
-
-    public Integer getQuantityPurchased()
-    {
-        return quantityPurchased;
-    }
-
-    public void setQuantityPurchased(Integer quantityPurchased)
-    {
-        this.quantityPurchased = quantityPurchased;
     }
 
     public String getNotes()
@@ -107,16 +82,6 @@ public class ProductItemEntity extends AbstractEntity
         this.price = price;
     }
 
-    public Date getPurchasedDate()
-    {
-        return purchasedDate;
-    }
-
-    public void setPurchasedDate(Date purchasedDate)
-    {
-        this.purchasedDate = purchasedDate;
-    }
-
     public Integer getIcon()
     {
         return icon;
@@ -147,19 +112,38 @@ public class ProductItemEntity extends AbstractEntity
         this.shoppingList = shoppingList;
     }
 
+    public String getCategory()
+    {
+        return category;
+    }
+
+    public void setCategory(String category)
+    {
+        this.category = category;
+    }
+
+    public String getProductName()
+    {
+        return productName;
+    }
+
+    public void setProductName(String productName)
+    {
+        this.productName = productName;
+    }
+
     @Override
     public String toString()
     {
         return "ProductItemEntity{" +
-                "productTemplate=" + productTemplate +
+                "productName='" + productName + '\'' +
                 ", quantity=" + quantity +
-                ", quantityPurchased=" + quantityPurchased +
                 ", notes='" + notes + '\'' +
                 ", store='" + store + '\'' +
                 ", price=" + price +
-                ", purchasedDate=" + purchasedDate +
                 ", icon=" + icon +
                 ", selected=" + selected +
+                ", category='" + category + '\'' +
                 ", shoppingList=" + shoppingList +
                 '}';
     }

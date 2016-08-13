@@ -8,12 +8,8 @@ import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.product.business.impl.ProductServiceImpl;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.product.business.impl.converter.ProductConverterService;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.product.business.impl.converter.impl.ProductConverterServiceImpl;
-import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.product.business.impl.validator.ProductValidatorService;
-import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.product.business.impl.validator.impl.ProductValidatorServiceImpl;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.product.persistence.ProductItemDao;
-import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.product.persistence.ProductTemplateDao;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.product.persistence.impl.ProductItemDaoImpl;
-import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.product.persistence.impl.ProductTemplateDaoImpl;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.shoppingList.business.ShoppingListService;
 
 import javax.inject.Singleton;
@@ -29,21 +25,12 @@ import javax.inject.Singleton;
         },
         injects = {
                 ProductService.class,
-                ProductTemplateDao.class,
                 ProductItemDao.class,
                 ProductConverterService.class,
-                ProductValidatorService.class
         }
 )
 public class ProductModule implements AppModule
 {
-    @Provides
-    @Singleton
-    ProductTemplateDao provideProductTemplateDao()
-    {
-        return new ProductTemplateDaoImpl();
-    }
-
     @Provides
     @Singleton
     ProductItemDao provideProductItemDao()
@@ -60,26 +47,15 @@ public class ProductModule implements AppModule
 
     @Provides
     @Singleton
-    ProductValidatorService provideProductValidatorService()
-    {
-        return new ProductValidatorServiceImpl();
-    }
-
-    @Provides
-    @Singleton
     ProductService provideProductService(
             ProductItemDao productItemDao,
-            ProductTemplateDao productTemplateDao,
             ProductConverterService converterService,
-            ProductValidatorService validatorService,
             ShoppingListService shoppingListService
     )
     {
         return new ProductServiceImpl(
                 productItemDao,
-                productTemplateDao,
                 converterService,
-                validatorService,
                 shoppingListService
         );
     }

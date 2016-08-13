@@ -3,7 +3,6 @@ package privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.context.ContextSetter;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.product.business.domain.AutoCompleteLists;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.product.business.domain.ProductDto;
-import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.product.business.domain.ProductTemplateDto;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.product.business.domain.TotalDto;
 import rx.Observable;
 
@@ -35,8 +34,6 @@ public interface ProductService extends ContextSetter
     String getInfo(String listId, String currency);
 
     void deleteAllFromList(String listId);
-
-    List<ProductTemplateDto> getAllTemplateProducts();
 
     List<ProductDto> moveSelectedToEnd(List<ProductDto> productDtos);
 

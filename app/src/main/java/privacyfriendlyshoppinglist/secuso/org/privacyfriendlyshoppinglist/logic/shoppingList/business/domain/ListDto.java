@@ -204,7 +204,56 @@ public class ListDto extends AbstractDto
 
         return sb.toString();
     }
-    
+
+    @Override
+    public boolean equals(Object o)
+    {
+        if ( this == o ) return true;
+        if ( o == null || getClass() != o.getClass() ) return false;
+
+        ListDto dto = (ListDto) o;
+
+        if ( getIcon() != dto.getIcon() ) return false;
+        if ( isSelected() != dto.isSelected() ) return false;
+        if ( isSortAscending() != dto.isSortAscending() ) return false;
+        if ( isReminderEnabled() != dto.isReminderEnabled() ) return false;
+        if ( getListName() != null ? !getListName().equals(dto.getListName()) : dto.getListName() != null )
+            return false;
+        if ( getPriority() != null ? !getPriority().equals(dto.getPriority()) : dto.getPriority() != null )
+            return false;
+        if ( getDeadlineDate() != null ? !getDeadlineDate().equals(dto.getDeadlineDate()) : dto.getDeadlineDate() != null )
+            return false;
+        if ( getDeadlineTime() != null ? !getDeadlineTime().equals(dto.getDeadlineTime()) : dto.getDeadlineTime() != null )
+            return false;
+        if ( getNotes() != null ? !getNotes().equals(dto.getNotes()) : dto.getNotes() != null ) return false;
+        if ( getNrItems() != null ? !getNrItems().equals(dto.getNrItems()) : dto.getNrItems() != null ) return false;
+        if ( getSortCriteria() != null ? !getSortCriteria().equals(dto.getSortCriteria()) : dto.getSortCriteria() != null )
+            return false;
+        if ( getReminderCount() != null ? !getReminderCount().equals(dto.getReminderCount()) : dto.getReminderCount() != null )
+            return false;
+        return getReminderUnit() != null ? getReminderUnit().equals(dto.getReminderUnit()) : dto.getReminderUnit() == null;
+
+    }
+
+    @Override
+    public int hashCode()
+    {
+        int result = getListName() != null ? getListName().hashCode() : 0;
+        result = 31 * result + (getPriority() != null ? getPriority().hashCode() : 0);
+        result = 31 * result + getIcon();
+        result = 31 * result + (getDeadlineDate() != null ? getDeadlineDate().hashCode() : 0);
+        result = 31 * result + (getDeadlineTime() != null ? getDeadlineTime().hashCode() : 0);
+        result = 31 * result + (getNotes() != null ? getNotes().hashCode() : 0);
+        result = 31 * result + (getNrItems() != null ? getNrItems().hashCode() : 0);
+        result = 31 * result + (isSelected() ? 1 : 0);
+        result = 31 * result + (isSortAscending() ? 1 : 0);
+        result = 31 * result + (getSortCriteria() != null ? getSortCriteria().hashCode() : 0);
+        result = 31 * result + (isReminderEnabled() ? 1 : 0);
+        result = 31 * result + (getReminderCount() != null ? getReminderCount().hashCode() : 0);
+        result = 31 * result + (getReminderUnit() != null ? getReminderUnit().hashCode() : 0);
+        return result;
+    }
+
     @Override
     public String toString()
     {

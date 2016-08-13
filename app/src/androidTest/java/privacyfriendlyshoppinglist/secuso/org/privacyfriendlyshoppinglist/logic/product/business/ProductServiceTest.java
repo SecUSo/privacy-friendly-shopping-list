@@ -10,8 +10,6 @@ import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framew
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.utils.DateUtils;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.product.business.domain.ProductDto;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.product.persistence.ProductItemDao;
-import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.product.persistence.ProductTemplateDao;
-import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.product.persistence.entity.ProductTemplateEntity;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.shoppingList.business.ShoppingListService;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.shoppingList.business.domain.ListDto;
 
@@ -28,7 +26,6 @@ public class ProductServiceTest extends AbstractDatabaseTest
 
     private ProductService productService;
     private ShoppingListService shoppingListService;
-    private ProductTemplateDao productTemplateDao;
     private ProductItemDao productItemDao;
     private String listId;
     private String shortDatePattern;
@@ -41,7 +38,6 @@ public class ProductServiceTest extends AbstractDatabaseTest
         AbstractInstanceFactory instanceFactory = new InstanceFactoryForTests(getContext());
         productService = (ProductService) instanceFactory.createInstance(ProductService.class);
         shoppingListService = (ShoppingListService) instanceFactory.createInstance(ShoppingListService.class);
-        productTemplateDao = (ProductTemplateDao) instanceFactory.createInstance(ProductTemplateDao.class);
         productItemDao = (ProductItemDao) instanceFactory.createInstance(ProductItemDao.class);
 
         Resources resources = getContext().getResources();
@@ -76,7 +72,7 @@ public class ProductServiceTest extends AbstractDatabaseTest
         ProductDto dto = getDefaultDto();
 
         productService.saveOrUpdate(dto, listId);
-        assertNotNull(dto.getProductId());
+        assertNotNull(dto.getId());
         assertNotNull(dto.getId());
     }
 
@@ -86,7 +82,7 @@ public class ProductServiceTest extends AbstractDatabaseTest
         ProductDto dto = getDefaultDto();
         productService.saveOrUpdate(dto, listId);
 
-        ProductDto retrievedDto = productService.getById(dto.getProductId());
+        ProductDto retrievedDto = productService.getById(dto.getId());
         assertEquals(dto, retrievedDto);
     }
 
@@ -100,10 +96,6 @@ public class ProductServiceTest extends AbstractDatabaseTest
 
         ProductDto retrivedDto = productService.getById(dto.getId());
         assertNull(retrivedDto);
-
-        ProductTemplateEntity templateEntity = productTemplateDao.getById(Long.valueOf(dto.getId()));
-        assertNotNull(templateEntity);
-
     }
 
     @Test
@@ -116,16 +108,12 @@ public class ProductServiceTest extends AbstractDatabaseTest
         ProductDto dto2 = getDefaultDto();
         // change ids so we have "another" product
         dto2.setId("2"); // templateId
-        dto2.setProductId("4"); // productId
+        dto2.setId("4"); // productId
         dto2.setSelectedForDeletion(true);
         productService.saveOrUpdate(dto2, listId);
 
         List<ProductDto> dtos = Arrays.asList(dto1, dto2);
         productService.deleteSelected(dtos);
-
-        int expectedTemplateSize = 2; // templates are not deleted
-        int actualTemplateSize = productTemplateDao.getAllEntities().size();
-        assertEquals(expectedTemplateSize, actualTemplateSize);
 
         int expectedSize = 1;
         int actualSize = productItemDao.getAllEntities().size();
@@ -140,7 +128,7 @@ public class ProductServiceTest extends AbstractDatabaseTest
 
         ProductDto dto2 = getDefaultDto();
         dto2.setId("2");
-        dto2.setProductId("4");
+        dto2.setId("4");
         productService.saveOrUpdate(dto2, listId);
 
 
@@ -169,13 +157,13 @@ public class ProductServiceTest extends AbstractDatabaseTest
     public void testDeleteProductsWhenListIsDeleted()
     {
         ProductDto dto1 = getDefaultDto();
-        dto1.setProductId(null);
+        dto1.setId(null);
         dto1.setId(null);
         productService.saveOrUpdate(dto1, listId);
 
         ProductDto dto2 = getDefaultDto();
         dto2.setId(null);
-        dto2.setProductId(null);
+        dto2.setId(null);
         productService.saveOrUpdate(dto2, listId);
 
         List<ProductDto> products = productService.getAllProducts(listId);
@@ -193,33 +181,23 @@ public class ProductServiceTest extends AbstractDatabaseTest
     {
         String expectedProductId = "1";
         String expectedQuantity = "5";
-        String expectedQuantityPurchased = "4";
         String expectedNotes = "Some Notes";
         String expectedStore = "Store";
         String expectedPrice = "10.00";
         String templateId = "3";
         String expectedProductName = "product";
         String expectedCategory = "category";
-        String expectedHistoryCount = "5";
-        String lastTimePurchased = "Tue 07/12/2016 15:52";
-        String expectedDefaultNotes = "default notes";
-        String expectedDefaultStore = "store";
 
         ProductDto dto = new ProductDto();
-        dto.setProductId(expectedProductId);
+        dto.setId(expectedProductId);
         dto.setQuantity(expectedQuantity);
-        dto.setQuantityPurchased(expectedQuantityPurchased);
         dto.setProductNotes(expectedNotes);
         dto.setProductStore(expectedStore);
         dto.setProductPrice(expectedPrice);
-        dto.setLastTimePurchased(lastTimePurchased);
         dto.setChecked(false);
         dto.setId(templateId);
         dto.setProductName(expectedProductName);
         dto.setProductCategory(expectedCategory);
-        dto.setHistoryCount(expectedHistoryCount);
-        dto.setDefaultNotes(expectedDefaultNotes);
-        dto.setDefaultStore(expectedDefaultStore);
         return dto;
     }
 }
