@@ -67,22 +67,25 @@ public class ShoppingListConverterImpl implements ShoppingListConverter
 
     private void setReminder(ListDto dto, ShoppingListEntity entity)
     {
-        if ( dto.getReminderCount() != null && dto.isReminderEnabled() )
+        if ( dto.getReminderCount() != null )
         {
-            if ( !StringUtils.isEmpty(dto.getReminderCount()) )
+            if ( dto.isReminderEnabled() )
             {
-                entity.setReminderCount(Integer.valueOf(dto.getReminderCount()));
+                if ( !StringUtils.isEmpty(dto.getReminderCount()) )
+                {
+                    entity.setReminderCount(Integer.valueOf(dto.getReminderCount()));
+                }
+                else
+                {
+                    entity.setReminderCount(0);
+                }
             }
             else
             {
-                entity.setReminderCount(0);
+                entity.setReminderCount(null);
             }
+            entity.setReminderUnit(Integer.valueOf(dto.getReminderUnit()));
         }
-        else
-        {
-            entity.setReminderCount(null);
-        }
-        entity.setReminderUnit(Integer.valueOf(dto.getReminderUnit()));
     }
 
     @Override
