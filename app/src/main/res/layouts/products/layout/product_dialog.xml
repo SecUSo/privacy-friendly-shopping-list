@@ -130,13 +130,17 @@
                     android:hint="@string/list_notes"/>
         </android.support.design.widget.TextInputLayout>
 
-        <ImageView
+        <ImageButton
                 android:id="@+id/expand_button"
-                android:layout_width="wrap_content"
                 android:tint="@color/colorAccent"
-                android:layout_height="25dp"
-                android:src="@drawable/expander_ic_minimized"
-                android:layout_gravity="center"
+                android:layout_width="50dp"
+                android:layout_height="@dimen/icon_size"
+                android:paddingLeft="15dp"
+                android:paddingRight="15dp"
+                android:scaleType="fitCenter"
+                android:layout_marginLeft="@dimen/list_margin_big"
+                android:background="?android:selectableItemBackground"
+                android:src="@drawable/ic_keyboard_arrow_down_white_48dp"
                 android:layout_centerVertical="true"
                 android:layout_alignParentEnd="true"/>
     </RelativeLayout>

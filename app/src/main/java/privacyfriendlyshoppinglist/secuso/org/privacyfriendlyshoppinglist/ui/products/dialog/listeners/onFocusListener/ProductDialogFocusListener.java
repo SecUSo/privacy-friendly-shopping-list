@@ -23,7 +23,7 @@ public class ProductDialogFocusListener implements View.OnFocusChangeListener
         if ( hasFocus )
         {
             dialogCache.getExpandableLayout().setVisibility(View.GONE);
-            dialogCache.getExpandableImageView().setImageResource(R.drawable.expander_ic_minimized);
+            dialogCache.getExpandableImageView().setImageResource(R.drawable.ic_keyboard_arrow_down_white_48dp);
         }
     }
 }

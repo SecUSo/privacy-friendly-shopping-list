@@ -12,7 +12,6 @@ import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.R;
  */
 public class ListDialogCache
 {
-
     private EditText listNameText;
     private EditText listNotes;
     private EditText reminderText;
@@ -28,6 +27,7 @@ public class ListDialogCache
     private Spinner reminderSpinner;
     private TextView titleTextView;
     private SwitchCompat statisticsSwitch;
+    private SwitchCompat reminderSwitch;
 
     public ListDialogCache(View rootview)
     {
@@ -38,14 +38,15 @@ public class ListDialogCache
         listNotes = (EditText) rootview.findViewById(R.id.list_notes);
         checkBox = (CheckBox) rootview.findViewById(R.id.list_dialog_checkbox);
         deadlineExpansionButton = (ImageView) rootview.findViewById(R.id.expand_button_list);
-        deadlineLayout = (LinearLayout) rootview.findViewById(R.id.set_deadline_layout);
-        dateLayout = (LinearLayout) rootview.findViewById(R.id.set_deadline_date);
-        timeLayout = (LinearLayout) rootview.findViewById(R.id.set_deadline_time);
-        reminderLayout = (LinearLayout) rootview.findViewById(R.id.set_deadline_reminder);
-        dateTextView = (TextView) rootview.findViewById(R.id.set_date_view);
-        timeTextView = (TextView) rootview.findViewById(R.id.set_time_view);
+        deadlineLayout = (LinearLayout) rootview.findViewById(R.id.deadline_layout);
+        dateLayout = (LinearLayout) rootview.findViewById(R.id.deadline_date);
+        timeLayout = (LinearLayout) rootview.findViewById(R.id.deadline_time);
+        reminderLayout = (LinearLayout) rootview.findViewById(R.id.layout_reminder);
+        dateTextView = (TextView) rootview.findViewById(R.id.date_view);
+        timeTextView = (TextView) rootview.findViewById(R.id.time_view);
         titleTextView = (TextView) rootview.findViewById(R.id.dialog_title);
         statisticsSwitch = (SwitchCompat) rootview.findViewById(R.id.switch_statistics);
+        reminderSwitch = (SwitchCompat) rootview.findViewById(R.id.switch_reminder);
     }
 
     public EditText getListNameText()
@@ -121,5 +122,10 @@ public class ListDialogCache
     public SwitchCompat getStatisticsSwitch()
     {
         return statisticsSwitch;
+    }
+
+    public SwitchCompat getReminderSwitch()
+    {
+        return reminderSwitch;
     }
 }

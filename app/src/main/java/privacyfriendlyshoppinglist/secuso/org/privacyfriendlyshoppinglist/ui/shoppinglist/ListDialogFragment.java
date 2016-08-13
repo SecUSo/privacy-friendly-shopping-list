@@ -7,6 +7,7 @@ import android.app.TimePickerDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
+import android.support.v7.widget.SwitchCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -104,7 +105,7 @@ public class ListDialogFragment extends DialogFragment
         if ( !StringUtils.isEmpty(dto.getDeadlineDate()) )
         {
             dialogCache.getDeadlineExpansionButton().setVisibility(View.VISIBLE);
-            dialogCache.getDeadlineExpansionButton().setImageResource(R.drawable.expander_ic_minimized);
+            dialogCache.getDeadlineExpansionButton().setImageResource(R.drawable.ic_keyboard_arrow_down_white_48dp);
 
             dialogCache.getCheckBox().setChecked(true);
             String language;
@@ -131,12 +132,12 @@ public class ListDialogFragment extends DialogFragment
                 if ( dialogCache.getDeadlineLayout().getVisibility() == View.VISIBLE )
                 {
                     dialogCache.getDeadlineLayout().setVisibility(View.GONE);
-                    dialogCache.getDeadlineExpansionButton().setImageResource(R.drawable.expander_ic_minimized);
+                    dialogCache.getDeadlineExpansionButton().setImageResource(R.drawable.ic_keyboard_arrow_down_white_48dp);
                 }
                 else
                 {
                     dialogCache.getDeadlineLayout().setVisibility(View.VISIBLE);
-                    dialogCache.getDeadlineExpansionButton().setImageResource(R.drawable.expander_ic_maximized);
+                    dialogCache.getDeadlineExpansionButton().setImageResource(R.drawable.ic_keyboard_arrow_up_white_48dp);
                 }
             }
         });
@@ -157,7 +158,7 @@ public class ListDialogFragment extends DialogFragment
                 if ( dialogCache.getCheckBox().isChecked() )
                 {
                     dialogCache.getDeadlineExpansionButton().setVisibility(View.VISIBLE);
-                    dialogCache.getDeadlineExpansionButton().setImageResource(R.drawable.expander_ic_maximized);
+                    dialogCache.getDeadlineExpansionButton().setImageResource(R.drawable.ic_keyboard_arrow_up_white_48dp);
                     dialogCache.getDeadlineLayout().setVisibility(View.VISIBLE);
                     dialogCache.getDateTextView().setText(DateUtils.getDateAsString(currentDate.getTimeInMillis(), datePattern, language));
                     dialogCache.getTimeTextView().setText(DateUtils.getDateAsString(currentDate.getTimeInMillis(), timePattern, language));
@@ -227,15 +228,6 @@ public class ListDialogFragment extends DialogFragment
             }
         });
 
-        dialogCache.getReminderLayout().setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View view)
-            {
-
-            }
-        });
-
         dialogCache.getListNameText().setText(dto.getListName());
         dialogCache.getListNotes().setText(dto.getNotes());
         String[] priorityList = cache.getActivity().getResources().getStringArray(R.array.shopping_list_priority_spinner);
@@ -289,12 +281,35 @@ public class ListDialogFragment extends DialogFragment
 
         String reminderCount = dto.getReminderCount();
         String reminderUnit = dto.getReminderUnit();
-
-        if ( reminderCount != null )
+        boolean reminderEnabled = reminderCount != null;
+        if ( reminderEnabled )
         {
             dialogCache.getReminderText().setText(reminderCount);
             dialogCache.getReminderSpinner().setSelection(Integer.valueOf(reminderUnit));
+            dialogCache.getReminderLayout().setVisibility(View.VISIBLE);
         }
+        else
+        {
+            dialogCache.getReminderLayout().setVisibility(View.GONE);
+        }
+        final SwitchCompat reminderSwitch = dialogCache.getReminderSwitch();
+        reminderSwitch.setChecked(reminderEnabled);
+
+        reminderSwitch.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                if ( reminderSwitch.isChecked() )
+                {
+                    dialogCache.getReminderLayout().setVisibility(View.VISIBLE);
+                }
+                else
+                {
+                    dialogCache.getReminderLayout().setVisibility(View.GONE);
+                }
+            }
+        });
 
 
         builder.setView(v);
@@ -317,7 +332,7 @@ public class ListDialogFragment extends DialogFragment
 
                 dto.setReminderUnit(String.valueOf(dialogCache.getReminderSpinner().getSelectedItemPosition()));
                 dto.setReminderCount(dialogCache.getReminderText().getText().toString());
-                dto.setReminderEnabled(true); //todo: change this true by checkbox value or something similar
+                dto.setReminderEnabled(reminderSwitch.isChecked());
                 dto.setStatisticEnabled(dialogCache.getStatisticsSwitch().isChecked());
 
                 shoppingListService.saveOrUpdate(dto);

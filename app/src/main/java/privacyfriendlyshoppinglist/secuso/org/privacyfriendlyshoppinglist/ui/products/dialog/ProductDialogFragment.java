@@ -167,12 +167,12 @@ public class ProductDialogFragment extends DialogFragment
             {
                 if ( dialogCache.getExpandableLayout().getVisibility() == View.GONE )
                 {
-                    dialogCache.getExpandableImageView().setImageResource(R.drawable.expander_ic_maximized);
+                    dialogCache.getExpandableImageView().setImageResource(R.drawable.ic_keyboard_arrow_up_white_48dp);
                     dialogCache.getExpandableLayout().setVisibility(View.VISIBLE);
                 }
                 else
                 {
-                    dialogCache.getExpandableImageView().setImageResource(R.drawable.expander_ic_minimized);
+                    dialogCache.getExpandableImageView().setImageResource(R.drawable.ic_keyboard_arrow_down_white_48dp);
                     dialogCache.getExpandableLayout().setVisibility(View.GONE);
                 }
             }

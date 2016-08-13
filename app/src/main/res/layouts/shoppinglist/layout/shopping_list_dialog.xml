@@ -55,7 +55,6 @@
                     android:checked="false"
                     android:layout_alignParentTop="true"
                     android:layout_alignParentEnd="true">
-
             </android.support.v7.widget.SwitchCompat>
         </RelativeLayout>
 
@@ -90,12 +89,17 @@
                     android:id="@+id/list_dialog_checkbox"
                     android:layout_toEndOf="@+id/set_deadline"/>
 
-            <ImageView
+            <ImageButton
                     android:id="@+id/expand_button_list"
-                    android:layout_width="wrap_content"
-                    android:layout_height="25dp"
+                    android:layout_width="50dp"
+                    android:layout_height="@dimen/icon_size"
+                    android:paddingLeft="15dp"
+                    android:paddingRight="15dp"
+                    android:scaleType="fitCenter"
+                    android:layout_marginLeft="@dimen/list_margin_big"
                     android:tint="@color/colorAccent"
-                    android:src="@drawable/expander_ic_minimized"
+                    android:background="?android:selectableItemBackground"
+                    android:src="@drawable/ic_keyboard_arrow_down_white_48dp"
                     android:visibility="gone"/>
         </LinearLayout>
 
@@ -103,7 +107,7 @@
                 android:visibility="gone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/set_deadline_layout"
+                android:id="@+id/deadline_layout"
                 android:paddingRight="@dimen/dialog_padding_top"
                 android:paddingLeft="@dimen/dialog_padding_top"
                 android:orientation="vertical">
@@ -118,7 +122,7 @@
                         android:orientation="horizontal"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:id="@+id/set_deadline_date">
+                        android:id="@+id/deadline_date">
 
                     <ImageView
                             android:layout_width="30dp"
@@ -128,7 +132,7 @@
                     <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:id="@+id/set_date_view"
+                            android:id="@+id/date_view"
                             android:layout_alignParentTop="true"
                             android:layout_gravity="center"/>
                 </LinearLayout>
@@ -138,7 +142,7 @@
                         android:orientation="horizontal"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:id="@+id/set_deadline_time">
+                        android:id="@+id/deadline_time">
 
                     <ImageView
                             android:layout_width="30dp"
@@ -150,7 +154,7 @@
                     <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:id="@+id/set_time_view"
+                            android:id="@+id/time_view"
                             android:layout_alignParentTop="true"
                             android:layout_gravity="center"
                     />
@@ -163,8 +167,16 @@
                     android:layout_width="wrap_content"
                     android:gravity="center"
                     android:layout_height="wrap_content"
-                    android:id="@+id/set_deadline_reminder"
                     android:orientation="horizontal">
+
+                <android.support.v7.widget.SwitchCompat
+                        android:id="@+id/switch_reminder"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:checked="false"
+                        android:layout_alignParentTop="true"
+                        android:layout_alignParentEnd="true">
+                </android.support.v7.widget.SwitchCompat>
 
                 <ImageView
                         android:layout_width="30dp"
@@ -182,6 +194,7 @@
             </LinearLayout>
 
             <LinearLayout
+                    android:id="@+id/layout_reminder"
                     android:paddingLeft="@dimen/dialog_padding_horizontal_big"
                     android:layout_width="wrap_content"
                     android:gravity="center"

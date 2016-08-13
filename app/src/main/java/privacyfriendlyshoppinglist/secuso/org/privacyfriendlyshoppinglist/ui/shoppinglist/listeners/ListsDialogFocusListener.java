@@ -24,7 +24,7 @@ public class ListsDialogFocusListener implements View.OnFocusChangeListener
         if ( hasFocus )
         {
             dialogCache.getDeadlineLayout().setVisibility(View.GONE);
-            dialogCache.getDeadlineExpansionButton().setImageResource(R.drawable.expander_ic_minimized);
+            dialogCache.getDeadlineExpansionButton().setImageResource(R.drawable.ic_keyboard_arrow_down_white_48dp);
         }
     }
 }
