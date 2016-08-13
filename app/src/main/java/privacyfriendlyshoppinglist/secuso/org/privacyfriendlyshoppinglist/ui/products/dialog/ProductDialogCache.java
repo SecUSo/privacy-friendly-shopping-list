@@ -25,7 +25,6 @@ public class ProductDialogCache
 
     private Button buttonPlus;
     private Button buttonMinus;
-    //private CheckBox productCheckBox;
 
     private ImageView cameraIcon;
     private ImageView productImage;
