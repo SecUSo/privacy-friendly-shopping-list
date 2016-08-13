@@ -49,9 +49,6 @@ public class DeleteListsOnClickListener implements View.OnClickListener
                         List<String> deletedIds = shoppingListService.deleteSelected(shoppingList);
                         Observable.from(deletedIds).subscribe(id -> productService.deleteAllFromList(id));
 
-                        // update ui
-                        updateListView();
-
                         // go back to list overview
                         AppCompatActivity activity = cache.getActivity();
                         Intent intent = new Intent(activity, MainActivity.class);
@@ -59,11 +56,5 @@ public class DeleteListsOnClickListener implements View.OnClickListener
                         activity.startActivity(intent);
                     }
                 }).show();
-    }
-
-    public void updateListView()
-    {
-        cache.getDeleteListsAdapter().setShoppingList(shoppingListService.getAllListDtos());
-        cache.getDeleteListsAdapter().notifyDataSetChanged();
     }
 }

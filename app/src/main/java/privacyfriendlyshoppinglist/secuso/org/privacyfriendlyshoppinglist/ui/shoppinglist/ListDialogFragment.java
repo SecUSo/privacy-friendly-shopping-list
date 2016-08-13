@@ -42,7 +42,6 @@ public class ListDialogFragment extends DialogFragment
     private static boolean editDialog;
     private ListDialogCache dialogCache;
 
-
     public static ListDialogFragment newEditInstance(ListDto dto, ShoppingListActivityCache cache)
     {
         editDialog = true;

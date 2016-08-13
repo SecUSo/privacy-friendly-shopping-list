@@ -45,9 +45,6 @@ public class DeleteProductOnClickListener implements View.OnClickListener
                         List<ProductDto> productList = cache.getDeleteProductsAdapter().getProductsList();
                         productService.deleteSelected(productList);
 
-                        // update ui
-                        updateListView();
-
                         // go to products overview
                         AppCompatActivity activity = cache.getActivity();
                         Intent intent = new Intent(activity, ProductsActivity.class);
@@ -56,11 +53,5 @@ public class DeleteProductOnClickListener implements View.OnClickListener
                         activity.startActivity(intent);
                     }
                 }).show();
-    }
-
-    public void updateListView()
-    {
-        cache.getDeleteProductsAdapter().setProductsList(productService.getAllProducts(cache.getListId()));
-        cache.getDeleteProductsAdapter().notifyDataSetChanged();
     }
 }

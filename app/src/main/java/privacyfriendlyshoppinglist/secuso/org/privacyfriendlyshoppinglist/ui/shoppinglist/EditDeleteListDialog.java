@@ -3,16 +3,17 @@ package privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.sh
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AlertDialog;
+import android.view.View;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.R;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.context.AbstractInstanceFactory;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.context.InstanceFactory;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.shoppingList.business.ShoppingListService;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.shoppingList.business.domain.ListDto;
+import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.main.MainActivity;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.main.ShoppingListActivityCache;
-
-import java.util.Calendar;
 
 /**
  * Created by Chris on 11.08.2016.
@@ -23,9 +24,6 @@ public class EditDeleteListDialog extends DialogFragment
     private ShoppingListActivityCache cache;
     private ListDto dto;
     private ShoppingListService shoppingListService;
-    private Calendar currentDate;
-    private int year, month, day, hour, minute;
-    private ListDialogCache dialogCache;
 
 
     public static EditDeleteListDialog newEditDeleteInstance(ListDto dto, ShoppingListActivityCache cache)
@@ -82,9 +80,17 @@ public class EditDeleteListDialog extends DialogFragment
                 {
                     public void onClick(DialogInterface dialog, int id)
                     {
-                        // TODO Delete still to be implemented
-
-
+                        Snackbar.make(cache.getNewListFab(), R.string.delele_lists_confirmation, Snackbar.LENGTH_LONG)
+                                .setAction(R.string.okay, new View.OnClickListener()
+                                {
+                                    @Override
+                                    public void onClick(View v)
+                                    {
+                                        shoppingListService.deleteById(dto.getId());
+                                        MainActivity activity = (MainActivity) cache.getActivity();
+                                        activity.updateListView();
+                                    }
+                                }).show();
                     }
                 });
 

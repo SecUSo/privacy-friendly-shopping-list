@@ -4,27 +4,26 @@ package privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.pr
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AlertDialog;
+import android.view.View;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.R;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.context.AbstractInstanceFactory;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.context.InstanceFactory;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.product.business.ProductService;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.product.business.domain.ProductDto;
-import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.deleteproducts.DeleteProductsCache;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.products.ProductActivityCache;
+import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.products.ProductsActivity;
 
 /**
  * Created by Chris on 11.08.2016.
  */
 public class EditDeleteProductDialog extends DialogFragment
 {
-
-    private ProductDialogCache dialogCache;
     private ProductActivityCache cache;
     private ProductDto dto;
     private ProductService productService;
-    private DeleteProductsCache deleteProductsCache;
 
     public static EditDeleteProductDialog newEditDeleteInstance(ProductDto dto, ProductActivityCache cache)
     {
@@ -79,21 +78,17 @@ public class EditDeleteProductDialog extends DialogFragment
                     public void onClick(DialogInterface dialog, int id)
                     {
 
-                        // TODO Delete still to be implemented
-//                        Snackbar.make(cache.getRecyclerView(), R.string.delele_products_confirmation, Snackbar.LENGTH_LONG)
-//                                .setAction(R.string.okay, new View.OnClickListener()
-//                                {
-//                                    @Override
-//                                    public void onClick(View v)
-//                                    {
-//                                        List<ProductDto> productList = deleteProductsCache.getDeleteProductsAdapter().getProductsList();
-//                                        productService.deleteSelected(productList);
-//
-//                                        deleteProductsCache.getDeleteProductsAdapter().setProductsList(productService.getAllProducts(cache.getListId()));
-//                                        deleteProductsCache.getDeleteProductsAdapter().notifyDataSetChanged();
-//
-//                                    }
-//                                }).show();
+                        Snackbar.make(cache.getNewListFab(), R.string.delele_products_confirmation, Snackbar.LENGTH_LONG)
+                                .setAction(R.string.okay, new View.OnClickListener()
+                                {
+                                    @Override
+                                    public void onClick(View v)
+                                    {
+                                        productService.deleteById(dto.getId());
+                                        ProductsActivity activity = (ProductsActivity) cache.getActivity();
+                                        activity.updateListView();
+                                    }
+                                }).show();
 
                     }
                 });
