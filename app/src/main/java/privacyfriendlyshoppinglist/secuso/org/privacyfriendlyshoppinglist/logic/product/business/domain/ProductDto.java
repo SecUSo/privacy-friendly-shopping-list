@@ -182,22 +182,21 @@ public class ProductDto
         {
             sb.append(totalPriceDetail);
             sb.append(NEW_LINE);
-            sb.append(NEW_LINE);
         }
         if ( !StringUtils.isEmpty(productCategory) )
         {
-            sb.append(categoryDetail);
             sb.append(NEW_LINE);
+            sb.append(categoryDetail);
         }
         if ( !StringUtils.isEmpty(productStore) )
         {
-            sb.append(storeDetail);
             sb.append(NEW_LINE);
+            sb.append(storeDetail);
         }
         if ( !StringUtils.isEmpty(productNotes) )
         {
-            sb.append(notesDetail);
             sb.append(NEW_LINE);
+            sb.append(notesDetail);
         }
 
         return sb.toString();

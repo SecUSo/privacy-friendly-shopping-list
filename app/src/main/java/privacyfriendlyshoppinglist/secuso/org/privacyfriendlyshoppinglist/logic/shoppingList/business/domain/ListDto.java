@@ -162,44 +162,50 @@ public class ListDto extends AbstractDto
 
     public String getDetailInfo(Context context)
     {
+        String[] statisticsInfoArray = context.getResources().getStringArray(R.array.statistics_enabled_text);
         String priorityLabel = context.getResources().getString(R.string.priority);
         String deadLineLabel = context.getResources().getString(R.string.deadline);
         String notesLabel = context.getResources().getString(R.string.list_notes);
 
         StringBuilder sb = new StringBuilder();
+
+        int statisticsInfoIndex = this.statisticEnabled ? 0 : 1;
+        sb.append(statisticsInfoArray[ statisticsInfoIndex ]);
+        sb.append(NEW_LINE);
+
         String priorityIndex = this.getPriority();
         if ( !StringUtils.isEmpty(priorityIndex) )
         {
+            sb.append(NEW_LINE);
             String[] prioritiesArray = context.getResources().getStringArray(R.array.shopping_list_priority_spinner);
             String priority = prioritiesArray[ Integer.valueOf(priorityIndex) ];
             sb.append(priorityLabel);
             sb.append(DETAIL_SEPARATOR);
             sb.append(priority);
-            sb.append(NEW_LINE);
         }
         if ( !StringUtils.isEmpty(this.getDeadlineDate()) )
         {
+            sb.append(NEW_LINE);
             sb.append(deadLineLabel);
             sb.append(DETAIL_SEPARATOR);
             sb.append(this.getDeadlineDate());
             sb.append(SPACE);
             sb.append(this.getDeadlineTime());
-            sb.append(NEW_LINE);
         }
         if ( !StringUtils.isEmpty(this.getReminderCount()) )
         {
+            sb.append(NEW_LINE);
             String[] timeUnitArray = context.getResources().getStringArray(R.array.shopping_list_reminder_spinner);
             String reminderUnit = timeUnitArray[ Integer.valueOf(this.getReminderUnit()) ];
             String reminderText = context.getResources().getString(R.string.reminder_text, Integer.valueOf(this.getReminderCount()), reminderUnit);
             sb.append(reminderText);
-            sb.append(NEW_LINE);
         }
         if ( !StringUtils.isEmpty(this.getNotes()) )
         {
+            sb.append(NEW_LINE);
             sb.append(notesLabel);
             sb.append(DETAIL_SEPARATOR);
             sb.append(this.getNotes());
-            sb.append(NEW_LINE);
         }
 
         return sb.toString();

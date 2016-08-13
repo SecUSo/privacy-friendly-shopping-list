@@ -57,7 +57,9 @@ class ListsItemViewHolder extends RecyclerView.ViewHolder
         setupPriorityIcon(dto);
 
         TotalDto totalDto = productService.getInfo(dto.getId());
-        listItemCache.getListDetails().setText(totalDto.getInfo(listItemCache.getCurrency(), shoppingListCache.getActivity()) + dto.getDetailInfo(listItemCache.getListCard().getContext()));
+        listItemCache.getListDetails().setText(
+                totalDto.getInfo(listItemCache.getCurrency(), shoppingListCache.getActivity()) +
+                        dto.getDetailInfo(listItemCache.getListCard().getContext()));
         listItemCache.getNrProductsTextView().setText(String.valueOf(totalDto.getNrProducts()));
 
 

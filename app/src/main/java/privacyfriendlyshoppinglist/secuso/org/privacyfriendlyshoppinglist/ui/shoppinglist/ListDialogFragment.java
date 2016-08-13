@@ -5,7 +5,9 @@ import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.TimePickerDialog;
 import android.content.DialogInterface;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.widget.SwitchCompat;
 import android.view.LayoutInflater;
@@ -24,6 +26,7 @@ import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.shoppingList.business.domain.ListDto;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.main.MainActivity;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.main.ShoppingListActivityCache;
+import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.settings.SettingsKeys;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.shoppinglist.listeners.ListsDialogFocusListener;
 
 import java.util.Calendar;
@@ -91,15 +94,17 @@ public class ListDialogFragment extends DialogFragment
         View v = inflater.inflate(R.layout.shopping_list_dialog, null);
         dialogCache = new ListDialogCache(v);
 
-        dialogCache.getStatisticsSwitch().setChecked(dto.isStatisticEnabled());
-
         if ( editDialog )
         {
             dialogCache.getTitleTextView().setText(getActivity().getResources().getString(R.string.list_name_edit));
+            dialogCache.getStatisticsSwitch().setChecked(dto.isStatisticEnabled());
         }
         else
         {
             dialogCache.getTitleTextView().setText(getActivity().getResources().getString(R.string.list_name_new));
+            SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(cache.getActivity());
+            boolean statisticsEnabled = sharedPreferences.getBoolean(SettingsKeys.STATISTICS_ENABLED, false);
+            dialogCache.getStatisticsSwitch().setChecked(statisticsEnabled);
         }
 
         if ( !StringUtils.isEmpty(dto.getDeadlineDate()) )
