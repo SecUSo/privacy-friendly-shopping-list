@@ -33,6 +33,7 @@
                     android:layout_height="wrap_content"
                     android:selectAllOnFocus="true"
                     android:maxLength="30"
+                    android:imeOptions="actionNext"
                     android:hint="@string/product_name">
             </AutoCompleteTextView>
         </android.support.design.widget.TextInputLayout>
@@ -83,6 +84,7 @@
                     android:selectAllOnFocus="true"
                     android:gravity="center"
                     android:maxLength="3"
+                    android:imeOptions="actionNext"
                     android:hint="@string/quantity_text">
             </EditText>
             </android.support.design.widget.TextInputLayout>
@@ -174,6 +176,7 @@
                             android:id="@+id/category_input"
                             android:inputType="textAutoComplete"
                             android:hint="@string/category_text"
+                            android:singleLine="true"
                             android:maxLength="40"/>
                 </android.support.design.widget.TextInputLayout>
 
