@@ -5,6 +5,7 @@ import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.TimePickerDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.widget.SwitchCompat;
@@ -25,6 +26,8 @@ import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.main.MainActivity;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.main.ShoppingListActivityCache;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.shoppinglist.listeners.ListsDialogFocusListener;
+import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.shoppinglist.reminder.ReminderReceiver;
+import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.shoppinglist.reminder.ReminderSchedulingService;
 
 import java.util.Calendar;
 import java.util.GregorianCalendar;
@@ -334,6 +337,15 @@ public class ListDialogFragment extends DialogFragment
                 dto.setReminderCount(dialogCache.getReminderText().getText().toString());
                 dto.setReminderEnabled(reminderSwitch.isChecked());
                 dto.setStatisticEnabled(dialogCache.getStatisticsSwitch().isChecked());
+
+                if ( reminderSwitch.isChecked() )
+                {
+                    ReminderReceiver alarm = new ReminderReceiver();
+                    Intent intent = new Intent(cache.getActivity(), ReminderSchedulingService.class);
+                    intent.putExtra(ReminderSchedulingService.TODOTEXT, "Test");
+                    intent.putExtra(ReminderSchedulingService.TODOUUID, "1");
+                    alarm.setAlarm(cache.getActivity(), intent, 100);
+                }
 
                 shoppingListService.saveOrUpdate(dto);
                 MainActivity mainActivity = (MainActivity) cache.getActivity();
