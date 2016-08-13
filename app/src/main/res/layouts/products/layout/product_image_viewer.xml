@@ -30,7 +30,7 @@
     </RelativeLayout>
 
     <ImageView
-            android:id="@+id/product_image"
+            android:id="@+id/product_image_in_viewer"
             android:src="@drawable/ic_menu_camera"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

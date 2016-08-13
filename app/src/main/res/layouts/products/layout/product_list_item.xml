@@ -19,42 +19,42 @@
                 android:layout_width="wrap_content"
                 android:layout_height="?attr/listPreferredItemHeight">
 
-        <TextView
-                android:id="@+id/textview_product_name"
-                android:text="@string/ph_product_name"
-                android:layout_width="wrap_content"
-                android:layout_height="?attr/listPreferredItemHeight"
-                android:gravity="center_vertical"
-                android:padding="@dimen/list_padding"
-                android:layout_marginLeft="@dimen/list_margin"
-                android:textSize="@dimen/text_medium"
-                style="@style/Base.TextAppearance.AppCompat.Body2"/>
-        <TextView
-                android:id="@+id/textview_product_info"
-                android:text="@string/ph_product_info"
-                android:ellipsize="end"
-                android:singleLine="true"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center_vertical"
-                android:padding="@dimen/list_padding"
-                android:layout_marginLeft="@dimen/list_margin"
-                android:layout_marginRight="@dimen/list_margin_big"
-                android:textSize="@dimen/text_small"
-                android:textColor="@color/middlegrey"
-                style="@style/Base.TextAppearance.AppCompat.Body2"
-                android:layout_alignParentBottom="true"
-                android:layout_alignStart="@+id/textview_product_name"/>
+            <TextView
+                    android:id="@+id/textview_product_name"
+                    android:text="@string/ph_product_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="?attr/listPreferredItemHeight"
+                    android:gravity="center_vertical"
+                    android:padding="@dimen/list_padding"
+                    android:layout_marginLeft="@dimen/list_margin"
+                    android:textSize="@dimen/text_medium"
+                    style="@style/Base.TextAppearance.AppCompat.Body2"/>
+            <TextView
+                    android:id="@+id/textview_product_info"
+                    android:text="@string/ph_product_info"
+                    android:ellipsize="end"
+                    android:singleLine="true"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:padding="@dimen/list_padding"
+                    android:layout_marginLeft="@dimen/list_margin"
+                    android:layout_marginRight="@dimen/list_margin_big"
+                    android:textSize="@dimen/text_small"
+                    android:textColor="@color/middlegrey"
+                    style="@style/Base.TextAppearance.AppCompat.Body2"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignStart="@+id/textview_product_name"/>
 
-        <CheckBox
-                android:id="@+id/checkbox_is_selected"
-                android:layout_width="wrap_content"
-                android:padding="@dimen/list_padding"
-                android:layout_height="?attr/listPreferredItemHeight"
-                android:gravity="center_vertical"
-                android:buttonTint="?attr/colorAccent"
-                android:layout_alignParentTop="true"
-                android:layout_alignEnd="@+id/textview_product_info"/>
+            <CheckBox
+                    android:id="@+id/checkbox_is_selected"
+                    android:layout_width="wrap_content"
+                    android:padding="@dimen/list_padding"
+                    android:layout_height="?attr/listPreferredItemHeight"
+                    android:gravity="center_vertical"
+                    android:buttonTint="?attr/colorAccent"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignEnd="@+id/textview_product_info"/>
 
             <ImageButton
                     android:id="@+id/expand_button_list"
@@ -69,28 +69,44 @@
                     android:layout_toLeftOf="@+id/textview_prod_quantity"
                     android:src="@drawable/ic_keyboard_arrow_down_white_48dp"/>
 
-        <TextView
-                android:id="@+id/textview_prod_quantity"
-                android:text="@string/ph_list_nr_items"
-                android:layout_width="wrap_content"
-                android:layout_height="?attr/listPreferredItemHeight"
-                android:layout_toLeftOf="@id/checkbox_is_selected"
-                android:gravity="center_vertical"
-                android:layout_marginRight="@dimen/list_margin"
-                android:textSize="@dimen/text_small"
-                style="@style/Base.TextAppearance.AppCompat.Body2"/>
-    </RelativeLayout>
+            <TextView
+                    android:id="@+id/textview_prod_quantity"
+                    android:text="@string/ph_list_nr_items"
+                    android:layout_width="wrap_content"
+                    android:layout_height="?attr/listPreferredItemHeight"
+                    android:layout_toLeftOf="@id/checkbox_is_selected"
+                    android:gravity="center_vertical"
+                    android:layout_marginRight="@dimen/list_margin"
+                    android:textSize="@dimen/text_small"
+                    style="@style/Base.TextAppearance.AppCompat.Body2"/>
+        </RelativeLayout>
 
-        <TextView
-                android:id="@+id/textview_list_details"
-                android:text="@string/ph_lists_details"
-                android:layout_width="match_parent"
-                android:textStyle="italic"
+        <RelativeLayout
                 android:visibility="gone"
-                android:paddingLeft="@dimen/list_padding"
-                android:layout_marginLeft="@dimen/list_margin"
-                android:layout_marginRight="@dimen/list_margin"
-                android:layout_marginBottom="@dimen/list_margin"
-                android:layout_height="wrap_content"/>
+                android:id="@+id/layout_details"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+            <TextView
+                    android:id="@+id/textview_list_details"
+                    android:text="@string/ph_lists_details"
+                    android:layout_width="match_parent"
+                    android:textStyle="italic"
+                    android:paddingLeft="@dimen/list_padding"
+                    android:layout_marginLeft="@dimen/list_margin"
+                    android:layout_marginRight="@dimen/list_margin"
+                    android:layout_marginBottom="@dimen/list_margin"
+                    android:layout_height="wrap_content"
+                    android:layout_toStartOf="@+id/product_image_in_detail"/>
+
+            <ImageView
+                    android:id="@+id/product_image_in_detail"
+                    android:layout_gravity="right|center_vertical"
+                    android:layout_marginRight="@dimen/list_margin"
+                    android:layout_width="@dimen/foto_preview_size"
+                    android:layout_height="@dimen/foto_preview_size"
+                    android:scaleType="fitCenter"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentEnd="true"/>
+        </RelativeLayout>
     </LinearLayout>
 </android.support.v7.widget.CardView>

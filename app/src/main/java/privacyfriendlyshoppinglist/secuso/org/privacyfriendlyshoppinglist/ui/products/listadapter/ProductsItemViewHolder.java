@@ -51,7 +51,16 @@ public class ProductsItemViewHolder extends RecyclerView.ViewHolder
         productItemCache.getProductNameTextView().setText(dto.getProductName());
         productItemCache.getQuantityTextView().setText(dto.getQuantity());
         productItemCache.getProductExtraInfoTextview().setText(dto.getSummary(productActivityCache.getActivity()));
-        productItemCache.getListDetails().setText(dto.getDetailInfo(productActivityCache.getActivity()));
+        productItemCache.getListDetailsTextView().setText(dto.getDetailInfo(productActivityCache.getActivity()));
+
+        if ( !dto.isDefaultImage() )
+        {
+            productItemCache.getProductImageInDetail().setImageBitmap(dto.getBitmapImage());
+        }
+        else
+        {
+            productItemCache.getProductImageInDetail().setImageBitmap(null);
+        }
 
         updateVisibilityFormat(dto);
 
@@ -106,13 +115,13 @@ public class ProductsItemViewHolder extends RecyclerView.ViewHolder
             if ( productItemCache.isDetailsVisible() )
             {
                 showDetailsButton.setImageResource(R.drawable.ic_keyboard_arrow_up_white_48dp);
-                productItemCache.getListDetails().setVisibility(View.VISIBLE);
+                productItemCache.getDetailsLayout().setVisibility(View.VISIBLE);
 
             }
             else
             {
                 showDetailsButton.setImageResource(R.drawable.ic_keyboard_arrow_down_white_48dp);
-                productItemCache.getListDetails().setVisibility(View.GONE);
+                productItemCache.getDetailsLayout().setVisibility(View.GONE);
             }
         });
 

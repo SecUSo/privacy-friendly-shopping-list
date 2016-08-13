@@ -41,6 +41,8 @@ public class ProductDto
 
     private Bitmap bitmapImage;
 
+    private boolean isDefaultImage;
+
     public String getId()
     {
         return id;
@@ -144,6 +146,16 @@ public class ProductDto
     public void setBitmapImage(Bitmap bitmapImage)
     {
         this.bitmapImage = bitmapImage;
+    }
+
+    public boolean isDefaultImage()
+    {
+        return isDefaultImage;
+    }
+
+    public void setDefaultImage(boolean defaultImage)
+    {
+        isDefaultImage = defaultImage;
     }
 
     public String getSummary(Context context)

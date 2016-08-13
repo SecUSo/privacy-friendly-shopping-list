@@ -69,7 +69,7 @@ public class ProductConverterServiceImpl implements ProductConverterService
         entity.setCategory(dto.getProductCategory());
         entity.setSelected(dto.isChecked());
 
-        if ( dto.getBitmapImage() != null )
+        if ( dto.getBitmapImage() != null && !dto.isDefaultImage() )
         {
             ByteArrayOutputStream stream = new ByteArrayOutputStream();
             dto.getBitmapImage().compress(Bitmap.CompressFormat.PNG, 100, stream);
@@ -117,11 +117,13 @@ public class ProductConverterServiceImpl implements ProductConverterService
         {
             Bitmap imageBitMap = BitmapFactory.decodeByteArray(imageBytes, 0, imageBytes.length);
             dto.setBitmapImage(imageBitMap);
+            dto.setDefaultImage(false);
         }
         else
         {
             Bitmap bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.ic_menu_camera);
             dto.setBitmapImage(bitmap);
+            dto.setDefaultImage(true);
         }
     }
 

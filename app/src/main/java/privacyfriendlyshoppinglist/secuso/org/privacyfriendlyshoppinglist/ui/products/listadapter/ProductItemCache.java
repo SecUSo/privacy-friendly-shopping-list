@@ -2,9 +2,7 @@ package privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.pr
 
 import android.support.v7.widget.CardView;
 import android.view.View;
-import android.widget.CheckBox;
-import android.widget.ImageButton;
-import android.widget.TextView;
+import android.widget.*;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.R;
 
 /**
@@ -20,8 +18,11 @@ public class ProductItemCache
     private CheckBox checkbox;
     private CardView productCard;
     private ImageButton showDetailsImageButton;
+    private ImageView productImageInViewer;
+    private ImageView productImageInDetail;
     private boolean detailsVisible;
-    private TextView listDetails;
+    private TextView listDetailsTextView;
+    private RelativeLayout detailsLayout;
 
     public ProductItemCache(View parent)
     {
@@ -31,7 +32,10 @@ public class ProductItemCache
         checkbox = (CheckBox) parent.findViewById(R.id.checkbox_is_selected);
         productCard = (CardView) parent.findViewById(R.id.cardview_item);
         showDetailsImageButton = (ImageButton) parent.findViewById(R.id.expand_button_list);
-        listDetails = (TextView) parent.findViewById(R.id.textview_list_details);
+        productImageInViewer = (ImageView) parent.findViewById(R.id.product_image_in_viewer);
+        productImageInDetail = (ImageView) parent.findViewById(R.id.product_image_in_detail);
+        listDetailsTextView = (TextView) parent.findViewById(R.id.textview_list_details);
+        detailsLayout = (RelativeLayout) parent.findViewById(R.id.layout_details);
     }
 
     public TextView getProductNameTextView()
@@ -74,8 +78,23 @@ public class ProductItemCache
         this.detailsVisible = detailsVisible;
     }
 
-    public TextView getListDetails()
+    public TextView getListDetailsTextView()
     {
-        return listDetails;
+        return listDetailsTextView;
+    }
+
+    public ImageView getProductImageInViewer()
+    {
+        return productImageInViewer;
+    }
+
+    public ImageView getProductImageInDetail()
+    {
+        return productImageInDetail;
+    }
+
+    public RelativeLayout getDetailsLayout()
+    {
+        return detailsLayout;
     }
 }

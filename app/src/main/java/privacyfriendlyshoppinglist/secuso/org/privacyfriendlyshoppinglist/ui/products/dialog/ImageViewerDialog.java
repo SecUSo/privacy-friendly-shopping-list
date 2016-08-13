@@ -56,7 +56,7 @@ public class ImageViewerDialog extends DialogFragment
         View rootView = inflater.inflate(R.layout.product_image_viewer, null);
         Button closeButton = (Button) rootView.findViewById(R.id.close);
         ImageButton deleteButton = (ImageButton) rootView.findViewById(R.id.delete);
-        ImageView productImage = (ImageView) rootView.findViewById(R.id.product_image);
+        ImageView productImage = (ImageView) rootView.findViewById(R.id.product_image_in_viewer);
 
         TextView titleTextView = (TextView) rootView.findViewById(R.id.title);
 
@@ -81,7 +81,7 @@ public class ImageViewerDialog extends DialogFragment
             {
                 Bitmap bitmap = BitmapFactory.decodeResource(getContext().getResources(), R.drawable.ic_menu_camera);
                 dialogCache.getProductImage().setImageBitmap(bitmap);
-                dialogCache.setImageDeleted(true);
+                dialogCache.setImageScheduledForDeletion(true);
                 dismiss();
             }
         });

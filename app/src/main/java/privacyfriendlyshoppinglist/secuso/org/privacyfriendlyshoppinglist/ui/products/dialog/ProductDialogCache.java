@@ -21,7 +21,7 @@ public class ProductDialogCache
     private AutoCompleteTextView customStore;
     private AutoCompleteTextView category;
     private EditText productNotes;
-    private boolean imageDeleted;
+    private boolean imageScheduledForDeletion;
 
     private Button buttonPlus;
     private Button buttonMinus;
@@ -98,14 +98,14 @@ public class ProductDialogCache
         return buttonMinus;
     }
 
-    public boolean isImageDeleted()
+    public boolean isImageScheduledForDeletion()
     {
-        return imageDeleted;
+        return imageScheduledForDeletion;
     }
 
-    public void setImageDeleted(boolean imageDeleted)
+    public void setImageScheduledForDeletion(boolean imageScheduledForDeletion)
     {
-        this.imageDeleted = imageDeleted;
+        this.imageScheduledForDeletion = imageScheduledForDeletion;
     }
 
     public ImageView getCameraIcon()

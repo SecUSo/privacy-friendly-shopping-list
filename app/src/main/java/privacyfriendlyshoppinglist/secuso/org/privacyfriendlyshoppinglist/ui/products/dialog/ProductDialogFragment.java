@@ -1,14 +1,18 @@
 package privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.products.dialog;
 
+import android.Manifest;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
+import android.support.v4.content.ContextCompat;
 import android.text.InputFilter;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -38,6 +42,7 @@ import static android.app.Activity.RESULT_OK;
 public class ProductDialogFragment extends DialogFragment
 {
     private static final int REQUEST_IMAGE_CAPTURE = 1;
+    private static final int MY_PERMISSIONS_REQUEST_USE_CAMERA = 2;
     private ProductDialogCache dialogCache;
     private ProductActivityCache cache;
     private ProductDto dto;
@@ -175,17 +180,21 @@ public class ProductDialogFragment extends DialogFragment
         });
 
 
-
         dialogCache.getCameraIcon().setOnClickListener(new View.OnClickListener()
         {
 
             @Override
             public void onClick(View view)
             {
-                Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                if ( takePictureIntent.resolveActivity(cache.getActivity().getPackageManager()) != null )
+                int permissionCheck = ContextCompat.checkSelfPermission(cache.getActivity(), Manifest.permission.CAMERA);
+
+                if ( permissionCheck == PackageManager.PERMISSION_GRANTED )
                 {
-                    startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
+                    startImageCaptureAction();
+                }
+                else
+                {
+                    requestPermissions(new String[]{Manifest.permission.CAMERA}, MY_PERMISSIONS_REQUEST_USE_CAMERA);
                 }
 
             }
@@ -216,8 +225,11 @@ public class ProductDialogFragment extends DialogFragment
             @Override
             public void onClick(View v)
             {
-                DialogFragment imageViewerDialog = ImageViewerDialog.newEditDeleteInstance(dto, dialogCache);
-                imageViewerDialog.show(cache.getActivity().getSupportFragmentManager(), "ProductViewer");
+                if ( !dto.isDefaultImage() && !dialogCache.isImageScheduledForDeletion() )
+                {
+                    DialogFragment imageViewerDialog = ImageViewerDialog.newEditDeleteInstance(dto, dialogCache);
+                    imageViewerDialog.show(cache.getActivity().getSupportFragmentManager(), "ProductViewer");
+                }
             }
         });
 
@@ -268,10 +280,11 @@ public class ProductDialogFragment extends DialogFragment
                     dto.setProductCategory(String.valueOf(dialogCache.getCategory().getText()));
                     dto.setProductStore(String.valueOf(dialogCache.getCustomStore().getText()));
 
-                    if ( dialogCache.isImageDeleted() )
+                    if ( dialogCache.isImageScheduledForDeletion() )
                     {
                         Bitmap bitmap = BitmapFactory.decodeResource(getContext().getResources(), R.drawable.ic_menu_camera);
                         dto.setBitmapImage(bitmap);
+                        dto.setDefaultImage(true);
                     }
 
                     productService.saveOrUpdate(dto, cache.getListId());
@@ -283,6 +296,15 @@ public class ProductDialogFragment extends DialogFragment
             }
         });
         return dialog;
+    }
+
+    private void startImageCaptureAction()
+    {
+        Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        if ( takePictureIntent.resolveActivity(cache.getActivity().getPackageManager()) != null )
+        {
+            startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
+        }
     }
 
     private void setupAutoCompleteLists(AutoCompleteLists autoCompleteLists)
@@ -309,7 +331,25 @@ public class ProductDialogFragment extends DialogFragment
             Bitmap imageBitmap = (Bitmap) extras.get("data");
 
             dto.setBitmapImage(imageBitmap);
+            dto.setDefaultImage(false);
             dialogCache.getProductImage().setImageBitmap(imageBitmap);
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults)
+    {
+        switch ( requestCode )
+        {
+            case MY_PERMISSIONS_REQUEST_USE_CAMERA:
+            {
+                if ( grantResults.length > 0
+                        && grantResults[ 0 ] == PackageManager.PERMISSION_GRANTED )
+                {
+                    startImageCaptureAction();
+                }
+                return;
+            }
         }
     }
 }

@@ -15,6 +15,7 @@
     <dimen name="list_padding">8dp</dimen>
     <dimen name="icon_padding">16dp</dimen>
     <dimen name="icon_size">25dp</dimen>
+    <dimen name="foto_preview_size">50dp</dimen>
     <dimen name="dialog_title_height">50dp</dimen>
     <dimen name="card_corner_radius">4dp</dimen>
     <dimen name="status_corner_radius">0dp</dimen>
