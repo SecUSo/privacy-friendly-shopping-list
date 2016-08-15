@@ -20,11 +20,13 @@ public class DeleteProductsCache
     private FloatingActionButton deleteFab;
     private DeleteProductsAdapter deleteProductsAdapter;
     private String listId;
+    private String listName;
 
-    public DeleteProductsCache(DeleteProductsActivity activity, String listId)
+    public DeleteProductsCache(DeleteProductsActivity activity, String listId, String listName)
     {
         this.activity = activity;
         this.listId = listId;
+        this.listName = listName;
 
         deleteProductsAdapter = new DeleteProductsAdapter(new ArrayList<>(), activity);
 
@@ -53,5 +55,10 @@ public class DeleteProductsCache
     public String getListId()
     {
         return listId;
+    }
+
+    public String getListName()
+    {
+        return listName;
     }
 }

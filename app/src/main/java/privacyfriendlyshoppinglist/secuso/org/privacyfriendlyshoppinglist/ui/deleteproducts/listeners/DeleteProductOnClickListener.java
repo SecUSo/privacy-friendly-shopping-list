@@ -50,6 +50,7 @@ public class DeleteProductOnClickListener implements View.OnClickListener
                         Intent intent = new Intent(activity, ProductsActivity.class);
                         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                         intent.putExtra(MainActivity.LIST_ID_KEY, cache.getListId());
+                        intent.putExtra(MainActivity.LIST_NAME_KEY, cache.getListName());
                         activity.startActivity(intent);
                     }
                 }).show();

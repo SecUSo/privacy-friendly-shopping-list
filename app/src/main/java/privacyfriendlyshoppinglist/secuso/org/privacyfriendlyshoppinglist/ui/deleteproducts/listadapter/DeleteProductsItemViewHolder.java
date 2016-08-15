@@ -35,6 +35,7 @@ public class DeleteProductsItemViewHolder extends RecyclerView.ViewHolder
         cache.getCheckBox().setChecked(dto.isChecked());
         updateVisibilityFormat(dto);
 
+        cache.getProductCard().setAlpha(0.0f);
         cache.getProductCard().setOnClickListener(new View.OnClickListener()
         {
             public void onClick(View v)

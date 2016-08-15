@@ -46,7 +46,7 @@ public class ProductsActivity extends AppCompatActivity
 
         listId = getIntent().getStringExtra(MainActivity.LIST_ID_KEY);
         boolean statisticsEnabled = getIntent().getBooleanExtra(MainActivity.STATISTICS_ID_KEY, false);
-        cache = new ProductActivityCache(this, listId, statisticsEnabled);
+        cache = new ProductActivityCache(this, listId, listName, statisticsEnabled);
 
 
         AbstractInstanceFactory instanceFactory = new InstanceFactory(getApplicationContext());

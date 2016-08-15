@@ -30,12 +30,14 @@ public class ProductActivityCache
     private LinearLayout totalLayout;
     private RecyclerView recyclerView;
     private String listId;
+    private String listName;
     private Boolean statisticsEnabled;
 
-    public ProductActivityCache(AppCompatActivity activity, String listId, boolean statisticsEnabled)
+    public ProductActivityCache(AppCompatActivity activity, String listId, String listName, boolean statisticsEnabled)
     {
         this.activity = activity;
         this.listId = listId;
+        this.listName = listName;
         this.statisticsEnabled = statisticsEnabled;
 
         productsAdapter = new ProductsAdapter(new ArrayList<>(), this);
@@ -98,5 +100,10 @@ public class ProductActivityCache
     public Boolean getStatisticsEnabled()
     {
         return statisticsEnabled;
+    }
+
+    public String getListName()
+    {
+        return listName;
     }
 }
