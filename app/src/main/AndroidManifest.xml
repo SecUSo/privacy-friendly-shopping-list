@@ -21,6 +21,14 @@
             </intent-filter>
         </activity>
 
+        <receiver
+                android:name='privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.shoppinglist.reminder.ReminderReceiver'>
+        </receiver>
+
+        <service
+                android:name='privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.shoppinglist.reminder.ReminderSchedulingService'>
+        </service>
+
 
         <activity
                 android:name=".ui.products.ProductsActivity"
