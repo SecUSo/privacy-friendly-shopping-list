@@ -16,6 +16,7 @@ import android.widget.ArrayAdapter;
 import android.widget.DatePicker;
 import android.widget.TextView;
 import android.widget.TimePicker;
+import org.joda.time.DateTime;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.R;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.context.AbstractInstanceFactory;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.context.InstanceFactory;
@@ -340,11 +341,14 @@ public class ListDialogFragment extends DialogFragment
 
                 if ( reminderSwitch.isChecked() )
                 {
+
+                    long now = new DateTime().getMillis();
+
                     ReminderReceiver alarm = new ReminderReceiver();
                     Intent intent = new Intent(cache.getActivity(), ReminderSchedulingService.class);
                     intent.putExtra(ReminderSchedulingService.TODOTEXT, "Test");
                     intent.putExtra(ReminderSchedulingService.TODOUUID, "1");
-                    alarm.setAlarm(cache.getActivity(), intent, 1000);
+                    alarm.setAlarm(cache.getActivity(), intent, now + 1000);
                 }
 
                 shoppingListService.saveOrUpdate(dto);
