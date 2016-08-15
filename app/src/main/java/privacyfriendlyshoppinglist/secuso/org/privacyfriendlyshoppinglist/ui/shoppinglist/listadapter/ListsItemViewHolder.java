@@ -21,6 +21,7 @@ import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.sho
  */
 class ListsItemViewHolder extends RecyclerView.ViewHolder
 {
+    private static final String HIGH_PRIORITY_INDEX = "0";
     private ListItemCache listItemCache;
     private ShoppingListActivityCache shoppingListCache;
     private ProductService productService;
@@ -103,8 +104,7 @@ class ListsItemViewHolder extends RecyclerView.ViewHolder
 
     private void setupPriorityIcon(ListDto dto)
     {
-        // todo: do not use hard code values here
-        if ( "0".equals(dto.getPriority()) )
+        if ( HIGH_PRIORITY_INDEX.equals(dto.getPriority()) )
         {
             listItemCache.getHighPriorityImageView().setVisibility(View.VISIBLE);
         }

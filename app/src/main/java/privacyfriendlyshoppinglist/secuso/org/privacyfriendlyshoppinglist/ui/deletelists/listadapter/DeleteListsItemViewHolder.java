@@ -20,6 +20,7 @@ import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.sho
 class DeleteListsItemViewHolder extends RecyclerView.ViewHolder
 {
 
+    private static final String HIGH_PRIORITY_INDEX = "0";
     private ListItemCache cache;
     private ProductService productService;
 
@@ -74,8 +75,7 @@ class DeleteListsItemViewHolder extends RecyclerView.ViewHolder
 
     private void setupPriorityIcon(ListDto dto)
     {
-        // todo: do not use hard code values here
-        if ( "0".equals(dto.getPriority()) )
+        if ( HIGH_PRIORITY_INDEX.equals(dto.getPriority()) )
         {
             cache.getHighPriorityImageView().setVisibility(View.VISIBLE);
         }
