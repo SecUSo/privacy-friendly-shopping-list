@@ -25,7 +25,6 @@ public class DeleteProductsActivity extends AppCompatActivity
     private ShoppingListService shoppingListService;
     private DeleteProductsCache cache;
     private String listId;
-    private String listName;
 
     @Override
     protected final void onCreate(final Bundle savedInstanceState)
@@ -38,8 +37,8 @@ public class DeleteProductsActivity extends AppCompatActivity
         this.shoppingListService = (ShoppingListService) instanceFactory.createInstance(ShoppingListService.class);
 
         listId = getIntent().getStringExtra(MainActivity.LIST_ID_KEY);
-        listName = getIntent().getStringExtra(MainActivity.LIST_NAME_KEY);
-        cache = new DeleteProductsCache(this, listId, listName);
+        ListDto dto = shoppingListService.getById(listId);
+        cache = new DeleteProductsCache(this, listId, dto.getListName());
 
         updateListView();
 

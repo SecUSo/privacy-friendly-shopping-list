@@ -41,17 +41,15 @@ public class ProductsActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.products_activity);
 
-        String listName = getIntent().getStringExtra(MainActivity.LIST_NAME_KEY);
-        setTitle(listName);
-
-        listId = getIntent().getStringExtra(MainActivity.LIST_ID_KEY);
-        boolean statisticsEnabled = getIntent().getBooleanExtra(MainActivity.STATISTICS_ID_KEY, false);
-        cache = new ProductActivityCache(this, listId, listName, statisticsEnabled);
-
-
         AbstractInstanceFactory instanceFactory = new InstanceFactory(getApplicationContext());
         this.productService = (ProductService) instanceFactory.createInstance(ProductService.class);
         this.shoppingListService = (ShoppingListService) instanceFactory.createInstance(ShoppingListService.class);
+
+        listId = getIntent().getStringExtra(MainActivity.LIST_ID_KEY);
+        ListDto dto = shoppingListService.getById(listId);
+        setTitle(dto.getListName());
+
+        cache = new ProductActivityCache(this, listId, dto.getListName(), dto.isStatisticEnabled());
 
         updateListView();
 

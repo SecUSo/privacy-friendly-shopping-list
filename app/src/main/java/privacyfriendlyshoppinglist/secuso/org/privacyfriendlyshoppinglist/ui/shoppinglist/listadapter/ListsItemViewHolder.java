@@ -68,9 +68,7 @@ class ListsItemViewHolder extends RecyclerView.ViewHolder
         {
             Intent intent = new Intent(shoppingListCache.getActivity(), ProductsActivity.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-            intent.putExtra(MainActivity.LIST_NAME_KEY, dto.getListName());
             intent.putExtra(MainActivity.LIST_ID_KEY, dto.getId());
-            intent.putExtra(MainActivity.STATISTICS_ID_KEY, dto.isStatisticEnabled());
             shoppingListCache.getActivity().startActivity(intent);
         });
 

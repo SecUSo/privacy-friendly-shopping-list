@@ -28,7 +28,6 @@ public class ShowDeleteProductsOnClickListener implements MenuItem.OnMenuItemCli
         Intent intent = new Intent(activity, DeleteProductsActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         intent.putExtra(MainActivity.LIST_ID_KEY, cache.getListId());
-        intent.putExtra(MainActivity.LIST_NAME_KEY, cache.getListName());
         activity.startActivity(intent);
         return true;
     }
