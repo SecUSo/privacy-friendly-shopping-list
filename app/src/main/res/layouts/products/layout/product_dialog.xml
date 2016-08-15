@@ -28,7 +28,7 @@
                 android:layout_height="wrap_content">
             <AutoCompleteTextView
                     android:id="@+id/product_name"
-                    android:inputType="text"
+                    android:inputType="text|textCapSentences"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:selectAllOnFocus="true"
@@ -126,7 +126,7 @@
                 android:layout_height="wrap_content">
             <EditText
                     android:id="@+id/product_notes"
-                    android:inputType="textMultiLine"
+                    android:inputType="textMultiLine|textCapSentences"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/list_notes"/>
@@ -174,7 +174,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:id="@+id/category_input"
-                            android:inputType="textAutoComplete"
+                            android:inputType="textAutoComplete|textCapSentences"
                             android:hint="@string/category_text"
                             android:singleLine="true"
                             android:maxLength="40"/>
@@ -187,7 +187,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:id="@+id/store_input"
-                            android:inputType="textAutoComplete"
+                            android:inputType="textAutoComplete|textCapSentences"
                             android:hint="@string/store_text"
                             android:maxLength="40"/>
                 </android.support.design.widget.TextInputLayout>

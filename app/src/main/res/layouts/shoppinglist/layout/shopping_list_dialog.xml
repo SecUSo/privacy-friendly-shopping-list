@@ -31,7 +31,7 @@
                     android:layout_height="wrap_content" android:layout_toStartOf="@+id/imageview_statistics">
                 <EditText
                         android:id="@+id/list_name"
-                        android:inputType="text"
+                        android:inputType="text|textCapSentences"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:maxLength="30"
@@ -233,7 +233,7 @@
                 android:layout_height="wrap_content">
             <EditText
                     android:id="@+id/list_notes"
-                    android:inputType="textMultiLine"
+                    android:inputType="textMultiLine|textCapSentences"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/list_notes"/>
