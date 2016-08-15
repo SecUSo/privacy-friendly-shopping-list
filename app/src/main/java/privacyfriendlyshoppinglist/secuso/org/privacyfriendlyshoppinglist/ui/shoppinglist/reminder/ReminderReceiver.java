@@ -11,7 +11,6 @@ import android.support.v4.content.WakefulBroadcastReceiver;
  */
 public class ReminderReceiver extends WakefulBroadcastReceiver
 {
-
     private AlarmManager alarmMgr;
 
 
@@ -23,26 +22,20 @@ public class ReminderReceiver extends WakefulBroadcastReceiver
 
     }
 
-    public void setAlarm(Context context, Intent i, long deltaTimeInMillis)
+    public void setAlarm(Context context, Intent i, long deltaTimeInMillis, String listId)
     {
         alarmMgr = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
-        PendingIntent pi = PendingIntent.getService(context, 0, i, PendingIntent.FLAG_UPDATE_CURRENT);
-        //Intent intent = new Intent(context, ReminderReceiver.class);
-        //alarmIntent = PendingIntent.getBroadcast(context, 0, intent, 0);
-
-
+        PendingIntent pi = PendingIntent.getService(context, Integer.parseInt(listId), i, PendingIntent.FLAG_UPDATE_CURRENT);
         alarmMgr.set(AlarmManager.RTC_WAKEUP, deltaTimeInMillis, pi);
     }
 
-    public void cancelAlarm(Context context, Intent i, int requestCode)
+    public void cancelAlarm(Context context, Intent i, String listId)
     {
         // If the alarm has been set, cancel it.
-        if ( alarmMgr != null )
-        {
-            PendingIntent pi = PendingIntent.getService(context, requestCode, i, PendingIntent.FLAG_NO_CREATE);
-            pi.cancel();
-            alarmMgr.cancel(pi);
-        }
+        alarmMgr = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
+        PendingIntent pi = PendingIntent.getService(context, Integer.parseInt(listId), i, PendingIntent.FLAG_CANCEL_CURRENT);
+        pi.cancel();
+        alarmMgr.cancel(pi);
     }
 
 }

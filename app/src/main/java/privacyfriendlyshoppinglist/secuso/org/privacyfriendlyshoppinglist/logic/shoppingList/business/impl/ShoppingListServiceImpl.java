@@ -1,9 +1,11 @@
 package privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.shoppingList.business.impl;
 
 import android.content.Context;
+import org.joda.time.DateTime;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.R;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.comparators.PFAComparators;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.persistence.DB;
+import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.utils.DateUtils;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.utils.StringUtils;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.shoppingList.business.ShoppingListService;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.shoppingList.business.domain.ListDto;
@@ -68,6 +70,47 @@ public class ShoppingListServiceImpl implements ShoppingListService
         ShoppingListEntity entity = shoppingListDao.getById(Long.valueOf(id));
         shoppingListConverter.convertEntityToDto(entity, dto);
         return dto;
+    }
+
+    @Override
+    public DateTime getReminderDate(ListDto dto)
+    {
+        DateTime inputTime = getDeadLine(dto);
+
+        String reminderCount = StringUtils.isEmpty(dto.getReminderCount()) ? "0" : dto.getReminderCount();
+        int inputAmount = Integer.parseInt(reminderCount);
+        int inputChoice = Integer.parseInt(dto.getReminderUnit());
+        DateTime reminderTime = calculateReminderTime(inputTime, inputAmount, inputChoice);
+        return reminderTime;
+    }
+
+    @Override
+    public DateTime getDeadLine(ListDto dto)
+    {
+        String language = context.getResources().getString(R.string.language);
+        String dateLongPattern = context.getResources().getString(R.string.date_long_pattern);
+        return DateUtils.getDateFromString(dto.getDeadlineDate() + " " + dto.getDeadlineTime(), dateLongPattern, language);
+    }
+
+    @Override
+    public int getReminderStatusResource(ListDto dto)
+    {
+        int reminderStatus = R.drawable.reminder_status_neutral;
+        if ( dto.getReminderCount() != null )
+        {
+            DateTime deadLine = getDeadLine(dto);
+            DateTime reminderDate = getReminderDate(dto);
+            DateTime nowDate = new DateTime();
+            if ( nowDate.isBefore(deadLine) && !nowDate.isBefore(reminderDate) )
+            {
+                reminderStatus = R.drawable.reminder_status_triggered;
+            }
+            else if ( deadLine.isBefore(nowDate) )
+            {
+                reminderStatus = R.drawable.reminder_status_time_over;
+            }
+        }
+        return reminderStatus;
     }
 
     @Override
@@ -150,5 +193,27 @@ public class ShoppingListServiceImpl implements ShoppingListService
         ListDto dto = new ListDto();
         shoppingListConverter.convertEntityToDto(entity, dto);
         return dto;
+    }
+
+    private DateTime calculateReminderTime(DateTime date, int inputAmount, int inputChoice)
+    {
+        DateTime dateTime = new DateTime();
+
+        switch ( inputChoice )
+        {
+            case 0:
+                dateTime = date.minusMinutes(inputAmount);
+                break;
+            case 1:
+                dateTime = date.minusHours(inputAmount);
+                break;
+            case 2:
+                dateTime = date.minusDays(inputAmount);
+                break;
+            case 3:
+                dateTime = date.minusWeeks(inputAmount);
+        }
+
+        return dateTime;
     }
 }

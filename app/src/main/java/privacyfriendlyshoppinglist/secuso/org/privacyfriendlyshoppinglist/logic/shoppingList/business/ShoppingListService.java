@@ -1,5 +1,6 @@
 package privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.shoppingList.business;
 
+import org.joda.time.DateTime;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.context.ContextSetter;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.shoppingList.business.domain.ListDto;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.shoppingList.persistence.entity.ShoppingListEntity;
@@ -16,6 +17,12 @@ public interface ShoppingListService extends ContextSetter
     void saveOrUpdate(ListDto dto);
 
     ListDto getById(String id);
+
+    DateTime getReminderDate(ListDto dto);
+
+    DateTime getDeadLine(ListDto dto);
+
+    int getReminderStatusResource(ListDto dto);
 
     ShoppingListEntity getEntityById(String id);
 

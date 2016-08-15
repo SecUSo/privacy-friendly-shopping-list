@@ -1,6 +1,7 @@
 package privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.shoppinglist;
 
 import android.app.Dialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.DialogFragment;
@@ -16,6 +17,8 @@ import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.shoppingList.business.domain.ListDto;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.main.MainActivity;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.main.ShoppingListActivityCache;
+import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.shoppinglist.reminder.ReminderReceiver;
+import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.shoppinglist.reminder.ReminderSchedulingService;
 
 /**
  * Created by Chris on 11.08.2016.
@@ -99,7 +102,14 @@ public class EditDeleteListDialog extends DialogFragment
                             @Override
                             public void onClick(View v)
                             {
-                                shoppingListService.deleteById(dto.getId());
+                                String id = dto.getId();
+                                shoppingListService.deleteById(id);
+
+                                // delete notification if any
+                                ReminderReceiver alarm = new ReminderReceiver();
+                                Intent intent = new Intent(cache.getActivity(), ReminderSchedulingService.class);
+                                alarm.cancelAlarm(cache.getActivity(), intent, id);
+
                                 MainActivity activity = (MainActivity) cache.getActivity();
                                 activity.updateListView();
                             }

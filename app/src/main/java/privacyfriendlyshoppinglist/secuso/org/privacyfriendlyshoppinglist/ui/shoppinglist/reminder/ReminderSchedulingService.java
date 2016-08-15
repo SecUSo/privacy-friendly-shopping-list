@@ -6,6 +6,7 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.TaskStackBuilder;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.R;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.main.MainActivity;
@@ -22,52 +23,45 @@ public class ReminderSchedulingService extends IntentService
         super("SchedulingService");
     }
 
-
-    public static final int NOTIFICATION_ID = 10;
-    public static final String MESSAGETEXT = "com.shoppinglist.notificationservicetext";
-    public static final String MESSAGEUUID = "com.shoppinglist.notificationserviceuuid";
-    public static final String LISTID = "com.shoppinglist.notificationserviceuuid";
-
-    private String messageText;
-    private String messageUUID;
-    private String listId;
-
-    private Context context;
-
+    public static final String MESSAGE_TEXT = "com.shoppinglist.notificationservicetext";
 
     @Override
     protected void onHandleIntent(Intent intent)
     {
-
-        messageText = intent.getStringExtra(MESSAGETEXT);
-        messageUUID = intent.getStringExtra(MESSAGEUUID);
-        listId = intent.getStringExtra(LISTID);
+        String messageText = intent.getStringExtra(MESSAGE_TEXT);
+        String listId = intent.getStringExtra(MainActivity.LIST_ID_KEY);
 
         NotificationManager manager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
         Intent i = new Intent(this, ProductDialogFragment.class);
-        i.putExtra(ReminderSchedulingService.MESSAGEUUID, messageUUID);
+        i.putExtra(MainActivity.LIST_ID_KEY, listId);
 
         PendingIntent pendingIntent = getPendingIntent(getApplicationContext(), listId);
 
-        Notification notification = new Notification.Builder(this)
-                .setContentTitle(messageText)
+        String appName = getResources().getString(R.string.app_name);
+
+        Notification notification = new NotificationCompat.Builder(this)
+                .setContentTitle(appName)
+                .setContentText(messageText)
+                .setStyle(new NotificationCompat.BigTextStyle().bigText(messageText))
                 .setAutoCancel(true)
-                .setSmallIcon(R.drawable.ic_launcher)
+                .setSmallIcon(R.mipmap.ic_launcher)
                 .setDefaults(Notification.DEFAULT_SOUND)
-                .addAction(R.drawable.ic_launcher, "Go to List", pendingIntent)
-                .setContentIntent(PendingIntent.getActivity(this, messageUUID.hashCode(), i, PendingIntent.FLAG_UPDATE_CURRENT))
+                .setContentIntent(pendingIntent)
                 .build();
 
-        manager.notify(NOTIFICATION_ID, notification);
-
+        manager.notify(Integer.parseInt(listId), notification);
     }
 
     private PendingIntent getPendingIntent(Context context, String listId)
     {
-        TaskStackBuilder stackBuilder = TaskStackBuilder.create(context);
-        Intent productsIntent = new Intent(context, ProductsActivity.class);
-        productsIntent.putExtra(MainActivity.LIST_ID_KEY, listId);
-        stackBuilder.addNextIntent(productsIntent);
+        Intent pendingIntent = new Intent(context, ProductsActivity.class);
+        pendingIntent.setFlags(Intent.FLAG_ACTIVITY_MULTIPLE_TASK);
+
+        pendingIntent.putExtra(MainActivity.LIST_ID_KEY, listId);
+        TaskStackBuilder stackBuilder = TaskStackBuilder
+                .create(context)
+                .addParentStack(ProductsActivity.class)
+                .addNextIntent(pendingIntent);
         return stackBuilder.getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT);
     }
 

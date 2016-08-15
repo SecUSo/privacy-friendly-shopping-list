@@ -346,34 +346,27 @@ public class ListDialogFragment extends DialogFragment
                 dto.setReminderEnabled(reminderSwitch.isChecked());
                 dto.setStatisticEnabled(dialogCache.getStatisticsSwitch().isChecked());
 
+                shoppingListService.saveOrUpdate(dto);
 
-                String dateLongPattern = cache.getActivity().getResources().getString(R.string.date_long_pattern);
-                String language = cache.getActivity().getResources().getString(R.string.language);
-                String date = dto.getDeadlineDate();
-                String time = dto.getDeadlineTime();
-                DateTime inputtime = DateUtils.getDateFromString(date + " " + time, dateLongPattern, language);
-
-                int inputAmount = Integer.parseInt(String.valueOf(dialogCache.getReminderText().getText()));
-
-                int inputChoice = dialogCache.getReminderSpinner().getSelectedItemPosition();
-
-                long reminderTime = calculateReminderTime(inputtime, inputAmount, inputChoice);
-
+                // the reminder feature must happen after save, because the list id is necessary for the notification
                 if ( reminderSwitch.isChecked() )
                 {
-
-                    long now = new DateTime().getMillis();
+                    String message = getResources().getString(R.string.notification_message, dto.getListName(), dto.getDeadlineDate() + " " + dto.getDeadlineTime());
+                    DateTime reminderTime = shoppingListService.getReminderDate(dto);
                     ReminderReceiver alarm = new ReminderReceiver();
                     Intent intent = new Intent(cache.getActivity(), ReminderSchedulingService.class);
-                    intent.putExtra(ReminderSchedulingService.MESSAGETEXT, dto.getListName());
-                    intent.putExtra(ReminderSchedulingService.MESSAGEUUID, "1");
-                    intent.putExtra(ReminderSchedulingService.LISTID, dto.getId());
-
-                    //alarm.setAlarm(cache.getActivity(), intent, now + 1000);
-                    alarm.setAlarm(cache.getActivity(), intent, reminderTime);
+                    intent.putExtra(ReminderSchedulingService.MESSAGE_TEXT, message);
+                    intent.putExtra(MainActivity.LIST_ID_KEY, dto.getId());
+                    alarm.setAlarm(cache.getActivity(), intent, reminderTime.getMillis(), dto.getId());
+                }
+                else
+                {
+                    // delete notification if exists
+                    ReminderReceiver alarm = new ReminderReceiver();
+                    Intent intent = new Intent(cache.getActivity(), ReminderSchedulingService.class);
+                    alarm.cancelAlarm(cache.getActivity(), intent, dto.getId());
                 }
 
-                shoppingListService.saveOrUpdate(dto);
                 MainActivity mainActivity = (MainActivity) cache.getActivity();
                 mainActivity.updateListView();
             }
@@ -388,34 +381,6 @@ public class ListDialogFragment extends DialogFragment
         });
 
         return builder.create();
-    }
-
-
-    private long calculateReminderTime(DateTime date, int inputAmount, int inputChoice)
-    {
-
-        long time = 0;
-        DateTime temp;
-
-
-        switch ( inputChoice )
-        {
-            case 0:
-                temp = date.minusHours(inputAmount);
-                time = temp.getMillis();
-                break;
-
-            case 1:
-                temp = date.minusDays(inputAmount);
-                time = temp.getMillis();
-                break;
-
-            case 2:
-                temp = date.minusWeeks(inputAmount);
-                time = temp.getMillis();
-        }
-
-        return time;
     }
 
 }

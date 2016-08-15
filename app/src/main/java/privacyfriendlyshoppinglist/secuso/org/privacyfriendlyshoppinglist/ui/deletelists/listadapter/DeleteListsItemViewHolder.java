@@ -11,6 +11,7 @@ import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.R;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.context.AbstractInstanceFactory;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.context.InstanceFactory;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.product.business.ProductService;
+import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.shoppingList.business.ShoppingListService;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.shoppingList.business.domain.ListDto;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.shoppinglist.listadapter.ListItemCache;
 
@@ -23,6 +24,7 @@ class DeleteListsItemViewHolder extends RecyclerView.ViewHolder
     private static final String HIGH_PRIORITY_INDEX = "0";
     private ListItemCache cache;
     private ProductService productService;
+    private ShoppingListService shoppingListService;
 
     DeleteListsItemViewHolder(final View parent, AppCompatActivity activity)
     {
@@ -30,6 +32,7 @@ class DeleteListsItemViewHolder extends RecyclerView.ViewHolder
         this.cache = new ListItemCache(parent);
         AbstractInstanceFactory instanceFactory = new InstanceFactory(activity.getApplicationContext());
         this.productService = (ProductService) instanceFactory.createInstance(ProductService.class);
+        this.shoppingListService = (ShoppingListService) instanceFactory.createInstance(ShoppingListService.class);
     }
 
     void processDto(ListDto dto)
@@ -37,6 +40,8 @@ class DeleteListsItemViewHolder extends RecyclerView.ViewHolder
         cache.getListNameTextView().setText(dto.getListName());
         cache.getNotesTextView().setText(dto.getNotes());
         cache.getShowDetailsImageButton().setVisibility(View.GONE);
+        int reminderStatus = shoppingListService.getReminderStatusResource(dto);
+        cache.getReminderBar().setImageResource(reminderStatus);
 
         int nrProducts = productService.getAllProducts(dto.getId()).size();
         cache.getNrProductsTextView().setText(String.valueOf(nrProducts));

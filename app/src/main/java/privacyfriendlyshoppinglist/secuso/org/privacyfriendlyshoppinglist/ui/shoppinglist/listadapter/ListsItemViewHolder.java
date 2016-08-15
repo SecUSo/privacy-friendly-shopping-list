@@ -10,6 +10,7 @@ import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framew
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.context.InstanceFactory;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.product.business.ProductService;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.product.business.domain.TotalDto;
+import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.shoppingList.business.ShoppingListService;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.shoppingList.business.domain.ListDto;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.main.MainActivity;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.main.ShoppingListActivityCache;
@@ -25,6 +26,7 @@ class ListsItemViewHolder extends RecyclerView.ViewHolder
     private ListItemCache listItemCache;
     private ShoppingListActivityCache shoppingListCache;
     private ProductService productService;
+    private ShoppingListService shoppingListService;
 
     ListsItemViewHolder(final View parent, ShoppingListActivityCache cache)
     {
@@ -33,6 +35,7 @@ class ListsItemViewHolder extends RecyclerView.ViewHolder
         this.shoppingListCache = cache;
         AbstractInstanceFactory instanceFactory = new InstanceFactory(cache.getActivity());
         this.productService = (ProductService) instanceFactory.createInstance(ProductService.class);
+        this.shoppingListService = (ShoppingListService) instanceFactory.createInstance(ShoppingListService.class);
     }
 
     void processDto(ListDto dto)
@@ -40,20 +43,8 @@ class ListsItemViewHolder extends RecyclerView.ViewHolder
         listItemCache.getListNameTextView().setText(dto.getListName());
         listItemCache.getNotesTextView().setText(dto.getNotes());
 
-        // todo: remove these block of ifs. It is only there to visualize the colors
-        int tmpColorBarCode = Integer.valueOf(dto.getId()) % 3;
-        if ( tmpColorBarCode == 0 )
-        {
-            listItemCache.getReminderBar().setImageResource(R.drawable.reminder_status_neutral);
-        }
-        else if ( tmpColorBarCode == 1 )
-        {
-            listItemCache.getReminderBar().setImageResource(R.drawable.reminder_status_triggered);
-        }
-        else if ( tmpColorBarCode == 2 )
-        {
-            listItemCache.getReminderBar().setImageResource(R.drawable.reminder_status_time_over);
-        }
+        int reminderStatus = shoppingListService.getReminderStatusResource(dto);
+        listItemCache.getReminderBar().setImageResource(reminderStatus);
 
         setupPriorityIcon(dto);
 
