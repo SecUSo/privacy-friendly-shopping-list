@@ -344,7 +344,7 @@ public class ListDialogFragment extends DialogFragment
                     Intent intent = new Intent(cache.getActivity(), ReminderSchedulingService.class);
                     intent.putExtra(ReminderSchedulingService.TODOTEXT, "Test");
                     intent.putExtra(ReminderSchedulingService.TODOUUID, "1");
-                    alarm.setAlarm(cache.getActivity(), intent, 100);
+                    alarm.setAlarm(cache.getActivity(), intent, 1000);
                 }
 
                 shoppingListService.saveOrUpdate(dto);

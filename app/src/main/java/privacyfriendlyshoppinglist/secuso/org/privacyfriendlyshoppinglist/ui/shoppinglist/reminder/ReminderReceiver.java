@@ -13,7 +13,7 @@ public class ReminderReceiver extends WakefulBroadcastReceiver
 {
 
     private AlarmManager alarmMgr;
-    private PendingIntent alarmIntent;
+
 
     @Override
     public void onReceive(Context context, Intent intent)
@@ -34,12 +34,14 @@ public class ReminderReceiver extends WakefulBroadcastReceiver
         alarmMgr.set(AlarmManager.RTC_WAKEUP, deltaTimeInMillis, pi);
     }
 
-    public void cancelAlarm(Context context)
+    public void cancelAlarm(Context context, Intent i, int requestCode)
     {
         // If the alarm has been set, cancel it.
         if ( alarmMgr != null )
         {
-            alarmMgr.cancel(alarmIntent);
+            PendingIntent pi = PendingIntent.getService(context, requestCode, i, PendingIntent.FLAG_NO_CREATE);
+            pi.cancel();
+            alarmMgr.cancel(pi);
         }
     }
 
