@@ -346,6 +346,19 @@ public class ListDialogFragment extends DialogFragment
                 dto.setReminderEnabled(reminderSwitch.isChecked());
                 dto.setStatisticEnabled(dialogCache.getStatisticsSwitch().isChecked());
 
+
+                String dateLongPattern = cache.getActivity().getResources().getString(R.string.date_long_pattern);
+                String language = cache.getActivity().getResources().getString(R.string.language);
+                String date = dto.getDeadlineDate();
+                String time = dto.getDeadlineTime();
+                DateTime inputtime = DateUtils.getDateFromString(date + " " + time, dateLongPattern, language);
+
+                int inputAmount = Integer.parseInt(String.valueOf(dialogCache.getReminderText().getText()));
+
+                int inputChoice = dialogCache.getReminderSpinner().getSelectedItemPosition();
+
+                long reminderTime = reminderTime(inputtime, inputAmount, inputChoice);
+
                 if ( reminderSwitch.isChecked() )
                 {
 
@@ -355,7 +368,8 @@ public class ListDialogFragment extends DialogFragment
                     Intent intent = new Intent(cache.getActivity(), ReminderSchedulingService.class);
                     intent.putExtra(ReminderSchedulingService.TODOTEXT, "Test");
                     intent.putExtra(ReminderSchedulingService.TODOUUID, "1");
-                    alarm.setAlarm(cache.getActivity(), intent, now + 1000);
+                    //alarm.setAlarm(cache.getActivity(), intent, now + 1000);
+                    alarm.setAlarm(cache.getActivity(), intent, reminderTime);
                 }
 
                 shoppingListService.saveOrUpdate(dto);
@@ -376,18 +390,25 @@ public class ListDialogFragment extends DialogFragment
     }
 
 
-    public long reminderTime(DateTime date, int input, int typeChoice)
+    public long reminderTime(DateTime date, int inputAmount, int inputChoice)
     {
 
         long time = 0;
+        DateTime temp;
 
 
-        switch ( typeChoice )
+        switch ( inputChoice )
         {
 
             case 0:
-                temp = date.minusHours(input);
-                time =
+                temp = date.minusHours(inputAmount);
+                time = temp.getMillis();
+            case 1:
+                temp = date.minusDays(inputAmount);
+                time = temp.getMillis();
+            case 2:
+                temp = date.minusWeeks(inputAmount);
+                time = temp.getMillis();
         }
 
         return time;
