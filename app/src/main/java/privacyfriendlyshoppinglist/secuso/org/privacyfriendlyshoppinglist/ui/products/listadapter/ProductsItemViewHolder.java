@@ -19,6 +19,7 @@ import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.products.ProductActivityCache;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.products.ProductsActivity;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.products.dialog.EditDeleteProductDialog;
+import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.products.dialog.ImageViewerDialog;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.products.dialog.ProductDialogFragment;
 
 /**
@@ -62,6 +63,19 @@ public class ProductsItemViewHolder extends RecyclerView.ViewHolder
             productItemCache.getProductImageInDetail().setImageBitmap(null);
         }
 
+        productItemCache.getProductImageInDetail().setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                if ( !ImageViewerDialog.isOpened() )
+                {
+                    DialogFragment imageViewerDialog = ImageViewerDialog.newViewOnlyInstance(dto);
+                    imageViewerDialog.show(productActivityCache.getActivity().getSupportFragmentManager(), "ProductViewer");
+                }
+            }
+        });
+
         updateVisibilityFormat(dto);
 
         checkbox.setOnClickListener(new View.OnClickListener()
@@ -89,10 +103,11 @@ public class ProductsItemViewHolder extends RecyclerView.ViewHolder
         {
             public void onClick(View v)
             {
-                // todo: show seek bar to modify bought quantity
-
-                DialogFragment productFragement = ProductDialogFragment.newEditDialogInstance(dto, productActivityCache);
-                productFragement.show(productActivityCache.getActivity().getSupportFragmentManager(), "Product");
+                if ( !ProductDialogFragment.isOpened() )
+                {
+                    DialogFragment productFragement = ProductDialogFragment.newEditDialogInstance(dto, productActivityCache);
+                    productFragement.show(productActivityCache.getActivity().getSupportFragmentManager(), "Product");
+                }
 
             }
         });

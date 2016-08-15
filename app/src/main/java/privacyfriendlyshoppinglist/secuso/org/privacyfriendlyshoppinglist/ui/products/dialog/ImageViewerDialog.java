@@ -1,7 +1,9 @@
 package privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.products.dialog;
 
 
+import android.app.Activity;
 import android.app.Dialog;
+import android.content.DialogInterface;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
@@ -21,19 +23,21 @@ import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.
  */
 public class ImageViewerDialog extends DialogFragment
 {
+    private static boolean opened;
     private ProductDialogCache dialogCache;
     private ProductDto dto;
 
-    public static ImageViewerDialog newEditDeleteInstance(ProductDto dto, ProductDialogCache dialogCache)
-    {
-        ImageViewerDialog dialogFragment = getEditDeleteFragment(dto, dialogCache);
-        return dialogFragment;
-    }
-
-    private static ImageViewerDialog getEditDeleteFragment(ProductDto dto, ProductDialogCache dialogCache)
+    public static ImageViewerDialog newInstance(ProductDto dto, ProductDialogCache dialogCache)
     {
         ImageViewerDialog dialogFragment = new ImageViewerDialog();
         dialogFragment.setDialogCache(dialogCache);
+        dialogFragment.setDto(dto);
+        return dialogFragment;
+    }
+
+    public static ImageViewerDialog newViewOnlyInstance(ProductDto dto)
+    {
+        ImageViewerDialog dialogFragment = new ImageViewerDialog();
         dialogFragment.setDto(dto);
         return dialogFragment;
     }
@@ -49,6 +53,25 @@ public class ImageViewerDialog extends DialogFragment
     }
 
     @Override
+    public void onAttach(Activity activity)
+    {
+        super.onAttach(activity);
+        opened = true; // flag to avoid opening this dialog twice
+    }
+
+    @Override
+    public void onDismiss(DialogInterface dialog)
+    {
+        super.onDismiss(dialog);
+        opened = false; // flag to avoid opening this dialog twice
+    }
+
+    public static boolean isOpened()
+    {
+        return opened;
+    }
+
+    @Override
     public Dialog onCreateDialog(Bundle savedInstanceState)
     {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
@@ -57,6 +80,11 @@ public class ImageViewerDialog extends DialogFragment
         Button closeButton = (Button) rootView.findViewById(R.id.close);
         ImageButton deleteButton = (ImageButton) rootView.findViewById(R.id.delete);
         ImageView productImage = (ImageView) rootView.findViewById(R.id.product_image_in_viewer);
+
+        if ( dialogCache == null )
+        {
+            deleteButton.setVisibility(View.GONE);
+        }
 
         TextView titleTextView = (TextView) rootView.findViewById(R.id.title);
 

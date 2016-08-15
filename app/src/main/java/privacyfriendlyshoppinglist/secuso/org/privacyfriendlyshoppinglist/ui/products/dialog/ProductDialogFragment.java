@@ -1,6 +1,7 @@
 package privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.products.dialog;
 
 import android.Manifest;
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
@@ -43,12 +44,14 @@ public class ProductDialogFragment extends DialogFragment
 {
     private static final int REQUEST_IMAGE_CAPTURE = 1;
     private static final int MY_PERMISSIONS_REQUEST_USE_CAMERA = 2;
+
+    private static boolean opened;
+    private static boolean editDialog;
+
     private ProductDialogCache dialogCache;
     private ProductActivityCache cache;
     private ProductDto dto;
     private ProductService productService;
-
-    private static boolean editDialog;
 
     public static ProductDialogFragment newEditDialogInstance(ProductDto dto, ProductActivityCache cache)
     {
@@ -88,6 +91,25 @@ public class ProductDialogFragment extends DialogFragment
     public void setProductService(ProductService productService)
     {
         this.productService = productService;
+    }
+
+    @Override
+    public void onAttach(Activity activity)
+    {
+        super.onAttach(activity);
+        opened = true; // flag to avoid opening this dialog twice
+    }
+
+    @Override
+    public void onDismiss(DialogInterface dialog)
+    {
+        super.onDismiss(dialog);
+        opened = false; // flag to avoid opening this dialog twice
+    }
+
+    public static boolean isOpened()
+    {
+        return opened;
     }
 
     @Override
@@ -228,8 +250,11 @@ public class ProductDialogFragment extends DialogFragment
             {
                 if ( !dto.isDefaultImage() && !dialogCache.isImageScheduledForDeletion() )
                 {
-                    DialogFragment imageViewerDialog = ImageViewerDialog.newEditDeleteInstance(dto, dialogCache);
-                    imageViewerDialog.show(cache.getActivity().getSupportFragmentManager(), "ProductViewer");
+                    if ( !ImageViewerDialog.isOpened() )
+                    {
+                        DialogFragment imageViewerDialog = ImageViewerDialog.newInstance(dto, dialogCache);
+                        imageViewerDialog.show(cache.getActivity().getSupportFragmentManager(), "ProductViewer");
+                    }
                 }
             }
         });
