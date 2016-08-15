@@ -357,17 +357,18 @@ public class ListDialogFragment extends DialogFragment
 
                 int inputChoice = dialogCache.getReminderSpinner().getSelectedItemPosition();
 
-                long reminderTime = reminderTime(inputtime, inputAmount, inputChoice);
+                long reminderTime = calculateReminderTime(inputtime, inputAmount, inputChoice);
 
                 if ( reminderSwitch.isChecked() )
                 {
 
                     long now = new DateTime().getMillis();
-
                     ReminderReceiver alarm = new ReminderReceiver();
                     Intent intent = new Intent(cache.getActivity(), ReminderSchedulingService.class);
-                    intent.putExtra(ReminderSchedulingService.TODOTEXT, "Test");
-                    intent.putExtra(ReminderSchedulingService.TODOUUID, "1");
+                    intent.putExtra(ReminderSchedulingService.MESSAGETEXT, dto.getListName());
+                    intent.putExtra(ReminderSchedulingService.MESSAGEUUID, "1");
+                    intent.putExtra(ReminderSchedulingService.LISTID, dto.getId());
+
                     //alarm.setAlarm(cache.getActivity(), intent, now + 1000);
                     alarm.setAlarm(cache.getActivity(), intent, reminderTime);
                 }
@@ -390,7 +391,7 @@ public class ListDialogFragment extends DialogFragment
     }
 
 
-    public long reminderTime(DateTime date, int inputAmount, int inputChoice)
+    private long calculateReminderTime(DateTime date, int inputAmount, int inputChoice)
     {
 
         long time = 0;
@@ -399,13 +400,16 @@ public class ListDialogFragment extends DialogFragment
 
         switch ( inputChoice )
         {
-
             case 0:
                 temp = date.minusHours(inputAmount);
                 time = temp.getMillis();
+                break;
+
             case 1:
                 temp = date.minusDays(inputAmount);
                 time = temp.getMillis();
+                break;
+
             case 2:
                 temp = date.minusWeeks(inputAmount);
                 time = temp.getMillis();

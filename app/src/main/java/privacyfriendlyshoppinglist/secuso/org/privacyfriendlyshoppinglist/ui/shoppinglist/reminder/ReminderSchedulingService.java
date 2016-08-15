@@ -21,8 +21,10 @@ public class ReminderSchedulingService extends IntentService
 
 
     public static final int NOTIFICATION_ID = 10;
-    public static final String TODOTEXT = "com.shoppinglist.notificationservicetext";
-    public static final String TODOUUID = "com.shoppinglist.notificationserviceuuid";
+    public static final String MESSAGETEXT = "com.shoppinglist.notificationservicetext";
+    public static final String MESSAGEUUID = "com.shoppinglist.notificationserviceuuid";
+    public static final String LISTID = "com.shoppinglist.notificationserviceuuid";
+
     private String messageText;
     private String messageUUID;
     private Context context;
@@ -32,12 +34,12 @@ public class ReminderSchedulingService extends IntentService
     protected void onHandleIntent(Intent intent)
     {
 
-        messageText = intent.getStringExtra(TODOTEXT);
-        messageUUID = intent.getStringExtra(TODOUUID);
+        messageText = intent.getStringExtra(MESSAGETEXT);
+        messageUUID = intent.getStringExtra(MESSAGEUUID);
 
         NotificationManager manager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
         Intent i = new Intent(this, ProductDialogFragment.class);
-        i.putExtra(ReminderSchedulingService.TODOUUID, messageUUID);
+        i.putExtra(ReminderSchedulingService.MESSAGEUUID, messageUUID);
 
         Notification notification = new Notification.Builder(this)
                 .setContentTitle(messageText)
