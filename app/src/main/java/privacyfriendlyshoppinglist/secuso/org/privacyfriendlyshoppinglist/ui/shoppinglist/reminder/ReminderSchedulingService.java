@@ -24,7 +24,7 @@ public class ReminderSchedulingService extends IntentService
     public static final int NOTIFICATION_ID = 10;
     public static final String TODOTEXT = "com.shoppinglist.notificationservicetext";
     public static final String TODOUUID = "com.shoppinglist.notificationserviceuuid";
-    private String messageText = "Test";
+    private String messageText;
     private UUID messageUUID;
     private Context context;
 
@@ -32,6 +32,9 @@ public class ReminderSchedulingService extends IntentService
     @Override
     protected void onHandleIntent(Intent intent)
     {
+
+        messageText = intent.getStringExtra(TODOTEXT);
+        messageUUID = (UUID) intent.getSerializableExtra(TODOUUID);
 
         NotificationManager manager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
         Intent i = new Intent(this, ProductDialogFragment.class);
