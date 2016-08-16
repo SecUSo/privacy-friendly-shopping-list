@@ -148,6 +148,7 @@
     <string name="okay">Okay</string>
     <string name="viewhelp">View Help</string>
     <string name="main_button_welcomedialog">Show Welcome</string>
+    <string name="welcomeDialogVisible">true</string>
 
     <!--### HELP ###-->
     <string name="help">Help</string>

@@ -39,6 +39,8 @@ public class ReminderSchedulingService extends IntentService
 
         String appName = getResources().getString(R.string.app_name);
 
+        //SwitchPreference noticationSetting =
+
         Notification notification = new NotificationCompat.Builder(this)
                 .setContentTitle(appName)
                 .setContentText(messageText)
