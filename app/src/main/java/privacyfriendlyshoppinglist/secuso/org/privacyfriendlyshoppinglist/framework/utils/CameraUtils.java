@@ -4,14 +4,12 @@ import android.graphics.Bitmap;
 import android.graphics.Matrix;
 import android.hardware.Camera;
 import android.view.Surface;
-import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.logger.PFALogger;
 import rx.Observable;
 
 import java.io.File;
 import java.io.FileOutputStream;
-import java.io.IOException;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Description:
@@ -20,7 +18,7 @@ import java.util.Set;
  */
 public abstract class CameraUtils
 {
-    private static Set<String> imagesBeingSaved = new HashSet<>();
+    private static List<String> imagesBeingSaved = new ArrayList<>();
 
     public static Bitmap getRotatedBitmap(Bitmap imageBitmap, int screenRotation)
     {
@@ -88,29 +86,18 @@ public abstract class CameraUtils
     {
         addImageToSet(imagePath);
         File imageFile = new File(imagePath);
-        FileOutputStream fos = null;
         {
             try
             {
                 Bitmap rotatedBitmap = getRotatedBitmap(bitmap, rotation);
-                fos = new FileOutputStream(imageFile);
+                FileOutputStream fos = new FileOutputStream(imageFile);
                 rotatedBitmap.compress(Bitmap.CompressFormat.JPEG, 100, fos);
+                removeImageFromSet(imagePath);
+                fos.close();
             }
             catch ( Exception e )
             {
-
-            }
-            finally
-            {
-                try
-                {
-                    removeImageFromSet(imagePath);
-                    fos.close();
-                }
-                catch ( IOException e1 )
-                {
-                    PFALogger.error("CameraUtils", "saveBitmap", e1);
-                }
+                e.printStackTrace();
             }
         }
         return null;

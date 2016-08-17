@@ -20,6 +20,29 @@
                 app:layout_anchor="@id/camera_preview"
                 app:layout_anchorGravity="bottom|right|end"
                 android:layout_gravity="right|bottom"/>
+
+        <android.support.design.widget.FloatingActionButton
+                android:id="@+id/button_flash"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/fab_margin"
+                android:tint="@color/white"
+                android:src="@drawable/ic_flash_auto_white_48dp"
+                app:layout_anchor="@id/camera_preview"
+                app:layout_anchorGravity="bottom|right|end"
+                android:layout_gravity="right|top"/>
+
+        <android.support.design.widget.FloatingActionButton
+                android:id="@+id/button_retake"
+                android:visibility="gone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/fab_margin"
+                android:tint="@color/white"
+                android:src="@drawable/ic_undo_white_48dp"
+                app:layout_anchor="@id/camera_preview"
+                app:layout_anchorGravity="bottom|right|end"
+                android:layout_gravity="left|bottom"/>
     </FrameLayout>
 
 </RelativeLayout>

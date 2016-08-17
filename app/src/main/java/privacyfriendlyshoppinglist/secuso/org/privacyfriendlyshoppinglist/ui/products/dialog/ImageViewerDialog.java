@@ -10,7 +10,12 @@ import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.*;
+import android.widget.Button;
+import android.widget.ImageButton;
+import android.widget.ProgressBar;
+import android.widget.TextView;
+import com.davemorrissey.labs.subscaleview.ImageSource;
+import com.davemorrissey.labs.subscaleview.SubsamplingScaleImageView;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.R;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.context.AbstractInstanceFactory;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.context.InstanceFactory;
@@ -89,7 +94,7 @@ public class ImageViewerDialog extends DialogFragment
 
         Button closeButton = (Button) rootView.findViewById(R.id.close);
         ImageButton deleteButton = (ImageButton) rootView.findViewById(R.id.delete);
-        ImageView productImage = (ImageView) rootView.findViewById(R.id.product_image_in_viewer);
+        SubsamplingScaleImageView productImage = (SubsamplingScaleImageView) rootView.findViewById(R.id.product_image_in_viewer);
         ProgressBar progressBar = (ProgressBar) rootView.findViewById(R.id.progress_bar);
 
         if ( dialogCache == null )
@@ -111,7 +116,7 @@ public class ImageViewerDialog extends DialogFragment
                         () ->
                         {
                             progressBar.setVisibility(View.GONE);
-                            productImage.setImageBitmap(fullSizeBitmap);
+                            productImage.setImage(ImageSource.bitmap(fullSizeBitmap));
                         }
                 );
 

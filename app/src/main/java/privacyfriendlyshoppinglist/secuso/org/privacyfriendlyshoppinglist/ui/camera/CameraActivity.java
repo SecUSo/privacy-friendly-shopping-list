@@ -16,22 +16,37 @@ import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framew
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.utils.CameraUtils;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.product.business.ProductService;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.products.ProductsActivity;
+import rx.Observable;
+import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Description:
  * Author: Grebiel Jose Ifill Brito
  * Created: 16.08.16 creation date
  */
-public class CameraActivity extends AppCompatActivity
+public class CameraActivity extends AppCompatActivity implements View.OnClickListener
 {
     public static final String THUMBNAIL_KEY = "thumbnail";
 
     private static final int THUMBNAIL_SIZE = 200;
+    public static final int FLASH_OPTIONS_AVAILABLE = 3;
     private Camera mCamera;
     private CameraPreview mPreview;
     private String productId;
     private int cameraOrientation;
+    private FloatingActionButton flashButton;
+    private FloatingActionButton captureButton;
+    private FloatingActionButton retakeButton;
+    private List<Integer> flashIcons;
+    private int currentFlashIconIndex;
+    private boolean PhotoCaptured;
+    private Bitmap takenImageBitmap;
+    private Bitmap rotatedThumbnailBitmap;
+    private byte[] imageData;
 
     @Override
     public void onCreate(Bundle savedInstanceState)
@@ -43,23 +58,18 @@ public class CameraActivity extends AppCompatActivity
         productId = (String) extras.get(ProductsActivity.PRODUCT_ID_KEY);
         String productName = (String) extras.get(ProductsActivity.PRODUCT_NAME);
         setTitle(productName);
+        setupFlashIcons();
 
-        mCamera = getCameraAndSetupOrientation();
-        setContinuousAutoFocus();
+        mCamera = getInitilizedCamera();
+        setupCameraPreview();
 
-        mPreview = new CameraPreview(this, mCamera);
-        FrameLayout preview = (FrameLayout) findViewById(R.id.camera_preview);
-        preview.addView(mPreview);
+        captureButton = (FloatingActionButton) findViewById(R.id.button_capture);
+        flashButton = (FloatingActionButton) findViewById(R.id.button_flash);
+        retakeButton = (FloatingActionButton) findViewById(R.id.button_retake);
 
-        FloatingActionButton captureButton = (FloatingActionButton) findViewById(R.id.button_capture);
-        captureButton.setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View v)
-            {
-                mCamera.takePicture(null, null, mPicture);
-            }
-        });
+        captureButton.setOnClickListener(this);
+        flashButton.setOnClickListener(this);
+        retakeButton.setOnClickListener(this);
     }
 
     @Override
@@ -67,7 +77,7 @@ public class CameraActivity extends AppCompatActivity
     {
         switch ( item.getItemId() )
         {
-            // override back navigation
+            // override back navigation behavior
             case android.R.id.home:
                 onBackPressed();
                 return true;
@@ -76,11 +86,105 @@ public class CameraActivity extends AppCompatActivity
         return super.onOptionsItemSelected(item);
     }
 
-    private void setContinuousAutoFocus()
+    @Override
+    public void onClick(View v)
     {
+        int id = v.getId();
+        switch ( id )
+        {
+            case R.id.button_capture:
+                handleButtonCapture();
+                break;
+            case R.id.button_flash:
+                setupFlash();
+                break;
+            case R.id.button_retake:
+                handleButtonRetake();
+        }
+    }
+
+    private void handleButtonCapture()
+    {
+        if ( !PhotoCaptured )
+        {
+            captureButton.setVisibility(View.GONE);
+            PhotoCaptured = true;
+            captureButton.setImageResource(R.drawable.ic_check_white_48dp);
+            flashButton.animate().alpha(0.0f).setDuration(500L);
+            mCamera.takePicture(null, null, mPicture);
+        }
+        else
+        {
+            String productImagePath = getImagePath();
+
+            // set thumbnail bitmap using a background thread
+            prepareBitmaps(imageData)
+                    .subscribeOn(Schedulers.newThread())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe(
+                            bitmap ->
+                            {
+                                rotatedThumbnailBitmap = bitmap;
+                                // save bitmap using a background thread
+                                CameraUtils.saveBitmap(takenImageBitmap, productImagePath, cameraOrientation)
+                                        .subscribeOn(Schedulers.newThread())
+                                        .subscribe();
+                            },
+                            Throwable::printStackTrace,
+                            () ->
+                            {
+                                Intent resultIntent = new Intent();
+                                resultIntent.putExtra(THUMBNAIL_KEY, rotatedThumbnailBitmap);
+                                setResult(RESULT_OK, resultIntent);
+                                finish();
+                            }
+                    );
+        }
+    }
+
+    private void handleButtonRetake()
+    {
+        PhotoCaptured = false;
+        retakeButton.setVisibility(View.GONE);
+        flashButton.animate().alpha(1.0f).setDuration(500L);
+        captureButton.setImageResource(R.drawable.ic_camera_alt_white_48dp);
+        mCamera.startPreview();
+    }
+
+    private void setupCameraPreview()
+    {
+        mPreview = new CameraPreview(this, mCamera);
+        FrameLayout preview = (FrameLayout) findViewById(R.id.camera_preview);
+        preview.addView(mPreview);
+    }
+
+    private void setupFlash()
+    {
+        currentFlashIconIndex = (++currentFlashIconIndex) % FLASH_OPTIONS_AVAILABLE;
+        flashButton.setImageResource(flashIcons.get(currentFlashIconIndex));
+
         Camera.Parameters parameters = mCamera.getParameters();
-        parameters.setFocusMode(Camera.Parameters.FOCUS_MODE_CONTINUOUS_PICTURE);
+        switch ( currentFlashIconIndex )
+        {
+            case 0:
+                parameters.setFlashMode(Camera.Parameters.FLASH_MODE_AUTO);
+                break;
+            case 1:
+                parameters.setFlashMode(Camera.Parameters.FLASH_MODE_ON);
+                break;
+            default:
+                parameters.setFlashMode(Camera.Parameters.FLASH_MODE_OFF);
+        }
         mCamera.setParameters(parameters);
+    }
+
+    private void setupFlashIcons()
+    {
+        currentFlashIconIndex = 0;
+        flashIcons = new ArrayList<>();
+        flashIcons.add(R.drawable.ic_flash_auto_white_48dp);
+        flashIcons.add(R.drawable.ic_flash_on_white_48dp);
+        flashIcons.add(R.drawable.ic_flash_off_white_48dp);
     }
 
     private Camera.PictureCallback mPicture = new Camera.PictureCallback()
@@ -88,21 +192,30 @@ public class CameraActivity extends AppCompatActivity
         @Override
         public void onPictureTaken(byte[] data, Camera camera)
         {
-            Bitmap imageBitmap = BitmapFactory.decodeByteArray(data, 0, data.length);
-            Bitmap thumbnailBitmap = Bitmap.createScaledBitmap(imageBitmap, THUMBNAIL_SIZE, THUMBNAIL_SIZE, true);
-            Bitmap rotatedThumbnailBitmap = CameraUtils.getRotatedBitmap(thumbnailBitmap, cameraOrientation);
-
-            String productImagePath = getImagePath();
-            CameraUtils.saveBitmap(imageBitmap, productImagePath, cameraOrientation)
-                    .subscribeOn(Schedulers.newThread())
-                    .subscribe();
-
-            Intent resultIntent = new Intent();
-            resultIntent.putExtra(THUMBNAIL_KEY, rotatedThumbnailBitmap);
-            setResult(RESULT_OK, resultIntent);
-            finish();
+            imageData = data;
+            captureButton.setVisibility(View.VISIBLE);
+            retakeButton.setVisibility(View.VISIBLE);
+            retakeButton.animate().rotation(-360).alpha(1.0f).setDuration(500L);
         }
     };
+
+    private Observable<Bitmap> prepareBitmaps(byte[] data)
+    {
+        Observable<Bitmap> observable = Observable
+                .create(subscriber ->
+                {
+                    subscriber.onNext(prepareBitmapsSync(data));
+                    subscriber.onCompleted();
+                });
+        return observable;
+    }
+
+    private Bitmap prepareBitmapsSync(byte[] data)
+    {
+        takenImageBitmap = BitmapFactory.decodeByteArray(data, 0, data.length);
+        Bitmap thumbnailBitmap = Bitmap.createScaledBitmap(takenImageBitmap, THUMBNAIL_SIZE, THUMBNAIL_SIZE, true);
+        return CameraUtils.getRotatedBitmap(thumbnailBitmap, cameraOrientation);
+    }
 
     private String getImagePath()
     {
@@ -112,20 +225,29 @@ public class CameraActivity extends AppCompatActivity
     }
 
 
-    public Camera getCameraAndSetupOrientation()
+    public Camera getInitilizedCamera()
     {
-        Camera c = null;
+        Camera camera = null;
         try
         {
-            c = Camera.open();
+            camera = Camera.open();
             cameraOrientation = getWindowManager().getDefaultDisplay().getRotation();
             int orientation = CameraUtils.getRotationAdjustment(cameraOrientation);
-            c.setDisplayOrientation(orientation);
+            camera.setDisplayOrientation(orientation);
+            setAutoFocus(camera);
+            PhotoCaptured = false;
         }
         catch ( Exception e )
         {
             // no camera available
         }
-        return c;
+        return camera;
+    }
+
+    private void setAutoFocus(Camera camera)
+    {
+        Camera.Parameters parameters = camera.getParameters();
+        parameters.setFocusMode(Camera.Parameters.FOCUS_MODE_CONTINUOUS_PICTURE);
+        camera.setParameters(parameters);
     }
 }

@@ -80,4 +80,6 @@ dependencies {
     compile "joda-time:joda-time:2.2"
     // graphics
     compile 'com.github.PhilJay:MPAndroidChart:v3.0.0-beta1'
+
+    compile 'com.davemorrissey.labs:subsampling-scale-image-view:3.5.0'
 }
