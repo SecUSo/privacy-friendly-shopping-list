@@ -30,6 +30,7 @@ import java.util.List;
 public class ProductsActivity extends AppCompatActivity
 {
     public static final String PRODUCT_ID_KEY = "product.id";
+    public static final String PRODUCT_NAME = "product.name";
 
     private static final long DURATION = 1000L;
     private ProductService productService;

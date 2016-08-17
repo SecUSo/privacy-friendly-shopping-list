@@ -376,12 +376,15 @@ public class ProductDialogFragment extends DialogFragment
         // id is needed to generate a unique file name for the image
         String productName = String.valueOf(dialogCache.getProductName().getText());
         if ( StringUtils.isEmpty(productName) ){
-            productName = StringUtils.EMPTY;
+            String newProductName = getResources().getString(R.string.new_product);
+            productName = newProductName;
         }
         saveUserInput(productName);
 
+        dialogCache.setImageScheduledForDeletion(false);
         Intent takePictureIntent = new Intent(cache.getActivity(), CameraActivity.class);
         takePictureIntent.putExtra(ProductsActivity.PRODUCT_ID_KEY, dto.getId());
+        takePictureIntent.putExtra(ProductsActivity.PRODUCT_NAME, dto.getProductName());
         this.startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
     }
 

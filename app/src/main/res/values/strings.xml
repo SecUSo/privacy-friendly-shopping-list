@@ -40,6 +40,7 @@
     <string name="notification_message">List name: %1$s\nDead line: %2$s</string>
 
     <!-- ### PRODUCTS ### -->
+    <string name="new_product">New Product</string>
     <string name="total_amount">Total:</string>
     <string name="total_amount_separator">/</string>
     <string name="store_label">Store:</string>

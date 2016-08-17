@@ -1,13 +1,14 @@
 package privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.camera;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.hardware.Camera;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
+import android.support.v7.app.AppCompatActivity;
+import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 import android.widget.FrameLayout;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.R;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.context.AbstractInstanceFactory;
@@ -22,7 +23,7 @@ import rx.schedulers.Schedulers;
  * Author: Grebiel Jose Ifill Brito
  * Created: 16.08.16 creation date
  */
-public class CameraActivity extends Activity
+public class CameraActivity extends AppCompatActivity
 {
     public static final String THUMBNAIL_KEY = "thumbnail";
 
@@ -38,6 +39,11 @@ public class CameraActivity extends Activity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.camera_preview);
 
+        Bundle extras = getIntent().getExtras();
+        productId = (String) extras.get(ProductsActivity.PRODUCT_ID_KEY);
+        String productName = (String) extras.get(ProductsActivity.PRODUCT_NAME);
+        setTitle(productName);
+
         mCamera = getCameraAndSetupOrientation();
         setContinuousAutoFocus();
 
@@ -45,10 +51,7 @@ public class CameraActivity extends Activity
         FrameLayout preview = (FrameLayout) findViewById(R.id.camera_preview);
         preview.addView(mPreview);
 
-        Bundle extras = getIntent().getExtras();
-        productId = (String) extras.get(ProductsActivity.PRODUCT_ID_KEY);
-
-        Button captureButton = (Button) findViewById(R.id.button_capture);
+        FloatingActionButton captureButton = (FloatingActionButton) findViewById(R.id.button_capture);
         captureButton.setOnClickListener(new View.OnClickListener()
         {
             @Override
@@ -57,6 +60,20 @@ public class CameraActivity extends Activity
                 mCamera.takePicture(null, null, mPicture);
             }
         });
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item)
+    {
+        switch ( item.getItemId() )
+        {
+            // override back navigation
+            case android.R.id.home:
+                onBackPressed();
+                return true;
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 
     private void setContinuousAutoFocus()
