@@ -133,6 +133,13 @@ public class ProductDialogFragment extends DialogFragment
         dialogCache.getCategory().setText(dto.getProductCategory());
         dialogCache.getCustomStore().setText(dto.getProductStore());
 
+        PackageManager pm = getContext().getPackageManager();
+        if ( !pm.hasSystemFeature(PackageManager.FEATURE_CAMERA) )
+        {
+            dialogCache.getCameraIcon().setVisibility(View.GONE);
+            dialogCache.getProductImage().setVisibility(View.GONE);
+        }
+
         if ( editDialog )
         {
             dialogCache.getTitleTextView().setText(getActivity().getResources().getString(R.string.product_name_edit));

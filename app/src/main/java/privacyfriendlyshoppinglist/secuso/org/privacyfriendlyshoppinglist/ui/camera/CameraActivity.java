@@ -193,6 +193,7 @@ public class CameraActivity extends AppCompatActivity implements View.OnClickLis
         public void onPictureTaken(byte[] data, Camera camera)
         {
             imageData = data;
+            mCamera.stopPreview();
             captureButton.setVisibility(View.VISIBLE);
             retakeButton.setVisibility(View.VISIBLE);
             retakeButton.animate().rotation(-360).alpha(1.0f).setDuration(500L);

@@ -2,6 +2,7 @@
 <RelativeLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/layout"
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -10,39 +11,43 @@
             android:id="@+id/camera_preview"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
-        <android.support.design.widget.FloatingActionButton
-                android:id="@+id/button_capture"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="@dimen/fab_margin"
-                android:tint="@color/white"
-                android:src="@drawable/ic_camera_alt_white_48dp"
-                app:layout_anchor="@id/camera_preview"
-                app:layout_anchorGravity="bottom|right|end"
-                android:layout_gravity="right|bottom"/>
-
-        <android.support.design.widget.FloatingActionButton
-                android:id="@+id/button_flash"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="@dimen/fab_margin"
-                android:tint="@color/white"
-                android:src="@drawable/ic_flash_auto_white_48dp"
-                app:layout_anchor="@id/camera_preview"
-                app:layout_anchorGravity="bottom|right|end"
-                android:layout_gravity="right|top"/>
-
-        <android.support.design.widget.FloatingActionButton
-                android:id="@+id/button_retake"
-                android:visibility="gone"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="@dimen/fab_margin"
-                android:tint="@color/white"
-                android:src="@drawable/ic_undo_white_48dp"
-                app:layout_anchor="@id/camera_preview"
-                app:layout_anchorGravity="bottom|right|end"
-                android:layout_gravity="left|bottom"/>
     </FrameLayout>
+
+    <android.support.design.widget.FloatingActionButton
+            android:id="@+id/button_capture"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:tint="@color/white"
+            android:src="@drawable/ic_camera_alt_white_48dp"
+            app:layout_anchor="@id/layout"
+            app:layout_anchorGravity="bottom|right|end"
+            android:layout_gravity="right|bottom" android:layout_marginLeft="@dimen/fab_margin"
+            android:layout_margin="@dimen/fab_margin"
+            android:layout_alignParentBottom="true" android:layout_alignParentEnd="true"/>
+
+    <android.support.design.widget.FloatingActionButton
+            android:id="@+id/button_flash"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:tint="@color/white"
+            android:src="@drawable/ic_flash_auto_white_48dp"
+            app:layout_anchor="@id/layout"
+            app:layout_anchorGravity="bottom|right|end"
+            android:layout_gravity="right|top" android:layout_marginLeft="@dimen/fab_margin"
+            android:layout_margin="@dimen/fab_margin"
+            android:layout_alignParentTop="true" android:layout_alignParentEnd="true"/>
+
+    <android.support.design.widget.FloatingActionButton
+            android:id="@+id/button_retake"
+            android:visibility="gone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:tint="@color/white"
+            android:src="@drawable/ic_undo_white_48dp"
+            app:layout_anchor="@id/layout"
+            app:layout_anchorGravity="bottom|right|end"
+            android:layout_gravity="left|bottom" android:layout_marginLeft="@dimen/fab_margin"
+            android:layout_margin="@dimen/fab_margin"
+            android:layout_alignParentBottom="true" android:layout_alignParentStart="true"/>
 
 </RelativeLayout>
