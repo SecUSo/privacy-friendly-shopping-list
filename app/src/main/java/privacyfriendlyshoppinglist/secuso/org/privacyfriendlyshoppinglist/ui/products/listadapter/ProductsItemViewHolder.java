@@ -57,7 +57,7 @@ public class ProductsItemViewHolder extends RecyclerView.ViewHolder
         if ( !dto.isDefaultImage() )
         {
             productItemCache.getProductImageInDetail().setVisibility(View.VISIBLE);
-            productItemCache.getProductImageInDetail().setImageBitmap(dto.getBitmapImage());
+            productItemCache.getProductImageInDetail().setImageBitmap(dto.getThumbnailBitmap());
         }
         else
         {

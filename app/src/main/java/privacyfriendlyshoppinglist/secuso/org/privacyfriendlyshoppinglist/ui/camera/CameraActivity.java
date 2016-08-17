@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.Matrix;
 import android.hardware.Camera;
 import android.os.Bundle;
 import android.view.View;
@@ -13,12 +12,10 @@ import android.widget.FrameLayout;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.R;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.context.AbstractInstanceFactory;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.context.InstanceFactory;
+import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.utils.CameraUtils;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.product.business.ProductService;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.products.ProductsActivity;
-
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
+import rx.schedulers.Schedulers;
 
 /**
  * Description:
@@ -28,11 +25,12 @@ import java.io.IOException;
 public class CameraActivity extends Activity
 {
     public static final String THUMBNAIL_KEY = "thumbnail";
-    public static final String IMAGE_PATH_KEY = "imagePath";
 
+    private static final int THUMBNAIL_SIZE = 200;
     private Camera mCamera;
     private CameraPreview mPreview;
     private String productId;
+    private int cameraOrientation;
 
     @Override
     public void onCreate(Bundle savedInstanceState)
@@ -40,7 +38,8 @@ public class CameraActivity extends Activity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.camera_preview);
 
-        mCamera = getCameraInstance();
+        mCamera = getCameraAndSetupOrientation();
+        setContinuousAutoFocus();
 
         mPreview = new CameraPreview(this, mCamera);
         FrameLayout preview = (FrameLayout) findViewById(R.id.camera_preview);
@@ -60,62 +59,51 @@ public class CameraActivity extends Activity
         });
     }
 
+    private void setContinuousAutoFocus()
+    {
+        Camera.Parameters parameters = mCamera.getParameters();
+        parameters.setFocusMode(Camera.Parameters.FOCUS_MODE_CONTINUOUS_PICTURE);
+        mCamera.setParameters(parameters);
+    }
+
     private Camera.PictureCallback mPicture = new Camera.PictureCallback()
     {
         @Override
         public void onPictureTaken(byte[] data, Camera camera)
         {
-            AbstractInstanceFactory instanceFactory = new InstanceFactory(getApplicationContext());
-            ProductService productService = (ProductService) instanceFactory.createInstance(ProductService.class);
-
-            File path = new File(productService.getProductImagePath(productId));
-
-            Matrix matrix = new Matrix();
-            matrix.postRotate(270);
             Bitmap imageBitmap = BitmapFactory.decodeByteArray(data, 0, data.length);
-            Bitmap rotatedBitmap = Bitmap.createBitmap(imageBitmap, 0, 0, imageBitmap.getWidth(), imageBitmap.getHeight(), matrix, true);
-            Bitmap thumbnailBitmap = Bitmap.createScaledBitmap(rotatedBitmap, 200, 200, true);
+            Bitmap thumbnailBitmap = Bitmap.createScaledBitmap(imageBitmap, THUMBNAIL_SIZE, THUMBNAIL_SIZE, true);
+            Bitmap rotatedThumbnailBitmap = CameraUtils.getRotatedBitmap(thumbnailBitmap, cameraOrientation);
 
-            FileOutputStream fos = null;
-            {
-                try
-                {
-                    fos = new FileOutputStream(path);
-                    // Use the compress method on the BitMap object to write image to the OutputStream
-                    rotatedBitmap.compress(Bitmap.CompressFormat.PNG, 100, fos);
-                }
-                catch ( Exception e )
-                {
-                    e.printStackTrace();
-                }
-                finally
-                {
-                    try
-                    {
-                        fos.close();
-                    }
-                    catch ( IOException e )
-                    {
-                        e.printStackTrace();
-                    }
-                }
-            }
+            String productImagePath = getImagePath();
+            CameraUtils.saveBitmap(imageBitmap, productImagePath, cameraOrientation)
+                    .subscribeOn(Schedulers.newThread())
+                    .subscribe();
 
             Intent resultIntent = new Intent();
-            resultIntent.putExtra(THUMBNAIL_KEY, thumbnailBitmap);
-            resultIntent.putExtra(IMAGE_PATH_KEY, path.getAbsolutePath());
+            resultIntent.putExtra(THUMBNAIL_KEY, rotatedThumbnailBitmap);
             setResult(RESULT_OK, resultIntent);
             finish();
         }
     };
 
+    private String getImagePath()
+    {
+        AbstractInstanceFactory instanceFactory = new InstanceFactory(getApplicationContext());
+        ProductService productService = (ProductService) instanceFactory.createInstance(ProductService.class);
+        return productService.getProductImagePath(productId);
+    }
 
-    public Camera getCameraInstance()
+
+    public Camera getCameraAndSetupOrientation()
     {
         Camera c = null;
         try
         {
             c = Camera.open();
+            cameraOrientation = getWindowManager().getDefaultDisplay().getRotation();
+            int orientation = CameraUtils.getRotationAdjustment(cameraOrientation);
+            c.setDisplayOrientation(orientation);
         }
         catch ( Exception e )
         {

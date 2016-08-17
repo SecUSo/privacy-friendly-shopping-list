@@ -39,9 +39,7 @@ public class ProductDto
 
     private boolean selectedForDeletion;
 
-    private Bitmap bitmapImage;
-
-    private String imagePath;
+    private Bitmap thumbnailBitmap;
 
     private boolean isDefaultImage;
 
@@ -140,14 +138,14 @@ public class ProductDto
         this.productName = productName;
     }
 
-    public Bitmap getBitmapImage()
+    public Bitmap getThumbnailBitmap()
     {
-        return bitmapImage;
+        return thumbnailBitmap;
     }
 
-    public void setBitmapImage(Bitmap bitmapImage)
+    public void setThumbnailBitmap(Bitmap thumbnailBitmap)
     {
-        this.bitmapImage = bitmapImage;
+        this.thumbnailBitmap = thumbnailBitmap;
     }
 
     public boolean isDefaultImage()
@@ -158,16 +156,6 @@ public class ProductDto
     public void setDefaultImage(boolean defaultImage)
     {
         isDefaultImage = defaultImage;
-    }
-
-    public String getImagePath()
-    {
-        return imagePath;
-    }
-
-    public void setImagePath(String imagePath)
-    {
-        this.imagePath = imagePath;
     }
 
     public String getSummary(Context context)
@@ -298,8 +286,11 @@ public class ProductDto
                 ", productNotes='" + productNotes + '\'' +
                 ", productStore='" + productStore + '\'' +
                 ", productPrice='" + productPrice + '\'' +
+                ", totalProductPrice='" + totalProductPrice + '\'' +
                 ", checked=" + checked +
                 ", selectedForDeletion=" + selectedForDeletion +
+                ", thumbnailBitmap=" + thumbnailBitmap +
+                ", isDefaultImage=" + isDefaultImage +
                 '}';
     }
 }

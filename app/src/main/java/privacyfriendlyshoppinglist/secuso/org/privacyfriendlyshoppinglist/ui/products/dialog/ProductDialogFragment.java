@@ -35,6 +35,8 @@ import rx.Observable;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 
+import java.io.File;
+
 import static android.app.Activity.RESULT_OK;
 
 /**
@@ -48,9 +50,10 @@ public class ProductDialogFragment extends DialogFragment
     private static boolean opened;
     private static boolean editDialog;
 
+    private ProductDto dto;
     private ProductDialogCache dialogCache;
     private ProductActivityCache cache;
-    private ProductDto dto;
+
     private ProductService productService;
 
     public static ProductDialogFragment newEditDialogInstance(ProductDto dto, ProductActivityCache cache)
@@ -133,7 +136,7 @@ public class ProductDialogFragment extends DialogFragment
         if ( editDialog )
         {
             dialogCache.getTitleTextView().setText(getActivity().getResources().getString(R.string.product_name_edit));
-            dialogCache.getProductImage().setImageBitmap(dto.getBitmapImage());
+            dialogCache.getProductImage().setImageBitmap(dto.getThumbnailBitmap());
         }
         else
         {
@@ -327,7 +330,9 @@ public class ProductDialogFragment extends DialogFragment
         if ( dialogCache.isImageScheduledForDeletion() )
         {
             Bitmap bitmap = BitmapFactory.decodeResource(getContext().getResources(), R.drawable.ic_menu_camera);
-            dto.setBitmapImage(bitmap);
+            File imageFile = new File(productService.getProductImagePath(dto.getId()));
+            imageFile.delete();
+            dto.setThumbnailBitmap(bitmap);
             dto.setDefaultImage(true);
         }
 
@@ -341,11 +346,9 @@ public class ProductDialogFragment extends DialogFragment
         {
             Bundle extras = data.getExtras();
             Bitmap imageBitmap = (Bitmap) extras.get(CameraActivity.THUMBNAIL_KEY);
-            String imagePath = (String) extras.get(CameraActivity.IMAGE_PATH_KEY);
 
             dialogCache.getProductImage().setImageBitmap(imageBitmap);
-            dto.setBitmapImage(imageBitmap);
-            dto.setImagePath(imagePath);
+            dto.setThumbnailBitmap(imageBitmap);
             dto.setDefaultImage(false);
         }
     }

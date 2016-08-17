@@ -31,7 +31,6 @@
 
     <ImageView
             android:id="@+id/product_image_in_viewer"
-            android:src="@drawable/ic_menu_camera"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:scaleType="fitCenter"
@@ -39,6 +38,13 @@
             android:layout_below="@+id/relativeLayout"
             android:layout_above="@+id/close"
             android:layout_alignParentEnd="true"/>
+
+    <ProgressBar
+            android:id="@+id/progress_bar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true"/>
 
     <Button
             android:id="@+id/close"

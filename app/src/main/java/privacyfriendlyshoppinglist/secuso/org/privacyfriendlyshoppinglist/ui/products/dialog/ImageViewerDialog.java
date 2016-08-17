@@ -1,6 +1,5 @@
 package privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.products.dialog;
 
-
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.DialogInterface;
@@ -11,15 +10,16 @@ import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.Button;
-import android.widget.ImageButton;
-import android.widget.ImageView;
-import android.widget.TextView;
+import android.widget.*;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.R;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.context.AbstractInstanceFactory;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.context.InstanceFactory;
+import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.utils.CameraUtils;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.product.business.ProductService;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.product.business.domain.ProductDto;
+import rx.Observable;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.schedulers.Schedulers;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -30,9 +30,11 @@ import java.io.FileNotFoundException;
  */
 public class ImageViewerDialog extends DialogFragment
 {
+    private static final long WAIT_INTERVAL_MILLISECONDS = 200L;
     private static boolean opened;
     private ProductDialogCache dialogCache;
     private ProductDto dto;
+    private Bitmap fullSizeBitmap;
 
     public static ImageViewerDialog newInstance(ProductDto dto, ProductDialogCache dialogCache)
     {
@@ -84,9 +86,11 @@ public class ImageViewerDialog extends DialogFragment
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         LayoutInflater inflater = (LayoutInflater) getActivity().getSystemService(getActivity().LAYOUT_INFLATER_SERVICE);
         View rootView = inflater.inflate(R.layout.product_image_viewer, null);
+
         Button closeButton = (Button) rootView.findViewById(R.id.close);
         ImageButton deleteButton = (ImageButton) rootView.findViewById(R.id.delete);
         ImageView productImage = (ImageView) rootView.findViewById(R.id.product_image_in_viewer);
+        ProgressBar progressBar = (ProgressBar) rootView.findViewById(R.id.progress_bar);
 
         if ( dialogCache == null )
         {
@@ -98,7 +102,18 @@ public class ImageViewerDialog extends DialogFragment
         String listDialogTitle = getContext().getResources().getString(R.string.product_as_title, dto.getProductName());
         titleTextView.setText(listDialogTitle);
 
-        productImage.setImageBitmap(loadImageFromStorage(dto));
+        loadImageFromStorage(dto)
+                .subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(
+                        result -> fullSizeBitmap = result,
+                        Throwable::printStackTrace,
+                        () ->
+                        {
+                            progressBar.setVisibility(View.GONE);
+                            productImage.setImageBitmap(fullSizeBitmap);
+                        }
+                );
 
         closeButton.setOnClickListener(new View.OnClickListener()
         {
@@ -126,17 +141,42 @@ public class ImageViewerDialog extends DialogFragment
         return builder.create();
     }
 
-    private Bitmap loadImageFromStorage(ProductDto dto)
+    private Observable<Bitmap> loadImageFromStorage(ProductDto dto)
+    {
+        Observable<Bitmap> observable = Observable
+                .create(subscriber ->
+                {
+                    try
+                    {
+                        subscriber.onNext(loadImageFromStorageSync(dto));
+                    }
+                    catch ( InterruptedException e )
+                    {
+                        e.printStackTrace();
+                    }
+                    subscriber.onCompleted();
+                });
+        return observable;
+    }
+
+    private Bitmap loadImageFromStorageSync(ProductDto dto) throws InterruptedException
     {
         AbstractInstanceFactory instanceFactory = new InstanceFactory(getContext());
         ProductService productService = (ProductService) instanceFactory.createInstance(ProductService.class);
+        String productImagePath = productService.getProductImagePath(dto.getId());
 
-        try {
-            File f=new File(productService.getProductImagePath(dto.getId()));
-            Bitmap b = BitmapFactory.decodeStream(new FileInputStream(f));
-            return b;
+        while ( CameraUtils.isSavingImage(productImagePath) )
+        {
+            Thread.sleep(WAIT_INTERVAL_MILLISECONDS);
         }
-        catch (FileNotFoundException e)
+
+        try
+        {
+            File imageFile = new File(productImagePath);
+            Bitmap bitmap = BitmapFactory.decodeStream(new FileInputStream(imageFile));
+            return bitmap;
+        }
+        catch ( FileNotFoundException e )
         {
             return null;
         }
