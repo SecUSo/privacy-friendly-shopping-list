@@ -41,6 +41,8 @@ public class ProductDto
 
     private Bitmap bitmapImage;
 
+    private String imagePath;
+
     private boolean isDefaultImage;
 
     public String getId()
@@ -156,6 +158,16 @@ public class ProductDto
     public void setDefaultImage(boolean defaultImage)
     {
         isDefaultImage = defaultImage;
+    }
+
+    public String getImagePath()
+    {
+        return imagePath;
+    }
+
+    public void setImagePath(String imagePath)
+    {
+        this.imagePath = imagePath;
     }
 
     public String getSummary(Context context)

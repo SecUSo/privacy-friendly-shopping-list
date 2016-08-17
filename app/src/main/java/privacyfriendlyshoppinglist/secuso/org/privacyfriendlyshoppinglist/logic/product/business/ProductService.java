@@ -15,15 +15,11 @@ import java.util.List;
  */
 public interface ProductService extends ContextSetter
 {
-    String SORT_BY_NAME = "sort..by.name";
-    String SORT_BY_COUNT = "sort.by.count";
-    String SORT_BY_PRICE = "sort.by.price";
-    String SORT_BY_CATEGORY = "sort.by.category";
-    String SORT_BY_STORE = "sort.by.description";
-
     void saveOrUpdate(ProductDto dto, String listId);
 
     ProductDto getById(String id);
+
+    String getProductImagePath(String id);
 
     void deleteById(String id);
 

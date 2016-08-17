@@ -8,6 +8,7 @@ import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
 import com.github.mikephil.charting.interfaces.datasets.IBarDataSet;
+import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.utils.StringUtils;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.statistics.business.domain.StatisticsQuery;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.statistics.StatisticsCache;
 
@@ -33,7 +34,6 @@ import java.util.List;
  */
 public class PFAChart
 {
-    private static final String EMPTY = "";
     private static final int ANIMATION_DURATION = 2000;
     private BarChart chart;
     private Context context;
@@ -47,7 +47,7 @@ public class PFAChart
         this.chart = cache.getChart();
         this.chart.setDrawBarShadow(false);
         this.chart.setDrawValueAboveBar(true);
-        this.chart.setDescription(EMPTY);
+        this.chart.setDescription(StringUtils.EMPTY);
         this.chart.setMaxVisibleValueCount(12);
         this.chart.setPinchZoom(false);
         this.chart.setDrawGridBackground(false);
@@ -89,7 +89,7 @@ public class PFAChart
         }
         else
         {
-            dataSet = new BarDataSet(yValues, EMPTY);
+            dataSet = new BarDataSet(yValues, StringUtils.EMPTY);
             dataSet.setColors(colors);
 
             ArrayList<IBarDataSet> dataSets = new ArrayList<>();

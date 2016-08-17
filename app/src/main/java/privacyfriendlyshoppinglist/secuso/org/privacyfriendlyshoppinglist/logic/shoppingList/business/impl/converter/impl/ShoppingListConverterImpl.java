@@ -20,7 +20,6 @@ import java.util.Date;
 public class ShoppingListConverterImpl implements ShoppingListConverter
 {
     private static final String SPACE = " ";
-    private static final String EMPTY = "";
 
     private String language;
     private String dateLongPattern;
@@ -116,8 +115,8 @@ public class ShoppingListConverterImpl implements ShoppingListConverter
         }
         else
         {
-            dto.setDeadlineDate(EMPTY);
-            dto.setDeadlineTime(EMPTY);
+            dto.setDeadlineDate(StringUtils.EMPTY);
+            dto.setDeadlineTime(StringUtils.EMPTY);
         }
 
         if ( entity.getReminderCount() != null )

@@ -10,7 +10,6 @@ import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
-import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.content.ContextCompat;
@@ -27,6 +26,7 @@ import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framew
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.product.business.ProductService;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.product.business.domain.AutoCompleteLists;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.product.business.domain.ProductDto;
+import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.camera.CameraActivity;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.products.ProductActivityCache;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.products.ProductsActivity;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.products.dialog.listeners.onFocusListener.ProductDialogFocusListener;
@@ -275,6 +275,13 @@ public class ProductDialogFragment extends DialogFragment
             @Override
             public void onClick(DialogInterface dialogInterface, int i)
             {
+                if (dto.getId() != null && !editDialog)
+                {
+                    // if dto was implicitly saved because of taking a picture for the product, then delete
+                    productService.deleteById(dto.getId());
+                    ProductsActivity productsActivity = (ProductsActivity) cache.getActivity();
+                    productsActivity.updateListView();
+                }
             }
         });
 
@@ -288,7 +295,8 @@ public class ProductDialogFragment extends DialogFragment
             @Override
             public void onClick(View view)
             {
-                if ( StringUtils.isEmpty(String.valueOf(dialogCache.getProductName().getText())) )
+                String productName = String.valueOf(dialogCache.getProductName().getText());
+                if ( StringUtils.isEmpty(productName) )
                 {
                     Toast toast = Toast.makeText(getActivity().getApplicationContext(), R.string.alert_missing_product_name, Toast.LENGTH_LONG);
                     toast.setGravity(Gravity.CENTER, 0, 0);
@@ -296,24 +304,7 @@ public class ProductDialogFragment extends DialogFragment
                 }
                 else
                 {
-                    dto.setProductName(String.valueOf(dialogCache.getProductName().getText()));
-
-                    dto.setProductNotes(String.valueOf(dialogCache.getProductNotes().getText()));
-                    dto.setQuantity(String.valueOf(dialogCache.getQuantity().getText()));
-
-                    dto.setProductPrice(String.valueOf(dialogCache.getPrice().getText()));
-
-                    dto.setProductCategory(String.valueOf(dialogCache.getCategory().getText()));
-                    dto.setProductStore(String.valueOf(dialogCache.getCustomStore().getText()));
-
-                    if ( dialogCache.isImageScheduledForDeletion() )
-                    {
-                        Bitmap bitmap = BitmapFactory.decodeResource(getContext().getResources(), R.drawable.ic_menu_camera);
-                        dto.setBitmapImage(bitmap);
-                        dto.setDefaultImage(true);
-                    }
-
-                    productService.saveOrUpdate(dto, cache.getListId());
+                    saveUserInput(productName);
                     ProductsActivity productsActivity = (ProductsActivity) cache.getActivity();
                     productsActivity.updateListView();
 
@@ -324,28 +315,23 @@ public class ProductDialogFragment extends DialogFragment
         return dialog;
     }
 
-    private void startImageCaptureAction()
+    private void saveUserInput(String productName)
     {
-        Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        if ( takePictureIntent.resolveActivity(cache.getActivity().getPackageManager()) != null )
+        dto.setProductName(productName);
+        dto.setProductNotes(String.valueOf(dialogCache.getProductNotes().getText()));
+        dto.setQuantity(String.valueOf(dialogCache.getQuantity().getText()));
+        dto.setProductPrice(String.valueOf(dialogCache.getPrice().getText()));
+        dto.setProductCategory(String.valueOf(dialogCache.getCategory().getText()));
+        dto.setProductStore(String.valueOf(dialogCache.getCustomStore().getText()));
+
+        if ( dialogCache.isImageScheduledForDeletion() )
         {
-            this.startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
+            Bitmap bitmap = BitmapFactory.decodeResource(getContext().getResources(), R.drawable.ic_menu_camera);
+            dto.setBitmapImage(bitmap);
+            dto.setDefaultImage(true);
         }
-    }
 
-    private void setupAutoCompleteLists(AutoCompleteLists autoCompleteLists)
-    {
-        String[] productsArray = autoCompleteLists.getProductsArray();
-        ArrayAdapter<String> productNamesAdapter = new ArrayAdapter<>(getActivity(), R.layout.pfa_lists, productsArray);
-        dialogCache.getProductName().setAdapter(productNamesAdapter);
-
-        String[] storesArray = autoCompleteLists.getStoresArray();
-        ArrayAdapter<String> storesAdapter = new ArrayAdapter<>(getActivity(), R.layout.pfa_lists, storesArray);
-        dialogCache.getCustomStore().setAdapter(storesAdapter);
-
-        String[] categoryArray = autoCompleteLists.getCategoryArray();
-        ArrayAdapter<String> categoryAdapter = new ArrayAdapter<>(getActivity(), R.layout.pfa_lists, categoryArray);
-        dialogCache.getCategory().setAdapter(categoryAdapter);
+        productService.saveOrUpdate(dto, cache.getListId());
     }
 
     @Override
@@ -354,11 +340,13 @@ public class ProductDialogFragment extends DialogFragment
         if ( requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK )
         {
             Bundle extras = data.getExtras();
-            Bitmap imageBitmap = (Bitmap) extras.get("data");
+            Bitmap imageBitmap = (Bitmap) extras.get(CameraActivity.THUMBNAIL_KEY);
+            String imagePath = (String) extras.get(CameraActivity.IMAGE_PATH_KEY);
 
-            dto.setBitmapImage(imageBitmap);
-            dto.setDefaultImage(false);
             dialogCache.getProductImage().setImageBitmap(imageBitmap);
+            dto.setBitmapImage(imageBitmap);
+            dto.setImagePath(imagePath);
+            dto.setDefaultImage(false);
         }
     }
 
@@ -377,5 +365,35 @@ public class ProductDialogFragment extends DialogFragment
                 return;
             }
         }
+    }
+
+    private void startImageCaptureAction()
+    {
+        // dto must be saved first in order to have an id.
+        // id is needed to generate a unique file name for the image
+        String productName = String.valueOf(dialogCache.getProductName().getText());
+        if ( StringUtils.isEmpty(productName) ){
+            productName = StringUtils.EMPTY;
+        }
+        saveUserInput(productName);
+
+        Intent takePictureIntent = new Intent(cache.getActivity(), CameraActivity.class);
+        takePictureIntent.putExtra(ProductsActivity.PRODUCT_ID_KEY, dto.getId());
+        this.startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
+    }
+
+    private void setupAutoCompleteLists(AutoCompleteLists autoCompleteLists)
+    {
+        String[] productsArray = autoCompleteLists.getProductsArray();
+        ArrayAdapter<String> productNamesAdapter = new ArrayAdapter<>(getActivity(), R.layout.pfa_lists, productsArray);
+        dialogCache.getProductName().setAdapter(productNamesAdapter);
+
+        String[] storesArray = autoCompleteLists.getStoresArray();
+        ArrayAdapter<String> storesAdapter = new ArrayAdapter<>(getActivity(), R.layout.pfa_lists, storesArray);
+        dialogCache.getCustomStore().setAdapter(storesAdapter);
+
+        String[] categoryArray = autoCompleteLists.getCategoryArray();
+        ArrayAdapter<String> categoryAdapter = new ArrayAdapter<>(getActivity(), R.layout.pfa_lists, categoryArray);
+        dialogCache.getCategory().setAdapter(categoryAdapter);
     }
 }

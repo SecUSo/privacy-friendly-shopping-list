@@ -1,6 +1,7 @@
 package privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.product.business.impl;
 
 import android.content.Context;
+import android.content.ContextWrapper;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.comparators.PFAComparators;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.persistence.DB;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.product.business.ProductService;
@@ -16,6 +17,7 @@ import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.
 import rx.Observable;
 
 import javax.inject.Inject;
+import java.io.File;
 import java.util.Collections;
 import java.util.List;
 
@@ -26,6 +28,9 @@ import java.util.List;
  */
 public class ProductServiceImpl implements ProductService
 {
+    private static final String IMAGE_DIR_NAME = "imageDir";
+    private static final String EXTENSION = ".jpg";
+
     private ProductItemDao productItemDao;
     private ProductConverterService converterService;
     private ShoppingListService shoppingListService;
@@ -77,9 +82,21 @@ public class ProductServiceImpl implements ProductService
     }
 
     @Override
+    public String getProductImagePath(String id){
+        ContextWrapper contextWrapper = new ContextWrapper(context);
+        File directory = contextWrapper.getDir(IMAGE_DIR_NAME, Context.MODE_PRIVATE);
+        File path = new File(directory, getUniqueName(id));
+        return path.getAbsolutePath();
+    }
+
+    @Override
     public void deleteById(String id)
     {
         productItemDao.deleteById(Long.valueOf(id));
+
+        // delete imageFile if exists
+        File imageFile = new File(getProductImagePath(id));
+        imageFile.delete();
     }
 
     @Override
@@ -225,5 +242,14 @@ public class ProductServiceImpl implements ProductService
         ProductDto dto = new ProductDto();
         converterService.convertEntitiesToDto(entity, dto);
         return dto;
+    }
+
+    private String getUniqueName(String productId)
+    {
+        StringBuilder sb = new StringBuilder();
+        sb
+                .append(productId)
+                .append(EXTENSION);
+        return sb.toString();
     }
 }

@@ -16,7 +16,14 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.R;
+import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.context.AbstractInstanceFactory;
+import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.context.InstanceFactory;
+import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.product.business.ProductService;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.product.business.domain.ProductDto;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 
 /**
  * Created by Chris on 11.08.2016.
@@ -91,7 +98,7 @@ public class ImageViewerDialog extends DialogFragment
         String listDialogTitle = getContext().getResources().getString(R.string.product_as_title, dto.getProductName());
         titleTextView.setText(listDialogTitle);
 
-        productImage.setImageBitmap(dto.getBitmapImage());
+        productImage.setImageBitmap(loadImageFromStorage(dto));
 
         closeButton.setOnClickListener(new View.OnClickListener()
         {
@@ -117,6 +124,22 @@ public class ImageViewerDialog extends DialogFragment
 
         builder.setView(rootView);
         return builder.create();
+    }
+
+    private Bitmap loadImageFromStorage(ProductDto dto)
+    {
+        AbstractInstanceFactory instanceFactory = new InstanceFactory(getContext());
+        ProductService productService = (ProductService) instanceFactory.createInstance(ProductService.class);
+
+        try {
+            File f=new File(productService.getProductImagePath(dto.getId()));
+            Bitmap b = BitmapFactory.decodeStream(new FileInputStream(f));
+            return b;
+        }
+        catch (FileNotFoundException e)
+        {
+            return null;
+        }
     }
 
 }

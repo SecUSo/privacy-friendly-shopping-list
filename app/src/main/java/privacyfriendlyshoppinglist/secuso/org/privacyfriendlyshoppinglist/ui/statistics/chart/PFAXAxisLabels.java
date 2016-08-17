@@ -2,6 +2,7 @@ package privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.st
 
 import com.github.mikephil.charting.components.AxisBase;
 import com.github.mikephil.charting.formatter.AxisValueFormatter;
+import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.utils.StringUtils;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -14,7 +15,6 @@ import java.util.List;
  */
 class PFAXAxisLabels implements AxisValueFormatter
 {
-    private static final String EMPTY = "";
     private List<String> labels;
 
     PFAXAxisLabels(String[] labels)
@@ -28,14 +28,14 @@ class PFAXAxisLabels implements AxisValueFormatter
     {
         if ( value == 0.0 || labels.isEmpty() )
         {
-            return EMPTY;
+            return StringUtils.EMPTY;
         }
         else
         {
             value = value - 1;
             if ( value >= labels.size() )
             {
-                return EMPTY;
+                return StringUtils.EMPTY;
             }
             else
             {

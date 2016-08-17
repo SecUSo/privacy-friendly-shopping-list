@@ -11,7 +11,7 @@ import java.text.ParseException;
 public abstract class StringUtils
 {
 
-    private static final String EMPTY = "";
+    public static final String EMPTY = "";
 
     public static boolean isEmpty(String string)
     {
