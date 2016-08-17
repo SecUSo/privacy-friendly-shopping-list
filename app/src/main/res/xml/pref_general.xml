@@ -7,8 +7,9 @@
                 android:id="@+id/pref_notifications"
                 android:key="pref_notifications"
                 android:title="@string/pref_notifications_title"
-                android:summary="@string/pref_notifications_summary"
-                android:defaultValue="false"/>
+                android:summaryOn="@string/pref_notifications_summary_on"
+                android:summaryOff="@string/pref_notifications_summary_off"
+                android:defaultValue="true"/>
     </PreferenceCategory>
     <PreferenceCategory
             android:title="@string/pref_header_statistics">
@@ -16,7 +17,8 @@
                 android:id="@+id/pref_statistics"
                 android:key="pref_statistics"
                 android:title="@string/pref_statistics_title"
-                android:summary="@string/pref_statistics_summary"
+                android:summaryOn="@string/pref_statistics_summary_on"
+                android:summaryOff="@string/pref_statistics_summary_off"
                 android:defaultValue="false"/>
         <Preference
                 android:key="pref_statistics_delete"

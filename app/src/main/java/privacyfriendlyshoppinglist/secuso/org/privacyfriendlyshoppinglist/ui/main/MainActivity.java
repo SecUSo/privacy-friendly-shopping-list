@@ -30,6 +30,7 @@ public class MainActivity extends BaseActivity
     public static final String LIST_ID_KEY = "list.id";
     private ShoppingListService shoppingListService;
     private ShoppingListActivityCache cache;
+    static final String KEY_WELCOME_ENABLED = "pref_welcome";
 
 
     @Override
@@ -46,11 +47,12 @@ public class MainActivity extends BaseActivity
 
         updateListView();
 
-        SharedPreferences welcomeSettings = this.getSharedPreferences("welcomeSetting", this.MODE_PRIVATE);
-        String welcomeDialogVis = welcomeSettings.getString(String.valueOf(R.string.welcomeDialogVisible), String.valueOf(R.string.welcomeDialogVisible));
+//        SharedPreferences welcomeSettings = this.getSharedPreferences("welcomeSetting", this.MODE_PRIVATE);
+//        String welcomeDialogVis = welcomeSettings.getString(String.valueOf(R.string.welcomeDialogVisible), String.valueOf(R.string.welcomeDialogVisible));
+//
+//        boolean welcomeDialogVisible = Boolean.parseBoolean(welcomeDialogVis);
 
-        boolean welcomeDialogVisible = Boolean.parseBoolean(welcomeDialogVis);
-        if ( welcomeDialogVisible )
+        if ( PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getBoolean(KEY_WELCOME_ENABLED, true) )
         {
             WelcomeDialog welcomeDialog = new WelcomeDialog();
             welcomeDialog.show(getFragmentManager(), "WelcomeDialog");
