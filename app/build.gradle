@@ -72,6 +72,7 @@ dependencies {
     // dependency injection
     compile 'com.squareup.dagger:dagger:1.2.+'
     provided 'com.squareup.dagger:dagger-compiler:1.2.+'
+    // persistence
     compile 'com.j256.ormlite:ormlite-android:4.46'
     // reactive x
     compile 'io.reactivex:rxandroid:1.2.0'
@@ -80,6 +81,6 @@ dependencies {
     compile "joda-time:joda-time:2.2"
     // graphics
     compile 'com.github.PhilJay:MPAndroidChart:v3.0.0-beta1'
-
+    // image zoom
     compile 'com.davemorrissey.labs:subsampling-scale-image-view:3.5.0'
 }
