@@ -38,7 +38,8 @@ class PFAMarkerView extends MarkerView
         {
             numberFormat = context.getResources().getString(R.string.number_format_2_decimals);
             SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
-            this.unit = prefs.getString(SettingsKeys.CURRENCY, null);
+            String defaultCurrency = context.getResources().getString(R.string.currency);
+            this.unit = prefs.getString(SettingsKeys.CURRENCY, defaultCurrency);
         }
         else
         {

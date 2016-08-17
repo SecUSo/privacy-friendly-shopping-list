@@ -53,7 +53,8 @@ public class ProductActivityCache
         currencyTextView = (TextView) activity.findViewById(R.id.textview_currency);
 
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(activity);
-        String currency = sharedPreferences.getString(SettingsKeys.CURRENCY, null);
+        String defaultCurrency = activity.getResources().getString(R.string.currency);
+        String currency = sharedPreferences.getString(SettingsKeys.CURRENCY, defaultCurrency);
         currencyTextView.setText(currency);
     }
 

@@ -40,7 +40,8 @@ public class StatisticsCache
 
         unitsTextView = (TextView) activity.findViewById(R.id.textview_stats_currency);
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(activity);
-        currency = prefs.getString(SettingsKeys.CURRENCY, null);
+        String defaultCurrency = activity.getResources().getString(R.string.currency);
+        currency = prefs.getString(SettingsKeys.CURRENCY, defaultCurrency);
         unitsTextView.setText(currency);
 
         rangeFromTextView = (TextView) activity.findViewById(R.id.textview_stats_range_from);

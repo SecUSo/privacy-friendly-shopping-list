@@ -67,7 +67,7 @@ class ListsItemViewHolder extends RecyclerView.ViewHolder
         {
 
             DialogFragment editDeleteFragment = EditDeleteListDialog.newEditDeleteInstance(dto, shoppingListCache);
-            editDeleteFragment.show(shoppingListCache.getActivity().getSupportFragmentManager(), "Liste");
+            editDeleteFragment.show(shoppingListCache.getActivity().getSupportFragmentManager(), "List");
 
             return true;
         });

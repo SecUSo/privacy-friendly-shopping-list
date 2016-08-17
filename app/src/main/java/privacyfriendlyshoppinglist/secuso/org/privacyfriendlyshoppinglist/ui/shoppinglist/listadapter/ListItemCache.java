@@ -41,7 +41,8 @@ public class ListItemCache
         detailsVisible = false;
 
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(parent.getContext());
-        currency = sharedPreferences.getString(SettingsKeys.CURRENCY, null);
+        String defaultCurrency = parent.getResources().getString(R.string.currency);
+        currency = sharedPreferences.getString(SettingsKeys.CURRENCY, defaultCurrency);
     }
 
     public TextView getListNameTextView()
