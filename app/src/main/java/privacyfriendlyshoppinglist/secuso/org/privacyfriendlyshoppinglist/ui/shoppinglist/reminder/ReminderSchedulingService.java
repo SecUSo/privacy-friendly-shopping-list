@@ -6,6 +6,7 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.preference.PreferenceManager;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.TaskStackBuilder;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.R;
@@ -25,6 +26,8 @@ public class ReminderSchedulingService extends IntentService
 
     public static final String MESSAGE_TEXT = "com.shoppinglist.notificationservicetext";
 
+    static final String KEY_REMINDER_ENABLED = "pref_notifications";
+
     @Override
     protected void onHandleIntent(Intent intent)
     {
@@ -39,17 +42,23 @@ public class ReminderSchedulingService extends IntentService
 
         String appName = getResources().getString(R.string.app_name);
 
-        Notification notification = new NotificationCompat.Builder(this)
-                .setContentTitle(appName)
-                .setContentText(messageText)
-                .setStyle(new NotificationCompat.BigTextStyle().bigText(messageText))
-                .setAutoCancel(true)
-                .setSmallIcon(R.mipmap.ic_launcher)
-                .setDefaults(Notification.DEFAULT_SOUND)
-                .setContentIntent(pendingIntent)
-                .build();
+        //SwitchPreference noticationSetting =
 
-        manager.notify(Integer.parseInt(listId), notification);
+        if ( PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getBoolean(KEY_REMINDER_ENABLED, true) )
+        {
+
+            Notification notification = new NotificationCompat.Builder(this)
+                    .setContentTitle(appName)
+                    .setContentText(messageText)
+                    .setStyle(new NotificationCompat.BigTextStyle().bigText(messageText))
+                    .setAutoCancel(true)
+                    .setSmallIcon(R.mipmap.ic_launcher)
+                    .setDefaults(Notification.DEFAULT_SOUND)
+                    .setContentIntent(pendingIntent)
+                    .build();
+
+            manager.notify(Integer.parseInt(listId), notification);
+        }
     }
 
     private PendingIntent getPendingIntent(Context context, String listId)

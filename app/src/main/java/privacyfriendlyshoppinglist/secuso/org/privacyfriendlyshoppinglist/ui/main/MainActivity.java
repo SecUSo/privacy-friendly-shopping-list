@@ -15,6 +15,7 @@ import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.bas
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.main.listeners.AddOnClickListener;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.main.listeners.ShowDeleteListsOnClickListener;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.main.listeners.SortOnClickListener;
+import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.main.welcome.WelcomeDialog;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.settings.SettingsKeys;
 
 import java.util.List;
@@ -29,6 +30,8 @@ public class MainActivity extends BaseActivity
     public static final String LIST_ID_KEY = "list.id";
     private ShoppingListService shoppingListService;
     private ShoppingListActivityCache cache;
+    static final String KEY_WELCOME_ENABLED = "pref_welcome";
+
 
     @Override
     protected final void onCreate(final Bundle savedInstanceState)
@@ -44,8 +47,16 @@ public class MainActivity extends BaseActivity
 
         updateListView();
 
-//        WelcomeDialog welcomeDialog = new WelcomeDialog();
-//        welcomeDialog.show(getFragmentManager(), "WelcomeDialog");
+//        SharedPreferences welcomeSettings = this.getSharedPreferences("welcomeSetting", this.MODE_PRIVATE);
+//        String welcomeDialogVis = welcomeSettings.getString(String.valueOf(R.string.welcomeDialogVisible), String.valueOf(R.string.welcomeDialogVisible));
+//
+//        boolean welcomeDialogVisible = Boolean.parseBoolean(welcomeDialogVis);
+
+        if ( PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getBoolean(KEY_WELCOME_ENABLED, true) )
+        {
+            WelcomeDialog welcomeDialog = new WelcomeDialog();
+            welcomeDialog.show(getFragmentManager(), "WelcomeDialog");
+        }
 
         SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
         String sortBy = sharedPref.getString(SettingsKeys.LIST_SORT_BY, null);

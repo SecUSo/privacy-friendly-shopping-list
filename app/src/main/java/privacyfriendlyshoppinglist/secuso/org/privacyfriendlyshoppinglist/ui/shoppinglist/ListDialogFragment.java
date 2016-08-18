@@ -14,10 +14,7 @@ import android.support.v7.widget.SwitchCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
-import android.widget.DatePicker;
-import android.widget.TextView;
-import android.widget.TimePicker;
+import android.widget.*;
 import org.joda.time.DateTime;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.R;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.context.AbstractInstanceFactory;
@@ -99,6 +96,22 @@ public class ListDialogFragment extends DialogFragment
         dialogCache = new ListDialogCache(v);
 
         dialogCache.getStatisticsSwitch().setChecked(dto.isStatisticEnabled());
+
+        dialogCache.getStatisticsSwitch().setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener()
+        {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b)
+            {
+                if ( dialogCache.getStatisticsSwitch().isChecked() )
+                {
+                    Toast.makeText(getActivity(), R.string.pref_statistics_toast_on, Toast.LENGTH_SHORT).show();
+                }
+                else
+                {
+                    Toast.makeText(getActivity(), R.string.pref_statistics_toast_off, Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
 
         if ( editDialog )
         {
@@ -306,10 +319,10 @@ public class ListDialogFragment extends DialogFragment
         final SwitchCompat reminderSwitch = dialogCache.getReminderSwitch();
         reminderSwitch.setChecked(reminderEnabled);
 
-        reminderSwitch.setOnClickListener(new View.OnClickListener()
+        reminderSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener()
         {
             @Override
-            public void onClick(View v)
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b)
             {
                 if ( reminderSwitch.isChecked() )
                 {

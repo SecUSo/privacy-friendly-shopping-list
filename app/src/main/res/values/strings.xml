@@ -121,13 +121,15 @@
 
     <string name="pref_header_notifications">Notifications</string>
     <string name="pref_notifications_title">Reminder</string>
-    <string name="pref_notifications_summary">Turn on/off</string>
+    <string name="pref_notifications_summary_on">Notifications for reminder turned on</string>
+    <string name="pref_notifications_summary_off">Notifications for reminder turned off</string>
     <string name="pref_notifications_toast_on">Notifications for the reminder turned on!</string>
     <string name="pref_notifications_toast_off">Notifications for the reminder turned off!</string>
 
     <string name="pref_header_statistics">Statistics</string>
     <string name="pref_statistics_title">Set default</string>
-    <string name="pref_statistics_summary">Set Statistics per default to be on/off</string>
+    <string name="pref_statistics_summary_on">Statistics are turned on. Checked Products are being registered</string>
+    <string name="pref_statistics_summary_off">Statistics are turned off. Products are not being registered</string>
     <string name="pref_statistics_toast_on">Statistics turned on!</string>
     <string name="pref_statistics_toast_off">Statistics turned off!</string>
 
@@ -149,6 +151,7 @@
     <string name="okay">Okay</string>
     <string name="viewhelp">View Help</string>
     <string name="main_button_welcomedialog">Show Welcome</string>
+    <string name="welcomeDialogVisible">true</string>
 
     <!--### HELP ###-->
     <string name="help">Help</string>
