@@ -12,7 +12,6 @@ import android.support.v4.app.TaskStackBuilder;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.R;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.main.MainActivity;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.products.ProductsActivity;
-import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.products.dialog.ProductDialogFragment;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.settings.SettingsKeys;
 
 /**
@@ -34,8 +33,6 @@ public class ReminderSchedulingService extends IntentService
         String listId = intent.getStringExtra(MainActivity.LIST_ID_KEY);
 
         NotificationManager manager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
-        Intent i = new Intent(this, ProductDialogFragment.class);
-        i.putExtra(MainActivity.LIST_ID_KEY, listId);
 
         PendingIntent pendingIntent = getPendingIntent(getApplicationContext(), listId);
 
@@ -68,7 +65,7 @@ public class ReminderSchedulingService extends IntentService
                 .create(context)
                 .addParentStack(ProductsActivity.class)
                 .addNextIntent(pendingIntent);
-        return stackBuilder.getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT);
+        return stackBuilder.getPendingIntent(Integer.parseInt(listId), PendingIntent.FLAG_UPDATE_CURRENT);
     }
 
 

@@ -190,6 +190,7 @@ public class ListDialogFragment extends DialogFragment
                 }
                 else
                 {
+                    dialogCache.getReminderSwitch().setChecked(false);
                     dialogCache.getDeadlineExpansionButton().setVisibility(View.GONE);
                     dialogCache.getDateTextView().setText("");
                     dialogCache.getTimeTextView().setText("");

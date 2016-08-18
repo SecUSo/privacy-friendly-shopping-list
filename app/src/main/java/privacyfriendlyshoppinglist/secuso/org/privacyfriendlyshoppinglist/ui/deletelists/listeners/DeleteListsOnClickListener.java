@@ -7,6 +7,7 @@ import android.view.View;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.R;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.context.AbstractInstanceFactory;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.context.InstanceFactory;
+import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.utils.NotificationUtils;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.product.business.ProductService;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.shoppingList.business.ShoppingListService;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.shoppingList.business.domain.ListDto;
@@ -61,6 +62,7 @@ public class DeleteListsOnClickListener implements View.OnClickListener
                                         ReminderReceiver alarm = new ReminderReceiver();
                                         Intent intent = new Intent(cache.getActivity(), ReminderSchedulingService.class);
                                         alarm.cancelAlarm(cache.getActivity(), intent, id);
+                                        NotificationUtils.removeNotification(cache.getActivity(), id);
                                     }
                                 }
                         );
