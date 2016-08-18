@@ -20,8 +20,10 @@ import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.R;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.context.AbstractInstanceFactory;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.context.InstanceFactory;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.utils.CameraUtils;
+import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.utils.MessageUtils;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.product.business.ProductService;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.product.business.domain.ProductDto;
+import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.products.ProductsActivity;
 import rx.Observable;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
@@ -40,6 +42,7 @@ public class ImageViewerDialog extends DialogFragment
     private ProductDialogCache dialogCache;
     private ProductDto dto;
     private Bitmap fullSizeBitmap;
+    private ProductService productService;
 
     public static ImageViewerDialog newInstance(ProductDto dto, ProductDialogCache dialogCache)
     {
@@ -97,10 +100,10 @@ public class ImageViewerDialog extends DialogFragment
         SubsamplingScaleImageView productImage = (SubsamplingScaleImageView) rootView.findViewById(R.id.product_image_in_viewer);
         ProgressBar progressBar = (ProgressBar) rootView.findViewById(R.id.progress_bar);
 
-        if ( dialogCache == null )
-        {
-            deleteButton.setVisibility(View.GONE);
-        }
+        AbstractInstanceFactory instanceFactory = new InstanceFactory(getContext());
+        productService = (ProductService) instanceFactory.createInstance(ProductService.class);
+
+        setupDeleteButton(deleteButton);
 
         TextView titleTextView = (TextView) rootView.findViewById(R.id.title);
 
@@ -129,21 +132,49 @@ public class ImageViewerDialog extends DialogFragment
             }
         });
 
-        deleteButton.setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View v)
-            {
-                Bitmap bitmap = BitmapFactory.decodeResource(getContext().getResources(), R.drawable.ic_menu_camera);
-                dialogCache.getProductImage().setImageBitmap(bitmap);
-                dialogCache.setImageScheduledForDeletion(true);
-                dismiss();
-            }
-        });
-
-
         builder.setView(rootView);
         return builder.create();
+    }
+
+    private void setupDeleteButton(ImageButton deleteButton)
+    {
+        if ( dialogCache == null )
+        {
+            deleteButton.setOnClickListener(new View.OnClickListener()
+            {
+                @Override
+                public void onClick(View v)
+                {
+                    MessageUtils.showAlertDialog(
+                            getContext(),
+                            R.string.delete_confirmation_title,
+                            R.string.delete_foto_confirmation,
+                            dto.getProductName(),
+                            productService.deleteOnlyImage(dto.getId())
+                                    .doOnCompleted(() ->
+                                    {
+                                        dismiss();
+                                        ProductsActivity activity = (ProductsActivity) getActivity();
+                                        activity.updateListView();
+                                    })
+                    );
+                }
+            });
+        }
+        else
+        {
+            deleteButton.setOnClickListener(new View.OnClickListener()
+            {
+                @Override
+                public void onClick(View v)
+                {
+                    Bitmap bitmap = BitmapFactory.decodeResource(getContext().getResources(), R.drawable.ic_menu_camera);
+                    dialogCache.getProductImage().setImageBitmap(bitmap);
+                    dialogCache.setImageScheduledForDeletion(true);
+                    dismiss();
+                }
+            });
+        }
     }
 
     private Observable<Bitmap> loadImageFromStorage(ProductDto dto)
@@ -166,8 +197,6 @@ public class ImageViewerDialog extends DialogFragment
 
     private Bitmap loadImageFromStorageSync(ProductDto dto) throws InterruptedException
     {
-        AbstractInstanceFactory instanceFactory = new InstanceFactory(getContext());
-        ProductService productService = (ProductService) instanceFactory.createInstance(ProductService.class);
         String productImagePath = productService.getProductImagePath(dto.getId());
 
         while ( CameraUtils.isSavingImage(productImagePath) )

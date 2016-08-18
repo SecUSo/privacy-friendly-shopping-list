@@ -100,6 +100,29 @@ public class ProductServiceImpl implements ProductService
     }
 
     @Override
+    public Observable<Void> deleteOnlyImage(String id)
+    {
+        Observable<Void> observable = Observable
+                .create(subscriber ->
+                {
+                    subscriber.onNext(deleteOnlyImageSync(id));
+                    subscriber.onCompleted();
+                });
+        return observable;
+    }
+
+    private Void deleteOnlyImageSync(String id)
+    {
+        ProductItemEntity entity = productItemDao.getById(Long.valueOf(id));
+        entity.setImageBytes(null);
+        productItemDao.save(entity);
+
+        File imageFile = new File(getProductImagePath(id));
+        imageFile.delete();
+        return null;
+    }
+
+    @Override
     public void deleteSelected(List<ProductDto> productDtos)
     {
         Observable.from(productDtos)

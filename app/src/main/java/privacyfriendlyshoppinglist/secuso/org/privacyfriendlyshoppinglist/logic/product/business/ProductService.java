@@ -23,6 +23,8 @@ public interface ProductService extends ContextSetter
 
     void deleteById(String id);
 
+    Observable<Void> deleteOnlyImage(String id);
+
     void deleteSelected(List<ProductDto> productDtos);
 
     List<ProductDto> getAllProducts(String listId);
