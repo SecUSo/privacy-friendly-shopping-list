@@ -38,7 +38,7 @@ class DeleteListsItemViewHolder extends RecyclerView.ViewHolder
     void processDto(ListDto dto)
     {
         cache.getListNameTextView().setText(dto.getListName());
-        cache.getNotesTextView().setText(dto.getNotes());
+        cache.getDeadLineTextView().setText(dto.getNotes());
         cache.getShowDetailsImageButton().setVisibility(View.GONE);
         int reminderStatus = shoppingListService.getReminderStatusResource(dto);
         cache.getReminderBar().setImageResource(reminderStatus);

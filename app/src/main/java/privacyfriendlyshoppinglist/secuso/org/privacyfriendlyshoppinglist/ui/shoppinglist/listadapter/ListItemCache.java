@@ -19,7 +19,7 @@ public class ListItemCache
 {
     private TextView listNameTextView;
     private TextView nrProductsTextView;
-    private TextView notesTextView;
+    private TextView deadLineTextView;
     private TextView listDetails;
     private ImageView reminderBar;
     private CardView listCard;
@@ -31,7 +31,7 @@ public class ListItemCache
     public ListItemCache(View parent)
     {
         listNameTextView = (TextView) parent.findViewById(R.id.textview_list_name);
-        notesTextView = (TextView) parent.findViewById(R.id.textview_list_info);
+        deadLineTextView = (TextView) parent.findViewById(R.id.textview_list_info);
         nrProductsTextView = (TextView) parent.findViewById(R.id.textview_prod_quantity);
         listDetails = (TextView) parent.findViewById(R.id.textview_list_details);
         listCard = (CardView) parent.findViewById(R.id.cardview_item);
@@ -55,9 +55,9 @@ public class ListItemCache
         return nrProductsTextView;
     }
 
-    public TextView getNotesTextView()
+    public TextView getDeadLineTextView()
     {
-        return notesTextView;
+        return deadLineTextView;
     }
 
     public CardView getListCard()

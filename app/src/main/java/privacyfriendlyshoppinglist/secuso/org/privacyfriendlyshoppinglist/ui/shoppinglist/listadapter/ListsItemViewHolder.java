@@ -41,7 +41,7 @@ class ListsItemViewHolder extends RecyclerView.ViewHolder
     void processDto(ListDto dto)
     {
         listItemCache.getListNameTextView().setText(dto.getListName());
-        listItemCache.getNotesTextView().setText(dto.getNotes());
+        listItemCache.getDeadLineTextView().setText(dto.getDeadlineDate());
 
         int reminderStatus = shoppingListService.getReminderStatusResource(dto);
         listItemCache.getReminderBar().setImageResource(reminderStatus);
