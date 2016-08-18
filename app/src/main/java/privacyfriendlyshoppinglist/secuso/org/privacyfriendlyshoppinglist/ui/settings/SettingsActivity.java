@@ -1,6 +1,5 @@
 package privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.settings;
 
-
 import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.Intent;
@@ -8,9 +7,7 @@ import android.content.res.Configuration;
 import android.os.Build;
 import android.os.Bundle;
 import android.preference.*;
-import android.support.design.widget.Snackbar;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.Toast;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.R;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.context.AbstractInstanceFactory;
@@ -18,6 +15,7 @@ import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framew
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.utils.MessageUtils;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.statistics.business.StatisticsService;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.baseactivity.BaseActivity;
+import rx.Observable;
 
 /**
  * A {@link PreferenceActivity} that presents a set of application settings. On
@@ -238,21 +236,30 @@ public class SettingsActivity extends BaseActivity
                 @Override
                 public boolean onPreferenceClick(Preference preference)
                 {
-                    Snackbar.make(getView(), R.string.delele_statistics_confirmation, Snackbar.LENGTH_LONG)
-                            .setAction(R.string.okay, new View.OnClickListener()
-                            {
-                                @Override
-                                public void onClick(View v)
-                                {
-                                    AbstractInstanceFactory instanceFactory = new InstanceFactory(getActivity().getApplicationContext());
-                                    StatisticsService statisticsService = (StatisticsService) instanceFactory.createInstance(StatisticsService.class);
-                                    statisticsService.deleteAll();
-                                }
-                            }).show();
+                    MessageUtils.showAlertDialog(getActivity(), R.string.delete_confirmation_title, R.string.delete_statistics_confirmation, deleteStatistics());
                     return false;
                 }
             });
             //bindPreferenceSummaryToValue(findPreference("example_list"));
+        }
+
+        private Observable<Void> deleteStatistics()
+        {
+            Observable<Void> observable = Observable
+                    .create(subscriber ->
+                    {
+                        subscriber.onNext(deleteStatisticsSync());
+                        subscriber.onCompleted();
+                    });
+            return observable;
+        }
+
+        private Void deleteStatisticsSync()
+        {
+            AbstractInstanceFactory instanceFactory = new InstanceFactory(getActivity().getApplicationContext());
+            StatisticsService statisticsService = (StatisticsService) instanceFactory.createInstance(StatisticsService.class);
+            statisticsService.deleteAll();
+            return null;
         }
 
         @Override

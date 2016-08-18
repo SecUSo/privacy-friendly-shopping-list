@@ -1,9 +1,7 @@
 package privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.products.dialog;
 
-
 import android.app.Dialog;
 import android.os.Bundle;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
@@ -13,10 +11,12 @@ import android.widget.TextView;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.R;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.context.AbstractInstanceFactory;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.context.InstanceFactory;
+import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.utils.MessageUtils;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.product.business.ProductService;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.product.business.domain.ProductDto;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.products.ProductActivityCache;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.products.ProductsActivity;
+import rx.Observable;
 
 /**
  * Created by Chris on 11.08.2016.
@@ -90,22 +90,36 @@ public class EditDeleteProductDialog extends DialogFragment
             public void onClick(View v)
             {
                 dismiss();
-                Snackbar.make(cache.getNewListFab(), R.string.delele_product_confirmation, Snackbar.LENGTH_LONG)
-                        .setAction(R.string.okay, new View.OnClickListener()
-                        {
-                            @Override
-                            public void onClick(View v)
-                            {
-                                productService.deleteById(dto.getId());
-                                ProductsActivity activity = (ProductsActivity) cache.getActivity();
-                                activity.updateListView();
-                            }
-                        }).show();
+                MessageUtils.showAlertDialog(
+                        getContext(),
+                        R.string.delete_confirmation_title,
+                        R.string.delete_product_confirmation,
+                        dto.getProductName(),
+                        deleteProduct());
             }
         });
 
         builder.setView(rootView);
         return builder.create();
+    }
+
+    private Observable<Void> deleteProduct()
+    {
+        Observable<Void> observable = Observable
+                .create(subscriber ->
+                {
+                    subscriber.onNext(deleteProductSync());
+                    subscriber.onCompleted();
+                });
+        return observable;
+    }
+
+    private Void deleteProductSync()
+    {
+        productService.deleteById(dto.getId());
+        ProductsActivity activity = (ProductsActivity) cache.getActivity();
+        activity.updateListView();
+        return null;
     }
 
 }

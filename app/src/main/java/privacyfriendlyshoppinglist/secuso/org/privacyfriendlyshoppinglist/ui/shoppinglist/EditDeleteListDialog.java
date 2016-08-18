@@ -3,7 +3,6 @@ package privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.sh
 import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
@@ -13,6 +12,7 @@ import android.widget.TextView;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.R;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.context.AbstractInstanceFactory;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.context.InstanceFactory;
+import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.utils.MessageUtils;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.utils.NotificationUtils;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.shoppingList.business.ShoppingListService;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.shoppingList.business.domain.ListDto;
@@ -20,6 +20,7 @@ import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.mai
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.main.ShoppingListActivityCache;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.shoppinglist.reminder.ReminderReceiver;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.shoppinglist.reminder.ReminderSchedulingService;
+import rx.Observable;
 
 /**
  * Created by Chris on 11.08.2016.
@@ -97,30 +98,44 @@ public class EditDeleteListDialog extends DialogFragment
             public void onClick(View v)
             {
                 dismiss();
-                Snackbar.make(cache.getNewListFab(), R.string.delele_list_confirmation, Snackbar.LENGTH_LONG)
-                        .setAction(R.string.okay, new View.OnClickListener()
-                        {
-                            @Override
-                            public void onClick(View v)
-                            {
-                                String id = dto.getId();
-                                shoppingListService.deleteById(id);
-                                NotificationUtils.removeNotification(cache.getActivity(), id);
-
-                                // delete notification if any
-                                ReminderReceiver alarm = new ReminderReceiver();
-                                Intent intent = new Intent(cache.getActivity(), ReminderSchedulingService.class);
-                                alarm.cancelAlarm(cache.getActivity(), intent, id);
-
-                                MainActivity activity = (MainActivity) cache.getActivity();
-                                activity.updateListView();
-                            }
-                        }).show();
+                MessageUtils.showAlertDialog(
+                        getContext(),
+                        R.string.delete_confirmation_title,
+                        R.string.delete_list_confirmation,
+                        dto.getListName(),
+                        deleteList());
             }
         });
 
         builder.setView(rootView);
         return builder.create();
+    }
+
+    private Observable<Void> deleteList()
+    {
+        Observable<Void> observable = Observable
+                .create(subscriber ->
+                {
+                    subscriber.onNext(deleteListSync());
+                    subscriber.onCompleted();
+                });
+        return observable;
+    }
+
+    private Void deleteListSync()
+    {
+        String id = dto.getId();
+        shoppingListService.deleteById(id);
+
+        // delete notification if any
+        NotificationUtils.removeNotification(cache.getActivity(), id);
+        ReminderReceiver alarm = new ReminderReceiver();
+        Intent intent = new Intent(cache.getActivity(), ReminderSchedulingService.class);
+        alarm.cancelAlarm(cache.getActivity(), intent, id);
+
+        MainActivity activity = (MainActivity) cache.getActivity();
+        activity.updateListView();
+        return null;
     }
 
 }

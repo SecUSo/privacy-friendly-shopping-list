@@ -74,18 +74,20 @@
     <string name="sort_by_category">Category</string>
 
 
+    <!-- ### DELETE ### -->
+    <string name="delete_confirmation_title">Delete Confirmation</string>
     <!-- ### DELETE SHOPPING LISTS ### -->
-    <string name="delele_lists_confirmation">Delete all selected lists? This operation cannot be undone.</string>
-    <string name="delele_list_confirmation">Delete selected list? This operation cannot be undone.</string>
+    <string name="delete_lists_confirmation">Delete all selected lists? This operation cannot be undone!</string>
+    <string name="delete_list_confirmation">Delete selected list (%1$s)? This operation cannot be undone!</string>
     <string name="activity_delete_lists">Delete Shopping Lists</string>
     <!-- ### DELETE PRODUCTS LISTS ### -->
-    <string name="delele_products_confirmation">Delete all selected products? This operation cannot be undone.</string>
-    <string name="delele_product_confirmation">Delete selected product? This operation cannot be undone.</string>
+    <string name="delete_products_confirmation">Delete all selected products? This operation cannot be undone!</string>
+    <string name="delete_product_confirmation">Delete selected product (%1$s)? This operation cannot be undone!</string>
     <string name="activity_delete_products">Delete Products</string>
 
     <!-- ### STATISTICS ### -->
     <string name="statistics">Statistics</string>
-    <string name="delele_statistics_confirmation">Delete all currently saved statistics? This operation cannot be
+    <string name="delete_statistics_confirmation">Delete all currently saved statistics? This operation cannot be
         undone!
     </string>
 

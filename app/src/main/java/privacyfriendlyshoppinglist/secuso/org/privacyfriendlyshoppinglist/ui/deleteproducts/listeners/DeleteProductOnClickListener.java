@@ -1,17 +1,18 @@
 package privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.deleteproducts.listeners;
 
 import android.content.Intent;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.R;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.context.AbstractInstanceFactory;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.context.InstanceFactory;
+import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.utils.MessageUtils;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.product.business.ProductService;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.product.business.domain.ProductDto;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.deleteproducts.DeleteProductsCache;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.main.MainActivity;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.products.ProductsActivity;
+import rx.Observable;
 
 import java.util.List;
 
@@ -35,23 +36,32 @@ public class DeleteProductOnClickListener implements View.OnClickListener
     @Override
     public void onClick(View v)
     {
-        Snackbar.make(v, R.string.delele_products_confirmation, Snackbar.LENGTH_LONG)
-                .setAction(R.string.okay, new View.OnClickListener()
-                {
-                    @Override
-                    public void onClick(View v)
-                    {
-                        // delete product
-                        List<ProductDto> productList = cache.getDeleteProductsAdapter().getProductsList();
-                        productService.deleteSelected(productList);
+        MessageUtils.showAlertDialog(cache.getActivity(), R.string.delete_confirmation_title, R.string.delete_products_confirmation, deleteProducts());
+    }
 
-                        // go to products overview
-                        AppCompatActivity activity = cache.getActivity();
-                        Intent intent = new Intent(activity, ProductsActivity.class);
-                        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                        intent.putExtra(MainActivity.LIST_ID_KEY, cache.getListId());
-                        activity.startActivity(intent);
-                    }
-                }).show();
+    private Observable<Void> deleteProducts()
+    {
+        Observable<Void> observable = Observable
+                .create(subscriber ->
+                {
+                    subscriber.onNext(deleteProductsSync());
+                    subscriber.onCompleted();
+                });
+        return observable;
+    }
+
+    private Void deleteProductsSync()
+    {
+        // delete products
+        List<ProductDto> productList = cache.getDeleteProductsAdapter().getProductsList();
+        productService.deleteSelected(productList);
+
+        // go to products overview
+        AppCompatActivity activity = cache.getActivity();
+        Intent intent = new Intent(activity, ProductsActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        intent.putExtra(MainActivity.LIST_ID_KEY, cache.getListId());
+        activity.startActivity(intent);
+        return null;
     }
 }

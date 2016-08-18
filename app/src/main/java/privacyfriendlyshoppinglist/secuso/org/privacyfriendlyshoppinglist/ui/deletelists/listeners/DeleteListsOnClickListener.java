@@ -1,12 +1,12 @@
 package privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.deletelists.listeners;
 
 import android.content.Intent;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.R;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.context.AbstractInstanceFactory;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.context.InstanceFactory;
+import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.utils.MessageUtils;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.utils.NotificationUtils;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.product.business.ProductService;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.shoppingList.business.ShoppingListService;
@@ -41,38 +41,47 @@ public class DeleteListsOnClickListener implements View.OnClickListener
     @Override
     public void onClick(View v)
     {
-        Snackbar.make(v, R.string.delele_lists_confirmation, Snackbar.LENGTH_LONG)
-                .setAction(R.string.okay, new View.OnClickListener()
-                {
-                    @Override
-                    public void onClick(View v)
-                    {
-                        // delete product
-                        List<ListDto> shoppingList = cache.getDeleteListsAdapter().getShoppingList();
-                        List<String> deletedIds = shoppingListService.deleteSelected(shoppingList);
-                        Observable.from(deletedIds).subscribe(
-                                id -> productService.deleteAllFromList(id),
-                                t ->
-                                {
-                                },
-                                () ->
-                                {
-                                    for ( String id : deletedIds )
-                                    {
-                                        ReminderReceiver alarm = new ReminderReceiver();
-                                        Intent intent = new Intent(cache.getActivity(), ReminderSchedulingService.class);
-                                        alarm.cancelAlarm(cache.getActivity(), intent, id);
-                                        NotificationUtils.removeNotification(cache.getActivity(), id);
-                                    }
-                                }
-                        );
+        MessageUtils.showAlertDialog(cache.getActivity(), R.string.delete_confirmation_title, R.string.delete_lists_confirmation, deleteLists());
+    }
 
-                        // go back to list overview
-                        AppCompatActivity activity = cache.getActivity();
-                        Intent intent = new Intent(activity, MainActivity.class);
-                        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                        activity.startActivity(intent);
+    private Observable<Void> deleteLists()
+    {
+        Observable<Void> observable = Observable
+                .create(subscriber ->
+                {
+                    subscriber.onNext(deleteListsSync());
+                    subscriber.onCompleted();
+                });
+        return observable;
+    }
+
+    private Void deleteListsSync()
+    {
+        // delete lists
+        List<ListDto> shoppingList = cache.getDeleteListsAdapter().getShoppingList();
+        List<String> deletedIds = shoppingListService.deleteSelected(shoppingList);
+        Observable.from(deletedIds).subscribe(
+                id -> productService.deleteAllFromList(id),
+                t ->
+                {
+                },
+                () ->
+                {
+                    for ( String id : deletedIds )
+                    {
+                        ReminderReceiver alarm = new ReminderReceiver();
+                        Intent intent = new Intent(cache.getActivity(), ReminderSchedulingService.class);
+                        alarm.cancelAlarm(cache.getActivity(), intent, id);
+                        NotificationUtils.removeNotification(cache.getActivity(), id);
                     }
-                }).show();
+                }
+        );
+
+        // go back to list overview
+        AppCompatActivity activity = cache.getActivity();
+        Intent intent = new Intent(activity, MainActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        activity.startActivity(intent);
+        return null;
     }
 }
