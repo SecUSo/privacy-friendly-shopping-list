@@ -13,20 +13,19 @@ import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.R;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.main.MainActivity;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.products.ProductsActivity;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.products.dialog.ProductDialogFragment;
+import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.settings.SettingsKeys;
 
 /**
  * Created by Chris on 13.08.2016.
  */
 public class ReminderSchedulingService extends IntentService
 {
+    public static final String MESSAGE_TEXT = "com.shoppinglist.notificationservicetext";
+
     public ReminderSchedulingService()
     {
         super("SchedulingService");
     }
-
-    public static final String MESSAGE_TEXT = "com.shoppinglist.notificationservicetext";
-
-    static final String KEY_REMINDER_ENABLED = "pref_notifications";
 
     @Override
     protected void onHandleIntent(Intent intent)
@@ -42,9 +41,7 @@ public class ReminderSchedulingService extends IntentService
 
         String appName = getResources().getString(R.string.app_name);
 
-        //SwitchPreference noticationSetting =
-
-        if ( PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getBoolean(KEY_REMINDER_ENABLED, true) )
+        if ( PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getBoolean(SettingsKeys.NOTIFICATIONS_ENABLED, true) )
         {
 
             Notification notification = new NotificationCompat.Builder(this)
