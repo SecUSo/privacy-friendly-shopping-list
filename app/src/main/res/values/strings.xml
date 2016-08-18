@@ -46,9 +46,10 @@
     <string name="tutorial_see_products">... see product details?</string>
     <string name="tutorial_see_details_product">... see product details?</string>
     <string name="tutorial_check_product">... check products?</string>
-    <string name="tutorial_check_statistics">Products will be added to the statistics every time they are checked if
-        this feature is enabled for this list. That means that the same product can be added to the statistics
-        multiple times. This allows you to uncheck products, reuse the list and still keep track of the checked items.
+    <string name="tutorial_check_statistics">If the statistics feature for the current list is enabled, products will be
+        added to the statistics every time they are checked. The same product can be added to the statistics
+        multiple times when being checked again. This allows you to uncheck products, reuse the list and still keep
+        track of the checked items.
     </string>
     <string name="tutorial_multiple_delete">Select the items that you want to delete, press the delete icon and confirm
         this action.
@@ -193,11 +194,10 @@
     <string name="pref_currency_summary">$</string>
 
     <!-- ### WELCOME DIALOG ### -->
-    <string name="welcome_text">Welcome to the Privacy Friendly Shopping List. Create your first list by clicking the +
-        button.
-        You can customize the default settings for notifications, statistics and hints in the menu settings. Consult the
-        Help menu
-        to get further informations about functions and usage of the app.
+    <string name="welcome_text">Welcome to the Privacy Friendly Shopping List. Follow the tutorial instructions to
+        create
+        your first list. You can customize the default settings for notifications, statistics and hints in the menu
+        settings. Consult the Help section to get further information about the app.
     </string>
     <string name="welcome">Welcome</string>
     <string name="okay">Okay</string>
