@@ -48,7 +48,7 @@
     <string name="tutorial_check_product">... check products?</string>
     <string name="tutorial_check_statistics">Products will be added to the statistics every time they are checked if
         this feature is enabled for this list. That means that the same product can be added to the statistics
-        multiple times. This allows you to uncheck produchts, reuse the list and still keep track of the checked items.
+        multiple times. This allows you to uncheck products, reuse the list and still keep track of the checked items.
     </string>
     <string name="tutorial_multiple_delete">Select the items that you want to delete, press the delete icon and confirm
         this action.
