@@ -32,7 +32,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:selectAllOnFocus="true"
-                    android:maxLength="30"
+                    android:maxLength="16"
                     android:imeOptions="actionNext"
                     android:hint="@string/product_name">
             </AutoCompleteTextView>
@@ -177,7 +177,7 @@
                             android:inputType="textAutoComplete|textCapSentences"
                             android:hint="@string/category_text"
                             android:singleLine="true"
-                            android:maxLength="40"/>
+                            android:maxLength="15"/>
                 </android.support.design.widget.TextInputLayout>
 
                 <android.support.design.widget.TextInputLayout
@@ -189,7 +189,7 @@
                             android:id="@+id/store_input"
                             android:inputType="textAutoComplete|textCapSentences"
                             android:hint="@string/store_text"
-                            android:maxLength="40"/>
+                            android:maxLength="15"/>
                 </android.support.design.widget.TextInputLayout>
 
             </LinearLayout>

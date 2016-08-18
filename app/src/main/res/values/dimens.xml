@@ -23,6 +23,7 @@
 
     <!-- Tutorial -->
     <dimen name="tutorial_icon_padding">10dp</dimen>
+    <dimen name="tutorial_icon_size">40dp</dimen>
 
     <!-- Sort Dialog -->
     <dimen name="dialog_padding">20dp</dimen>
