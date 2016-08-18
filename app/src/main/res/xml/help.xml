@@ -8,8 +8,16 @@
                 android:title=""
                 android:summary="@string/help_intro"/>
         <Preference
-                android:title="@string/help_category_example"
-                android:summary="@string/help_intro_long"
+                android:title="@string/help_category_general_features"
+                android:summary="@string/help_intro_long_general"
+                android:selectable="false"/>
+        <Preference
+                android:title="@string/help_category_reminder"
+                android:summary="@string/help_intro_reminder"
+                android:selectable="false"/>
+        <Preference
+                android:title="@string/help_category_statistics"
+                android:summary="@string/help_intro_statistics"
                 android:selectable="false"/>
 
         <Preference android:title="@string/help_customize"

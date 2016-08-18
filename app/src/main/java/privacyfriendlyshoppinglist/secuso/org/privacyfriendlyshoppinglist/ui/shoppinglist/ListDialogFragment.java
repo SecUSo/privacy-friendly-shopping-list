@@ -20,6 +20,7 @@ import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.R;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.context.AbstractInstanceFactory;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.context.InstanceFactory;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.utils.DateUtils;
+import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.utils.MessageUtils;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.utils.StringUtils;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.shoppingList.business.ShoppingListService;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.shoppingList.business.domain.ListDto;
@@ -104,11 +105,11 @@ public class ListDialogFragment extends DialogFragment
             {
                 if ( dialogCache.getStatisticsSwitch().isChecked() )
                 {
-                    Toast.makeText(getActivity(), R.string.pref_statistics_toast_on, Toast.LENGTH_SHORT).show();
+                    MessageUtils.showToast(getActivity(), R.string.pref_statistics_toast_on, Toast.LENGTH_LONG);
                 }
                 else
                 {
-                    Toast.makeText(getActivity(), R.string.pref_statistics_toast_off, Toast.LENGTH_SHORT).show();
+                    MessageUtils.showToast(getActivity(), R.string.pref_statistics_toast_off, Toast.LENGTH_SHORT);
                 }
             }
         });

@@ -92,7 +92,7 @@
     <!--### ABOUT ###-->
     <string name="about">About</string>
     <string name="version_number">Version 1.0</string>
-    <string name="about_developper">Developer:</string>
+    <string name="about_developper">Developers:</string>
     <string name="about_author_greb">Grebiel José Ifill Brito</string>
     <string name="about_author_cri">Christian König</string>
 
@@ -128,9 +128,13 @@
 
     <string name="pref_header_statistics">Statistics</string>
     <string name="pref_statistics_title">Set default</string>
-    <string name="pref_statistics_summary_on">Statistics are turned on. Checked Products are being registered</string>
-    <string name="pref_statistics_summary_off">Statistics are turned off. Products are not being registered</string>
-    <string name="pref_statistics_toast_on">Statistics turned on!</string>
+    <string name="pref_statistics_summary_on">Statistics will be per default \"enabled\" when creating a new list.
+    </string>
+    <string name="pref_statistics_summary_off">Statistics will be per default \"disabled\" when creating a new list.
+    </string>
+    <string name="pref_statistics_toast_on">Statistics turned on! Items will be added to the statistics as soon as they
+        are checked.
+    </string>
     <string name="pref_statistics_toast_off">Statistics turned off!</string>
 
     <string name="pref_statistics_delete">Delete</string>
@@ -163,49 +167,41 @@
         Initially both are turned off. By switching the corresponding button you can choose to turn statistics and
         notifications on / off per default.
     </string>
-    <string name="help_category_example">Functions and Usage</string>
+    <string name="help_category_general_features">General Features</string>
+    <string name="help_category_reminder">Reminder</string>
+    <string name="help_category_statistics">Statistics</string>
     <string name="help_privacy_heading">Privacy Info</string>
     <string name="help_permissionXY_heading">Permission for camera access</string>
-    <string name="help_permissionXY_description">is needed in order to make images of items in the item dialog box. If
-        this permission is denied, this feature can\'t be used, but won\'t affect the other usages of the application.
-
+    <string name="help_permissionXY_description">This permission is needed in order to be able to take a picture and add
+        it
+        to a product. If this permission is denied, this feature cannot be used. Denying this permission will not
+        affect any of the other features.
     </string>
     <string name="help_permissions_heading">Permissions</string>
     <string name="help_permissions_description">Other permissions are not required.</string>
-    <string name="help_intro_long">Inside a list you are able to add new custom items, edit them, and remove them
-        through a checkbox.
-        With the camera symbol in the product dialog you can add pictures to items in your lists. You are also able to
-        set a reminder for your lists.
-        This will cause a notification on the phone when you given deadline approaches. You can choose to activate
-        statistics for your shopping lists
-        and by clicking the statistics menu item you get an overview of your purchases based on the information you
-        provided in the items.
+    <string name="help_intro_long_general">
+        You can create, delete, remove and sort lists. Inside a list you are able to add, edit, remove and sort items
+        as well. The items in a list can be marked as \"bought\" by using a checkbox. As soon as an item is checked, it
+        goes to the end of the list. If the statistics are enabled for the current list, then the relevant information
+        will be save in the statistics every time an item is checked.
     </string>
-    <string name="help_intro">Welcome to the help page of Privacy Friendly Shopping List. This app lets you create
-        personal lists of products or other custom items.
-        Start by creating a list with the + button.
-
+    <string name="help_intro_reminder">
+        Reminders are showed through notifications. In order to see them, you need to enable the notifications in the
+        settings section.
     </string>
-
-    <!-- ###MAIN### -->
-    <string name="main_button_text">Full Width Button</string>
-    <string name="main_button_disabled_text">Inactive Button</string>
-    <string name="main_button_1">1</string>
-    <string name="main_button_2">2</string>
-    <string name="main_button_3">3</string>
-    <string name="main_button_4">4</string>
-    <string name="main_button_5">5</string>
-    <string name="main_text_fullwithbutton_desc">A button that uses the full width of the screen looks like this:
+    <string name="help_intro_statistics">
+        The statistics section shows a summary of the purchased items. The diagram can be filtered by a date range. You
+        can select whether you want to group the results by month, week, day, category, store or product name.
+        Additionally,
+        you can select whether total amount (price) or quantity (units) should be shown.
     </string>
-    <string name="main_text_disabledbutton_desc">A disabled button looks like this (any size):</string>
-    <string name="main_text_title">This is an example app to demonstrate the design of a Privacy Friendly App. Further
-        explanations can be found in the Privacy Friendly App Guide.
-    </string>
-    <string name="main_text_normalbutton_desc">There are multiple ways to display basic buttons. Button 1 is the basic
-        button. If you wish to separate a button visually, use button 2. The buttons 3&#8211;5 are examples for
-        highlighted buttons. Depending on the app other colors are possible.
-    </string>
-    <string name="main_button_welcomedialog_text">Use the button in the lower left corner to call the Welcome Dialog.
+    <string name="help_intro">Welcome to the help page of Privacy Friendly Shopping List. This app allows you to manage
+        your shopping lists. Besides giving each list a name you can set a priority, deadline, reminder
+        and add notes to each of them. Additionally, you can decide whether a list should keep track of its checked
+        items in order summarize them in the statistics section.\n\n
+        A shopping list contains products. You can setup quantity, price, store, and category for each of them.
+        Furthermore,
+        you can write notes and use the camera to add an image.
     </string>
 
     <!-- Product Dialog -->

@@ -15,6 +15,7 @@ import android.widget.Toast;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.R;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.context.AbstractInstanceFactory;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.context.InstanceFactory;
+import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.utils.MessageUtils;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.statistics.business.StatisticsService;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.baseactivity.BaseActivity;
 
@@ -202,11 +203,11 @@ public class SettingsActivity extends BaseActivity
                 {
                     if ( notificationsSetting.isChecked() )
                     {
-                        Toast.makeText(getActivity(), R.string.pref_notifications_toast_on, Toast.LENGTH_SHORT).show();
+                        MessageUtils.showToast(getActivity(), R.string.pref_notifications_toast_on, Toast.LENGTH_SHORT);
                     }
                     else
                     {
-                        Toast.makeText(getActivity(), R.string.pref_notifications_toast_off, Toast.LENGTH_SHORT).show();
+                        MessageUtils.showToast(getActivity(), R.string.pref_notifications_toast_off, Toast.LENGTH_SHORT);
                     }
                     return false;
                 }
@@ -220,11 +221,11 @@ public class SettingsActivity extends BaseActivity
                 {
                     if ( statisticsSetting.isChecked() )
                     {
-                        Toast.makeText(getActivity(), R.string.pref_statistics_toast_on, Toast.LENGTH_SHORT).show();
+                        MessageUtils.showToast(getActivity(), R.string.pref_statistics_toast_on, Toast.LENGTH_LONG);
                     }
                     else
                     {
-                        Toast.makeText(getActivity(), R.string.pref_statistics_toast_off, Toast.LENGTH_SHORT).show();
+                        MessageUtils.showToast(getActivity(), R.string.pref_statistics_toast_off, Toast.LENGTH_SHORT);
                     }
                     return false;
                 }
