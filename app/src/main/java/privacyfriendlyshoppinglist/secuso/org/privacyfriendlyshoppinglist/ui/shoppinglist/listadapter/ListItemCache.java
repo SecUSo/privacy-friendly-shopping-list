@@ -24,6 +24,7 @@ public class ListItemCache
     private ImageView reminderBar;
     private CardView listCard;
     private ImageView highPriorityImageView;
+    private ImageView reminderImageView;
     private ImageButton showDetailsImageButton;
     private boolean detailsVisible;
     private String currency;
@@ -36,6 +37,7 @@ public class ListItemCache
         listDetails = (TextView) parent.findViewById(R.id.textview_list_details);
         listCard = (CardView) parent.findViewById(R.id.cardview_item);
         highPriorityImageView = (ImageView) parent.findViewById(R.id.imageview_high_prio_icon);
+        reminderImageView = (ImageView) parent.findViewById(R.id.imageview_reminder_icon);
         reminderBar = (ImageView) parent.findViewById(R.id.reminder_bar);
         showDetailsImageButton = (ImageButton) parent.findViewById(R.id.expand_button_list);
         detailsVisible = false;
@@ -83,6 +85,11 @@ public class ListItemCache
     public TextView getListDetails()
     {
         return listDetails;
+    }
+
+    public ImageView getReminderImageView()
+    {
+        return reminderImageView;
     }
 
     public boolean isDetailsVisible()

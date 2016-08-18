@@ -1,13 +1,17 @@
 package privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.shoppinglist.listadapter;
 
 import android.content.Intent;
+import android.preference.PreferenceManager;
 import android.support.v4.app.DialogFragment;
+import android.support.v4.content.ContextCompat;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageButton;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.R;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.context.AbstractInstanceFactory;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.context.InstanceFactory;
+import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.utils.StringUtils;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.product.business.ProductService;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.product.business.domain.TotalDto;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.shoppingList.business.ShoppingListService;
@@ -15,6 +19,7 @@ import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.main.MainActivity;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.main.ShoppingListActivityCache;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.products.ProductsActivity;
+import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.settings.SettingsKeys;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.shoppinglist.EditDeleteListDialog;
 
 /**
@@ -47,6 +52,7 @@ class ListsItemViewHolder extends RecyclerView.ViewHolder
         listItemCache.getReminderBar().setImageResource(reminderStatus);
 
         setupPriorityIcon(dto);
+        setupReminderIcon(dto);
 
         TotalDto totalDto = productService.getInfo(dto.getId());
         listItemCache.getListDetails().setText(
@@ -89,6 +95,27 @@ class ListsItemViewHolder extends RecyclerView.ViewHolder
             }
         });
 
+    }
+
+    private void setupReminderIcon(ListDto dto)
+    {
+        if ( StringUtils.isEmpty(dto.getReminderCount()) )
+        {
+            listItemCache.getReminderImageView().setVisibility(View.GONE);
+        }
+        else
+        {
+            listItemCache.getReminderImageView().setVisibility(View.VISIBLE);
+            AppCompatActivity activity = shoppingListCache.getActivity();
+            if ( !PreferenceManager.getDefaultSharedPreferences(activity).getBoolean(SettingsKeys.NOTIFICATIONS_ENABLED, true) )
+            {
+                listItemCache.getReminderImageView().setColorFilter(ContextCompat.getColor(activity, R.color.red));
+            }
+            else
+            {
+                listItemCache.getReminderImageView().setColorFilter(ContextCompat.getColor(activity, R.color.middlegrey));
+            }
+        }
     }
 
     private void setupPriorityIcon(ListDto dto)

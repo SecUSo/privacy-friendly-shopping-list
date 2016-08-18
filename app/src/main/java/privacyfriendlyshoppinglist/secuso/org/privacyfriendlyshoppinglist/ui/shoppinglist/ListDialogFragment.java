@@ -328,6 +328,10 @@ public class ListDialogFragment extends DialogFragment
             {
                 if ( reminderSwitch.isChecked() )
                 {
+                    if ( !PreferenceManager.getDefaultSharedPreferences(getContext()).getBoolean(SettingsKeys.NOTIFICATIONS_ENABLED, true) )
+                    {
+                        MessageUtils.showToast(getContext(), R.string.notification_setting_status, Toast.LENGTH_LONG);
+                    }
                     dialogCache.getReminderLayout().setVisibility(View.VISIBLE);
                 }
                 else

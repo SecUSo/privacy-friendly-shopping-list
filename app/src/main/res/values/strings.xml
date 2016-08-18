@@ -38,6 +38,8 @@
 
     <!-- ### NOTIFICATIONS ### -->
     <string name="notification_message">List name: %1$s\nDead line: %2$s</string>
+    <string name="notification_setting_status">Notifications are disabled. Please go to settings and turn them on.
+    </string>
 
     <!-- ### PRODUCTS ### -->
     <string name="new_product">New Product</string>
