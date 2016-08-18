@@ -60,7 +60,7 @@ public class CameraActivity extends AppCompatActivity implements View.OnClickLis
         setTitle(productName);
         setupFlashIcons();
 
-        mCamera = getInitilizedCamera();
+        mCamera = getInitializedCamera();
         setupCameraPreview();
 
         captureButton = (FloatingActionButton) findViewById(R.id.button_capture);
@@ -136,6 +136,7 @@ public class CameraActivity extends AppCompatActivity implements View.OnClickLis
                                 Intent resultIntent = new Intent();
                                 resultIntent.putExtra(THUMBNAIL_KEY, rotatedThumbnailBitmap);
                                 setResult(RESULT_OK, resultIntent);
+                                mCamera.release();
                                 finish();
                             }
                     );
@@ -226,7 +227,7 @@ public class CameraActivity extends AppCompatActivity implements View.OnClickLis
     }
 
 
-    public Camera getInitilizedCamera()
+    public Camera getInitializedCamera()
     {
         Camera camera = null;
         try

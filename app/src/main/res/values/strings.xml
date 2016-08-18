@@ -76,7 +76,7 @@
 
     <!-- ### DELETE ### -->
     <string name="delete_confirmation_title">Delete Confirmation</string>
-    <string name="delete_foto_confirmation">Delete selected foto (%1$s)? This operation cannot be undone!</string>
+    <string name="delete_foto_confirmation">Delete selected image (%1$s)? This operation cannot be undone!</string>
     <!-- ### DELETE SHOPPING LISTS ### -->
     <string name="delete_lists_confirmation">Delete all selected lists? This operation cannot be undone!</string>
     <string name="delete_list_confirmation">Delete selected list (%1$s)? This operation cannot be undone!</string>
