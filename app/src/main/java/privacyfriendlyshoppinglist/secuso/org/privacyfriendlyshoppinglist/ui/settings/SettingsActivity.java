@@ -3,6 +3,7 @@ package privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.se
 import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.os.Build;
 import android.os.Bundle;
@@ -193,23 +194,42 @@ public class SettingsActivity extends BaseActivity
             bindPreferenceSummaryToValue(findPreference(SettingsKeys.CURRENCY));
 
 
+            SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(getActivity());
             SwitchPreference tutorialSettings = (SwitchPreference) findPreference(SettingsKeys.TUTORIAL_PREF);
             tutorialSettings.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener()
             {
                 @Override
                 public boolean onPreferenceClick(Preference preference)
                 {
+                    SharedPreferences.Editor editor = pref.edit();
                     if ( tutorialSettings.isChecked() )
                     {
                         MessageUtils.showToast(getActivity(), R.string.pref_tutorial_toast_on, Toast.LENGTH_SHORT);
+                        editor.putBoolean(SettingsKeys.TUTORIAL_LIST, true);
+                        editor.putBoolean(SettingsKeys.TUTORIAL_PRODUCT, true);
+                        editor.putBoolean(SettingsKeys.TUTORIAL_DELETE, true);
+                        editor.commit();
                     }
                     else
                     {
                         MessageUtils.showToast(getActivity(), R.string.pref_tutorial_toast_off, Toast.LENGTH_SHORT);
+                        editor.putBoolean(SettingsKeys.TUTORIAL_LIST, false);
+                        editor.putBoolean(SettingsKeys.TUTORIAL_PRODUCT, false);
+                        editor.putBoolean(SettingsKeys.TUTORIAL_DELETE, false);
+                        editor.commit();
                     }
                     return false;
                 }
             });
+
+            boolean tutorialListsEnabled = pref.getBoolean(SettingsKeys.TUTORIAL_LIST, true);
+            boolean tutorialProductsEnabled = pref.getBoolean(SettingsKeys.TUTORIAL_PRODUCT, true);
+            boolean tutorialDeleteEnabled = pref.getBoolean(SettingsKeys.TUTORIAL_DELETE, true);
+
+            if ( !tutorialListsEnabled && !tutorialProductsEnabled && !tutorialDeleteEnabled )
+            {
+                tutorialSettings.setChecked(false);
+            }
 
 
             SwitchPreference notificationsSetting = (SwitchPreference) findPreference(SettingsKeys.NOTIFICATIONS_ENABLED);

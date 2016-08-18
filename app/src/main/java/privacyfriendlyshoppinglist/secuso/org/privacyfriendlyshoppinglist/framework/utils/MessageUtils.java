@@ -82,8 +82,8 @@ public class MessageUtils
                 @Override
                 public void onClick(DialogInterface dialogInterface, int i)
                 {
-                    SharedPreferences welcomeSettings = PreferenceManager.getDefaultSharedPreferences(activity);
-                    SharedPreferences.Editor editor = welcomeSettings.edit();
+                    SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(activity);
+                    SharedPreferences.Editor editor = pref.edit();
                     editor.putBoolean(settingKey, false);
                     editor.commit();
                 }

@@ -1,7 +1,10 @@
 package privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.deletelists.listadapter;
 
+import android.app.Activity;
 import android.content.res.Resources;
 import android.graphics.Paint;
+import android.preference.PreferenceManager;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
@@ -10,9 +13,11 @@ import android.widget.TextView;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.R;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.context.AbstractInstanceFactory;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.context.InstanceFactory;
+import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.utils.StringUtils;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.product.business.ProductService;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.shoppingList.business.ShoppingListService;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.shoppingList.business.domain.ListDto;
+import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.settings.SettingsKeys;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.shoppinglist.listadapter.ListItemCache;
 
 /**
@@ -25,10 +30,12 @@ class DeleteListsItemViewHolder extends RecyclerView.ViewHolder
     private ListItemCache cache;
     private ProductService productService;
     private ShoppingListService shoppingListService;
+    private Activity activity;
 
     DeleteListsItemViewHolder(final View parent, AppCompatActivity activity)
     {
         super(parent);
+        this.activity = activity;
         this.cache = new ListItemCache(parent);
         AbstractInstanceFactory instanceFactory = new InstanceFactory(activity.getApplicationContext());
         this.productService = (ProductService) instanceFactory.createInstance(ProductService.class);
@@ -38,14 +45,17 @@ class DeleteListsItemViewHolder extends RecyclerView.ViewHolder
     void processDto(ListDto dto)
     {
         cache.getListNameTextView().setText(dto.getListName());
-        cache.getDeadLineTextView().setText(dto.getNotes());
+        cache.getDeadLineTextView().setText(dto.getDeadlineDate());
+
         cache.getShowDetailsImageButton().setVisibility(View.GONE);
         int reminderStatus = shoppingListService.getReminderStatusResource(dto);
         cache.getReminderBar().setImageResource(reminderStatus);
 
         int nrProducts = productService.getAllProducts(dto.getId()).size();
         cache.getNrProductsTextView().setText(String.valueOf(nrProducts));
+
         setupPriorityIcon(dto);
+        setupReminderIcon(dto);
 
         updateVisibilityFormat(dto);
 
@@ -75,6 +85,26 @@ class DeleteListsItemViewHolder extends RecyclerView.ViewHolder
             listNameTextView.setTextColor(resources.getColor(R.color.black));
             listNameTextView.setPaintFlags(listNameTextView.getPaintFlags() & (~Paint.STRIKE_THRU_TEXT_FLAG));
             listNrProdTextView.setPaintFlags(listNrProdTextView.getPaintFlags() & (~Paint.STRIKE_THRU_TEXT_FLAG));
+        }
+    }
+
+    private void setupReminderIcon(ListDto dto)
+    {
+        if ( StringUtils.isEmpty(dto.getReminderCount()) )
+        {
+            cache.getReminderImageView().setVisibility(View.GONE);
+        }
+        else
+        {
+            cache.getReminderImageView().setVisibility(View.VISIBLE);
+            if ( !PreferenceManager.getDefaultSharedPreferences(activity).getBoolean(SettingsKeys.NOTIFICATIONS_ENABLED, true) )
+            {
+                cache.getReminderImageView().setColorFilter(ContextCompat.getColor(activity, R.color.red));
+            }
+            else
+            {
+                cache.getReminderImageView().setColorFilter(ContextCompat.getColor(activity, R.color.middlegrey));
+            }
         }
     }
 
