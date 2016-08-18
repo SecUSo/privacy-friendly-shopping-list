@@ -10,6 +10,21 @@ Nowadays there are many apps that require many or all permissions available in A
 
 ## Versioning
 
+Version 0.2 (Beta). Changes:
+- Statistics (total units) were added to the chart
+- Statistics can be enabled or disabled for each list
+- Sorting options are saved for each product list
+- A reminder can be set for each list. If the notifications are enabled, then a notification pops up when the date of the reminder has been reached.
+- Toasts were added to improve the user experience
+- The user can use the camera to take a picture when editing or adding products. This picture can only be accessed through the Shopping List app.
+- Zoom available for product images.
+- Welcome Dialog added
+- Tutorials added
+- Tutorials can be enabled/disabled in the settings section
+- List and product items are expandabled. When expanded, the details of the item can be seen.
+- Lists and products can be deleted one by one on long press. Multiple deletion of elements is still available.
+- Help section was updated
+
 Version 0.1 (Beta). Features:
 - Lists can be added, edited and removed
 - Lists can be sorted by name or priority
