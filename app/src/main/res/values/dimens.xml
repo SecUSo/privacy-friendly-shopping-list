@@ -21,6 +21,8 @@
     <dimen name="status_corner_radius">0dp</dimen>
     <dimen name="status_width">4dp</dimen>
 
+    <!-- Tutorial -->
+    <dimen name="tutorial_icon_padding">10dp</dimen>
 
     <!-- Sort Dialog -->
     <dimen name="dialog_padding">20dp</dimen>

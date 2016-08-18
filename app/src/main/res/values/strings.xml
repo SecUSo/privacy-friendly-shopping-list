@@ -17,6 +17,39 @@
     <string name="number_decimal_separator">.</string>
     <string name="currency">$</string>
 
+    <!-- ### TUTORIAL ### -->
+    <string name="do_not_show_again">Don\'t show again!</string>
+    <string name="tutorial_dialog_title">Tutorial</string>
+    <string name="tutorial_how_to">How to...</string>
+    <string name="tutorial_create_list">... create a new list?</string>
+    <string name="tutorial_delete_lists">... delete multiple lists?</string>
+    <string name="tutorial_sort_lists">... sort lists?</string>
+    <string name="tutorial_see_details_list">... see list details?</string>
+    <string name="tutorial_icons_meaning">Icons</string>
+    <string name="tutorial_icon_priority">High priority list</string>
+    <string name="tutorial_icon_reminder_on">Reminder is set. Notifications are turned
+        <b>
+            <i>on</i>
+        </b>
+        .
+    </string>
+    <string name="tutorial_icon_reminder_off">Reminder is set. Notifications are turned
+        <b>
+            <i>off</i>
+        </b>
+        .
+    </string>
+
+    <string name="tutorial_add_product">... add a new product?</string>
+    <string name="tutorial_delete_products">... delete multiple products?</string>
+    <string name="tutorial_sort_products">... sort products?</string>
+    <string name="tutorial_see_products">... see product details?</string>
+    <string name="tutorial_see_details_product">... see product details?</string>
+    <string name="tutorial_check_product">... check products?</string>
+    <string name="tutorial_check_statistics">Products will be added to the statistics every time they are checked if
+        this feature is enabled for this list. That means that the same product can be added to the statistics
+        multiple times. This allows you to uncheck produchts, reuse the list and still keep track of the checked items.
+    </string>
     <!-- Placeholders-->
     <string name="ph_list_name" translatable="false">List Name</string>
     <string name="ph_product_name" translatable="false">Product Name</string>

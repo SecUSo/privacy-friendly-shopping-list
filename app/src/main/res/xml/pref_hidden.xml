@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <Preference
+            android:key="pref_welcome"
+            android:defaultValue="true">
+    </Preference>
+    <Preference
+            android:key="pref_tutorial_list"
+            android:defaultValue="true">
+    </Preference>
+    <Preference
+            android:key="pref_tutorial_product"
+            android:defaultValue="true">
+    </Preference>
+    <Preference
+            android:key="pref_tutorial_product"
+            android:defaultValue="true">
+    </Preference>
+
+
+</PreferenceScreen>

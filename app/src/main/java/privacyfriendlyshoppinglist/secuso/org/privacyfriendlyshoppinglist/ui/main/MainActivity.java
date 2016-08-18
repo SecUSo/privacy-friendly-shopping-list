@@ -46,7 +46,7 @@ public class MainActivity extends BaseActivity
 
         updateListView();
         MessageUtils.showWelcomeDialog(SettingsKeys.WELCOME_PREF, this);
-
+        MessageUtils.showTutorialDialog(this);
 
         SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
         String sortBy = sharedPref.getString(SettingsKeys.LIST_SORT_BY, null);
@@ -91,7 +91,7 @@ public class MainActivity extends BaseActivity
     @Override
     protected int getNavigationDrawerID()
     {
-        return R.id.nav_example;
+        return R.id.nav_main;
     }
 
     public void updateListView()

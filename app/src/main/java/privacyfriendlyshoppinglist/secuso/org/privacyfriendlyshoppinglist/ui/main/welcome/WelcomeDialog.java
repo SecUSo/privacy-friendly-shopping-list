@@ -30,7 +30,7 @@ public class WelcomeDialog extends DialogFragment
         builder.setIcon(R.mipmap.ic_launcher);
         builder.setTitle(getActivity().getString(R.string.welcome));
         builder.setPositiveButton(getActivity().getString(R.string.okay), null);
-        builder.setNeutralButton("Don't show again", new DialogInterface.OnClickListener()
+        builder.setNeutralButton(getActivity().getString(R.string.do_not_show_again), new DialogInterface.OnClickListener()
         {
             @Override
             public void onClick(DialogInterface dialogInterface, int i)

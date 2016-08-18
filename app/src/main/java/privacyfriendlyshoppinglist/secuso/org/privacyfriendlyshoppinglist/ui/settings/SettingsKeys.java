@@ -9,6 +9,9 @@ public abstract class SettingsKeys
 {
     public static final String WELCOME_PREF = "pref_welcome";
     public static final String TUTORIAL_PREF = "pref_tutorial";
+    public static final String TUTORIAL_LIST = "pref_tutorial_list";
+    public static final String TUTORIAL_PRODUCT = "pref_tutorial_product";
+    public static final String TUTORIAL_DELETE = "pref_tutorial_product";
 
     public static final String CURRENCY = "pref_currency";
     public static final String STATISTICS_DELETE = "pref_statistics_delete";
