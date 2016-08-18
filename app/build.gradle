@@ -48,6 +48,7 @@ android {
                             'src/main/res/layouts/shoppinglist',
                             'src/main/res/layouts/statistics',
                             'src/main/res/layouts/camera',
+                            'src/main/res/layouts/tutorials',
                             'src/main/res'
                     ]
         }

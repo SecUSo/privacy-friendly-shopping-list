@@ -193,6 +193,25 @@ public class SettingsActivity extends BaseActivity
             bindPreferenceSummaryToValue(findPreference(SettingsKeys.CURRENCY));
 
 
+            SwitchPreference tutorialSettings = (SwitchPreference) findPreference(SettingsKeys.TUTORIAL_PREF);
+            tutorialSettings.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener()
+            {
+                @Override
+                public boolean onPreferenceClick(Preference preference)
+                {
+                    if ( tutorialSettings.isChecked() )
+                    {
+                        MessageUtils.showToast(getActivity(), R.string.pref_tutorial_toast_on, Toast.LENGTH_SHORT);
+                    }
+                    else
+                    {
+                        MessageUtils.showToast(getActivity(), R.string.pref_tutorial_toast_off, Toast.LENGTH_SHORT);
+                    }
+                    return false;
+                }
+            });
+
+
             SwitchPreference notificationsSetting = (SwitchPreference) findPreference(SettingsKeys.NOTIFICATIONS_ENABLED);
             notificationsSetting.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener()
             {

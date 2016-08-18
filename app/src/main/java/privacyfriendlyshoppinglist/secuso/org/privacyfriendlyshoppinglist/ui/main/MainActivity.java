@@ -9,13 +9,13 @@ import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.R;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.comparators.PFAComparators;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.context.AbstractInstanceFactory;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.context.InstanceFactory;
+import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.utils.MessageUtils;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.shoppingList.business.ShoppingListService;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.shoppingList.business.domain.ListDto;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.baseactivity.BaseActivity;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.main.listeners.AddOnClickListener;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.main.listeners.ShowDeleteListsOnClickListener;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.main.listeners.SortOnClickListener;
-import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.main.welcome.WelcomeDialog;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.settings.SettingsKeys;
 
 import java.util.List;
@@ -30,7 +30,6 @@ public class MainActivity extends BaseActivity
     public static final String LIST_ID_KEY = "list.id";
     private ShoppingListService shoppingListService;
     private ShoppingListActivityCache cache;
-    static final String KEY_WELCOME_ENABLED = "pref_welcome";
 
 
     @Override
@@ -46,17 +45,8 @@ public class MainActivity extends BaseActivity
 //        getApplicationContext().deleteDatabase(DB.APP.getDbName());
 
         updateListView();
+        MessageUtils.showWelcomeDialog(SettingsKeys.WELCOME_PREF, this);
 
-//        SharedPreferences welcomeSettings = this.getSharedPreferences("welcomeSetting", this.MODE_PRIVATE);
-//        String welcomeDialogVis = welcomeSettings.getString(String.valueOf(R.string.welcomeDialogVisible), String.valueOf(R.string.welcomeDialogVisible));
-//
-//        boolean welcomeDialogVisible = Boolean.parseBoolean(welcomeDialogVis);
-
-        if ( PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getBoolean(KEY_WELCOME_ENABLED, true) )
-        {
-            WelcomeDialog welcomeDialog = new WelcomeDialog();
-            welcomeDialog.show(getFragmentManager(), "WelcomeDialog");
-        }
 
         SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
         String sortBy = sharedPref.getString(SettingsKeys.LIST_SORT_BY, null);

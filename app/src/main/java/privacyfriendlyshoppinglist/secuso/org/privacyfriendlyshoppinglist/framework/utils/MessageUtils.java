@@ -1,11 +1,14 @@
 package privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.utils;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AlertDialog;
 import android.view.Gravity;
 import android.widget.Toast;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.R;
+import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.main.welcome.WelcomeDialog;
 import rx.Observable;
 
 /**
@@ -22,6 +25,15 @@ public class MessageUtils
         Toast toast = Toast.makeText(context, messageStringResource, toastLength);
         toast.setGravity(Gravity.CENTER, 0, 0);
         toast.show();
+    }
+
+    public static void showWelcomeDialog(String keyWelcomeEnabled, Activity activity)
+    {
+        if ( PreferenceManager.getDefaultSharedPreferences(activity.getApplicationContext()).getBoolean(keyWelcomeEnabled, true) )
+        {
+            WelcomeDialog welcomeDialog = new WelcomeDialog();
+            welcomeDialog.show(activity.getFragmentManager(), "WelcomeDialog");
+        }
     }
 
     public static void showAlertDialog(Context context, int titleResource, int messageResource, Observable action)

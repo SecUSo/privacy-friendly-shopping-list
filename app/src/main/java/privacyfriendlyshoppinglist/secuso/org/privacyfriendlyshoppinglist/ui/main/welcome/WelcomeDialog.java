@@ -11,11 +11,10 @@ import android.preference.PreferenceManager;
 import android.view.LayoutInflater;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.R;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.main.MainActivity;
+import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.settings.SettingsKeys;
 
 public class WelcomeDialog extends DialogFragment
 {
-    static final String KEY_WELCOME_ENABLED = "pref_welcome";
-
     @Override
     public void onAttach(Activity activity)
     {
@@ -38,11 +37,8 @@ public class WelcomeDialog extends DialogFragment
             {
                 SharedPreferences welcomeSettings = PreferenceManager.getDefaultSharedPreferences(getActivity());
                 SharedPreferences.Editor editor = welcomeSettings.edit();
-                editor.putBoolean(KEY_WELCOME_ENABLED, false);
+                editor.putBoolean(SettingsKeys.WELCOME_PREF, false);
                 editor.commit();
-
-//                PreferenceManager.getDefaultSharedPreferences(getActivity().getApplicationContext()).edit().putBoolean(KEY_WELCOME_ENABLED, false);
-
             }
         });
         builder.setNegativeButton(getActivity().getString(R.string.viewhelp), new DialogInterface.OnClickListener()
