@@ -16,10 +16,16 @@
         <item name="colorAccent">@color/middlegrey</item>
     </style>
 
-    <style name="AlertDialogCustom" parent="Theme.AppCompat.Light.Dialog.Alert">
+    <style name="AlertDialogColourful" parent="Theme.AppCompat.Light.Dialog.Alert">
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+    <style name="AlertDialogGrey" parent="Theme.AppCompat.Light.Dialog.Alert">
+        <item name="colorPrimary">@color/middlegrey</item>
+        <item name="colorPrimaryDark">@color/middlegrey</item>
+        <item name="colorAccent">@color/middlegrey</item>
     </style>
 
     <style name="AppTheme.NoActionBar">

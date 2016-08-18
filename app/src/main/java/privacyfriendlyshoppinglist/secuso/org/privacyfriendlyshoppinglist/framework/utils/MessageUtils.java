@@ -10,6 +10,8 @@ import android.support.v7.app.AlertDialog;
 import android.view.Gravity;
 import android.widget.Toast;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.R;
+import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.deletelists.DeleteListsActivity;
+import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.deleteproducts.DeleteProductsActivity;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.help.HelpActivity;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.main.MainActivity;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.main.welcome.WelcomeDialog;
@@ -46,15 +48,24 @@ public class MessageUtils
     {
         String settingKey;
         int tutorialLayoutResource;
+        int dialogTheme;
         if ( activity instanceof MainActivity )
         {
             settingKey = SettingsKeys.TUTORIAL_LIST;
             tutorialLayoutResource = R.layout.shopping_list_tutorial;
+            dialogTheme = R.style.AlertDialogColourful;
         }
         else if ( activity instanceof ProductsActivity )
         {
             settingKey = SettingsKeys.TUTORIAL_PRODUCT;
             tutorialLayoutResource = R.layout.products_tutorial;
+            dialogTheme = R.style.AlertDialogColourful;
+        }
+        else if ( activity instanceof DeleteProductsActivity || activity instanceof DeleteListsActivity )
+        {
+            settingKey = SettingsKeys.TUTORIAL_DELETE;
+            tutorialLayoutResource = R.layout.delete_tutorial;
+            dialogTheme = R.style.AlertDialogGrey;
         }
         else
         {
@@ -63,7 +74,7 @@ public class MessageUtils
 
         if ( PreferenceManager.getDefaultSharedPreferences(activity.getApplicationContext()).getBoolean(settingKey, true) )
         {
-            AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(activity, R.style.AlertDialogCustom);
+            AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(activity, dialogTheme);
             dialogBuilder.setView(tutorialLayoutResource);
             dialogBuilder.setPositiveButton(activity.getString(R.string.okay), null);
             dialogBuilder.setNeutralButton(activity.getString(R.string.do_not_show_again), new DialogInterface.OnClickListener()
@@ -97,7 +108,7 @@ public class MessageUtils
 
     public static void showAlertDialog(Context context, int titleResource, int messageResource, String customText, Observable action)
     {
-        AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(context, R.style.AlertDialogCustom);
+        AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(context, R.style.AlertDialogColourful);
         if ( titleResource != NOTHING )
         {
             String title = context.getResources().getString(titleResource);

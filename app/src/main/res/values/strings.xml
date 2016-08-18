@@ -50,6 +50,10 @@
         this feature is enabled for this list. That means that the same product can be added to the statistics
         multiple times. This allows you to uncheck produchts, reuse the list and still keep track of the checked items.
     </string>
+    <string name="tutorial_multiple_delete">Select the items that you want to delete, press the delete icon and confirm
+        this action.
+    </string>
+
     <!-- Placeholders-->
     <string name="ph_list_name" translatable="false">List Name</string>
     <string name="ph_product_name" translatable="false">Product Name</string>
