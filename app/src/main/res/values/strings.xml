@@ -29,15 +29,13 @@
     <string name="tutorial_icon_priority">High priority list</string>
     <string name="tutorial_icon_reminder_on">Reminder is set. Notifications are turned
         <b>
-            <i>on</i>
+            <i>on.</i>
         </b>
-        .
     </string>
     <string name="tutorial_icon_reminder_off">Reminder is set. Notifications are turned
         <b>
-            <i>off</i>
+            <i>off.</i>
         </b>
-        .
     </string>
 
     <string name="tutorial_add_product">... add a new product?</string>

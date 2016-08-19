@@ -196,13 +196,13 @@ public class SettingsActivity extends BaseActivity
 
             SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(getActivity());
             SwitchPreference tutorialSettings = (SwitchPreference) findPreference(SettingsKeys.TUTORIAL_PREF);
-            tutorialSettings.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener()
+            tutorialSettings.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener()
             {
                 @Override
-                public boolean onPreferenceClick(Preference preference)
+                public boolean onPreferenceChange(Preference preference, Object newValue)
                 {
                     SharedPreferences.Editor editor = pref.edit();
-                    if ( tutorialSettings.isChecked() )
+                    if ( !tutorialSettings.isChecked() )
                     {
                         MessageUtils.showToast(getActivity(), R.string.pref_tutorial_toast_on, Toast.LENGTH_SHORT);
                         editor.putBoolean(SettingsKeys.TUTORIAL_LIST, true);
@@ -218,7 +218,7 @@ public class SettingsActivity extends BaseActivity
                         editor.putBoolean(SettingsKeys.TUTORIAL_DELETE, false);
                         editor.commit();
                     }
-                    return false;
+                    return true;
                 }
             });
 
@@ -233,12 +233,12 @@ public class SettingsActivity extends BaseActivity
 
 
             SwitchPreference notificationsSetting = (SwitchPreference) findPreference(SettingsKeys.NOTIFICATIONS_ENABLED);
-            notificationsSetting.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener()
+            notificationsSetting.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener()
             {
                 @Override
-                public boolean onPreferenceClick(Preference preference)
+                public boolean onPreferenceChange(Preference preference, Object newValue)
                 {
-                    if ( notificationsSetting.isChecked() )
+                    if ( !notificationsSetting.isChecked() )
                     {
                         MessageUtils.showToast(getActivity(), R.string.pref_notifications_toast_on, Toast.LENGTH_SHORT);
                     }
@@ -246,17 +246,17 @@ public class SettingsActivity extends BaseActivity
                     {
                         MessageUtils.showToast(getActivity(), R.string.pref_notifications_toast_off, Toast.LENGTH_SHORT);
                     }
-                    return false;
+                    return true;
                 }
             });
 
             SwitchPreference statisticsSetting = (SwitchPreference) findPreference(SettingsKeys.STATISTICS_ENABLED);
-            statisticsSetting.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener()
+            statisticsSetting.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener()
             {
                 @Override
-                public boolean onPreferenceClick(Preference preference)
+                public boolean onPreferenceChange(Preference preference, Object newValue)
                 {
-                    if ( statisticsSetting.isChecked() )
+                    if ( !statisticsSetting.isChecked() )
                     {
                         MessageUtils.showToast(getActivity(), R.string.pref_statistics_toast_on, Toast.LENGTH_LONG);
                     }
@@ -264,7 +264,7 @@ public class SettingsActivity extends BaseActivity
                     {
                         MessageUtils.showToast(getActivity(), R.string.pref_statistics_toast_off, Toast.LENGTH_SHORT);
                     }
-                    return false;
+                    return true;
                 }
             });
 

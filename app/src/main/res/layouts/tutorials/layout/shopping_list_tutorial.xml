@@ -1,221 +1,234 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView
+<LinearLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
+        android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-    <LinearLayout
-            android:orientation="vertical"
+    <ScrollView
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
-        <TextView
-                android:id="@+id/dialog_title"
-                android:gravity="center"
-                android:text="@string/tutorial_dialog_title"
-                android:background="@color/colorPrimaryDark"
-                android:textColor="@color/white"
+        <LinearLayout
+                android:orientation="vertical"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/dialog_title_height"
-                android:layout_marginBottom="10dp"
-                android:textStyle="bold"/>
-        <TextView
-                android:text="@string/tutorial_how_to"
-                android:textStyle="bold"
-                android:paddingLeft="@dimen/dialog_padding"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
-
-        <RelativeLayout
-                android:layout_marginBottom="@dimen/tutorial_icon_padding"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" android:layout_gravity="center_horizontal">
-            <ImageView
-                    android:layout_gravity="center"
-                    android:layout_marginLeft="@dimen/fab_margin"
-                    android:layout_marginRight="@dimen/fab_margin"
-                    android:src="@drawable/fab_tutorial"
-                    android:layout_width="@dimen/tutorial_icon_size"
-                    android:layout_height="@dimen/tutorial_icon_size"
-                    android:layout_alignParentTop="true" android:layout_alignParentEnd="true"/>
-            <ImageView
-                    android:layout_gravity="center"
-                    android:src="@drawable/ic_keyboard_arrow_right_black_24dp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:tint="@color/colorPrimaryDark"
-                    android:id="@+id/imageView2" android:layout_centerVertical="true"
-                    android:layout_toEndOf="@+id/textView"/>
+                android:layout_height="wrap_content">
             <TextView
-                    android:paddingLeft="@dimen/dialog_padding_horizontal_big"
-                    android:text="@string/tutorial_create_list"
-                    android:inputType="textMultiLine"
-                    android:layout_gravity="center_vertical"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true" android:layout_alignParentStart="true"
-                    android:id="@+id/textView"/>
-        </RelativeLayout>
-        <RelativeLayout
-                android:layout_marginBottom="@dimen/tutorial_icon_padding"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_below="@+id/textView" android:layout_alignParentStart="true">
-            <ImageView
-                    android:layout_gravity="center"
-                    android:src="@drawable/ic_keyboard_arrow_right_black_24dp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:tint="@color/colorPrimaryDark"
-                    android:layout_row="1"
-                    android:layout_column="1"
-                    android:layout_centerVertical="true" android:layout_toEndOf="@+id/textView2"
-                    android:id="@+id/imageView3"/>
-            <TextView
-                    android:paddingLeft="@dimen/dialog_padding_horizontal_big"
-                    android:layout_gravity="center_vertical"
-                    android:text="@string/tutorial_delete_lists"
-                    android:inputType="textMultiLine"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/textView2" android:layout_centerVertical="true"
-                    android:layout_alignParentStart="true"/>
-            <ImageView
-                    android:layout_gravity="center"
-                    android:layout_marginLeft="@dimen/fab_margin"
-                    android:layout_marginRight="@dimen/fab_margin"
-                    android:padding="@dimen/tutorial_icon_padding"
-                    android:src="@drawable/ic_delete_white_24dp"
+                    android:id="@+id/dialog_title"
+                    android:gravity="center"
+                    android:text="@string/tutorial_dialog_title"
                     android:background="@color/colorPrimaryDark"
-                    android:layout_width="@dimen/tutorial_icon_size"
-                    android:layout_height="@dimen/tutorial_icon_size"
-                    android:tint="@color/white"
-                    android:layout_alignParentTop="true" android:layout_alignParentEnd="true"/>
-        </RelativeLayout>
-        <RelativeLayout
-                android:layout_marginBottom="@dimen/tutorial_icon_padding"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-            <ImageView
-                    android:layout_gravity="center"
-                    android:src="@drawable/ic_keyboard_arrow_right_black_24dp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:tint="@color/colorPrimaryDark"
-                    android:layout_centerVertical="true" android:layout_toEndOf="@+id/textView3"/>
+                    android:textColor="@color/white"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dialog_title_height"
+                    android:layout_marginBottom="10dp"
+                    android:textStyle="bold"/>
             <TextView
-                    android:paddingLeft="@dimen/dialog_padding_horizontal_big"
-                    android:layout_gravity="center_vertical"
-                    android:text="@string/tutorial_sort_lists"
-                    android:inputType="textMultiLine"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/textView3" android:layout_centerVertical="true"
-                    android:layout_alignParentStart="true"/>
-            <ImageView
-                    android:layout_gravity="center"
-                    android:layout_marginLeft="@dimen/fab_margin"
-                    android:layout_marginRight="@dimen/fab_margin"
-                    android:padding="@dimen/tutorial_icon_padding"
-                    android:src="@drawable/ic_sort_white_24dp"
-                    android:background="@color/colorPrimaryDark"
-                    android:layout_width="@dimen/tutorial_icon_size"
-                    android:layout_height="@dimen/tutorial_icon_size"
-                    android:tint="@color/white"
-                    android:layout_alignParentTop="true" android:layout_alignParentEnd="true"/>
-        </RelativeLayout>
-        <RelativeLayout
-                android:layout_marginBottom="@dimen/tutorial_icon_padding"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-            <ImageView
-                    android:layout_gravity="center"
-                    android:src="@drawable/ic_keyboard_arrow_right_black_24dp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:tint="@color/colorPrimaryDark"
-                    android:layout_centerVertical="true"
-                    android:layout_toEndOf="@+id/textView4"/>
-            <ImageView
-                    android:layout_gravity="center"
-                    android:layout_marginLeft="@dimen/fab_margin"
-                    android:layout_marginRight="@dimen/fab_margin"
-                    android:padding="@dimen/tutorial_icon_padding"
-                    android:src="@drawable/ic_keyboard_arrow_down_white_48dp"
-                    android:layout_width="@dimen/tutorial_icon_size"
-                    android:layout_height="@dimen/tutorial_icon_size"
-                    android:tint="@color/colorAccent"
-                    android:layout_alignParentTop="true" android:layout_alignParentEnd="true"/>
-            <TextView
-                    android:paddingLeft="@dimen/dialog_padding_horizontal_big"
-                    android:layout_gravity="center_vertical"
-                    android:text="@string/tutorial_see_details_list"
-                    android:inputType="textMultiLine"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true" android:layout_alignParentStart="true"
-                    android:id="@+id/textView4"/>
-        </RelativeLayout>
+                    android:text="@string/tutorial_how_to"
+                    android:textStyle="bold"
+                    android:paddingLeft="@dimen/dialog_padding"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
 
-        <TextView
-                android:text="@string/tutorial_icons_meaning"
-                android:textStyle="bold"
-                android:paddingLeft="@dimen/dialog_padding"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
+            <RelativeLayout
+                    android:layout_marginBottom="@dimen/tutorial_icon_padding"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" android:layout_gravity="center_horizontal">
+                <ImageView
+                        android:layout_gravity="center"
+                        android:layout_marginLeft="@dimen/fab_margin"
+                        android:layout_marginRight="@dimen/fab_margin"
+                        android:src="@drawable/fab_tutorial"
+                        android:layout_width="@dimen/tutorial_icon_size"
+                        android:layout_height="@dimen/tutorial_icon_size"
+                        android:layout_alignParentTop="true" android:layout_alignParentEnd="true"/>
+                <ImageView
+                        android:layout_gravity="center"
+                        android:src="@drawable/ic_keyboard_arrow_right_black_24dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:tint="@color/colorPrimaryDark"
+                        android:id="@+id/imageView2" android:layout_centerVertical="true"
+                        android:layout_toEndOf="@+id/textView"/>
+                <TextView
+                        android:paddingLeft="@dimen/dialog_padding_horizontal_big"
+                        android:text="@string/tutorial_create_list"
+                        android:inputType="textMultiLine"
+                        android:layout_gravity="center_vertical"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true" android:layout_alignParentStart="true"
+                        android:id="@+id/textView"/>
+            </RelativeLayout>
+            <RelativeLayout
+                    android:layout_marginBottom="@dimen/tutorial_icon_padding"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_below="@+id/textView" android:layout_alignParentStart="true">
+                <ImageView
+                        android:layout_gravity="center"
+                        android:src="@drawable/ic_keyboard_arrow_right_black_24dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:tint="@color/colorPrimaryDark"
+                        android:layout_row="1"
+                        android:layout_column="1"
+                        android:layout_centerVertical="true" android:layout_toEndOf="@+id/textView2"
+                        android:id="@+id/imageView3"/>
+                <TextView
+                        android:paddingLeft="@dimen/dialog_padding_horizontal_big"
+                        android:layout_gravity="center_vertical"
+                        android:text="@string/tutorial_delete_lists"
+                        android:inputType="textMultiLine"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/textView2" android:layout_centerVertical="true"
+                        android:layout_alignParentStart="true"/>
+                <ImageView
+                        android:layout_gravity="center"
+                        android:layout_marginLeft="@dimen/fab_margin"
+                        android:layout_marginRight="@dimen/fab_margin"
+                        android:padding="@dimen/tutorial_icon_padding"
+                        android:src="@drawable/ic_delete_white_24dp"
+                        android:background="@color/colorPrimaryDark"
+                        android:layout_width="@dimen/tutorial_icon_size"
+                        android:layout_height="@dimen/tutorial_icon_size"
+                        android:tint="@color/white"
+                        android:layout_alignParentTop="true" android:layout_alignParentEnd="true"/>
+            </RelativeLayout>
+            <RelativeLayout
+                    android:layout_marginBottom="@dimen/tutorial_icon_padding"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+                <ImageView
+                        android:layout_gravity="center"
+                        android:src="@drawable/ic_keyboard_arrow_right_black_24dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:tint="@color/colorPrimaryDark"
+                        android:layout_centerVertical="true" android:layout_toEndOf="@+id/textView3"/>
+                <TextView
+                        android:paddingLeft="@dimen/dialog_padding_horizontal_big"
+                        android:layout_gravity="center_vertical"
+                        android:text="@string/tutorial_sort_lists"
+                        android:inputType="textMultiLine"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/textView3" android:layout_centerVertical="true"
+                        android:layout_alignParentStart="true"/>
+                <ImageView
+                        android:layout_gravity="center"
+                        android:layout_marginLeft="@dimen/fab_margin"
+                        android:layout_marginRight="@dimen/fab_margin"
+                        android:padding="@dimen/tutorial_icon_padding"
+                        android:src="@drawable/ic_sort_white_24dp"
+                        android:background="@color/colorPrimaryDark"
+                        android:layout_width="@dimen/tutorial_icon_size"
+                        android:layout_height="@dimen/tutorial_icon_size"
+                        android:tint="@color/white"
+                        android:layout_alignParentTop="true" android:layout_alignParentEnd="true"/>
+            </RelativeLayout>
+            <RelativeLayout
+                    android:layout_marginBottom="@dimen/tutorial_icon_padding"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+                <ImageView
+                        android:layout_gravity="center"
+                        android:src="@drawable/ic_keyboard_arrow_right_black_24dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:tint="@color/colorPrimaryDark"
+                        android:layout_centerVertical="true"
+                        android:layout_toEndOf="@+id/textView4"/>
+                <ImageView
+                        android:layout_gravity="center"
+                        android:layout_marginLeft="@dimen/fab_margin"
+                        android:layout_marginRight="@dimen/fab_margin"
+                        android:padding="@dimen/tutorial_icon_padding"
+                        android:src="@drawable/ic_keyboard_arrow_down_white_48dp"
+                        android:layout_width="@dimen/tutorial_icon_size"
+                        android:layout_height="@dimen/tutorial_icon_size"
+                        android:tint="@color/colorAccent"
+                        android:layout_alignParentTop="true" android:layout_alignParentEnd="true"/>
+                <TextView
+                        android:paddingLeft="@dimen/dialog_padding_horizontal_big"
+                        android:layout_gravity="center_vertical"
+                        android:text="@string/tutorial_see_details_list"
+                        android:inputType="textMultiLine"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true" android:layout_alignParentStart="true"
+                        android:id="@+id/textView4"/>
+            </RelativeLayout>
 
-        <GridLayout
-                android:padding="@dimen/dialog_padding"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
             <TextView
-                    android:paddingLeft="@dimen/dialog_padding_horizontal"
-                    android:text="@string/tutorial_icon_priority"
-                    android:layout_gravity="center_vertical"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:inputType="textMultiLine"
-                    android:layout_row="0"
-                    android:layout_column="1"/>
-            <TextView
-                    android:paddingLeft="@dimen/dialog_padding_horizontal"
-                    android:text="@string/tutorial_icon_reminder_on"
-                    android:layout_gravity="center_vertical"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:inputType="textMultiLine"
-                    android:layout_row="1"
-                    android:layout_column="1"/>
-            <TextView
-                    android:paddingLeft="@dimen/dialog_padding_horizontal"
-                    android:text="@string/tutorial_icon_reminder_off"
-                    android:layout_gravity="center_vertical"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:inputType="textMultiLine"
-                    android:layout_row="2"
-                    android:layout_column="1"/>
-            <ImageView
-                    android:id="@+id/imageview_high_prio_icon"
-                    android:tint="@color/yellow"
-                    android:src="@drawable/ic_error_black_24dp"
-                    android:layout_width="@dimen/icon_size"
-                    android:layout_height="@dimen/icon_size"
-                    android:layout_row="0" android:layout_column="0"/>
-            <ImageView
-                    android:tint="@color/middlegrey"
-                    android:src="@drawable/ic_perm_group_device_alarms"
-                    android:layout_gravity="center_vertical"
-                    android:layout_width="@dimen/icon_size"
-                    android:layout_height="@dimen/icon_size"
-                    android:layout_row="1" android:layout_column="0"/>
-            <ImageView
-                    android:tint="@color/red"
-                    android:src="@drawable/ic_perm_group_device_alarms"
-                    android:layout_gravity="center_vertical"
-                    android:layout_width="@dimen/icon_size"
-                    android:layout_height="@dimen/icon_size"
-                    android:layout_row="2" android:layout_column="0"/>
-        </GridLayout>
+                    android:text="@string/tutorial_icons_meaning"
+                    android:textStyle="bold"
+                    android:paddingLeft="@dimen/dialog_padding"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
 
+            <LinearLayout
+                    android:orientation="vertical"
+                    android:padding="@dimen/dialog_padding_horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+                    <ImageView
+                            android:id="@+id/imageview_high_prio_icon"
+                            android:tint="@color/yellow"
+                            android:src="@drawable/ic_error_black_24dp"
+                            android:layout_width="@dimen/icon_size"
+                            android:layout_height="@dimen/icon_size"/>
+                    <TextView
+                            android:paddingLeft="@dimen/dialog_padding_horizontal"
+                            android:text="@string/tutorial_icon_priority"
+                            android:layout_gravity="center_vertical"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:inputType="textMultiLine"/>
+                </LinearLayout>
 
-    </LinearLayout>
-</ScrollView>
+                <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+                    <ImageView
+                            android:tint="@color/middlegrey"
+                            android:src="@drawable/ic_perm_group_device_alarms"
+                            android:layout_gravity="center_vertical"
+                            android:layout_width="@dimen/icon_size"
+                            android:layout_height="@dimen/icon_size"/>
+                    <TextView
+                            android:paddingLeft="@dimen/dialog_padding_horizontal"
+                            android:text="@string/tutorial_icon_reminder_on"
+                            android:layout_gravity="center_vertical"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:inputType="textMultiLine"/>
+                </LinearLayout>
+
+                <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+                    <ImageView
+                            android:tint="@color/red"
+                            android:src="@drawable/ic_perm_group_device_alarms"
+                            android:layout_gravity="center_vertical"
+                            android:layout_width="@dimen/icon_size"
+                            android:layout_height="@dimen/icon_size"/>
+                    <TextView
+                            android:paddingLeft="@dimen/dialog_padding_horizontal"
+                            android:text="@string/tutorial_icon_reminder_off"
+                            android:layout_gravity="center_vertical"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:inputType="textMultiLine"/>
+                </LinearLayout>
+
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

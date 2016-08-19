@@ -1,221 +1,227 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                  android:orientation="vertical"
-                  android:layout_width="match_parent"
-                  android:layout_height="wrap_content">
-        <TextView
-                android:id="@+id/dialog_title"
-                android:gravity="center"
-                android:text="@string/tutorial_dialog_title"
-                android:background="@color/colorPrimaryDark"
-                android:textColor="@color/white"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/dialog_title_height"
-                android:layout_marginBottom="10dp"
-                android:textStyle="bold"/>
-        <TextView
-                android:text="@string/tutorial_how_to"
-                android:textStyle="bold"
-                android:paddingLeft="@dimen/dialog_padding"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
-
-        <RelativeLayout
-                android:layout_marginBottom="@dimen/tutorial_icon_padding"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" android:layout_gravity="center_horizontal">
-            <ImageView
-                    android:layout_gravity="center"
-                    android:layout_marginLeft="@dimen/fab_margin"
-                    android:layout_marginRight="@dimen/fab_margin"
-                    android:src="@drawable/fab_tutorial"
-                    android:layout_width="@dimen/tutorial_icon_size"
-                    android:layout_height="@dimen/tutorial_icon_size"
-                    android:layout_alignParentTop="true" android:layout_alignParentEnd="true"/>
-            <ImageView
-                    android:layout_gravity="center"
-                    android:src="@drawable/ic_keyboard_arrow_right_black_24dp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:tint="@color/colorPrimaryDark"
-                    android:id="@+id/imageView2" android:layout_centerVertical="true"
-                    android:layout_toEndOf="@+id/textView"/>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content">
+    <TextView
+            android:id="@+id/dialog_title"
+            android:gravity="center"
+            android:text="@string/tutorial_dialog_title"
+            android:background="@color/colorPrimaryDark"
+            android:textColor="@color/white"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dialog_title_height"
+            android:layout_marginBottom="10dp"
+            android:textStyle="bold"/>
+    <ScrollView
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="match_parent"
+            android:fadeScrollbars="false"
+            android:layout_height="wrap_content">
+        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                      android:orientation="vertical"
+                      android:layout_width="match_parent"
+                      android:layout_height="wrap_content">
             <TextView
-                    android:paddingLeft="@dimen/dialog_padding_horizontal_big"
-                    android:text="@string/tutorial_add_product"
-                    android:inputType="textMultiLine"
-                    android:layout_gravity="center_vertical"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true" android:layout_alignParentStart="true"
-                    android:id="@+id/textView"/>
-        </RelativeLayout>
-        <RelativeLayout
-                android:layout_marginBottom="@dimen/tutorial_icon_padding"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_below="@+id/textView" android:layout_alignParentStart="true">
-            <ImageView
-                    android:layout_gravity="center"
-                    android:src="@drawable/ic_keyboard_arrow_right_black_24dp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:tint="@color/colorPrimaryDark"
-                    android:layout_row="1"
-                    android:layout_column="1"
-                    android:layout_centerVertical="true" android:layout_toEndOf="@+id/textView2"
-                    android:id="@+id/imageView3"/>
-            <TextView
-                    android:paddingLeft="@dimen/dialog_padding_horizontal_big"
-                    android:layout_gravity="center_vertical"
-                    android:text="@string/tutorial_delete_products"
-                    android:inputType="textMultiLine"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/textView2" android:layout_centerVertical="true"
-                    android:layout_alignParentStart="true"/>
-            <ImageView
-                    android:layout_gravity="center"
-                    android:layout_marginLeft="@dimen/fab_margin"
-                    android:layout_marginRight="@dimen/fab_margin"
-                    android:padding="@dimen/tutorial_icon_padding"
-                    android:src="@drawable/ic_delete_white_24dp"
-                    android:background="@color/colorPrimaryDark"
-                    android:layout_width="@dimen/tutorial_icon_size"
-                    android:layout_height="@dimen/tutorial_icon_size"
-                    android:tint="@color/white"
-                    android:layout_alignParentTop="true" android:layout_alignParentEnd="true"/>
-        </RelativeLayout>
-        <RelativeLayout
-                android:layout_marginBottom="@dimen/tutorial_icon_padding"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-            <ImageView
-                    android:layout_gravity="center"
-                    android:src="@drawable/ic_keyboard_arrow_right_black_24dp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:tint="@color/colorPrimaryDark"
-                    android:layout_centerVertical="true" android:layout_toEndOf="@+id/textView3"/>
-            <TextView
-                    android:paddingLeft="@dimen/dialog_padding_horizontal_big"
-                    android:layout_gravity="center_vertical"
-                    android:text="@string/tutorial_sort_products"
-                    android:inputType="textMultiLine"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/textView3" android:layout_centerVertical="true"
-                    android:layout_alignParentStart="true"/>
-            <ImageView
-                    android:layout_gravity="center"
-                    android:layout_marginLeft="@dimen/fab_margin"
-                    android:layout_marginRight="@dimen/fab_margin"
-                    android:padding="@dimen/tutorial_icon_padding"
-                    android:src="@drawable/ic_sort_white_24dp"
-                    android:background="@color/colorPrimaryDark"
-                    android:layout_width="@dimen/tutorial_icon_size"
-                    android:layout_height="@dimen/tutorial_icon_size"
-                    android:tint="@color/white"
-                    android:layout_alignParentTop="true" android:layout_alignParentEnd="true"/>
-        </RelativeLayout>
-        <RelativeLayout
-                android:layout_marginBottom="@dimen/tutorial_icon_padding"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-            <ImageView
-                    android:layout_gravity="center"
-                    android:src="@drawable/ic_keyboard_arrow_right_black_24dp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:tint="@color/colorPrimaryDark"
-                    android:layout_centerVertical="true"
-                    android:layout_toEndOf="@+id/textView4"/>
-            <ImageView
-                    android:layout_gravity="center"
-                    android:layout_marginLeft="@dimen/fab_margin"
-                    android:layout_marginRight="@dimen/fab_margin"
-                    android:padding="@dimen/tutorial_icon_padding"
-                    android:src="@drawable/ic_keyboard_arrow_down_white_48dp"
-                    android:layout_width="@dimen/tutorial_icon_size"
-                    android:layout_height="@dimen/tutorial_icon_size"
-                    android:tint="@color/colorAccent"
-                    android:layout_alignParentTop="true" android:layout_alignParentEnd="true"/>
-            <TextView
-                    android:paddingLeft="@dimen/dialog_padding_horizontal_big"
-                    android:layout_gravity="center_vertical"
-                    android:text="@string/tutorial_see_details_product"
-                    android:inputType="textMultiLine"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true" android:layout_alignParentStart="true"
-                    android:id="@+id/textView4"/>
-        </RelativeLayout>
-        <RelativeLayout
-                android:layout_marginBottom="@dimen/tutorial_icon_padding"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-            <TextView
-                    android:paddingLeft="@dimen/dialog_padding_horizontal_big"
-                    android:layout_gravity="center_vertical"
-                    android:text="@string/tutorial_check_product"
-                    android:inputType="textMultiLine"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true" android:layout_alignParentStart="true"
-                    android:id="@+id/textView5"/>
-            <ImageView
-                    android:layout_gravity="center"
-                    android:src="@drawable/ic_keyboard_arrow_right_black_24dp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:tint="@color/colorPrimaryDark"
-                    android:layout_centerVertical="true"
-                    android:layout_toEndOf="@+id/textView5"/>
-            <CheckBox
-                    android:layout_marginLeft="@dimen/fab_margin"
-                    android:layout_marginRight="@dimen/fab_margin"
-
-                    android:layout_gravity="center"
-                    android:padding="@dimen/tutorial_icon_padding"
-                    android:layout_width="35dp"
-                    android:layout_height="@dimen/tutorial_icon_size"
-                    android:backgroundTint="@color/colorAccent"
-                    android:layout_alignParentTop="true"
-                    android:layout_alignParentEnd="true"/>
-        </RelativeLayout>
-
-        <TextView
-                android:text="@string/statistics"
-                android:textStyle="bold"
-                android:paddingLeft="@dimen/dialog_padding"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
-
-        <LinearLayout
-                android:orientation="horizontal"
-                android:padding="@dimen/dialog_padding"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-            <CheckBox
-                    android:layout_gravity="center_vertical"
-                    android:checked="true"
-                    android:clickable="false"
-                    android:padding="@dimen/tutorial_icon_padding"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:backgroundTint="@color/colorAccent"/>
-            <TextView
-                    android:paddingLeft="@dimen/dialog_padding_horizontal"
-                    android:paddingRight="@dimen/dialog_padding_horizontal_big"
-                    android:text="@string/tutorial_check_statistics"
-                    android:layout_gravity="center_vertical"
+                    android:text="@string/tutorial_how_to"
+                    android:textStyle="bold"
+                    android:paddingLeft="@dimen/dialog_padding"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:inputType="textMultiLine"/>
+                    android:layout_height="wrap_content"/>
+
+            <RelativeLayout
+                    android:layout_marginBottom="@dimen/tutorial_icon_padding"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" android:layout_gravity="center_horizontal">
+                <ImageView
+                        android:layout_gravity="center"
+                        android:layout_marginLeft="@dimen/fab_margin"
+                        android:layout_marginRight="@dimen/fab_margin"
+                        android:src="@drawable/fab_tutorial"
+                        android:layout_width="@dimen/tutorial_icon_size"
+                        android:layout_height="@dimen/tutorial_icon_size"
+                        android:layout_alignParentTop="true" android:layout_alignParentEnd="true"/>
+                <ImageView
+                        android:layout_gravity="center"
+                        android:src="@drawable/ic_keyboard_arrow_right_black_24dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:tint="@color/colorPrimaryDark"
+                        android:id="@+id/imageView2" android:layout_centerVertical="true"
+                        android:layout_toEndOf="@+id/textView"/>
+                <TextView
+                        android:paddingLeft="@dimen/dialog_padding_horizontal_big"
+                        android:text="@string/tutorial_add_product"
+                        android:inputType="textMultiLine"
+                        android:layout_gravity="center_vertical"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true" android:layout_alignParentStart="true"
+                        android:id="@+id/textView"/>
+            </RelativeLayout>
+            <RelativeLayout
+                    android:layout_marginBottom="@dimen/tutorial_icon_padding"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_below="@+id/textView" android:layout_alignParentStart="true">
+                <ImageView
+                        android:layout_gravity="center"
+                        android:src="@drawable/ic_keyboard_arrow_right_black_24dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:tint="@color/colorPrimaryDark"
+                        android:layout_row="1"
+                        android:layout_column="1"
+                        android:layout_centerVertical="true" android:layout_toEndOf="@+id/textView2"
+                        android:id="@+id/imageView3"/>
+                <TextView
+                        android:paddingLeft="@dimen/dialog_padding_horizontal_big"
+                        android:layout_gravity="center_vertical"
+                        android:text="@string/tutorial_delete_products"
+                        android:inputType="textMultiLine"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/textView2" android:layout_centerVertical="true"
+                        android:layout_alignParentStart="true"/>
+                <ImageView
+                        android:layout_gravity="center"
+                        android:layout_marginLeft="@dimen/fab_margin"
+                        android:layout_marginRight="@dimen/fab_margin"
+                        android:padding="@dimen/tutorial_icon_padding"
+                        android:src="@drawable/ic_delete_white_24dp"
+                        android:background="@color/colorPrimaryDark"
+                        android:layout_width="@dimen/tutorial_icon_size"
+                        android:layout_height="@dimen/tutorial_icon_size"
+                        android:tint="@color/white"
+                        android:layout_alignParentTop="true" android:layout_alignParentEnd="true"/>
+            </RelativeLayout>
+            <RelativeLayout
+                    android:layout_marginBottom="@dimen/tutorial_icon_padding"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+                <ImageView
+                        android:layout_gravity="center"
+                        android:src="@drawable/ic_keyboard_arrow_right_black_24dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:tint="@color/colorPrimaryDark"
+                        android:layout_centerVertical="true" android:layout_toEndOf="@+id/textView3"/>
+                <TextView
+                        android:paddingLeft="@dimen/dialog_padding_horizontal_big"
+                        android:layout_gravity="center_vertical"
+                        android:text="@string/tutorial_sort_products"
+                        android:inputType="textMultiLine"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/textView3" android:layout_centerVertical="true"
+                        android:layout_alignParentStart="true"/>
+                <ImageView
+                        android:layout_gravity="center"
+                        android:layout_marginLeft="@dimen/fab_margin"
+                        android:layout_marginRight="@dimen/fab_margin"
+                        android:padding="@dimen/tutorial_icon_padding"
+                        android:src="@drawable/ic_sort_white_24dp"
+                        android:background="@color/colorPrimaryDark"
+                        android:layout_width="@dimen/tutorial_icon_size"
+                        android:layout_height="@dimen/tutorial_icon_size"
+                        android:tint="@color/white"
+                        android:layout_alignParentTop="true" android:layout_alignParentEnd="true"/>
+            </RelativeLayout>
+            <RelativeLayout
+                    android:layout_marginBottom="@dimen/tutorial_icon_padding"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+                <ImageView
+                        android:layout_gravity="center"
+                        android:src="@drawable/ic_keyboard_arrow_right_black_24dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:tint="@color/colorPrimaryDark"
+                        android:layout_centerVertical="true"
+                        android:layout_toEndOf="@+id/textView4"/>
+                <ImageView
+                        android:layout_gravity="center"
+                        android:layout_marginLeft="@dimen/fab_margin"
+                        android:layout_marginRight="@dimen/fab_margin"
+                        android:padding="@dimen/tutorial_icon_padding"
+                        android:src="@drawable/ic_keyboard_arrow_down_white_48dp"
+                        android:layout_width="@dimen/tutorial_icon_size"
+                        android:layout_height="@dimen/tutorial_icon_size"
+                        android:tint="@color/colorAccent"
+                        android:layout_alignParentTop="true" android:layout_alignParentEnd="true"/>
+                <TextView
+                        android:paddingLeft="@dimen/dialog_padding_horizontal_big"
+                        android:layout_gravity="center_vertical"
+                        android:text="@string/tutorial_see_details_product"
+                        android:inputType="textMultiLine"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true" android:layout_alignParentStart="true"
+                        android:id="@+id/textView4"/>
+            </RelativeLayout>
+            <RelativeLayout
+                    android:layout_marginBottom="@dimen/tutorial_icon_padding"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+                <TextView
+                        android:paddingLeft="@dimen/dialog_padding_horizontal_big"
+                        android:layout_gravity="center_vertical"
+                        android:text="@string/tutorial_check_product"
+                        android:inputType="textMultiLine"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true" android:layout_alignParentStart="true"
+                        android:id="@+id/textView5"/>
+                <ImageView
+                        android:layout_gravity="center"
+                        android:src="@drawable/ic_keyboard_arrow_right_black_24dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:tint="@color/colorPrimaryDark"
+                        android:layout_centerVertical="true"
+                        android:layout_toEndOf="@+id/textView5"/>
+                <CheckBox
+                        android:layout_marginLeft="@dimen/fab_margin"
+                        android:layout_marginRight="@dimen/fab_margin"
+
+                        android:layout_gravity="center"
+                        android:padding="@dimen/tutorial_icon_padding"
+                        android:layout_width="35dp"
+                        android:layout_height="@dimen/tutorial_icon_size"
+                        android:backgroundTint="@color/colorAccent"
+                        android:layout_alignParentTop="true"
+                        android:layout_alignParentEnd="true"/>
+            </RelativeLayout>
+
+            <TextView
+                    android:text="@string/statistics"
+                    android:textStyle="bold"
+                    android:paddingLeft="@dimen/dialog_padding"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+
+            <LinearLayout
+                    android:orientation="horizontal"
+                    android:padding="@dimen/dialog_padding"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+                <CheckBox
+                        android:layout_gravity="center_vertical"
+                        android:checked="true"
+                        android:clickable="false"
+                        android:padding="@dimen/tutorial_icon_padding"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:backgroundTint="@color/colorAccent"/>
+                <TextView
+                        android:paddingLeft="@dimen/dialog_padding_horizontal"
+                        android:paddingRight="@dimen/dialog_padding_horizontal_big"
+                        android:text="@string/tutorial_check_statistics"
+                        android:layout_gravity="center_vertical"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="textMultiLine"/>
+            </LinearLayout>
         </LinearLayout>
-    </LinearLayout>
-</ScrollView>
+    </ScrollView>
+</LinearLayout>
