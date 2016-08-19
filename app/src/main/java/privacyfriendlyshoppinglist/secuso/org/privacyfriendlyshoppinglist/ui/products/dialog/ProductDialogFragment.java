@@ -111,7 +111,7 @@ public class ProductDialogFragment extends DialogFragment
 
         if ( resetState )
         {
-            // if dto was implicitly saved because of taking a picture for the product, then delete
+            // if dto was implicitly saved because of taking a picture for the product, then delete the product
             productService.deleteById(dto.getId());
             ProductsActivity productsActivity = (ProductsActivity) cache.getActivity();
             productsActivity.updateListView();
