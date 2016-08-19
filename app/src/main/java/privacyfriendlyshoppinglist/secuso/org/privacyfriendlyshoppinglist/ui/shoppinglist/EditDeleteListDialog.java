@@ -21,6 +21,8 @@ import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.mai
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.shoppinglist.reminder.ReminderReceiver;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.shoppinglist.reminder.ReminderSchedulingService;
 import rx.Observable;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.schedulers.Schedulers;
 
 /**
  * Created by Chris on 11.08.2016.
@@ -103,7 +105,12 @@ public class EditDeleteListDialog extends DialogFragment
                         R.string.delete_confirmation_title,
                         R.string.delete_list_confirmation,
                         dto.getListName(),
-                        deleteList());
+                        deleteList()
+                                .doOnCompleted(() ->
+                                {
+                                    MainActivity activity = (MainActivity) cache.getActivity();
+                                    activity.updateListView();
+                                }));
             }
         });
 
@@ -113,12 +120,14 @@ public class EditDeleteListDialog extends DialogFragment
 
     private Observable<Void> deleteList()
     {
-        Observable<Void> observable = Observable
+        Observable observable = Observable
                 .create(subscriber ->
                 {
                     subscriber.onNext(deleteListSync());
                     subscriber.onCompleted();
-                });
+                })
+                .subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread());
         return observable;
     }
 
@@ -132,9 +141,6 @@ public class EditDeleteListDialog extends DialogFragment
         ReminderReceiver alarm = new ReminderReceiver();
         Intent intent = new Intent(cache.getActivity(), ReminderSchedulingService.class);
         alarm.cancelAlarm(cache.getActivity(), intent, id);
-
-        MainActivity activity = (MainActivity) cache.getActivity();
-        activity.updateListView();
         return null;
     }
 

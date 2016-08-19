@@ -15,6 +15,8 @@ import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.shoppingList.business.ShoppingListService;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.shoppingList.persistence.entity.ShoppingListEntity;
 import rx.Observable;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.schedulers.Schedulers;
 
 import javax.inject.Inject;
 import java.io.File;
@@ -102,12 +104,14 @@ public class ProductServiceImpl implements ProductService
     @Override
     public Observable<Void> deleteOnlyImage(String id)
     {
-        Observable<Void> observable = Observable
+        Observable observable = Observable
                 .create(subscriber ->
                 {
                     subscriber.onNext(deleteOnlyImageSync(id));
                     subscriber.onCompleted();
-                });
+                })
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread());
         return observable;
     }
 
@@ -212,13 +216,14 @@ public class ProductServiceImpl implements ProductService
     @Override
     public Observable<AutoCompleteLists> getAutoCompleteListsObservable()
     {
-        Observable<AutoCompleteLists> autoCompleteListsObservable = Observable
+        Observable autoCompleteListsObservable = Observable
                 .create(subscriber ->
                 {
                     subscriber.onNext(getAutoCompleteLists());
                     subscriber.onCompleted();
-                });
-
+                })
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.newThread());
         return autoCompleteListsObservable;
     }
 
@@ -229,9 +234,7 @@ public class ProductServiceImpl implements ProductService
         Observable
                 .from(productItemDao.getAllEntities())
                 .map(this::getDto)
-                .subscribe(
-                        dto -> autoCompleteLists.updateLists(dto)
-                );
+                .subscribe(dto -> autoCompleteLists.updateLists(dto));
         return autoCompleteLists;
     }
 

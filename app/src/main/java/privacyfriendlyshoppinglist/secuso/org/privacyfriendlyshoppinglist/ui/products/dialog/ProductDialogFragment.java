@@ -33,8 +33,6 @@ import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.pro
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.products.dialog.listeners.onFocusListener.ProductDialogFocusListener;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.products.dialog.listeners.price.PriceInputFilter;
 import rx.Observable;
-import rx.android.schedulers.AndroidSchedulers;
-import rx.schedulers.Schedulers;
 
 import java.io.File;
 
@@ -50,6 +48,7 @@ public class ProductDialogFragment extends DialogFragment
 
     private static boolean opened;
     private static boolean editDialog;
+    private static boolean resetState;
 
     private ProductDto dto;
     private ProductDialogCache dialogCache;
@@ -109,6 +108,15 @@ public class ProductDialogFragment extends DialogFragment
     {
         super.onDismiss(dialog);
         opened = false; // flag to avoid opening this dialog twice
+
+        if ( resetState )
+        {
+            // if dto was implicitly saved because of taking a picture for the product, then delete
+            productService.deleteById(dto.getId());
+            ProductsActivity productsActivity = (ProductsActivity) cache.getActivity();
+            productsActivity.updateListView();
+            resetState = false;
+        }
     }
 
     public static boolean isOpened()
@@ -244,15 +252,11 @@ public class ProductDialogFragment extends DialogFragment
         dialogCache.getPrice().setOnFocusChangeListener(new ProductDialogFocusListener(dialogCache));
 
         Observable<AutoCompleteLists> rxAutoCompleteLists = productService.getAutoCompleteListsObservable();
-
         AutoCompleteLists autoCompleteLists = new AutoCompleteLists();
         rxAutoCompleteLists
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribeOn(Schedulers.newThread())
-                .subscribe(
-                        result -> result.copyTo(autoCompleteLists),
-                        Throwable::printStackTrace,
-                        () -> setupAutoCompleteLists(autoCompleteLists));
+                .doOnNext(result -> result.copyTo(autoCompleteLists))
+                .doOnCompleted(() -> setupAutoCompleteLists(autoCompleteLists))
+                .subscribe();
 
         dialogCache.getProductImage().setOnClickListener(new View.OnClickListener()
         {
@@ -286,13 +290,7 @@ public class ProductDialogFragment extends DialogFragment
             @Override
             public void onClick(DialogInterface dialogInterface, int i)
             {
-                if (dto.getId() != null && !editDialog)
-                {
-                    // if dto was implicitly saved because of taking a picture for the product, then delete
-                    productService.deleteById(dto.getId());
-                    ProductsActivity productsActivity = (ProductsActivity) cache.getActivity();
-                    productsActivity.updateListView();
-                }
+
             }
         });
 
@@ -387,6 +385,7 @@ public class ProductDialogFragment extends DialogFragment
             productName = newProductName;
         }
         saveUserInput(productName);
+        resetState = true;
 
         dialogCache.setImageScheduledForDeletion(false);
         Intent takePictureIntent = new Intent(cache.getActivity(), CameraActivity.class);

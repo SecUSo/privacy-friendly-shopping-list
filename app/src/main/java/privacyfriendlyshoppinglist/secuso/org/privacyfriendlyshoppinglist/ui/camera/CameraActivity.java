@@ -145,11 +145,14 @@ public class CameraActivity extends AppCompatActivity implements View.OnClickLis
 
     private void handleButtonRetake()
     {
-        photoCaptured = false;
-        retakeButton.setVisibility(View.GONE);
-        flashButton.animate().alpha(1.0f).setDuration(500L);
-        captureButton.setImageResource(R.drawable.ic_camera_alt_white_48dp);
-        camera.startPreview();
+        if ( !photoConfirmed )
+        {
+            photoCaptured = false;
+            retakeButton.setVisibility(View.GONE);
+            flashButton.animate().alpha(1.0f).setDuration(500L);
+            captureButton.setImageResource(R.drawable.ic_camera_alt_white_48dp);
+            camera.startPreview();
+        }
     }
 
     private void setupCameraPreview()

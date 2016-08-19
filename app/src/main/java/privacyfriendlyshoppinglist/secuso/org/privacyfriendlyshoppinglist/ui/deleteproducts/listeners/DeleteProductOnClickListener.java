@@ -13,6 +13,7 @@ import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.del
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.main.MainActivity;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.products.ProductsActivity;
 import rx.Observable;
+import rx.schedulers.Schedulers;
 
 import java.util.List;
 
@@ -41,12 +42,13 @@ public class DeleteProductOnClickListener implements View.OnClickListener
 
     private Observable<Void> deleteProducts()
     {
-        Observable<Void> observable = Observable
+        Observable observable = Observable
                 .create(subscriber ->
                 {
                     subscriber.onNext(deleteProductsSync());
                     subscriber.onCompleted();
-                });
+                })
+                .subscribeOn(Schedulers.computation());
         return observable;
     }
 

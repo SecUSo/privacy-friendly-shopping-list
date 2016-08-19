@@ -111,17 +111,13 @@ public class ImageViewerDialog extends DialogFragment
         titleTextView.setText(listDialogTitle);
 
         loadImageFromStorage(dto)
-                .subscribeOn(Schedulers.newThread())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(
-                        result -> fullSizeBitmap = result,
-                        Throwable::printStackTrace,
-                        () ->
-                        {
-                            progressBar.setVisibility(View.GONE);
-                            productImage.setImage(ImageSource.bitmap(fullSizeBitmap));
-                        }
-                );
+                .doOnNext(result -> fullSizeBitmap = result)
+                .doOnCompleted(() ->
+                {
+                    progressBar.setVisibility(View.GONE);
+                    productImage.setImage(ImageSource.bitmap(fullSizeBitmap));
+                })
+                .subscribe();
 
         closeButton.setOnClickListener(new View.OnClickListener()
         {
@@ -179,7 +175,7 @@ public class ImageViewerDialog extends DialogFragment
 
     private Observable<Bitmap> loadImageFromStorage(ProductDto dto)
     {
-        Observable<Bitmap> observable = Observable
+        Observable observable = Observable
                 .create(subscriber ->
                 {
                     try
@@ -191,7 +187,9 @@ public class ImageViewerDialog extends DialogFragment
                         e.printStackTrace();
                     }
                     subscriber.onCompleted();
-                });
+                })
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread());
         return observable;
     }
 

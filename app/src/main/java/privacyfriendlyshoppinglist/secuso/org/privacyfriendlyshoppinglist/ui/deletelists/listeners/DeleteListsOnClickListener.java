@@ -16,6 +16,7 @@ import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.mai
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.shoppinglist.reminder.ReminderReceiver;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.shoppinglist.reminder.ReminderSchedulingService;
 import rx.Observable;
+import rx.schedulers.Schedulers;
 
 import java.util.List;
 
@@ -46,12 +47,13 @@ public class DeleteListsOnClickListener implements View.OnClickListener
 
     private Observable<Void> deleteLists()
     {
-        Observable<Void> observable = Observable
+        Observable observable = Observable
                 .create(subscriber ->
                 {
                     subscriber.onNext(deleteListsSync());
                     subscriber.onCompleted();
-                });
+                })
+                .subscribeOn(Schedulers.computation());
         return observable;
     }
 
@@ -60,12 +62,9 @@ public class DeleteListsOnClickListener implements View.OnClickListener
         // delete lists
         List<ListDto> shoppingList = cache.getDeleteListsAdapter().getShoppingList();
         List<String> deletedIds = shoppingListService.deleteSelected(shoppingList);
-        Observable.from(deletedIds).subscribe(
-                id -> productService.deleteAllFromList(id),
-                t ->
-                {
-                },
-                () ->
+        Observable.from(deletedIds)
+                .doOnNext(id -> productService.deleteAllFromList(id))
+                .doOnCompleted(() ->
                 {
                     for ( String id : deletedIds )
                     {
@@ -74,8 +73,8 @@ public class DeleteListsOnClickListener implements View.OnClickListener
                         alarm.cancelAlarm(cache.getActivity(), intent, id);
                         NotificationUtils.removeNotification(cache.getActivity(), id);
                     }
-                }
-        );
+                })
+                .subscribe();
 
         // go back to list overview
         AppCompatActivity activity = cache.getActivity();

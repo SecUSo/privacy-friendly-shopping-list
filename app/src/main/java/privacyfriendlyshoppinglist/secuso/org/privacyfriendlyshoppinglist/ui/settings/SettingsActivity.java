@@ -17,6 +17,7 @@ import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framew
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.statistics.business.StatisticsService;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.baseactivity.BaseActivity;
 import rx.Observable;
+import rx.schedulers.Schedulers;
 
 /**
  * A {@link PreferenceActivity} that presents a set of application settings. On
@@ -284,12 +285,13 @@ public class SettingsActivity extends BaseActivity
 
         private Observable<Void> deleteStatistics()
         {
-            Observable<Void> observable = Observable
+            Observable observable = Observable
                     .create(subscriber ->
                     {
                         subscriber.onNext(deleteStatisticsSync());
                         subscriber.onCompleted();
-                    });
+                    })
+                    .subscribeOn(Schedulers.computation());
             return observable;
         }
 
