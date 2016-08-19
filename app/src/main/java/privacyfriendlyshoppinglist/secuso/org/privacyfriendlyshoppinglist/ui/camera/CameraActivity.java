@@ -34,8 +34,8 @@ public class CameraActivity extends AppCompatActivity implements View.OnClickLis
 
     private static final int THUMBNAIL_SIZE = 200;
     public static final int FLASH_OPTIONS_AVAILABLE = 3;
-    private Camera mCamera;
-    private CameraPreview mPreview;
+    private Camera camera;
+    private CameraPreview cameraPreview;
     private String productId;
     private int cameraOrientation;
     private FloatingActionButton flashButton;
@@ -43,7 +43,8 @@ public class CameraActivity extends AppCompatActivity implements View.OnClickLis
     private FloatingActionButton retakeButton;
     private List<Integer> flashIcons;
     private int currentFlashIconIndex;
-    private boolean PhotoCaptured;
+    private boolean photoCaptured;
+    private boolean photoConfirmed;
     private Bitmap takenImageBitmap;
     private Bitmap rotatedThumbnailBitmap;
     private byte[] imageData;
@@ -60,7 +61,7 @@ public class CameraActivity extends AppCompatActivity implements View.OnClickLis
         setTitle(productName);
         setupFlashIcons();
 
-        mCamera = getInitializedCamera();
+        camera = getInitializedCamera();
         setupCameraPreview();
 
         captureButton = (FloatingActionButton) findViewById(R.id.button_capture);
@@ -105,58 +106,57 @@ public class CameraActivity extends AppCompatActivity implements View.OnClickLis
 
     private void handleButtonCapture()
     {
-        if ( !PhotoCaptured )
+        if ( !photoCaptured )
         {
             captureButton.setVisibility(View.GONE);
-            PhotoCaptured = true;
+            photoCaptured = true;
             captureButton.setImageResource(R.drawable.ic_check_white_48dp);
             flashButton.animate().alpha(0.0f).setDuration(500L);
-            mCamera.takePicture(null, null, mPicture);
+            camera.takePicture(null, null, mPicture);
         }
         else
         {
-            String productImagePath = getImagePath();
+            if ( !photoConfirmed )
+            {
+                // confirm button can only be pressed one time
+                photoConfirmed = !photoConfirmed;
+                String productImagePath = getImagePath();
 
-            // set thumbnail bitmap using a background thread
-            prepareBitmaps(imageData)
-                    .subscribeOn(Schedulers.newThread())
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .subscribe(
-                            bitmap ->
-                            {
-                                rotatedThumbnailBitmap = bitmap;
-                                // save bitmap using a background thread
-                                CameraUtils.saveBitmap(takenImageBitmap, productImagePath, cameraOrientation)
-                                        .subscribeOn(Schedulers.newThread())
-                                        .subscribe();
-                            },
-                            Throwable::printStackTrace,
-                            () ->
-                            {
-                                Intent resultIntent = new Intent();
-                                resultIntent.putExtra(THUMBNAIL_KEY, rotatedThumbnailBitmap);
-                                setResult(RESULT_OK, resultIntent);
-                                mCamera.release();
-                                finish();
-                            }
-                    );
+                // set thumbnail bitmap using a background thread
+                prepareBitmaps(imageData)
+                        .doOnNext(bitmap ->
+                        {
+                            rotatedThumbnailBitmap = bitmap;
+                            // save bitmap using a new background thread
+                            CameraUtils.saveBitmap(takenImageBitmap, productImagePath, cameraOrientation).subscribe();
+                        })
+                        .doOnCompleted(() ->
+                        {
+                            Intent resultIntent = new Intent();
+                            resultIntent.putExtra(THUMBNAIL_KEY, rotatedThumbnailBitmap);
+                            setResult(RESULT_OK, resultIntent);
+                            camera.release();
+                            finish();
+                        })
+                        .subscribe();
+            }
         }
     }
 
     private void handleButtonRetake()
     {
-        PhotoCaptured = false;
+        photoCaptured = false;
         retakeButton.setVisibility(View.GONE);
         flashButton.animate().alpha(1.0f).setDuration(500L);
         captureButton.setImageResource(R.drawable.ic_camera_alt_white_48dp);
-        mCamera.startPreview();
+        camera.startPreview();
     }
 
     private void setupCameraPreview()
     {
-        mPreview = new CameraPreview(this, mCamera);
+        cameraPreview = new CameraPreview(this, camera);
         FrameLayout preview = (FrameLayout) findViewById(R.id.camera_preview);
-        preview.addView(mPreview);
+        preview.addView(cameraPreview);
     }
 
     private void setupFlash()
@@ -164,7 +164,7 @@ public class CameraActivity extends AppCompatActivity implements View.OnClickLis
         currentFlashIconIndex = (++currentFlashIconIndex) % FLASH_OPTIONS_AVAILABLE;
         flashButton.setImageResource(flashIcons.get(currentFlashIconIndex));
 
-        Camera.Parameters parameters = mCamera.getParameters();
+        Camera.Parameters parameters = camera.getParameters();
         switch ( currentFlashIconIndex )
         {
             case 0:
@@ -176,7 +176,7 @@ public class CameraActivity extends AppCompatActivity implements View.OnClickLis
             default:
                 parameters.setFlashMode(Camera.Parameters.FLASH_MODE_OFF);
         }
-        mCamera.setParameters(parameters);
+        camera.setParameters(parameters);
     }
 
     private void setupFlashIcons()
@@ -194,7 +194,7 @@ public class CameraActivity extends AppCompatActivity implements View.OnClickLis
         public void onPictureTaken(byte[] data, Camera camera)
         {
             imageData = data;
-            mCamera.stopPreview();
+            CameraActivity.this.camera.stopPreview();
             captureButton.setVisibility(View.VISIBLE);
             retakeButton.setVisibility(View.VISIBLE);
             retakeButton.animate().rotation(-360).alpha(1.0f).setDuration(500L);
@@ -203,12 +203,14 @@ public class CameraActivity extends AppCompatActivity implements View.OnClickLis
 
     private Observable<Bitmap> prepareBitmaps(byte[] data)
     {
-        Observable<Bitmap> observable = Observable
+        Observable observable = Observable
                 .create(subscriber ->
                 {
                     subscriber.onNext(prepareBitmapsSync(data));
                     subscriber.onCompleted();
-                });
+                })
+                .subscribeOn(Schedulers.computation())
+                .observeOn(AndroidSchedulers.mainThread());
         return observable;
     }
 
@@ -237,7 +239,7 @@ public class CameraActivity extends AppCompatActivity implements View.OnClickLis
             int orientation = CameraUtils.getRotationAdjustment(cameraOrientation);
             camera.setDisplayOrientation(orientation);
             setAutoFocus(camera);
-            PhotoCaptured = false;
+            photoCaptured = false;
         }
         catch ( Exception e )
         {

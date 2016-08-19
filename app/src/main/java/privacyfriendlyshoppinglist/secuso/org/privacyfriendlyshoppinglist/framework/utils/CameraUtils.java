@@ -5,6 +5,7 @@ import android.graphics.Matrix;
 import android.hardware.Camera;
 import android.view.Surface;
 import rx.Observable;
+import rx.schedulers.Schedulers;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -53,12 +54,13 @@ public abstract class CameraUtils
 
     public static Observable<Void> saveBitmap(Bitmap bitmap, String imagePath, int rotation)
     {
-        Observable<Void> observable = Observable
+        Observable observable = Observable
                 .create(subscriber ->
                 {
                     subscriber.onNext(saveBitmapSync(bitmap, imagePath, rotation));
                     subscriber.onCompleted();
-                });
+                })
+                .subscribeOn(Schedulers.io());
         return observable;
     }
 
