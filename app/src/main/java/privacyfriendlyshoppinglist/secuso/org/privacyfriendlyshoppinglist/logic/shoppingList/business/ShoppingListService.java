@@ -2,6 +2,7 @@ package privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic
 
 import org.joda.time.DateTime;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.context.ContextSetter;
+import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.product.business.domain.ProductDto;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.shoppingList.business.domain.ListDto;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.shoppingList.persistence.entity.ShoppingListEntity;
 
@@ -35,4 +36,6 @@ public interface ShoppingListService extends ContextSetter
     List<ListDto> moveSelectedToEnd(List<ListDto> shoppingListDtos);
 
     void sortList(List<ListDto> lists, String criteria, boolean ascending);
+
+    String getShareableText(ListDto listDto, List<ProductDto> productDtos);
 }

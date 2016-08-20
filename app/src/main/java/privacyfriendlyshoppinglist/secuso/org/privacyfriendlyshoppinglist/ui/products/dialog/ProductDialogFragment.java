@@ -75,9 +75,6 @@ public class ProductDialogFragment extends DialogFragment
         ProductDialogFragment dialogFragment = new ProductDialogFragment();
         dialogFragment.setCache(cache);
         dialogFragment.setDto(dto);
-        AbstractInstanceFactory instanceFactory = new InstanceFactory(cache.getActivity().getApplicationContext());
-        ProductService productService = (ProductService) instanceFactory.createInstance(ProductService.class);
-        dialogFragment.setProductService(productService);
         return dialogFragment;
     }
 
@@ -89,11 +86,6 @@ public class ProductDialogFragment extends DialogFragment
     public void setDto(ProductDto dto)
     {
         this.dto = dto;
-    }
-
-    public void setProductService(ProductService productService)
-    {
-        this.productService = productService;
     }
 
     @Override
@@ -127,6 +119,9 @@ public class ProductDialogFragment extends DialogFragment
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState)
     {
+        AbstractInstanceFactory instanceFactory = new InstanceFactory(cache.getActivity().getApplicationContext());
+        productService = (ProductService) instanceFactory.createInstance(ProductService.class);
+
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         LayoutInflater inflater = (LayoutInflater) getActivity().getSystemService(getActivity().LAYOUT_INFLATER_SERVICE);
         View v = inflater.inflate(R.layout.product_dialog, null);

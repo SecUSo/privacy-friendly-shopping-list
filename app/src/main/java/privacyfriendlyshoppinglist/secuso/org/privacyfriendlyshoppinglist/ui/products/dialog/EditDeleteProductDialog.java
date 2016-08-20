@@ -40,9 +40,6 @@ public class EditDeleteProductDialog extends DialogFragment
         EditDeleteProductDialog dialogFragment = new EditDeleteProductDialog();
         dialogFragment.setCache(cache);
         dialogFragment.setDto(dto);
-        AbstractInstanceFactory instanceFactory = new InstanceFactory(cache.getActivity().getApplicationContext());
-        ProductService productService = (ProductService) instanceFactory.createInstance(ProductService.class);
-        dialogFragment.setProductService(productService);
         return dialogFragment;
     }
 
@@ -56,24 +53,34 @@ public class EditDeleteProductDialog extends DialogFragment
         this.dto = dto;
     }
 
-    public void setProductService(ProductService productService)
-    {
-        this.productService = productService;
-    }
-
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState)
     {
+        AbstractInstanceFactory instanceFactory = new InstanceFactory(cache.getActivity().getApplicationContext());
+        productService = (ProductService) instanceFactory.createInstance(ProductService.class);
+
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         LayoutInflater inflater = (LayoutInflater) getActivity().getSystemService(getActivity().LAYOUT_INFLATER_SERVICE);
         View rootView = inflater.inflate(R.layout.edit_delete_dialog, null);
         Button editButton = (Button) rootView.findViewById(R.id.edit);
         Button deleteButton = (Button) rootView.findViewById(R.id.delete);
+        Button shareButton = (Button) rootView.findViewById(R.id.share);
         TextView titleTextView = (TextView) rootView.findViewById(R.id.title);
 
         String listDialogTitle = getContext().getResources().getString(R.string.product_as_title, dto.getProductName());
         titleTextView.setText(listDialogTitle);
+
+        shareButton.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                dismiss();
+                String shareableText = productService.getSharableText(dto);
+                MessageUtils.shareText(getContext(), shareableText, dto.getProductName());
+            }
+        });
 
         editButton.setOnClickListener(new View.OnClickListener()
         {

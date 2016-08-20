@@ -19,6 +19,9 @@ import java.io.ByteArrayOutputStream;
  */
 public class ProductConverterServiceImpl implements ProductConverterService
 {
+    private static final int DEFAULT_QUANTITY = 1;
+    private static final double DEFAULT_PRICE = 0.0;
+    private static final int BITMAP_QUALITY = 100;
     private String priceFormat0;
     private String priceFormat1;
     private String priceFormat2;
@@ -49,7 +52,7 @@ public class ProductConverterServiceImpl implements ProductConverterService
         }
         else
         {
-            entity.setQuantity(0);
+            entity.setQuantity(DEFAULT_QUANTITY);
         }
 
         entity.setNotes(dto.getProductNotes());
@@ -63,7 +66,7 @@ public class ProductConverterServiceImpl implements ProductConverterService
         }
         else
         {
-            entity.setPrice(0.0);
+            entity.setPrice(DEFAULT_PRICE);
         }
 
         entity.setCategory(dto.getProductCategory());
@@ -72,7 +75,7 @@ public class ProductConverterServiceImpl implements ProductConverterService
         if ( dto.getThumbnailBitmap() != null && !dto.isDefaultImage() )
         {
             ByteArrayOutputStream stream = new ByteArrayOutputStream();
-            dto.getThumbnailBitmap().compress(Bitmap.CompressFormat.PNG, 100, stream);
+            dto.getThumbnailBitmap().compress(Bitmap.CompressFormat.PNG, BITMAP_QUALITY, stream);
             entity.setImageBytes(stream.toByteArray());
         }
         else

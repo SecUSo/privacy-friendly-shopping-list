@@ -13,11 +13,6 @@ import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framew
  */
 public class ProductDto
 {
-
-    public static final String NEW_LINE = "\n";
-    private static final String SPACE = " ";
-    private static final String COMMA = ",";
-
     // product fields
     private String productName;
 
@@ -168,16 +163,16 @@ public class ProductDto
         boolean withStore = false;
         if ( !StringUtils.isEmpty(getProductStore()) )
         {
-            sb.append(storeLabel).append(SPACE).append(getProductStore());
+            sb.append(storeLabel).append(StringUtils.SPACE).append(getProductStore());
             withStore = true;
         }
         if ( !StringUtils.isEmpty(getProductCategory()) )
         {
             if ( withStore )
             {
-                sb.append(COMMA).append(SPACE);
+                sb.append(StringUtils.COMMA).append(StringUtils.SPACE);
             }
-            sb.append(categoryLabel).append(SPACE).append(getProductCategory());
+            sb.append(categoryLabel).append(StringUtils.SPACE).append(getProductCategory());
         }
         return sb.toString();
     }
@@ -196,12 +191,12 @@ public class ProductDto
         if ( !StringUtils.isEmpty(quantity) )
         {
             sb.append(quantityDetail);
-            sb.append(NEW_LINE);
+            sb.append(StringUtils.NEW_LINE);
         }
         if ( !StringUtils.isEmpty(productPrice) )
         {
             sb.append(priceDetail);
-            sb.append(NEW_LINE);
+            sb.append(StringUtils.NEW_LINE);
         }
         if ( !StringUtils.isEmpty(totalProductPrice) )
         {
@@ -213,22 +208,22 @@ public class ProductDto
         boolean notesExists = !StringUtils.isEmpty(productNotes);
         if ( categoryExists || storeExists || notesExists )
         {
-            sb.append(NEW_LINE);
+            sb.append(StringUtils.NEW_LINE);
         }
 
         if ( categoryExists )
         {
-            sb.append(NEW_LINE);
+            sb.append(StringUtils.NEW_LINE);
             sb.append(categoryDetail);
         }
         if ( storeExists )
         {
-            sb.append(NEW_LINE);
+            sb.append(StringUtils.NEW_LINE);
             sb.append(storeDetail);
         }
         if ( notesExists )
         {
-            sb.append(NEW_LINE);
+            sb.append(StringUtils.NEW_LINE);
             sb.append(notesDetail);
         }
 

@@ -7,6 +7,7 @@ import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framew
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.persistence.DB;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.utils.DateUtils;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.utils.StringUtils;
+import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.product.business.domain.ProductDto;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.shoppingList.business.ShoppingListService;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.shoppingList.business.domain.ListDto;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.shoppingList.business.impl.comparators.ListsComparators;
@@ -186,6 +187,43 @@ public class ShoppingListServiceImpl implements ShoppingListService
             Collections.sort(lists, ListsComparators.getPriorityComparator(ascending));
         }
 
+    }
+
+    @Override
+    public String getShareableText(ListDto listDto, List<ProductDto> productDtos)
+    {
+        StringBuilder sb = new StringBuilder();
+
+        sb.append(listDto.getListName());
+        sb.append(StringUtils.NEW_LINE);
+
+        if ( productDtos != null && !productDtos.isEmpty() )
+        {
+            Observable.from(productDtos)
+                    .filter(dto -> !dto.isChecked())
+                    .subscribe(dto ->
+                    {
+                        sb
+                                .append(StringUtils.DASH)
+                                .append(StringUtils.LEFT_BRACE)
+                                .append(dto.getQuantity())
+                                .append(StringUtils.RIGHT_BRACE)
+                                .append(dto.getProductName())
+                                .append(StringUtils.NEW_LINE);
+                    });
+        }
+        else
+        {
+            sb.append(context.getResources().getString(R.string.no_products));
+        }
+
+        if ( !StringUtils.isEmpty(listDto.getNotes()) )
+        {
+            sb.append(StringUtils.NEW_LINE);
+            sb.append(listDto.getNotes());
+        }
+
+        return sb.toString();
     }
 
     private ListDto getDto(ShoppingListEntity entity)

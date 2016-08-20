@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.ContextWrapper;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.comparators.PFAComparators;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.persistence.DB;
+import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.utils.StringUtils;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.product.business.ProductService;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.product.business.domain.AutoCompleteLists;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.product.business.domain.ProductDto;
@@ -84,7 +85,8 @@ public class ProductServiceImpl implements ProductService
     }
 
     @Override
-    public String getProductImagePath(String id){
+    public String getProductImagePath(String id)
+    {
         ContextWrapper contextWrapper = new ContextWrapper(context);
         File directory = contextWrapper.getDir(IMAGE_DIR_NAME, Context.MODE_PRIVATE);
         File path = new File(directory, getUniqueName(id));
@@ -211,6 +213,28 @@ public class ProductServiceImpl implements ProductService
         totalDto.setNrProducts(nrProducts);
 
         return totalDto;
+    }
+
+    @Override
+    public String getSharableText(ProductDto dto)
+    {
+        StringBuilder sb = new StringBuilder();
+        sb
+                .append(StringUtils.DASH)
+                .append(StringUtils.LEFT_BRACE)
+                .append(dto.getQuantity())
+                .append(StringUtils.RIGHT_BRACE)
+                .append(dto.getProductName());
+
+        if ( !StringUtils.isEmpty(dto.getProductNotes()) )
+        {
+            sb
+                    .append(StringUtils.NEW_LINE)
+                    .append(StringUtils.NEW_LINE)
+                    .append(dto.getProductNotes());
+        }
+
+        return sb.toString();
     }
 
     @Override

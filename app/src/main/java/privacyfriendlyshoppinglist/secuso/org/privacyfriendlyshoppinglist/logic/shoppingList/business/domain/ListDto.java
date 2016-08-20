@@ -12,10 +12,6 @@ import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framew
  */
 public class ListDto extends AbstractDto
 {
-    private static final String DETAIL_SEPARATOR = ": ";
-    private static final String NEW_LINE = "\n";
-    private static final String SPACE = " ";
-    
     private String listName;
     private String priority;
     private int icon;
@@ -171,30 +167,30 @@ public class ListDto extends AbstractDto
 
         int statisticsInfoIndex = this.statisticEnabled ? 0 : 1;
         sb.append(statisticsInfoArray[ statisticsInfoIndex ]);
-        sb.append(NEW_LINE);
+        sb.append(StringUtils.NEW_LINE);
 
         String priorityIndex = this.getPriority();
         if ( !StringUtils.isEmpty(priorityIndex) )
         {
-            sb.append(NEW_LINE);
+            sb.append(StringUtils.NEW_LINE);
             String[] prioritiesArray = context.getResources().getStringArray(R.array.shopping_list_priority_spinner);
             String priority = prioritiesArray[ Integer.valueOf(priorityIndex) ];
             sb.append(priorityLabel);
-            sb.append(DETAIL_SEPARATOR);
+            sb.append(StringUtils.DETAIL_SEPARATOR);
             sb.append(priority);
         }
         if ( !StringUtils.isEmpty(this.getDeadlineDate()) )
         {
-            sb.append(NEW_LINE);
+            sb.append(StringUtils.NEW_LINE);
             sb.append(deadLineLabel);
-            sb.append(DETAIL_SEPARATOR);
+            sb.append(StringUtils.DETAIL_SEPARATOR);
             sb.append(this.getDeadlineDate());
-            sb.append(SPACE);
+            sb.append(StringUtils.SPACE);
             sb.append(this.getDeadlineTime());
         }
         if ( !StringUtils.isEmpty(this.getReminderCount()) )
         {
-            sb.append(NEW_LINE);
+            sb.append(StringUtils.NEW_LINE);
             String[] timeUnitArray = context.getResources().getStringArray(R.array.shopping_list_reminder_spinner);
             String reminderUnit = timeUnitArray[ Integer.valueOf(this.getReminderUnit()) ];
             String reminderText = context.getResources().getString(R.string.reminder_text, Integer.valueOf(this.getReminderCount()), reminderUnit);
@@ -202,9 +198,9 @@ public class ListDto extends AbstractDto
         }
         if ( !StringUtils.isEmpty(this.getNotes()) )
         {
-            sb.append(NEW_LINE);
+            sb.append(StringUtils.NEW_LINE);
             sb.append(notesLabel);
-            sb.append(DETAIL_SEPARATOR);
+            sb.append(StringUtils.DETAIL_SEPARATOR);
             sb.append(this.getNotes());
         }
 

@@ -12,6 +12,13 @@ public abstract class StringUtils
 {
 
     public static final String EMPTY = "";
+    public static final String NEW_LINE = "\n";
+    public static final String SPACE = " ";
+    public static final String COMMA = ",";
+    public static final String DETAIL_SEPARATOR = ": ";
+    public static final String DASH = "- ";
+    public static final String LEFT_BRACE = "[ ";
+    public static final String RIGHT_BRACE = " ] ";
 
     public static boolean isEmpty(String string)
     {

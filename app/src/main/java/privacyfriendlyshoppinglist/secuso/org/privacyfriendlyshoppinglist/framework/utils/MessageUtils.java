@@ -28,6 +28,25 @@ public class MessageUtils
 {
     private static int NOTHING = -1;
 
+    public static void shareText(Context context, String text)
+    {
+        shareText(context, text, null);
+    }
+
+    public static void shareText(Context context, String text, String title)
+    {
+        Intent sendIntent = new Intent();
+        sendIntent.setAction(Intent.ACTION_SEND);
+        sendIntent.putExtra(Intent.EXTRA_TEXT, text);
+        if ( title != null )
+        {
+            sendIntent.putExtra(Intent.EXTRA_TITLE, title);
+            sendIntent.putExtra(Intent.EXTRA_SUBJECT, title);
+        }
+        sendIntent.setType("text/plain");
+        context.startActivity(Intent.createChooser(sendIntent, context.getResources().getText(R.string.share_as_text)));
+    }
+
     public static void showToast(Context context, int messageStringResource, int toastLength)
     {
         Toast toast = Toast.makeText(context, messageStringResource, toastLength);

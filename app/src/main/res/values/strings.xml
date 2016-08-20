@@ -4,6 +4,7 @@
     <!--### GENERAL ### -->
     <string name="cancel">Cancel</string>
     <string name="delete">Delete</string>
+    <string name="share">Share</string>
     <string name="edit">Edit</string>
     <string name="language">US</string>
     <string name="date_long_pattern">EE MM/dd/yyyy HH:mm</string>
@@ -282,6 +283,10 @@
     <string name="reminder_before">before</string>
     <string name="list_notes">Notes</string>
     <string name="default_list_name">New Shopping List</string>
+
+    <!-- Sharing -->
+    <string name="no_products">This list does not contain any products.</string>
+    <string name="share_as_text">Share as Text</string>
 
     <string-array
             name="shopping_list_priority_spinner">

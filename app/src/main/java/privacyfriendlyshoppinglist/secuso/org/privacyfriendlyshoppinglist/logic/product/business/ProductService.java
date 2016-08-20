@@ -37,6 +37,8 @@ public interface ProductService extends ContextSetter
 
     TotalDto computeTotals(List<ProductDto> productDtos);
 
+    String getSharableText(ProductDto dto);
+
     Observable<AutoCompleteLists> getAutoCompleteListsObservable();
 
     void sortProducts(List<ProductDto> products, String criteria, boolean ascending);

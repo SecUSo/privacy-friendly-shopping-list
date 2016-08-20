@@ -68,9 +68,6 @@ public class ListDialogFragment extends DialogFragment
         ListDialogFragment dialogFragment = new ListDialogFragment();
         dialogFragment.setCache(cache);
         dialogFragment.setDto(dto);
-        AbstractInstanceFactory instanceFactory = new InstanceFactory(cache.getActivity().getApplicationContext());
-        ShoppingListService shoppingListService = (ShoppingListService) instanceFactory.createInstance(ShoppingListService.class);
-        dialogFragment.setShoppingListService(shoppingListService);
         return dialogFragment;
     }
 
@@ -84,14 +81,12 @@ public class ListDialogFragment extends DialogFragment
         this.dto = dto;
     }
 
-    public void setShoppingListService(ShoppingListService shoppingListService)
-    {
-        this.shoppingListService = shoppingListService;
-    }
-
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState)
     {
+        AbstractInstanceFactory instanceFactory = new InstanceFactory(cache.getActivity().getApplicationContext());
+        shoppingListService = (ShoppingListService) instanceFactory.createInstance(ShoppingListService.class);
+
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         LayoutInflater inflater = (LayoutInflater) getActivity().getSystemService(getActivity().LAYOUT_INFLATER_SERVICE);
         View v = inflater.inflate(R.layout.shopping_list_dialog, null);
