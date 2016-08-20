@@ -49,6 +49,7 @@ public class ProductDialogFragment extends DialogFragment
     private static boolean opened;
     private static boolean editDialog;
     private static boolean resetState;
+    private static boolean saveConfirmed;
 
     private ProductDto dto;
     private ProductDialogCache dialogCache;
@@ -101,7 +102,7 @@ public class ProductDialogFragment extends DialogFragment
         super.onDismiss(dialog);
         opened = false; // flag to avoid opening this dialog twice
 
-        if ( resetState )
+        if ( resetState && !saveConfirmed )
         {
             // if dto was implicitly saved because of taking a picture for the product, then delete the product
             productService.deleteById(dto.getId());
@@ -306,6 +307,7 @@ public class ProductDialogFragment extends DialogFragment
                 }
                 else
                 {
+                    saveConfirmed = true;
                     saveUserInput(productName);
                     ProductsActivity productsActivity = (ProductsActivity) cache.getActivity();
                     productsActivity.updateListView();
@@ -379,8 +381,10 @@ public class ProductDialogFragment extends DialogFragment
             String newProductName = getResources().getString(R.string.new_product);
             productName = newProductName;
         }
+        boolean newProductAdded = dto.getId() == null;
+        resetState = true && newProductAdded;
         saveUserInput(productName);
-        resetState = true;
+        saveConfirmed = false;
 
         dialogCache.setImageScheduledForDeletion(false);
         Intent takePictureIntent = new Intent(cache.getActivity(), CameraActivity.class);
