@@ -207,11 +207,7 @@ public class CameraActivity extends AppCompatActivity implements View.OnClickLis
     private Observable<Bitmap> prepareBitmaps(byte[] data)
     {
         Observable observable = Observable
-                .create(subscriber ->
-                {
-                    subscriber.onNext(prepareBitmapsSync(data));
-                    subscriber.onCompleted();
-                })
+                .defer(() -> Observable.just(prepareBitmapsSync(data)))
                 .subscribeOn(Schedulers.computation())
                 .observeOn(AndroidSchedulers.mainThread());
         return observable;

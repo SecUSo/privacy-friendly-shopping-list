@@ -135,11 +135,7 @@ public class EditDeleteListDialog extends DialogFragment
     private Observable<Void> deleteList()
     {
         Observable observable = Observable
-                .create(subscriber ->
-                {
-                    subscriber.onNext(deleteListSync());
-                    subscriber.onCompleted();
-                })
+                .defer(() -> Observable.just(deleteListSync()))
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread());
         return observable;

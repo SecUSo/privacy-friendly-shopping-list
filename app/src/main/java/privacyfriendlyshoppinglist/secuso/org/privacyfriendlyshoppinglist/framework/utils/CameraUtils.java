@@ -55,11 +55,7 @@ public abstract class CameraUtils
     public static Observable<Void> saveBitmap(Bitmap bitmap, String imagePath, int rotation)
     {
         Observable observable = Observable
-                .create(subscriber ->
-                {
-                    subscriber.onNext(saveBitmapSync(bitmap, imagePath, rotation));
-                    subscriber.onCompleted();
-                })
+                .defer(() -> Observable.just(saveBitmapSync(bitmap, imagePath, rotation)))
                 .subscribeOn(Schedulers.io());
         return observable;
     }

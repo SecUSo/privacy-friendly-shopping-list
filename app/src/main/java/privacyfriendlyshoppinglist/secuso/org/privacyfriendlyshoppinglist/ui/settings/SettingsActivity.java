@@ -286,11 +286,7 @@ public class SettingsActivity extends BaseActivity
         private Observable<Void> deleteStatistics()
         {
             Observable observable = Observable
-                    .create(subscriber ->
-                    {
-                        subscriber.onNext(deleteStatisticsSync());
-                        subscriber.onCompleted();
-                    })
+                    .defer(() -> Observable.just(deleteStatisticsSync()))
                     .subscribeOn(Schedulers.computation());
             return observable;
         }

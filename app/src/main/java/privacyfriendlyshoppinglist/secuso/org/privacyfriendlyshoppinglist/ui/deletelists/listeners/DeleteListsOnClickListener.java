@@ -48,11 +48,7 @@ public class DeleteListsOnClickListener implements View.OnClickListener
     private Observable<Void> deleteLists()
     {
         Observable observable = Observable
-                .create(subscriber ->
-                {
-                    subscriber.onNext(deleteListsSync());
-                    subscriber.onCompleted();
-                })
+                .defer(() -> Observable.just(deleteListsSync()))
                 .subscribeOn(Schedulers.computation());
         return observable;
     }

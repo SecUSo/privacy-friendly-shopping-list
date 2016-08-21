@@ -176,17 +176,16 @@ public class ImageViewerDialog extends DialogFragment
     private Observable<Bitmap> loadImageFromStorage(ProductDto dto)
     {
         Observable observable = Observable
-                .create(subscriber ->
+                .defer(() ->
                 {
                     try
                     {
-                        subscriber.onNext(loadImageFromStorageSync(dto));
+                        return Observable.just(loadImageFromStorageSync(dto));
                     }
                     catch ( InterruptedException e )
                     {
-                        e.printStackTrace();
+                        return Observable.error(e);
                     }
-                    subscriber.onCompleted();
                 })
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread());

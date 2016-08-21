@@ -43,11 +43,7 @@ public class DeleteProductOnClickListener implements View.OnClickListener
     private Observable<Void> deleteProducts()
     {
         Observable observable = Observable
-                .create(subscriber ->
-                {
-                    subscriber.onNext(deleteProductsSync());
-                    subscriber.onCompleted();
-                })
+                .defer(() -> Observable.just(deleteProductsSync()))
                 .subscribeOn(Schedulers.computation());
         return observable;
     }

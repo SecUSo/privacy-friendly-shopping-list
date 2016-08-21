@@ -107,11 +107,7 @@ public class ProductServiceImpl implements ProductService
     public Observable<Void> deleteOnlyImage(String id)
     {
         Observable observable = Observable
-                .create(subscriber ->
-                {
-                    subscriber.onNext(deleteOnlyImageSync(id));
-                    subscriber.onCompleted();
-                })
+                .defer(() -> Observable.just(deleteOnlyImageSync(id)))
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread());
         return observable;
@@ -241,11 +237,7 @@ public class ProductServiceImpl implements ProductService
     public Observable<AutoCompleteLists> getAutoCompleteListsObservable()
     {
         Observable autoCompleteListsObservable = Observable
-                .create(subscriber ->
-                {
-                    subscriber.onNext(getAutoCompleteLists());
-                    subscriber.onCompleted();
-                })
+                .defer(() -> Observable.just(getAutoCompleteLists()))
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.newThread());
         return autoCompleteListsObservable;

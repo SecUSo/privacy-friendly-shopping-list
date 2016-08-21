@@ -120,11 +120,7 @@ public class EditDeleteProductDialog extends DialogFragment
     private Observable<Void> deleteProduct()
     {
         Observable observable = Observable
-                .create(subscriber ->
-                {
-                    subscriber.onNext(deleteProductSync());
-                    subscriber.onCompleted();
-                })
+                .defer(() -> Observable.just(deleteProductSync()))
                 .subscribeOn(Schedulers.computation())
                 .observeOn(AndroidSchedulers.mainThread());
         return observable;
