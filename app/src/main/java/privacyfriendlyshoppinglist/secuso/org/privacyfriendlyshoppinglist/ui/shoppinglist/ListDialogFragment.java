@@ -27,6 +27,7 @@ import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.shoppingList.business.domain.ListDto;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.main.MainActivity;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.main.ShoppingListActivityCache;
+import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.products.ProductsActivity;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.settings.SettingsKeys;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.shoppinglist.listeners.ListsDialogFocusListener;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.shoppinglist.reminder.ReminderReceiver;
@@ -382,8 +383,20 @@ public class ListDialogFragment extends DialogFragment
                     alarm.cancelAlarm(cache.getActivity(), intent, dto.getId());
                 }
 
-                MainActivity mainActivity = (MainActivity) cache.getActivity();
-                mainActivity.updateListView();
+                if ( !editDialog )
+                {
+                    // go to new list
+                    Intent intent = new Intent(cache.getActivity(), ProductsActivity.class);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    intent.putExtra(MainActivity.LIST_ID_KEY, dto.getId());
+                    cache.getActivity().startActivity(intent);
+                }
+                else
+                {
+                    // update lists
+                    MainActivity mainActivity = (MainActivity) cache.getActivity();
+                    mainActivity.updateListView();
+                }
             }
         });
 
