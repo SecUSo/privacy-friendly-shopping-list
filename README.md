@@ -9,6 +9,15 @@ The Privacy Friendly App Shopping List is an Android application that does not r
 Nowadays there are many apps that require many or all permissions available in Android in order to be installed. However these apps do not always need all of the permissions they ask for. With this project we want to offer an app where the user can be sure that private information such as contacts, location, identity etc., are not being used by the application.
 
 ## Versioning
+Version 0.3 (Beta). Changes:
+- When edit/create dialogs (for list or products) are opened, then the keyboard is automatically showed, so the user can start typing.
+- After creating a new list, the app jumps automatically inside of the new list, so the user can immediately start adding products.
+- Tutorial Dialog layouts bugs fixed
+- Bug fixes in Camara feature
+- Share as Text feature added
+- Length of List name and Product name increased to 40. If the text is too long, then "..." is showed at the end of the line
+- Dynamic counter added in text fields List Name and Product Name to show the users how many characters they have left
+- Product names cannot appear multiple times in the same list. Error message added so the user realizes that the product already exists
 
 Version 0.2 (Beta). Changes:
 - Statistics (total units) were added to the chart
