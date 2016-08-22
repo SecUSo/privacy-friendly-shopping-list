@@ -20,7 +20,6 @@ import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.pro
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.products.ProductsActivity;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.products.dialog.EditDeleteProductDialog;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.products.dialog.ImageViewerDialog;
-import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.products.dialog.ProductDialogFragment;
 
 /**
  * Description:
@@ -105,12 +104,7 @@ public class ProductsItemViewHolder extends RecyclerView.ViewHolder
         {
             public void onClick(View v)
             {
-                if ( !ProductDialogFragment.isOpened() )
-                {
-                    DialogFragment productFragement = ProductDialogFragment.newEditDialogInstance(dto, productActivityCache);
-                    productFragement.show(productActivityCache.getActivity().getSupportFragmentManager(), "Product");
-                }
-
+                productItemCache.getCheckbox().performClick();
             }
         });
 
