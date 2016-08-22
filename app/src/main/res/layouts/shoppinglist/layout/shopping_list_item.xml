@@ -28,8 +28,11 @@
             <TextView
                     android:id="@+id/textview_list_name"
                     android:text="@string/ph_list_name"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:layout_marginRight="100dp"
+                    android:ellipsize="end"
+                    android:singleLine="true"
                     android:gravity="center_vertical"
                     android:padding="@dimen/list_padding"
                     android:layout_marginLeft="@dimen/list_margin"
@@ -68,8 +71,7 @@
                     android:src="@drawable/ic_error_black_24dp"
                     android:layout_width="@dimen/icon_size"
                     android:layout_height="@dimen/icon_size"
-                    android:layout_centerVertical="true"
-                    android:layout_toEndOf="@+id/textview_list_name"/>
+                    android:layout_centerVertical="true" android:layout_toStartOf="@+id/textview_prod_quantity"/>
             <ImageButton
                     android:id="@+id/expand_button_list"
                     android:layout_width="50dp"

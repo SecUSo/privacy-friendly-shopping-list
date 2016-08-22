@@ -32,7 +32,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:selectAllOnFocus="true"
-                    android:maxLength="16"
+                    android:maxLength="40"
                     android:imeOptions="actionNext"
                     android:hint="@string/product_name">
             </AutoCompleteTextView>

@@ -22,8 +22,11 @@
             <TextView
                     android:id="@+id/textview_product_name"
                     android:text="@string/ph_product_name"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="?attr/listPreferredItemHeight"
+                    android:layout_marginRight="110dp"
+                    android:ellipsize="end"
+                    android:singleLine="true"
                     android:gravity="center_vertical"
                     android:padding="@dimen/list_padding"
                     android:layout_marginLeft="@dimen/list_margin"
