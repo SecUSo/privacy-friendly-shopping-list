@@ -1,5 +1,6 @@
 package privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.products.dialog;
 
+import android.support.design.widget.TextInputLayout;
 import android.view.View;
 import android.widget.*;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.R;
@@ -29,10 +30,12 @@ public class ProductDialogCache
     private ImageView cameraIcon;
     private ImageView productImage;
     private TextView titleTextView;
+    private TextInputLayout productNameInputLayout;
 
     public ProductDialogCache(View rootview)
     {
         productName = (AutoCompleteTextView) rootview.findViewById(R.id.product_name);
+        productNameInputLayout = (TextInputLayout) rootview.findViewById(R.id.product_name_input_layout);
         quantity = (EditText) rootview.findViewById(R.id.quantity);
         price = (EditText) rootview.findViewById(R.id.product_price);
         customStore = (AutoCompleteTextView) rootview.findViewById(R.id.store_input);
@@ -120,5 +123,10 @@ public class ProductDialogCache
     public TextView getTitleTextView()
     {
         return titleTextView;
+    }
+
+    public TextInputLayout getProductNameInputLayout()
+    {
+        return productNameInputLayout;
     }
 }

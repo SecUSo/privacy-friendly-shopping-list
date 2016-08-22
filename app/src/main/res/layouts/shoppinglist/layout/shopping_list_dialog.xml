@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
               android:orientation="vertical"
               android:layout_width="match_parent"
               android:layout_height="wrap_content">
@@ -24,17 +25,25 @@
 
         <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/dialog_title_height">
+                android:layout_height="80dp">
 
             <android.support.design.widget.TextInputLayout
+                    app:errorTextAppearance="@style/error_appearance"
+                    app:counterEnabled="true"
+                    app:counterMaxLength="40"
+                    app:errorEnabled="true"
+                    android:id="@+id/list_name_input_layout"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content" android:layout_toStartOf="@+id/imageview_statistics">
+                    android:layout_height="wrap_content"
+                    android:layout_toStartOf="@+id/imageview_statistics">
                 <EditText
                         android:id="@+id/list_name"
                         android:inputType="text|textCapSentences"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:selectAllOnFocus="true"
                         android:maxLength="40"
+                        android:imeOptions="actionNext"
                         android:hint="@string/list_name"/>
             </android.support.design.widget.TextInputLayout>
 

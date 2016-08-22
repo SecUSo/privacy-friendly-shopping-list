@@ -13,7 +13,9 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.content.ContextCompat;
+import android.text.Editable;
 import android.text.InputFilter;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.WindowManager;
@@ -35,6 +37,7 @@ import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.pro
 import rx.Observable;
 
 import java.io.File;
+import java.util.Set;
 
 import static android.app.Activity.RESULT_OK;
 
@@ -244,8 +247,6 @@ public class ProductDialogFragment extends DialogFragment
 
         dialogCache.getProductNotes().setOnFocusChangeListener(new ProductDialogFocusListener(dialogCache));
         dialogCache.getProductName().setOnFocusChangeListener(new ProductDialogFocusListener(dialogCache));
-        dialogCache.getQuantity().setOnFocusChangeListener(new ProductDialogFocusListener(dialogCache));
-        dialogCache.getPrice().setOnFocusChangeListener(new ProductDialogFocusListener(dialogCache));
 
         Observable<AutoCompleteLists> rxAutoCompleteLists = productService.getAutoCompleteListsObservable();
         AutoCompleteLists autoCompleteLists = new AutoCompleteLists();
@@ -253,6 +254,9 @@ public class ProductDialogFragment extends DialogFragment
                 .doOnNext(result -> result.copyTo(autoCompleteLists))
                 .doOnCompleted(() -> setupAutoCompleteLists(autoCompleteLists))
                 .subscribe();
+
+        dialogCache.getQuantity().setOnFocusChangeListener(new ProductDialogFocusListener(dialogCache));
+        dialogCache.getPrice().setOnFocusChangeListener(new ProductDialogFocusListener(dialogCache));
 
         dialogCache.getProductImage().setOnClickListener(new View.OnClickListener()
         {
@@ -317,6 +321,39 @@ public class ProductDialogFragment extends DialogFragment
             }
         });
         dialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE);
+
+        dialogCache.getProductNameInputLayout().setError(null);
+        dialogCache.getProductName().addTextChangedListener(new TextWatcher()
+        {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after)
+            {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count)
+            {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s)
+            {
+                Set<String> products = autoCompleteLists.getProducts();
+                if ( products.contains(s.toString()) )
+                {
+                    dialog.getButton(Dialog.BUTTON_POSITIVE).setEnabled(false);
+                    dialogCache.getProductNameInputLayout().setError(getContext().getString(R.string.product_already_exists));
+                }
+                else
+                {
+                    dialogCache.getProductNameInputLayout().setError(null);
+                    dialog.getButton(Dialog.BUTTON_POSITIVE).setEnabled(true);
+                }
+            }
+        });
+
         return dialog;
     }
 

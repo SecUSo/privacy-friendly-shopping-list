@@ -1,5 +1,6 @@
 package privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.shoppinglist;
 
+import android.support.design.widget.TextInputLayout;
 import android.support.v7.widget.SwitchCompat;
 import android.view.View;
 import android.widget.*;
@@ -28,12 +29,14 @@ public class ListDialogCache
     private TextView titleTextView;
     private SwitchCompat statisticsSwitch;
     private SwitchCompat reminderSwitch;
+    private TextInputLayout listNameInputLayout;
 
     public ListDialogCache(View rootview)
     {
         prioritySpinner = (Spinner) rootview.findViewById(R.id.priority_spinner);
         reminderSpinner = (Spinner) rootview.findViewById(R.id.reminder_spinner);
         listNameText = (EditText) rootview.findViewById(R.id.list_name);
+        listNameInputLayout = (TextInputLayout) rootview.findViewById(R.id.list_name_input_layout);
         reminderText = (EditText) rootview.findViewById(R.id.edittext_reminder);
         listNotes = (EditText) rootview.findViewById(R.id.list_notes);
         checkBox = (CheckBox) rootview.findViewById(R.id.list_dialog_checkbox);
@@ -127,5 +130,10 @@ public class ListDialogCache
     public SwitchCompat getReminderSwitch()
     {
         return reminderSwitch;
+    }
+
+    public TextInputLayout getListNameInputLayout()
+    {
+        return listNameInputLayout;
     }
 }

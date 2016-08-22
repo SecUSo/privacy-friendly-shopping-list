@@ -3,7 +3,7 @@
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:layout_width="match_parent"
-              android:layout_height="wrap_content"
+              android:layout_height="wrap_content" xmlns:app="http://schemas.android.com/apk/res-auto"
               android:orientation="vertical">
     <TextView
             android:id="@+id/dialog_title"
@@ -18,12 +18,15 @@
     <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
             android:paddingRight="@dimen/dialog_padding_horizontal"
             android:paddingLeft="@dimen/dialog_padding_horizontal">
 
         <android.support.design.widget.TextInputLayout
-
+                app:errorTextAppearance="@style/error_appearance"
+                app:counterEnabled="true"
+                app:counterMaxLength="40"
+                app:errorEnabled="true"
+                android:id="@+id/product_name_input_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
             <AutoCompleteTextView

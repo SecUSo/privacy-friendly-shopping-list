@@ -80,6 +80,7 @@
 
     <!-- ### PRODUCTS ### -->
     <string name="new_product">New Product</string>
+    <string name="product_already_exists">Product already exists in this list!</string>
     <string name="total_amount">Total:</string>
     <string name="total_amount_separator">/</string>
     <string name="store_label">Store:</string>
