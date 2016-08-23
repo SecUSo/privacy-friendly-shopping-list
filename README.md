@@ -18,6 +18,8 @@ Version 0.3 (Beta). Changes:
 - Length of List name and Product name increased to 40. If the text is too long, then "..." is showed at the end of the line
 - Dynamic counter added in text fields List Name and Product Name to show the users how many characters they have left
 - Product names cannot appear multiple times in the same list. Error message added so the user realizes that the product already exists
+- onClick event inside a shopping list set the checkbox value to true. This feature was added because sometimes the CardView was behind the floating action button and therefore the user could not click the checkbox.
+- If lists are empty, then the logo of the app and a message are shown to user. This feature was added to to fill the empty white space.
 
 Version 0.2 (Beta). Changes:
 - Statistics (total units) were added to the chart
