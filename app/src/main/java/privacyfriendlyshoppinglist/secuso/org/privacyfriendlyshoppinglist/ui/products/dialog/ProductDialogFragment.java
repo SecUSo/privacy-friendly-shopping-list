@@ -320,7 +320,10 @@ public class ProductDialogFragment extends DialogFragment
                 }
             }
         });
-        dialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE);
+        if ( !editDialog )
+        {
+            dialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE);
+        }
 
         dialogCache.getProductNameInputLayout().setError(null);
         dialogCache.getProductName().addTextChangedListener(new TextWatcher()
