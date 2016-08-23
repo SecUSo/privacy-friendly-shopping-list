@@ -368,6 +368,7 @@ public class ProductDialogFragment extends DialogFragment
         dto.setProductPrice(String.valueOf(dialogCache.getPrice().getText()));
         dto.setProductCategory(String.valueOf(dialogCache.getCategory().getText()));
         dto.setProductStore(String.valueOf(dialogCache.getCustomStore().getText()));
+        dto.setChecked(false);
 
         if ( dialogCache.isImageScheduledForDeletion() )
         {
