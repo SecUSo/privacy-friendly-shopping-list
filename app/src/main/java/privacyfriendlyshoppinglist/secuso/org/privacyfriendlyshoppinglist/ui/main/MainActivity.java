@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.R;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.comparators.PFAComparators;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.context.AbstractInstanceFactory;
@@ -97,6 +98,15 @@ public class MainActivity extends BaseActivity
     public void updateListView()
     {
         List<ListDto> allListDtos = shoppingListService.getAllListDtos();
+
+        if ( allListDtos.isEmpty() )
+        {
+            cache.getNoListsLayout().setVisibility(View.VISIBLE);
+        }
+        else
+        {
+            cache.getNoListsLayout().setVisibility(View.GONE);
+        }
 
         // sort according to last sort selection
         SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);

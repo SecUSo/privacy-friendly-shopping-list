@@ -32,6 +32,7 @@ public class ProductActivityCache
     private String listId;
     private String listName;
     private Boolean statisticsEnabled;
+    private LinearLayout noProductsLayout;
 
     public ProductActivityCache(AppCompatActivity activity, String listId, String listName, boolean statisticsEnabled)
     {
@@ -51,6 +52,7 @@ public class ProductActivityCache
         totalCheckedTextView = (TextView) activity.findViewById(R.id.textview_total_checked);
         totalLayout = (LinearLayout) activity.findViewById(R.id.layout_total);
         currencyTextView = (TextView) activity.findViewById(R.id.textview_currency);
+        noProductsLayout = (LinearLayout) activity.findViewById(R.id.no_products_layout);
 
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(activity);
         String defaultCurrency = activity.getResources().getString(R.string.currency);
@@ -106,5 +108,10 @@ public class ProductActivityCache
     public String getListName()
     {
         return listName;
+    }
+
+    public LinearLayout getNoProductsLayout()
+    {
+        return noProductsLayout;
     }
 }

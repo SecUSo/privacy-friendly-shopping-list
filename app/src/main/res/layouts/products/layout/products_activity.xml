@@ -31,6 +31,26 @@
 
     </android.support.design.widget.CoordinatorLayout>
 
+    <LinearLayout
+            android:id="@+id/no_products_layout"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+        <ImageView
+                android:layout_gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/ic_launcher"/>
+
+        <TextView
+                android:layout_gravity="center"
+                android:textAlignment="center"
+                android:text="@string/product_list_empty"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+    </LinearLayout>
+
     <include
             layout="@layout/products_total_amount"/>
 

@@ -4,6 +4,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.widget.LinearLayout;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.R;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.shoppinglist.listadapter.ListsAdapter;
 
@@ -19,6 +20,7 @@ public class ShoppingListActivityCache
     private AppCompatActivity activity;
     private FloatingActionButton newListFab;
     private ListsAdapter listAdapter;
+    private LinearLayout noListsLayout;
 
     public ShoppingListActivityCache(AppCompatActivity activity)
     {
@@ -31,6 +33,8 @@ public class ShoppingListActivityCache
         recyclerView.setAdapter(listAdapter);
 
         newListFab = (FloatingActionButton) activity.findViewById(R.id.fab_new_list);
+
+        noListsLayout = (LinearLayout) activity.findViewById(R.id.no_lists_layout);
     }
 
     public AppCompatActivity getActivity()
@@ -46,5 +50,10 @@ public class ShoppingListActivityCache
     public ListsAdapter getListAdapter()
     {
         return listAdapter;
+    }
+
+    public LinearLayout getNoListsLayout()
+    {
+        return noListsLayout;
     }
 }

@@ -99,6 +99,15 @@ public class ProductsActivity extends AppCompatActivity
     {
         List<ProductDto> allProducts = productService.getAllProducts(cache.getListId());
 
+        if ( allProducts.isEmpty() )
+        {
+            cache.getNoProductsLayout().setVisibility(View.VISIBLE);
+        }
+        else
+        {
+            cache.getNoProductsLayout().setVisibility(View.GONE);
+        }
+
         // sort according to last sort selection
         ListDto listDto = shoppingListService.getById(listId);
         String sortBy = listDto.getSortCriteria();

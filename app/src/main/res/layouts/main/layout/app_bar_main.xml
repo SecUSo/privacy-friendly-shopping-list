@@ -26,4 +26,24 @@
             app:layout_anchorGravity="bottom|right|end"
             app:layout_behavior=".ui.fab.ScrollAwareFabBehavior"/>
 
+    <LinearLayout
+            android:id="@+id/no_lists_layout"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+        <ImageView
+                android:layout_gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/ic_launcher"/>
+
+        <TextView
+                android:layout_gravity="center"
+                android:textAlignment="center"
+                android:text="@string/lists_empty"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+    </LinearLayout>
+
 </android.support.design.widget.CoordinatorLayout>

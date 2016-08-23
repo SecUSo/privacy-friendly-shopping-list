@@ -72,6 +72,7 @@
     <string name="nr_items">Nr. Items</string>
     <string name="total_list_amount">Total Amount</string>
     <string name="reminder_text">Reminder: %1$d %2$s before</string>
+    <string name="lists_empty">(App Logo)\nYou don\'t have any shopping lists</string>
 
     <!-- ### NOTIFICATIONS ### -->
     <string name="notification_message">List name: %1$s\nDead line: %2$s</string>
@@ -81,6 +82,7 @@
     <!-- ### PRODUCTS ### -->
     <string name="new_product">New Product</string>
     <string name="product_already_exists">Product already exists in this list!</string>
+    <string name="product_list_empty">(App Logo)\nThis list does not contain any products</string>
     <string name="total_amount">Total:</string>
     <string name="total_amount_separator">/</string>
     <string name="store_label">Store:</string>
