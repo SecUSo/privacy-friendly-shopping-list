@@ -24,7 +24,7 @@ public interface ShoppingListService extends ContextSetter
 
     DateTime getDeadLine(ListDto dto);
 
-    int getReminderStatusResource(ListDto dto);
+    int getReminderStatusResource(ListDto dto, List<ProductDto> productDtos);
 
     ShoppingListEntity getEntityByIdSync(String id);
 

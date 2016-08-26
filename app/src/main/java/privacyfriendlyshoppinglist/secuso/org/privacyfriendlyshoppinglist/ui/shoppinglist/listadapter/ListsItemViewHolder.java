@@ -13,6 +13,7 @@ import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framew
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.context.InstanceFactory;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.utils.StringUtils;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.product.business.ProductService;
+import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.product.business.domain.ProductDto;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.product.business.domain.TotalDto;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.shoppingList.business.ShoppingListService;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.shoppingList.business.domain.ListDto;
@@ -21,6 +22,9 @@ import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.mai
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.products.ProductsActivity;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.settings.SettingsKeys;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.shoppinglist.EditDeleteListDialog;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Chris on 05.06.2016.
@@ -48,8 +52,16 @@ class ListsItemViewHolder extends RecyclerView.ViewHolder
         listItemCache.getListNameTextView().setText(dto.getListName());
         listItemCache.getDeadLineTextView().setText(dto.getDeadlineDate());
 
-        int reminderStatus = shoppingListService.getReminderStatusResource(dto);
-        listItemCache.getReminderBar().setImageResource(reminderStatus);
+        List<ProductDto> productDtos = new ArrayList<>();
+        productService.getAllProducts(dto.getId())
+                .filter(productDto -> !productDto.isChecked())
+                .doOnNext(productDto -> productDtos.add(productDto))
+                .doOnCompleted(() ->
+                {
+                    int reminderStatus = shoppingListService.getReminderStatusResource(dto, productDtos);
+                    listItemCache.getReminderBar().setImageResource(reminderStatus);
+                })
+                .subscribe();
 
         setupPriorityIcon(dto);
         setupReminderIcon(dto);

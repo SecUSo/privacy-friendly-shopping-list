@@ -15,11 +15,15 @@ import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framew
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.context.InstanceFactory;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.utils.StringUtils;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.product.business.ProductService;
+import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.product.business.domain.ProductDto;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.product.business.domain.TotalDto;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.shoppingList.business.ShoppingListService;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.shoppingList.business.domain.ListDto;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.settings.SettingsKeys;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.shoppinglist.listadapter.ListItemCache;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Chris on 05.06.2016.
@@ -49,8 +53,17 @@ class DeleteListsItemViewHolder extends RecyclerView.ViewHolder
         cache.getDeadLineTextView().setText(dto.getDeadlineDate());
 
         cache.getShowDetailsImageButton().setVisibility(View.GONE);
-        int reminderStatus = shoppingListService.getReminderStatusResource(dto);
-        cache.getReminderBar().setImageResource(reminderStatus);
+
+        List<ProductDto> productDtos = new ArrayList<>();
+        productService.getAllProducts(dto.getId())
+                .filter(productDto -> !productDto.isChecked())
+                .doOnNext(productDto -> productDtos.add(productDto))
+                .doOnCompleted(() ->
+                {
+                    int reminderStatus = shoppingListService.getReminderStatusResource(dto, productDtos);
+                    cache.getReminderBar().setImageResource(reminderStatus);
+                })
+                .subscribe();
 
         final TotalDto[] totalDto = new TotalDto[ 1 ];
         productService.getInfo(dto.getId())
