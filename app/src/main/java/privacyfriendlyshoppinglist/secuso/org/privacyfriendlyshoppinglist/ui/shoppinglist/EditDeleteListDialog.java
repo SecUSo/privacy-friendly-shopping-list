@@ -145,6 +145,7 @@ public class EditDeleteListDialog extends DialogFragment
     {
         String id = dto.getId();
         shoppingListService.deleteById(id);
+        productService.deleteAllFromList(id);
 
         // delete notification if any
         NotificationUtils.removeNotification(cache.getActivity(), id);
