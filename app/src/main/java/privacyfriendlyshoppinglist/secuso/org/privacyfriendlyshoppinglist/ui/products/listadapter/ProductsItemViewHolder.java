@@ -2,6 +2,7 @@ package privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.pr
 
 import android.content.res.ColorStateList;
 import android.content.res.Resources;
+import android.graphics.Paint;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.widget.AppCompatCheckBox;
 import android.support.v7.widget.CardView;
@@ -142,6 +143,7 @@ public class ProductsItemViewHolder extends RecyclerView.ViewHolder
     {
         Resources resources = productActivityCache.getActivity().getResources();
         TextView productNameTextView = productItemCache.getProductNameTextView();
+        TextView productQuantityTextView = productItemCache.getQuantityTextView();
         TextView quantityTextView = productItemCache.getQuantityTextView();
         CardView productCard = productItemCache.getProductCard();
         AppCompatCheckBox checkbox = (AppCompatCheckBox) productItemCache.getCheckbox();
@@ -153,6 +155,8 @@ public class ProductsItemViewHolder extends RecyclerView.ViewHolder
             checkbox.setSupportButtonTintList(ColorStateList.valueOf(resources.getColor(R.color.middleblue)));
             productNameTextView.setTextColor(grey);
             quantityTextView.setTextColor(grey);
+            productNameTextView.setPaintFlags(productNameTextView.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
+            productQuantityTextView.setPaintFlags(productQuantityTextView.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
         }
         else
         {
@@ -161,6 +165,8 @@ public class ProductsItemViewHolder extends RecyclerView.ViewHolder
             checkbox.setSupportButtonTintList(ColorStateList.valueOf(resources.getColor(R.color.colorAccent)));
             productNameTextView.setTextColor(black);
             quantityTextView.setTextColor(black);
+            productNameTextView.setPaintFlags(productNameTextView.getPaintFlags() & (~Paint.STRIKE_THRU_TEXT_FLAG));
+            productQuantityTextView.setPaintFlags(productQuantityTextView.getPaintFlags() & (~Paint.STRIKE_THRU_TEXT_FLAG));
         }
 
     }
