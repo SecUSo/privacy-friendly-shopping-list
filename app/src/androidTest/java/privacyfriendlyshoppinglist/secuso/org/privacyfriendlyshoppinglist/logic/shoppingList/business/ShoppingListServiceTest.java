@@ -57,12 +57,12 @@ public class ShoppingListServiceTest extends AbstractDatabaseTest
         dto.setNotes(notes);
 
         // test save
-        shoppingListService.saveOrUpdate(dto);
+        shoppingListService.saveOrUpdate(dto).toBlocking().single();
         String id = dto.getId();
         assertNotNull(id);
 
         // test getById
-        ListDto newDto = shoppingListService.getById(id);
+        ListDto newDto = shoppingListService.getById(id).toBlocking().single();
         assertEquals(id, newDto.getId());
         assertEquals(name, newDto.getListName());
         assertEquals(priority, newDto.getPriority());
@@ -74,24 +74,24 @@ public class ShoppingListServiceTest extends AbstractDatabaseTest
         // test update
         String expectedName = "newName";
         newDto.setListName(expectedName);
-        shoppingListService.saveOrUpdate(newDto);
-        ListDto updatedDto = shoppingListService.getById(id);
+        shoppingListService.saveOrUpdate(newDto).toBlocking().single();
+        ListDto updatedDto = shoppingListService.getById(id).toBlocking().single();
         assertEquals(expectedName, updatedDto.getListName());
 
         // test getAllListDtos
         //      save another DTO in order to have 2 entities in the DB
         updatedDto.setId(null); // if id == null, then the dto will be saved as a new entity
-        shoppingListService.saveOrUpdate(updatedDto);
+        shoppingListService.saveOrUpdate(updatedDto).toBlocking().single();
 
         int expectedSize = 2;
-        List<ListDto> allListDtos = shoppingListService.getAllListDtos();
+        List<ListDto> allListDtos = shoppingListService.getAllListDtos().toList().toBlocking().single();
         assertEquals(expectedSize, allListDtos.size());
 
         // test deleteById using the id of the updatedDto
         String newId = updatedDto.getId();
-        shoppingListService.deleteById(newId);
+        shoppingListService.deleteById(newId).toBlocking().single();
         int expectedSizeAfterDelete = 1;
-        List<ListDto> allListDtosAfterDelete = shoppingListService.getAllListDtos();
+        List<ListDto> allListDtosAfterDelete = shoppingListService.getAllListDtos().toList().toBlocking().single();
         assertEquals(expectedSizeAfterDelete, allListDtosAfterDelete.size());
     }
 

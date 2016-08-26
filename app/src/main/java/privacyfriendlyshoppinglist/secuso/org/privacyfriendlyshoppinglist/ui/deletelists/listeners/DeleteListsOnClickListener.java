@@ -57,18 +57,17 @@ public class DeleteListsOnClickListener implements View.OnClickListener
     {
         // delete lists
         List<ListDto> shoppingList = cache.getDeleteListsAdapter().getShoppingList();
-        List<String> deletedIds = shoppingListService.deleteSelected(shoppingList);
-        Observable.from(deletedIds)
-                .doOnNext(id -> productService.deleteAllFromList(id).subscribe())
-                .doOnCompleted(() ->
+        shoppingListService.deleteSelected(shoppingList)
+                .doOnNext(id ->
                 {
-                    for ( String id : deletedIds )
-                    {
-                        ReminderReceiver alarm = new ReminderReceiver();
-                        Intent intent = new Intent(cache.getActivity(), ReminderSchedulingService.class);
-                        alarm.cancelAlarm(cache.getActivity(), intent, id);
-                        NotificationUtils.removeNotification(cache.getActivity(), id);
-                    }
+                    // delete all products
+                    productService.deleteAllFromList(id).subscribe();
+
+                    // delete reminder
+                    ReminderReceiver alarm = new ReminderReceiver();
+                    Intent intent = new Intent(cache.getActivity(), ReminderSchedulingService.class);
+                    alarm.cancelAlarm(cache.getActivity(), intent, id);
+                    NotificationUtils.removeNotification(cache.getActivity(), id);
                 })
                 .subscribe();
 

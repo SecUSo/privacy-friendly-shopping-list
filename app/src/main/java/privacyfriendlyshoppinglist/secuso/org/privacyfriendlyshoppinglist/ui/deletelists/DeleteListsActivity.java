@@ -14,6 +14,7 @@ import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.deletelists.listeners.DeleteListsOnClickListener;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.settings.SettingsKeys;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -47,15 +48,21 @@ public class DeleteListsActivity extends AppCompatActivity
 
     public void updateListView()
     {
-        List<ListDto> allListDtos = shoppingListService.getAllListDtos();
+        List<ListDto> allListDtos = new ArrayList<>();
 
-        // sort according to last sort selection
-        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
-        String sortBy = sharedPref.getString(SettingsKeys.LIST_SORT_BY, PFAComparators.SORT_BY_NAME);
-        boolean sortAscending = sharedPref.getBoolean(SettingsKeys.LIST_SORT_ASCENDING, true);
-        shoppingListService.sortList(allListDtos, sortBy, sortAscending);
+        shoppingListService.getAllListDtos()
+                .doOnNext(dto -> allListDtos.add(dto))
+                .doOnCompleted(() ->
+                {
+                    // sort according to last sort selection
+                    SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
+                    String sortBy = sharedPref.getString(SettingsKeys.LIST_SORT_BY, PFAComparators.SORT_BY_NAME);
+                    boolean sortAscending = sharedPref.getBoolean(SettingsKeys.LIST_SORT_ASCENDING, true);
+                    shoppingListService.sortList(allListDtos, sortBy, sortAscending);
 
-        cache.getDeleteListsAdapter().setShoppingList(allListDtos);
-        cache.getDeleteListsAdapter().notifyDataSetChanged();
+                    cache.getDeleteListsAdapter().setShoppingList(allListDtos);
+                    cache.getDeleteListsAdapter().notifyDataSetChanged();
+                })
+                .subscribe();
     }
 }

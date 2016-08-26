@@ -362,41 +362,45 @@ public class ListDialogFragment extends DialogFragment
                 dto.setReminderEnabled(reminderSwitch.isChecked());
                 dto.setStatisticEnabled(dialogCache.getStatisticsSwitch().isChecked());
 
-                shoppingListService.saveOrUpdate(dto);
+                shoppingListService.saveOrUpdate(dto)
+                        .doOnCompleted(() ->
+                        {
+                            // the reminder feature must happen after save, because the list id is necessary for the notification
+                            if ( reminderSwitch.isChecked() )
+                            {
+                                String message = getResources().getString(R.string.notification_message, dto.getListName(), dto.getDeadlineDate() + " " + dto.getDeadlineTime());
+                                DateTime reminderTime = shoppingListService.getReminderDate(dto);
+                                ReminderReceiver alarm = new ReminderReceiver();
 
-                // the reminder feature must happen after save, because the list id is necessary for the notification
-                if ( reminderSwitch.isChecked() )
-                {
-                    String message = getResources().getString(R.string.notification_message, dto.getListName(), dto.getDeadlineDate() + " " + dto.getDeadlineTime());
-                    DateTime reminderTime = shoppingListService.getReminderDate(dto);
-                    ReminderReceiver alarm = new ReminderReceiver();
-                    Intent intent = new Intent(cache.getActivity(), ReminderSchedulingService.class);
-                    intent.putExtra(ReminderSchedulingService.MESSAGE_TEXT, message);
-                    intent.putExtra(MainActivity.LIST_ID_KEY, dto.getId());
-                    alarm.setAlarm(cache.getActivity(), intent, reminderTime.getMillis(), dto.getId());
-                }
-                else
-                {
-                    // delete notification if exists
-                    ReminderReceiver alarm = new ReminderReceiver();
-                    Intent intent = new Intent(cache.getActivity(), ReminderSchedulingService.class);
-                    alarm.cancelAlarm(cache.getActivity(), intent, dto.getId());
-                }
+                                Intent intent = new Intent(cache.getActivity(), ReminderSchedulingService.class);
+                                intent.putExtra(ReminderSchedulingService.MESSAGE_TEXT, message);
+                                intent.putExtra(MainActivity.LIST_ID_KEY, dto.getId());
+                                alarm.setAlarm(cache.getActivity(), intent, reminderTime.getMillis(), dto.getId());
+                            }
+                            else
+                            {
+                                // delete notification if exists
+                                ReminderReceiver alarm = new ReminderReceiver();
+                                Intent intent = new Intent(cache.getActivity(), ReminderSchedulingService.class);
+                                alarm.cancelAlarm(cache.getActivity(), intent, dto.getId());
+                            }
 
-                if ( !editDialog )
-                {
-                    // go to new list
-                    Intent intent = new Intent(cache.getActivity(), ProductsActivity.class);
-                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                    intent.putExtra(MainActivity.LIST_ID_KEY, dto.getId());
-                    cache.getActivity().startActivity(intent);
-                }
-                else
-                {
-                    // update lists
-                    MainActivity mainActivity = (MainActivity) cache.getActivity();
-                    mainActivity.updateListView();
-                }
+                            if ( !editDialog )
+                            {
+                                // go to new list
+                                Intent intent = new Intent(cache.getActivity(), ProductsActivity.class);
+                                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                intent.putExtra(MainActivity.LIST_ID_KEY, dto.getId());
+                                cache.getActivity().startActivity(intent);
+                            }
+                            else
+                            {
+                                // update lists
+                                MainActivity mainActivity = (MainActivity) cache.getActivity();
+                                mainActivity.updateListView();
+                            }
+                        })
+                        .subscribe();
             }
         });
 

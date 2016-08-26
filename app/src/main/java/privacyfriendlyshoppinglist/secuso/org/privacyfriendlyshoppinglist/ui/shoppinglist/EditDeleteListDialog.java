@@ -128,12 +128,7 @@ public class EditDeleteListDialog extends DialogFragment
                         R.string.delete_confirmation_title,
                         R.string.delete_list_confirmation,
                         dto.getListName(),
-                        deleteList()
-                                .doOnCompleted(() ->
-                                {
-                                    MainActivity activity = (MainActivity) cache.getActivity();
-                                    activity.updateListView();
-                                }));
+                        deleteList());
             }
         });
 
@@ -153,7 +148,13 @@ public class EditDeleteListDialog extends DialogFragment
     private Void deleteListSync()
     {
         String id = dto.getId();
-        shoppingListService.deleteById(id);
+        shoppingListService.deleteById(id)
+                .doOnCompleted(() ->
+                {
+                    MainActivity activity = (MainActivity) cache.getActivity();
+                    activity.updateListView();
+                })
+                .subscribe();
         productService.deleteAllFromList(id).subscribe();
 
         // delete notification if any

@@ -5,6 +5,7 @@ import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framew
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.product.business.domain.ProductDto;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.shoppingList.business.domain.ListDto;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.shoppingList.persistence.entity.ShoppingListEntity;
+import rx.Observable;
 
 import java.util.List;
 
@@ -15,9 +16,9 @@ import java.util.List;
  */
 public interface ShoppingListService extends ContextSetter
 {
-    void saveOrUpdate(ListDto dto);
+    Observable<Void> saveOrUpdate(ListDto dto);
 
-    ListDto getById(String id);
+    Observable<ListDto> getById(String id);
 
     DateTime getReminderDate(ListDto dto);
 
@@ -25,13 +26,13 @@ public interface ShoppingListService extends ContextSetter
 
     int getReminderStatusResource(ListDto dto);
 
-    ShoppingListEntity getEntityById(String id);
+    ShoppingListEntity getEntityByIdSync(String id);
 
-    void deleteById(String id);
+    Observable<Void> deleteById(String id);
 
-    List<ListDto> getAllListDtos();
+    Observable<ListDto> getAllListDtos();
 
-    List<String> deleteSelected(List<ListDto> shoppingListDtos);
+    Observable<String> deleteSelected(List<ListDto> shoppingListDtos);
 
     List<ListDto> moveSelectedToEnd(List<ListDto> shoppingListDtos);
 

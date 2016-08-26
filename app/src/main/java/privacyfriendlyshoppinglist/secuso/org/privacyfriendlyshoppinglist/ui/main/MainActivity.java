@@ -19,6 +19,7 @@ import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.mai
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.main.listeners.SortOnClickListener;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.settings.SettingsKeys;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -97,25 +98,31 @@ public class MainActivity extends BaseActivity
 
     public void updateListView()
     {
-        List<ListDto> allListDtos = shoppingListService.getAllListDtos();
+        List<ListDto> allListDtos = new ArrayList<>();
 
-        if ( allListDtos.isEmpty() )
-        {
-            cache.getNoListsLayout().setVisibility(View.VISIBLE);
-        }
-        else
-        {
-            cache.getNoListsLayout().setVisibility(View.GONE);
-        }
+        shoppingListService.getAllListDtos()
+                .doOnNext(dto -> allListDtos.add(dto))
+                .doOnCompleted(() ->
+                {
+                    if ( allListDtos.isEmpty() )
+                    {
+                        cache.getNoListsLayout().setVisibility(View.VISIBLE);
+                    }
+                    else
+                    {
+                        cache.getNoListsLayout().setVisibility(View.GONE);
+                    }
 
-        // sort according to last sort selection
-        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
-        String sortBy = sharedPref.getString(SettingsKeys.LIST_SORT_BY, PFAComparators.SORT_BY_NAME);
-        boolean sortAscending = sharedPref.getBoolean(SettingsKeys.LIST_SORT_ASCENDING, true);
-        shoppingListService.sortList(allListDtos, sortBy, sortAscending);
+                    // sort according to last sort selection
+                    SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
+                    String sortBy = sharedPref.getString(SettingsKeys.LIST_SORT_BY, PFAComparators.SORT_BY_NAME);
+                    boolean sortAscending = sharedPref.getBoolean(SettingsKeys.LIST_SORT_ASCENDING, true);
+                    shoppingListService.sortList(allListDtos, sortBy, sortAscending);
 
-        cache.getListAdapter().setShoppingList(allListDtos);
-        cache.getListAdapter().notifyDataSetChanged();
+                    cache.getListAdapter().setShoppingList(allListDtos);
+                    cache.getListAdapter().notifyDataSetChanged();
+                })
+                .subscribe();
     }
 
     public void reorderListView(List<ListDto> sortedList)

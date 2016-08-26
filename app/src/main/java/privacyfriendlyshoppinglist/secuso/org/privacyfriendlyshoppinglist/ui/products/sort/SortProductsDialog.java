@@ -108,10 +108,10 @@ public class SortProductsDialog extends DialogFragment
                         .subscribe();
 
                 // save sort options
-                ListDto dto = shoppingListService.getById(listId);
+                ListDto dto = shoppingListService.getById(listId).toBlocking().single();
                 dto.setSortAscending(ascending);
                 dto.setSortCriteria(criteria);
-                shoppingListService.saveOrUpdate(dto);
+                shoppingListService.saveOrUpdate(dto).subscribe();
             }
         });
 

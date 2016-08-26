@@ -15,6 +15,8 @@ import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.shoppingList.persistence.ShoppingListDao;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.shoppingList.persistence.entity.ShoppingListEntity;
 import rx.Observable;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.schedulers.Schedulers;
 
 import javax.inject.Inject;
 import java.util.ArrayList;
@@ -52,7 +54,16 @@ public class ShoppingListServiceImpl implements ShoppingListService
     }
 
     @Override
-    public void saveOrUpdate(ListDto dto)
+    public Observable<Void> saveOrUpdate(ListDto dto)
+    {
+        Observable<Void> observable = Observable
+                .fromCallable(() -> saveOrUpdateSync(dto))
+                .subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread());
+        return observable;
+    }
+
+    private Void saveOrUpdateSync(ListDto dto)
     {
         if ( StringUtils.isEmpty(dto.getListName()) )
         {
@@ -62,10 +73,20 @@ public class ShoppingListServiceImpl implements ShoppingListService
         shoppingListConverter.convertDtoToEntity(dto, entity);
         Long id = shoppingListDao.save(entity);
         dto.setId(id.toString());
+        return null;
     }
 
     @Override
-    public ListDto getById(String id)
+    public Observable<ListDto> getById(String id)
+    {
+        Observable<ListDto> observable = Observable
+                .fromCallable(() -> getByIdSync(id))
+                .subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread());
+        return observable;
+    }
+
+    private ListDto getByIdSync(String id)
     {
         ListDto dto = new ListDto();
         ShoppingListEntity entity = shoppingListDao.getById(Long.valueOf(id));
@@ -115,33 +136,58 @@ public class ShoppingListServiceImpl implements ShoppingListService
     }
 
     @Override
-    public ShoppingListEntity getEntityById(String id)
+    public ShoppingListEntity getEntityByIdSync(String id)
     {
         return shoppingListDao.getById(Long.valueOf(id));
     }
 
     @Override
-    public void deleteById(String id)
+    public Observable<Void> deleteById(String id)
+    {
+        Observable<Void> observable = Observable
+                .fromCallable(() -> deleteByIdSync(id))
+                .subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread());
+        return observable;
+    }
+
+    private Void deleteByIdSync(String id)
     {
         shoppingListDao.deleteById(Long.valueOf(id));
+        return null;
     }
 
     @Override
-    public List<ListDto> getAllListDtos()
+    public Observable<ListDto> getAllListDtos()
     {
-        List<ShoppingListEntity> allEntities = shoppingListDao.getAllEntities();
-        if ( allEntities != null )
-        {
-            Observable<ListDto> dtos = Observable
-                    .from(allEntities)
-                    .map(this::getDto);
-            return dtos.toList().toBlocking().single();
-        }
-        return new ArrayList<>();
+        Observable<ListDto> observable = Observable
+                .defer(() -> Observable.from(getAllListDtosSync()))
+                .subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread());
+        return observable;
+    }
+
+    private List<ListDto> getAllListDtosSync()
+    {
+        List<ListDto> listDto = new ArrayList<>();
+        Observable
+                .from(shoppingListDao.getAllEntities())
+                .map(this::getDto)
+                .subscribe(dto -> listDto.add(dto));
+        return listDto;
     }
 
     @Override
-    public List<String> deleteSelected(List<ListDto> shoppingListDtos)
+    public Observable<String> deleteSelected(List<ListDto> shoppingListDtos)
+    {
+        Observable<String> observable = Observable
+                .defer(() -> Observable.from(deleteSelectedSync(shoppingListDtos)))
+                .subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread());
+        return observable;
+    }
+
+    private List<String> deleteSelectedSync(List<ListDto> shoppingListDtos)
     {
         List<String> deletedIds = new ArrayList<>();
         Observable
@@ -151,7 +197,7 @@ public class ShoppingListServiceImpl implements ShoppingListService
                         dto ->
                         {
                             String id = dto.getId();
-                            deleteById(id);
+                            deleteByIdSync(id);
                             deletedIds.add(id);
                         }
                 );
@@ -161,15 +207,18 @@ public class ShoppingListServiceImpl implements ShoppingListService
     @Override
     public List<ListDto> moveSelectedToEnd(List<ListDto> shoppingListDtos)
     {
-        List<ListDto> nonSelectedDtos = Observable
+        List<ListDto> nonSelectedDtos = new ArrayList<>();
+        Observable
                 .from(shoppingListDtos)
                 .filter(dto -> !dto.isSelected())
-                .toList().toBlocking().single();
+                .subscribe(dto -> nonSelectedDtos.add(dto));
 
-        List<ListDto> selectedDtos = Observable
+        List<ListDto> selectedDtos = new ArrayList<>();
+        Observable
                 .from(shoppingListDtos)
                 .filter(dto -> dto.isSelected())
-                .toList().toBlocking().single();
+                .subscribe(dto -> selectedDtos.add(dto));
+
         nonSelectedDtos.addAll(selectedDtos);
         shoppingListDtos = nonSelectedDtos;
         return shoppingListDtos;

@@ -2,6 +2,7 @@
 <LinearLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/layout_total"
+        android:visibility="gone"
         android:animateLayoutChanges="true"
         android:orientation="horizontal"
         android:background="@color/black"

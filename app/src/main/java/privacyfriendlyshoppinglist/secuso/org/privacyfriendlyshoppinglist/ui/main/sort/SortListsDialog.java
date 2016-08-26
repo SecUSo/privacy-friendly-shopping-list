@@ -20,6 +20,7 @@ import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.main.MainActivity;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.settings.SettingsKeys;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -74,15 +75,24 @@ public class SortListsDialog extends DialogFragment
                 AbstractInstanceFactory instanceFactory = new InstanceFactory(host.getApplicationContext());
                 ShoppingListService shoppingListService = (ShoppingListService) instanceFactory.createInstance(ShoppingListService.class);
 
-                List<ListDto> listDtos = shoppingListService.getAllListDtos();
                 String criteria = PFAComparators.SORT_BY_NAME;
                 if ( cache.getPriority().isChecked() )
                 {
                     criteria = PFAComparators.SORT_BY_PRIORITY;
                 }
+                final String finalCriteria = criteria;
                 boolean ascending = cache.getAscending().isChecked();
-                shoppingListService.sortList(listDtos, criteria, ascending);
-                host.reorderListView(listDtos);
+
+                List<ListDto> listDtos = new ArrayList<>();
+
+                shoppingListService.getAllListDtos()
+                        .doOnNext(dto -> listDtos.add(dto))
+                        .doOnCompleted(() ->
+                        {
+                            shoppingListService.sortList(listDtos, finalCriteria, ascending);
+                            host.reorderListView(listDtos);
+                        })
+                        .subscribe();
 
                 // save sort options
                 SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(activity);

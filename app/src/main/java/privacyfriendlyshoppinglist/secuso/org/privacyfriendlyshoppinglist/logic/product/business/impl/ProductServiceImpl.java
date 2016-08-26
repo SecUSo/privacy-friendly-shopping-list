@@ -76,7 +76,7 @@ public class ProductServiceImpl implements ProductService
         ProductItemEntity entity = new ProductItemEntity();
         converterService.convertDtoToEntity(dto, entity);
 
-        ShoppingListEntity shoppingListEntity = shoppingListService.getEntityById(listId);
+        ShoppingListEntity shoppingListEntity = shoppingListService.getEntityByIdSync(listId);
         entity.setShoppingList(shoppingListEntity);
 
         productItemDao.save(entity);
@@ -89,8 +89,8 @@ public class ProductServiceImpl implements ProductService
     {
         Observable<ProductDto> observable = Observable
                 .fromCallable(() -> getByIdSync(entityId))
-                .observeOn(Schedulers.newThread())
-                .subscribeOn(AndroidSchedulers.mainThread());
+                .subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread());
         return observable;
     }
 

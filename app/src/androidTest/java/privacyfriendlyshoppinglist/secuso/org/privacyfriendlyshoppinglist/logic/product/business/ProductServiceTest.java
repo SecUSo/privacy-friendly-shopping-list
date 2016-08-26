@@ -62,7 +62,7 @@ public class ProductServiceTest extends AbstractDatabaseTest
         dto.setNotes(notes);
 
         // save a default list! Needed to save products
-        shoppingListService.saveOrUpdate(dto);
+        shoppingListService.saveOrUpdate(dto).toBlocking().single();
         listId = dto.getId();
     }
 
@@ -170,7 +170,7 @@ public class ProductServiceTest extends AbstractDatabaseTest
         assertEquals(2, products.size());
 
         productService.deleteAllFromList(listId).toBlocking().single();
-        shoppingListService.deleteById(listId);
+        shoppingListService.deleteById(listId).toBlocking().single();
 
         products = productService.getAllProducts(listId).toList().toBlocking().single();
         assertEquals(0, products.size());

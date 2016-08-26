@@ -39,6 +39,7 @@ public class ProductsActivity extends AppCompatActivity
     private ShoppingListService shoppingListService;
     private ProductActivityCache cache;
     private String listId;
+    private ListDto listDto;
 
     @Override
     protected final void onCreate(final Bundle savedInstanceState)
@@ -53,14 +54,16 @@ public class ProductsActivity extends AppCompatActivity
         this.shoppingListService = (ShoppingListService) instanceFactory.createInstance(ShoppingListService.class);
 
         listId = getIntent().getStringExtra(MainActivity.LIST_ID_KEY);
-        ListDto dto = shoppingListService.getById(listId);
-        setTitle(dto.getListName());
-
-        cache = new ProductActivityCache(this, listId, dto.getListName(), dto.isStatisticEnabled());
-
-        updateListView();
-
-        cache.getNewListFab().setOnClickListener(new AddProductOnClickListener(cache));
+        shoppingListService.getById(listId)
+                .doOnNext(result -> listDto = result)
+                .doOnCompleted(() ->
+                {
+                    setTitle(listDto.getListName());
+                    cache = new ProductActivityCache(this, listId, listDto.getListName(), listDto.isStatisticEnabled());
+                    cache.getNewListFab().setOnClickListener(new AddProductOnClickListener(cache));
+                    updateListView();
+                })
+                .subscribe();
 
         overridePendingTransition(0, 0);
     }
@@ -114,16 +117,22 @@ public class ProductsActivity extends AppCompatActivity
                     }
 
                     // sort according to last sort selection
-                    ListDto listDto = shoppingListService.getById(listId);
-                    String sortBy = listDto.getSortCriteria();
-                    boolean sortAscending = listDto.isSortAscending();
-                    productService.sortProducts(allProducts, sortBy, sortAscending);
+                    final ListDto[] listDto = new ListDto[ 1 ];
+                    shoppingListService.getById(listId)
+                            .doOnNext(dto -> listDto[ 0 ] = dto)
+                            .doOnCompleted(() ->
+                            {
+                                String sortBy = listDto[ 0 ].getSortCriteria();
+                                boolean sortAscending = listDto[ 0 ].isSortAscending();
+                                productService.sortProducts(allProducts, sortBy, sortAscending);
 
-                    cache.getProductsAdapter().setProductsList(allProducts);
-                    cache.getProductsAdapter().notifyDataSetChanged();
+                                cache.getProductsAdapter().setProductsList(allProducts);
+                                cache.getProductsAdapter().notifyDataSetChanged();
 
-                    reorderProductViewBySelection();
-                    updateTotals();
+                                reorderProductViewBySelection();
+                                updateTotals();
+                            })
+                            .subscribe();
                 })
                 .subscribe();
     }
