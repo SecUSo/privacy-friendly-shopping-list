@@ -62,7 +62,16 @@ public class ProductServiceImpl implements ProductService
     }
 
     @Override
-    public void saveOrUpdate(ProductDto dto, String listId)
+    public Observable<Void> saveOrUpdate(ProductDto dto, String listId)
+    {
+        Observable<Void> observable = Observable
+                .fromCallable(() -> saveOrUpdateSync(dto, listId))
+                .subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread());
+        return observable;
+    }
+
+    private Void saveOrUpdateSync(ProductDto dto, String listId)
     {
         ProductItemEntity entity = new ProductItemEntity();
         converterService.convertDtoToEntity(dto, entity);
@@ -72,10 +81,20 @@ public class ProductServiceImpl implements ProductService
 
         productItemDao.save(entity);
         dto.setId(entity.getId().toString());
+        return null;
     }
 
     @Override
-    public ProductDto getById(String entityId)
+    public Observable<ProductDto> getById(String entityId)
+    {
+        Observable<ProductDto> observable = Observable
+                .fromCallable(() -> getByIdSync(entityId))
+                .observeOn(Schedulers.newThread())
+                .subscribeOn(AndroidSchedulers.mainThread());
+        return observable;
+    }
+
+    private ProductDto getByIdSync(String entityId)
     {
         ProductItemEntity productEntity = productItemDao.getById(Long.valueOf(entityId));
         if ( productEntity == null ) return null;
@@ -95,13 +114,23 @@ public class ProductServiceImpl implements ProductService
     }
 
     @Override
-    public void deleteById(String id)
+    public Observable<Void> deleteById(String id)
+    {
+        Observable<Void> observable = Observable
+                .fromCallable(() -> deleteByIdSync(id))
+                .subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread());
+        return observable;
+    }
+
+    private Void deleteByIdSync(String id)
     {
         productItemDao.deleteById(Long.valueOf(id));
 
         // delete imageFile if exists
         File imageFile = new File(getProductImagePath(id));
         imageFile.delete();
+        return null;
     }
 
     @Override
@@ -126,11 +155,21 @@ public class ProductServiceImpl implements ProductService
     }
 
     @Override
-    public void deleteSelected(List<ProductDto> productDtos)
+    public Observable<Void> deleteSelected(List<ProductDto> productDtos)
+    {
+        Observable<Void> observable = Observable
+                .fromCallable(() -> deleteSelectedSync(productDtos))
+                .subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread());
+        return observable;
+    }
+
+    private Void deleteSelectedSync(List<ProductDto> productDtos)
     {
         Observable.from(productDtos)
                 .filter(dto -> dto.isSelectedForDeletion())
-                .subscribe(dto -> deleteById(dto.getId()));
+                .subscribe(dto -> deleteByIdSync(dto.getId()));
+        return null;
     }
 
     @Override
@@ -174,11 +213,21 @@ public class ProductServiceImpl implements ProductService
     }
 
     @Override
-    public void deleteAllFromList(String listId)
+    public Observable<Void> deleteAllFromList(String listId)
+    {
+        Observable<Void> observable = Observable
+                .fromCallable(() -> deleteAllFromListSync(listId))
+                .subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread());
+        return observable;
+    }
+
+    private Void deleteAllFromListSync(String listId)
     {
         List<ProductDto> productDtos = getAllProductsSync(listId);
         Observable.from(productDtos)
-                .subscribe(dto -> deleteById(dto.getId()));
+                .subscribe(dto -> deleteByIdSync(dto.getId()));
+        return null;
     }
 
     @Override

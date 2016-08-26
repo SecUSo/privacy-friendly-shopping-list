@@ -71,7 +71,7 @@ public class ProductServiceTest extends AbstractDatabaseTest
     {
         ProductDto dto = getDefaultDto();
 
-        productService.saveOrUpdate(dto, listId);
+        productService.saveOrUpdate(dto, listId).toBlocking().single();
         assertNotNull(dto.getId());
         assertNotNull(dto.getId());
     }
@@ -80,9 +80,9 @@ public class ProductServiceTest extends AbstractDatabaseTest
     public void testGetById()
     {
         ProductDto dto = getDefaultDto();
-        productService.saveOrUpdate(dto, listId);
+        productService.saveOrUpdate(dto, listId).toBlocking().single();
 
-        ProductDto retrievedDto = productService.getById(dto.getId());
+        ProductDto retrievedDto = productService.getById(dto.getId()).toBlocking().single();
         assertEquals(dto, retrievedDto);
     }
 
@@ -90,11 +90,11 @@ public class ProductServiceTest extends AbstractDatabaseTest
     public void testDeleteById()
     {
         ProductDto dto = getDefaultDto();
-        productService.saveOrUpdate(dto, listId);
+        productService.saveOrUpdate(dto, listId).toBlocking().single();
 
-        productService.deleteById(dto.getId());
+        productService.deleteById(dto.getId()).toBlocking().single();
 
-        ProductDto retrivedDto = productService.getById(dto.getId());
+        ProductDto retrivedDto = productService.getById(dto.getId()).toBlocking().single();
         assertNull(retrivedDto);
     }
 
@@ -103,17 +103,17 @@ public class ProductServiceTest extends AbstractDatabaseTest
     {
         ProductDto dto1 = getDefaultDto();
         dto1.setSelectedForDeletion(false);
-        productService.saveOrUpdate(dto1, listId);
+        productService.saveOrUpdate(dto1, listId).toBlocking().single();
 
         ProductDto dto2 = getDefaultDto();
         // change ids so we have "another" product
         dto2.setId("2"); // templateId
         dto2.setId("4"); // productId
         dto2.setSelectedForDeletion(true);
-        productService.saveOrUpdate(dto2, listId);
+        productService.saveOrUpdate(dto2, listId).toBlocking().single();
 
         List<ProductDto> dtos = Arrays.asList(dto1, dto2);
-        productService.deleteSelected(dtos);
+        productService.deleteSelected(dtos).toBlocking().single();
 
         int expectedSize = 1;
         int actualSize = productItemDao.getAllEntities().size();
@@ -124,15 +124,15 @@ public class ProductServiceTest extends AbstractDatabaseTest
     public void testGetAllProducts()
     {
         ProductDto dto1 = getDefaultDto();
-        productService.saveOrUpdate(dto1, listId);
+        productService.saveOrUpdate(dto1, listId).toBlocking().single();
 
         ProductDto dto2 = getDefaultDto();
         dto2.setId("2");
         dto2.setId("4");
-        productService.saveOrUpdate(dto2, listId);
+        productService.saveOrUpdate(dto2, listId).toBlocking().single();
 
 
-        List<ProductDto> productDtos = productService.getAllProducts(listId).toBlocking().single();
+        List<ProductDto> productDtos = productService.getAllProducts(listId).toList().toBlocking().single();
 
         int expectedSize = 2;
         int actualSize = productDtos.size();
@@ -159,20 +159,20 @@ public class ProductServiceTest extends AbstractDatabaseTest
         ProductDto dto1 = getDefaultDto();
         dto1.setId(null);
         dto1.setId(null);
-        productService.saveOrUpdate(dto1, listId);
+        productService.saveOrUpdate(dto1, listId).toBlocking().single();
 
         ProductDto dto2 = getDefaultDto();
         dto2.setId(null);
         dto2.setId(null);
-        productService.saveOrUpdate(dto2, listId);
+        productService.saveOrUpdate(dto2, listId).toBlocking().single();
 
-        List<ProductDto> products = productService.getAllProducts(listId).toBlocking().single();
+        List<ProductDto> products = productService.getAllProducts(listId).toList().toBlocking().single();
         assertEquals(2, products.size());
 
-        productService.deleteAllFromList(listId);
+        productService.deleteAllFromList(listId).toBlocking().single();
         shoppingListService.deleteById(listId);
 
-        products = productService.getAllProducts(listId).toBlocking().single();
+        products = productService.getAllProducts(listId).toList().toBlocking().single();
         assertEquals(0, products.size());
     }
 

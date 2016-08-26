@@ -109,10 +109,13 @@ public class ProductDialogFragment extends DialogFragment
         if ( resetState && !saveConfirmed )
         {
             // if dto was implicitly saved because of taking a picture for the product, then delete the product
-            productService.deleteById(dto.getId());
-            ProductsActivity productsActivity = (ProductsActivity) cache.getActivity();
-            productsActivity.updateListView();
-            resetState = false;
+            productService.deleteById(dto.getId())
+                    .doOnCompleted(() ->
+                    {
+                        ProductsActivity productsActivity = (ProductsActivity) cache.getActivity();
+                        productsActivity.updateListView();
+                        resetState = false;
+                    });
         }
     }
 
@@ -320,9 +323,13 @@ public class ProductDialogFragment extends DialogFragment
                 {
                     saveConfirmed = true;
                     saveUserInput(productName);
-                    ProductsActivity productsActivity = (ProductsActivity) cache.getActivity();
-                    productsActivity.updateListView();
-
+                    productService.saveOrUpdate(dto, cache.getListId())
+                            .doOnCompleted(() ->
+                            {
+                                ProductsActivity productsActivity = (ProductsActivity) cache.getActivity();
+                                productsActivity.updateListView();
+                            })
+                            .subscribe();
                     dialog.dismiss();
                 }
             }
@@ -384,8 +391,6 @@ public class ProductDialogFragment extends DialogFragment
             dto.setThumbnailBitmap(bitmap);
             dto.setDefaultImage(true);
         }
-
-        productService.saveOrUpdate(dto, cache.getListId());
     }
 
     @Override
@@ -424,13 +429,15 @@ public class ProductDialogFragment extends DialogFragment
         // dto must be saved first in order to have an id.
         // id is needed to generate a unique file name for the image
         String productName = String.valueOf(dialogCache.getProductName().getText());
-        if ( StringUtils.isEmpty(productName) ){
+        if ( StringUtils.isEmpty(productName) )
+        {
             String newProductName = getResources().getString(R.string.new_product);
             productName = newProductName;
         }
         boolean newProductAdded = dto.getId() == null;
         resetState = true && newProductAdded;
         saveUserInput(productName);
+        productService.saveOrUpdate(dto, cache.getListId()).subscribe();
         saveConfirmed = false;
 
         dialogCache.setImageScheduledForDeletion(false);

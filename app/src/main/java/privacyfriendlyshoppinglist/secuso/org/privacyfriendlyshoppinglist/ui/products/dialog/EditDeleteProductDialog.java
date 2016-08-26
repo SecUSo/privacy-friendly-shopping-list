@@ -16,9 +16,6 @@ import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.product.business.domain.ProductDto;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.products.ProductActivityCache;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.products.ProductsActivity;
-import rx.Observable;
-import rx.android.schedulers.AndroidSchedulers;
-import rx.schedulers.Schedulers;
 
 /**
  * Created by Chris on 11.08.2016.
@@ -104,7 +101,7 @@ public class EditDeleteProductDialog extends DialogFragment
                         R.string.delete_confirmation_title,
                         R.string.delete_product_confirmation,
                         dto.getProductName(),
-                        deleteProduct()
+                        productService.deleteById(dto.getId())
                                 .doOnCompleted(() ->
                                 {
                                     ProductsActivity activity = (ProductsActivity) cache.getActivity();
@@ -115,21 +112,6 @@ public class EditDeleteProductDialog extends DialogFragment
 
         builder.setView(rootView);
         return builder.create();
-    }
-
-    private Observable<Void> deleteProduct()
-    {
-        Observable observable = Observable
-                .defer(() -> Observable.just(deleteProductSync()))
-                .subscribeOn(Schedulers.computation())
-                .observeOn(AndroidSchedulers.mainThread());
-        return observable;
-    }
-
-    private Void deleteProductSync()
-    {
-        productService.deleteById(dto.getId());
-        return null;
     }
 
 }

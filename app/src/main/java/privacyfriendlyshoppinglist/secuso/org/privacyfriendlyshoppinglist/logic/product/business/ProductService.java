@@ -15,23 +15,23 @@ import java.util.List;
  */
 public interface ProductService extends ContextSetter
 {
-    void saveOrUpdate(ProductDto dto, String listId);
+    Observable<Void> saveOrUpdate(ProductDto dto, String listId);
 
-    ProductDto getById(String id);
+    Observable<ProductDto> getById(String id);
 
     String getProductImagePath(String id);
 
-    void deleteById(String id);
+    Observable<Void> deleteById(String id);
 
     Observable<Void> deleteOnlyImage(String id);
 
-    void deleteSelected(List<ProductDto> productDtos);
+    Observable<Void> deleteSelected(List<ProductDto> productDtos);
 
     Observable<ProductDto> getAllProducts(String listId);
 
     Observable<TotalDto> getInfo(String listId);
 
-    void deleteAllFromList(String listId);
+    Observable<Void> deleteAllFromList(String listId);
 
     List<ProductDto> moveSelectedToEnd(List<ProductDto> productDtos);
 

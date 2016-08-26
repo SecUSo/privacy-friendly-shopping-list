@@ -52,7 +52,7 @@ public class DeleteProductOnClickListener implements View.OnClickListener
     {
         // delete products
         List<ProductDto> productList = cache.getDeleteProductsAdapter().getProductsList();
-        productService.deleteSelected(productList);
+        productService.deleteSelected(productList).subscribe();
 
         // go to products overview
         AppCompatActivity activity = cache.getActivity();

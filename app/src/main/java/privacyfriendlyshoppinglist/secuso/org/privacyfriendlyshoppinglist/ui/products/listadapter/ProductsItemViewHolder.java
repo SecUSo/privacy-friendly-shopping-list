@@ -85,7 +85,7 @@ public class ProductsItemViewHolder extends RecyclerView.ViewHolder
             public void onClick(View v)
             {
                 dto.setChecked(checkbox.isChecked());
-                productService.saveOrUpdate(dto, productActivityCache.getListId());
+                productService.saveOrUpdate(dto, productActivityCache.getListId()).subscribe();
                 if ( checkbox.isChecked() && productActivityCache.getStatisticsEnabled() )
                 {
                     statisticsService.saveRecord(dto);

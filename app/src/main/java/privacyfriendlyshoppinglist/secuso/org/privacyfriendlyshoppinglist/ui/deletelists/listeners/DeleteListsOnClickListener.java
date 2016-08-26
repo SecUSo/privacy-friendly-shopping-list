@@ -59,7 +59,7 @@ public class DeleteListsOnClickListener implements View.OnClickListener
         List<ListDto> shoppingList = cache.getDeleteListsAdapter().getShoppingList();
         List<String> deletedIds = shoppingListService.deleteSelected(shoppingList);
         Observable.from(deletedIds)
-                .doOnNext(id -> productService.deleteAllFromList(id))
+                .doOnNext(id -> productService.deleteAllFromList(id).subscribe())
                 .doOnCompleted(() ->
                 {
                     for ( String id : deletedIds )
