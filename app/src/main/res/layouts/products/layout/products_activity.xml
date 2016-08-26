@@ -33,6 +33,7 @@
 
     <LinearLayout
             android:id="@+id/no_products_layout"
+            android:visibility="gone"
             android:orientation="vertical"
             android:gravity="center"
             android:layout_width="match_parent"

@@ -12,7 +12,7 @@ Nowadays there are many apps that require many or all permissions available in A
 Version 0.4 (Beta). Changes:
 - Bug fix: product names can be repeated in different lists. The validation that avoid adding a product twice happens only inside a list.
 - Bug fix: when a list is deleted all its product are deleted from the database as well
-- Vertical bar of list CardViews turns grey if all products of the list have been checked.
+- Vertical bar of CardViews in the list overview turns grey if there are no unchecked products in the shopping list (all products checked, or list is empty)
 - Responsiveness improvement: All database access operations are perform asynchronously by using the RxJava API and the RxAndroid extension
 
 Version 0.3 (Beta). Changes:

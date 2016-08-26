@@ -27,6 +27,7 @@
             app:layout_behavior=".ui.fab.ScrollAwareFabBehavior"/>
 
     <LinearLayout
+            android:visibility="gone"
             android:id="@+id/no_lists_layout"
             android:orientation="vertical"
             android:gravity="center"
