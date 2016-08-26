@@ -15,6 +15,7 @@ import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framew
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.context.InstanceFactory;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.utils.StringUtils;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.product.business.ProductService;
+import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.product.business.domain.TotalDto;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.shoppingList.business.ShoppingListService;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.shoppingList.business.domain.ListDto;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.settings.SettingsKeys;
@@ -51,8 +52,12 @@ class DeleteListsItemViewHolder extends RecyclerView.ViewHolder
         int reminderStatus = shoppingListService.getReminderStatusResource(dto);
         cache.getReminderBar().setImageResource(reminderStatus);
 
-        int nrProducts = productService.getAllProducts(dto.getId()).size();
-        cache.getNrProductsTextView().setText(String.valueOf(nrProducts));
+        final TotalDto[] totalDto = new TotalDto[ 1 ];
+        productService.getInfo(dto.getId())
+                .doOnNext(result -> totalDto[ 0 ] = result)
+                .doOnCompleted(() ->
+                        cache.getNrProductsTextView().setText(String.valueOf(totalDto[ 0 ].getNrProducts()))
+                ).subscribe();
 
         setupPriorityIcon(dto);
         setupReminderIcon(dto);

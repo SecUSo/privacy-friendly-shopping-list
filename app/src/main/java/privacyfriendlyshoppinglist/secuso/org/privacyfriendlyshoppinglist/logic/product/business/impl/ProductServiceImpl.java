@@ -21,6 +21,7 @@ import rx.schedulers.Schedulers;
 
 import javax.inject.Inject;
 import java.io.File;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -133,28 +134,49 @@ public class ProductServiceImpl implements ProductService
     }
 
     @Override
-    public List<ProductDto> getAllProducts(String listId)
+    public Observable<ProductDto> getAllProducts(String listId)
     {
-        Observable<ProductDto> dtos = Observable
+        Observable<ProductDto> observable = Observable
+                .defer(() -> Observable.from(getAllProductsSync(listId)))
+                .subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread());
+        return observable;
+    }
+
+    private List<ProductDto> getAllProductsSync(String listId)
+    {
+        List<ProductDto> productDtos = new ArrayList<>();
+
+        Observable
                 .from(productItemDao.getAllEntities())
                 .filter(entity -> entity.getShoppingList().getId() == Long.valueOf(listId))
-                .map(this::getDto);
+                .map(this::getDto)
+                .subscribe(dto -> productDtos.add(dto));
 
-        return dtos.toList().toBlocking().single();
+        return productDtos;
     }
 
     @Override
-    public TotalDto getInfo(String listId)
+    public Observable<TotalDto> getInfo(String listId)
     {
-        List<ProductDto> allProducts = getAllProducts(listId);
-        TotalDto totalDto = computeTotals(allProducts);
+        Observable<TotalDto> observable = Observable
+                .fromCallable(() -> getInfoSync(listId))
+                .subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread());
+        return observable;
+    }
+
+    private TotalDto getInfoSync(String listId)
+    {
+        List<ProductDto> productDtos = getAllProductsSync(listId);
+        TotalDto totalDto = computeTotals(productDtos);
         return totalDto;
     }
 
     @Override
     public void deleteAllFromList(String listId)
     {
-        List<ProductDto> productDtos = getAllProducts(listId);
+        List<ProductDto> productDtos = getAllProductsSync(listId);
         Observable.from(productDtos)
                 .subscribe(dto -> deleteById(dto.getId()));
     }
@@ -162,15 +184,18 @@ public class ProductServiceImpl implements ProductService
     @Override
     public List<ProductDto> moveSelectedToEnd(List<ProductDto> productDtos)
     {
-        List<ProductDto> nonSelectedDtos = Observable
+        List<ProductDto> nonSelectedDtos = new ArrayList<>();
+        Observable
                 .from(productDtos)
                 .filter(dto -> !dto.isChecked())
-                .toList().toBlocking().single();
+                .subscribe(dto -> nonSelectedDtos.add(dto));
 
-        List<ProductDto> selectedDtos = Observable
+        List<ProductDto> selectedDtos = new ArrayList<>();
+        Observable
                 .from(productDtos)
                 .filter(dto -> dto.isChecked())
-                .toList().toBlocking().single();
+                .subscribe(dto -> selectedDtos.add(dto));
+
         nonSelectedDtos.addAll(selectedDtos);
         productDtos = nonSelectedDtos;
         return productDtos;

@@ -54,12 +54,17 @@ class ListsItemViewHolder extends RecyclerView.ViewHolder
         setupPriorityIcon(dto);
         setupReminderIcon(dto);
 
-        TotalDto totalDto = productService.getInfo(dto.getId());
-        listItemCache.getListDetails().setText(
-                totalDto.getInfo(listItemCache.getCurrency(), shoppingListCache.getActivity()) +
-                        dto.getDetailInfo(listItemCache.getListCard().getContext()));
-        listItemCache.getNrProductsTextView().setText(String.valueOf(totalDto.getNrProducts()));
-
+        final TotalDto[] totalDto = new TotalDto[ 1 ];
+        productService.getInfo(dto.getId())
+                .doOnNext(result -> totalDto[ 0 ] = result)
+                .doOnCompleted(() ->
+                        {
+                            listItemCache.getListDetails().setText(
+                                    totalDto[ 0 ].getInfo(listItemCache.getCurrency(), shoppingListCache.getActivity()) +
+                                            dto.getDetailInfo(listItemCache.getListCard().getContext()));
+                            listItemCache.getNrProductsTextView().setText(String.valueOf(totalDto[ 0 ].getNrProducts()));
+                        }
+                ).subscribe();
 
         listItemCache.getListCard().setOnClickListener(v ->
         {

@@ -13,6 +13,7 @@ import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.deleteproducts.listeners.DeleteProductOnClickListener;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.main.MainActivity;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -52,16 +53,22 @@ public class DeleteProductsActivity extends AppCompatActivity
 
     public void updateListView()
     {
-        List<ProductDto> allProducts = productService.getAllProducts(cache.getListId());
+        List<ProductDto> allProducts = new ArrayList<>();
 
-        // sort according to last sort selection
-        ListDto listDto = shoppingListService.getById(listId);
-        String sortBy = listDto.getSortCriteria();
-        boolean sortAscending = listDto.isSortAscending();
-        productService.sortProducts(allProducts, sortBy, sortAscending);
+        productService.getAllProducts(cache.getListId())
+                .doOnNext(dto -> allProducts.add(dto))
+                .doOnCompleted(() ->
+                {
+                    // sort according to last sort selection
+                    ListDto listDto = shoppingListService.getById(listId);
+                    String sortBy = listDto.getSortCriteria();
+                    boolean sortAscending = listDto.isSortAscending();
+                    productService.sortProducts(allProducts, sortBy, sortAscending);
 
-        cache.getDeleteProductsAdapter().setProductsList(allProducts);
-        cache.getDeleteProductsAdapter().notifyDataSetChanged();
+                    cache.getDeleteProductsAdapter().setProductsList(allProducts);
+                    cache.getDeleteProductsAdapter().notifyDataSetChanged();
+                })
+                .subscribe();
     }
 }
 

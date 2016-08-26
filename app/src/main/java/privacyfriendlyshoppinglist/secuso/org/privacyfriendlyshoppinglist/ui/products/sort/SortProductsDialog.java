@@ -19,6 +19,7 @@ import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.products.ProductActivityCache;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.products.ProductsActivity;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -73,7 +74,7 @@ public class SortProductsDialog extends DialogFragment
                 ShoppingListService shoppingListService = (ShoppingListService) instanceFactory.createInstance(ShoppingListService.class);
 
                 String listId = productActivityCache.getListId();
-                List<ProductDto> productDtos = productService.getAllProducts(listId);
+
                 String criteria = PFAComparators.SORT_BY_NAME;
                 if ( cache.getQuantity().isChecked() )
                 {
@@ -92,9 +93,19 @@ public class SortProductsDialog extends DialogFragment
                     criteria = PFAComparators.SORT_BY_CATEGORY;
                 }
                 boolean ascending = cache.getAscending().isChecked();
-                productService.sortProducts(productDtos, criteria, ascending);
-                host.reorderProductView(productDtos);
-                host.reorderProductViewBySelection();
+                final String finalCriteria = criteria;
+
+                List<ProductDto> productDtos = new ArrayList<>();
+
+                productService.getAllProducts(listId)
+                        .doOnNext(dto -> productDtos.add(dto))
+                        .doOnCompleted(() ->
+                        {
+                            productService.sortProducts(productDtos, finalCriteria, ascending);
+                            host.reorderProductView(productDtos);
+                            host.reorderProductViewBySelection();
+                        })
+                        .subscribe();
 
                 // save sort options
                 ListDto dto = shoppingListService.getById(listId);

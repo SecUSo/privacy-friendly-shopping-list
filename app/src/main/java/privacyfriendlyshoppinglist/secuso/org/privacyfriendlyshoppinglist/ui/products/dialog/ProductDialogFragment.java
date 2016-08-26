@@ -38,6 +38,7 @@ import rx.Observable;
 
 import java.io.File;
 import java.util.Set;
+import java.util.TreeSet;
 
 import static android.app.Activity.RESULT_OK;
 
@@ -255,6 +256,12 @@ public class ProductDialogFragment extends DialogFragment
                 .doOnCompleted(() -> setupAutoCompleteLists(autoCompleteLists))
                 .subscribe();
 
+        Set<String> productNames = new TreeSet<>();
+        productService.getAllProducts(cache.getListId())
+                .map(dto -> dto.getProductName())
+                .doOnNext(name -> productNames.add(name))
+                .subscribe();
+
         dialogCache.getQuantity().setOnFocusChangeListener(new ProductDialogFocusListener(dialogCache));
         dialogCache.getPrice().setOnFocusChangeListener(new ProductDialogFocusListener(dialogCache));
 
@@ -343,16 +350,15 @@ public class ProductDialogFragment extends DialogFragment
             @Override
             public void afterTextChanged(Editable s)
             {
-                Set<String> products = autoCompleteLists.getProducts();
-                if ( products.contains(s.toString()) )
+                if ( productNames.contains(s.toString()) )
                 {
                     dialog.getButton(Dialog.BUTTON_POSITIVE).setEnabled(false);
                     dialogCache.getProductNameInputLayout().setError(getContext().getString(R.string.product_already_exists));
                 }
                 else
                 {
-                    dialogCache.getProductNameInputLayout().setError(null);
                     dialog.getButton(Dialog.BUTTON_POSITIVE).setEnabled(true);
+                    dialogCache.getProductNameInputLayout().setError(null);
                 }
             }
         });

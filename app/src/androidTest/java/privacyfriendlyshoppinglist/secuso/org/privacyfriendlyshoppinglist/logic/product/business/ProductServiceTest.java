@@ -132,7 +132,7 @@ public class ProductServiceTest extends AbstractDatabaseTest
         productService.saveOrUpdate(dto2, listId);
 
 
-        List<ProductDto> productDtos = productService.getAllProducts(listId);
+        List<ProductDto> productDtos = productService.getAllProducts(listId).toBlocking().single();
 
         int expectedSize = 2;
         int actualSize = productDtos.size();
@@ -166,13 +166,13 @@ public class ProductServiceTest extends AbstractDatabaseTest
         dto2.setId(null);
         productService.saveOrUpdate(dto2, listId);
 
-        List<ProductDto> products = productService.getAllProducts(listId);
+        List<ProductDto> products = productService.getAllProducts(listId).toBlocking().single();
         assertEquals(2, products.size());
 
         productService.deleteAllFromList(listId);
         shoppingListService.deleteById(listId);
 
-        products = productService.getAllProducts(listId);
+        products = productService.getAllProducts(listId).toBlocking().single();
         assertEquals(0, products.size());
     }
 

@@ -21,6 +21,7 @@ import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.pro
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.products.listeners.ShowDeleteProductsOnClickListener;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.products.listeners.SortProductsOnClickListener;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -97,28 +98,34 @@ public class ProductsActivity extends AppCompatActivity
 
     public void updateListView()
     {
-        List<ProductDto> allProducts = productService.getAllProducts(cache.getListId());
+        List<ProductDto> allProducts = new ArrayList<>();
 
-        if ( allProducts.isEmpty() )
-        {
-            cache.getNoProductsLayout().setVisibility(View.VISIBLE);
-        }
-        else
-        {
-            cache.getNoProductsLayout().setVisibility(View.GONE);
-        }
+        productService.getAllProducts(cache.getListId())
+                .doOnNext(dto -> allProducts.add(dto))
+                .doOnCompleted(() ->
+                {
+                    if ( allProducts.isEmpty() )
+                    {
+                        cache.getNoProductsLayout().setVisibility(View.VISIBLE);
+                    }
+                    else
+                    {
+                        cache.getNoProductsLayout().setVisibility(View.GONE);
+                    }
 
-        // sort according to last sort selection
-        ListDto listDto = shoppingListService.getById(listId);
-        String sortBy = listDto.getSortCriteria();
-        boolean sortAscending = listDto.isSortAscending();
-        productService.sortProducts(allProducts, sortBy, sortAscending);
+                    // sort according to last sort selection
+                    ListDto listDto = shoppingListService.getById(listId);
+                    String sortBy = listDto.getSortCriteria();
+                    boolean sortAscending = listDto.isSortAscending();
+                    productService.sortProducts(allProducts, sortBy, sortAscending);
 
-        cache.getProductsAdapter().setProductsList(allProducts);
-        cache.getProductsAdapter().notifyDataSetChanged();
+                    cache.getProductsAdapter().setProductsList(allProducts);
+                    cache.getProductsAdapter().notifyDataSetChanged();
 
-        reorderProductViewBySelection();
-        updateTotals();
+                    reorderProductViewBySelection();
+                    updateTotals();
+                })
+                .subscribe();
     }
 
     public void updateTotals()

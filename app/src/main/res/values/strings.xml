@@ -135,7 +135,7 @@
 
     <!--### ABOUT ###-->
     <string name="about">About</string>
-    <string name="version_number">Version 0.3 Beta</string>
+    <string name="version_number">Version 0.4 Beta</string>
     <string name="about_developper">Developers:</string>
     <string name="about_author_greb">Grebiel José Ifill Brito</string>
     <string name="about_author_cri">Christian König</string>

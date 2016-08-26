@@ -27,9 +27,9 @@ public interface ProductService extends ContextSetter
 
     void deleteSelected(List<ProductDto> productDtos);
 
-    List<ProductDto> getAllProducts(String listId);
+    Observable<ProductDto> getAllProducts(String listId);
 
-    TotalDto getInfo(String listId);
+    Observable<TotalDto> getInfo(String listId);
 
     void deleteAllFromList(String listId);
 

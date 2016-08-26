@@ -26,6 +26,7 @@ import rx.Observable;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -91,9 +92,17 @@ public class EditDeleteListDialog extends DialogFragment
             public void onClick(View v)
             {
                 dismiss();
-                List<ProductDto> productDtos = productService.getAllProducts(dto.getId());
-                String shareableText = shoppingListService.getShareableText(dto, productDtos);
-                MessageUtils.shareText(getContext(), shareableText, dto.getListName());
+                List<ProductDto> productDtos = new ArrayList<>();
+
+                productService.getAllProducts(dto.getId())
+                        .doOnNext(productDto -> productDtos.add(productDto))
+                        .doOnCompleted(() ->
+                        {
+                            String shareableText = shoppingListService.getShareableText(dto, productDtos);
+                            MessageUtils.shareText(getContext(), shareableText, dto.getListName());
+                        })
+                        .subscribe();
+
             }
         });
 
