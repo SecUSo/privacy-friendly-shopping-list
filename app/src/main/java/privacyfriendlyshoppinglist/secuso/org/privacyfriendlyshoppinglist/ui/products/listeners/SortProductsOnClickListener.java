@@ -1,7 +1,7 @@
 package privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.products.listeners;
 
+import android.app.Activity;
 import android.view.MenuItem;
-import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.products.ProductActivityCache;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.products.sort.SortProductsDialog;
 
 /**
@@ -11,18 +11,20 @@ import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.pro
  */
 public class SortProductsOnClickListener implements MenuItem.OnMenuItemClickListener
 {
-    private ProductActivityCache cache;
+    private Activity activity;
+    private String listId;
 
-    public SortProductsOnClickListener(ProductActivityCache cache)
+    public SortProductsOnClickListener(Activity activity, String listId)
     {
-        this.cache = cache;
+        this.activity = activity;
+        this.listId = listId;
     }
 
     @Override
     public boolean onMenuItemClick(MenuItem item)
     {
-        SortProductsDialog sortProductsDialog = SortProductsDialog.newInstance(cache);
-        sortProductsDialog.show(cache.getActivity().getFragmentManager(), "SortDialog");
+        SortProductsDialog sortProductsDialog = SortProductsDialog.newInstance(activity, listId);
+        sortProductsDialog.show(activity.getFragmentManager(), "SortDialog");
         return true;
     }
 }

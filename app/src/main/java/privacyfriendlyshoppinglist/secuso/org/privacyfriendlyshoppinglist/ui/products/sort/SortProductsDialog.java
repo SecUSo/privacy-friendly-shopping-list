@@ -15,8 +15,6 @@ import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framew
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.product.business.ProductService;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.product.business.domain.ProductDto;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.shoppingList.business.ShoppingListService;
-import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.shoppingList.business.domain.ListDto;
-import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.products.ProductActivityCache;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.products.ProductsActivity;
 
 import java.util.ArrayList;
@@ -29,18 +27,25 @@ import java.util.List;
  */
 public class SortProductsDialog extends DialogFragment
 {
-    private ProductActivityCache productActivityCache;
+    private Activity activity;
+    private String listId;
 
-    public static SortProductsDialog newInstance(ProductActivityCache productActivityCache)
+    public static SortProductsDialog newInstance(Activity activity, String listId)
     {
         SortProductsDialog sortProductsDialog = new SortProductsDialog();
-        sortProductsDialog.setProductActivityCache(productActivityCache);
+        sortProductsDialog.setActivity(activity);
+        sortProductsDialog.setListId(listId);
         return sortProductsDialog;
     }
 
-    public void setProductActivityCache(ProductActivityCache productActivityCache)
+    public void setActivity(Activity activity)
     {
-        this.productActivityCache = productActivityCache;
+        this.activity = activity;
+    }
+
+    public void setListId(String listId)
+    {
+        this.listId = listId;
     }
 
     @Override
@@ -68,12 +73,10 @@ public class SortProductsDialog extends DialogFragment
             @Override
             public void onClick(DialogInterface dialog, int which)
             {
-                ProductsActivity host = (ProductsActivity) productActivityCache.getActivity();
+                ProductsActivity host = (ProductsActivity) activity;
                 AbstractInstanceFactory instanceFactory = new InstanceFactory(host.getApplicationContext());
                 ProductService productService = (ProductService) instanceFactory.createInstance(ProductService.class);
                 ShoppingListService shoppingListService = (ShoppingListService) instanceFactory.createInstance(ShoppingListService.class);
-
-                String listId = productActivityCache.getListId();
 
                 String criteria = PFAComparators.SORT_BY_NAME;
                 if ( cache.getQuantity().isChecked() )
@@ -108,10 +111,15 @@ public class SortProductsDialog extends DialogFragment
                         .subscribe();
 
                 // save sort options
-                ListDto dto = shoppingListService.getById(listId).toBlocking().single();
-                dto.setSortAscending(ascending);
-                dto.setSortCriteria(criteria);
-                shoppingListService.saveOrUpdate(dto).subscribe();
+                shoppingListService.getById(listId)
+                        .doOnNext(dto ->
+                        {
+                            dto.setSortAscending(ascending);
+                            dto.setSortCriteria(finalCriteria);
+                            shoppingListService.saveOrUpdate(dto).subscribe();
+                        })
+                        .subscribe();
+
             }
         });
 

@@ -79,10 +79,10 @@ public class ProductsActivity extends AppCompatActivity
     public boolean onPrepareOptionsMenu(Menu menu)
     {
         MenuItem sortItem = menu.findItem(R.id.imageview_sort);
-        sortItem.setOnMenuItemClickListener(new SortProductsOnClickListener(cache));
+        sortItem.setOnMenuItemClickListener(new SortProductsOnClickListener(this, listId));
 
         MenuItem deleteItem = menu.findItem(R.id.imageview_delete);
-        deleteItem.setOnMenuItemClickListener(new ShowDeleteProductsOnClickListener(cache));
+        deleteItem.setOnMenuItemClickListener(new ShowDeleteProductsOnClickListener(this, listId));
         return super.onPrepareOptionsMenu(menu);
     }
 
