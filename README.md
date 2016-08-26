@@ -9,6 +9,12 @@ The Privacy Friendly App Shopping List is an Android application that does not r
 Nowadays there are many apps that require many or all permissions available in Android in order to be installed. However these apps do not always need all of the permissions they ask for. With this project we want to offer an app where the user can be sure that private information such as contacts, location, identity etc., are not being used by the application.
 
 ## Versioning
+Version 0.4 (Beta). Changes:
+- Bug fix: product names can be repeated in different lists. The validation that avoid adding a product twice happens only inside a list.
+- Bug fix: when a list is deleted all its product are deleted from the database as well
+- Vertical bar of list CardViews turns grey if all products of the list have been checked.
+- Responsiveness improvement: All database access operations are perform asynchronously by using the RxJava API and the RxAndroid extension
+
 Version 0.3 (Beta). Changes:
 - When edit/create dialogs (for list or products) are opened, then the keyboard is automatically showed, so the user can start typing.
 - After creating a new list, the app jumps automatically inside of the new list, so the user can immediately start adding products.
