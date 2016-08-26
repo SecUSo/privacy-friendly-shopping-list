@@ -36,7 +36,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_toStartOf="@+id/imageview_statistics">
-                <EditText
+                <android.support.design.widget.TextInputEditText
                         android:id="@+id/list_name"
                         android:inputType="text|textCapSentences"
                         android:layout_width="match_parent"
@@ -210,7 +210,7 @@
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
 
-                <EditText
+                <android.support.design.widget.TextInputEditText
                         android:id="@+id/edittext_reminder"
                         android:layout_width="40dp"
                         android:layout_height="wrap_content"
@@ -240,7 +240,7 @@
         <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
-            <EditText
+            <android.support.design.widget.TextInputEditText
                     android:id="@+id/list_notes"
                     android:inputType="textMultiLine|textCapSentences"
                     android:layout_width="match_parent"

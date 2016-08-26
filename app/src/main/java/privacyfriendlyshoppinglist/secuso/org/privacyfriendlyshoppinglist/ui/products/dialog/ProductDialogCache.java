@@ -1,5 +1,6 @@
 package privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.products.dialog;
 
+import android.support.design.widget.TextInputEditText;
 import android.support.design.widget.TextInputLayout;
 import android.view.View;
 import android.widget.*;
@@ -17,11 +18,11 @@ public class ProductDialogCache
     private ImageView expandableImageView;
 
     private AutoCompleteTextView productName;
-    private EditText quantity;
-    private EditText price;
+    private TextInputEditText quantity;
+    private TextInputEditText price;
     private AutoCompleteTextView customStore;
     private AutoCompleteTextView category;
-    private EditText productNotes;
+    private TextInputEditText productNotes;
     private boolean imageScheduledForDeletion;
 
     private Button buttonPlus;
@@ -36,11 +37,11 @@ public class ProductDialogCache
     {
         productName = (AutoCompleteTextView) rootview.findViewById(R.id.product_name);
         productNameInputLayout = (TextInputLayout) rootview.findViewById(R.id.product_name_input_layout);
-        quantity = (EditText) rootview.findViewById(R.id.quantity);
-        price = (EditText) rootview.findViewById(R.id.product_price);
+        quantity = (TextInputEditText) rootview.findViewById(R.id.quantity);
+        price = (TextInputEditText) rootview.findViewById(R.id.product_price);
         customStore = (AutoCompleteTextView) rootview.findViewById(R.id.store_input);
         category = (AutoCompleteTextView) rootview.findViewById(R.id.category_input);
-        productNotes = (EditText) rootview.findViewById(R.id.product_notes);
+        productNotes = (TextInputEditText) rootview.findViewById(R.id.product_notes);
         buttonPlus = (Button) rootview.findViewById(R.id.product_button_plus);
         buttonMinus = (Button) rootview.findViewById(R.id.product_button_minus);
         expandableLayout = (LinearLayout) rootview.findViewById(R.id.expandable_product_view);
@@ -65,12 +66,12 @@ public class ProductDialogCache
         return productName;
     }
 
-    public EditText getQuantity()
+    public TextInputEditText getQuantity()
     {
         return quantity;
     }
 
-    public EditText getPrice()
+    public TextInputEditText getPrice()
     {
         return price;
     }
@@ -85,7 +86,7 @@ public class ProductDialogCache
         return category;
     }
 
-    public EditText getProductNotes()
+    public TextInputEditText getProductNotes()
     {
         return productNotes;
     }

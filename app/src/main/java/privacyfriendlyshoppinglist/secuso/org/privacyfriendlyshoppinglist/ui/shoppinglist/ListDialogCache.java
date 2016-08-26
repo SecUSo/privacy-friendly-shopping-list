@@ -1,5 +1,6 @@
 package privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.shoppinglist;
 
+import android.support.design.widget.TextInputEditText;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.widget.SwitchCompat;
 import android.view.View;
@@ -13,9 +14,9 @@ import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.R;
  */
 public class ListDialogCache
 {
-    private EditText listNameText;
-    private EditText listNotes;
-    private EditText reminderText;
+    private TextInputEditText listNameText;
+    private TextInputEditText listNotes;
+    private TextInputEditText reminderText;
     private CheckBox checkBox;
     private LinearLayout deadlineLayout;
     private LinearLayout dateLayout;
@@ -35,10 +36,10 @@ public class ListDialogCache
     {
         prioritySpinner = (Spinner) rootview.findViewById(R.id.priority_spinner);
         reminderSpinner = (Spinner) rootview.findViewById(R.id.reminder_spinner);
-        listNameText = (EditText) rootview.findViewById(R.id.list_name);
+        listNameText = (TextInputEditText) rootview.findViewById(R.id.list_name);
         listNameInputLayout = (TextInputLayout) rootview.findViewById(R.id.list_name_input_layout);
-        reminderText = (EditText) rootview.findViewById(R.id.edittext_reminder);
-        listNotes = (EditText) rootview.findViewById(R.id.list_notes);
+        reminderText = (TextInputEditText) rootview.findViewById(R.id.edittext_reminder);
+        listNotes = (TextInputEditText) rootview.findViewById(R.id.list_notes);
         checkBox = (CheckBox) rootview.findViewById(R.id.list_dialog_checkbox);
         deadlineExpansionButton = (ImageView) rootview.findViewById(R.id.expand_button_list);
         deadlineLayout = (LinearLayout) rootview.findViewById(R.id.deadline_layout);
@@ -52,12 +53,12 @@ public class ListDialogCache
         reminderSwitch = (SwitchCompat) rootview.findViewById(R.id.switch_reminder);
     }
 
-    public EditText getListNameText()
+    public TextInputEditText getListNameText()
     {
         return listNameText;
     }
 
-    public EditText getListNotes()
+    public TextInputEditText getListNotes()
     {
         return listNotes;
     }
@@ -117,7 +118,7 @@ public class ListDialogCache
         return titleTextView;
     }
 
-    public EditText getReminderText()
+    public TextInputEditText getReminderText()
     {
         return reminderText;
     }

@@ -41,5 +41,7 @@ public interface ProductService extends ContextSetter
 
     Observable<AutoCompleteLists> getAutoCompleteListsObservable();
 
+    Observable<Boolean> deleteInvisibleProductsFromDb(List<String> listIds);
+
     void sortProducts(List<ProductDto> products, String criteria, boolean ascending);
 }

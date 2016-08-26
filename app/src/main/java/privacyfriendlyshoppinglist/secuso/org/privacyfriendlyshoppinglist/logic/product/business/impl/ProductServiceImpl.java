@@ -329,6 +329,16 @@ public class ProductServiceImpl implements ProductService
     }
 
     @Override
+    public Observable<Boolean> deleteInvisibleProductsFromDb(List<String> listIds)
+    {
+        Observable<Boolean> observable = Observable.from(productItemDao.getAllEntities())
+                .filter(entity -> !listIds.contains(String.valueOf(entity.getShoppingList().getId())))
+                .map(entity -> productItemDao.deleteById(entity.getId()))
+                .subscribeOn(Schedulers.newThread());
+        return observable;
+    }
+
+    @Override
     public void sortProducts(List<ProductDto> products, String criteria, boolean ascending)
     {
         if ( PFAComparators.SORT_BY_NAME.equals(criteria) )
