@@ -295,7 +295,7 @@ public class SettingsActivity extends BaseActivity
         {
             AbstractInstanceFactory instanceFactory = new InstanceFactory(getActivity().getApplicationContext());
             StatisticsService statisticsService = (StatisticsService) instanceFactory.createInstance(StatisticsService.class);
-            statisticsService.deleteAll();
+            statisticsService.deleteAll().subscribe();
             return null;
         }
 

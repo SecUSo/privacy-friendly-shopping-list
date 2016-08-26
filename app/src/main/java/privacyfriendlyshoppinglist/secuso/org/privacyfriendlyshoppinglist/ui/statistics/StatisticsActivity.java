@@ -49,8 +49,7 @@ public class StatisticsActivity extends BaseActivity implements Observer
         cache = new StatisticsCache(this);
         chart = new PFAChart(cache);
 
-        setupInitialDates(cache);
-        setupSpinner(cache);
+        setupQuery(cache);
 
         overridePendingTransition(0, 0);
     }
@@ -65,23 +64,29 @@ public class StatisticsActivity extends BaseActivity implements Observer
     public void update(Observable observable, Object data)
     {
         int middleblue = getResources().getColor(R.color.middleblue);
-        StatisticsChartData chartData = statisticsService.getChartData(query);
-        updateChartVisibility(chartData);
+        final StatisticsChartData[] chartData = new StatisticsChartData[ 1 ];
+        statisticsService.getChartData(query)
+                .doOnNext(result -> chartData[ 0 ] = result)
+                .doOnCompleted(() ->
+                {
+                    updateChartVisibility(chartData[ 0 ]);
 
-        chart.updateChart(chartData.getData(), chartData.getLabels(), middleblue);
-        String totalAmount = StringUtils.getDoubleAsString(chartData.getTotal(), cache.getNumberFormat());
-        cache.getUnitsTextView().setText(cache.getCurrency());
+                    chart.updateChart(chartData[ 0 ].getData(), chartData[ 0 ].getLabels(), middleblue);
+                    String totalAmount = StringUtils.getDoubleAsString(chartData[ 0 ].getTotal(), cache.getNumberFormat());
+                    cache.getUnitsTextView().setText(cache.getCurrency());
 
-        if ( cache.getValuesSpinner().getSelectedItemPosition() == StatisticsQuery.QUANTITY )
-        {
-            // don't show decimals for quantities
-            totalAmount = totalAmount.replace(".00", "").replace(",00", "");
-            String unit = getResources().getString(R.string.statistics_quantity_unit);
-            cache.getUnitsTextView().setText(unit);
-        }
+                    if ( cache.getValuesSpinner().getSelectedItemPosition() == StatisticsQuery.QUANTITY )
+                    {
+                        // don't show decimals for quantities
+                        totalAmount = totalAmount.replace(".00", "").replace(",00", "");
+                        String unit = getResources().getString(R.string.statistics_quantity_unit);
+                        cache.getUnitsTextView().setText(unit);
+                    }
 
-        cache.getTotalTextView().setText(totalAmount);
-        cache.getTitleTextView().setText(chartData.getTitle());
+                    cache.getTotalTextView().setText(totalAmount);
+                    cache.getTitleTextView().setText(chartData[ 0 ].getTitle());
+                })
+                .subscribe();
     }
 
     private void updateChartVisibility(StatisticsChartData chartData)
@@ -96,19 +101,34 @@ public class StatisticsActivity extends BaseActivity implements Observer
         }
     }
 
-    private void setupInitialDates(StatisticsCache cache)
+    private void setupQuery(StatisticsCache cache)
     {
-        String minDate = statisticsService.getMinDate();
-        String maxDate = statisticsService.getMaxDate();
 
-        query.setDateFrom(minDate);
-        query.setDateTo(maxDate);
 
-        cache.getRangeFromTextView().setText(minDate);
-        cache.getRangeToTextView().setText(maxDate);
+        final String[] maxDate = new String[ 1 ];
+        final String[] minDate = new String[ 1 ];
 
-        cache.getRangeFromTextView().setOnClickListener(new DataFromOnClickListener(cache, query, cache.getRangeFromTextView()));
-        cache.getRangeToTextView().setOnClickListener(new DataToOnClickListener(cache, query, cache.getRangeToTextView()));
+        statisticsService.getRange()
+                .doOnNext(dto ->
+                {
+                    maxDate[ 0 ] = dto.getMaxDate();
+                    minDate[ 0 ] = dto.getMaxDate();
+                })
+                .doOnCompleted(() ->
+                        {
+                            query.setDateTo(maxDate[ 0 ]);
+                            cache.getRangeToTextView().setText(maxDate[ 0 ]);
+                            cache.getRangeToTextView().setOnClickListener(new DataToOnClickListener(cache, query, cache.getRangeToTextView()));
+
+                            query.setDateFrom(minDate[ 0 ]);
+                            cache.getRangeFromTextView().setText(minDate[ 0 ]);
+                            cache.getRangeFromTextView().setOnClickListener(new DataFromOnClickListener(cache, query, cache.getRangeFromTextView()));
+
+                            setupSpinner(cache);
+                        }
+
+                )
+                .subscribe();
     }
 
     private void setupSpinner(StatisticsCache cache)

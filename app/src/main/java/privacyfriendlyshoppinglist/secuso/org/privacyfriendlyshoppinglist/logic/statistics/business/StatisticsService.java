@@ -5,8 +5,8 @@ import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.statistics.business.domain.StatisticEntryDto;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.statistics.business.domain.StatisticsChartData;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.statistics.business.domain.StatisticsQuery;
-
-import java.util.List;
+import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.statistics.business.domain.StatsRangeDto;
+import rx.Observable;
 
 /**
  * Description:
@@ -15,17 +15,15 @@ import java.util.List;
  */
 public interface StatisticsService extends ContextSetter
 {
-    void saveRecord(ProductDto dto);
+    Observable<Void> saveRecord(ProductDto dto);
 
-    List<StatisticEntryDto> getAll();
+    Observable<StatisticEntryDto> getAll();
 
-    void deleteAll();
+    Observable<Boolean> deleteAll();
 
-    String getMaxDate();
+    Observable<StatsRangeDto> getRange();
 
-    String getMinDate();
+    Observable<StatisticsChartData> getChartData(StatisticsQuery query);
 
-    StatisticsChartData getChartData(StatisticsQuery query);
-
-    void deleteById(String id);
+    Observable<Boolean> deleteById(String id);
 }

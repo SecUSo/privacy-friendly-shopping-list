@@ -9,10 +9,13 @@ import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.statistics.business.domain.StatisticEntryDto;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.statistics.business.domain.StatisticsChartData;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.statistics.business.domain.StatisticsQuery;
+import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.statistics.business.domain.StatsRangeDto;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.statistics.business.impl.converter.StatisticsConverterService;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.statistics.persistence.StatisticsDao;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.statistics.persistence.entity.StatisticEntryEntity;
 import rx.Observable;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.schedulers.Schedulers;
 
 import javax.inject.Inject;
 import java.util.*;
@@ -53,43 +56,78 @@ public class StatisticsServiceImpl implements StatisticsService
     }
 
     @Override
-    public void saveRecord(ProductDto dto)
+    public Observable<Void> saveRecord(ProductDto dto)
+    {
+        Observable<Void> observable = Observable
+                .fromCallable(() -> saveRecordSync(dto))
+                .subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread());
+        return observable;
+    }
+
+    private Void saveRecordSync(ProductDto dto)
     {
         StatisticEntryEntity entity = new StatisticEntryEntity();
         converterService.convertDtoToEntity(dto, entity);
         entity.setRecordDate(new Date());
         statisticsDao.save(entity);
+        return null;
     }
 
     @Override
-    public List<StatisticEntryDto> getAll()
+    public Observable<StatisticEntryDto> getAll()
     {
-        List<StatisticEntryEntity> entities = statisticsDao.getAllEntities();
-
-        if ( !entities.isEmpty() )
-        {
-            Observable<StatisticEntryDto> dtos = Observable
-                    .from(entities)
-                    .map(this::getDto);
-            return dtos.toList().toBlocking().single();
-        }
-        else
-        {
-            return new ArrayList<>();
-        }
+        Observable<StatisticEntryDto> observable = Observable
+                .defer(() -> Observable.from(getAllSync()))
+                .subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread());
+        return observable;
     }
 
-    @Override
-    public void deleteAll()
+    private List<StatisticEntryDto> getAllSync()
     {
+        List<StatisticEntryDto> dtos = new ArrayList<>();
         Observable
                 .from(statisticsDao.getAllEntities())
-                .map(entity -> statisticsDao.deleteById(entity.getId()))
-                .subscribe();
+                .map(this::getDto)
+                .subscribe(dto -> dtos.add(dto));
+
+        return dtos;
     }
 
     @Override
-    public String getMaxDate()
+    public Observable<Boolean> deleteAll()
+    {
+        Observable<Boolean> observable = Observable
+                .from(statisticsDao.getAllEntities())
+                .map(entity -> statisticsDao.deleteById(entity.getId()))
+                .subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread());
+
+        return observable;
+    }
+
+    @Override
+    public Observable<StatsRangeDto> getRange()
+    {
+        Observable<StatsRangeDto> observable = Observable
+                .fromCallable(() -> getRangeSync())
+                .subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread());
+        return observable;
+    }
+
+    private StatsRangeDto getRangeSync()
+    {
+        String maxDateSync = getMaxDateSync();
+        String minDateSync = getMinDateSync();
+        StatsRangeDto dto = new StatsRangeDto();
+        dto.setMaxDate(maxDateSync);
+        dto.setMindDate(minDateSync);
+        return dto;
+    }
+
+    private String getMaxDateSync()
     {
         List<StatisticEntryEntity> entities = statisticsDao.getAllEntities();
         Date maxDate = new Date();
@@ -105,8 +143,7 @@ public class StatisticsServiceImpl implements StatisticsService
         return converterService.getStringFromDate(maxDate);
     }
 
-    @Override
-    public String getMinDate()
+    private String getMinDateSync()
     {
         List<StatisticEntryEntity> entities = statisticsDao.getAllEntities();
         Date minDate = new Date();
@@ -123,13 +160,26 @@ public class StatisticsServiceImpl implements StatisticsService
     }
 
     @Override
-    public void deleteById(String id)
+    public Observable<Boolean> deleteById(String id)
     {
-        statisticsDao.deleteById(Long.valueOf(id));
+        Observable<Boolean> observable = Observable
+                .fromCallable(() -> statisticsDao.deleteById(Long.valueOf(id)))
+                .subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread());
+        return observable;
     }
 
     @Override
-    public StatisticsChartData getChartData(StatisticsQuery query)
+    public Observable<StatisticsChartData> getChartData(StatisticsQuery query)
+    {
+        Observable<StatisticsChartData> observable = Observable
+                .fromCallable(() -> getChartDataSync(query))
+                .subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread());
+        return observable;
+    }
+
+    private StatisticsChartData getChartDataSync(StatisticsQuery query)
     {
         DateTime dateFrom = converterService.getDateTimeFromString(query.getDateFrom());
         DateTime dateTo = converterService.getDateTimeFromString(query.getDateTo());

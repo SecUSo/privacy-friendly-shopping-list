@@ -88,7 +88,7 @@ public class ProductsItemViewHolder extends RecyclerView.ViewHolder
                 productService.saveOrUpdate(dto, productActivityCache.getListId()).subscribe();
                 if ( checkbox.isChecked() && productActivityCache.getStatisticsEnabled() )
                 {
-                    statisticsService.saveRecord(dto);
+                    statisticsService.saveRecord(dto).subscribe();
                 }
 
                 ProductsActivity host = (ProductsActivity) productActivityCache.getActivity();

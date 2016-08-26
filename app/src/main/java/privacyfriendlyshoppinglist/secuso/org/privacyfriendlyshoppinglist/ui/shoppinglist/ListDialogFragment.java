@@ -362,13 +362,14 @@ public class ListDialogFragment extends DialogFragment
                 dto.setReminderEnabled(reminderSwitch.isChecked());
                 dto.setStatisticEnabled(dialogCache.getStatisticsSwitch().isChecked());
 
+                String message = getResources().getString(R.string.notification_message, dto.getListName(), dto.getDeadlineDate() + " " + dto.getDeadlineTime());
+
                 shoppingListService.saveOrUpdate(dto)
                         .doOnCompleted(() ->
                         {
                             // the reminder feature must happen after save, because the list id is necessary for the notification
                             if ( reminderSwitch.isChecked() )
                             {
-                                String message = getResources().getString(R.string.notification_message, dto.getListName(), dto.getDeadlineDate() + " " + dto.getDeadlineTime());
                                 DateTime reminderTime = shoppingListService.getReminderDate(dto);
                                 ReminderReceiver alarm = new ReminderReceiver();
 
