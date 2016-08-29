@@ -28,7 +28,7 @@
                 app:errorEnabled="true"
                 android:id="@+id/product_name_input_layout"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content" android:layout_toStartOf="@+id/product_checkbox">
             <AutoCompleteTextView
                     android:id="@+id/product_name"
                     android:inputType="text|textCapSentences"
@@ -41,6 +41,12 @@
             </AutoCompleteTextView>
         </android.support.design.widget.TextInputLayout>
 
+        <CheckBox
+                android:id="@+id/product_checkbox"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_alignParentEnd="true"/>
 
     </RelativeLayout>
 

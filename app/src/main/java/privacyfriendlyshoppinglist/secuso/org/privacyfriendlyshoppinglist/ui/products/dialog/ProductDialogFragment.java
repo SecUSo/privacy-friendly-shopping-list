@@ -144,6 +144,7 @@ public class ProductDialogFragment extends DialogFragment
         dialogCache.getPrice().setText(dto.getProductPrice());
         dialogCache.getCategory().setText(dto.getProductCategory());
         dialogCache.getCustomStore().setText(dto.getProductStore());
+        dialogCache.getProductCheckBox().setChecked(dto.isChecked());
 
         PackageManager pm = getContext().getPackageManager();
         if ( !pm.hasSystemFeature(PackageManager.FEATURE_CAMERA) )
@@ -156,12 +157,14 @@ public class ProductDialogFragment extends DialogFragment
         {
             dialogCache.getTitleTextView().setText(getActivity().getResources().getString(R.string.product_name_edit));
             dialogCache.getProductImage().setImageBitmap(dto.getThumbnailBitmap());
+            dialogCache.getProductCheckBox().setVisibility(View.VISIBLE);
         }
         else
         {
             dialogCache.getTitleTextView().setText(getActivity().getResources().getString(R.string.product_name_new));
             Bitmap bitmap = BitmapFactory.decodeResource(getContext().getResources(), R.drawable.ic_menu_camera);
             dialogCache.getProductImage().setImageBitmap(bitmap);
+            dialogCache.getProductCheckBox().setVisibility(View.GONE);
         }
 
         dialogCache.getButtonPlus().setOnClickListener(new View.OnClickListener()
@@ -381,7 +384,7 @@ public class ProductDialogFragment extends DialogFragment
         dto.setProductPrice(String.valueOf(dialogCache.getPrice().getText()));
         dto.setProductCategory(String.valueOf(dialogCache.getCategory().getText()));
         dto.setProductStore(String.valueOf(dialogCache.getCustomStore().getText()));
-        dto.setChecked(false);
+        dto.setChecked(dialogCache.getProductCheckBox().isChecked());
 
         if ( dialogCache.isImageScheduledForDeletion() )
         {
