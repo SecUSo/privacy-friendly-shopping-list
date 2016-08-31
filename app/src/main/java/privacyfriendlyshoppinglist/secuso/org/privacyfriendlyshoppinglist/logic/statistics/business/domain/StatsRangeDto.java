@@ -8,7 +8,7 @@ package privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic
 public class StatsRangeDto
 {
     private String maxDate;
-    private String mindDate;
+    private String minDate;
 
     public String getMaxDate()
     {
@@ -20,13 +20,13 @@ public class StatsRangeDto
         this.maxDate = maxDate;
     }
 
-    public String getMindDate()
+    public String getMinDate()
     {
-        return mindDate;
+        return minDate;
     }
 
-    public void setMindDate(String mindDate)
+    public void setMinDate(String minDate)
     {
-        this.mindDate = mindDate;
+        this.minDate = minDate;
     }
 }

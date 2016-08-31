@@ -123,7 +123,7 @@ public class StatisticsServiceImpl implements StatisticsService
         String minDateSync = getMinDateSync();
         StatsRangeDto dto = new StatsRangeDto();
         dto.setMaxDate(maxDateSync);
-        dto.setMindDate(minDateSync);
+        dto.setMinDate(minDateSync);
         return dto;
     }
 

@@ -112,7 +112,7 @@ public class StatisticsActivity extends BaseActivity implements Observer
                 .doOnNext(dto ->
                 {
                     maxDate[ 0 ] = dto.getMaxDate();
-                    minDate[ 0 ] = dto.getMaxDate();
+                    minDate[ 0 ] = dto.getMinDate();
                 })
                 .doOnCompleted(() ->
                         {
