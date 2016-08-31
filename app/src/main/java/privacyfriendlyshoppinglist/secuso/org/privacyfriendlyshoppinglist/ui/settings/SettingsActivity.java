@@ -232,6 +232,44 @@ public class SettingsActivity extends BaseActivity
                 tutorialSettings.setChecked(false);
             }
 
+            SwitchPreference checkboxSettings = (SwitchPreference) findPreference(SettingsKeys.CHECKBOX_POSITION_PREF);
+            checkboxSettings.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener()
+            {
+                @Override
+                public boolean onPreferenceChange(Preference preference, Object newValue)
+                {
+                    if ( !checkboxSettings.isChecked() )
+                    {
+                        MessageUtils.showToast(getActivity(), R.string.pref_checkbox_toast_on, Toast.LENGTH_SHORT);
+                    }
+                    else
+                    {
+                        MessageUtils.showToast(getActivity(), R.string.pref_checkbox_toast_off, Toast.LENGTH_SHORT);
+                    }
+                    return true;
+                }
+            });
+            checkboxSettings.setSwitchTextOn(R.string.pref_checkbox_right_display_text);
+            checkboxSettings.setSwitchTextOff(R.string.pref_checkbox_left_display_text);
+
+            SwitchPreference moveProductsPref = (SwitchPreference) findPreference(SettingsKeys.MOVE_PRODUCTS_PREF);
+            moveProductsPref.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener()
+            {
+                @Override
+                public boolean onPreferenceChange(Preference preference, Object newValue)
+                {
+                    if ( !moveProductsPref.isChecked() )
+                    {
+                        MessageUtils.showToast(getActivity(), R.string.pref_move_products_toast_on, Toast.LENGTH_SHORT);
+                    }
+                    else
+                    {
+                        MessageUtils.showToast(getActivity(), R.string.pref_move_products_toast_off, Toast.LENGTH_SHORT);
+                    }
+                    return true;
+                }
+            });
+
 
             SwitchPreference notificationsSetting = (SwitchPreference) findPreference(SettingsKeys.NOTIFICATIONS_ENABLED);
             notificationsSetting.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener()

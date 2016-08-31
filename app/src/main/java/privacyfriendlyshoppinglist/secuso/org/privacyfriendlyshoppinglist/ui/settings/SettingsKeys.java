@@ -7,6 +7,9 @@ package privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.se
  */
 public abstract class SettingsKeys
 {
+    public static final String CHECKBOX_POSITION_PREF = "pref_checkbox_position";
+    public static final String MOVE_PRODUCTS_PREF = "pref_move_products";
+
     public static final String WELCOME_PREF = "pref_welcome";
     public static final String TUTORIAL_PREF = "pref_tutorial";
 

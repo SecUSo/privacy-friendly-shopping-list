@@ -10,6 +10,8 @@ Nowadays there are many apps that require many or all permissions available in A
 
 ## Versioning
 Version 0.4 (Beta). Changes:
+- Setting added to allow the user choosing whether the product items should be moved to the end on "checked" or not
+- Setting added to allow the user choosing whether the checkbox and the extend button of products should be shown on the right or on the left side (Probably helpful for left handed people)
 - Search products feature added
 - Checking products onClick had been added to allow the user checking products when the floating action button ("+") was covering the checkbox by clicking on the CardView. This solution was not very intuitive because items would move to the bottom if the user accidentally clicked a product. Therefore the checkbox was added again in the ProductEditDialog. Users can check the product in this dialog if the checkbox is being covered by the floating action button ("+").
 - Bug fix: product names can be repeated in different lists. The validation that avoid adding a product twice happens only inside a list.

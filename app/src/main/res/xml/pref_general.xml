@@ -2,6 +2,23 @@
         xmlns:android="http://schemas.android.com/apk/res/android">
 
     <PreferenceCategory
+            android:title="@string/pref_header_general">
+        <SwitchPreference
+                android:id="@+id/pref_checkbox_position"
+                android:key="pref_checkbox_position"
+                android:title="@string/pref_checkbox_position"
+                android:summaryOn="@string/pref_checkbox_summary_on"
+                android:summaryOff="@string/pref_checkbox_summary_off"
+                android:defaultValue="true"/>
+        <SwitchPreference
+                android:id="@+id/pref_move_products"
+                android:key="pref_move_products"
+                android:title="@string/pref_move_products"
+                android:summaryOn="@string/pref_move_products_summary_on"
+                android:summaryOff="@string/pref_move_products_summary_off"
+                android:defaultValue="true"/>
+    </PreferenceCategory>
+    <PreferenceCategory
             android:title="@string/pref_header_tutorial">
         <SwitchPreference
                 android:id="@+id/pref_tutorial"

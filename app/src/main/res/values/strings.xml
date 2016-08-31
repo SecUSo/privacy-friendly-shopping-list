@@ -164,6 +164,18 @@
     <!-- ### SETTINGS ### -->
     <string name="pref_header_general">General</string>
     <string name="title_activity_settings">Settings</string>
+    <string name="pref_checkbox_position">Checkbox Position</string>
+    <string name="pref_checkbox_summary_on">Product checkboxes are shown on the right</string>
+    <string name="pref_checkbox_summary_off">Product checkboxes are shown on the left</string>
+    <string name="pref_checkbox_toast_on">Checkboxes will be shown on the right!</string>
+    <string name="pref_checkbox_toast_off">Checboxes will be shown on the left!</string>
+    <string name="pref_checkbox_right_display_text">R</string>
+    <string name="pref_checkbox_left_display_text">L</string>
+    <string name="pref_move_products">Move Checked Products</string>
+    <string name="pref_move_products_summary_on">Move checked products to the end of the list is on</string>
+    <string name="pref_move_products_summary_off">Move checked products to the end of the list is off</string>
+    <string name="pref_move_products_toast_on">Move checked products have been turned on!</string>
+    <string name="pref_move_products_toast_off">Move checked products have been turned off!</string>
 
     <string name="pref_header_tutorial">Tutorial</string>
     <string name="pref_tutorial_title">Show Tutorial</string>

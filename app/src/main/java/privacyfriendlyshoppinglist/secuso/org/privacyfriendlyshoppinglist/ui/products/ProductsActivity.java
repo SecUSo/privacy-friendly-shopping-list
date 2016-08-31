@@ -2,6 +2,7 @@ package privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.pr
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -18,6 +19,7 @@ import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.main.MainActivity;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.products.listadapter.ProductsAdapter;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.products.listeners.*;
+import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.settings.SettingsKeys;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -160,29 +162,35 @@ public class ProductsActivity extends AppCompatActivity
 
     public void changeItemPosition(ProductDto dto)
     {
-        ProductsAdapter productsAdapter = cache.getProductsAdapter();
-        List<ProductDto> productsList = productsAdapter.getProductsList();
-        List<ProductDto> productDtos = productService.moveSelectedToEnd(productsList);
-        productsAdapter.setProductsList(productDtos);
-
-        int initialPosition = productsList.indexOf(dto);
-        int finalPosition = productDtos.indexOf(dto);
-        productsAdapter.notifyItemMoved(initialPosition, finalPosition);
-        // Animation ends in final position when the initial position is equals zero.
-        // Therefore the animation needs to be fix by scrolling back to position 0.
-        if ( initialPosition == 0 )
+        if ( PreferenceManager.getDefaultSharedPreferences(cache.getActivity()).getBoolean(SettingsKeys.MOVE_PRODUCTS_PREF, true) )
         {
-            cache.getRecyclerView().scrollToPosition(0);
+            ProductsAdapter productsAdapter = cache.getProductsAdapter();
+            List<ProductDto> productsList = productsAdapter.getProductsList();
+            List<ProductDto> productDtos = productService.moveSelectedToEnd(productsList);
+            productsAdapter.setProductsList(productDtos);
+
+            int initialPosition = productsList.indexOf(dto);
+            int finalPosition = productDtos.indexOf(dto);
+            productsAdapter.notifyItemMoved(initialPosition, finalPosition);
+            // Animation ends in final position when the initial position is equals zero.
+            // Therefore the animation needs to be fix by scrolling back to position 0.
+            if ( initialPosition == 0 )
+            {
+                cache.getRecyclerView().scrollToPosition(0);
+            }
         }
     }
 
     public void reorderProductViewBySelection()
     {
-        ProductsAdapter productsAdapter = cache.getProductsAdapter();
-        List<ProductDto> productsList = productsAdapter.getProductsList();
-        List<ProductDto> productDtos = productService.moveSelectedToEnd(productsList);
-        productsAdapter.setProductsList(productDtos);
-        productsAdapter.notifyDataSetChanged();
+        if ( PreferenceManager.getDefaultSharedPreferences(cache.getActivity()).getBoolean(SettingsKeys.MOVE_PRODUCTS_PREF, true) )
+        {
+            ProductsAdapter productsAdapter = cache.getProductsAdapter();
+            List<ProductDto> productsList = productsAdapter.getProductsList();
+            List<ProductDto> productDtos = productService.moveSelectedToEnd(productsList);
+            productsAdapter.setProductsList(productDtos);
+            productsAdapter.notifyDataSetChanged();
+        }
     }
 
     public void setProductsAndUpdateView(List<ProductDto> sortedProducts)
