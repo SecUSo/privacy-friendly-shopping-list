@@ -3,9 +3,12 @@ package privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.pr
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.widget.AutoCompleteTextView;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.R;
@@ -33,6 +36,9 @@ public class ProductActivityCache
     private String listName;
     private Boolean statisticsEnabled;
     private LinearLayout noProductsLayout;
+    private TextInputLayout searchTextInputLayout;
+    private AutoCompleteTextView searchAutoCompleteTextView;
+    private ImageButton cancelSarchButton;
 
     public ProductActivityCache(AppCompatActivity activity, String listId, String listName, boolean statisticsEnabled)
     {
@@ -53,6 +59,9 @@ public class ProductActivityCache
         totalLayout = (LinearLayout) activity.findViewById(R.id.layout_total);
         currencyTextView = (TextView) activity.findViewById(R.id.textview_currency);
         noProductsLayout = (LinearLayout) activity.findViewById(R.id.no_products_layout);
+        searchTextInputLayout = (TextInputLayout) activity.findViewById(R.id.search_input_layout);
+        searchAutoCompleteTextView = (AutoCompleteTextView) activity.findViewById(R.id.search_input_text);
+        cancelSarchButton = (ImageButton) activity.findViewById(R.id.cancel_search);
 
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(activity);
         String defaultCurrency = activity.getResources().getString(R.string.currency);
@@ -113,5 +122,20 @@ public class ProductActivityCache
     public LinearLayout getNoProductsLayout()
     {
         return noProductsLayout;
+    }
+
+    public TextInputLayout getSearchTextInputLayout()
+    {
+        return searchTextInputLayout;
+    }
+
+    public AutoCompleteTextView getSearchAutoCompleteTextView()
+    {
+        return searchAutoCompleteTextView;
+    }
+
+    public ImageButton getCancelSarchButton()
+    {
+        return cancelSarchButton;
     }
 }

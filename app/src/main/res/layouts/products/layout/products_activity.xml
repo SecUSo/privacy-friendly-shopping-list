@@ -6,10 +6,53 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+    <android.support.design.widget.TextInputLayout
+            android:visibility="gone"
+            app:errorTextAppearance="@style/error_appearance"
+            app:errorEnabled="true"
+            android:hint=" "
+            android:id="@+id/search_input_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:layout_toStartOf="@+id/cancel_search"
+            android:layout_alignParentEnd="true">
+        <AutoCompleteTextView
+                android:id="@+id/search_input_text"
+                android:inputType="text|textCapSentences"
+                android:paddingRight="50dp"
+                android:paddingLeft="8dp"
+                android:paddingTop="8dp"
+                android:paddingBottom="8dp"
+                android:background="@drawable/search_border_style"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/search"
+                android:selectAllOnFocus="true">
+        </AutoCompleteTextView>
+    </android.support.design.widget.TextInputLayout>
+
+    <ImageButton
+            android:visibility="gone"
+            android:id="@+id/cancel_search"
+            android:tint="@color/colorAccent"
+            android:background="?android:selectableItemBackground"
+            android:src="@drawable/ic_cancel_white_48dp"
+            android:layout_width="45dp"
+            android:layout_height="38dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginRight="6dp"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:scaleType="fitCenter"
+            android:layout_alignParentEnd="true"
+            android:layout_alignTop="@+id/search_input_layout"/>
+
     <android.support.design.widget.CoordinatorLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_above="@+id/layout_total">
+            android:layout_above="@+id/layout_total"
+            android:layout_below="@+id/search_input_layout">
 
         <android.support.v7.widget.RecyclerView
                 android:id="@+id/recyclerView"

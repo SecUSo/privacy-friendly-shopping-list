@@ -17,9 +17,7 @@ import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.shoppingList.business.domain.ListDto;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.main.MainActivity;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.products.listadapter.ProductsAdapter;
-import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.products.listeners.AddProductOnClickListener;
-import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.products.listeners.ShowDeleteProductsOnClickListener;
-import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.products.listeners.SortProductsOnClickListener;
+import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.products.listeners.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -61,6 +59,8 @@ public class ProductsActivity extends AppCompatActivity
                     setTitle(listDto.getListName());
                     cache = new ProductActivityCache(this, listId, listDto.getListName(), listDto.isStatisticEnabled());
                     cache.getNewListFab().setOnClickListener(new AddProductOnClickListener(cache));
+                    cache.getSearchAutoCompleteTextView().addTextChangedListener(new SearchTextWatcher(cache));
+                    cache.getCancelSarchButton().setOnClickListener(new CancelSearchOnClick(cache));
                     updateListView();
                 })
                 .subscribe();
@@ -71,13 +71,16 @@ public class ProductsActivity extends AppCompatActivity
     @Override
     public boolean onCreateOptionsMenu(Menu menu)
     {
-        getMenuInflater().inflate(R.menu.lists_menu, menu);
+        getMenuInflater().inflate(R.menu.products_menu, menu);
         return true;
     }
 
     @Override
     public boolean onPrepareOptionsMenu(Menu menu)
     {
+        MenuItem searchItem = menu.findItem(R.id.imageview_search);
+        searchItem.setOnMenuItemClickListener(new ShowSearchFieldOnClickListener(this));
+
         MenuItem sortItem = menu.findItem(R.id.imageview_sort);
         sortItem.setOnMenuItemClickListener(new SortProductsOnClickListener(this, listId));
 
@@ -182,7 +185,7 @@ public class ProductsActivity extends AppCompatActivity
         productsAdapter.notifyDataSetChanged();
     }
 
-    public void reorderProductView(List<ProductDto> sortedProducts)
+    public void setProductsAndUpdateView(List<ProductDto> sortedProducts)
     {
         cache.getProductsAdapter().setProductsList(sortedProducts);
         cache.getProductsAdapter().notifyDataSetChanged();

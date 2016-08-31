@@ -37,6 +37,8 @@ public interface ProductService extends ContextSetter
 
     TotalDto computeTotals(List<ProductDto> productDtos);
 
+    Boolean isSearched(String[] searchedTexts, ProductDto dto);
+
     String getSharableText(ProductDto dto);
 
     Observable<AutoCompleteLists> getAutoCompleteListsObservable();

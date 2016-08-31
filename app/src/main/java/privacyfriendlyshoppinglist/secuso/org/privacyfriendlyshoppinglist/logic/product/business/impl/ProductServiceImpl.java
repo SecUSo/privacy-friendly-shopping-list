@@ -286,6 +286,24 @@ public class ProductServiceImpl implements ProductService
     }
 
     @Override
+    public Boolean isSearched(String[] searchedTexts, ProductDto dto)
+    {
+        String name = dto.getProductName().toLowerCase();
+        String category = dto.getProductCategory().toLowerCase();
+        String store = dto.getProductStore().toLowerCase();
+        String notes = dto.getProductNotes().toLowerCase();
+        String searchableText = name + StringUtils.SPACE + category + StringUtils.SPACE + store + StringUtils.SPACE + notes;
+        for ( String searchedText : searchedTexts )
+        {
+            if ( searchableText.contains(searchedText.toLowerCase()) )
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    @Override
     public String getSharableText(ProductDto dto)
     {
         StringBuilder sb = new StringBuilder();

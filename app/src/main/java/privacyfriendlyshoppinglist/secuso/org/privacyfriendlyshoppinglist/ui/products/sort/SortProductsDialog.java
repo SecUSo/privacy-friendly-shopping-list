@@ -16,6 +16,7 @@ import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.product.business.domain.ProductDto;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.shoppingList.business.ShoppingListService;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.products.ProductsActivity;
+import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.products.listeners.CancelSearchOnClick;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -73,6 +74,8 @@ public class SortProductsDialog extends DialogFragment
             @Override
             public void onClick(DialogInterface dialog, int which)
             {
+                CancelSearchOnClick.performClick();
+
                 ProductsActivity host = (ProductsActivity) activity;
                 AbstractInstanceFactory instanceFactory = new InstanceFactory(host.getApplicationContext());
                 ProductService productService = (ProductService) instanceFactory.createInstance(ProductService.class);
@@ -105,7 +108,7 @@ public class SortProductsDialog extends DialogFragment
                         .doOnCompleted(() ->
                         {
                             productService.sortProducts(productDtos, finalCriteria, ascending);
-                            host.reorderProductView(productDtos);
+                            host.setProductsAndUpdateView(productDtos);
                             host.reorderProductViewBySelection();
                         })
                         .subscribe();

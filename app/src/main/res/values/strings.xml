@@ -87,6 +87,8 @@
     <string name="total_amount_separator">/</string>
     <string name="store_label">Store:</string>
     <string name="category_label">Category:</string>
+    <string name="search">Search</string>
+    <string name="no_products_found">No products found!</string>
 
     <string name="store_detail">Store: %1$s</string>
     <string name="category_detail">Category: %1$s</string>

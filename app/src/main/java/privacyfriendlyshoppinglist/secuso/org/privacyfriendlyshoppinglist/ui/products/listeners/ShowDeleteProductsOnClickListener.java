@@ -26,6 +26,7 @@ public class ShowDeleteProductsOnClickListener implements MenuItem.OnMenuItemCli
     @Override
     public boolean onMenuItemClick(MenuItem item)
     {
+        CancelSearchOnClick.performClick();
         Intent intent = new Intent(activity, DeleteProductsActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         intent.putExtra(MainActivity.LIST_ID_KEY, listId);

@@ -4,6 +4,12 @@
         xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
+            android:id="@+id/imageview_search"
+            android:icon="@drawable/ic_search_white_48dp"
+            android:title="@string/search"
+            app:showAsAction="ifRoom"/>
+
+    <item
             android:id="@+id/imageview_sort"
             android:icon="@drawable/ic_sort_white_24dp"
             android:title="@string/sort_options"
