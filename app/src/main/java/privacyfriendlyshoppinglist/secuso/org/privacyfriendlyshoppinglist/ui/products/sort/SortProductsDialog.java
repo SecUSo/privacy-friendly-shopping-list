@@ -107,6 +107,7 @@ public class SortProductsDialog extends DialogFragment
                         .doOnNext(dto -> productDtos.add(dto))
                         .doOnCompleted(() ->
                         {
+                            productService.sortProducts(productDtos, PFAComparators.SORT_BY_NAME, ascending);
                             productService.sortProducts(productDtos, finalCriteria, ascending);
                             host.setProductsAndUpdateView(productDtos);
                             host.reorderProductViewBySelection();
