@@ -216,13 +216,11 @@ public class ProductDialogFragment extends DialogFragment
             {
                 if ( dialogCache.getExpandableLayout().getVisibility() == View.GONE )
                 {
-                    dialogCache.getExpandableImageView().setImageResource(R.drawable.ic_keyboard_arrow_up_white_48dp);
-                    dialogCache.getExpandableLayout().setVisibility(View.VISIBLE);
+                    changePhotoThumbnailVisibility(R.drawable.ic_keyboard_arrow_up_white_48dp, View.VISIBLE);
                 }
                 else
                 {
-                    dialogCache.getExpandableImageView().setImageResource(R.drawable.ic_keyboard_arrow_down_white_48dp);
-                    dialogCache.getExpandableLayout().setVisibility(View.GONE);
+                    changePhotoThumbnailVisibility(R.drawable.ic_keyboard_arrow_down_white_48dp, View.GONE);
                 }
             }
         });
@@ -376,6 +374,12 @@ public class ProductDialogFragment extends DialogFragment
         return dialog;
     }
 
+    private void changePhotoThumbnailVisibility(int ic_keyboard_arrow_up_white_48dp, int visible)
+    {
+        dialogCache.getExpandableImageView().setImageResource(ic_keyboard_arrow_up_white_48dp);
+        dialogCache.getExpandableLayout().setVisibility(visible);
+    }
+
     private void saveUserInput(String productName)
     {
         dto.setProductName(productName);
@@ -407,6 +411,7 @@ public class ProductDialogFragment extends DialogFragment
             dialogCache.getProductImage().setImageBitmap(imageBitmap);
             dto.setThumbnailBitmap(imageBitmap);
             dto.setDefaultImage(false);
+            changePhotoThumbnailVisibility(R.drawable.ic_keyboard_arrow_up_white_48dp, View.VISIBLE);
         }
     }
 
