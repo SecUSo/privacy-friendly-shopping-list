@@ -33,11 +33,21 @@
         <activity
                 android:name=".ui.products.ProductsActivity"
                 android:label="@string/activity_shopping_list"
+                android:launchMode="singleTop"
                 android:parentActivityName=".ui.main.MainActivity"
                 android:screenOrientation="portrait">
             <meta-data
                     android:name="android.support.PARENT_ACTIVITY"
                     android:value=".ui.main.MainActivity"/>
+        </activity>
+        <activity
+                android:name=".ui.products.PhotoPreviewActivity"
+                android:label="@string/activity_shopping_list"
+                android:parentActivityName=".ui.products.ProductsActivity"
+                android:screenOrientation="portrait">
+            <meta-data
+                    android:name="android.support.PARENT_ACTIVITY"
+                    android:value=".ui.products.ProductsActivity"/>
         </activity>
         <activity
                 android:name=".ui.deleteproducts.DeleteProductsActivity"

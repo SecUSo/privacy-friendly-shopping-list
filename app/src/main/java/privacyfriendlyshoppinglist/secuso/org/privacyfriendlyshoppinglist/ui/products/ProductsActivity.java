@@ -33,6 +33,10 @@ public class ProductsActivity extends AppCompatActivity
 {
     public static final String PRODUCT_ID_KEY = "product.id";
     public static final String PRODUCT_NAME = "product.name";
+    public static final String FROM_DIALOG = "from.dialog";
+    public static final String PHOTO_BITMAP = "photo.bitmap";
+    public static final String SCHEDULED_FOR_DELETION = "scheduled.for.deletion";
+    public static final int REQUEST_PHOTO_PREVIEW_FROM_ITEM = 3;
 
     private static final long DURATION = 1000L;
     private ProductService productService;
@@ -95,6 +99,10 @@ public class ProductsActivity extends AppCompatActivity
     protected void onActivityResult(int requestCode, int resultCode, Intent data)
     {
         super.onActivityResult(requestCode, resultCode, data);
+        if ( requestCode == REQUEST_PHOTO_PREVIEW_FROM_ITEM && resultCode == RESULT_OK )
+        {
+            updateListView();
+        }
     }
 
     @Override

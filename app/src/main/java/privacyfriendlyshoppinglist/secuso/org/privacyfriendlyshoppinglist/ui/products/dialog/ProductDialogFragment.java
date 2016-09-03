@@ -30,6 +30,7 @@ import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.product.business.domain.AutoCompleteLists;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.product.business.domain.ProductDto;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.camera.CameraActivity;
+import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.products.PhotoPreviewActivity;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.products.ProductActivityCache;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.products.ProductsActivity;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.products.dialog.listeners.onFocusListener.ProductDialogFocusListener;
@@ -49,6 +50,7 @@ public class ProductDialogFragment extends DialogFragment
 {
     private static final int REQUEST_IMAGE_CAPTURE = 1;
     private static final int MY_PERMISSIONS_REQUEST_USE_CAMERA = 2;
+    private static final int REQUEST_PHOTO_PREVIEW_FROM_DIALOG = 3;
 
     private static boolean opened;
     private static boolean editDialog;
@@ -276,11 +278,7 @@ public class ProductDialogFragment extends DialogFragment
             {
                 if ( !dto.isDefaultImage() && !dialogCache.isImageScheduledForDeletion() )
                 {
-                    if ( !ImageViewerDialog.isOpened() )
-                    {
-                        DialogFragment imageViewerDialog = ImageViewerDialog.newInstance(dto, dialogCache);
-                        imageViewerDialog.show(cache.getActivity().getSupportFragmentManager(), "ProductViewer");
-                    }
+                    startPhotoPreviewActivity();
                 }
             }
         });
@@ -374,6 +372,15 @@ public class ProductDialogFragment extends DialogFragment
         return dialog;
     }
 
+    private void startPhotoPreviewActivity()
+    {
+        Intent viewPhotoIntent = new Intent(cache.getActivity(), PhotoPreviewActivity.class);
+        viewPhotoIntent.putExtra(ProductsActivity.PRODUCT_ID_KEY, dto.getId());
+        viewPhotoIntent.putExtra(ProductsActivity.PRODUCT_NAME, dto.getProductName());
+        viewPhotoIntent.putExtra(ProductsActivity.FROM_DIALOG, true);
+        this.startActivityForResult(viewPhotoIntent, REQUEST_PHOTO_PREVIEW_FROM_DIALOG);
+    }
+
     private void changePhotoThumbnailVisibility(int ic_keyboard_arrow_up_white_48dp, int visible)
     {
         dialogCache.getExpandableImageView().setImageResource(ic_keyboard_arrow_up_white_48dp);
@@ -411,6 +418,15 @@ public class ProductDialogFragment extends DialogFragment
             dialogCache.getProductImage().setImageBitmap(imageBitmap);
             dto.setThumbnailBitmap(imageBitmap);
             dto.setDefaultImage(false);
+            changePhotoThumbnailVisibility(R.drawable.ic_keyboard_arrow_up_white_48dp, View.VISIBLE);
+        }
+        else if ( requestCode == REQUEST_PHOTO_PREVIEW_FROM_DIALOG && resultCode == RESULT_OK )
+        {
+            Bundle extras = data.getExtras();
+            Bitmap imageBitmap = (Bitmap) extras.get(ProductsActivity.PHOTO_BITMAP);
+
+            dialogCache.getProductImage().setImageBitmap(imageBitmap);
+            dialogCache.setImageScheduledForDeletion(true);
             changePhotoThumbnailVisibility(R.drawable.ic_keyboard_arrow_up_white_48dp, View.VISIBLE);
         }
     }

@@ -11,7 +11,6 @@ import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framew
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.context.AbstractInstanceFactory;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.context.InstanceFactory;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.utils.MessageUtils;
-import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.product.business.ProductService;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.shoppingList.business.ShoppingListService;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.shoppingList.business.domain.ListDto;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.baseactivity.BaseActivity;
@@ -32,7 +31,6 @@ public class MainActivity extends BaseActivity
 {
     public static final String LIST_ID_KEY = "list.id";
     private ShoppingListService shoppingListService;
-    private ProductService productService;
     private ShoppingListActivityCache cache;
 
 
@@ -44,15 +42,9 @@ public class MainActivity extends BaseActivity
 
         AbstractInstanceFactory instanceFactory = new InstanceFactory(getApplicationContext());
         this.shoppingListService = (ShoppingListService) instanceFactory.createInstance(ShoppingListService.class);
-        this.productService = (ProductService) instanceFactory.createInstance(ProductService.class);
         cache = new ShoppingListActivityCache(this);
 
-        // todo: This method was added to fix bug in already installed apps without loosing relevant data from the database
-        // remove this method before the first release
-        deleteInvisibleProductsFromDb();
-
 //        getApplicationContext().deleteDatabase(DB.APP.getDbName());
-
 
         updateListView();
         MessageUtils.showWelcomeDialog(SettingsKeys.WELCOME_PREF, this);
@@ -71,17 +63,6 @@ public class MainActivity extends BaseActivity
         cache.getNewListFab().setOnClickListener(new AddOnClickListener(cache));
 
         overridePendingTransition(0, 0);
-    }
-
-    private void deleteInvisibleProductsFromDb()
-    {
-        List<String> allListIds = new ArrayList<>();
-        shoppingListService.getAllListDtos()
-                .doOnNext(dto -> allListIds.add(dto.getId()))
-                .doOnCompleted(() ->
-                        productService.deleteInvisibleProductsFromDb(allListIds).subscribe()
-                )
-                .subscribe();
     }
 
     @Override

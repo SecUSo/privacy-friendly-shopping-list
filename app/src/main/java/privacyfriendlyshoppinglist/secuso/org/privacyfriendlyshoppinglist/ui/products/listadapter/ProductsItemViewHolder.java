@@ -1,5 +1,6 @@
 package privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.products.listadapter;
 
+import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.content.res.Resources;
 import android.graphics.Paint;
@@ -17,10 +18,10 @@ import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framew
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.product.business.ProductService;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.product.business.domain.ProductDto;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.statistics.business.StatisticsService;
+import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.products.PhotoPreviewActivity;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.products.ProductActivityCache;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.products.ProductsActivity;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.products.dialog.EditDeleteProductDialog;
-import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.products.dialog.ImageViewerDialog;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.products.dialog.ProductDialogFragment;
 
 /**
@@ -71,11 +72,12 @@ public class ProductsItemViewHolder extends RecyclerView.ViewHolder
             @Override
             public void onClick(View v)
             {
-                if ( !ImageViewerDialog.isOpened() )
-                {
-                    DialogFragment imageViewerDialog = ImageViewerDialog.newViewOnlyInstance(dto);
-                    imageViewerDialog.show(productActivityCache.getActivity().getSupportFragmentManager(), "ProductViewer");
-                }
+                Intent viewPhotoIntent = new Intent(productActivityCache.getActivity(), PhotoPreviewActivity.class);
+                viewPhotoIntent.putExtra(ProductsActivity.PRODUCT_ID_KEY, dto.getId());
+                viewPhotoIntent.putExtra(ProductsActivity.PRODUCT_NAME, dto.getProductName());
+                viewPhotoIntent.putExtra(ProductsActivity.FROM_DIALOG, false);
+                ProductsActivity activity = (ProductsActivity) productActivityCache.getActivity();
+                activity.startActivityForResult(viewPhotoIntent, ProductsActivity.REQUEST_PHOTO_PREVIEW_FROM_ITEM);
             }
         });
 
