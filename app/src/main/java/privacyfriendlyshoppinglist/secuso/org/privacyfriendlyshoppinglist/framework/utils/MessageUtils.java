@@ -58,6 +58,7 @@ public class MessageUtils
     {
         if ( PreferenceManager.getDefaultSharedPreferences(activity.getApplicationContext()).getBoolean(keyWelcomeEnabled, true) )
         {
+            setPreferenceToFalse(keyWelcomeEnabled, activity);
             WelcomeDialog welcomeDialog = new WelcomeDialog();
             welcomeDialog.show(activity.getFragmentManager(), "WelcomeDialog");
         }
@@ -93,20 +94,10 @@ public class MessageUtils
 
         if ( PreferenceManager.getDefaultSharedPreferences(activity.getApplicationContext()).getBoolean(settingKey, true) )
         {
+            setPreferenceToFalse(settingKey, activity);
             AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(activity, dialogTheme);
             dialogBuilder.setView(tutorialLayoutResource);
             dialogBuilder.setPositiveButton(activity.getString(R.string.okay), null);
-            dialogBuilder.setNeutralButton(activity.getString(R.string.do_not_show_again), new DialogInterface.OnClickListener()
-            {
-                @Override
-                public void onClick(DialogInterface dialogInterface, int i)
-                {
-                    SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(activity);
-                    SharedPreferences.Editor editor = pref.edit();
-                    editor.putBoolean(settingKey, false);
-                    editor.commit();
-                }
-            });
             dialogBuilder.setNegativeButton(activity.getString(R.string.viewhelp), new DialogInterface.OnClickListener()
             {
                 @Override
@@ -118,6 +109,14 @@ public class MessageUtils
             });
             dialogBuilder.show();
         }
+    }
+
+    private static void setPreferenceToFalse(String preferenceKey, Activity activity)
+    {
+        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(activity);
+        SharedPreferences.Editor editor = sharedPref.edit();
+        editor.putBoolean(preferenceKey, false);
+        editor.commit();
     }
 
     public static void showAlertDialog(Context context, int titleResource, int messageResource, Observable action)

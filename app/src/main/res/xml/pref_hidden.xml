@@ -17,6 +17,9 @@
             android:key="pref_tutorial_delete"
             android:defaultValue="true">
     </Preference>
-
+    <Preference
+            android:key="pref_tutorial"
+            android:defaultValue="true">
+    </Preference>
 
 </PreferenceScreen>

@@ -19,16 +19,6 @@
                 android:defaultValue="true"/>
     </PreferenceCategory>
     <PreferenceCategory
-            android:title="@string/pref_header_tutorial">
-        <SwitchPreference
-                android:id="@+id/pref_tutorial"
-                android:key="pref_tutorial"
-                android:title="@string/pref_tutorial_title"
-                android:summaryOn="@string/pref_tutorial_summary_on"
-                android:summaryOff="@string/pref_tutorial_summary_off"
-                android:defaultValue="true"/>
-    </PreferenceCategory>
-    <PreferenceCategory
             android:title="@string/pref_header_notifications">
         <SwitchPreference
                 android:id="@+id/pref_notifications"
