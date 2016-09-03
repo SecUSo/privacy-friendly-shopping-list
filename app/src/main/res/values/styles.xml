@@ -13,7 +13,7 @@
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/middlegrey</item>
         <item name="colorPrimaryDark">@color/middlegrey</item>
-        <item name="colorAccent">@color/middlegrey</item>
+        <item name="colorAccent">@color/colorAccent</item>
     </style>
 
     <style name="AlertDialogColourful" parent="Theme.AppCompat.Light.Dialog.Alert">
@@ -25,7 +25,7 @@
     <style name="AlertDialogGrey" parent="Theme.AppCompat.Light.Dialog.Alert">
         <item name="colorPrimary">@color/middlegrey</item>
         <item name="colorPrimaryDark">@color/middlegrey</item>
-        <item name="colorAccent">@color/middlegrey</item>
+        <item name="colorAccent">@color/colorAccent</item>
     </style>
 
     <style name="AppTheme.NoActionBar">
