@@ -83,6 +83,7 @@ public class StatisticsActivity extends BaseActivity implements Observer
                         cache.getUnitsTextView().setText(unit);
                     }
 
+                    cache.setNumberScale(chartData[ 0 ].getNumberScale());
                     cache.getTotalTextView().setText(totalAmount);
                     cache.getTitleTextView().setText(chartData[ 0 ].getTitle());
                 })

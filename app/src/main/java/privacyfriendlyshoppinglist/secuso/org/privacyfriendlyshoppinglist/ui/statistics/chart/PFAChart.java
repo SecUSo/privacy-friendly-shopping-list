@@ -81,7 +81,7 @@ public class PFAChart
             dataSet = (BarDataSet) chart.getData().getDataSetByIndex(0);
             dataSet.setValues(yValues);
 
-            chart.getData().setValueFormatter(new PFAValueFormatter(context, valuesSelectedItemPos));
+            chart.getData().setValueFormatter(new PFAValueFormatter(context, valuesSelectedItemPos, cache.getNumberScale()));
 
             chart.getData().notifyDataChanged();
             chart.notifyDataSetChanged();
@@ -96,7 +96,7 @@ public class PFAChart
             dataSets.add(dataSet);
 
             BarData data = new BarData(dataSets);
-            data.setValueFormatter(new PFAValueFormatter(context, valuesSelectedItemPos));
+            data.setValueFormatter(new PFAValueFormatter(context, valuesSelectedItemPos, cache.getNumberScale()));
             data.setValueTextSize(10f);
             data.setBarWidth(0.9f);
             chart.setData(data);
@@ -112,7 +112,7 @@ public class PFAChart
         labelList.toArray(labels);
 
         PFAXAxisLabels xFormatter = new PFAXAxisLabels(labels);
-        chart.setMarkerView(new PFAMarkerView(context, xFormatter, valuesSelectedItemPos));
+        chart.setMarkerView(new PFAMarkerView(context, xFormatter, valuesSelectedItemPos, cache.getNumberScale()));
 
         XAxis xAxis = chart.getXAxis();
         xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
@@ -130,7 +130,7 @@ public class PFAChart
         leftAxis.setPosition(YAxis.YAxisLabelPosition.OUTSIDE_CHART);
         leftAxis.setSpaceTop(20f);
         leftAxis.setAxisMinValue(0f);
-        leftAxis.setValueFormatter(new PFAYAxisLabels(context, valuesSelectedItemPos));
+        leftAxis.setValueFormatter(new PFAYAxisLabels(context, valuesSelectedItemPos, cache.getNumberScale()));
 
         if ( valuesSelectedItemPos == StatisticsQuery.QUANTITY )
         {

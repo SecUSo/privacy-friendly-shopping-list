@@ -8,6 +8,7 @@ import android.widget.TextView;
 import com.github.mikephil.charting.charts.BarChart;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.R;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.settings.SettingsKeys;
+import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.statistics.chart.NumberScale;
 
 /**
  * Description:
@@ -29,6 +30,7 @@ public class StatisticsCache
     private String dateLanguage;
     private String numberFormat;
     private String currency;
+    private NumberScale numberScale;
 
     public StatisticsCache(AppCompatActivity activity)
     {
@@ -117,5 +119,15 @@ public class StatisticsCache
     public String getCurrency()
     {
         return currency;
+    }
+
+    public void setNumberScale(NumberScale numberScale)
+    {
+        this.numberScale = numberScale;
+    }
+
+    public NumberScale getNumberScale()
+    {
+        return numberScale;
     }
 }

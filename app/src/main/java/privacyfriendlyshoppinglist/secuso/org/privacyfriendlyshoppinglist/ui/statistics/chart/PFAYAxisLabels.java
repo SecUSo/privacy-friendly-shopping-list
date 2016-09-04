@@ -6,6 +6,7 @@ import android.preference.PreferenceManager;
 import com.github.mikephil.charting.components.AxisBase;
 import com.github.mikephil.charting.formatter.AxisValueFormatter;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.R;
+import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.utils.StringUtils;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.statistics.business.domain.StatisticsQuery;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.settings.SettingsKeys;
 
@@ -21,9 +22,13 @@ public class PFAYAxisLabels implements AxisValueFormatter
     private static final String SPACE = " ";
     private String unit;
     private DecimalFormat format;
+    private Context context;
+    private NumberScale numberScale;
 
-    public PFAYAxisLabels(Context context, int valuesSelectedItemPos)
+    public PFAYAxisLabels(Context context, int valuesSelectedItemPos, NumberScale numberScale)
     {
+        this.numberScale = numberScale;
+        this.context = context;
         String numberFormat;
         if ( valuesSelectedItemPos == StatisticsQuery.PRICE )
         {
@@ -43,7 +48,13 @@ public class PFAYAxisLabels implements AxisValueFormatter
     @Override
     public String getFormattedValue(float value, AxisBase axis)
     {
-        return format.format(value) + SPACE + unit;
+        String numberSuffix = StringUtils.EMPTY;
+        if ( numberScale != null && value > numberScale.getValue(context) )
+        {
+            value /= numberScale.getValue(context);
+            numberSuffix = numberScale.getAbbreviation(context) + StringUtils.SPACE;
+        }
+        return format.format(value) + SPACE + numberSuffix + unit;
     }
 
     @Override

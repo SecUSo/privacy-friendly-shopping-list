@@ -1,0 +1,35 @@
+package privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.statistics.chart;
+
+import android.content.Context;
+import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.R;
+
+/**
+ * Description:
+ * Author: Grebiel Jose Ifill Brito
+ * Created: 04.09.16 creation date
+ */
+public enum NumberScale
+{
+    KILO(R.string.kilo_abbreviation, R.string.kilo_value),
+    MILLION(R.string.million_abbreviation, R.string.million_value),
+    BILLION(R.string.billion_abbreviation, R.string.billion_value);
+
+    private int abbreviation;
+    private int value;
+
+    NumberScale(int abbreviation, int value)
+    {
+        this.abbreviation = abbreviation;
+        this.value = value;
+    }
+
+    public String getAbbreviation(Context context)
+    {
+        return context.getResources().getString(this.abbreviation);
+    }
+
+    public int getValue(Context context)
+    {
+        return Integer.parseInt(context.getResources().getString(this.value));
+    }
+}

@@ -10,6 +10,7 @@ import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.formatter.AxisValueFormatter;
 import com.github.mikephil.charting.highlight.Highlight;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.R;
+import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.utils.StringUtils;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.statistics.business.domain.StatisticsQuery;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.settings.SettingsKeys;
 
@@ -19,13 +20,14 @@ class PFAMarkerView extends MarkerView
 {
     private static final String SEPARATION = " - ";
     private static final String SPACE = " ";
+    private NumberScale numberScale;
     private TextView markup;
     private AxisValueFormatter xValueFormatter;
     private DecimalFormat format;
     private Context context;
     private String unit;
 
-    PFAMarkerView(Context context, AxisValueFormatter xValueFormatter, int valuesSelectedItemPos)
+    PFAMarkerView(Context context, AxisValueFormatter xValueFormatter, int valuesSelectedItemPos, NumberScale numberScale)
     {
         super(context, R.layout.statistics_marker_view);
 
@@ -47,16 +49,25 @@ class PFAMarkerView extends MarkerView
             this.unit = context.getResources().getString(R.string.statistics_quantity_unit);
         }
 
-        format = new DecimalFormat(numberFormat);
+        this.context = context;
+        this.numberScale = numberScale;
+        this.format = new DecimalFormat(numberFormat);
     }
 
     @Override
     public void refreshContent(Entry e, Highlight highlight)
     {
+        float value = e.getY();
+        String numberSuffix = StringUtils.EMPTY;
+        if ( numberScale != null && value > numberScale.getValue(context) )
+        {
+            value /= numberScale.getValue(context);
+            numberSuffix = numberScale.getAbbreviation(context) + StringUtils.SPACE;
+        }
         String markupText =
                 xValueFormatter.getFormattedValue(e.getX(), null) +
                         SEPARATION +
-                        format.format(e.getY()) + SPACE +
+                        format.format(value) + SPACE + numberSuffix +
                         unit;
         markup.setText(markupText);
     }

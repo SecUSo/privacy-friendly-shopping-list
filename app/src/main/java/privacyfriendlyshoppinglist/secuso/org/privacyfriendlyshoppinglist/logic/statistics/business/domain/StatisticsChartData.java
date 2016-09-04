@@ -1,5 +1,7 @@
 package privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.statistics.business.domain;
 
+import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.statistics.chart.NumberScale;
+
 import java.util.List;
 
 /**
@@ -16,6 +18,8 @@ public class StatisticsChartData
     private Double total;
 
     private String title;
+
+    private NumberScale numberScale;
 
     public List<Double> getData()
     {
@@ -55,5 +59,15 @@ public class StatisticsChartData
     public void setTitle(String title)
     {
         this.title = title;
+    }
+
+    public NumberScale getNumberScale()
+    {
+        return numberScale;
+    }
+
+    public void setNumberScale(NumberScale numberScale)
+    {
+        this.numberScale = numberScale;
     }
 }

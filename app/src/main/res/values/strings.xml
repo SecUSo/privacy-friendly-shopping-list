@@ -103,6 +103,12 @@
     <string name="statistics_group_by">Group by:</string>
     <string name="statistics_y_values">Values:</string>
     <string name="statistics_quantity_unit">Units</string>
+    <string name="kilo_abbreviation" translatable="false">K.</string>
+    <string name="million_abbreviation" translatable="false">M.</string>
+    <string name="billion_abbreviation" translatable="false">B.</string>
+    <string name="kilo_value" translatable="false">1000</string>
+    <string name="million_value" translatable="false">1000</string>
+    <string name="billion_value">1000000000</string>
 
     <!-- ### SORT ### -->
     <string name="sort_options">Sort Options</string>

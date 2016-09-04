@@ -13,6 +13,7 @@ import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.statistics.business.impl.converter.StatisticsConverterService;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.statistics.persistence.StatisticsDao;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.statistics.persistence.entity.StatisticEntryEntity;
+import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.statistics.chart.NumberScale;
 import rx.Observable;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
@@ -198,7 +199,43 @@ public class StatisticsServiceImpl implements StatisticsService
                 .toBlocking().single();
 
         StatisticsChartData chartData = getStatisticsChartData(groupBy, valuesIndex, filteredEntities);
+
+        double maxColumnValue = getMaxColumnValue(chartData);
+        chartData.setNumberScale(getNumberScale(maxColumnValue));
+
         return chartData;
+    }
+
+    private NumberScale getNumberScale(double maxColumnValue)
+    {
+        NumberScale numberScale = null;
+        if ( maxColumnValue > NumberScale.BILLION.getValue(context) )
+        {
+            numberScale = NumberScale.BILLION;
+        }
+        else if ( maxColumnValue > NumberScale.MILLION.getValue(context) )
+        {
+            numberScale = NumberScale.MILLION;
+        }
+        else if ( maxColumnValue > NumberScale.KILO.getValue(context) )
+        {
+            numberScale = NumberScale.KILO;
+        }
+        return numberScale;
+    }
+
+    private double getMaxColumnValue(StatisticsChartData chartData)
+    {
+        List<Double> numberData = chartData.getData();
+        Double max = Double.MIN_VALUE;
+        for ( Double number : numberData )
+        {
+            if ( number > max )
+            {
+                max = number;
+            }
+        }
+        return max;
     }
 
     private void setAxisNames(int groupBy, int valuesIndex)
