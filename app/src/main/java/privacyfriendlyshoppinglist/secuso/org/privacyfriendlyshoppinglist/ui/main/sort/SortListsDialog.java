@@ -60,8 +60,7 @@ public class SortListsDialog extends DialogFragment
         View rootView = i.inflate(R.layout.sort_lists_dialog, null);
 
         SortListsDialogCache cache = new SortListsDialogCache(rootView);
-        cache.getAscending().setChecked(true);
-        cache.getName().setChecked(true);
+        setupPreviosOptions(cache);
 
         builder.setView(rootView);
         builder.setTitle(getActivity().getString(R.string.sort_options));
@@ -104,5 +103,22 @@ public class SortListsDialog extends DialogFragment
         });
 
         return builder.create();
+    }
+
+    private void setupPreviosOptions(SortListsDialogCache cache)
+    {
+        boolean prevAscending = PreferenceManager.getDefaultSharedPreferences(activity).getBoolean(SettingsKeys.LIST_SORT_ASCENDING, true);
+        cache.getAscending().setChecked(prevAscending);
+        cache.getDescending().setChecked(!prevAscending);
+
+        String prevCriteria = PreferenceManager.getDefaultSharedPreferences(activity).getString(SettingsKeys.LIST_SORT_BY, PFAComparators.SORT_BY_NAME);
+        switch ( prevCriteria )
+        {
+            case PFAComparators.SORT_BY_PRIORITY:
+                cache.getPriority().setChecked(true);
+                break;
+            default:
+                cache.getName().setChecked(true);
+        }
     }
 }

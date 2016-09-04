@@ -15,6 +15,7 @@ import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framew
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.product.business.ProductService;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.product.business.domain.ProductDto;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.shoppingList.business.ShoppingListService;
+import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.shoppingList.business.domain.ListDto;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.products.ProductsActivity;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.products.listeners.CancelSearchOnClick;
 
@@ -58,13 +59,16 @@ public class SortProductsDialog extends DialogFragment
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState)
     {
+        AbstractInstanceFactory instanceFactory = new InstanceFactory(activity.getApplicationContext());
+        ShoppingListService shoppingListService = (ShoppingListService) instanceFactory.createInstance(ShoppingListService.class);
+
         LayoutInflater i = getActivity().getLayoutInflater();
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         View rootView = i.inflate(R.layout.sort_products_dialog, null);
 
         SortProductsDialogCache cache = new SortProductsDialogCache(rootView);
-        cache.getAscending().setChecked(true);
-        cache.getName().setChecked(true);
+        final ListDto[] dtoAddress = {new ListDto()};
+        setupPreviosOptions(shoppingListService, cache, dtoAddress);
 
         builder.setView(rootView);
         builder.setTitle(getActivity().getString(R.string.sort_options));
@@ -128,5 +132,36 @@ public class SortProductsDialog extends DialogFragment
         });
 
         return builder.create();
+    }
+
+    private void setupPreviosOptions(ShoppingListService shoppingListService, SortProductsDialogCache cache, ListDto[] dtoAddress)
+    {
+        shoppingListService.getById(listId)
+                .doOnNext(result -> dtoAddress[ 0 ] = result)
+                .doOnCompleted(() ->
+                        {
+                            ListDto dto = dtoAddress[ 0 ];
+                            cache.getAscending().setChecked(dto.isSortAscending());
+                            cache.getDescending().setChecked(!dto.isSortAscending());
+                            String sortCriteria = dto.getSortCriteria();
+                            switch ( sortCriteria )
+                            {
+                                case PFAComparators.SORT_BY_QUANTITY:
+                                    cache.getQuantity().setChecked(true);
+                                    break;
+                                case PFAComparators.SORT_BY_STORE:
+                                    cache.getStore().setChecked(true);
+                                    break;
+                                case PFAComparators.SORT_BY_PRICE:
+                                    cache.getPrice().setChecked(true);
+                                    break;
+                                case PFAComparators.SORT_BY_CATEGORY:
+                                    cache.getCategory().setChecked(true);
+                                    break;
+                                default:
+                                    cache.getName().setChecked(true);
+                            }
+                        }
+                ).subscribe();
     }
 }
