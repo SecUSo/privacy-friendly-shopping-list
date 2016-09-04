@@ -14,11 +14,11 @@ public abstract class StringUtils
     public static final String EMPTY = "";
     public static final String NEW_LINE = "\n";
     public static final String SPACE = " ";
-    public static final String COMMA = ",";
     public static final String DETAIL_SEPARATOR = ": ";
     public static final String DASH = "- ";
     public static final String LEFT_BRACE = "[ ";
     public static final String RIGHT_BRACE = " ] ";
+    public static final double PARSE_ERROR = -1.0;
 
     public static boolean isEmpty(String string)
     {
@@ -51,16 +51,7 @@ public abstract class StringUtils
 
         catch ( ParseException e )
         {
-            try
-            {
-                Number parse = df.parse(numberAsString.replace(".", ","));
-                return parse.doubleValue();
-            }
-
-            catch ( ParseException e1 )
-            {
-                return 0.0;
-            }
+            return PARSE_ERROR;
         }
     }
 
@@ -86,7 +77,7 @@ public abstract class StringUtils
                 }
                 catch ( Exception e3 )
                 {
-                    stringAsDouble = 0.0;
+                    stringAsDouble = PARSE_ERROR;
                 }
             }
         }

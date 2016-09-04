@@ -33,11 +33,13 @@ public class ProductDialogCache
     private ImageView productImage;
     private TextView titleTextView;
     private TextInputLayout productNameInputLayout;
+    private TextInputLayout productPriceInputLayout;
 
     public ProductDialogCache(View rootview)
     {
         productName = (AutoCompleteTextView) rootview.findViewById(R.id.product_name);
         productNameInputLayout = (TextInputLayout) rootview.findViewById(R.id.product_name_input_layout);
+        productPriceInputLayout = (TextInputLayout) rootview.findViewById(R.id.product_price_input_layout);
         quantity = (TextInputEditText) rootview.findViewById(R.id.quantity);
         price = (TextInputEditText) rootview.findViewById(R.id.product_price);
         customStore = (AutoCompleteTextView) rootview.findViewById(R.id.store_input);
@@ -136,5 +138,10 @@ public class ProductDialogCache
     public TextInputLayout getProductNameInputLayout()
     {
         return productNameInputLayout;
+    }
+
+    public TextInputLayout getProductPriceInputLayout()
+    {
+        return productPriceInputLayout;
     }
 }

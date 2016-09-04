@@ -2,7 +2,7 @@
 <LinearLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/layout_total"
-        android:visibility="gone"
+
         android:animateLayoutChanges="true"
         android:orientation="horizontal"
         android:background="@color/colorPrimaryDark"
@@ -47,7 +47,7 @@
             android:text="@string/ph_total_amount"
             android:textColor="@color/white"
             android:paddingLeft="@dimen/total_padding"
-            android:paddingRight="@dimen/total_padding"
+            android:paddingRight="@dimen/text_space_padding"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:textStyle="bold"/>
@@ -58,7 +58,6 @@
             android:textColor="@color/white"
             android:textStyle="bold"
             android:gravity="left"
-            android:padding="@dimen/statistics_padding"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
 </LinearLayout>

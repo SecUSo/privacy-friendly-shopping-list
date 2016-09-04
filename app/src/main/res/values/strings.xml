@@ -15,7 +15,6 @@
     <string name="number_format_0_decimals">"###,###,###,##0"</string>
     <string name="number_format_1_decimal">"###,###,###,##0.0"</string>
     <string name="number_format_2_decimals">"###,###,###,##0.00"</string>
-    <string name="number_decimal_separator">.</string>
     <string name="currency">$</string>
 
     <!-- ### TUTORIAL ### -->
@@ -82,6 +81,8 @@
     <!-- ### PRODUCTS ### -->
     <string name="new_product">New Product</string>
     <string name="product_already_exists">Product already exists in this list!</string>
+    <string name="price_number_too_big">Number too big!</string>
+    <string name="number_format_invalid">Invalid: #,###,##0.00</string>
     <string name="product_list_empty">(App Logo)\nThis list does not contain any products</string>
     <string name="total_amount">Total:</string>
     <string name="total_amount_separator">/</string>
@@ -103,11 +104,13 @@
     <string name="statistics_group_by">Group by:</string>
     <string name="statistics_y_values">Values:</string>
     <string name="statistics_quantity_unit">Units</string>
+    <string name="no_scale_abbreviation" translatable="false"></string>
     <string name="kilo_abbreviation" translatable="false">K.</string>
     <string name="million_abbreviation" translatable="false">M.</string>
     <string name="billion_abbreviation" translatable="false">B.</string>
+    <string name="no_scale_value" translatable="false">1</string>
     <string name="kilo_value" translatable="false">1000</string>
-    <string name="million_value" translatable="false">1000</string>
+    <string name="million_value" translatable="false">1000000</string>
     <string name="billion_value">1000000000</string>
 
     <!-- ### SORT ### -->

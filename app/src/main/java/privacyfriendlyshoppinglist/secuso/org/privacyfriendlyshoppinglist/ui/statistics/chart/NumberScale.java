@@ -10,6 +10,7 @@ import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.R;
  */
 public enum NumberScale
 {
+    NO_SCALE(R.string.no_scale_abbreviation, R.string.no_scale_value),
     KILO(R.string.kilo_abbreviation, R.string.kilo_value),
     MILLION(R.string.million_abbreviation, R.string.million_value),
     BILLION(R.string.billion_abbreviation, R.string.billion_value);

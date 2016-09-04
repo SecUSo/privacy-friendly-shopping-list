@@ -23,9 +23,9 @@
 
         <android.support.design.widget.TextInputLayout
                 app:errorTextAppearance="@style/error_appearance"
+                app:errorEnabled="true"
                 app:counterEnabled="true"
                 app:counterMaxLength="40"
-                app:errorEnabled="true"
                 android:id="@+id/product_name_input_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" android:layout_toStartOf="@+id/product_checkbox">
@@ -86,15 +86,16 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
                 <android.support.design.widget.TextInputEditText
-                    android:id="@+id/quantity"
-                    android:inputType="number"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:selectAllOnFocus="true"
-                    android:gravity="center"
-                    android:maxLength="3"
-                    android:imeOptions="actionNext"
-                    android:hint="@string/quantity_text">
+                        android:id="@+id/quantity"
+                        android:inputType="number"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:selectAllOnFocus="true"
+                        android:maxLines="1"
+                        android:gravity="center"
+                        android:maxLength="3"
+                        android:imeOptions="actionNext"
+                        android:hint="@string/quantity_text">
                 </android.support.design.widget.TextInputEditText>
             </android.support.design.widget.TextInputLayout>
         </LinearLayout>
@@ -106,16 +107,21 @@
                 android:orientation="horizontal">
 
             <android.support.design.widget.TextInputLayout
+                    app:errorTextAppearance="@style/error_appearance"
+                    app:errorEnabled="true"
+                    android:id="@+id/product_price_input_layout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
                 <android.support.design.widget.TextInputEditText
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/product_price"
-                    android:gravity="center"
-                    android:inputType="numberDecimal"
-                    android:selectAllOnFocus="true"
-                    android:hint="@string/price_text"/>
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/product_price"
+                        android:gravity="center"
+                        android:maxLines="1"
+                        android:inputType="numberDecimal"
+                        android:digits="0123456789.,"
+                        android:selectAllOnFocus="true"
+                        android:hint="@string/price_text"/>
             </android.support.design.widget.TextInputLayout>
 
         </LinearLayout>
@@ -125,6 +131,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
+            android:layout_marginTop="@dimen/negative_margin_big"
             android:paddingBottom="@dimen/dialog_padding_vertical"
             android:paddingRight="@dimen/dialog_padding_horizontal"
             android:paddingLeft="@dimen/dialog_padding_horizontal">

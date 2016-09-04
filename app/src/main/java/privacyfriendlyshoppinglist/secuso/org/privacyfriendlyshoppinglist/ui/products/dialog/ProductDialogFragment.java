@@ -14,7 +14,6 @@ import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.content.ContextCompat;
 import android.text.Editable;
-import android.text.InputFilter;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -29,12 +28,12 @@ import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framew
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.product.business.ProductService;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.product.business.domain.AutoCompleteLists;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.product.business.domain.ProductDto;
+import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.statistics.business.StatisticsService;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.camera.CameraActivity;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.products.PhotoPreviewActivity;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.products.ProductActivityCache;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.products.ProductsActivity;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.products.dialog.listeners.onFocusListener.ProductDialogFocusListener;
-import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.products.dialog.listeners.price.PriceInputFilter;
 import rx.Observable;
 
 import java.io.File;
@@ -51,6 +50,7 @@ public class ProductDialogFragment extends DialogFragment
     private static final int REQUEST_IMAGE_CAPTURE = 1;
     private static final int MY_PERMISSIONS_REQUEST_USE_CAMERA = 2;
     private static final int REQUEST_PHOTO_PREVIEW_FROM_DIALOG = 3;
+    private static final double MAX_PRICE_ALLOWED = 999999999999.999999999999;
 
     private static boolean opened;
     private static boolean editDialog;
@@ -62,6 +62,7 @@ public class ProductDialogFragment extends DialogFragment
     private ProductActivityCache cache;
 
     private ProductService productService;
+    private StatisticsService statisticsService;
 
     public static ProductDialogFragment newEditDialogInstance(ProductDto dto, ProductActivityCache cache)
     {
@@ -130,7 +131,8 @@ public class ProductDialogFragment extends DialogFragment
     public Dialog onCreateDialog(Bundle savedInstanceState)
     {
         AbstractInstanceFactory instanceFactory = new InstanceFactory(cache.getActivity().getApplicationContext());
-        productService = (ProductService) instanceFactory.createInstance(ProductService.class);
+        this.productService = (ProductService) instanceFactory.createInstance(ProductService.class);
+        this.statisticsService = (StatisticsService) instanceFactory.createInstance(StatisticsService.class);
 
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         LayoutInflater inflater = (LayoutInflater) getActivity().getSystemService(getActivity().LAYOUT_INFLATER_SERVICE);
@@ -249,8 +251,6 @@ public class ProductDialogFragment extends DialogFragment
 
         });
 
-        dialogCache.getPrice().setFilters(new InputFilter[]{new PriceInputFilter(dialogCache)});
-
 
         dialogCache.getProductNotes().setOnFocusChangeListener(new ProductDialogFocusListener(dialogCache));
         dialogCache.getProductName().setOnFocusChangeListener(new ProductDialogFocusListener(dialogCache));
@@ -322,6 +322,10 @@ public class ProductDialogFragment extends DialogFragment
                 {
                     saveConfirmed = true;
                     saveUserInput(productName);
+                    if ( dto.isChecked() && cache.getStatisticsEnabled() )
+                    {
+                        statisticsService.saveRecord(dto).subscribe();
+                    }
                     productService.saveOrUpdate(dto, cache.getListId())
                             .doOnCompleted(() ->
                             {
@@ -365,6 +369,46 @@ public class ProductDialogFragment extends DialogFragment
                 {
                     dialog.getButton(Dialog.BUTTON_POSITIVE).setEnabled(true);
                     dialogCache.getProductNameInputLayout().setError(null);
+                }
+            }
+        });
+
+        String format2Decimals = getResources().getString(R.string.number_format_2_decimals);
+        String format1Decimal = getResources().getString(R.string.number_format_1_decimal);
+        String format0Decimals = getResources().getString(R.string.number_format_0_decimals);
+        dialogCache.getProductPriceInputLayout().setError(null);
+        dialogCache.getPrice().addTextChangedListener(new TextWatcher()
+        {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after)
+            {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count)
+            {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s)
+            {
+                Double number = StringUtils.getStringAsDouble(s.toString(), format2Decimals, format1Decimal, format0Decimals);
+                if ( number > MAX_PRICE_ALLOWED )
+                {
+                    dialog.getButton(Dialog.BUTTON_POSITIVE).setEnabled(false);
+                    dialogCache.getProductPriceInputLayout().setError(getContext().getString(R.string.price_number_too_big));
+                }
+                else if ( number == StringUtils.PARSE_ERROR && !s.toString().equals(StringUtils.EMPTY) )
+                {
+                    dialog.getButton(Dialog.BUTTON_POSITIVE).setEnabled(false);
+                    dialogCache.getProductPriceInputLayout().setError(getContext().getString(R.string.number_format_invalid));
+                }
+                else
+                {
+                    dialog.getButton(Dialog.BUTTON_POSITIVE).setEnabled(true);
+                    dialogCache.getProductPriceInputLayout().setError(null);
                 }
             }
         });

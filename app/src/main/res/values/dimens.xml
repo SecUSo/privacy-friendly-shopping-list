@@ -5,6 +5,10 @@
 
     <dimen name="text_medium">16dp</dimen>
     <dimen name="text_small">12dp</dimen>
+    <dimen name="text_space_padding">4dp</dimen>
+    <dimen name="negative_margin_big">-25dp</dimen>
+    <dimen name="negative_margin_normal">-10dp</dimen>
+    <dimen name="negative_margin_small">-5dp</dimen>
 
     <!-- Statistics -->
     <dimen name="statistics_padding">12dp</dimen>
