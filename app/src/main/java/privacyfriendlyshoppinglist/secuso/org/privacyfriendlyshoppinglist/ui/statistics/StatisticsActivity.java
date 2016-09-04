@@ -69,6 +69,7 @@ public class StatisticsActivity extends BaseActivity implements Observer
                 .doOnNext(result -> chartData[ 0 ] = result)
                 .doOnCompleted(() ->
                 {
+                    cache.setNumberScale(chartData[ 0 ].getNumberScale());
                     updateChartVisibility(chartData[ 0 ]);
 
                     chart.updateChart(chartData[ 0 ].getData(), chartData[ 0 ].getLabels(), middleblue);
@@ -83,7 +84,6 @@ public class StatisticsActivity extends BaseActivity implements Observer
                         cache.getUnitsTextView().setText(unit);
                     }
 
-                    cache.setNumberScale(chartData[ 0 ].getNumberScale());
                     cache.getTotalTextView().setText(totalAmount);
                     cache.getTitleTextView().setText(chartData[ 0 ].getTitle());
                 })
