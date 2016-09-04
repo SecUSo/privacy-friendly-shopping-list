@@ -12,6 +12,7 @@
 
     <!-- Statistics -->
     <dimen name="statistics_padding">12dp</dimen>
+    <dimen name="statistics_padding_small">4dp</dimen>
 
     <!-- Lists -->
     <dimen name="list_margin">16dp</dimen>

@@ -11,7 +11,9 @@
             android:layout_weight="0.5"
             android:textColor="@color/white"
             android:textStyle="bold"
-            android:padding="@dimen/statistics_padding"
+            android:paddingTop="@dimen/statistics_padding"
+            android:paddingBottom="@dimen/statistics_padding"
+            android:paddingLeft="@dimen/statistics_padding_small"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
     <TextView

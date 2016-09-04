@@ -17,7 +17,9 @@
         <TextView
                 android:text="@string/statistics_range"
                 android:layout_weight="0.5"
-                android:padding="@dimen/statistics_padding"
+                android:paddingTop="@dimen/statistics_padding"
+                android:paddingBottom="@dimen/statistics_padding"
+                android:paddingLeft="@dimen/statistics_padding_small"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
         <TextView
@@ -49,7 +51,9 @@
         <TextView
                 android:text="@string/statistics_group_by"
                 android:layout_weight="0.25"
-                android:padding="@dimen/statistics_padding"
+                android:paddingTop="@dimen/statistics_padding"
+                android:paddingBottom="@dimen/statistics_padding"
+                android:paddingLeft="@dimen/statistics_padding_small"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
         <Spinner
@@ -63,7 +67,9 @@
         <TextView
                 android:text="@string/statistics_y_values"
                 android:layout_weight="0.25"
-                android:padding="@dimen/statistics_padding"
+                android:paddingTop="@dimen/statistics_padding"
+                android:paddingBottom="@dimen/statistics_padding"
+                android:paddingLeft="@dimen/statistics_padding_small"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
         <Spinner
