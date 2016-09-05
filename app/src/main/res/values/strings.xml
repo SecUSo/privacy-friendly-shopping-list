@@ -12,9 +12,9 @@
     <string name="date_day_stats_pattern">MM/dd/yy</string>
     <string name="date_month_pattern">MMM yy</string>
     <string name="time_pattern">HH:mm</string>
-    <string name="number_format_0_decimals">"###,###,###,##0"</string>
-    <string name="number_format_1_decimal">"###,###,###,##0.0"</string>
-    <string name="number_format_2_decimals">"###,###,###,##0.00"</string>
+    <string name="number_format_0_decimals" translatable="false">"###,###,###,##0"</string>
+    <string name="number_format_1_decimal" translatable="false">"###,###,###,##0.0"</string>
+    <string name="number_format_2_decimals" translatable="false">"###,###,###,##0.00"</string>
     <string name="currency">$</string>
 
     <!-- ### TUTORIAL ### -->
@@ -225,56 +225,122 @@
     <!--### HELP ###-->
     <string name="help">Help</string>
     <string name="help_overview_heading">Overview</string>
-    <string name="help_settings_heading">Settings</string>
-    <string name="help_customize">Customizing Settings</string>
-    <string name="help_customize_summary">In the settings section of the menu you can set default behaviour for the
-        statistics and notifications.
-        Initially both are turned off. By switching the corresponding button you can choose to turn statistics and
-        notifications on / off per default.
+    <string name="help_intro1">Welcome to the help page of Privacy Friendly Shopping List. This App allows you not only
+        creating lists and addding products to it, but also set priority, deadlines,
+        reminders and add notes to your lists. You can also keep track of checked items and visualize the total spent
+        amount or total number of units purchased in a diagram.
     </string>
-    <string name="help_category_general_features">General Features</string>
-    <string name="help_category_reminder">Reminder</string>
-    <string name="help_category_statistics">Statistics</string>
+    <string name="help_intro2">A shopping contains products. Besides product name, quantity and price, you can add a
+        category, the store where the item is to be purchased, some notes and a photo by using the camera of your
+        device.
+    </string>
+
+    <string name="help_how_tos_lists">How To\'s</string>
+    <string name="help_how_to_create_a_list">Create a List</string>
+    <string name="help_how_to_create_a_list_summary">To create a list go to the main menu and press the plus (+) button.
+        Then fill the fields shown in the dialog and press OKAY. There are no mandatory fields. A default name will be
+        used
+        if the field \"name\" is empty. If priority \"High\" is selected, then you will see an icon (!) on the right
+        side
+        of the card.
+    </string>
+
+    <string name="help_how_to_create_a_product">Add a Product</string>
+    <string name="help_how_to_create_a_product_summary">Once you have created a list, you will jump automatically inside
+        of the new list. To add a product to this list press the plus (+) button. Then fill the fields shown in the
+        dialog and press OKAY. There field \"Product Name\" is mandatory.
+    </string>
+
+    <string name="help_how_to_edit_a_list">Edit, Delete or Remove</string>
+    <string name="help_how_to_edit_a_list_summary">To edit, delete, or remove a list or a product you must click the
+        item and hold on pressing it until you see a dialog where the mentioned options are shown.
+        Then you can select the option you would like to perform. Notice that the delete operation will not delete any
+        data saved in the statistics.
+    </string>
+
+    <string name="help_how_to_enable_statistics">Enable Statistics</string>
+    <string name="help_how_to_enable_statistics_summary">Once you are in the list dialog (See \"Create a List\"),
+        you can enable the statistics by using the switch button next the to icon with three bars. After this option
+        have been switched on, items are going to be registered in the statistics as soon as the items are checked.
+        Notice that if you checked the product multiple times, then the product will also be registered multiple times
+        in the statistics. This allows you to reuse the same shopping list over and over and being able to keep track
+        of your purchases.
+    </string>
+
+    <string name="help_how_to_setup_deadline">Setup a Deadline</string>
+    <string name="help_how_to_setup_deadline_summary">Once you are in the list dialog (See \"Create a List\"),
+        you can set a deadline to the list by clicking the checkbox (\"Deadline\") and adding a date and a time. If the
+        deadline has passed and there are still unchecked items in the list, then the vertical bar on the left side of
+        the
+        list item will turn red. If all items are checked, then the bar is grey. The default color of this bar is blue.
+        If
+        a deadline is set you will see the date and the time in the card as well.
+    </string>
+
+    <string name="help_how_to_setup_reminder">Setup a Reminder</string>
+    <string name="help_how_to_setup_reminder_summary">If you have setup a deadline (See \"Setup a Deadline\"), then
+        you will see the option to setup a reminder. Switch the reminder option on and select how many minutes hours,
+        days or weeks before you want the app to remind you about this list. The reminder appears as a notifications and
+        uses the notification default sound of your device. If the reminder has already been triggered, then the
+        vertical
+        bar on the left side of the list item will turn yellow. If a reminder is set then you will see an alarm icon
+        next to the deadline. This icon will be red if the notifications have been disabled in settings.
+    </string>
+
+    <string name="help_how_to_sort_lists">Sort Items</string>
+    <string name="help_how_to_sort_lists_summary">To sort items use the icon with the three horizontal lines located in
+        the action bar. After clicking in this icon you will see two groups of options. You can select whether the items
+        should be sorted ascending or descending and the parameter that should be used to sort the items.
+    </string>
+
+    <string name="help_how_to_delete_multiple_items">Delete Multiple Items</string>
+    <string name="help_how_to_delete_multiple_items_summary">To delete multiple items use the trashcan icon located in
+        the action bar. After clicking in this icon you will have a view where you can select all the items that should
+        be deleted. Once you are done selecting the items, press the trashcan icon located at bottom and confirm the
+        action.
+        The items will now be successfully deleted. Notice that the delete operation will not delete any data saved in
+        the statistics.
+    </string>
+
+    <string name="help_how_to_search_products">Search Products in List</string>
+    <string name="help_how_to_search_products_summary">To search for products in a list use the magnifier glass icon
+        located in the action bar of the current list. After clicking in this icon you will see a field, where you can
+        type the words you are looking for. As you type, the product list will be filtered, showing only the products
+        that
+        match the search. You can manipulate the filtered products as before.
+    </string>
+
+    <string name="help_how_to_save_picture">Take Picture</string>
+    <string name="help_how_to_save_picture_summary">You can use the device\'s camera to take a picture of a certain
+        product and save it. This option is located in the add product dialog (See \"Add a Product\"), or in the edit
+        product dialog (See \"Edit, Delete or Remove\"). Once you are there, click on the arrow to see more options.
+        You will see a blue camera icon that will allow you using the camera of your device to take and save a picture
+        of a product. Please notice that this image can only be accessed by the Privacy Friendly Shopping List App.
+        There is no possibility to share this image.
+    </string>
+
+    <string name="help_settings_heading">Settings</string>
+    <string name="help_settings_summary">In the settings page you can customize some options to make the app more
+        comfortable for you. You can choose for example whether the checkbox to check products should be on the left or
+        on the right, whether the notifications should be on/off, and some other options. Visit the settings section to
+        find out more!
+    </string>
+
+
     <string name="help_privacy_heading">Privacy Info</string>
-    <string name="help_permissionXY_heading">Permission for camera access</string>
-    <string name="help_permissionXY_description">This permission is needed in order to be able to take a picture and add
-        it
-        to a product. If this permission is denied, this feature cannot be used. Denying this permission will not
-        affect any of the other features.
+    <string name="help_camera_permission_heading">Permission for camera access</string>
+    <string name="help_camera_permission_description">This permission is needed in order to be able to take a picture
+        and add it to a product. If this permission is denied, this feature cannot be used. Denying this permission
+        will not affect any of the other features.
     </string>
     <string name="help_permissions_heading">Permissions</string>
     <string name="help_permissions_description">Other permissions are not required.</string>
-    <string name="help_intro_long_general">
-        You can create, delete, remove and sort lists. Inside a list you are able to add, edit, remove and sort items
-        as well. The items in a list can be marked as \"bought\" by using a checkbox. As soon as an item is checked, it
-        goes to the end of the list. If the statistics are enabled for the current list, then the relevant information
-        will be save in the statistics every time an item is checked.
-    </string>
-    <string name="help_intro_reminder">
-        Reminders are showed through notifications. In order to see them, you need to enable the notifications in the
-        settings section.
-    </string>
-    <string name="help_intro_statistics">
-        The statistics section shows a summary of the purchased items. The diagram can be filtered by a date range. You
-        can select whether you want to group the results by month, week, day, category, store or product name.
-        Additionally,
-        you can select whether total amount (price) or quantity (units) should be shown.
-    </string>
-    <string name="help_intro">Welcome to the help page of Privacy Friendly Shopping List. This app allows you to manage
-        your shopping lists. Besides giving each list a name you can set a priority, deadline, reminder
-        and add notes to each of them. Additionally, you can decide whether a list should keep track of its checked
-        items in order summarize them in the statistics section.\n\n
-        A shopping list contains products. You can setup quantity, price, store, and category for each of them.
-        Furthermore,
-        you can write notes and use the camera to add an image.
-    </string>
-
     <!-- Product Dialog -->
 
     <string name="product_name">Product Name</string>
     <string name="product_name_new">New Product</string>
     <string name="product_name_edit">Edit Product</string>
-    <string name="quantity">0</string>
+    <string name="quantity" translatable="false">0</string>
     <string name="price">0.00</string>
     <string name="alert_missing_product_name">Please provide a product name!</string>
     <string name="product_dialog_title">Title</string>

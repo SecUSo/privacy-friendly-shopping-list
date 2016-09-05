@@ -6,33 +6,95 @@
                 android:selectable="false"
                 android:persistent="false"
                 android:title=""
-                android:summary="@string/help_intro"/>
+                android:summary="@string/help_intro1"/>
         <Preference
-                android:title="@string/help_category_general_features"
-                android:summary="@string/help_intro_long_general"
-                android:selectable="false"/>
-        <Preference
-                android:title="@string/help_category_reminder"
-                android:summary="@string/help_intro_reminder"
-                android:selectable="false"/>
-        <Preference
-                android:title="@string/help_category_statistics"
-                android:summary="@string/help_intro_statistics"
-                android:selectable="false"/>
-
-        <Preference android:title="@string/help_customize"
-                    android:summary="@string/help_customize_summary"
-                    android:selectable="false"/>
+                android:selectable="false"
+                android:persistent="false"
+                android:title=""
+                android:summary="@string/help_intro2"/>
     </PreferenceCategory>
 
+    <PreferenceCategory android:title="@string/help_how_tos_lists">
+        <Preference
+                android:selectable="false"
+                android:persistent="false"
+                android:title="@string/help_how_to_create_a_list"
+                android:summary="@string/help_how_to_create_a_list_summary"/>
+
+        <Preference
+                android:selectable="false"
+                android:persistent="false"
+                android:title="@string/help_how_to_create_a_product"
+                android:summary="@string/help_how_to_create_a_product_summary"/>
+
+        <Preference
+                android:selectable="false"
+                android:persistent="false"
+                android:title="@string/help_how_to_edit_a_list"
+                android:summary="@string/help_how_to_edit_a_list_summary"/>
+
+        <Preference
+                android:selectable="false"
+                android:persistent="false"
+                android:title="@string/help_how_to_enable_statistics"
+                android:summary="@string/help_how_to_enable_statistics_summary"/>
+
+        <Preference
+                android:selectable="false"
+                android:persistent="false"
+                android:title="@string/help_how_to_setup_deadline"
+                android:summary="@string/help_how_to_setup_deadline_summary"/>
+
+        <Preference
+                android:selectable="false"
+                android:persistent="false"
+                android:title="@string/help_how_to_setup_reminder"
+                android:summary="@string/help_how_to_setup_reminder_summary"/>
+
+        <Preference
+                android:selectable="false"
+                android:persistent="false"
+                android:title="@string/help_how_to_sort_lists"
+                android:summary="@string/help_how_to_sort_lists_summary"/>
+
+        <Preference
+                android:selectable="false"
+                android:persistent="false"
+                android:title="@string/help_how_to_delete_multiple_items"
+                android:summary="@string/help_how_to_delete_multiple_items_summary"/>
+
+        <Preference
+                android:selectable="false"
+                android:persistent="false"
+                android:title="@string/help_how_to_search_products"
+                android:summary="@string/help_how_to_search_products_summary"/>
+
+        <Preference
+                android:selectable="false"
+                android:persistent="false"
+                android:title="@string/help_how_to_save_picture"
+                android:summary="@string/help_how_to_save_picture_summary"/>
+    </PreferenceCategory>
+
+    <PreferenceCategory android:title="@string/help_settings_heading">
+        <Preference
+                android:selectable="false"
+                android:persistent="false"
+                android:title=""
+                android:summary="@string/help_settings_summary"/>
+    </PreferenceCategory>
 
     <PreferenceCategory android:title="@string/help_privacy_heading">
         <Preference
-                android:summary="@string/help_permissionXY_description"
-                android:title="@string/help_permissionXY_heading"/>
+                android:selectable="false"
+                android:persistent="false"
+                android:title="@string/help_camera_permission_heading"
+                android:summary="@string/help_camera_permission_description"/>
         <Preference
-                android:summary="@string/help_permissions_description"
-                android:title="@string/help_permissions_heading"/>
+                android:selectable="false"
+                android:persistent="false"
+                android:title="@string/help_permissions_heading"
+                android:summary="@string/help_permissions_description"/>
     </PreferenceCategory>
 
 </PreferenceScreen>
