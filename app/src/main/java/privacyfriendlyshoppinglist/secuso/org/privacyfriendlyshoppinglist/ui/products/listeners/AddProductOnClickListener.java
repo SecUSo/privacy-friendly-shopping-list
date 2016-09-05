@@ -23,8 +23,10 @@ public class AddProductOnClickListener implements View.OnClickListener
     public void onClick(View v)
     {
         ProductDto dto = new ProductDto();
-        ProductDialogFragment productDialogFragment = ProductDialogFragment.newAddDialogInstance(dto, cache);
-
-        productDialogFragment.show(cache.getActivity().getSupportFragmentManager(), "ProductDialog");
+        if ( !ProductDialogFragment.isOpened() )
+        {
+            ProductDialogFragment productDialogFragment = ProductDialogFragment.newAddDialogInstance(dto, cache);
+            productDialogFragment.show(cache.getActivity().getSupportFragmentManager(), "ProductDialog");
+        }
     }
 }

@@ -34,11 +34,11 @@ public class AddOnClickListener implements View.OnClickListener
         ListDto dto = new ListDto();
         String priority = "1";
         dto.setPriority(priority);
-        ListDialogFragment listDialogFragment = ListDialogFragment.newAddInstance(dto, cache);
 
-        listDialogFragment.show(cache.getActivity().getSupportFragmentManager(), "DialogFragment");
-
-
-
+        if ( !ListDialogFragment.isOpened() )
+        {
+            ListDialogFragment listDialogFragment = ListDialogFragment.newAddInstance(dto, cache);
+            listDialogFragment.show(cache.getActivity().getSupportFragmentManager(), "DialogFragment");
+        }
     }
 }

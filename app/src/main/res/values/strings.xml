@@ -350,6 +350,7 @@
     <string name="store_text">Store</string>
     <string name="product_as_title">Product: %1$s</string>
     <string name="close_image">Close</string>
+    <string name="edit_dialog_product">Edit, delete or share product?</string>
 
     <!-- Shopping List Dialog -->
     <string name="list_name">Shopping List Name</string>
@@ -368,6 +369,7 @@
     <string name="reminder_before">before</string>
     <string name="list_notes">Notes</string>
     <string name="default_list_name">New Shopping List</string>
+    <string name="edit_dialog_list">Edit, delete or share list?</string>
 
     <!-- Sharing -->
     <string name="no_products">This list does not contain any products.</string>

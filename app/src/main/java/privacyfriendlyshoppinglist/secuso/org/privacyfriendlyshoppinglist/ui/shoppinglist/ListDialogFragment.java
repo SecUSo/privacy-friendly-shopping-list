@@ -1,9 +1,6 @@
 package privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.shoppinglist;
 
-import android.app.AlertDialog;
-import android.app.DatePickerDialog;
-import android.app.Dialog;
-import android.app.TimePickerDialog;
+import android.app.*;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -48,6 +45,7 @@ public class ListDialogFragment extends DialogFragment
     private Calendar currentDate;
     private int year, month, day, hour, minute;
     private static boolean editDialog;
+    private static boolean opened;
     private ListDialogCache dialogCache;
 
     public static ListDialogFragment newEditInstance(ListDto dto, ShoppingListActivityCache cache)
@@ -80,6 +78,25 @@ public class ListDialogFragment extends DialogFragment
     public void setDto(ListDto dto)
     {
         this.dto = dto;
+    }
+
+    @Override
+    public void onAttach(Activity activity)
+    {
+        super.onAttach(activity);
+        opened = true; // flag to avoid opening this dialog twice
+    }
+
+    @Override
+    public void onDismiss(DialogInterface dialog)
+    {
+        super.onDismiss(dialog);
+        opened = false; // flag to avoid opening this dialog twice
+    }
+
+    public static boolean isOpened()
+    {
+        return opened;
     }
 
     @Override

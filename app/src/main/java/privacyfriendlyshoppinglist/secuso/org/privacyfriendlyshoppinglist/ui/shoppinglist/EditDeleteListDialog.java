@@ -1,14 +1,12 @@
 package privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.shoppinglist;
 
 import android.app.Dialog;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AlertDialog;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.widget.Button;
-import android.widget.TextView;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.R;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.context.AbstractInstanceFactory;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.context.InstanceFactory;
@@ -75,52 +73,24 @@ public class EditDeleteListDialog extends DialogFragment
         shoppingListService = (ShoppingListService) instanceFactory.createInstance(ShoppingListService.class);
         productService = (ProductService) instanceFactory.createInstance(ProductService.class);
 
-        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-        LayoutInflater inflater = (LayoutInflater) getActivity().getSystemService(getActivity().LAYOUT_INFLATER_SERVICE);
-        View rootView = inflater.inflate(R.layout.edit_delete_dialog, null);
-        Button editButton = (Button) rootView.findViewById(R.id.edit);
-        Button deleteButton = (Button) rootView.findViewById(R.id.delete);
-        Button shareButton = (Button) rootView.findViewById(R.id.share);
-        TextView titleTextView = (TextView) rootView.findViewById(R.id.title);
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity(), R.style.AlertDialogColourful);
 
-        String listDialogTitle = getContext().getResources().getString(R.string.list_as_title, dto.getListName());
-        titleTextView.setText(listDialogTitle);
+        builder.setMessage(R.string.edit_dialog_list)
+                .setTitle(getContext().getResources().getString(R.string.list_as_title, dto.getListName()))
+                .setIcon(R.drawable.ic_edit_custom_color)
+                .setPositiveButton(R.string.edit, getEditOnClickListener())
+                .setNegativeButton(R.string.delete, getDeleteOnClickListener())
+                .setNeutralButton(R.string.share, getShareOnClickListener());
 
-        shareButton.setOnClickListener(new View.OnClickListener()
+        return builder.create();
+    }
+
+    private DialogInterface.OnClickListener getDeleteOnClickListener()
+    {
+        return new DialogInterface.OnClickListener()
         {
             @Override
-            public void onClick(View v)
-            {
-                dismiss();
-                List<ProductDto> productDtos = new ArrayList<>();
-
-                productService.getAllProducts(dto.getId())
-                        .doOnNext(productDto -> productDtos.add(productDto))
-                        .doOnCompleted(() ->
-                        {
-                            String shareableText = shoppingListService.getShareableText(dto, productDtos);
-                            MessageUtils.shareText(getContext(), shareableText, dto.getListName());
-                        })
-                        .subscribe();
-
-            }
-        });
-
-        editButton.setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View v)
-            {
-                dismiss();
-                DialogFragment productFragement = ListDialogFragment.newEditInstance(dto, cache);
-                productFragement.show(cache.getActivity().getSupportFragmentManager(), "List");
-            }
-        });
-
-        deleteButton.setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View v)
+            public void onClick(DialogInterface dialog, int id)
             {
                 dismiss();
                 MessageUtils.showAlertDialog(
@@ -130,10 +100,47 @@ public class EditDeleteListDialog extends DialogFragment
                         dto.getListName(),
                         deleteList());
             }
-        });
+        };
+    }
 
-        builder.setView(rootView);
-        return builder.create();
+    private DialogInterface.OnClickListener getEditOnClickListener()
+    {
+        return new DialogInterface.OnClickListener()
+        {
+            @Override
+            public void onClick(DialogInterface dialog, int id)
+            {
+                dismiss();
+                if ( !ListDialogFragment.isOpened() )
+                {
+                    DialogFragment productFragment = ListDialogFragment.newEditInstance(dto, cache);
+                    productFragment.show(cache.getActivity().getSupportFragmentManager(), "List");
+                }
+            }
+        };
+    }
+
+    private DialogInterface.OnClickListener getShareOnClickListener()
+    {
+        return new DialogInterface.OnClickListener()
+        {
+            @Override
+            public void onClick(DialogInterface dialog, int id)
+            {
+                dismiss();
+                List<ProductDto> productDtos = new ArrayList<>();
+                Context context = getContext();
+                productService.getAllProducts(dto.getId())
+                        .doOnNext(productDto -> productDtos.add(productDto))
+                        .doOnCompleted(() ->
+                        {
+                            String shareableText = shoppingListService.getShareableText(dto, productDtos);
+                            MessageUtils.shareText(context, shareableText, dto.getListName());
+                        })
+                        .subscribe();
+
+            }
+        };
     }
 
     private Observable<Void> deleteList()
