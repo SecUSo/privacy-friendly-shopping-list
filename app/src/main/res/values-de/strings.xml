@@ -6,7 +6,7 @@
     <string name="delete">Delete</string>
     <string name="share">Share</string>
     <string name="edit">Edit</string>
-    <string name="language">US</string>
+    <string name="language">DE</string>
     <string name="date_long_pattern">EE MM/dd/yyyy HH:mm</string>
     <string name="date_short_pattern">EE MM/dd/yyyy</string>
     <string name="date_day_stats_pattern">MM/dd/yy</string>
@@ -16,7 +16,6 @@
     <string name="number_decimal_separator">,</string>
 
     <!-- ### TUTORIAL ### -->
-    <string name="do_not_show_again">Don\'t show again!</string>
     <string name="tutorial_dialog_title">Tutorial</string>
     <string name="tutorial_how_to">How to...</string>
     <string name="tutorial_create_list">... create a new list?</string>
@@ -67,7 +66,7 @@
     <string name="new_product">New Product</string>
     <string name="product_already_exists">Product already exists in this list!</string>
     <string name="price_number_too_big">Number too big!</string>
-    <string name="number_format_invalid">Invalid: #,###,##0.00</string>
+    <string name="number_format_invalid">Invalid: #.###.##0,00</string>
     <string name="product_list_empty">(App Logo)\nThis list does not contain any products</string>
     <string name="total_amount">Total:</string>
     <string name="total_amount_separator">/</string>
@@ -89,10 +88,9 @@
     <string name="statistics_group_by">Group by:</string>
     <string name="statistics_y_values">Values:</string>
     <string name="statistics_quantity_unit">Units</string>
-    <string name="billion_value">1000000000000</string>
 
     <!-- ### SORT ### -->
-    <string name="sort_options">Sort Options</string>
+    <string name="sort_options">Sort</string>
     <string name="sort_ascencing_descending">Ascending/Descending</string>
     <string name="sort_ascencing">Ascending</string>
     <string name="sort_descending">Descending</string>
@@ -189,13 +187,12 @@
     <!-- ### WELCOME DIALOG ### -->
     <string name="welcome_text">Welcome to the Privacy Friendly Shopping List. Follow the tutorial instructions to
         create
-        your first list. You can customize the default settings for notifications, statistics and hints in the menu
+        your first list. You can customize the default settings for notifications, statistics and others in the menu
         settings. Consult the Help section to get further information about the app.
     </string>
     <string name="welcome">Welcome</string>
     <string name="okay">Okay</string>
     <string name="viewhelp">View Help</string>
-    <string name="main_button_welcomedialog">Show Welcome</string>
 
     <!--### HELP ###-->
     <string name="help">Help</string>
@@ -315,7 +312,7 @@
     <string name="product_name">Product Name</string>
     <string name="product_name_new">New Product</string>
     <string name="product_name_edit">Edit Product</string>
-    <string name="price">0.00</string>
+    <string name="price">0,00</string>
     <string name="alert_missing_product_name">Please provide a product name!</string>
     <string name="product_dialog_title">Title</string>
     <string name="price_text">Price</string>

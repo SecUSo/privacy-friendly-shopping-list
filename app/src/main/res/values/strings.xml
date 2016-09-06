@@ -19,7 +19,7 @@
     <string name="number_decimal_separator">.</string>
 
     <!-- ### TUTORIAL ### -->
-    <string name="do_not_show_again">Don\'t show again!</string>
+    <string name="do_not_show_again" translatable="false">Don\'t show again!</string>
     <string name="tutorial_dialog_title">Tutorial</string>
     <string name="tutorial_how_to">How to...</string>
     <string name="tutorial_create_list">... create a new list?</string>
@@ -108,14 +108,12 @@
     <string name="no_scale_abbreviation" translatable="false"></string>
     <string name="kilo_abbreviation" translatable="false">K.</string>
     <string name="million_abbreviation" translatable="false">M.</string>
-    <string name="billion_abbreviation" translatable="false">B.</string>
     <string name="no_scale_value" translatable="false">1</string>
     <string name="kilo_value" translatable="false">1000</string>
     <string name="million_value" translatable="false">1000000</string>
-    <string name="billion_value">1000000000</string>
 
     <!-- ### SORT ### -->
-    <string name="sort_options">Sort Options</string>
+    <string name="sort_options">Sort</string>
     <string name="sort_ascencing_descending">Ascending/Descending</string>
     <string name="sort_ascencing">Ascending</string>
     <string name="sort_descending">Descending</string>
@@ -215,13 +213,13 @@
     <!-- ### WELCOME DIALOG ### -->
     <string name="welcome_text">Welcome to the Privacy Friendly Shopping List. Follow the tutorial instructions to
         create
-        your first list. You can customize the default settings for notifications, statistics and hints in the menu
+        your first list. You can customize the default settings for notifications, statistics and others in the menu
         settings. Consult the Help section to get further information about the app.
     </string>
     <string name="welcome">Welcome</string>
     <string name="okay">Okay</string>
     <string name="viewhelp">View Help</string>
-    <string name="main_button_welcomedialog">Show Welcome</string>
+    <string name="main_button_welcomedialog" translatable="false">Show Welcome</string>
 
     <!--### HELP ###-->
     <string name="help">Help</string>
@@ -231,7 +229,8 @@
         reminders and add notes to your lists. You can also keep track of checked items and visualize the total spent
         amount or total number of units purchased in a diagram.
     </string>
-    <string name="help_intro2">A shopping contains products. Besides product name, quantity and price, you can add a
+    <string name="help_intro2">A shopping list contains products. Besides product name, quantity and price, you can add
+        a
         category, the store where the item is to be purchased, some notes and a photo by using the camera of your
         device.
     </string>

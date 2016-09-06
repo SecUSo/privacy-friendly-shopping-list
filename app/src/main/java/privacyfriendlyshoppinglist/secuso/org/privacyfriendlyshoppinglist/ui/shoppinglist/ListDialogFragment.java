@@ -239,7 +239,6 @@ public class ListDialogFragment extends DialogFragment
 
                     }
                 }, year, month, day);
-                datePickerDialog.setTitle("Set Date:");
                 datePickerDialog.show();
             }
         });
@@ -263,7 +262,6 @@ public class ListDialogFragment extends DialogFragment
 
                     }
                 }, hour, minute, true);
-                timePickerDialog.setTitle("Set Time: ");
                 timePickerDialog.show();
             }
         });
