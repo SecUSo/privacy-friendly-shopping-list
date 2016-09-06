@@ -50,7 +50,7 @@ public class ProductDialogFragment extends DialogFragment
     private static final int REQUEST_IMAGE_CAPTURE = 1;
     private static final int MY_PERMISSIONS_REQUEST_USE_CAMERA = 2;
     private static final int REQUEST_PHOTO_PREVIEW_FROM_DIALOG = 3;
-    private static final double MAX_PRICE_ALLOWED = 999999999999.999999999999;
+    private static final double MAX_PRICE_ALLOWED = 10000000;
 
     private static boolean opened;
     private static boolean editDialog;

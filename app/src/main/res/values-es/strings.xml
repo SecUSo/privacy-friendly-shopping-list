@@ -2,20 +2,20 @@
     <string name="app_name">Shopping List</string>
 
     <!--### GENERAL ### -->
-    <string name="cancel">Cancel</string>
-    <string name="delete">Delete</string>
+    <string name="cancel">Cancelar</string>
+    <string name="delete">Eliminar</string>
     <string name="share">Share</string>
     <string name="edit">Edit</string>
     <string name="language">US</string>
-    <string name="date_long_pattern">EE MM/dd/yyyy HH:mm</string>
-    <string name="date_short_pattern">EE MM/dd/yyyy</string>
-    <string name="date_day_stats_pattern">MM/dd/yy</string>
+    <string name="date_long_pattern">EE dd/MM/yyyy HH:mm</string>
+    <string name="date_short_pattern">EE dd/MM/yyyy</string>
+    <string name="date_day_stats_pattern">dd/MM/yy</string>
     <string name="date_month_pattern">MMM yy</string>
     <string name="time_pattern">HH:mm</string>
-    <string name="currency">$</string>
+    <string name="currency">€</string>
 
     <!-- ### TUTORIAL ### -->
-    <string name="do_not_show_again">Don\'t show again!</string>
+    <string name="do_not_show_again">¡No mostrar de nuevo!</string>
     <string name="tutorial_dialog_title">Tutorial</string>
     <string name="tutorial_how_to">How to...</string>
     <string name="tutorial_create_list">... create a new list?</string>
@@ -51,7 +51,7 @@
     </string>
 
     <!-- ### SHOPPING LIST ### -->
-    <string name="activity_shopping_list">Shopping List:</string>
+    <string name="activity_shopping_list">Lista:</string>
     <string name="nr_items">Nr. Items</string>
     <string name="total_list_amount">Total Amount</string>
     <string name="reminder_text">Reminder: %1$d %2$s before</string>
@@ -71,12 +71,12 @@
     <string name="total_amount">Total:</string>
     <string name="total_amount_separator">/</string>
     <string name="store_label">Store:</string>
-    <string name="category_label">Category:</string>
+    <string name="category_label">Categoria:</string>
     <string name="search">Search</string>
     <string name="no_products_found">No products found!</string>
 
     <string name="store_detail">Store: %1$s</string>
-    <string name="category_detail">Category: %1$s</string>
+    <string name="category_detail">Categoria: %1$s</string>
     <string name="quantity_detail">Quantity: %1$s</string>
     <string name="price_detail">Price: %1$s</string>
     <string name="total_price_detail">Total Price: %1$s</string>
@@ -105,41 +105,51 @@
 
 
     <!-- ### DELETE ### -->
-    <string name="delete_confirmation_title">Delete Confirmation</string>
-    <string name="delete_foto_confirmation">Delete selected image (%1$s)? This operation cannot be undone!</string>
+    <string name="delete_confirmation_title">Eliminar</string>
+    <string name="delete_foto_confirmation">¿Desea eliminar la imagen seleccionada (%1$s)? Esta operación no puede ser
+        revertida.
+    </string>
     <!-- ### DELETE SHOPPING LISTS ### -->
-    <string name="delete_lists_confirmation">Delete all selected lists? This operation cannot be undone!</string>
-    <string name="delete_list_confirmation">Delete selected list (%1$s)? This operation cannot be undone!</string>
-    <string name="activity_delete_lists">Delete Shopping Lists</string>
+    <string name="delete_lists_confirmation">¿Desea eliminar todas las listas seleccionadas? Esta operación no puede ser
+        revertida.
+    </string>
+    <string name="delete_list_confirmation">¿Desea eliminar la lista seleccionada (%1$s)? Esta operación no puede ser
+        revertida.
+    </string>
+    <string name="activity_delete_lists">Eliminar listas de compras</string>
     <!-- ### DELETE PRODUCTS LISTS ### -->
-    <string name="delete_products_confirmation">Delete all selected products? This operation cannot be undone!</string>
-    <string name="delete_product_confirmation">Delete selected product (%1$s)? This operation cannot be undone!</string>
-    <string name="activity_delete_products">Delete Products</string>
+    <string name="delete_products_confirmation">¿Desea eliminar todos los productos seleccionados? Esta operación no
+        puede ser revertida.
+    </string>
+    <string name="delete_product_confirmation">¿Desea eliminar el producto seleccionado (%1$s)? Esta operación no puede
+        ser revertida.
+    </string>
+    <string name="activity_delete_products">Eliminar productos</string>
     <!-- ### STATISTICS ### -->
     <string name="statistics">Statistics</string>
-    <string name="delete_statistics_confirmation">Delete all currently saved statistics? This operation cannot be
-        undone!
+    <string name="delete_statistics_confirmation">¿Desea eliminar el registro de estadísticas? Esta operación no puede
+        ser revertida.
     </string>
 
     <!--### ABOUT ###-->
-    <string name="about">About</string>
+    <string name="about">Acerca de Shopping List</string>
     <string name="version_number">Version 0.4 Beta</string>
-    <string name="about_developper">Developers:</string>
+    <string name="about_developper">Desarrolladores:</string>
     <string name="about_author_greb">Grebiel José Ifill Brito</string>
     <string name="about_author_cri">Christian König</string>
 
-    <string name="about_author_contributors">contributors...</string>
-    <string name="about_affiliation">In affiliation with</string>
+    <string name="about_author_contributors">contribuidores...</string>
+    <string name="about_affiliation">En afiliación con</string>
     <string name="privacy_friendly">This application belongs to the group of Privacy Friendly Apps developed by
         Technische Universität Darmstadt.
     </string>
     <string name="more_info">More information can be found on:</string>
 
     <!-- ### DRAWER ###-->
-    <string name="action_help">Help</string>
-    <string name="action_about">About</string>
-    <string name="action_settings">Settings</string>
-    <string name="action_main">Main</string>
+    <string name="action_help">Ayuda</string>
+    <string name="action_about">Acerca de Shopping List</string>
+    <string name="action_settings">Configuración</string>
+    <string name="action_main">Inicio</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
@@ -315,14 +325,14 @@
     <string name="product_name_new">New Product</string>
     <string name="product_name_edit">Edit Product</string>
     <string name="price">0.00</string>
-    <string name="alert_missing_product_name">Please provide a product name!</string>
+    <string name="alert_missing_product_name">¡Por favor introduzca el nombre del producto!</string>
     <string name="product_dialog_title">Title</string>
     <string name="price_text">Price</string>
     <string name="quantity_text">Qty.</string>
-    <string name="category_text">Category</string>
+    <string name="category_text">Categoria</string>
     <string name="store_text">Store</string>
     <string name="product_as_title">Product: %1$s</string>
-    <string name="close_image">Close</string>
+    <string name="close_image">Cerrar</string>
     <string name="edit_dialog_product">Edit, delete or share product?</string>
 
     <!-- Shopping List Dialog -->
@@ -335,13 +345,13 @@
     <string name="priority_high">High</string>
     <string name="priority_normal">Normal</string>
 
-    <string name="deadline_date">Date</string>
-    <string name="deadline_time">Time</string>
-    <string name="deadline">Deadline</string>
+    <string name="deadline_date">Fecha</string>
+    <string name="deadline_time">Hora</string>
+    <string name="deadline">Fecha tope</string>
     <string name="reminder">Reminder</string>
     <string name="reminder_before">before</string>
     <string name="list_notes">Notes</string>
-    <string name="default_list_name">New Shopping List</string>
+    <string name="default_list_name">Nueva lista</string>
     <string name="edit_dialog_list">Edit, delete or share list?</string>
 
     <!-- Sharing -->
