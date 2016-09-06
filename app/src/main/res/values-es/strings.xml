@@ -225,8 +225,8 @@
         dialog and press OKAY. There field \"Product Name\" is mandatory.
     </string>
 
-    <string name="help_how_to_edit_a_list">Edit, Delete or Remove</string>
-    <string name="help_how_to_edit_a_list_summary">To edit, delete, or remove a list or a product you must click the
+    <string name="help_how_to_edit_a_list">Edit, Delete or Share</string>
+    <string name="help_how_to_edit_a_list_summary">To edit, delete, or share a list or a product you must click the
         item and hold on pressing it until you see a dialog where the mentioned options are shown.
         Then you can select the option you would like to perform. Notice that the delete operation will not delete any
         data saved in the statistics.
