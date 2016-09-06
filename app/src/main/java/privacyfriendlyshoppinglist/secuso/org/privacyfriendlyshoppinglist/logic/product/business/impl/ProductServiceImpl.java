@@ -296,11 +296,7 @@ public class ProductServiceImpl implements ProductService
     private NumberScale getNumberScale(double value)
     {
         NumberScale numberScale = NumberScale.NO_SCALE;
-        if ( value > NumberScale.BILLION.getValue(context) )
-        {
-            numberScale = NumberScale.BILLION;
-        }
-        else if ( value > NumberScale.MILLION.getValue(context) )
+        if ( value > NumberScale.MILLION.getValue(context) )
         {
             numberScale = NumberScale.MILLION;
         }

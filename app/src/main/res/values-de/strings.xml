@@ -13,6 +13,7 @@
     <string name="date_month_pattern">MMM yy</string>
     <string name="time_pattern">HH:mm</string>
     <string name="currency">$</string>
+    <string name="number_decimal_separator">,</string>
 
     <!-- ### TUTORIAL ### -->
     <string name="do_not_show_again">Don\'t show again!</string>

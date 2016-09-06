@@ -209,11 +209,7 @@ public class StatisticsServiceImpl implements StatisticsService
     private NumberScale getNumberScale(double maxColumnValue)
     {
         NumberScale numberScale = null;
-        if ( maxColumnValue > NumberScale.BILLION.getValue(context) )
-        {
-            numberScale = NumberScale.BILLION;
-        }
-        else if ( maxColumnValue > NumberScale.MILLION.getValue(context) )
+        if ( maxColumnValue > NumberScale.MILLION.getValue(context) )
         {
             numberScale = NumberScale.MILLION;
         }
