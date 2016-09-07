@@ -194,9 +194,9 @@
 
     <string name="pref_header_statistics">Statistics</string>
     <string name="pref_statistics_title">Set default</string>
-    <string name="pref_statistics_summary_on">Statistics will be per default \"enabled\" when creating a new list.
+    <string name="pref_statistics_summary_on">Statistics will be \"enabled\" per default when creating a new list.
     </string>
-    <string name="pref_statistics_summary_off">Statistics will be per default \"disabled\" when creating a new list.
+    <string name="pref_statistics_summary_off">Statistics will be \"disabled\" per default when creating a new list.
     </string>
     <string name="pref_statistics_toast_on">Statistics turned on! Items will be added to the statistics as soon as they
         are checked.
@@ -212,8 +212,8 @@
 
     <!-- ### WELCOME DIALOG ### -->
     <string name="welcome_text">Welcome to the Privacy Friendly Shopping List. Follow the tutorial instructions to
-        create
-        your first list. You can customize the default settings for notifications, statistics and others in the menu
+        create your first list. You can customize the default settings for notifications, statistics and others in the
+        menu
         settings. Consult the Help section to get further information about the app.
     </string>
     <string name="welcome">Welcome</string>
@@ -225,13 +225,13 @@
     <string name="help">Help</string>
     <string name="help_overview_heading">Overview</string>
     <string name="help_intro1">Welcome to the help page of Privacy Friendly Shopping List. This App allows you not only
-        creating lists and addding products to it, but also set priority, deadlines,
-        reminders and add notes to your lists. You can also keep track of checked items and visualize the total spent
-        amount or total number of units purchased in a diagram.
+        creating lists and addding products to it, but also set priority, deadlines, reminders and add notes to your
+        lists.
+        You can also keep track of checked items and visualize the total amount spent, or the total number of units
+        purchased, in a diagram.
     </string>
     <string name="help_intro2">A shopping list contains products. Besides product name, quantity and price, you can add
-        a
-        category, the store where the item is to be purchased, some notes and a photo by using the camera of your
+        a category, the store where the item is to be purchased, some notes and a photo by using the camera of your
         device.
     </string>
 
@@ -261,7 +261,7 @@
     <string name="help_how_to_enable_statistics">Enable Statistics</string>
     <string name="help_how_to_enable_statistics_summary">Once you are in the list dialog (See \"Create a List\"),
         you can enable the statistics by using the switch button next the to icon with three bars. After this option
-        have been switched on, items are going to be registered in the statistics as soon as the items are checked.
+        has been switched on, items are going to be registered in the statistics as soon as the items are checked.
         Notice that if you checked the product multiple times, then the product will also be registered multiple times
         in the statistics. This allows you to reuse the same shopping list over and over and being able to keep track
         of your purchases.
@@ -306,11 +306,10 @@
     <string name="help_how_to_search_products_summary">To search for products in a list use the magnifier glass icon
         located in the action bar of the current list. After clicking in this icon you will see a field, where you can
         type the words you are looking for. As you type, the product list will be filtered, showing only the products
-        that
-        match the search. You can manipulate the filtered products as before.
+        that match the search. You can manipulate the filtered products as before.
     </string>
 
-    <string name="help_how_to_save_picture">Take Picture</string>
+    <string name="help_how_to_save_picture">Take a Picture</string>
     <string name="help_how_to_save_picture_summary">You can use the device\'s camera to take a picture of a certain
         product and save it. This option is located in the add product dialog (See \"Add a Product\"), or in the edit
         product dialog (See \"Edit, Delete or Remove\"). Once you are there, click on the arrow to see more options.
