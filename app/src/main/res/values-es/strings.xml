@@ -185,10 +185,10 @@
     <string name="help_overview_heading">Resumen</string>
     <string name="help_intro1">Bienvenido a la página de ayuda de Privacy Friendly Shopping List. Con esta aplicación no
         solo podrás crear listas de compras y añadir productos en ella, sino también fijar otra información relevante
-        como prioridad, fecha tope, recordatorios y notas. Adicionalmente podrás llevar un registro de tus compras y
-        visualizar tanto el monto total gastado como la cantidad total de unidades compradas en un diagrama de barras.
+        como por ejemplo: prioridad, fecha tope, recordatorios y notas. Adicionalmente podrás llevar un registro de tus compras y
+        visualizar de forma gráfica tanto el monto total gastado como la cantidad total de unidades compradas.
     </string>
-    <string name="help_intro2">Una lista de compras contiene productos. Además de asignar un nombre, cantidad y precio,
+    <string name="help_intro2">Una lista de compras contiene productos. Además de asignarle nombre, cantidad y precio a cada producto,
         podrás añadir categoría, nombre de la tienda e incluso una foto del producto usando la cámara de tu
         dispositivo.
     </string>
@@ -196,7 +196,7 @@
     <string name="help_how_to_create_a_list">Crear una lista</string>
     <string name="help_how_to_create_a_list_summary">Para crear una lista ve al menú de inicio y presiona el signo más
         (+). Luego rellena los campos que aparecerán en la ventana y presiona ACEPTAR. No hay campos obligatorios. Si no se
-        le asigna un nombre a la lista entonces esta tomará un nombre por defecto (Nueva lista). Si la opción de
+        le asigna un nombre a la lista, entonces ésta tomará un nombre por defecto (Nueva lista). Si la opción de
         \"alta\" prioridad es seleccionada, entonces aparecerá un icono con el signo \"!\" al lado derecho de la
         tarjeta.
     </string>
@@ -207,13 +207,13 @@
     </string>
     <string name="help_how_to_edit_a_list">Editar, Eliminar o Compartir</string>
     <string name="help_how_to_edit_a_list_summary">Para editar, eliminar o compartir una lista o un producto debes hacer
-        clic en el ítem correspondiente por un tiempo aproximado de 3 segundos. Esta acción mostrará una ventana en
-        donde podrá eligir la operación que desea realizar. La operación de eliminar no afectará los datos
+        clic en el ítem correspondiente, lista o producto, por un tiempo de tres segundos aproximadamente. Esta acción mostrará una ventana en
+        donde podrás eligir la operación que deseas realizar. La operación de eliminar no afectará los datos
         correspondientes a estadísticas.
     </string>
     <string name="help_how_to_enable_statistics">Activar estadísticas</string>
     <string name="help_how_to_enable_statistics_summary">Una vez que hayas hecho clic en la opción correspondiente para
-        crear o editar, podrás activar las estadísticas utilizando el botón que se encuentra al
+        crear o editar listas, podrás activar las estadísticas utilizando el botón que se encuentra al
         lado del icono con tres barras (representando un gráfico). Luego de haber activado las estadísticas, todos los
         productos que sean marcados utilizando la casilla serán guardados en un registro aparte que es utilizado para
         mostrar de forma gráfica ciertos datos de interés. Un producto será añadido a las estadísticas tantas veces como
@@ -221,36 +221,36 @@
     </string>
     <string name="help_how_to_setup_deadline">Fijar una fecha tope</string>
     <string name="help_how_to_setup_deadline_summary">Una vez que hayas hecho clic en la opción correspondiente para
-        crear o editar, podrás fijar una fecha tope haciendo clic en la casilla \"Fecha tope\" y fijando una fecha y
+        crear o editar listas, podrás fijar una fecha tope haciendo clic en la casilla \"Fecha tope\" y fijando una fecha y
         una hora. Si la fecha tope ya ha pasado y la lista aún contiene productos sin marcar, entonces la barra vertical
-        del lado izquierda de la tarjeta cambiará a color rojo. Si todos los ítems han sido marcados, entonces el color
+        del lado izquierdo de la tarjeta cambiará a color rojo. Si todos los ítems han sido marcados, entonces el color
         de la barra será gris. El color neutral de la barra es azul. Luego de fijar una fecha, ésta aparecerá en la
         tarjeta debajo del nombre de la lista.
     </string>
     <string name="help_how_to_setup_reminder">Fijar un recordatorio</string>
     <string name="help_how_to_setup_reminder_summary">Si has fijado una fecha tope para una lista, entonces podrás también
         fijar un recordatorio. Para ello tendrás que hacer clic en el botón que se encuentra al lado del icono de alarma
-        y luego introducir cuántos minutos, horas, días o semanas antes de la fecha tope quiere el recordatorio. Si la
+        y luego introducir cuántos minutos, horas, días o semanas antes de la fecha tope quieres el recordatorio. Si la
         alarma ya ha sonado, entonces la barra vertical al lado izquierdo de la tarjeta cambiará a color amarillo.
         Listas con recordatorio mostrarán en la tarjeta un icono de alarma ubicado al lado de la fecha tope. Si las
         notificaciones han sido deshabilitadas en la aplicación, entonces el color del icono será rojo.
     </string>
     <string name="help_how_to_sort_lists">Ordenar ítems</string>
-    <string name="help_how_to_sort_lists_summary">Para ordenar ítems utilice el icono con tres barras horizontales
+    <string name="help_how_to_sort_lists_summary">Para ordenar ítems utiliza el icono con tres barras horizontales
         localizado en la parte superior de la ventana. Luego de hacer clic en este icono, verás unas opciones donde podrás
         escoger si deseas ordenar los ítems de manera ascendente o descendente y el criterio que debe ser utilizado para
         ordenar los mismos.
     </string>
     <string name="help_how_to_delete_multiple_items">Elimina múltiples ítems</string>
     <string name="help_how_to_delete_multiple_items_summary">Para eliminar múltiples ítems utiliza el icono de la
-        papelera mostrado en la parte superior de la pantalla. Luego de haber hecho clic en este icono, tendrás la
+        papelera mostrado en la parte superior derecha de la pantalla. Luego de haber hecho clic en este icono, tendrás la
         oportunidad de seleccionar todos los ítems que deseas eliminar. Al final haz clic nuevamente en el icono de la
         papelera localizado en la parte inferior derecha. Esta operación no eliminará ningún dato relacionado con las
         estadísticas.
     </string>
     <string name="help_how_to_search_products">Buscar productos en lista</string>
-    <string name="help_how_to_search_products_summary">Para buscar productos en una lista en particular debes utilizar el
-        icono de la lupa que se encuentra en la parte superior. Luego de hacer clic en él, aparecerá un campo en el que
+    <string name="help_how_to_search_products_summary">Para buscar productos en una lista debes utilizar el
+        icono de la lupa que se encuentra en la parte superior de la ventana. Luego de hacer clic en él, aparecerá un campo en el que
         podrás escribir las palabras que deseas buscar. La lista se filtrará a medida que estas escribiendo escribiendo, mostrando
         así los ítems que coinciden con la búsqueda. Los ítems allí mostrados pueden ser manipulados tal y como se hace
         en la vista original (marcar, editar, etc.).
