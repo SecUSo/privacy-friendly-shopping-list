@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Shoppinglist</string>
+    <string name="app_name">Shopping List</string>
 
     <!--### GENERAL ### -->
     <string name="cancel">Abbruch</string>
@@ -199,7 +199,7 @@
     <string name="pref_currency_summary">€</string>
 
     <!-- ### WELCOME DIALOG ### -->
-    <string name="welcome_text">Willkommen zur Privacy Friendly Shoppinglist. Folge den Hinweisen in den Tutorials, um
+    <string name="welcome_text">Willkommen zur Privacy Friendly Shopping List. Folge den Hinweisen in den Tutorials, um
         deine erste Liste zu erstellen.
         Unter dem Menüpunkt Einstellungen kannst du das Standardverhalten für Statistiken, Benachrichtigungen, und
         Hinweise einrichten. Weitere Hinweise zur
@@ -213,7 +213,7 @@
     <!--### HELP ###-->
     <string name="help">Hilfe</string>
     <string name="help_overview_heading">Übersicht</string>
-    <string name="help_intro1">Willkommen zur Hilfsseite der Privacy Friendly Shoppinglist. Die App ermöglicht euch
+    <string name="help_intro1">Willkommen zur Hilfsseite der Privacy Friendly Shopping List. Die App ermöglicht euch
         nicht nur Listen anzulegen und Produkte darin zu erfassen, sondern ebenfalls Prioritäten für Listen festzulegen,
         Deadlines und Erinnerungen
         für Listen zu setzen, und Notizen
@@ -362,11 +362,11 @@
     <string name="reminder">Erinnerung</string>
     <string name="reminder_before">bevor</string>
     <string name="list_notes">Notizen</string>
-    <string name="default_list_name">Neue Einkaufsliste</string>
+    <string name="default_list_name">Neue Liste</string>
     <string name="edit_dialog_list">Liste editieren, löschen oder teilen?</string>
 
     <!-- Sharing -->
-    <string name="no_products">Diese List enthält noch keine Produkte.</string>
+    <string name="no_products">Diese Liste enthält noch keine Produkte.</string>
     <string name="share_as_text">Teile als Textformat</string>
 
     <string-array
@@ -419,6 +419,5 @@
         <item>Nov.</item>
         <item>Dez.</item>
     </string-array>
-
 
 </resources>
