@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Einkaufsliste</string>
+    <string name="app_name">Shoppinglist</string>
 
     <!--### GENERAL ### -->
     <string name="cancel">Abbruch</string>
@@ -53,8 +53,8 @@
     <string name="activity_shopping_list">Einkaufsliste:</string>
     <string name="nr_items">Nr. v. Elementen</string>
     <string name="total_list_amount">Gesamtbetrag</string>
-    <string name="reminder_text">Erinnerung: %1$d %2$s bevor Deadline</string>
-    <string name="lists_empty">(App Logo)\nDu hast noch keine Shoppingliste angelegt.</string>
+    <string name="reminder_text">Erinnerung: %1$d %2$s davor Deadline</string>
+    <string name="lists_empty">(App Logo)\nDu hast noch keine Einkaufsliste angelegt.</string>
 
     <!-- ### NOTIFICATIONS ### -->
     <string name="notification_message">Listenname: %1$s\nDeadline: %2$s</string>
@@ -115,7 +115,7 @@
     <string name="delete_list_confirmation">Ausgewählte Liste löschen? Diese Aktion kann nicht rückgängig gemacht
         werden!
     </string>
-    <string name="activity_delete_lists">Shoppingliste löschen</string>
+    <string name="activity_delete_lists">Einkaufsliste löschen</string>
     <!-- ### DELETE PRODUCTS LISTS ### -->
     <string name="delete_products_confirmation">Alle ausgewählten Produkte löschen? Diese Aktion kann nicht rückgängig
         gemacht werden!
@@ -197,7 +197,7 @@
     <string name="pref_currency_summary">€</string>
 
     <!-- ### WELCOME DIALOG ### -->
-    <string name="welcome_text">Willkommen zur Privacy Friendly Shoppingliste. Folge den Hinweisen in den Tutorials, um
+    <string name="welcome_text">Willkommen zur Privacy Friendly Shoppinglist. Folge den Hinweisen in den Tutorials, um
         deine erste Liste zu erstellen.
         Unter dem Menüpunkt Einstellungen kannst du das Standardverhalten für Statistiken, Benachrichtigungen, und
         Hinweise einrichten. Weitere Hinweise zur
@@ -211,14 +211,14 @@
     <!--### HELP ###-->
     <string name="help">Hilfe</string>
     <string name="help_overview_heading">Übersicht</string>
-    <string name="help_intro1">Willkommen zur Hilfsseite der Privacy Friendly Shoppingliste. Die App ermöglicht euch
-        nicht nur Listen anzulegen
-        und Produkte darin zu erfassen, sondern ebenfalls Prioritäten für Listen festzulegen, Deadlines und Erinnerungen
+    <string name="help_intro1">Willkommen zur Hilfsseite der Privacy Friendly Shoppinglist. Die App ermöglicht euch
+        nicht nur Listen anzulegen und Produkte darin zu erfassen, sondern ebenfalls Prioritäten für Listen festzulegen,
+        Deadlines und Erinnerungen
         für Listen zu setzen, und Notizen
         zu Listen oder Produkten anzufügen. Das Statistik-Feature ermöglicht euch zusätzlich eure Ausgaben zu erfassen
         und graphisch darzustellen.
     </string>
-    <string name="help_intro2">Eine Shoppingliste besteht aus Produkteinträgen. Zusätzlich zu Produktname, Menge und
+    <string name="help_intro2">Eine Einkaufsliste besteht aus Produkteinträgen. Zusätzlich zu Produktname, Menge und
         Preis kann eine Kategorie und der Einkaufsort
         eingepflegt werden. Darüberhinaus können Notizen vermerkt und über die Nutzung der Gerätekamera auch ein Foto
         eingefügt werden.
@@ -226,11 +226,11 @@
 
     <string name="help_how_tos_lists">Wie funktioniert\'s</string>
     <string name="help_how_to_create_a_list">Eine Liste erstellen</string>
-    <string name="help_how_to_create_a_list_summary">Um eine neue Liste zu erstellen wechselst du in das Hauptmenü und
-        drückst das (+) Symbol in der rechten unteren Ecke.
-        Fülle alle gewünschten Dialogfelder aus und bestätige den Dialog mit OKAY. Für Listen gibt es keine
-        Pflichtfelder. Bleibt der Listenname leer, wird ein generischer Standardname
-        vergeben. Wird eine Liste mit hoher Priorität deklariert, so erscheint in der Listenübersicht ein kleines Symbol
+    <string name="help_how_to_create_a_list_summary">Um eine neue Liste zu erstellen, wechselst du in das Hauptmenü und
+        drückst das (+) Symbol in der rechten unteren Ecke. Fülle alle gewünschten Dialogfelder aus und bestätige den
+        Dialog mit OKAY.
+        Für Listen gibt es keine Pflichtfelder. Bleibt der Listenname leer, wird ein Standardname vergeben.
+        Wird eine Liste mit hoher Priorität deklariert, so erscheint in der Listenübersicht ein kleines Symbol
         mit Ausrufezeichen rechts neben der betroffenen Liste.
     </string>
 
@@ -253,36 +253,31 @@
 
     <string name="help_how_to_enable_statistics">Statistiken aktivieren</string>
     <string name="help_how_to_enable_statistics_summary">Im Listendialog (siehe \"Eine Liste erstellen\") kann das
-        Statistik-Feature auch individuell für diese Liste
-        aktiviert oder deaktiviert werden. Dafür steht der Schiebeschalter neben dem Symbol in drei Balken zur
-        Verfügung. Ist dieser Schalter auf aktiviert gesetzt, werden Produkte
-        nach dem abhaken in der Statistik erfasst. Produkte werden durch mehrfaches Abhaken auch mehrfach in der
-        Statistik erfasst. Das ermöglicht dir eine bestehende Liste
-        mit Produkten immer wieder zu verwenden und jedes erneut abgehakte Produkt auch zuverlässig in der Statistik zu
-        erfassen.
+        Statistik-Feature individuell für diese Liste aktiviert oder deaktiviert werden. Dafür steht der Schiebeschalter
+        neben dem Symbol in drei Balken zur
+        Verfügung. Ist dieser Schalter aktiviert, werden Produkte
+        nach dem Abhaken in der Statistik erfasst. Durch mehrfaches Abhaken werden Produkte mehrfach in der
+        Statistik erfasst.
     </string>
 
     <string name="help_how_to_setup_deadline">Eine Deadline einstellen</string>
-    <string name="help_how_to_setup_deadline_summary">Im Listendialog (siehe \"Eine Liste erstellen\") kann ebenfalls
-        eine Deadline gesetzt werden.
-        Dazu muss auf das Kontrollkästchen (\"Deadline\") geklickt werden. Jetzt kann ein Datum und eine Uhrzeit
-        eingestellt werden. Diese Informationen
-        sind dann in der Produktkarte sichtbar. Am linken Rand der Produktkarte wird standardmäßg ein blauer Streifen
-        angezeigt, sofern eine Deadline gesetzt ist.
-        Ist die Deadline abgelaufen und befinden sich noch nicht abgehakte Produkte in der Liste, wird dieser Streifen
-        rot. Sind alle Produkte der Liste abgehakt, wird der Streifen grau.
+    <string name="help_how_to_setup_deadline_summary">Im Listendialog (siehe \"Eine Liste erstellen\") kann, wozu auf
+        das Kontrollkästchen (\"Deadline\")
+        geklickt werden muss. Danach kann ein Datum und eine Uhrzeit eingestellt werden. Ist eine Deadline gesetzt, wird
+        am linken Rand der Produktkarte standardmäßg ein blauer Streifen
+        angezeigt. Ist die Deadline abgelaufen und befinden sich noch nicht abgehakte Produkte in der Liste, wird dieser
+        Streifen
+        rot. Sind alle Produkte abgehakt, wird der Streifen grau.
     </string>
 
     <string name="help_how_to_setup_reminder">Eine Erinnerung einstellen</string>
-    <string name="help_how_to_setup_reminder_summary">Wenn eine Deadline für eine Liste eingestellt wird (Siehe \"Eine
-        Deadline einstellen\"),
-        erscheinen im Dialog die Option einer Erinnerung. Wird der Schiebeschalter aktiviert, kann eingestellt werden
-        wieviele Minuten, Stunden, Tage, etc.
-        vor Eintreten der Deadline eine Erinnerung geschickt werden soll. Diese wird mit einem Signalton als
-        Benachrichtigung auf dem Telefon angezeigt. Wurde eine Erinnerung für eine Liste bereits ausgelöst, wird der
-        Farbbalken der betroffenen Liste in der Listenansicht gelb gefärbt. Ist eine Erinnerung eingestellt, erscheint
-        zusätzlich ein Symbol in Form eines Weckers in der Listenansicht. Dieses ist rot gefärbt, sofern in den
-        Einstellungen der Standard für Benachrichtigungen deaktiviert ist.
+    <string name="help_how_to_setup_reminder_summary">Wird eine Deadline gesetzt, erscheint im Dialog die Option einer
+        Erinnerung.
+        Wird der Schiebeschalter aktiviert, kann eingestellt werden wieviele Minuten, Stunden, etc.
+        vor Eintreten der Deadline eine Erinnerung in Form Benachrichtigung auf dem Telefon angezeigt werden soll.
+        Es erscheint zusätzlich ein Symbol in Form eines Weckers in der Listenansicht. Dieses ist rot gefärbt, sofern in
+        den
+        die Standardeinstellung für Benachrichtigungen deaktiviert ist.
     </string>
 
     <string name="help_how_to_sort_lists">Elemente sortieren</string>
@@ -295,9 +290,9 @@
     <string name="help_how_to_delete_multiple_items">Mehrere Elemente löschen</string>
     <string name="help_how_to_delete_multiple_items_summary">Um mehrere Elemente zu löschen, kannst du auf das
         Mülleimersymbol klicken. Danach kannst du alle Elemente durch einen Klick darauf auswählen, die gelöscht werden
-        sollen. Zum Abschluss der Aktion musst du auf das Mülleimer-Symbol in der unteren rechten Ecke drucken. Hier
-        wirst du erneut aufgefordert deine Aktion zu bestätigen. Danach sind alle ausgewählten Elemente gelöscht. Dies
-        beeinflusst jedoch nicht bereits gespeicherte Statistikdaten, die mit diesen Elementen zusammenhingen.
+        sollen. Zum Abschluss der Aktion musst du auf das Symbol in der unteren rechten Ecke drucken. Hier
+        wirst du erneut aufgefordert deine Aktion zu bestätigen. Das Löschen beeinflusst keine bereits gespeicherte
+        Statistikdaten, die mit diesen Elementen zusammenhingen.
     </string>
 
     <string name="help_how_to_search_products">Produkte in Listen suchen</string>
@@ -309,11 +304,10 @@
 
     <string name="help_how_to_save_picture">Ein Foto aufnehmen</string>
     <string name="help_how_to_save_picture_summary">Um für bestimmte Produkte eine visuelle Erinnerungshilfe zu haben,
-        steht die eine Fotofunktion im Produktdialog zur Verfügung. Dazu wird die Gerätekamera verwendet und erfordert
-        die entsprechende Berechtigung (siehe unten \"Privacy Information\"). Im Produktdialog wird beim Klick auf das
-        Kamerasymbol die Gerätekamera aktiviert. Nachdem ein Bild gemacht und gespeichert wurde, erscheint es als
-        vergrößerbares Bild im Produktdialog, sowie in der Detailansicht in der Produktliste. Zu beachten ist, dass auf
-        diese Bilder nur durch die App zugegriffen werden kann und sie daher auch nicht geteilt werden können.
+        steht dir eine Fotofunktion im Produktdialog zur Verfügung. Dazu wird die Gerätekamera verwendet und erfordert
+        die entsprechende Berechtigung (siehe unten \"Privacy Information\"). Durch Klick auf das Kamerasymbol kann
+        ein Bild geschossen und und gespeichert werden. Dieses erscheint dann als
+        vergrößerbares Bild im Produktdialog.
     </string>
 
     <string name="help_settings_heading">Einstellungen</string>
@@ -351,9 +345,9 @@
     <string name="edit_dialog_product">Bearbeiten, löschen oder teilen?</string>
 
     <!-- Shopping List Dialog -->
-    <string name="list_name">Name der Shoppingliste</string>
+    <string name="list_name">Name der Einkaufsliste</string>
     <string name="list_name_new">Neue Liste</string>
-    <string name="list_name_edit">Shoppingliste bearbeiten</string>
+    <string name="list_name_edit">Einkaufsliste bearbeiten</string>
     <string name="list_as_title">Liste: %1$s</string>
 
     <string name="priority">Priorität</string>
@@ -366,7 +360,7 @@
     <string name="reminder">Erinnerung</string>
     <string name="reminder_before">bevor</string>
     <string name="list_notes">Notizen</string>
-    <string name="default_list_name">Neue Shoppingliste</string>
+    <string name="default_list_name">Neue Einkaufsliste</string>
     <string name="edit_dialog_list">Liste editieren, löschen oder teilen?</string>
 
     <!-- Sharing -->
