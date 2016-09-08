@@ -135,7 +135,7 @@
 
     <!--### ABOUT ###-->
     <string name="about">Über</string>
-    <string name="version_number">Version 0.4 Beta</string>
+    <string name="version_number">Version 1.0</string>
     <string name="about_developper">Entwickler:</string>
     <string name="about_author_greb">Grebiel José Ifill Brito</string>
     <string name="about_author_cri">Christian König</string>
@@ -209,7 +209,6 @@
     <string name="welcome">Willkommen</string>
     <string name="okay">Okay</string>
     <string name="viewhelp">Öffne \"Hilfe\"</string>
-    <string name="main_button_welcomedialog">Zeige Willkommensnachricht</string>
 
     <!--### HELP ###-->
     <string name="help">Hilfe</string>
