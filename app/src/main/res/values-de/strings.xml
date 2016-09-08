@@ -55,6 +55,8 @@
     <string name="total_list_amount">Gesamtbetrag</string>
     <string name="reminder_text">Erinnerung: %1$d %2$s davor Deadline</string>
     <string name="lists_empty">(App Logo)\nDu hast noch keine Einkaufsliste angelegt.</string>
+    <string name="alert_message_list">Erstelle eine Liste</string>
+    <string name="alert_message_product">Füge ein Produkt ein</string>
 
     <!-- ### NOTIFICATIONS ### -->
     <string name="notification_message">Listenname: %1$s\nDeadline: %2$s</string>
