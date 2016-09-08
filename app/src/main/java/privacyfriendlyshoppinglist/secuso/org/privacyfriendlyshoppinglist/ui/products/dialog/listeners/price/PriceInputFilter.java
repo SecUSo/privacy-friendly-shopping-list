@@ -5,6 +5,8 @@ import android.text.Spanned;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.R;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.products.dialog.ProductDialogCache;
 
+import java.util.Locale;
+
 /**
  * Description:
  * Author: Grebiel Jose Ifill Brito
@@ -19,7 +21,13 @@ public class PriceInputFilter implements InputFilter
 
     public PriceInputFilter(ProductDialogCache dialogCache)
     {
-        decimalSeparator = dialogCache.getPrice().getResources().getString(R.string.number_decimal_separator);
+        Locale locale = dialogCache.getPrice().getContext().getResources().getConfiguration().locale;
+        if ("US".equals(locale.getCountry()))
+        {
+            decimalSeparator = PERIOD;
+        } else {
+            decimalSeparator = dialogCache.getPrice().getResources().getString(R.string.number_decimal_separator);
+        }
     }
 
     @Override
