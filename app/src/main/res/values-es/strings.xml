@@ -40,8 +40,7 @@
     <string name="tutorial_check_product">... marcar un producto?</string>
     <string name="tutorial_check_statistics">Si las estadísticas han sido habilitadas, entonces cada vez que un producto
         sea marcado, este será guardado en un registro aparte para las estadísticas. El mismo producto puede ser marcado
-        varias veces. Esto te permite usar una misma lista una y otra vez, y al mismo tiempo guardar un registro de tus
-        compras.
+        varias veces. Esto te permite actualizar el registro de compras al reutilizar listas.
     </string>
     <string name="tutorial_multiple_delete">Selecciona los ítems que deseas eliminar, haz clic en el icono y confirma la
         operación.
@@ -51,21 +50,21 @@
     <string name="nr_items">Nr. Ítems</string>
     <string name="total_list_amount">Monto total</string>
     <string name="reminder_text">Recordatorio: %1$d %2$s antes</string>
-    <string name="lists_empty">(App Logo)\nNo existe ninguna lista</string>
+    <string name="lists_empty">(App Logo)\nNo existen listas</string>
     <!-- ### NOTIFICATIONS ### -->
     <string name="notification_message">Lista: %1$s\nFecha tope: %2$s</string>
     <!-- ### PRODUCTS ### -->
     <string name="new_product">Producto nuevo</string>
     <string name="product_already_exists">¡Este producto ya existe!</string>
-    <string name="price_number_too_big">!Número muy grande!</string>
-    <string name="number_format_invalid">Invalid: #.###.##0,00</string>
+    <string name="price_number_too_big">¡Número muy grande!</string>
+    <string name="number_format_invalid">Invalido: #.###.##0,00</string>
     <string name="product_list_empty">(App Logo)\nEsta lista no contiene productos.</string>
     <string name="total_amount">Total:</string>
     <string name="total_amount_separator">/</string>
     <string name="store_label">Tienda:</string>
     <string name="category_label">Categoría:</string>
     <string name="search">Búsqueda</string>
-    <string name="no_products_found">¡Ningún producto coíncide!</string>
+    <string name="no_products_found">¡Ningún producto coincide con la búsqueda!</string>
     <string name="store_detail">Tienda: %1$s</string>
     <string name="category_detail">Categoría: %1$s</string>
     <string name="quantity_detail">Cantidad: %1$s</string>
@@ -102,7 +101,7 @@
     <string name="delete_list_confirmation">¿Deseas eliminar la lista seleccionada (%1$s)? Esta operación no puede ser
         revertida.
     </string>
-    <string name="activity_delete_lists">Eliminar listas de compras</string>
+    <string name="activity_delete_lists">Eliminar listas</string>
     <!-- ### DELETE PRODUCTS LISTS ### -->
     <string name="delete_products_confirmation">¿Deseas eliminar todos los productos seleccionados? Esta operación no
         puede ser revertida.
@@ -146,10 +145,10 @@
     <string name="pref_checkbox_right_display_text">D</string>
     <string name="pref_checkbox_left_display_text">I</string>
     <string name="pref_move_products">Mover productos</string>
-    <string name="pref_move_products_summary_on">Mover productos marcados automáticamente al final de la lista</string>
-    <string name="pref_move_products_summary_off">No mover productos marcados automáticamente al final de la lista</string>
-    <string name="pref_move_products_toast_on">¡Productos marcados serán movidos al final de la lista!</string>
-    <string name="pref_move_products_toast_off">¡Productos marcados no serán movidos al final de la lista!</string>
+    <string name="pref_move_products_summary_on">Mover productos automáticamente al final de la lista al marcarlos</string>
+    <string name="pref_move_products_summary_off">No mover productos automáticamente al final de la lista al marcarlos</string>
+    <string name="pref_move_products_toast_on">¡Los productos serán movidos al final de la lista al ser marcardos!</string>
+    <string name="pref_move_products_toast_off">¡Los productos no serán movidos al final de la lista al ser marcados!</string>
     <string name="pref_header_notifications">Notificaciones</string>
     <string name="pref_notifications_title">Recordatorio</string>
     <string name="pref_notifications_summary_on">Las notificaciones para recordatorios se encuentran activadas</string>
@@ -169,8 +168,8 @@
     <string name="pref_statistics_delete">Eliminar</string>
     <string name="pref_statistics_delete_summary">Eliminar todos los datos de las estadísticas</string>
     <string name="pref_header_currency">Moneda</string>
-    <string name="pref_currency_title">Selecciona la moneda</string>
-    <string name="pref_currency_summary">$</string>
+    <string name="pref_currency_title">Seleccionar moneda</string>
+    <string name="pref_currency_summary">€</string>
     <!-- ### WELCOME DIALOG ### -->
     <string name="welcome_text">Bienvenido a Privacy Friendly Shopping List. Sigue las instrucciones del siguiente
         tutorial para crear tu primera lista. Para personalizar funciones correspondientes a notificaciones,
@@ -184,19 +183,19 @@
     <string name="help">Ayuda</string>
     <string name="help_overview_heading">Resumen</string>
     <string name="help_intro1">Bienvenido a la página de ayuda de Privacy Friendly Shopping List. Con esta aplicación no
-        solo podrás crear listas de compras y añadir productos en ella, sino también fijar otra información relevante
+        solo podrás crear listas de compras y añadir productos en ella, sino también fijar otra información relevante,
         como por ejemplo: prioridad, fecha tope, recordatorios y notas. Adicionalmente podrás llevar un registro de tus compras y
         visualizar de forma gráfica tanto el monto total gastado como la cantidad total de unidades compradas.
     </string>
     <string name="help_intro2">Una lista de compras contiene productos. Además de asignarle nombre, cantidad y precio a cada producto,
-        podrás añadir categoría, nombre de la tienda e incluso una foto del producto usando la cámara de tu
+        podrás añadir categoría, nombre de la tienda o supermercado e incluso una foto del producto usando la cámara de tu
         dispositivo.
     </string>
     <string name="help_how_tos_lists">Funciones</string>
     <string name="help_how_to_create_a_list">Crear una lista</string>
     <string name="help_how_to_create_a_list_summary">Para crear una lista ve al menú de inicio y presiona el signo más
         (+). Luego rellena los campos que aparecerán en la ventana y presiona ACEPTAR. No hay campos obligatorios. Si no se
-        le asigna un nombre a la lista, entonces ésta tomará un nombre por defecto (Nueva lista). Si la opción de
+        le asigna un nombre a la lista, entonces ésta tomará ek nombre por defecto \”Nueva lista\”. Si la opción de
         \"alta\" prioridad es seleccionada, entonces aparecerá un icono con el signo \"!\" al lado derecho de la
         tarjeta.
     </string>
@@ -215,7 +214,7 @@
     <string name="help_how_to_enable_statistics_summary">Una vez que hayas hecho clic en la opción correspondiente para
         crear o editar listas, podrás activar las estadísticas utilizando el botón que se encuentra al
         lado del icono con tres barras (representando un gráfico). Luego de haber activado las estadísticas, todos los
-        productos que sean marcados utilizando la casilla serán guardados en un registro aparte que es utilizado para
+        productos serán guardados en un registro aparte tan pronto sean marcados utilizando la casilla. Este registro es utilizado para
         mostrar de forma gráfica ciertos datos de interés. Un producto será añadido a las estadísticas tantas veces como
         sea marcado.
     </string>
@@ -241,8 +240,8 @@
         escoger si deseas ordenar los ítems de manera ascendente o descendente y el criterio que debe ser utilizado para
         ordenar los mismos.
     </string>
-    <string name="help_how_to_delete_multiple_items">Elimina múltiples ítems</string>
-    <string name="help_how_to_delete_multiple_items_summary">Para eliminar múltiples ítems utiliza el icono de la
+    <string name="help_how_to_delete_multiple_items">Eliminar múltiples ítems</string>
+    <string name="help_how_to_delete_multiple_items_summary">Para eliminar múltiples ítems simultáneamente utiliza el icono de la
         papelera mostrado en la parte superior derecha de la pantalla. Luego de haber hecho clic en este icono, tendrás la
         oportunidad de seleccionar todos los ítems que deseas eliminar. Al final haz clic nuevamente en el icono de la
         papelera localizado en la parte inferior derecha. Esta operación no eliminará ningún dato relacionado con las
@@ -251,11 +250,11 @@
     <string name="help_how_to_search_products">Buscar productos en lista</string>
     <string name="help_how_to_search_products_summary">Para buscar productos en una lista debes utilizar el
         icono de la lupa que se encuentra en la parte superior de la ventana. Luego de hacer clic en él, aparecerá un campo en el que
-        podrás escribir las palabras que deseas buscar. La lista se filtrará a medida que estas escribiendo escribiendo, mostrando
-        así los ítems que coinciden con la búsqueda. Los ítems allí mostrados pueden ser manipulados tal y como se hace
+        podrás escribir las palabras que deseas buscar. La lista se filtrará a medida que estas escribiendo, mostrando
+        así los ítems que coincidan con la búsqueda. Los ítems allí mostrados pueden ser manipulados tal y como se hace
         en la vista original (marcar, editar, etc.).
     </string>
-    <string name="help_how_to_save_picture">Tomar foto</string>
+    <string name="help_how_to_save_picture">Guardar imagen</string>
     <string name="help_how_to_save_picture_summary">Para guardar una imagen de un producto se puede utilizar la cámara
         del dispositivo. Esta opción se encuentra localizada en la ventana de añadir o editar productos (Vea \"Añadir un
         producto\" y/o \"Editar, eliminar o compartir\"). Una vez estando allí, podrás hacer clic en la flecha hacia
@@ -271,11 +270,11 @@
     <string name="help_privacy_heading">Información de Privacidad</string>
     <string name="help_camera_permission_heading">Permiso para acceder a la cámara</string>
     <string name="help_camera_permission_description">Este permiso es necesario para poder tomar y guardar fotos de un
-        producto. Si el permiso es negado, la función no estará disponible. Negar este permiso no afecta las otras
+        producto. Si el permiso es negado, la función no podrá ser utilizada. Negar este permiso no afecta las otras
         funciones de la aplicación.
     </string>
     <string name="help_permissions_heading">Permisos</string>
-    <string name="help_permissions_description">No se requiere de otros permisos</string>
+    <string name="help_permissions_description">No se requiere de otros permisos.</string>
     <!-- Product Dialog -->
     <string name="product_name">Nombre</string>
     <string name="product_name_new">Nuevo producto</string>
@@ -341,17 +340,17 @@
         <item></item>
     </string-array>
     <string-array name="statistics_months">
-        <item>Ene</item>
-        <item>Feb</item>
-        <item>Mar</item>
-        <item>Abr</item>
-        <item>May</item>
-        <item>Jun</item>
-        <item>Jul</item>
-        <item>Ago</item>
-        <item>Sep</item>
-        <item>Oct</item>
-        <item>Nov</item>
-        <item>Dic</item>
+        <item>Ene.</item>
+        <item>Feb.</item>
+        <item>Mar.</item>
+        <item>Abr.</item>
+        <item>May.</item>
+        <item>Jun.</item>
+        <item>Jul.</item>
+        <item>Ago.</item>
+        <item>Sep.</item>
+        <item>Oct.</item>
+        <item>Nov.</item>
+        <item>Dic.</item>
     </string-array>
 </resources>

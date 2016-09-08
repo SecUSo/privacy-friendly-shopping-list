@@ -1,6 +1,5 @@
 <resources>
     <string name="app_name">Shopping List</string>
-
     <!--### GENERAL ### -->
     <string name="cancel">Cancel</string>
     <string name="delete">Delete</string>
@@ -17,7 +16,6 @@
     <string name="number_format_2_decimals" translatable="false">"###,###,###,##0.00"</string>
     <string name="currency">$</string>
     <string name="number_decimal_separator">.</string>
-
     <!-- ### TUTORIAL ### -->
     <string name="do_not_show_again" translatable="false">Don\'t show again!</string>
     <string name="tutorial_dialog_title">Tutorial</string>
@@ -38,7 +36,6 @@
             <i>off.</i>
         </b>
     </string>
-
     <string name="tutorial_add_product">... add a new product?</string>
     <string name="tutorial_delete_products">... delete multiple products?</string>
     <string name="tutorial_sort_products">... sort products?</string>
@@ -46,14 +43,13 @@
     <string name="tutorial_see_details_product">... see product details?</string>
     <string name="tutorial_check_product">... check products?</string>
     <string name="tutorial_check_statistics">If the statistics feature for the current list is enabled, products will be
-        added to the statistics every time they are checked. The same product can be added to the statistics
-        multiple times when being checked again. This allows you to uncheck products, reuse the list and still keep
+        added to the statistics every time you check them. The same product can be added to the statistics
+        multiple times. This allows you to uncheck products, reuse the list and still keep
         track of the checked items.
     </string>
     <string name="tutorial_multiple_delete">Select the items that you want to delete, press the delete icon and confirm
         this action.
     </string>
-
     <!-- Placeholders-->
     <string name="ph_list_name" translatable="false">List Name</string>
     <string name="ph_product_name" translatable="false">Product Name</string>
@@ -66,19 +62,16 @@
     <string name="ph_list_nr_items" translatable="false">X</string>
     <string name="ph_stats_title" translatable="false">Title</string>
     <string name="ph_lists_details" translatable="false">Priority: High\nNotes: some notes here</string>
-
     <!-- ### SHOPPING LIST ### -->
     <string name="activity_shopping_list">Shopping List:</string>
     <string name="nr_items">Nr. Items</string>
     <string name="total_list_amount">Total Amount</string>
     <string name="reminder_text">Reminder: %1$d %2$s before</string>
     <string name="lists_empty">(App Logo)\nYou don\'t have any shopping lists</string>
-
     <!-- ### NOTIFICATIONS ### -->
     <string name="notification_message">List name: %1$s\nDead line: %2$s</string>
     <string name="notification_setting_status">Notifications are disabled. Please go to settings and turn them on.
     </string>
-
     <!-- ### PRODUCTS ### -->
     <string name="new_product">New Product</string>
     <string name="product_already_exists">Product already exists in this list!</string>
@@ -91,14 +84,12 @@
     <string name="category_label">Category:</string>
     <string name="search">Search</string>
     <string name="no_products_found">No products found!</string>
-
     <string name="store_detail">Store: %1$s</string>
     <string name="category_detail">Category: %1$s</string>
     <string name="quantity_detail">Quantity: %1$s</string>
     <string name="price_detail">Price: %1$s</string>
     <string name="total_price_detail">Total Price: %1$s</string>
     <string name="notes_detail">Notes: %1$s</string>
-
     <!-- ### Statistics -->
     <string name="statistics_total_amout">Total:</string>
     <string name="statistics_range">Range:</string>
@@ -111,7 +102,6 @@
     <string name="no_scale_value" translatable="false">1</string>
     <string name="kilo_value" translatable="false">1000</string>
     <string name="million_value" translatable="false">1000000</string>
-
     <!-- ### SORT ### -->
     <string name="sort_options">Sort</string>
     <string name="sort_ascencing_descending">Ascending/Descending</string>
@@ -124,8 +114,6 @@
     <string name="sort_by_store">Store</string>
     <string name="sort_by_price">Price</string>
     <string name="sort_by_category">Category</string>
-
-
     <!-- ### DELETE ### -->
     <string name="delete_confirmation_title">Delete Confirmation</string>
     <string name="delete_foto_confirmation">Delete selected image (%1$s)? This operation cannot be undone!</string>
@@ -142,14 +130,12 @@
     <string name="delete_statistics_confirmation">Delete all currently saved statistics? This operation cannot be
         undone!
     </string>
-
     <!--### ABOUT ###-->
     <string name="about">About</string>
     <string name="version_number">Version 0.4 Beta</string>
     <string name="about_developper">Developers:</string>
     <string name="about_author_greb">Grebiel José Ifill Brito</string>
     <string name="about_author_cri">Christian König</string>
-
     <string name="about_author_contributors">contributors...</string>
     <string name="about_affiliation">In affiliation with</string>
     <string name="privacy_friendly">This application belongs to the group of Privacy Friendly Apps developed by
@@ -159,16 +145,13 @@
     <string name="url" translatable="false">
         <a href="https://www.secuso.org/pfa">https://www.secuso.org/pfa</a>
     </string>
-
     <!-- ### DRAWER ###-->
     <string name="action_help">Help</string>
     <string name="action_about">About</string>
     <string name="action_settings">Settings</string>
     <string name="action_main">Main</string>
-
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
-
     <!-- ### SETTINGS ### -->
     <string name="pref_header_general">General</string>
     <string name="title_activity_settings">Settings</string>
@@ -184,14 +167,12 @@
     <string name="pref_move_products_summary_off">Move checked products to the end of the list is off</string>
     <string name="pref_move_products_toast_on">Move checked products have been turned on!</string>
     <string name="pref_move_products_toast_off">Move checked products have been turned off!</string>
-
     <string name="pref_header_notifications">Notifications</string>
     <string name="pref_notifications_title">Reminder</string>
     <string name="pref_notifications_summary_on">Notifications for reminder turned on</string>
     <string name="pref_notifications_summary_off">Notifications for reminder turned off</string>
     <string name="pref_notifications_toast_on">Notifications for the reminder turned on!</string>
     <string name="pref_notifications_toast_off">Notifications for the reminder turned off!</string>
-
     <string name="pref_header_statistics">Statistics</string>
     <string name="pref_statistics_title">Set default</string>
     <string name="pref_statistics_summary_on">Statistics will be \"enabled\" per default when creating a new list.
@@ -202,14 +183,11 @@
         are checked.
     </string>
     <string name="pref_statistics_toast_off">Statistics turned off!</string>
-
     <string name="pref_statistics_delete">Delete</string>
     <string name="pref_statistics_delete_summary">Delete all data from saved statistics</string>
-
     <string name="pref_header_currency">Currency</string>
     <string name="pref_currency_title">Select currency</string>
     <string name="pref_currency_summary">$</string>
-
     <!-- ### WELCOME DIALOG ### -->
     <string name="welcome_text">Welcome to the Privacy Friendly Shopping List. Follow the tutorial instructions to
         create your first list. You can customize the default settings for notifications, statistics and others in the
@@ -220,7 +198,6 @@
     <string name="okay">Okay</string>
     <string name="viewhelp">View Help</string>
     <string name="main_button_welcomedialog" translatable="false">Show Welcome</string>
-
     <!--### HELP ###-->
     <string name="help">Help</string>
     <string name="help_overview_heading">Overview</string>
@@ -234,7 +211,6 @@
         a category, the store where the item is to be purchased, some notes and a photo by using the camera of your
         device.
     </string>
-
     <string name="help_how_tos_lists">How To\'s</string>
     <string name="help_how_to_create_a_list">Create a List</string>
     <string name="help_how_to_create_a_list_summary">To create a list go to the main menu and press the plus (+) button.
@@ -244,20 +220,17 @@
         side
         of the card.
     </string>
-
     <string name="help_how_to_create_a_product">Add a Product</string>
     <string name="help_how_to_create_a_product_summary">Once you have created a list, you will jump automatically inside
         of the new list. To add a product to this list press the plus (+) button. Then fill the fields shown in the
         dialog and press OKAY. There field \"Product Name\" is mandatory.
     </string>
-
     <string name="help_how_to_edit_a_list">Edit, Delete or Share</string>
     <string name="help_how_to_edit_a_list_summary">To edit, delete, or share a list or a product you must click the
-        item and hold on pressing it until you see a dialog where the mentioned options are shown.
-        Then you can select the option you would like to perform. Notice that the delete operation will not delete any
+        item and hold on pressing for about three seconds, then you see a dialog where the mentioned options are shown.
+        After that you can select the option you would like to perform. Notice that the delete operation will not delete any
         data saved in the statistics.
     </string>
-
     <string name="help_how_to_enable_statistics">Enable Statistics</string>
     <string name="help_how_to_enable_statistics_summary">Once you are in the list dialog (See \"Create a List\"),
         you can enable the statistics by using the switch button next the to icon with three bars. After this option
@@ -266,17 +239,15 @@
         in the statistics. This allows you to reuse the same shopping list over and over and being able to keep track
         of your purchases.
     </string>
-
     <string name="help_how_to_setup_deadline">Setup a Deadline</string>
     <string name="help_how_to_setup_deadline_summary">Once you are in the list dialog (See \"Create a List\"),
         you can set a deadline to the list by clicking the checkbox (\"Deadline\") and adding a date and a time. If the
         deadline has passed and there are still unchecked items in the list, then the vertical bar on the left side of
         the
-        list item will turn red. If all items are checked, then the bar is grey. The default color of this bar is blue.
+        list item will turn red. If all items are checked, then the bar is gray. The default color of this bar is blue.
         If
         a deadline is set you will see the date and the time in the card as well.
     </string>
-
     <string name="help_how_to_setup_reminder">Setup a Reminder</string>
     <string name="help_how_to_setup_reminder_summary">If you have setup a deadline (See \"Setup a Deadline\"), then
         you will see the option to setup a reminder. Switch the reminder option on and select how many minutes hours,
@@ -286,13 +257,11 @@
         bar on the left side of the list item will turn yellow. If a reminder is set then you will see an alarm icon
         next to the deadline. This icon will be red if the notifications have been disabled in settings.
     </string>
-
     <string name="help_how_to_sort_lists">Sort Items</string>
     <string name="help_how_to_sort_lists_summary">To sort items use the icon with the three horizontal lines located in
         the action bar. After clicking in this icon you will see two groups of options. You can select whether the items
         should be sorted ascending or descending and the parameter that should be used to sort the items.
     </string>
-
     <string name="help_how_to_delete_multiple_items">Delete Multiple Items</string>
     <string name="help_how_to_delete_multiple_items_summary">To delete multiple items use the trashcan icon located in
         the action bar. After clicking in this icon you will have a view where you can select all the items that should
@@ -301,14 +270,12 @@
         The items will now be successfully deleted. Notice that the delete operation will not delete any data saved in
         the statistics.
     </string>
-
     <string name="help_how_to_search_products">Search Products in List</string>
     <string name="help_how_to_search_products_summary">To search for products in a list use the magnifier glass icon
         located in the action bar of the current list. After clicking in this icon you will see a field, where you can
         type the words you are looking for. As you type, the product list will be filtered, showing only the products
         that match the search. You can manipulate the filtered products as before.
     </string>
-
     <string name="help_how_to_save_picture">Take a Picture</string>
     <string name="help_how_to_save_picture_summary">You can use the device\'s camera to take a picture of a certain
         product and save it. This option is located in the add product dialog (See \"Add a Product\"), or in the edit
@@ -317,15 +284,12 @@
         of a product. Please notice that this image can only be accessed by the Privacy Friendly Shopping List App.
         There is no possibility to share this image.
     </string>
-
     <string name="help_settings_heading">Settings</string>
     <string name="help_settings_summary">In the settings page you can customize some options to make the app more
         comfortable for you. You can choose for example whether the checkbox to check products should be on the left or
         on the right, whether the notifications should be on/off, and some other options. Visit the settings section to
         find out more!
     </string>
-
-
     <string name="help_privacy_heading">Privacy Info</string>
     <string name="help_camera_permission_heading">Permission for camera access</string>
     <string name="help_camera_permission_description">This permission is needed in order to be able to take a picture
@@ -335,7 +299,6 @@
     <string name="help_permissions_heading">Permissions</string>
     <string name="help_permissions_description">Other permissions are not required.</string>
     <!-- Product Dialog -->
-
     <string name="product_name">Product Name</string>
     <string name="product_name_new">New Product</string>
     <string name="product_name_edit">Edit Product</string>
@@ -350,17 +313,14 @@
     <string name="product_as_title">Product: %1$s</string>
     <string name="close_image">Close</string>
     <string name="edit_dialog_product">Edit, delete or share product?</string>
-
     <!-- Shopping List Dialog -->
     <string name="list_name">Shopping List Name</string>
     <string name="list_name_new">New List</string>
     <string name="list_name_edit">Edit Shopping List</string>
     <string name="list_as_title">List: %1$s</string>
-
     <string name="priority">Priority</string>
     <string name="priority_high">High</string>
     <string name="priority_normal">Normal</string>
-
     <string name="deadline_date">Date</string>
     <string name="deadline_time">Time</string>
     <string name="deadline">Deadline</string>
@@ -369,18 +329,15 @@
     <string name="list_notes">Notes</string>
     <string name="default_list_name">New Shopping List</string>
     <string name="edit_dialog_list">Edit, delete or share list?</string>
-
     <!-- Sharing -->
     <string name="no_products">This list does not contain any products.</string>
     <string name="share_as_text">Share as Text</string>
-
     <string-array
             name="shopping_list_priority_spinner">
         <item>High</item>
         <item>Normal</item>
         <item>Priority</item>
     </string-array>
-
     <string-array
             name="shopping_list_reminder_spinner">
         <item>Minutes</item>
@@ -389,7 +346,6 @@
         <item>Weeks</item>
         <item>Reminder</item>
     </string-array>
-
     <string-array name="statistics_spinner_group_by">
         <item>Month</item>
         <item>Week</item>
@@ -398,18 +354,15 @@
         <item>Store</item>
         <item>Product</item>
     </string-array>
-
     <string-array name="statistics_spinner_values">
         <item>Price</item>
         <item>Quantity</item>
     </string-array>
-
     <string-array name="statistics_enabled_text">
         <item>Statistics are enabled for this list.</item>
         <item>Statistics are disabled for this list.</item>
         <item></item>
     </string-array>
-
     <string-array name="statistics_months">
         <item>Jan</item>
         <item>Feb</item>
@@ -424,6 +377,4 @@
         <item>Nov</item>
         <item>Dec</item>
     </string-array>
-
-
 </resources>

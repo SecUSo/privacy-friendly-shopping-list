@@ -6,16 +6,15 @@
     <string name="delete">Löschen</string>
     <string name="share">Teilen</string>
     <string name="edit">Bearbeiten</string>
-    <string name="language">US</string>
+    <string name="language">DE</string>
     <string name="date_long_pattern">EE MM/dd/yyyy HH:mm</string>
     <string name="date_short_pattern">EE MM/dd/yyyy</string>
     <string name="date_day_stats_pattern">MM/dd/yy</string>
     <string name="date_month_pattern">MMM yy</string>
     <string name="time_pattern">HH:mm</string>
-    <string name="currency">$</string>
+    <string name="currency">€</string>
 
     <!-- ### TUTORIAL ### -->
-    <string name="do_not_show_again">Don\'t show again!</string>
     <string name="tutorial_dialog_title">Tutorial</string>
     <string name="tutorial_how_to">So geht es:</string>
     <string name="tutorial_create_list">... eine neue Liste erstellen?</string>
@@ -89,7 +88,6 @@
     <string name="statistics_group_by">Gruppieren nach:</string>
     <string name="statistics_y_values">Werte:</string>
     <string name="statistics_quantity_unit">Einheit</string>
-    <string name="billion_value">1000000000000</string>
 
     <!-- ### SORT ### -->
     <string name="sort_options">Sortieroptionen</string>
