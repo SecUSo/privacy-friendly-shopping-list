@@ -20,9 +20,15 @@ import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.mai
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.products.listadapter.ProductsAdapter;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.products.listeners.*;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.settings.SettingsKeys;
+import rx.Observable;
+import rx.Subscriber;
+import rx.Subscription;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.schedulers.Schedulers;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Description:
@@ -44,6 +50,8 @@ public class ProductsActivity extends AppCompatActivity
     private ProductActivityCache cache;
     private String listId;
     private ListDto listDto;
+    private Subscriber<Long> alertUpdateSubscriber;
+    private Subscription alertSubscriber;
 
     @Override
     protected final void onCreate(final Bundle savedInstanceState)
@@ -70,6 +78,8 @@ public class ProductsActivity extends AppCompatActivity
                     updateListView();
                 })
                 .subscribe();
+
+        setupAlertSubscriber();
 
         overridePendingTransition(0, 0);
     }
@@ -123,10 +133,12 @@ public class ProductsActivity extends AppCompatActivity
                     if ( allProducts.isEmpty() )
                     {
                         cache.getNoProductsLayout().setVisibility(View.VISIBLE);
+                        subscribeAlert();
                     }
                     else
                     {
                         cache.getNoProductsLayout().setVisibility(View.GONE);
+                        unsubscribeAlert();
                     }
 
                     // sort according to last sort selection
@@ -148,6 +160,24 @@ public class ProductsActivity extends AppCompatActivity
                             .subscribe();
                 })
                 .subscribe();
+    }
+
+    private void subscribeAlert()
+    {
+        alertSubscriber = Observable.interval(1L, TimeUnit.SECONDS)
+                .subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .doOnNext(x -> alertUpdateSubscriber.onNext(x))
+                .subscribe();
+    }
+
+    private void unsubscribeAlert()
+    {
+        if (alertSubscriber != null && !alertSubscriber.isUnsubscribed())
+        {
+            cache.getAlertTextView().setVisibility(View.GONE);
+            alertSubscriber.unsubscribe();
+        }
     }
 
     public void updateTotals()
@@ -205,5 +235,36 @@ public class ProductsActivity extends AppCompatActivity
     {
         cache.getProductsAdapter().setProductsList(sortedProducts);
         cache.getProductsAdapter().notifyDataSetChanged();
+    }
+
+    private void setupAlertSubscriber()
+    {
+        alertUpdateSubscriber = new Subscriber<Long>()
+        {
+            @Override
+            public void onCompleted()
+            {
+
+            }
+
+            @Override
+            public void onError(Throwable e)
+            {
+
+            }
+
+            @Override
+            public void onNext(Long time)
+            {
+                if ( time % 2 != 0 )
+                {
+                    cache.getAlertTextView().setVisibility(View.GONE);
+                }
+                else
+                {
+                    cache.getAlertTextView().setVisibility(View.VISIBLE);
+                }
+            }
+        };
     }
 }

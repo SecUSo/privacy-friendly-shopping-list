@@ -72,6 +72,33 @@
                 app:layout_anchorGravity="bottom|right|end"
                 app:layout_behavior=".ui.fab.ScrollAwareFabBehavior"/>
 
+        <LinearLayout
+                android:visibility="gone"
+                android:id="@+id/insert_alert"
+                android:orientation="horizontal"
+                android:layout_margin="@dimen/fab_margin"
+                android:paddingRight="70dp"
+                android:gravity="center_vertical"
+                app:layout_anchor="@id/fab_new_product"
+                app:layout_anchorGravity="bottom|left"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp">
+
+            <TextView
+                    android:text="@string/alert_message_product"
+                    android:gravity="center_vertical"
+                    android:textStyle="bold|italic"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+            <ImageView
+                    android:tint="@color/colorPrimary"
+                    android:src="@drawable/ic_keyboard_arrow_right_black_24dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+        </LinearLayout>
+
     </android.support.design.widget.CoordinatorLayout>
 
     <LinearLayout

@@ -18,9 +18,15 @@ import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.mai
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.main.listeners.ShowDeleteListsOnClickListener;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.main.listeners.SortOnClickListener;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.settings.SettingsKeys;
+import rx.Observable;
+import rx.Subscriber;
+import rx.Subscription;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.schedulers.Schedulers;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Description:
@@ -32,6 +38,8 @@ public class MainActivity extends BaseActivity
     public static final String LIST_ID_KEY = "list.id";
     private ShoppingListService shoppingListService;
     private ShoppingListActivityCache cache;
+    private Subscriber<Long> alertUpdateSubscriber;
+    private Subscription alertSubscriber;
 
 
     @Override
@@ -61,6 +69,7 @@ public class MainActivity extends BaseActivity
         }
 
         cache.getNewListFab().setOnClickListener(new AddOnClickListener(cache));
+        setupAlertSubscriber();
 
         overridePendingTransition(0, 0);
     }
@@ -107,10 +116,12 @@ public class MainActivity extends BaseActivity
                     if ( allListDtos.isEmpty() )
                     {
                         cache.getNoListsLayout().setVisibility(View.VISIBLE);
+                        subscribeAlert();
                     }
                     else
                     {
                         cache.getNoListsLayout().setVisibility(View.GONE);
+                        unsubscribeAlert();
                     }
 
                     // sort according to last sort selection
@@ -123,6 +134,55 @@ public class MainActivity extends BaseActivity
                     cache.getListAdapter().notifyDataSetChanged();
                 })
                 .subscribe();
+    }
+
+    private void subscribeAlert()
+    {
+        alertSubscriber = Observable.interval(1L, TimeUnit.SECONDS)
+                .subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .doOnNext(x -> alertUpdateSubscriber.onNext(x))
+                .subscribe();
+    }
+
+    private void unsubscribeAlert()
+    {
+        if (alertSubscriber != null && !alertSubscriber.isUnsubscribed())
+        {
+            cache.getAlertTextView().setVisibility(View.GONE);
+            alertSubscriber.unsubscribe();
+        }
+    }
+
+    private void setupAlertSubscriber()
+    {
+        alertUpdateSubscriber = new Subscriber<Long>()
+        {
+            @Override
+            public void onCompleted()
+            {
+
+            }
+
+            @Override
+            public void onError(Throwable e)
+            {
+
+            }
+
+            @Override
+            public void onNext(Long time)
+            {
+                if ( time % 2 != 0 )
+                {
+                    cache.getAlertTextView().setVisibility(View.GONE);
+                }
+                else
+                {
+                    cache.getAlertTextView().setVisibility(View.VISIBLE);
+                }
+            }
+        };
     }
 
     public void reorderListView(List<ListDto> sortedList)

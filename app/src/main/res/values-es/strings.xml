@@ -51,6 +51,8 @@
     <string name="total_list_amount">Monto total</string>
     <string name="reminder_text">Recordatorio: %1$d %2$s antes</string>
     <string name="lists_empty">(App Logo)\nNo existen listas</string>
+    <string name="alert_message_list">CREAR LISTA</string>
+    <string name="alert_message_product">AÑADIR PRODUCTO</string>
     <!-- ### NOTIFICATIONS ### -->
     <string name="notification_message">Lista: %1$s\nFecha tope: %2$s</string>
     <!-- ### PRODUCTS ### -->

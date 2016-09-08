@@ -68,6 +68,8 @@
     <string name="total_list_amount">Total Amount</string>
     <string name="reminder_text">Reminder: %1$d %2$s before</string>
     <string name="lists_empty">(App Logo)\nYou don\'t have any shopping lists</string>
+    <string name="alert_message_list">CREATE A LIST</string>
+    <string name="alert_message_product">ADD A PRODUCT</string>
     <!-- ### NOTIFICATIONS ### -->
     <string name="notification_message">List name: %1$s\nDead line: %2$s</string>
     <string name="notification_setting_status">Notifications are disabled. Please go to settings and turn them on.

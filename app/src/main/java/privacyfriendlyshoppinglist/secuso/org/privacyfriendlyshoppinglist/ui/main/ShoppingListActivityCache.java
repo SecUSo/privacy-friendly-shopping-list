@@ -21,6 +21,7 @@ public class ShoppingListActivityCache
     private FloatingActionButton newListFab;
     private ListsAdapter listAdapter;
     private LinearLayout noListsLayout;
+    private LinearLayout alertTextView;
 
     public ShoppingListActivityCache(AppCompatActivity activity)
     {
@@ -33,6 +34,7 @@ public class ShoppingListActivityCache
         recyclerView.setAdapter(listAdapter);
 
         newListFab = (FloatingActionButton) activity.findViewById(R.id.fab_new_list);
+        alertTextView = (LinearLayout) activity.findViewById(R.id.insert_alert);
 
         noListsLayout = (LinearLayout) activity.findViewById(R.id.no_lists_layout);
     }
@@ -55,5 +57,10 @@ public class ShoppingListActivityCache
     public LinearLayout getNoListsLayout()
     {
         return noListsLayout;
+    }
+
+    public LinearLayout getAlertTextView()
+    {
+        return alertTextView;
     }
 }

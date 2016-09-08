@@ -26,6 +26,8 @@ import rx.Observable;
  */
 public class MessageUtils
 {
+    private static Toast toast;
+
     private static int NOTHING = -1;
 
     public static void shareText(Context context, String text)
@@ -49,7 +51,14 @@ public class MessageUtils
 
     public static void showToast(Context context, int messageStringResource, int toastLength)
     {
-        Toast toast = Toast.makeText(context, messageStringResource, toastLength);
+        if ( toast == null )
+        {
+            toast = Toast.makeText(context, messageStringResource, toastLength);
+        }
+        else
+        {
+            toast.setText(messageStringResource);
+        }
         toast.setGravity(Gravity.CENTER, 0, 0);
         toast.show();
     }

@@ -39,6 +39,7 @@ public class ProductActivityCache
     private TextInputLayout searchTextInputLayout;
     private AutoCompleteTextView searchAutoCompleteTextView;
     private ImageButton cancelSarchButton;
+    private LinearLayout alertTextView;
 
     public ProductActivityCache(AppCompatActivity activity, String listId, String listName, boolean statisticsEnabled)
     {
@@ -62,6 +63,7 @@ public class ProductActivityCache
         searchTextInputLayout = (TextInputLayout) activity.findViewById(R.id.search_input_layout);
         searchAutoCompleteTextView = (AutoCompleteTextView) activity.findViewById(R.id.search_input_text);
         cancelSarchButton = (ImageButton) activity.findViewById(R.id.cancel_search);
+        alertTextView = (LinearLayout) activity.findViewById(R.id.insert_alert);
 
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(activity);
         String defaultCurrency = activity.getResources().getString(R.string.currency);
@@ -137,5 +139,10 @@ public class ProductActivityCache
     public ImageButton getCancelSarchButton()
     {
         return cancelSarchButton;
+    }
+
+    public LinearLayout getAlertTextView()
+    {
+        return alertTextView;
     }
 }
