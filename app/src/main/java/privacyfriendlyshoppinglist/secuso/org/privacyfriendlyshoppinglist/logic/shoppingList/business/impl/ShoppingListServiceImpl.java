@@ -118,6 +118,7 @@ public class ShoppingListServiceImpl implements ShoppingListService
     public int getReminderStatusResource(ListDto dto, List<ProductDto> productDtos)
     {
         int reminderStatus = R.drawable.reminder_status_neutral;
+        DateTime nowDate = new DateTime();
         if ( productDtos.isEmpty() )
         {
             reminderStatus = R.drawable.reminder_status_done;
@@ -126,12 +127,19 @@ public class ShoppingListServiceImpl implements ShoppingListService
         {
             DateTime deadLine = getDeadLine(dto);
             DateTime reminderDate = getReminderDate(dto);
-            DateTime nowDate = new DateTime();
             if ( nowDate.isBefore(deadLine) && !nowDate.isBefore(reminderDate) )
             {
                 reminderStatus = R.drawable.reminder_status_triggered;
             }
             else if ( deadLine.isBefore(nowDate) )
+            {
+                reminderStatus = R.drawable.reminder_status_time_over;
+            }
+        }
+        else if ( !StringUtils.isEmpty(dto.getDeadlineDate()) )
+        {
+            DateTime deadLine = getDeadLine(dto);
+            if ( deadLine.isBefore(nowDate) )
             {
                 reminderStatus = R.drawable.reminder_status_time_over;
             }
