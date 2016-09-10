@@ -215,34 +215,34 @@
     <string name="help_overview_heading">Übersicht</string>
     <string name="help_intro1">Willkommen zur Hilfsseite der Privacy Friendly Shopping List. Die App ermöglicht euch
         nicht nur Listen anzulegen und Produkte darin zu erfassen, sondern ebenfalls Prioritäten für Listen festzulegen,
-        Deadlines und Erinnerungen
-        für Listen zu setzen, und Notizen
-        zu Listen oder Produkten anzufügen. Das Statistik-Feature ermöglicht euch zusätzlich eure Ausgaben zu erfassen
-        und graphisch darzustellen.
+        Deadlines und Erinnerungen für Listen zu setzen, und Notizen zu Listen oder Produkten anzufügen.
     </string>
-    <string name="help_intro2">Eine Einkaufsliste besteht aus Produkteinträgen. Zusätzlich zu Produktname, Menge und
-        Preis kann eine Kategorie und der Einkaufsort
-        eingepflegt werden. Darüberhinaus können Notizen vermerkt und über die Nutzung der Gerätekamera auch ein Foto
-        eingefügt werden.
+    <string name="help_intro2">Das Statistik-Feature ermöglicht euch zusätzlich eure Ausgaben zu erfassen und graphisch darzustellen.
+    </string>
+    <string name="help_intro3">Eine Einkaufsliste besteht aus Produkteinträgen. Zusätzlich zu Produktname, Menge und
+        Preis kann eine Kategorie und der Einkaufsort eingepflegt werden. Darüberhinaus können Notizen vermerkt und über
+        die Nutzung der Gerätekamera auch ein Foto eingefügt werden.
     </string>
 
     <string name="help_how_tos_lists">Wie funktioniert\'s</string>
     <string name="help_how_to_create_a_list">Eine Liste erstellen</string>
-    <string name="help_how_to_create_a_list_summary">Um eine neue Liste zu erstellen, wechselst du in das Hauptmenü und
+    <string name="help_how_to_create_a_list_summary1">Um eine neue Liste zu erstellen, wechselst du in das Hauptmenü und
         drückst das (+) Symbol in der rechten unteren Ecke. Fülle alle gewünschten Dialogfelder aus und bestätige den
         Dialog mit OKAY.
-        Für Listen gibt es keine Pflichtfelder. Bleibt der Listenname leer, wird ein Standardname vergeben.
-        Wird eine Liste mit hoher Priorität deklariert, so erscheint in der Listenübersicht ein kleines Symbol
-        mit Ausrufezeichen rechts neben der betroffenen Liste.
+    </string>
+    <string name="help_how_to_create_a_list_summary2">Für Listen gibt es keine Pflichtfelder. Bleibt der Listenname leer,
+        wird ein Standardname vergeben. Wird eine Liste mit hoher Priorität deklariert, so erscheint in der Listenübersicht
+        ein kleines Symbol mit Ausrufezeichen rechts neben der betroffenen Liste.
     </string>
 
     <string name="help_how_to_create_a_product">Ein Produkt hinzufügen</string>
-    <string name="help_how_to_create_a_product_summary">Nachdem eine Liste erstellt wurde, springt die App automatisch
-        in diese Liste und ist bereit zum Erstellen neuer Produkte.
-        Dafür drückst du wiederum auf das (+) Symbol in der unteren rechten Ecke. Fülle nach Belieben die Dialogfelder
-        aus, wobei diesmal ein Produktname erforderlich ist, um den Dialog
-        schließen zu können. Wenn du fertig bist mit dem Ausfüllen der Produktinformationen, kann über den OKAY Knopf
-        der Dialog geschlossen werden.
+    <string name="help_how_to_create_a_product_summary1">Nachdem eine Liste erstellt wurde, springt die App automatisch
+        in diese Liste und ist bereit zum Erstellen neuer Produkte. Dafür drückst du wiederum auf das (+) Symbol in der
+        unteren rechten Ecke.
+    </string>
+    <string name="help_how_to_create_a_product_summary2">Fülle nach Belieben die Dialogfelder aus, wobei diesmal ein
+        Produktname erforderlich ist, um den Dialog schließen zu können. Wenn du fertig bist mit dem Ausfüllen der
+        Produktinformationen, kann über den OKAY Knopf der Dialog geschlossen werden.
     </string>
 
     <string name="help_how_to_edit_a_list">Bearbeiten, Löschen, oder Teilen</string>
@@ -254,32 +254,31 @@
     </string>
 
     <string name="help_how_to_enable_statistics">Statistiken aktivieren</string>
-    <string name="help_how_to_enable_statistics_summary">Im Listendialog (siehe \"Eine Liste erstellen\") kann das
+    <string name="help_how_to_enable_statistics_summary1">Im Listendialog (siehe \"Eine Liste erstellen\") kann das
         Statistik-Feature individuell für diese Liste aktiviert oder deaktiviert werden. Dafür steht der Schiebeschalter
-        neben dem Symbol in drei Balken zur
-        Verfügung. Ist dieser Schalter aktiviert, werden Produkte
-        nach dem Abhaken in der Statistik erfasst. Durch mehrfaches Abhaken werden Produkte mehrfach in der
+        neben dem Symbol in drei Balken zur Verfügung. Ist dieser Schalter aktiviert, werden Produkte
+        nach dem Abhaken in der Statistik erfasst.
+    </string>
+    <string name="help_how_to_enable_statistics_summary2">Durch mehrfaches Abhaken werden Produkte mehrfach in der
         Statistik erfasst.
     </string>
 
     <string name="help_how_to_setup_deadline">Eine Deadline einstellen</string>
-    <string name="help_how_to_setup_deadline_summary">Im Listendialog (siehe \"Eine Liste erstellen\") kann, wozu auf
-        das Kontrollkästchen (\"Deadline\")
-        geklickt werden muss. Danach kann ein Datum und eine Uhrzeit eingestellt werden. Ist eine Deadline gesetzt, wird
-        am linken Rand der Produktkarte standardmäßg ein blauer Streifen
-        angezeigt. Ist die Deadline abgelaufen und befinden sich noch nicht abgehakte Produkte in der Liste, wird dieser
-        Streifen
-        rot. Sind alle Produkte abgehakt, wird der Streifen grau.
+    <string name="help_how_to_setup_deadline_summary1">Im Listendialog (siehe \"Eine Liste erstellen\") kann, wozu auf
+        das Kontrollkästchen (\"Deadline\") geklickt werden muss. Danach kann ein Datum und eine Uhrzeit eingestellt werden.
+    </string>
+    <string name="help_how_to_setup_deadline_summary2">Ist eine Deadline gesetzt, wird am linken Rand der Produktkarte
+        standardmäßg ein blauer Streifen angezeigt. Ist die Deadline abgelaufen und befinden sich noch nicht abgehakte
+        Produkte in der Liste, wird dieser Streifen rot. Sind alle Produkte abgehakt, wird der Streifen grau.
     </string>
 
     <string name="help_how_to_setup_reminder">Eine Erinnerung einstellen</string>
-    <string name="help_how_to_setup_reminder_summary">Wird eine Deadline gesetzt, erscheint im Dialog die Option einer
-        Erinnerung.
-        Wird der Schiebeschalter aktiviert, kann eingestellt werden wieviele Minuten, Stunden, etc.
+    <string name="help_how_to_setup_reminder_summary1">Wird eine Deadline gesetzt, erscheint im Dialog die Option einer
+        Erinnerung. Wird der Schiebeschalter aktiviert, kann eingestellt werden wieviele Minuten, Stunden, etc.
         vor Eintreten der Deadline eine Erinnerung in Form Benachrichtigung auf dem Telefon angezeigt werden soll.
-        Es erscheint zusätzlich ein Symbol in Form eines Weckers in der Listenansicht. Dieses ist rot gefärbt, sofern in
-        den
-        die Standardeinstellung für Benachrichtigungen deaktiviert ist.
+    </string>
+    <string name="help_how_to_setup_reminder_summary2">Es erscheint zusätzlich ein Symbol in Form eines Weckers in der
+        Listenansicht. Dieses ist rot gefärbt, sofern in den die Standardeinstellung für Benachrichtigungen deaktiviert ist.
     </string>
 
     <string name="help_how_to_sort_lists">Elemente sortieren</string>
@@ -290,33 +289,41 @@
     </string>
 
     <string name="help_how_to_delete_multiple_items">Mehrere Elemente löschen</string>
-    <string name="help_how_to_delete_multiple_items_summary">Um mehrere Elemente zu löschen, kannst du auf das
+    <string name="help_how_to_delete_multiple_items_summary1">Um mehrere Elemente zu löschen, kannst du auf das
         Mülleimersymbol klicken. Danach kannst du alle Elemente durch einen Klick darauf auswählen, die gelöscht werden
-        sollen. Zum Abschluss der Aktion musst du auf das Symbol in der unteren rechten Ecke drucken. Hier
-        wirst du erneut aufgefordert deine Aktion zu bestätigen. Das Löschen beeinflusst keine bereits gespeicherte
-        Statistikdaten, die mit diesen Elementen zusammenhingen.
+        sollen.
+    </string>
+    <string name="help_how_to_delete_multiple_items_summary2">Zum Abschluss der Aktion musst du auf das Symbol in der
+        unteren rechten Ecke drucken. Hier wirst du erneut aufgefordert deine Aktion zu bestätigen. Das Löschen beeinflusst
+        keine bereits gespeicherte Statistikdaten, die mit diesen Elementen zusammenhingen.
     </string>
 
     <string name="help_how_to_search_products">Produkte in Listen suchen</string>
-    <string name="help_how_to_search_products_summary">Um Produkte in einer Liste einfacher zu finden, kannst du eine
+    <string name="help_how_to_search_products_summary1">Um Produkte in einer Liste einfacher zu finden, kannst du eine
         Suchfunktion benutzen. Diese ist mit dem Lupensymbol aufrufbar. Nach dem Klick auf die Lupe kann in der
-        Suchmaske eine Eingabe vorgenommen werden. Während des Schreibens wird die Liste der vorhandenen Elemente
+        Suchmaske eine Eingabe vorgenommen werden.
+    </string>
+    <string name="help_how_to_search_products_summary2">Während des Schreibens wird die Liste der vorhandenen Elemente
         entsprechend der Eingabe gefiltert.
     </string>
 
     <string name="help_how_to_save_picture">Ein Foto aufnehmen</string>
-    <string name="help_how_to_save_picture_summary">Um für bestimmte Produkte eine visuelle Erinnerungshilfe zu haben,
+    <string name="help_how_to_save_picture_summary1">Um für bestimmte Produkte eine visuelle Erinnerungshilfe zu haben,
         steht dir eine Fotofunktion im Produktdialog zur Verfügung. Dazu wird die Gerätekamera verwendet und erfordert
-        die entsprechende Berechtigung (siehe unten \"Privacy Information\"). Durch Klick auf das Kamerasymbol kann
+        die entsprechende Berechtigung (siehe unten \"Privacy Information\").
+    </string>
+    <string name="help_how_to_save_picture_summary2">Durch Klick auf das Kamerasymbol kann
         ein Bild geschossen und und gespeichert werden. Dieses erscheint dann als
         vergrößerbares Bild im Produktdialog.
     </string>
 
     <string name="help_settings_heading">Einstellungen</string>
-    <string name="help_settings_summary">Unter dem Menüpunkt Einstellungen kannst du die App in verschiedener Weise
-        personalisieren, um ihren Gebrauch für dich komfortabler zu machen. So kannst du z.B. auswählen, ob das
-        Kontrollkästchen für Produkte auf der linken oder rechten Seite erscheinen soll, ob Benachrichtigungen ein- oder
-        ausgeschaltet sein sollen, und vieles mehr. Alle Einstellungen werden auch im Menüpunkt erklärt.
+    <string name="help_settings_summary1">Unter dem Menüpunkt Einstellungen kannst du die App in verschiedener Weise
+        personalisieren, um ihren Gebrauch für dich komfortabler zu machen.
+    </string>
+    <string name="help_settings_summary2">Du kannst z.B. auswählen, ob das Kontrollkästchen für Produkte auf der linken
+        oder rechten Seite erscheinen soll, ob Benachrichtigungen ein- oder ausgeschaltet sein sollen, und vieles mehr.
+        Alle Einstellungen werden auch im Menüpunkt erklärt.
     </string>
 
 
