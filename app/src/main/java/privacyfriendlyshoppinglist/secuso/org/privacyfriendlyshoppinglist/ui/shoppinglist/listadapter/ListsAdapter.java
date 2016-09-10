@@ -1,6 +1,7 @@
 package privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.shoppinglist.listadapter;
 
 import android.content.Context;
+import android.preference.PreferenceManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,6 +9,7 @@ import android.view.ViewGroup;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.R;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.shoppingList.business.domain.ListDto;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.main.ShoppingListActivityCache;
+import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.settings.SettingsKeys;
 
 import java.util.List;
 
@@ -39,7 +41,8 @@ public class ListsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         Context context = parent.getContext();
-        View view = LayoutInflater.from(context).inflate(R.layout.shopping_list_item, parent, false);
+        int listItemLayout = getListItemLayout();
+        View view = LayoutInflater.from(context).inflate(listItemLayout, parent, false);
         return new ListsItemViewHolder(view, cache);
     }
 
@@ -53,6 +56,20 @@ public class ListsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
     @Override
     public int getItemCount() {
         return shoppingList == null ? 0 : shoppingList.size();
+    }
+
+    private int getListItemLayout()
+    {
+        int listItemLayout;
+        if ( PreferenceManager.getDefaultSharedPreferences(cache.getActivity()).getBoolean(SettingsKeys.CHECKBOX_POSITION_PREF, true) )
+        {
+            listItemLayout = R.layout.shopping_list_item;
+        }
+        else
+        {
+            listItemLayout = R.layout.shopping_list_item_left_hand;
+        }
+        return listItemLayout;
     }
 
 }

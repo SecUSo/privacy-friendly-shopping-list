@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:card_view="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/cardview_item"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_margin="8dp"
+        card_view:cardCornerRadius="@dimen/card_corner_radius">
+
+    <ImageView
+            android:id="@+id/reminder_bar"
+            android:layout_width="@dimen/status_width"
+            android:layout_height="match_parent"
+            android:src="@drawable/button_normal"
+            android:layout_alignParentLeft="true"/>
+
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+        <RelativeLayout
+                android:id="@+id/summary_layout"
+                android:layout_width="wrap_content"
+                android:layout_height="?attr/listPreferredItemHeight">
+            <TextView
+                    android:id="@+id/textview_list_name"
+                    android:text="@string/ph_list_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginRight="50dp"
+                    android:ellipsize="end"
+                    android:singleLine="true"
+                    android:gravity="center_vertical"
+                    android:padding="@dimen/list_padding"
+                    android:layout_marginLeft="50dp"
+                    android:textSize="@dimen/text_medium"
+                    style="@style/Base.TextAppearance.AppCompat.Body2"/>
+            <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignStart="@+id/textview_list_name"
+                    android:layout_height="wrap_content">
+                <TextView
+                        android:id="@+id/textview_list_info"
+                        android:text="@string/date_short_pattern"
+                        android:ellipsize="end"
+                        android:singleLine="true"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        android:padding="@dimen/list_padding"
+                        android:layout_marginLeft="@dimen/list_margin"
+                        android:textSize="@dimen/text_small"
+                        android:textColor="@color/middlegrey"
+                        style="@style/Base.TextAppearance.AppCompat.Body2"/>
+                <ImageView
+                        android:id="@+id/imageview_reminder_icon"
+                        android:tint="@color/middlegrey"
+                        android:src="@drawable/ic_perm_group_device_alarms"
+                        android:layout_gravity="center_vertical"
+                        android:layout_width="@dimen/icon_size"
+                        android:layout_height="@dimen/icon_size"/>
+            </LinearLayout>
+            <ImageView
+                    android:id="@+id/imageview_high_prio_icon"
+                    android:tint="@color/yellow"
+                    android:src="@drawable/ic_error_black_24dp"
+                    android:layout_width="@dimen/icon_size"
+                    android:layout_height="@dimen/icon_size"
+                    android:layout_centerVertical="true" android:layout_toStartOf="@+id/textview_prod_quantity"/>
+            <ImageButton
+                    android:id="@+id/expand_button_list"
+                    android:layout_width="50dp"
+                    android:layout_height="?attr/listPreferredItemHeight"
+                    android:tint="?attr/colorAccent"
+                    android:padding="15dp"
+                    android:scaleType="fitCenter"
+                    android:background="?android:selectableItemBackground"
+                    android:src="@drawable/ic_keyboard_arrow_down_white_48dp" android:layout_alignParentTop="true"
+                    android:layout_alignParentStart="true"/>
+            <TextView
+                    android:id="@+id/textview_prod_quantity"
+                    android:text="@string/ph_list_nr_items"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:padding="@dimen/list_padding"
+                    android:layout_marginRight="@dimen/list_margin"
+                    android:textSize="@dimen/text_small"
+                    android:textColor="@color/middlegrey"
+                    style="@style/Base.TextAppearance.AppCompat.Body2"
+                    android:layout_marginEnd="10dp"
+                    android:layout_alignParentEnd="true" android:layout_alignParentTop="true"/>
+        </RelativeLayout>
+
+        <TextView
+                android:id="@+id/textview_list_details"
+                android:text="@string/ph_lists_details"
+                android:layout_width="match_parent"
+                android:textStyle="italic"
+                android:visibility="gone"
+                android:paddingLeft="@dimen/list_padding"
+                android:layout_marginLeft="@dimen/list_margin"
+                android:layout_marginRight="@dimen/list_margin"
+                android:layout_marginBottom="@dimen/list_margin"
+                android:layout_height="wrap_content"/>
+    </LinearLayout>
+</android.support.v7.widget.CardView>
