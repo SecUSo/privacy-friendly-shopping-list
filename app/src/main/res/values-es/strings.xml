@@ -55,6 +55,9 @@
     <string name="alert_message_product">AÑADIR PRODUCTO</string>
     <!-- ### NOTIFICATIONS ### -->
     <string name="notification_message">Lista: %1$s\nFecha tope: %2$s</string>
+    <string name="notification_setting_status">Las notificaciones están deshabilitadas. Puedes activarlas en el menú
+        de configuración.
+    </string>
     <!-- ### PRODUCTS ### -->
     <string name="new_product">Producto nuevo</string>
     <string name="product_already_exists">¡Este producto ya existe!</string>
