@@ -121,6 +121,7 @@
                         android:inputType="numberDecimal"
                         android:digits="0123456789.,"
                         android:selectAllOnFocus="true"
+                        android:imeOptions="actionNext"
                         android:hint="@string/price_text"/>
             </android.support.design.widget.TextInputLayout>
 
@@ -193,6 +194,7 @@
                             android:inputType="textAutoComplete|textCapSentences"
                             android:hint="@string/category_text"
                             android:singleLine="true"
+                            android:imeOptions="actionNext"
                             android:maxLength="15"/>
                 </android.support.design.widget.TextInputLayout>
 

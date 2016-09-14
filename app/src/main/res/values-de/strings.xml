@@ -367,7 +367,7 @@
     <string name="deadline_time">Uhrzeit</string>
     <string name="deadline">Deadline</string>
     <string name="reminder">Erinnerung</string>
-    <string name="reminder_before">bevor</string>
+    <string name="reminder_before">davor</string>
     <string name="list_notes">Notizen</string>
     <string name="default_list_name">Neue Liste</string>
     <string name="edit_dialog_list">Liste editieren, löschen oder teilen?</string>
