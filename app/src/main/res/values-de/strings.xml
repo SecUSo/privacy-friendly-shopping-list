@@ -88,8 +88,8 @@
     <!-- ### Statistics -->
     <string name="statistics_total_amout">Gesamt:</string>
     <string name="statistics_range">Von-Bis:</string>
-    <string name="statistics_group_by">Gruppieren nach:</string>
-    <string name="statistics_y_values">Werte:</string>
+    <string name="statistics_group_by">Gruppieren nach</string>
+    <string name="statistics_y_values">Werte</string>
     <string name="statistics_quantity_unit">Einheit</string>
 
     <!-- ### SORT ### -->
