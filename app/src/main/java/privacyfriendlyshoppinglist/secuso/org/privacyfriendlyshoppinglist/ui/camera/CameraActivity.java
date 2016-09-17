@@ -104,6 +104,36 @@ public class CameraActivity extends AppCompatActivity implements View.OnClickLis
         }
     }
 
+    @Override
+    protected void onStop()
+    {
+        super.onStop();
+        if ( camera != null )
+        {
+            camera.release();
+        }
+    }
+
+    @Override
+    protected void onPause()
+    {
+        super.onPause();
+        if ( camera != null )
+        {
+            camera.release();
+        }
+    }
+
+    @Override
+    protected void onDestroy()
+    {
+        super.onDestroy();
+        if ( camera != null )
+        {
+            camera.release();
+        }
+    }
+
     private void handleButtonCapture()
     {
         if ( !photoCaptured )
