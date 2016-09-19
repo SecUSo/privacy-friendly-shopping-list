@@ -50,7 +50,6 @@
     <string name="nr_items">Nr. Ítems</string>
     <string name="total_list_amount">Monto total</string>
     <string name="reminder_text">Recordatorio: %1$d %2$s antes</string>
-    <string name="lists_empty">(App Logo)\nNo existen listas</string>
     <string name="alert_message_list">CREAR LISTA</string>
     <string name="alert_message_product">AÑADIR PRODUCTO</string>
     <!-- ### NOTIFICATIONS ### -->
@@ -63,7 +62,8 @@
     <string name="product_already_exists">¡Este producto ya existe!</string>
     <string name="price_number_too_big">¡Número muy grande!</string>
     <string name="number_format_invalid">Invalido: #.###.##0,00</string>
-    <string name="product_list_empty">(App Logo)\nEsta lista no contiene productos.</string>
+    <string name="product_list_empty">Esta lista no contiene productos.</string>
+    <string name="lists_empty">No existen listas</string>
     <string name="total_amount">Total:</string>
     <string name="total_amount_separator">/</string>
     <string name="store_label">Tienda:</string>
@@ -123,13 +123,14 @@
     <!--### ABOUT ###-->
     <string name="about">Acerca de Shopping List</string>
     <string name="version_number">Versión 1.0</string>
-    <string name="about_developper">Desarrolladores:</string>
+    <string name="about_developper">Autores:</string>
     <string name="about_author_greb">Grebiel José Ifill Brito</string>
     <string name="about_author_cri">Christian König</string>
     <string name="about_author_contributors">contribuidores...</string>
     <string name="about_affiliation">En afiliación con</string>
     <string name="privacy_friendly">Esta aplicación pertenece al grupo de Privacy Friendly Apps desarrolladas por la
-        Universidad Técnica de Darmstadt.
+        Universidad Técnica de Darmstadt. El código fuente está licenciado bajo \"Apache License\", Versión 2.0. Derecho
+        de autor de imágenes: Universidad Técnica de Darmstadt y Google Inc.
     </string>
     <string name="more_info">Más información en:</string>
     <!-- ### DRAWER ###-->

@@ -46,7 +46,7 @@ public class ReminderSchedulingService extends IntentService
                     .setContentText(messageText)
                     .setStyle(new NotificationCompat.BigTextStyle().bigText(messageText))
                     .setAutoCancel(true)
-                    .setSmallIcon(R.mipmap.ic_launcher)
+                    .setSmallIcon(R.drawable.ic_stat_name)
                     .setDefaults(Notification.DEFAULT_SOUND)
                     .setContentIntent(pendingIntent)
                     .build();

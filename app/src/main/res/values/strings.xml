@@ -67,7 +67,7 @@
     <string name="nr_items">Nr. Items</string>
     <string name="total_list_amount">Total Amount</string>
     <string name="reminder_text">Reminder: %1$d %2$s before</string>
-    <string name="lists_empty">(App Logo)\nYou don\'t have any shopping lists</string>
+    <string name="lists_empty">You don\'t have any shopping lists</string>
     <string name="alert_message_list">CREATE A LIST</string>
     <string name="alert_message_product">ADD A PRODUCT</string>
     <!-- ### NOTIFICATIONS ### -->
@@ -79,7 +79,7 @@
     <string name="product_already_exists">Product already exists in this list!</string>
     <string name="price_number_too_big">Number too big!</string>
     <string name="number_format_invalid">Invalid: #,###,##0.00</string>
-    <string name="product_list_empty">(App Logo)\nThis list does not contain any products</string>
+    <string name="product_list_empty">This list does not contain any products</string>
     <string name="total_amount">Total:</string>
     <string name="total_amount_separator">/</string>
     <string name="store_label">Store:</string>
@@ -135,13 +135,14 @@
     <!--### ABOUT ###-->
     <string name="about">About</string>
     <string name="version_number">Version 1.0</string>
-    <string name="about_developper">Developers:</string>
+    <string name="about_developper">Authors:</string>
     <string name="about_author_greb">Grebiel José Ifill Brito</string>
     <string name="about_author_cri">Christian König</string>
-    <string name="about_author_contributors">contributors...</string>
+    <string name="about_author_contributors">and contributors...</string>
     <string name="about_affiliation">In affiliation with</string>
     <string name="privacy_friendly">This application belongs to the group of Privacy Friendly Apps developed by
-        Technische Universität Darmstadt.
+        Technische Universität Darmstadt. Sourcecode licensed under Apache License, Version 2.0. Images copyright TU
+        Darmstadt und Google Inc.
     </string>
     <string name="more_info">More information can be found on:</string>
     <string name="url" translatable="false">
