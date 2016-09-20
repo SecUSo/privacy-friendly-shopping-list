@@ -1,5 +1,4 @@
 <resources>
-    <string name="app_name">Shopping List</string>
     <!--### GENERAL ### -->
     <string name="cancel">Cancelar</string>
     <string name="delete">Eliminar</string>
