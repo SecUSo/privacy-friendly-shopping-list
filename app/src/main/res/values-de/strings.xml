@@ -2,7 +2,7 @@
     <string name="app_name">Shopping List</string>
 
     <!--### GENERAL ### -->
-    <string name="cancel">Abbruch</string>
+    <string name="cancel">Abbrechen</string>
     <string name="delete">Löschen</string>
     <string name="share">Teilen</string>
     <string name="edit">Bearbeiten</string>

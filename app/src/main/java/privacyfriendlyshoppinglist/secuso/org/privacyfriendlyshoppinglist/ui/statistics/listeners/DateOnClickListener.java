@@ -5,6 +5,7 @@ import android.view.View;
 import android.widget.DatePicker;
 import android.widget.TextView;
 import org.joda.time.DateTime;
+import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.R;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.logger.PFALogger;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.utils.DateUtils;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.statistics.business.domain.StatisticsQuery;
@@ -78,6 +79,7 @@ class DateOnClickListener implements View.OnClickListener
                 date.getMonthOfYear() - COMPATIBILITY_FACTOR,
                 date.getDayOfMonth());
 
+        datePickerDialog.setButton(DatePickerDialog.BUTTON_POSITIVE, cache.getActivity().getResources().getString(R.string.okay), datePickerDialog);
         datePickerDialog.show();
     }
 }

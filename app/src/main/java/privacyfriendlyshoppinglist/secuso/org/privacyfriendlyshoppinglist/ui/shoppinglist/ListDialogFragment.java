@@ -239,6 +239,7 @@ public class ListDialogFragment extends DialogFragment
 
                     }
                 }, year, month, day);
+                datePickerDialog.setButton(DatePickerDialog.BUTTON_POSITIVE, getResources().getString(R.string.okay), datePickerDialog);
                 datePickerDialog.show();
             }
         });
@@ -262,6 +263,7 @@ public class ListDialogFragment extends DialogFragment
 
                     }
                 }, hour, minute, true);
+                timePickerDialog.setButton(TimePickerDialog.BUTTON_POSITIVE, getResources().getString(R.string.okay), timePickerDialog);
                 timePickerDialog.show();
             }
         });
