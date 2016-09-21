@@ -106,7 +106,6 @@
                     android:paddingLeft="15dp"
                     android:paddingRight="15dp"
                     android:scaleType="fitCenter"
-                    android:layout_marginLeft="@dimen/list_margin_big"
                     android:tint="@color/colorAccent"
                     android:background="?android:selectableItemBackground"
                     android:src="@drawable/ic_keyboard_arrow_down_white_48dp"

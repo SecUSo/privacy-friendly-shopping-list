@@ -105,7 +105,7 @@ public class ListDialogFragment extends DialogFragment
         AbstractInstanceFactory instanceFactory = new InstanceFactory(cache.getActivity().getApplicationContext());
         shoppingListService = (ShoppingListService) instanceFactory.createInstance(ShoppingListService.class);
 
-        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity(), R.style.AlertDialogColourful);
         LayoutInflater inflater = (LayoutInflater) getActivity().getSystemService(getActivity().LAYOUT_INFLATER_SERVICE);
         View v = inflater.inflate(R.layout.shopping_list_dialog, null);
         dialogCache = new ListDialogCache(v);

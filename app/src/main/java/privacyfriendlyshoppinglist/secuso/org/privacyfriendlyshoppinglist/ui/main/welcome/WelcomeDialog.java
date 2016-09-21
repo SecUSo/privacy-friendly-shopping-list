@@ -22,7 +22,7 @@ public class WelcomeDialog extends DialogFragment
     public Dialog onCreateDialog(Bundle savedInstanceState)
     {
         LayoutInflater i = getActivity().getLayoutInflater();
-        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity(), R.style.AlertDialogColourful);
         builder.setView(i.inflate(R.layout.welcome_dialog, null));
         builder.setIcon(R.drawable.ic_launcher);
         builder.setTitle(getActivity().getString(R.string.welcome));

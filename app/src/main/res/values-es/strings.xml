@@ -1,5 +1,4 @@
 <resources>
-    <string name="app_name">Shopping List</string>
     <!--### GENERAL ### -->
     <string name="cancel">Cancelar</string>
     <string name="delete">Eliminar</string>
@@ -122,7 +121,7 @@
     </string>
     <!--### ABOUT ###-->
     <string name="about">Acerca de Shopping List</string>
-    <string name="version_number">Versión 1.0.1</string>
+    <string name="version_number">Versión 1.0.2</string>
     <string name="about_developper">Autores:</string>
     <string name="about_author_greb">Grebiel José Ifill Brito</string>
     <string name="about_author_cri">Christian König</string>
