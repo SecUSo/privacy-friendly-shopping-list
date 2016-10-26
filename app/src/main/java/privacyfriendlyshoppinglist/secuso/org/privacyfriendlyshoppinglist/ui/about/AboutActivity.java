@@ -3,7 +3,10 @@ package privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.ab
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.text.method.LinkMovementMethod;
 import android.view.View;
+import android.widget.TextView;
+
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.R;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.baseactivity.BaseActivity;
 
@@ -32,7 +35,12 @@ public class AboutActivity extends AppCompatActivity
         }
 
         overridePendingTransition(0, 0);
+
+        ((TextView)findViewById(R.id.secusoWebsite)).setMovementMethod(LinkMovementMethod.getInstance());
+        ((TextView)findViewById(R.id.githubURL)).setMovementMethod(LinkMovementMethod.getInstance());
     }
+
+
 
     //@Override
     //protected int getNavigationDrawerID() {
