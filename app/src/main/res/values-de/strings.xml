@@ -137,8 +137,6 @@
     <string name="about_developper">Autoren:</string>
     <string name="about_author_greb">Grebiel José Ifill Brito</string>
     <string name="about_author_cri">Christian König und Mitwirkende.</string>
-
-    <string name="about_author_contributors">und Mitwirkende.</string>
     <string name="about_affiliation">In Zusammenarbeit mit</string>
     <string name="privacy_friendly">Diese App gehört zur Gruppe der Privacy Friendly Apps entwickelt von der Technischen
         Universität Darmstadt. Quelltext lizenziert unter Apache License, Version 2.0. Bilder copyright TU Darmstadt und
@@ -212,19 +210,17 @@
     <!--### HELP ###-->
     <string name="help">Hilfe</string>
     <string name="help_overview_heading">Übersicht</string>
-    <string name="help_intro1">Willkommen zur Hilfsseite der Privacy Friendly Shopping List. Die App ermöglicht euch
-        nicht nur Listen anzulegen und Produkte darin zu erfassen, sondern ebenfalls Prioritäten für Listen festzulegen,
+    <string name="help_intro1">Die App ermöglicht es nicht nur Listen anzulegen und Produkte darin zu erfassen, sondern ebenfalls Prioritäten für Listen festzulegen,
         Deadlines und Erinnerungen für Listen zu setzen, und Notizen zu Listen oder Produkten anzufügen.
     </string>
-    <string name="help_intro2">Das Statistik-Feature ermöglicht euch zusätzlich eure Ausgaben zu erfassen und graphisch darzustellen.
+    <string name="help_intro2">Durch das Statistik-Feature können Ausgaben erfasst und graphisch dargestellt werden.
     </string>
     <string name="help_intro3">Eine Einkaufsliste besteht aus Produkteinträgen. Zusätzlich zu Produktname, Menge und
-        Preis kann eine Kategorie und der Einkaufsort eingepflegt werden. Darüberhinaus können Notizen vermerkt und über
-        die Nutzung der Gerätekamera auch ein Foto eingefügt werden.
+        Preis kann eine Kategorie und der Einkaufsort eingepflegt werden. Außerdem können Notizen vermerkt und ein Foto eingefügt werden.
     </string>
 
     <string name="help_how_tos_lists">Wie funktioniert\'s</string>
-    <string name="help_how_to_create_a_list">Eine Liste erstellen</string>
+    <string name="help_how_to_create_a_list">Liste erstellen</string>
     <string name="help_how_to_create_a_list_summary1">Um eine neue Liste zu erstellen, wechselst du in das Hauptmenü und
         drückst das (+) Symbol in der rechten unteren Ecke. Fülle alle gewünschten Dialogfelder aus und bestätige den
         Dialog mit OKAY.
@@ -234,7 +230,7 @@
         ein kleines Symbol mit Ausrufezeichen rechts neben der betroffenen Liste.
     </string>
 
-    <string name="help_how_to_create_a_product">Ein Produkt hinzufügen</string>
+    <string name="help_how_to_create_a_product">Produkt hinzufügen</string>
     <string name="help_how_to_create_a_product_summary1">Nachdem eine Liste erstellt wurde, springt die App automatisch
         in diese Liste und ist bereit zum Erstellen neuer Produkte. Dafür drückst du wiederum auf das (+) Symbol in der
         unteren rechten Ecke.
@@ -262,7 +258,7 @@
         Statistik erfasst.
     </string>
 
-    <string name="help_how_to_setup_deadline">Eine Deadline einstellen</string>
+    <string name="help_how_to_setup_deadline">Deadline einstellen</string>
     <string name="help_how_to_setup_deadline_summary1">Im Listendialog (siehe \"Eine Liste erstellen\") kann, wozu auf
         das Kontrollkästchen (\"Deadline\") geklickt werden muss. Danach kann ein Datum und eine Uhrzeit eingestellt werden.
     </string>
@@ -271,7 +267,7 @@
         Produkte in der Liste, wird dieser Streifen rot. Sind alle Produkte abgehakt, wird der Streifen grau.
     </string>
 
-    <string name="help_how_to_setup_reminder">Eine Erinnerung einstellen</string>
+    <string name="help_how_to_setup_reminder">Erinnerung einstellen</string>
     <string name="help_how_to_setup_reminder_summary1">Wird eine Deadline gesetzt, erscheint im Dialog die Option einer
         Erinnerung. Wird der Schiebeschalter aktiviert, kann eingestellt werden wieviele Minuten, Stunden, etc.
         vor Eintreten der Deadline eine Erinnerung in Form Benachrichtigung auf dem Telefon angezeigt werden soll.
@@ -326,7 +322,7 @@
     </string>
 
 
-    <string name="help_privacy_heading">Privacy Information</string>
+    <string name="help_privacy_heading">Datenschutz-Information</string>
     <string name="help_camera_permission_heading">Berechtigung für die Kameranutzung</string>
     <string name="help_camera_permission_description">Diese Berechtigung ist erforderlich, um im Produktdialog Fotos
         hinzufügen

@@ -124,8 +124,7 @@
     <string name="version_number">Versión 1.0.3</string>
     <string name="about_developper">Autores:</string>
     <string name="about_author_greb">Grebiel José Ifill Brito</string>
-    <string name="about_author_cri">Christian König</string>
-    <string name="about_author_contributors">contribuidores...</string>
+    <string name="about_author_cri">Christian König y contribuidores.</string>
     <string name="about_affiliation">En afiliación con</string>
     <string name="privacy_friendly">Esta aplicación pertenece al grupo de Privacy Friendly Apps desarrolladas por la
         Universidad Técnica de Darmstadt. El código fuente está licenciado bajo \"Apache License\", Versión 2.0. Derecho
