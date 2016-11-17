@@ -10,7 +10,11 @@ Nowadays there are many apps that require many or all permissions available in A
 
 ## Download and more Information
 
-The app can be installed by using IntelliJ or Android Studio (we recommend to use at least version 2.1.2).
+[<img src="https://f-droid.org/badge/get-it-on.png" alt="Get it on F-Droid" height="60">](https://f-droid.org/repository/browse/?fdid=privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist)<a href="https://play.google.com/store/apps/details?id=privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist"><img src="https://play.google.com/intl/en_us/badges/images/generic/en_badge_web_generic.png" height="60"></a>
+
+###Building
+
+The app can be installed by using IntelliJ or Android Studio (we recommend to use version 2.2.2 or higher).
 
 1. Download the source code: $ git clone https://github.com/SecUSo/privacy-friendly-shopping-list.git
 2. Add the local.properties and the build.properties file to the root by removing the extension ".copy" from "local.properties.copy" and "build.gradle.copy"
