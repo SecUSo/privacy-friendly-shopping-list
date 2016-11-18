@@ -2,6 +2,7 @@ package privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic
 
 import android.content.Context;
 import android.content.ContextWrapper;
+import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.R;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.comparators.PFAComparators;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.persistence.DB;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.utils.StringUtils;
@@ -14,6 +15,7 @@ import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.product.persistence.ProductItemDao;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.product.persistence.entity.ProductItemEntity;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.shoppingList.business.ShoppingListService;
+import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.shoppingList.business.domain.ListDto;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.shoppingList.persistence.entity.ShoppingListEntity;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.statistics.chart.NumberScale;
 import rx.Observable;
@@ -67,7 +69,7 @@ public class ProductServiceImpl implements ProductService
     {
         Observable<Void> observable = Observable
                 .fromCallable(() -> saveOrUpdateSync(dto, listId))
-                .subscribeOn(Schedulers.newThread())
+                .subscribeOn(Schedulers.computation())
                 .observeOn(AndroidSchedulers.mainThread());
         return observable;
     }
@@ -86,11 +88,48 @@ public class ProductServiceImpl implements ProductService
     }
 
     @Override
+    public Observable<Void> duplicateProducts(String listId)
+    {
+        Observable<Void> observable = Observable
+                .fromCallable(() -> duplicateProductsSync(listId))
+                .subscribeOn(Schedulers.computation())
+                .observeOn(AndroidSchedulers.mainThread());
+        return observable;
+    }
+
+    private Void duplicateProductsSync(String listId)
+    {
+        ListDto newList = shoppingListService.getById(listId)
+                .doOnNext(listDto ->
+                {
+                    listDto.setId(null); // new list
+                    listDto.setListName(getNewName(listDto));
+                })
+                .toBlocking().single();
+
+        shoppingListService.saveOrUpdateSync(newList);
+
+        List<ProductDto> products = getAllProductsSync(listId);
+        for ( ProductDto product : products )
+        {
+            product.setId(null); // new product
+            product.setChecked(false);
+            saveOrUpdateSync(product, newList.getId());
+        }
+        return null;
+    }
+
+    private String getNewName(ListDto listDto)
+    {
+        return listDto.getListName() + StringUtils.SPACE + context.getResources().getString(R.string.duplicated_suffix);
+    }
+
+    @Override
     public Observable<ProductDto> getById(String entityId)
     {
         Observable<ProductDto> observable = Observable
                 .fromCallable(() -> getByIdSync(entityId))
-                .subscribeOn(Schedulers.newThread())
+                .subscribeOn(Schedulers.computation())
                 .observeOn(AndroidSchedulers.mainThread());
         return observable;
     }
@@ -119,7 +158,7 @@ public class ProductServiceImpl implements ProductService
     {
         Observable<Void> observable = Observable
                 .fromCallable(() -> deleteByIdSync(id))
-                .subscribeOn(Schedulers.newThread())
+                .subscribeOn(Schedulers.computation())
                 .observeOn(AndroidSchedulers.mainThread());
         return observable;
     }
@@ -160,7 +199,7 @@ public class ProductServiceImpl implements ProductService
     {
         Observable<Void> observable = Observable
                 .fromCallable(() -> deleteSelectedSync(productDtos))
-                .subscribeOn(Schedulers.newThread())
+                .subscribeOn(Schedulers.computation())
                 .observeOn(AndroidSchedulers.mainThread());
         return observable;
     }
@@ -178,7 +217,7 @@ public class ProductServiceImpl implements ProductService
     {
         Observable<ProductDto> observable = Observable
                 .defer(() -> Observable.from(getAllProductsSync(listId)))
-                .subscribeOn(Schedulers.newThread())
+                .subscribeOn(Schedulers.computation())
                 .observeOn(AndroidSchedulers.mainThread());
         return observable;
     }
@@ -201,7 +240,7 @@ public class ProductServiceImpl implements ProductService
     {
         Observable<TotalDto> observable = Observable
                 .fromCallable(() -> getInfoSync(listId))
-                .subscribeOn(Schedulers.newThread())
+                .subscribeOn(Schedulers.computation())
                 .observeOn(AndroidSchedulers.mainThread());
         return observable;
     }
@@ -218,7 +257,7 @@ public class ProductServiceImpl implements ProductService
     {
         Observable<Void> observable = Observable
                 .fromCallable(() -> deleteAllFromListSync(listId))
-                .subscribeOn(Schedulers.newThread())
+                .subscribeOn(Schedulers.computation())
                 .observeOn(AndroidSchedulers.mainThread());
         return observable;
     }
@@ -354,7 +393,7 @@ public class ProductServiceImpl implements ProductService
         Observable autoCompleteListsObservable = Observable
                 .defer(() -> Observable.just(getAutoCompleteLists()))
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribeOn(Schedulers.newThread());
+                .subscribeOn(Schedulers.computation());
         return autoCompleteListsObservable;
     }
 
@@ -375,7 +414,7 @@ public class ProductServiceImpl implements ProductService
         Observable<Boolean> observable = Observable.from(productItemDao.getAllEntities())
                 .filter(entity -> !listIds.contains(String.valueOf(entity.getShoppingList().getId())))
                 .map(entity -> productItemDao.deleteById(entity.getId()))
-                .subscribeOn(Schedulers.newThread());
+                .subscribeOn(Schedulers.computation());
         return observable;
     }
 

@@ -18,6 +18,8 @@ public interface ShoppingListService extends ContextSetter
 {
     Observable<Void> saveOrUpdate(ListDto dto);
 
+    Void saveOrUpdateSync(ListDto dto);
+
     Observable<ListDto> getById(String id);
 
     DateTime getReminderDate(ListDto dto);

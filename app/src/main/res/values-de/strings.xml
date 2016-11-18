@@ -4,6 +4,7 @@
     <string name="delete">Löschen</string>
     <string name="share">Teilen</string>
     <string name="edit">Bearbeiten</string>
+    <string name="duplicate">Duplizieren</string>
     <string name="language">DE</string>
     <string name="date_long_pattern">EE MM/dd/yyyy HH:mm</string>
     <string name="date_short_pattern">EE MM/dd/yyyy</string>
@@ -56,6 +57,7 @@
     <string name="lists_empty">Du hast noch keine Einkaufsliste angelegt.</string>
     <string name="alert_message_list">Erstelle eine Liste</string>
     <string name="alert_message_product">Füge ein Produkt ein</string>
+    <string name="duplicated_suffix">(Neu)</string>
 
     <!-- ### NOTIFICATIONS ### -->
     <string name="notification_message">Listenname: %1$s\nDeadline: %2$s</string>
@@ -133,7 +135,7 @@
 
     <!--### ABOUT ###-->
     <string name="about">Über</string>
-    <string name="version_number">Version 1.0.3</string>
+    <string name="version_number">Version 1.0.4</string>
     <string name="about_developper">Autoren:</string>
     <string name="about_author_greb">Grebiel José Ifill Brito</string>
     <string name="about_author_cri">Christian König und Mitwirkende.</string>

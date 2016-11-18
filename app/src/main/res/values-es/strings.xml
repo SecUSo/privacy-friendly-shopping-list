@@ -4,6 +4,7 @@
     <string name="delete">Eliminar</string>
     <string name="share">Compartir</string>
     <string name="edit">Editar</string>
+    <string name="duplicate">Duplicar</string>
     <string name="language">ES</string>
     <string name="date_long_pattern">EE dd/MM/yyyy HH:mm</string>
     <string name="date_short_pattern">EE dd/MM/yyyy</string>
@@ -56,6 +57,7 @@
     <string name="notification_setting_status">Las notificaciones están deshabilitadas. Puedes activarlas en el menú
         de configuración.
     </string>
+    <string name="duplicated_suffix">(Nueva)</string>
     <!-- ### PRODUCTS ### -->
     <string name="new_product">Producto nuevo</string>
     <string name="product_already_exists">¡Este producto ya existe!</string>
@@ -121,7 +123,7 @@
     </string>
     <!--### ABOUT ###-->
     <string name="about">Acerca de Shopping List</string>
-    <string name="version_number">Versión 1.0.3</string>
+    <string name="version_number">Versión 1.0.4</string>
     <string name="about_developper">Autores:</string>
     <string name="about_author_greb">Grebiel José Ifill Brito</string>
     <string name="about_author_cri">Christian König y contribuidores.</string>
