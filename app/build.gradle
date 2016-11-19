@@ -2,7 +2,7 @@ apply plugin: 'com.android.application'
 apply plugin: 'me.tatarka.retrolambda'
 
 android {
-    compileSdkVersion 23
+    compileSdkVersion 25
     buildToolsVersion "23.0.3"
 
     compileOptions {
@@ -13,8 +13,8 @@ android {
     defaultConfig {
         applicationId "privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist"
         minSdkVersion 17
-        targetSdkVersion 23
-        versionCode 1
+        targetSdkVersion 25
+        versionCode 2
         versionName "1.0.4"
     }
 
@@ -58,17 +58,17 @@ android {
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     // android
-    androidTestCompile 'com.android.support:support-annotations:23.4.0'
-    compile 'com.android.support:appcompat-v7:23.4.0'
-    compile 'com.android.support:design:23.4.0'
-    compile 'com.android.support:support-v4:23.4.0'
-    compile 'com.android.support:recyclerview-v7:23.4.0'
-    compile 'com.android.support:cardview-v7:23.4.0'
+    androidTestCompile 'com.android.support:support-annotations:25.0.1'
+    compile 'com.android.support:appcompat-v7:25.0.1'
+    compile 'com.android.support:design:25.0.1'
+    compile 'com.android.support:support-v4:25.0.1'
+    compile 'com.android.support:recyclerview-v7:25.0.1'
+    compile 'com.android.support:cardview-v7:25.0.1'
     // tests
     testCompile 'junit:junit:4.12'
     testCompile "org.mockito:mockito-core:1.9.5"
-    androidTestCompile 'com.android.support.test:runner:0.4'
-    androidTestCompile 'com.android.support.test:rules:0.4'
+    androidTestCompile 'com.android.support.test:runner:0.5'
+    androidTestCompile 'com.android.support.test:rules:0.5'
     testCompile group: 'pl.pragmatists', name: 'JUnitParams', version: '0.3.6'
     // dependency injection
     compile 'com.squareup.dagger:dagger:1.2.+'
