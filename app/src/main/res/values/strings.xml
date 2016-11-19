@@ -6,6 +6,7 @@
     <string name="delete">Delete</string>
     <string name="share">Share</string>
     <string name="edit">Edit</string>
+    <string name="duplicate">Duplicate</string>
     <string name="language">US</string>
     <string name="date_long_pattern">EE MM/dd/yyyy HH:mm</string>
     <string name="date_short_pattern">EE MM/dd/yyyy</string>
@@ -71,6 +72,7 @@
     <string name="lists_empty">You don\'t have any shopping lists</string>
     <string name="alert_message_list">CREATE A LIST</string>
     <string name="alert_message_product">ADD A PRODUCT</string>
+    <string name="duplicated_suffix">(New)</string>
     <!-- ### NOTIFICATIONS ### -->
     <string name="notification_message">List name: %1$s\nDead line: %2$s</string>
     <string name="notification_setting_status">Notifications are disabled. Please go to settings and turn them on.
@@ -135,7 +137,7 @@
     </string>
     <!--### ABOUT ###-->
     <string name="about">About</string>
-    <string name="version_number">Version 1.0.3</string>
+    <string name="version_number">Version 1.0.4</string>
     <string name="about_developper">Authors:</string>
     <string name="about_author_greb">Grebiel José Ifill Brito</string>
     <string name="about_author_cri">Christian König and contributors.</string>

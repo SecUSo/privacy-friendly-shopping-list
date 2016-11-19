@@ -58,12 +58,13 @@ public class ShoppingListServiceImpl implements ShoppingListService
     {
         Observable<Void> observable = Observable
                 .fromCallable(() -> saveOrUpdateSync(dto))
-                .subscribeOn(Schedulers.newThread())
+                .subscribeOn(Schedulers.computation())
                 .observeOn(AndroidSchedulers.mainThread());
         return observable;
     }
 
-    private Void saveOrUpdateSync(ListDto dto)
+    @Override
+    public Void saveOrUpdateSync(ListDto dto)
     {
         if ( StringUtils.isEmpty(dto.getListName()) )
         {
@@ -81,7 +82,7 @@ public class ShoppingListServiceImpl implements ShoppingListService
     {
         Observable<ListDto> observable = Observable
                 .fromCallable(() -> getByIdSync(id))
-                .subscribeOn(Schedulers.newThread())
+                .subscribeOn(Schedulers.computation())
                 .observeOn(AndroidSchedulers.mainThread());
         return observable;
     }
@@ -158,7 +159,7 @@ public class ShoppingListServiceImpl implements ShoppingListService
     {
         Observable<Void> observable = Observable
                 .fromCallable(() -> deleteByIdSync(id))
-                .subscribeOn(Schedulers.newThread())
+                .subscribeOn(Schedulers.computation())
                 .observeOn(AndroidSchedulers.mainThread());
         return observable;
     }
@@ -174,7 +175,7 @@ public class ShoppingListServiceImpl implements ShoppingListService
     {
         Observable<ListDto> observable = Observable
                 .defer(() -> Observable.from(getAllListDtosSync()))
-                .subscribeOn(Schedulers.newThread())
+                .subscribeOn(Schedulers.computation())
                 .observeOn(AndroidSchedulers.mainThread());
         return observable;
     }
@@ -194,7 +195,7 @@ public class ShoppingListServiceImpl implements ShoppingListService
     {
         Observable<String> observable = Observable
                 .defer(() -> Observable.from(deleteSelectedSync(shoppingListDtos)))
-                .subscribeOn(Schedulers.newThread())
+                .subscribeOn(Schedulers.computation())
                 .observeOn(AndroidSchedulers.mainThread());
         return observable;
     }

@@ -17,6 +17,8 @@ public interface ProductService extends ContextSetter
 {
     Observable<Void> saveOrUpdate(ProductDto dto, String listId);
 
+    Observable<Void> duplicateProducts(String listId);
+
     Observable<ProductDto> getById(String id);
 
     String getProductImagePath(String id);

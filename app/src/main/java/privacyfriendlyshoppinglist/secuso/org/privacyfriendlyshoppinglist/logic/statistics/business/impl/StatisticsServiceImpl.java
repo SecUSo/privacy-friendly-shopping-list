@@ -61,7 +61,7 @@ public class StatisticsServiceImpl implements StatisticsService
     {
         Observable<Void> observable = Observable
                 .fromCallable(() -> saveRecordSync(dto))
-                .subscribeOn(Schedulers.newThread())
+                .subscribeOn(Schedulers.computation())
                 .observeOn(AndroidSchedulers.mainThread());
         return observable;
     }
@@ -80,7 +80,7 @@ public class StatisticsServiceImpl implements StatisticsService
     {
         Observable<StatisticEntryDto> observable = Observable
                 .defer(() -> Observable.from(getAllSync()))
-                .subscribeOn(Schedulers.newThread())
+                .subscribeOn(Schedulers.computation())
                 .observeOn(AndroidSchedulers.mainThread());
         return observable;
     }
@@ -102,7 +102,7 @@ public class StatisticsServiceImpl implements StatisticsService
         Observable<Boolean> observable = Observable
                 .from(statisticsDao.getAllEntities())
                 .map(entity -> statisticsDao.deleteById(entity.getId()))
-                .subscribeOn(Schedulers.newThread())
+                .subscribeOn(Schedulers.computation())
                 .observeOn(AndroidSchedulers.mainThread());
 
         return observable;
@@ -113,7 +113,7 @@ public class StatisticsServiceImpl implements StatisticsService
     {
         Observable<StatsRangeDto> observable = Observable
                 .fromCallable(() -> getRangeSync())
-                .subscribeOn(Schedulers.newThread())
+                .subscribeOn(Schedulers.computation())
                 .observeOn(AndroidSchedulers.mainThread());
         return observable;
     }
@@ -165,7 +165,7 @@ public class StatisticsServiceImpl implements StatisticsService
     {
         Observable<Boolean> observable = Observable
                 .fromCallable(() -> statisticsDao.deleteById(Long.valueOf(id)))
-                .subscribeOn(Schedulers.newThread())
+                .subscribeOn(Schedulers.computation())
                 .observeOn(AndroidSchedulers.mainThread());
         return observable;
     }
@@ -175,7 +175,7 @@ public class StatisticsServiceImpl implements StatisticsService
     {
         Observable<StatisticsChartData> observable = Observable
                 .fromCallable(() -> getChartDataSync(query))
-                .subscribeOn(Schedulers.newThread())
+                .subscribeOn(Schedulers.computation())
                 .observeOn(AndroidSchedulers.mainThread());
         return observable;
     }
