@@ -6,7 +6,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_margin="8dp"
+        android:layout_margin="8sp"
         card_view:cardCornerRadius="@dimen/card_corner_radius">
 
     <ImageView
@@ -24,13 +24,13 @@
         <RelativeLayout
                 android:id="@+id/summary_layout"
                 android:layout_width="wrap_content"
-                android:layout_height="?attr/listPreferredItemHeight">
+                android:layout_height="@dimen/listPreferredItemHeight">
             <TextView
                     android:id="@+id/textview_list_name"
                     android:text="@string/ph_list_name"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_marginRight="100dp"
+                    android:layout_marginRight="100sp"
                     android:ellipsize="end"
                     android:singleLine="true"
                     android:gravity="center_vertical"
@@ -68,22 +68,22 @@
             <ImageView
                     android:id="@+id/imageview_high_prio_icon"
                     android:tint="@color/yellow"
-                    android:src="@drawable/ic_error_black_24dp"
+                    android:src="@drawable/ic_error_black_24sp"
                     android:layout_width="@dimen/icon_size"
                     android:layout_height="@dimen/icon_size"
                     android:layout_centerVertical="true" android:layout_toStartOf="@+id/textview_prod_quantity"/>
             <ImageButton
                     android:id="@+id/expand_button_list"
-                    android:layout_width="50dp"
-                    android:layout_height="?attr/listPreferredItemHeight"
+                    android:layout_width="50sp"
+                    android:layout_height="@dimen/listPreferredItemHeight"
                     android:tint="?attr/colorAccent"
                     android:layout_centerVertical="true"
                     android:layout_alignParentRight="true"
-                    android:padding="15dp"
+                    android:padding="15sp"
                     android:scaleType="fitCenter"
                     android:background="?android:selectableItemBackground"
                     android:layout_toLeftOf="@+id/textview_prod_quantity"
-                    android:src="@drawable/ic_keyboard_arrow_down_white_48dp"/>
+                    android:src="@drawable/ic_keyboard_arrow_down_white_48sp"/>
             <TextView
                     android:id="@+id/textview_prod_quantity"
                     android:text="@string/ph_list_nr_items"
@@ -95,7 +95,7 @@
                     android:textSize="@dimen/text_small"
                     android:textColor="@color/middlegrey"
                     style="@style/Base.TextAppearance.AppCompat.Body2"
-                    android:layout_marginEnd="50dp"
+                    android:layout_marginEnd="50sp"
                     android:layout_alignParentEnd="true" android:layout_alignParentTop="true"/>
         </RelativeLayout>
 

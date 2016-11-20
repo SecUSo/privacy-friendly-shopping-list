@@ -11,7 +11,7 @@
             android:textColor="@color/white"
             android:layout_width="match_parent"
             android:layout_height="@dimen/dialog_title_height"
-            android:layout_marginBottom="10dp"
+            android:layout_marginBottom="10sp"
             android:textStyle="bold"/>
     <ScrollView
             android:layout_width="match_parent"
@@ -42,7 +42,7 @@
                         android:layout_alignParentTop="true" android:layout_alignParentEnd="true"/>
                 <ImageView
                         android:layout_gravity="center"
-                        android:src="@drawable/ic_keyboard_arrow_right_black_24dp"
+                        android:src="@drawable/ic_keyboard_arrow_right_black_24sp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:tint="@color/colorPrimaryDark"
@@ -65,7 +65,7 @@
                     android:layout_below="@+id/textView" android:layout_alignParentStart="true">
                 <ImageView
                         android:layout_gravity="center"
-                        android:src="@drawable/ic_keyboard_arrow_right_black_24dp"
+                        android:src="@drawable/ic_keyboard_arrow_right_black_24sp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:tint="@color/colorPrimaryDark"
@@ -87,7 +87,7 @@
                         android:layout_marginLeft="@dimen/fab_margin"
                         android:layout_marginRight="@dimen/fab_margin"
                         android:padding="@dimen/tutorial_icon_padding"
-                        android:src="@drawable/ic_delete_white_24dp"
+                        android:src="@drawable/ic_delete_white_24sp"
                         android:background="@color/colorPrimaryDark"
                         android:layout_width="@dimen/tutorial_icon_size"
                         android:layout_height="@dimen/tutorial_icon_size"
@@ -100,7 +100,7 @@
                     android:layout_height="match_parent">
                 <ImageView
                         android:layout_gravity="center"
-                        android:src="@drawable/ic_keyboard_arrow_right_black_24dp"
+                        android:src="@drawable/ic_keyboard_arrow_right_black_24sp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:tint="@color/colorPrimaryDark"
@@ -119,7 +119,7 @@
                         android:layout_marginLeft="@dimen/fab_margin"
                         android:layout_marginRight="@dimen/fab_margin"
                         android:padding="@dimen/tutorial_icon_padding"
-                        android:src="@drawable/ic_sort_white_24dp"
+                        android:src="@drawable/ic_sort_white_24sp"
                         android:background="@color/colorPrimaryDark"
                         android:layout_width="@dimen/tutorial_icon_size"
                         android:layout_height="@dimen/tutorial_icon_size"
@@ -132,7 +132,7 @@
                     android:layout_height="match_parent">
                 <ImageView
                         android:layout_gravity="center"
-                        android:src="@drawable/ic_keyboard_arrow_right_black_24dp"
+                        android:src="@drawable/ic_keyboard_arrow_right_black_24sp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:tint="@color/colorPrimaryDark"
@@ -143,7 +143,7 @@
                         android:layout_marginLeft="@dimen/fab_margin"
                         android:layout_marginRight="@dimen/fab_margin"
                         android:padding="@dimen/tutorial_icon_padding"
-                        android:src="@drawable/ic_keyboard_arrow_down_white_48dp"
+                        android:src="@drawable/ic_keyboard_arrow_down_white_48sp"
                         android:layout_width="@dimen/tutorial_icon_size"
                         android:layout_height="@dimen/tutorial_icon_size"
                         android:tint="@color/colorAccent"
@@ -173,7 +173,7 @@
                         android:id="@+id/textView5"/>
                 <ImageView
                         android:layout_gravity="center"
-                        android:src="@drawable/ic_keyboard_arrow_right_black_24dp"
+                        android:src="@drawable/ic_keyboard_arrow_right_black_24sp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:tint="@color/colorPrimaryDark"
@@ -185,7 +185,7 @@
 
                         android:layout_gravity="center"
                         android:padding="@dimen/tutorial_icon_padding"
-                        android:layout_width="35dp"
+                        android:layout_width="35sp"
                         android:layout_height="@dimen/tutorial_icon_size"
                         android:backgroundTint="@color/colorAccent"
                         android:layout_alignParentTop="true"

@@ -42,7 +42,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
-                    android:layout_marginTop="20dp"
+                    android:layout_marginTop="20sp"
                     android:text="@string/app_name_long"/>
 
             <TextView
@@ -50,7 +50,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
-                    android:layout_marginTop="5dp"
+                    android:layout_marginTop="5sp"
                     android:text="@string/version_number"/>
 
             <TextView
@@ -58,7 +58,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
-                    android:layout_marginTop="5dp"
+                    android:layout_marginTop="5sp"
                     android:text="@string/about_developper"/>
 
             <TextView
@@ -66,7 +66,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
-                    android:layout_marginTop="5dp"
+                    android:layout_marginTop="5sp"
                     android:text="@string/about_author_greb"/>
 
             <TextView
@@ -74,7 +74,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
-                    android:layout_marginTop="5dp"
+                    android:layout_marginTop="5sp"
                     android:text="@string/about_author_cri"/>
 
 
@@ -83,7 +83,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
-                    android:layout_marginTop="15dp"
+                    android:layout_marginTop="15sp"
                     android:text="@string/about_affiliation"
                     android:textStyle="bold"/>
 
@@ -97,7 +97,7 @@
             <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
+                    android:layout_marginTop="10sp"
                     android:layout_gravity="center_horizontal"
                     android:text="@string/privacy_friendly"
                     android:gravity="center_horizontal"/>
@@ -107,7 +107,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
                     android:gravity="center"
-                    android:layout_marginTop="15dp"
+                    android:layout_marginTop="15sp"
                     android:text="@string/more_info"/>
 
             <TextView

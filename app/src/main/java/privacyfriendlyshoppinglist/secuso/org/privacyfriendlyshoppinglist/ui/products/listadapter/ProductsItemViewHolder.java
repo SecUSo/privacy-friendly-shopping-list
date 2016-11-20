@@ -134,13 +134,13 @@ public class ProductsItemViewHolder extends RecyclerView.ViewHolder
             productItemCache.setDetailsVisible(!productItemCache.isDetailsVisible());
             if ( productItemCache.isDetailsVisible() )
             {
-                showDetailsButton.setImageResource(R.drawable.ic_keyboard_arrow_up_white_48dp);
+                showDetailsButton.setImageResource(R.drawable.ic_keyboard_arrow_up_white_48sp);
                 productItemCache.getDetailsLayout().setVisibility(View.VISIBLE);
 
             }
             else
             {
-                showDetailsButton.setImageResource(R.drawable.ic_keyboard_arrow_down_white_48dp);
+                showDetailsButton.setImageResource(R.drawable.ic_keyboard_arrow_down_white_48sp);
                 productItemCache.getDetailsLayout().setVisibility(View.GONE);
             }
         });

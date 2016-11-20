@@ -14,16 +14,16 @@
             android:id="@+id/search_input_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="8dp"
+            android:layout_margin="8sp"
             android:layout_toStartOf="@+id/cancel_search"
             android:layout_alignParentEnd="true">
         <AutoCompleteTextView
                 android:id="@+id/search_input_text"
                 android:inputType="text|textCapSentences"
-                android:paddingRight="50dp"
-                android:paddingLeft="8dp"
-                android:paddingTop="8dp"
-                android:paddingBottom="8dp"
+                android:paddingRight="50sp"
+                android:paddingLeft="8sp"
+                android:paddingTop="8sp"
+                android:paddingBottom="8sp"
                 android:background="@drawable/search_border_style"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -37,13 +37,13 @@
             android:id="@+id/cancel_search"
             android:tint="@color/colorAccent"
             android:background="?android:selectableItemBackground"
-            android:src="@drawable/ic_cancel_white_48dp"
-            android:layout_width="45dp"
-            android:layout_height="38dp"
-            android:layout_marginTop="12dp"
-            android:layout_marginRight="6dp"
-            android:paddingLeft="10dp"
-            android:paddingRight="10dp"
+            android:src="@drawable/ic_cancel_white_48sp"
+            android:layout_width="45sp"
+            android:layout_height="38sp"
+            android:layout_marginTop="12sp"
+            android:layout_marginRight="6sp"
+            android:paddingLeft="10sp"
+            android:paddingRight="10sp"
             android:scaleType="fitCenter"
             android:layout_alignParentEnd="true"
             android:layout_alignTop="@+id/search_input_layout"/>
@@ -77,12 +77,12 @@
                 android:id="@+id/insert_alert"
                 android:orientation="horizontal"
                 android:layout_margin="@dimen/fab_margin"
-                android:paddingRight="70dp"
+                android:paddingRight="70sp"
                 android:gravity="center_vertical"
                 app:layout_anchor="@id/fab_new_product"
                 app:layout_anchorGravity="bottom|left"
                 android:layout_width="wrap_content"
-                android:layout_height="50dp">
+                android:layout_height="50sp">
 
             <TextView
                     android:text="@string/alert_message_product"
@@ -94,7 +94,7 @@
 
             <ImageView
                     android:tint="@color/colorPrimary"
-                    android:src="@drawable/ic_keyboard_arrow_right_black_24dp"
+                    android:src="@drawable/ic_keyboard_arrow_right_black_24sp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"/>
         </LinearLayout>

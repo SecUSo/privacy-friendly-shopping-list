@@ -222,11 +222,11 @@ public class ProductDialogFragment extends DialogFragment
             {
                 if ( dialogCache.getExpandableLayout().getVisibility() == View.GONE )
                 {
-                    changePhotoThumbnailVisibility(R.drawable.ic_keyboard_arrow_up_white_48dp, View.VISIBLE);
+                    changePhotoThumbnailVisibility(R.drawable.ic_keyboard_arrow_up_white_48sp, View.VISIBLE);
                 }
                 else
                 {
-                    changePhotoThumbnailVisibility(R.drawable.ic_keyboard_arrow_down_white_48dp, View.GONE);
+                    changePhotoThumbnailVisibility(R.drawable.ic_keyboard_arrow_down_white_48sp, View.GONE);
                 }
             }
         });
@@ -429,9 +429,9 @@ public class ProductDialogFragment extends DialogFragment
         this.startActivityForResult(viewPhotoIntent, REQUEST_PHOTO_PREVIEW_FROM_DIALOG);
     }
 
-    private void changePhotoThumbnailVisibility(int ic_keyboard_arrow_up_white_48dp, int visible)
+    private void changePhotoThumbnailVisibility(int ic_keyboard_arrow_up_white_48sp, int visible)
     {
-        dialogCache.getExpandableImageView().setImageResource(ic_keyboard_arrow_up_white_48dp);
+        dialogCache.getExpandableImageView().setImageResource(ic_keyboard_arrow_up_white_48sp);
         dialogCache.getExpandableLayout().setVisibility(visible);
     }
 
@@ -466,7 +466,7 @@ public class ProductDialogFragment extends DialogFragment
             dialogCache.getProductImage().setImageBitmap(imageBitmap);
             dto.setThumbnailBitmap(imageBitmap);
             dto.setDefaultImage(false);
-            changePhotoThumbnailVisibility(R.drawable.ic_keyboard_arrow_up_white_48dp, View.VISIBLE);
+            changePhotoThumbnailVisibility(R.drawable.ic_keyboard_arrow_up_white_48sp, View.VISIBLE);
         }
         else if ( requestCode == REQUEST_PHOTO_PREVIEW_FROM_DIALOG && resultCode == RESULT_OK )
         {
@@ -475,7 +475,7 @@ public class ProductDialogFragment extends DialogFragment
 
             dialogCache.getProductImage().setImageBitmap(imageBitmap);
             dialogCache.setImageScheduledForDeletion(true);
-            changePhotoThumbnailVisibility(R.drawable.ic_keyboard_arrow_up_white_48dp, View.VISIBLE);
+            changePhotoThumbnailVisibility(R.drawable.ic_keyboard_arrow_up_white_48sp, View.VISIBLE);
         }
     }
 

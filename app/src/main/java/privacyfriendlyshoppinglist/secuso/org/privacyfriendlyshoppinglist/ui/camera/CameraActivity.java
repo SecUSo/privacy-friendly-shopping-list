@@ -140,7 +140,7 @@ public class CameraActivity extends AppCompatActivity implements View.OnClickLis
         {
             captureButton.setVisibility(View.GONE);
             photoCaptured = true;
-            captureButton.setImageResource(R.drawable.ic_check_white_48dp);
+            captureButton.setImageResource(R.drawable.ic_check_white_48sp);
             flashButton.animate().alpha(0.0f).setDuration(500L);
             camera.takePicture(null, null, mPicture);
         }
@@ -180,7 +180,7 @@ public class CameraActivity extends AppCompatActivity implements View.OnClickLis
             photoCaptured = false;
             retakeButton.setVisibility(View.GONE);
             flashButton.animate().alpha(1.0f).setDuration(500L);
-            captureButton.setImageResource(R.drawable.ic_camera_alt_white_48dp);
+            captureButton.setImageResource(R.drawable.ic_camera_alt_white_48sp);
             camera.startPreview();
         }
     }
@@ -216,9 +216,9 @@ public class CameraActivity extends AppCompatActivity implements View.OnClickLis
     {
         currentFlashIconIndex = 0;
         flashIcons = new ArrayList<>();
-        flashIcons.add(R.drawable.ic_flash_auto_white_48dp);
-        flashIcons.add(R.drawable.ic_flash_on_white_48dp);
-        flashIcons.add(R.drawable.ic_flash_off_white_48dp);
+        flashIcons.add(R.drawable.ic_flash_auto_white_48sp);
+        flashIcons.add(R.drawable.ic_flash_on_white_48sp);
+        flashIcons.add(R.drawable.ic_flash_off_white_48sp);
     }
 
     private Camera.PictureCallback mPicture = new Camera.PictureCallback()

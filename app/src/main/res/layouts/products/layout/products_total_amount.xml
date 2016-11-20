@@ -7,7 +7,7 @@
         android:orientation="horizontal"
         android:background="@color/colorPrimaryDark"
         android:layout_width="match_parent"
-        android:layout_height="?attr/listPreferredItemHeight"
+        android:layout_height="@dimen/listPreferredItemHeight"
         android:layout_weight="10"
         android:layout_alignParentBottom="true"
         android:layout_alignParentStart="true">

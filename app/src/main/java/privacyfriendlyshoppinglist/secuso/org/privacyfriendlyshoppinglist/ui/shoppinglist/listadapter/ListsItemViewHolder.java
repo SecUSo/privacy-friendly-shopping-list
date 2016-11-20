@@ -101,13 +101,13 @@ class ListsItemViewHolder extends RecyclerView.ViewHolder
             listItemCache.setDetailsVisible(!listItemCache.isDetailsVisible());
             if ( listItemCache.isDetailsVisible() )
             {
-                showDetailsButton.setImageResource(R.drawable.ic_keyboard_arrow_up_white_48dp);
+                showDetailsButton.setImageResource(R.drawable.ic_keyboard_arrow_up_white_48sp);
                 listItemCache.getListDetails().setVisibility(View.VISIBLE);
 
             }
             else
             {
-                showDetailsButton.setImageResource(R.drawable.ic_keyboard_arrow_down_white_48dp);
+                showDetailsButton.setImageResource(R.drawable.ic_keyboard_arrow_down_white_48sp);
                 listItemCache.getListDetails().setVisibility(View.GONE);
             }
         });

@@ -5,11 +5,11 @@
            android:checkableBehavior="all">
         <item
                 android:id="@+id/nav_main"
-                android:icon="@drawable/ic_home_white_24dp"
+                android:icon="@drawable/ic_home_white_24sp"
                 android:title="@string/action_main"/>
         <item
                 android:id="@+id/nav_statistics"
-                android:icon="@drawable/ic_insert_chart_white_24dp"
+                android:icon="@drawable/ic_insert_chart_white_24sp"
                 android:title="@string/statistics"/>
     </group>
 
