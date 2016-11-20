@@ -20,12 +20,17 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:windowSoftInputMode">stateUnchanged</item>
     </style>
 
     <style name="AlertDialogGrey" parent="Theme.AppCompat.Light.Dialog.Alert">
         <item name="colorPrimary">@color/middlegrey</item>
         <item name="colorPrimaryDark">@color/middlegrey</item>
         <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+    <style name="DialogColourful" parent="AlertDialogColourful">
+        <item name="android:windowBackground">@android:color/transparent</item>
     </style>
 
     <style name="SplashTheme" parent="@android:style/Theme.NoTitleBar.Fullscreen">

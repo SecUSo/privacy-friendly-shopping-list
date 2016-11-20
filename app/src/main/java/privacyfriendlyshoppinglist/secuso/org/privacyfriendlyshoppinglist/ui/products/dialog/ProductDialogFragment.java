@@ -136,7 +136,7 @@ public class ProductDialogFragment extends DialogFragment
         this.productService = (ProductService) instanceFactory.createInstance(ProductService.class);
         this.statisticsService = (StatisticsService) instanceFactory.createInstance(StatisticsService.class);
 
-        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity(), R.style.AlertDialogColourful);
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity(), R.style.DialogColourful);
         LayoutInflater inflater = (LayoutInflater) getActivity().getSystemService(getActivity().LAYOUT_INFLATER_SERVICE);
         View v = inflater.inflate(R.layout.product_dialog, null);
 
