@@ -54,7 +54,7 @@ public class EditDeleteProductDialog extends DialogFragment
         AbstractInstanceFactory instanceFactory = new InstanceFactory(cache.getActivity().getApplicationContext());
         productService = (ProductService) instanceFactory.createInstance(ProductService.class);
 
-        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity(), R.style.AlertDialogColourful);
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity(), R.style.DialogColourful);
 
         builder.setMessage(R.string.edit_dialog_product)
                 .setTitle(getContext().getResources().getString(R.string.product_as_title, dto.getProductName()))

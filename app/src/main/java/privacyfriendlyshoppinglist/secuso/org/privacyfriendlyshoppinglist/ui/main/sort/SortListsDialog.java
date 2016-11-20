@@ -56,7 +56,7 @@ public class SortListsDialog extends DialogFragment
     {
 
         LayoutInflater i = getActivity().getLayoutInflater();
-        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity(), R.style.AlertDialogColourful);
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity(), R.style.DialogColourful);
         View rootView = i.inflate(R.layout.sort_lists_dialog, null);
 
         SortListsDialogCache cache = new SortListsDialogCache(rootView);

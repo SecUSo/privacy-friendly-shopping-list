@@ -6,4 +6,12 @@
         <item name="android:windowDrawsSystemBarBackgrounds">true</item>
         <item name="android:statusBarColor">@android:color/transparent</item>
     </style>
+
+    <!--
+    From api 21 on, the "weird" white border is no longer there.
+    Setting the background to transparent would influence the whole
+    dialog and not only the border
+    -->
+    <style name="DialogColourful" parent="AlertDialogColourful">
+    </style>
 </resources>

@@ -63,7 +63,7 @@ public class SortProductsDialog extends DialogFragment
         ShoppingListService shoppingListService = (ShoppingListService) instanceFactory.createInstance(ShoppingListService.class);
 
         LayoutInflater i = getActivity().getLayoutInflater();
-        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity(), R.style.AlertDialogColourful);
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity(), R.style.DialogColourful);
         View rootView = i.inflate(R.layout.sort_products_dialog, null);
 
         SortProductsDialogCache cache = new SortProductsDialogCache(rootView);
