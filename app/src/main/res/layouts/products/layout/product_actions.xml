@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+            android:fadeScrollbars="false"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+    <LinearLayout android:orientation="vertical"
+                  android:layout_width="match_parent"
+                  android:layout_height="wrap_content">
+
+        <TextView
+                android:id="@+id/title"
+                android:text="Title"
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                android:background="@color/colorPrimaryDark"
+                android:padding="@dimen/dialog_padding"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+        <Button
+                android:id="@+id/edit"
+                android:text="@string/edit"
+                android:background="@drawable/button_normal"
+                android:layout_marginLeft="@dimen/list_margin_big"
+                android:layout_marginRight="@dimen/list_margin_big"
+                android:layout_marginBottom="@dimen/list_margin"
+                android:layout_marginTop="@dimen/list_margin"
+                android:textColor="@color/white"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+        <Button
+                android:id="@+id/share"
+                android:text="@string/share"
+                android:background="@drawable/button_normal"
+                android:layout_marginLeft="@dimen/list_margin_big"
+                android:layout_marginRight="@dimen/list_margin_big"
+                android:layout_marginBottom="@dimen/list_margin"
+                android:layout_marginTop="@dimen/list_margin"
+                android:textColor="@color/white"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+        <Button
+                android:id="@+id/delete"
+                android:text="@string/delete"
+                android:background="@drawable/button_normal"
+                android:layout_marginLeft="@dimen/list_margin_big"
+                android:layout_marginRight="@dimen/list_margin_big"
+                android:layout_marginBottom="@dimen/list_margin"
+                android:layout_marginTop="@dimen/list_margin"
+                android:textColor="@color/white"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+    </LinearLayout>
+</ScrollView>
