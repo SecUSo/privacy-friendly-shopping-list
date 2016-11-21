@@ -7,7 +7,7 @@
     <dimen name="text_small">12sp</dimen>
     <dimen name="text_space_padding">4sp</dimen>
     <dimen name="negative_margin_big">-25sp</dimen>
-    <dimen name="negative_margin_normal">0sp</dimen>
+    <dimen name="negative_margin_normal">-10sp</dimen>
     <dimen name="negative_margin_small">-5sp</dimen>
     <dimen name="listPreferredItemHeight">64sp</dimen>
 
