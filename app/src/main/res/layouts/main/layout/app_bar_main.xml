@@ -31,12 +31,12 @@
             android:id="@+id/insert_alert"
             android:orientation="horizontal"
             android:layout_margin="@dimen/fab_margin"
-            android:paddingRight="70dp"
+            android:paddingRight="70sp"
             android:gravity="center_vertical"
             app:layout_anchor="@id/fab_new_list"
             app:layout_anchorGravity="bottom|left"
             android:layout_width="wrap_content"
-            android:layout_height="50dp">
+            android:layout_height="50sp">
 
         <TextView
                 android:text="@string/alert_message_list"
@@ -48,7 +48,7 @@
 
         <ImageView
                 android:tint="@color/colorPrimary"
-                android:src="@drawable/ic_keyboard_arrow_right_black_24dp"
+                android:src="@drawable/ic_keyboard_arrow_right_black_24sp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
     </LinearLayout>

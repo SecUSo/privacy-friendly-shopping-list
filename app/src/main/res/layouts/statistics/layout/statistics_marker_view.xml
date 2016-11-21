@@ -2,7 +2,7 @@
 <RelativeLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="wrap_content"
-        android:layout_height="40dp"
+        android:layout_height="40sp"
         android:backgroundTint="@color/yellow"
         android:background="@drawable/chart_marker">
 
@@ -11,7 +11,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="7dp"
+            android:layout_marginTop="7sp"
             android:paddingRight="@dimen/statistics_padding"
             android:paddingLeft="@dimen/statistics_padding"
             android:text="@string/ph_total_amount"

@@ -6,7 +6,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_margin="8dp"
+        android:layout_margin="8sp"
         card_view:cardCornerRadius="@dimen/card_corner_radius">
 
     <LinearLayout
@@ -17,14 +17,14 @@
         <RelativeLayout
                 android:id="@+id/summary_layout"
                 android:layout_width="wrap_content"
-                android:layout_height="?attr/listPreferredItemHeight">
+                android:layout_height="@dimen/listPreferredItemHeight">
 
             <TextView
                     android:id="@+id/textview_product_name"
                     android:text="@string/ph_product_name"
                     android:layout_width="match_parent"
-                    android:layout_height="?attr/listPreferredItemHeight"
-                    android:layout_marginRight="110dp"
+                    android:layout_height="@dimen/listPreferredItemHeight"
+                    android:layout_marginRight="110sp"
                     android:ellipsize="end"
                     android:singleLine="true"
                     android:gravity="center_vertical"
@@ -53,7 +53,7 @@
                     android:id="@+id/checkbox_is_selected"
                     android:layout_width="wrap_content"
                     android:padding="@dimen/list_padding"
-                    android:layout_height="?attr/listPreferredItemHeight"
+                    android:layout_height="@dimen/listPreferredItemHeight"
                     android:gravity="center_vertical"
                     android:buttonTint="?attr/colorAccent"
                     android:layout_alignParentTop="true"
@@ -61,22 +61,22 @@
 
             <ImageButton
                     android:id="@+id/expand_button_list"
-                    android:layout_width="50dp"
-                    android:layout_height="?attr/listPreferredItemHeight"
+                    android:layout_width="50sp"
+                    android:layout_height="@dimen/listPreferredItemHeight"
                     android:tint="?attr/colorAccent"
                     android:layout_centerVertical="true"
                     android:layout_alignParentRight="true"
-                    android:padding="15dp"
+                    android:padding="15sp"
                     android:scaleType="fitCenter"
                     android:background="?android:selectableItemBackground"
                     android:layout_toLeftOf="@+id/textview_prod_quantity"
-                    android:src="@drawable/ic_keyboard_arrow_down_white_48dp"/>
+                    android:src="@drawable/ic_keyboard_arrow_down_white_48sp"/>
 
             <TextView
                     android:id="@+id/textview_prod_quantity"
                     android:text="@string/ph_list_nr_items"
                     android:layout_width="wrap_content"
-                    android:layout_height="?attr/listPreferredItemHeight"
+                    android:layout_height="@dimen/listPreferredItemHeight"
                     android:layout_toLeftOf="@id/checkbox_is_selected"
                     android:gravity="center_vertical"
                     android:layout_marginRight="@dimen/list_margin"

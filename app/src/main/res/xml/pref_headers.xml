@@ -4,7 +4,7 @@
 
     <header
             android:fragment="privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.settings.SettingsActivity$GeneralPreferenceFragment"
-            android:icon="@drawable/ic_info_black_24dp"
+            android:icon="@drawable/ic_info_black_24sp"
             android:title="@string/pref_header_general"/>
 
 </preference-headers>

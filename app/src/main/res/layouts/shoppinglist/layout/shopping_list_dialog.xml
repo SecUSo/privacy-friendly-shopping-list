@@ -13,7 +13,7 @@
             android:textColor="@color/white"
             android:layout_width="match_parent"
             android:layout_height="@dimen/dialog_title_height"
-            android:layout_marginBottom="10dp"
+            android:layout_marginBottom="10sp"
             android:textStyle="bold"/>
     <ScrollView
             android:fadeScrollbars="false"
@@ -29,7 +29,7 @@
 
             <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="80dp">
+                    android:layout_height="wrap_content">
 
                 <android.support.design.widget.TextInputLayout
                         app:errorTextAppearance="@style/error_appearance"
@@ -55,10 +55,10 @@
                         android:id="@+id/imageview_statistics"
                         android:paddingTop="@dimen/icon_padding"
                         android:paddingBottom="@dimen/icon_padding"
-                        android:layout_width="24dp"
+                        android:layout_width="24sp"
                         android:layout_height="wrap_content"
                         android:tint="@color/colorPrimaryDark"
-                        android:src="@drawable/ic_insert_chart_white_24dp"
+                        android:src="@drawable/ic_insert_chart_white_24sp"
                         android:layout_alignParentTop="true" android:layout_toStartOf="@+id/switch_statistics"/>
 
                 <android.support.v7.widget.SwitchCompat
@@ -73,7 +73,7 @@
 
 
             <LinearLayout
-                    android:layout_marginTop="@dimen/negative_margin_normal"
+                    android:layout_marginTop="@dimen/negative_margin_big"
                     android:gravity="center_vertical"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -104,15 +104,15 @@
 
                 <ImageButton
                         android:id="@+id/expand_button_list"
-                        android:layout_width="50dp"
+                        android:layout_width="50sp"
                         android:layout_height="@dimen/icon_size"
-                        android:paddingLeft="15dp"
-                        android:paddingRight="15dp"
+                        android:paddingLeft="15sp"
+                        android:paddingRight="15sp"
                         android:scaleType="fitCenter"
                         android:tint="@color/colorAccent"
                         android:background="?android:selectableItemBackground"
-                        android:src="@drawable/ic_keyboard_arrow_down_white_48dp"
-                        android:visibility="gone"/>
+                        android:src="@drawable/ic_keyboard_arrow_down_white_48sp"
+                        android:visibility="invisible"/>
             </LinearLayout>
 
             <LinearLayout
@@ -137,8 +137,8 @@
                             android:id="@+id/deadline_date">
 
                         <ImageView
-                                android:layout_width="30dp"
-                                android:layout_height="30dp"
+                                android:layout_width="30sp"
+                                android:layout_height="30sp"
                                 android:src="@drawable/ic_perm_group_calendar"
                                 android:tint="@color/colorAccent"/>
                         <TextView
@@ -157,8 +157,8 @@
                             android:id="@+id/deadline_time">
 
                         <ImageView
-                                android:layout_width="30dp"
-                                android:layout_height="30dp"
+                                android:layout_width="30sp"
+                                android:layout_height="30sp"
                                 android:tint="@color/colorAccent"
                                 android:src="@drawable/ic_perm_group_system_clock"
                                 android:adjustViewBounds="true"/>
@@ -191,8 +191,8 @@
                     </android.support.v7.widget.SwitchCompat>
 
                     <ImageView
-                            android:layout_width="30dp"
-                            android:layout_height="30dp"
+                            android:layout_width="30sp"
+                            android:layout_height="30sp"
                             android:tint="@color/colorAccent"
                             android:src="@drawable/ic_perm_group_device_alarms"
                             android:adjustViewBounds="true"/>
@@ -215,7 +215,7 @@
 
                     <android.support.design.widget.TextInputEditText
                             android:id="@+id/edittext_reminder"
-                            android:layout_width="40dp"
+                            android:layout_width="40sp"
                             android:layout_height="wrap_content"
                             android:inputType="number"
                             android:gravity="center"
@@ -227,7 +227,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:backgroundTint="@color/colorAccent"
-                            android:layout_marginLeft="5dp"/>
+                            android:layout_marginLeft="5sp"/>
 
                     <TextView
                             android:layout_width="wrap_content"

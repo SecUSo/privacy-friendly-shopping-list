@@ -76,16 +76,16 @@
                     <Button
                             android:layout_marginRight="@dimen/dialog_margin_buttons"
                             style="?android:attr/buttonStyleSmall"
-                            android:layout_width="30dp"
-                            android:layout_height="30dp"
+                            android:layout_width="30sp"
+                            android:layout_height="30sp"
                             android:background="@drawable/button_normal"
                             android:textColor="@color/white"
                             android:text="-"
                             android:id="@+id/product_button_minus"/>
                     <Button
                             style="?android:attr/buttonStyleSmall"
-                            android:layout_width="30dp"
-                            android:layout_height="30dp"
+                            android:layout_width="30sp"
+                            android:layout_height="30sp"
                             android:background="@drawable/button_normal"
                             android:textColor="@color/white"
                             android:text="+"
@@ -161,14 +161,14 @@
                 <ImageButton
                         android:id="@+id/expand_button"
                         android:tint="@color/colorAccent"
-                        android:layout_width="50dp"
+                        android:layout_width="50sp"
                         android:layout_height="@dimen/icon_size"
-                        android:paddingLeft="15dp"
-                        android:paddingRight="15dp"
+                        android:paddingLeft="15sp"
+                        android:paddingRight="15sp"
                         android:scaleType="fitCenter"
                         android:layout_marginLeft="@dimen/list_margin_big"
                         android:background="?android:selectableItemBackground"
-                        android:src="@drawable/ic_keyboard_arrow_down_white_48dp"
+                        android:src="@drawable/ic_keyboard_arrow_down_white_48sp"
                         android:layout_centerVertical="true"
                         android:layout_alignParentEnd="true"/>
             </RelativeLayout>
@@ -228,13 +228,13 @@
                             android:orientation="vertical">
 
                         <ImageButton
-                                android:layout_width="50dp"
-                                android:layout_height="50dp"
-                                android:padding="10dp"
+                                android:layout_width="50sp"
+                                android:layout_height="50sp"
+                                android:padding="10sp"
                                 android:scaleType="fitCenter"
                                 android:background="?android:selectableItemBackground"
                                 android:tint="@color/colorAccent"
-                                android:src="@drawable/ic_camera_alt_white_48dp"
+                                android:src="@drawable/ic_camera_alt_white_48sp"
                                 android:id="@+id/camera_button"
                                 android:layout_gravity="right"/>
 
