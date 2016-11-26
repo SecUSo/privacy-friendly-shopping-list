@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.ContextWrapper;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.R;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.comparators.PFAComparators;
+import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.logger.PFALogger;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.persistence.DB;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.utils.StringUtils;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.product.business.ProductService;
@@ -24,6 +25,10 @@ import rx.schedulers.Schedulers;
 
 import javax.inject.Inject;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.nio.channels.FileChannel;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -112,11 +117,29 @@ public class ProductServiceImpl implements ProductService
         List<ProductDto> products = getAllProductsSync(listId);
         for ( ProductDto product : products )
         {
-            product.setId(null); // new product
-            product.setChecked(false);
-            saveOrUpdateSync(product, newList.getId());
+            copyToList(product, newList);
         }
         return null;
+    }
+
+    private void copyToList(ProductDto product, ListDto newList)
+    {
+        File srcImage = new File(getProductImagePath(product.getId()));
+        product.setId(null); // new product
+        product.setChecked(false);
+        saveOrUpdateSync(product, newList.getId());
+        if ( srcImage.exists() )
+        {
+            try
+            {
+                File destFile = new File(getProductImagePath(product.getId()));
+                copy(srcImage, destFile);
+            }
+            catch ( IOException e )
+            {
+                PFALogger.error("ProductServiceImpl", "duplicateProductSync", e);
+            }
+        }
     }
 
     @Override
@@ -478,5 +501,16 @@ public class ProductServiceImpl implements ProductService
                 .append(productId)
                 .append(EXTENSION);
         return sb.toString();
+    }
+
+    private void copy(File src, File dst) throws IOException
+    {
+        FileInputStream inStream = new FileInputStream(src);
+        FileOutputStream outStream = new FileOutputStream(dst);
+        FileChannel inChannel = inStream.getChannel();
+        FileChannel outChannel = outStream.getChannel();
+        inChannel.transferTo(0, inChannel.size(), outChannel);
+        inStream.close();
+        outStream.close();
     }
 }
