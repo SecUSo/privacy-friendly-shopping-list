@@ -119,6 +119,27 @@ public class ProductServiceImpl implements ProductService
         return null;
     }
 
+    @Override
+    public Observable<Void> resetCheckedProducts(String listId)
+    {
+        Observable<Void> observable = Observable
+                .fromCallable(() -> resetCheckedProductsSync(listId))
+                .subscribeOn(Schedulers.computation())
+                .observeOn(AndroidSchedulers.mainThread());
+        return observable;
+    }
+
+    private Void resetCheckedProductsSync(String listId)
+    {
+        List<ProductDto> products = getAllProductsSync(listId);
+        for ( ProductDto product : products )
+        {
+            product.setChecked(false);
+            saveOrUpdateSync(product, listId);
+        }
+        return null;
+    }
+
     private String getNewName(ListDto listDto)
     {
         return listDto.getListName() + StringUtils.SPACE + context.getResources().getString(R.string.duplicated_suffix);

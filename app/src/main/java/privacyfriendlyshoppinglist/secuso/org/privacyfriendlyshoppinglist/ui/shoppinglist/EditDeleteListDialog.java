@@ -80,6 +80,7 @@ public class EditDeleteListDialog extends DialogFragment
         View rootView = inflater.inflate(R.layout.shopping_list_actions, null);
         Button editButton = (Button) rootView.findViewById(R.id.edit);
         Button duplicateButton = (Button) rootView.findViewById(R.id.duplicate);
+        Button resetButton = (Button) rootView.findViewById(R.id.reset);
         Button shareButton = (Button) rootView.findViewById(R.id.share);
         Button deleteButton = (Button) rootView.findViewById(R.id.delete);
         TextView titleTextView = (TextView) rootView.findViewById(R.id.title);
@@ -90,6 +91,7 @@ public class EditDeleteListDialog extends DialogFragment
         editButton.setOnClickListener(getEditOnClickListener());
         duplicateButton.setOnClickListener(getDuplicateOnClickListener());
         deleteButton.setOnClickListener(getDeleteOnClickListener());
+        resetButton.setOnClickListener(getResetCheckedItemsOnClickListener());
         shareButton.setOnClickListener(getShareOnClickListener());
 
         builder.setView(rootView);
@@ -170,6 +172,25 @@ public class EditDeleteListDialog extends DialogFragment
                         })
                         .subscribe();
 
+            }
+        };
+    }
+
+    private View.OnClickListener getResetCheckedItemsOnClickListener()
+    {
+        return new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View view)
+            {
+                dismiss();
+                productService.resetCheckedProducts(dto.getId())
+                        .doOnCompleted(() ->
+                        {
+                            MainActivity activity = (MainActivity) cache.getActivity();
+                            activity.updateListView();
+                        })
+                        .subscribe();
             }
         };
     }
