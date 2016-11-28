@@ -56,6 +56,7 @@ public class ListDialogFragment extends DialogFragment
     public static ListDialogFragment newEditInstance(ListDto dto, ShoppingListActivityCache cache)
     {
         editDialog = true;
+        usesTemplate = false;
         ListDialogFragment dialogFragment = getListDialogFragment(dto, cache);
         return dialogFragment;
     }
@@ -63,6 +64,7 @@ public class ListDialogFragment extends DialogFragment
     public static ListDialogFragment newAddInstance(ShoppingListActivityCache cache)
     {
         editDialog = false;
+        usesTemplate = false;
         ListDialogFragment dialogFragment = getListDialogFragment(new ListDto(), cache);
         return dialogFragment;
     }
