@@ -108,6 +108,14 @@
     <string name="no_scale_value" translatable="false">1</string>
     <string name="kilo_value" translatable="false">1000</string>
     <string name="million_value" translatable="false">1000000</string>
+    <!-- ### TEMPLATE ### -->
+    <string name="create_template">Create Template</string>
+    <string name="template_titel">Template</string>
+    <string name="template_message">Create a list using all existing products in two steps:\n\n
+        1. Give the list a name\n
+        2. Delete all irrelevant products from the new list\n\n.
+        Would you like to continue?
+    </string>
     <!-- ### SORT ### -->
     <string name="sort_options">Sort</string>
     <string name="sort_ascencing_descending">Ascending/Descending</string>

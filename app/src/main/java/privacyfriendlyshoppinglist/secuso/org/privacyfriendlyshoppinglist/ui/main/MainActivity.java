@@ -15,6 +15,7 @@ import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.shoppingList.business.domain.ListDto;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.baseactivity.BaseActivity;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.main.listeners.AddOnClickListener;
+import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.main.listeners.CreateTemplateOnClickListener;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.main.listeners.ShowDeleteListsOnClickListener;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.main.listeners.SortOnClickListener;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.settings.SettingsKeys;
@@ -91,6 +92,9 @@ public class MainActivity extends BaseActivity
     @Override
     public boolean onPrepareOptionsMenu(Menu menu)
     {
+        MenuItem templateItem = menu.findItem(R.id.imageview_template);
+        templateItem.setOnMenuItemClickListener(new CreateTemplateOnClickListener(cache));
+
         MenuItem sortItem = menu.findItem(R.id.imageview_sort);
         sortItem.setOnMenuItemClickListener(new SortOnClickListener(cache));
 

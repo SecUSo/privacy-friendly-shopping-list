@@ -7,6 +7,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v4.app.DialogFragment;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.SwitchCompat;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,8 +21,10 @@ import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framew
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.utils.DateUtils;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.utils.MessageUtils;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.utils.StringUtils;
+import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.product.business.ProductService;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.shoppingList.business.ShoppingListService;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.shoppingList.business.domain.ListDto;
+import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.deleteproducts.DeleteProductsActivity;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.main.MainActivity;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.main.ShoppingListActivityCache;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.products.ProductsActivity;
@@ -42,11 +45,13 @@ public class ListDialogFragment extends DialogFragment
     private ShoppingListActivityCache cache;
     private ListDto dto;
     private ShoppingListService shoppingListService;
+    private ProductService productService;
     private Calendar currentDate;
     private int year, month, day, hour, minute;
     private static boolean editDialog;
     private static boolean opened;
     private ListDialogCache dialogCache;
+    private static boolean usesTemplate;
 
     public static ListDialogFragment newEditInstance(ListDto dto, ShoppingListActivityCache cache)
     {
@@ -55,10 +60,18 @@ public class ListDialogFragment extends DialogFragment
         return dialogFragment;
     }
 
-    public static ListDialogFragment newAddInstance(ListDto dto, ShoppingListActivityCache cache)
+    public static ListDialogFragment newAddInstance(ShoppingListActivityCache cache)
     {
         editDialog = false;
-        ListDialogFragment dialogFragment = getListDialogFragment(dto, cache);
+        ListDialogFragment dialogFragment = getListDialogFragment(new ListDto(), cache);
+        return dialogFragment;
+    }
+
+    public static ListDialogFragment newAddInstanceForTemplate(ShoppingListActivityCache cache)
+    {
+        editDialog = false;
+        usesTemplate = true;
+        ListDialogFragment dialogFragment = getListDialogFragment(new ListDto(), cache);
         return dialogFragment;
     }
 
@@ -104,6 +117,7 @@ public class ListDialogFragment extends DialogFragment
     {
         AbstractInstanceFactory instanceFactory = new InstanceFactory(cache.getActivity().getApplicationContext());
         shoppingListService = (ShoppingListService) instanceFactory.createInstance(ShoppingListService.class);
+        productService = (ProductService) instanceFactory.createInstance(ProductService.class);
 
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity(), R.style.DialogColourful);
         LayoutInflater inflater = (LayoutInflater) getActivity().getSystemService(getActivity().LAYOUT_INFLATER_SERVICE);
@@ -380,45 +394,16 @@ public class ListDialogFragment extends DialogFragment
                 dto.setStatisticEnabled(dialogCache.getStatisticsSwitch().isChecked());
 
                 String message = getResources().getString(R.string.notification_message, dto.getListName(), dto.getDeadlineDate() + " " + dto.getDeadlineTime());
-
-                shoppingListService.saveOrUpdate(dto)
-                        .doOnCompleted(() ->
-                        {
-                            // the reminder feature must happen after save, because the list id is necessary for the notification
-                            if ( reminderSwitch.isChecked() )
-                            {
-                                DateTime reminderTime = shoppingListService.getReminderDate(dto);
-                                ReminderReceiver alarm = new ReminderReceiver();
-
-                                Intent intent = new Intent(cache.getActivity(), ReminderSchedulingService.class);
-                                intent.putExtra(ReminderSchedulingService.MESSAGE_TEXT, message);
-                                intent.putExtra(MainActivity.LIST_ID_KEY, dto.getId());
-                                alarm.setAlarm(cache.getActivity(), intent, reminderTime.getMillis(), dto.getId());
-                            }
-                            else
-                            {
-                                // delete notification if exists
-                                ReminderReceiver alarm = new ReminderReceiver();
-                                Intent intent = new Intent(cache.getActivity(), ReminderSchedulingService.class);
-                                alarm.cancelAlarm(cache.getActivity(), intent, dto.getId());
-                            }
-
-                            if ( !editDialog )
-                            {
-                                // go to new list
-                                Intent intent = new Intent(cache.getActivity(), ProductsActivity.class);
-                                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                                intent.putExtra(MainActivity.LIST_ID_KEY, dto.getId());
-                                cache.getActivity().startActivity(intent);
-                            }
-                            else
-                            {
-                                // update lists
-                                MainActivity mainActivity = (MainActivity) cache.getActivity();
-                                mainActivity.updateListView();
-                            }
-                        })
-                        .subscribe();
+                if ( usesTemplate )
+                {
+                    productService.createTemplate(dto)
+                            .doOnCompleted(() -> saveOrUpdateList(dto, message, reminderSwitch))
+                            .subscribe();
+                }
+                else
+                {
+                    saveOrUpdateList(dto, message, reminderSwitch);
+                }
             }
         });
 
@@ -436,6 +421,59 @@ public class ListDialogFragment extends DialogFragment
             dialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE);
         }
         return dialog;
+    }
+
+    private void saveOrUpdateList(ListDto dto, String message, SwitchCompat reminderSwitch)
+    {
+        shoppingListService.saveOrUpdate(dto)
+                .doOnCompleted(() ->
+                {
+                    // the reminder feature must happen after save, because the list id is necessary for the notification
+                    if ( reminderSwitch.isChecked() )
+                    {
+                        DateTime reminderTime = shoppingListService.getReminderDate(dto);
+                        ReminderReceiver alarm = new ReminderReceiver();
+
+                        Intent intent = new Intent(cache.getActivity(), ReminderSchedulingService.class);
+                        intent.putExtra(ReminderSchedulingService.MESSAGE_TEXT, message);
+                        intent.putExtra(MainActivity.LIST_ID_KEY, this.dto.getId());
+                        alarm.setAlarm(cache.getActivity(), intent, reminderTime.getMillis(), dto.getId());
+                    }
+                    else
+                    {
+                        // delete notification if exists
+                        ReminderReceiver alarm = new ReminderReceiver();
+                        Intent intent = new Intent(cache.getActivity(), ReminderSchedulingService.class);
+                        alarm.cancelAlarm(cache.getActivity(), intent, dto.getId());
+                    }
+
+                    if ( !editDialog && !usesTemplate )
+                    {
+                        // go to new list
+                        Intent productsIntent = new Intent(cache.getActivity(), ProductsActivity.class);
+                        productsIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                        productsIntent.putExtra(MainActivity.LIST_ID_KEY, dto.getId());
+                        cache.getActivity().startActivity(productsIntent);
+                    }
+                    else if ( usesTemplate )
+                    {
+                        Intent productsIntent = new Intent(cache.getActivity(), ProductsActivity.class);
+                        productsIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                        productsIntent.putExtra(MainActivity.LIST_ID_KEY, dto.getId());
+
+                        Intent deleteProductsIntent = new Intent(cache.getActivity(), DeleteProductsActivity.class);
+                        deleteProductsIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                        deleteProductsIntent.putExtra(MainActivity.LIST_ID_KEY, dto.getId());
+                        ContextCompat.startActivities(cache.getActivity(), new Intent[]{productsIntent, deleteProductsIntent});
+                    }
+                    else
+                    {
+                        // update lists
+                        MainActivity mainActivity = (MainActivity) cache.getActivity();
+                        mainActivity.updateListView();
+                    }
+                })
+                .subscribe();
     }
 
 }

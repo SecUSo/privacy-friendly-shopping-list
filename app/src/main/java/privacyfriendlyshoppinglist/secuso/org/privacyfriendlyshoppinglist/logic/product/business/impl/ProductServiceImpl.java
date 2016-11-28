@@ -2,6 +2,8 @@ package privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic
 
 import android.content.Context;
 import android.content.ContextWrapper;
+import android.content.res.Resources;
+import android.graphics.Bitmap;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.R;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.comparators.PFAComparators;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.logger.PFALogger;
@@ -29,9 +31,7 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.channels.FileChannel;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 /**
  * Description:
@@ -93,6 +93,90 @@ public class ProductServiceImpl implements ProductService
     }
 
     @Override
+    public Observable<Void> createTemplate(ListDto newList)
+    {
+        Observable<Void> observable = Observable
+                .fromCallable(() -> createTemplateSync(newList))
+                .subscribeOn(Schedulers.computation())
+                .observeOn(AndroidSchedulers.mainThread());
+        return observable;
+    }
+
+    private Void createTemplateSync(ListDto newList)
+    {
+        Map<String, List<ProductDto>> productsMap = createProductsMap();
+
+        shoppingListService.saveOrUpdateSync(newList);
+
+        for ( String productName : productsMap.keySet() )
+        {
+            ProductDto productDto = createTemplateProduct(productsMap, productName);
+            copyToList(productDto, newList);
+        }
+
+        return null;
+    }
+
+    private Map<String, List<ProductDto>> createProductsMap()
+    {
+        Map<String, List<ProductDto>> productsMap = new HashMap<>();
+        List<ProductItemEntity> productEntities = productItemDao.getAllEntities();
+        for ( ProductItemEntity entity : productEntities )
+        {
+            List<ProductDto> accumList = productsMap.get(entity.getProductName());
+            if ( accumList == null )
+            {
+                accumList = new ArrayList<>();
+            }
+            ProductDto dto = new ProductDto();
+            converterService.convertEntitiesToDto(entity, dto);
+            accumList.add(dto);
+            productsMap.put(dto.getProductName(), accumList);
+        }
+
+        return productsMap;
+    }
+
+    private ProductDto createTemplateProduct(Map<String, List<ProductDto>> productsMap, String productName)
+    {
+        Resources resources = context.getResources();
+        String format = resources.getString(R.string.number_format_2_decimals);
+        ProductDto productDto = new ProductDto();
+        productDto.setProductName(productName);
+        List<ProductDto> accumProducts = productsMap.get(productName);
+        double price = 0.0;
+        int quantity = 0;
+        Bitmap thumbnail = null;
+        Set<String> categories = new TreeSet<>();
+        Set<String> stores = new TreeSet<>();
+        for ( ProductDto product : accumProducts )
+        {
+            price = price + StringUtils.getStringAsDouble(product.getProductPrice(), format);
+            quantity = quantity + Integer.parseInt(product.getQuantity());
+            String productCategory = product.getProductCategory();
+            if ( !StringUtils.isEmpty(productCategory) ) categories.add(productCategory);
+            String productStore = product.getProductStore();
+            if ( !StringUtils.isEmpty(productStore) ) stores.add(productStore);
+            if ( product.getThumbnailBitmap() != null ) thumbnail = product.getThumbnailBitmap();
+        }
+        int numProducts = accumProducts.size();
+        price = price / numProducts;
+        quantity = quantity / numProducts;
+
+        productDto.setProductPrice(converterService.getDoubleAsString(price));
+        productDto.setQuantity(String.valueOf(quantity));
+        productDto.setProductCategory(listToText(categories));
+        productDto.setProductStore(listToText(stores));
+        productDto.setThumbnailBitmap(thumbnail);
+        return productDto;
+    }
+
+    private String listToText(Set<String> list)
+    {
+        return list.toString().replace("[", "").replace("]", "");
+    }
+
+    @Override
     public Observable<Void> duplicateProducts(String listId)
     {
         Observable<Void> observable = Observable
@@ -124,15 +208,22 @@ public class ProductServiceImpl implements ProductService
 
     private void copyToList(ProductDto product, ListDto newList)
     {
-        File srcImage = new File(getProductImagePath(product.getId()));
+        String originalProductId = product.getId();
         product.setId(null); // new product
         product.setChecked(false);
         saveOrUpdateSync(product, newList.getId());
+        String newProductId = product.getId();
+        copyImage(originalProductId, newProductId);
+    }
+
+    private void copyImage(String sourceProductId, String destProductId)
+    {
+        File srcImage = new File(getProductImagePath(sourceProductId));
         if ( srcImage.exists() )
         {
             try
             {
-                File destFile = new File(getProductImagePath(product.getId()));
+                File destFile = new File(getProductImagePath(destProductId));
                 copy(srcImage, destFile);
             }
             catch ( IOException e )

@@ -4,6 +4,7 @@ import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framew
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.product.business.domain.AutoCompleteLists;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.product.business.domain.ProductDto;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.product.business.domain.TotalDto;
+import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.shoppingList.business.domain.ListDto;
 import rx.Observable;
 
 import java.util.List;
@@ -16,6 +17,8 @@ import java.util.List;
 public interface ProductService extends ContextSetter
 {
     Observable<Void> saveOrUpdate(ProductDto dto, String listId);
+
+    Observable<Void> createTemplate(ListDto newList);
 
     Observable<Void> duplicateProducts(String listId);
 

@@ -93,6 +93,15 @@
     <string name="statistics_y_values">Werte</string>
     <string name="statistics_quantity_unit">Einheit</string>
 
+    <!-- ### TEMPLATE ### -->
+    <string name="create_template">Template Erzeugen</string>
+    <string name="template_titel">Template</string>
+    <string name="template_message">Erstellen Sie eine Liste mithilfe der vorhandenen Produkten in der App in zwei
+        Schritten:\n\n
+        1. Geben Sie einen Namen für die Liste ein.\n
+        2. Löschen Sie die irrelevanten Produkten aus der neuen Liste.\n\n
+        Möchten Sie fortfahren?
+    </string>
     <!-- ### SORT ### -->
     <string name="sort_options">Sortieroptionen</string>
     <string name="sort_ascencing_descending">Aufsteigend/Absteigend</string>

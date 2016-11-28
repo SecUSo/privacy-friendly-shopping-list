@@ -84,6 +84,15 @@
     <string name="statistics_group_by">Agrupar:</string>
     <string name="statistics_y_values">Valores:</string>
     <string name="statistics_quantity_unit">Unidades</string>
+    <!-- ### TEMPLATE ### -->
+    <string name="create_template">Crear Plantilla</string>
+    <string name="template_titel">Plantilla</string>
+    <string name="template_message">Crear una lista partiendo de los productos almacenados en la app en tan solo dos
+        pasos:\n\n
+        1. Asignar nombre a lista y rellenar otros campos de interés\n
+        2. Eliminar los productos que no sean relevantes\n\n
+        ¿Deseas continuar con la operación?
+    </string>
     <!-- ### SORT ### -->
     <string name="sort_options">Ordenar</string>
     <string name="sort_ascencing_descending">Ascendente/Descendente</string>

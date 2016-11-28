@@ -15,28 +15,22 @@ public class ProductDto
 {
     // product fields
     private String productName;
-
     private String id;
-
     private String productCategory;
-
     private String quantity;
-
     private String productNotes;
-
     private String productStore;
-
     private String productPrice;
-
     private String totalProductPrice;
-
     private boolean checked;
-
     private boolean selectedForDeletion;
-
     private Bitmap thumbnailBitmap;
-
     private boolean isDefaultImage;
+
+    public ProductDto()
+    {
+        productNotes = "";
+    }
 
     public String getId()
     {

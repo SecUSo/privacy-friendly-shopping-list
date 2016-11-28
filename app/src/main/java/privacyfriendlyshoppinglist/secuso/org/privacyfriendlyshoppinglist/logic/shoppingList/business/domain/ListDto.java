@@ -26,6 +26,13 @@ public class ListDto extends AbstractDto
     private String reminderCount;
     private String reminderUnit;
 
+    public ListDto()
+    {
+        deadlineDate = "";
+        deadlineTime = "";
+        priority = "1";
+    }
+
     public String getListName()
     {
         return listName;
