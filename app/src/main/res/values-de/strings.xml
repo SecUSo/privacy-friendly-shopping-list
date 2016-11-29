@@ -21,6 +21,7 @@
     <string name="tutorial_create_list">... eine neue Liste erstellen?</string>
     <string name="tutorial_delete_lists">... mehrere Listen löschen?</string>
     <string name="tutorial_sort_lists">... Listen sortieren?</string>
+    <string name="tutorial_recurring_shopping">... Liste mit allen vorhandenen\n\t\t\Produkten erzeugen?</string>
     <string name="tutorial_see_details_list">... Listendetails aufrufen?</string>
     <string name="tutorial_icons_meaning">Symbole</string>
     <string name="tutorial_icon_priority">Listen hoher Priorität</string>
@@ -252,14 +253,20 @@
         Produktinformationen, kann über den OKAY Knopf der Dialog geschlossen werden.
     </string>
 
-    <string name="help_how_to_edit_a_list">Bearbeiten, Löschen, oder Teilen</string>
-    <string name="help_how_to_edit_a_list_summary">Um eine Liste oder ein Produkt bearbeiten, löschen oder teilen zu
-        können, ist ein längerer Klick auf das Element erforderlich. Hierbei
+    <string name="help_how_to_edit_a_list">Bearbeiten, Löschen, Duplizieren, Wiederverwenden oder Teilen</string>
+    <string name="help_how_to_edit_a_list_summary">Um eine Liste oder ein Produkt bearbeiten, löschen, duplizieren,
+        wiederverwenden
+        oder teilen zu können, ist ein längerer Klick auf das Element erforderlich. Hierbei
         wird ein Dialog mit den genannten Optionen angezeigt, die dann ausgewählt werden können. Beim Löschen des
         ausgewählten Elements ist zu beachten, dass dabei keine bereits erfassten
         Statistikdaten gelöscht werden.
     </string>
-
+    <string name="help_how_to_create_list_fast">Liste schnell erzeugen</string>
+    <string name="help_how_to_create_list_fast_summary">Um schnell eine Liste zu erzeugen, kannst du in der Titelbar das
+        Symbol mit den drei horizontalen Balken und einem Plus klicken. Danach kannst du der Liste einen Namen geben und
+        OKAY klicken. Eine Liste mit allen vorhandenen Produkten wird geniert werden. Nur wirst du eine Liste sehen,
+        in der alle irrelevanten Produkten selektiert und gelöscht werden können.
+    </string>
     <string name="help_how_to_enable_statistics">Statistiken aktivieren</string>
     <string name="help_how_to_enable_statistics_summary1">Im Listendialog (siehe \"Eine Liste erstellen\") kann das
         Statistik-Feature individuell für diese Liste aktiviert oder deaktiviert werden. Dafür steht der Schiebeschalter
@@ -290,7 +297,7 @@
 
     <string name="help_how_to_sort_lists">Elemente sortieren</string>
     <string name="help_how_to_sort_lists_summary">Um Elemente der aktuellen Ansicht zu sortieren, kannst du in der
-        Titelbar of das Symbol mit den drei horizontalen Balken klicken. Es erscheinen zwei verschiedene
+        Titelbar das Symbol mit den drei horizontalen Balken klicken. Es erscheinen zwei verschiedene
         Sortieroptionen. Es kann ausgewählt werden ob auf- oder absteigend sortiert werden soll, sowie nach welchem
         Parameter die Sortierung stattfinden soll.
     </string>

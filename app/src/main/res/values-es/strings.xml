@@ -20,6 +20,7 @@
     <string name="tutorial_create_list">... crear una nueva lista?</string>
     <string name="tutorial_delete_lists">... eliminar varias listas?</string>
     <string name="tutorial_sort_lists">... ordenar listas?</string>
+    <string name="tutorial_recurring_shopping">... crear lista usando todos\n\t\t\los productos existentes?</string>
     <string name="tutorial_see_details_list">... ver detalles?</string>
     <string name="tutorial_icons_meaning">Iconos</string>
     <string name="tutorial_icon_priority">Lista de alta prioridad</string>
@@ -224,11 +225,20 @@
     <string name="help_how_to_create_a_product_summary2">Rellena los campos mostrados y presiona ACEPTAR.
         El campo \"Nombre del Producto\" es obligatorio.
     </string>
-    <string name="help_how_to_edit_a_list">Editar, Eliminar o Compartir</string>
-    <string name="help_how_to_edit_a_list_summary">Para editar, eliminar o compartir una lista o un producto debes hacer
+    <string name="help_how_to_edit_a_list">Editar, Eliminar, Duplicar, Reutilizar o Compartir</string>
+    <string name="help_how_to_edit_a_list_summary">Para editar, eliminar, duplicar, reutilizar o compartir una lista o
+        un producto debes hacer
         clic en el ítem correspondiente, lista o producto, por un tiempo de tres segundos aproximadamente. Esta acción mostrará una ventana en
         donde podrás eligir la operación que deseas realizar. La operación de eliminar no afectará los datos
         correspondientes a estadísticas.
+    </string>
+    <string name="help_how_to_create_list_fast">Crear una lista rápidamente</string>
+    <string name="help_how_to_create_list_fast_summary">Para crear una lista rápidamente selecciona el icono con tres
+        barras
+        horizontales y el signo de más. Luego podrás asignarle un nombre a la nueva lista y hacer clic en ACEPTAR. Una
+        lista
+        con todos los productos de la app será generada. Por último la app mostrará una lista donde podrás seleccionar y
+        eliminar aquellos productos que no necesites.
     </string>
     <string name="help_how_to_enable_statistics">Activar estadísticas</string>
     <string name="help_how_to_enable_statistics_summary1">Una vez que hayas hecho clic en la opción correspondiente para

@@ -26,6 +26,7 @@
     <string name="tutorial_create_list">... create a new list?</string>
     <string name="tutorial_delete_lists">... delete multiple lists?</string>
     <string name="tutorial_sort_lists">... sort lists?</string>
+    <string name="tutorial_recurring_shopping">... create list using\n\t\t\texisting products?</string>
     <string name="tutorial_see_details_list">... see list details?</string>
     <string name="tutorial_icons_meaning">Icons</string>
     <string name="tutorial_icon_priority">High priority list</string>
@@ -239,11 +240,20 @@
     <string name="help_how_to_create_a_product_summary2">Then fill the fields shown in the dialog and press OKAY.
         The field \"Product Name\" is mandatory.
     </string>
-    <string name="help_how_to_edit_a_list">Edit, Delete or Share</string>
-    <string name="help_how_to_edit_a_list_summary">To edit, delete, or share a list or a product you must click the
+    <string name="help_how_to_edit_a_list">Edit, Delete, Duplicate, Reset or Share</string>
+    <string name="help_how_to_edit_a_list_summary">To edit, delete, duplicate, reset, or share a list or a product you
+        must click the
         item and hold on pressing for about three seconds, then you see a dialog where the mentioned options are shown.
         After that you can select the option you would like to perform. Notice that the delete operation will not delete any
         data saved in the statistics.
+    </string>
+    <string name="help_how_to_create_list_fast">Create a List Fast</string>
+    <string name="help_how_to_create_list_fast_summary">You can create lists faster by using the icon from
+        the action bar that has tree bars and a plus sign. This icon will help you creating a list that contains all
+        existing products
+        from the app. Averages are taken for quantities and prices. After given the list a name you will be prompt to a
+        list where
+        you can delete all irrelevant products.
     </string>
     <string name="help_how_to_enable_statistics">Enable Statistics</string>
     <string name="help_how_to_enable_statistics_summary1">Once you are in the list dialog (See \"Create a List\"),
