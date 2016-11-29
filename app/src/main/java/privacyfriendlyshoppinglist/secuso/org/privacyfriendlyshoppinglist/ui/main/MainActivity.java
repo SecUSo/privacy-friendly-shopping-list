@@ -42,6 +42,8 @@ public class MainActivity extends BaseActivity
     private Subscriber<Long> alertUpdateSubscriber;
     private Subscription alertSubscriber;
 
+    private boolean menusVisible;
+
 
     @Override
     protected final void onCreate(final Bundle savedInstanceState)
@@ -52,6 +54,7 @@ public class MainActivity extends BaseActivity
         AbstractInstanceFactory instanceFactory = new InstanceFactory(getApplicationContext());
         this.shoppingListService = (ShoppingListService) instanceFactory.createInstance(ShoppingListService.class);
         cache = new ShoppingListActivityCache(this);
+        menusVisible = false;
 
 //        getApplicationContext().deleteDatabase(DB.APP.getDbName());
 
@@ -100,6 +103,10 @@ public class MainActivity extends BaseActivity
 
         MenuItem deleteItem = menu.findItem(R.id.imageview_delete);
         deleteItem.setOnMenuItemClickListener(new ShowDeleteListsOnClickListener(cache));
+
+        templateItem.setVisible(menusVisible);
+        sortItem.setVisible(menusVisible);
+        deleteItem.setVisible(menusVisible);
         return super.onPrepareOptionsMenu(menu);
     }
 
@@ -127,6 +134,9 @@ public class MainActivity extends BaseActivity
                         cache.getNoListsLayout().setVisibility(View.GONE);
                         unsubscribeAlert();
                     }
+
+                    menusVisible = !allListDtos.isEmpty();
+                    invalidateOptionsMenu();
 
                     // sort according to last sort selection
                     SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
