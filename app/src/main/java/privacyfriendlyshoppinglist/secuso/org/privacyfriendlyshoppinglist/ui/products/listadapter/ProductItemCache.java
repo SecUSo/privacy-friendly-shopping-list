@@ -23,6 +23,7 @@ public class ProductItemCache
     private boolean detailsVisible;
     private TextView listDetailsTextView;
     private RelativeLayout detailsLayout;
+    private Button plusButton;
 
     public ProductItemCache(View parent)
     {
@@ -36,6 +37,7 @@ public class ProductItemCache
         productImageInDetail = (ImageView) parent.findViewById(R.id.product_image_in_detail);
         listDetailsTextView = (TextView) parent.findViewById(R.id.textview_list_details);
         detailsLayout = (RelativeLayout) parent.findViewById(R.id.layout_details);
+        plusButton = (Button) parent.findViewById(R.id.product_button_plus);
     }
 
     public TextView getProductNameTextView()
@@ -96,5 +98,10 @@ public class ProductItemCache
     public RelativeLayout getDetailsLayout()
     {
         return detailsLayout;
+    }
+
+    public Button getPlusButton()
+    {
+        return plusButton;
     }
 }

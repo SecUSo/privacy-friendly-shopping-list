@@ -87,7 +87,7 @@
     <!-- ### TEMPLATE ### -->
     <string name="create_template">Crear Plantilla</string>
     <string name="template_titel">Plantilla</string>
-    <string name="template_message">Crear una lista partiendo de los productos almacenados en la app en tan solo dos
+    <string name="template_message">Crea una lista partiendo de los productos almacenados en la app en tan solo dos
         pasos:\n\n
         1. Asignar nombre a lista y rellenar otros campos de interés\n
         2. Eliminar los productos que no sean relevantes\n\n

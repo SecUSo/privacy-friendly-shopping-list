@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.ContextWrapper;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.R;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.comparators.PFAComparators;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.logger.PFALogger;
@@ -111,7 +112,7 @@ public class ProductServiceImpl implements ProductService
         for ( String productName : productsMap.keySet() )
         {
             ProductDto productDto = createTemplateProduct(productsMap, productName);
-            copyToList(productDto, newList);
+            copyToListSync(productDto, newList.getId());
         }
 
         return null;
@@ -146,18 +147,24 @@ public class ProductServiceImpl implements ProductService
         List<ProductDto> accumProducts = productsMap.get(productName);
         double price = 0.0;
         int quantity = 0;
-        Bitmap thumbnail = null;
         Set<String> categories = new TreeSet<>();
         Set<String> stores = new TreeSet<>();
-        for ( ProductDto product : accumProducts )
+        Bitmap thumbnail = BitmapFactory.decodeResource(context.getResources(), R.drawable.ic_menu_camera);
+        boolean defaultImage = true;
+        for ( ProductDto refProductDto : accumProducts )
         {
-            price = price + StringUtils.getStringAsDouble(product.getProductPrice(), format);
-            quantity = quantity + Integer.parseInt(product.getQuantity());
-            String productCategory = product.getProductCategory();
+            price = price + StringUtils.getStringAsDouble(refProductDto.getProductPrice(), format);
+            quantity = quantity + Integer.parseInt(refProductDto.getQuantity());
+            String productCategory = refProductDto.getProductCategory();
             if ( !StringUtils.isEmpty(productCategory) ) categories.add(productCategory);
-            String productStore = product.getProductStore();
+            String productStore = refProductDto.getProductStore();
             if ( !StringUtils.isEmpty(productStore) ) stores.add(productStore);
-            if ( product.getThumbnailBitmap() != null ) thumbnail = product.getThumbnailBitmap();
+            if ( !refProductDto.isDefaultImage() && defaultImage )
+            {
+                productDto.setId(refProductDto.getId());
+                thumbnail = refProductDto.getThumbnailBitmap();
+                defaultImage = false;
+            }
         }
         int numProducts = accumProducts.size();
         price = price / numProducts;
@@ -167,6 +174,7 @@ public class ProductServiceImpl implements ProductService
         productDto.setQuantity(String.valueOf(quantity));
         productDto.setProductCategory(listToText(categories));
         productDto.setProductStore(listToText(stores));
+        productDto.setDefaultImage(defaultImage);
         productDto.setThumbnailBitmap(thumbnail);
         return productDto;
     }
@@ -201,19 +209,30 @@ public class ProductServiceImpl implements ProductService
         List<ProductDto> products = getAllProductsSync(listId);
         for ( ProductDto product : products )
         {
-            copyToList(product, newList);
+            copyToListSync(product, newList.getId());
         }
         return null;
     }
 
-    private void copyToList(ProductDto product, ListDto newList)
+    @Override
+    public Observable<Void> copyToList(ProductDto product, String listId)
+    {
+        Observable<Void> observable = Observable
+                .fromCallable(() -> copyToListSync(product, listId))
+                .subscribeOn(Schedulers.computation())
+                .observeOn(AndroidSchedulers.mainThread());
+        return observable;
+    }
+
+    private Void copyToListSync(ProductDto product, String listId)
     {
         String originalProductId = product.getId();
         product.setId(null); // new product
         product.setChecked(false);
-        saveOrUpdateSync(product, newList.getId());
+        saveOrUpdateSync(product, listId);
         String newProductId = product.getId();
         copyImage(originalProductId, newProductId);
+        return null;
     }
 
     private void copyImage(String sourceProductId, String destProductId)
@@ -364,6 +383,28 @@ public class ProductServiceImpl implements ProductService
         Observable
                 .from(productItemDao.getAllEntities())
                 .filter(entity -> entity.getShoppingList().getId() == Long.valueOf(listId))
+                .map(this::getDto)
+                .subscribe(dto -> productDtos.add(dto));
+
+        return productDtos;
+    }
+
+    @Override
+    public Observable<ProductDto> getAllProducts()
+    {
+        Observable<ProductDto> observable = Observable
+                .defer(() -> Observable.from(getAllProductsSync()))
+                .subscribeOn(Schedulers.computation())
+                .observeOn(AndroidSchedulers.mainThread());
+        return observable;
+    }
+
+    private List<ProductDto> getAllProductsSync()
+    {
+        List<ProductDto> productDtos = new ArrayList<>();
+
+        Observable
+                .from(productItemDao.getAllEntities())
                 .map(this::getDto)
                 .subscribe(dto -> productDtos.add(dto));
 

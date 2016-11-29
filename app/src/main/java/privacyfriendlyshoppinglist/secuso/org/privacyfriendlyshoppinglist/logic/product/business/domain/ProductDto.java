@@ -14,6 +14,7 @@ import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framew
 public class ProductDto
 {
     // product fields
+    private String listId;
     private String productName;
     private String id;
     private String productCategory;
@@ -30,6 +31,16 @@ public class ProductDto
     public ProductDto()
     {
         productNotes = "";
+    }
+
+    public String getListId()
+    {
+        return listId;
+    }
+
+    public void setListId(String listId)
+    {
+        this.listId = listId;
     }
 
     public String getId()

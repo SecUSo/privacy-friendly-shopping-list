@@ -256,6 +256,12 @@ public class ProductsActivity extends AppCompatActivity
             @Override
             public void onNext(Long time)
             {
+                if ( cache.getSearchTextInputLayout().getVisibility() == View.VISIBLE )
+                {
+                    cache.getAlertTextView().setVisibility(View.GONE);
+                    return;
+                }
+
                 if ( time % 2 != 0 )
                 {
                     cache.getAlertTextView().setVisibility(View.GONE);

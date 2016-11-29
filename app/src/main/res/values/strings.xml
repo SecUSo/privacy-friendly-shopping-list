@@ -111,9 +111,9 @@
     <!-- ### TEMPLATE ### -->
     <string name="create_template">Create Template</string>
     <string name="template_titel">Template</string>
-    <string name="template_message">Create a list using all existing products in two steps:\n\n
+    <string name="template_message">Create a list based on all existing products in two steps:\n\n
         1. Give the list a name\n
-        2. Delete all irrelevant products from the new list\n\n.
+        2. Delete all irrelevant products from the new list\n\n
         Would you like to continue?
     </string>
     <!-- ### SORT ### -->

@@ -5,6 +5,7 @@ import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.utils.StringUtils;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.products.ProductActivityCache;
+import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.products.ProductsActivity;
 
 /**
  * Description:
@@ -28,9 +29,11 @@ public class CancelSearchOnClick implements View.OnClickListener
 
     public static void performClick()
     {
-        cache.getSearchAutoCompleteTextView().setText(StringUtils.EMPTY);
         cache.getSearchTextInputLayout().setVisibility(View.GONE);
         cache.getCancelSarchButton().setVisibility(View.GONE);
+        cache.getSearchAutoCompleteTextView().setText(StringUtils.EMPTY);
+        ProductsActivity host = (ProductsActivity) cache.getActivity();
+        host.updateListView();
         hideKeyboard();
     }
 

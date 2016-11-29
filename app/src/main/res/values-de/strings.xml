@@ -96,7 +96,7 @@
     <!-- ### TEMPLATE ### -->
     <string name="create_template">Template Erzeugen</string>
     <string name="template_titel">Template</string>
-    <string name="template_message">Erstellen Sie eine Liste mithilfe der vorhandenen Produkten in der App in zwei
+    <string name="template_message">Erstellen Sie eine Liste mithilfe aller vorhandenen Produkten in zwei
         Schritten:\n\n
         1. Geben Sie einen Namen für die Liste ein.\n
         2. Löschen Sie die irrelevanten Produkten aus der neuen Liste.\n\n
