@@ -30,5 +30,5 @@ abstract public class AbstractDatabaseTest extends AndroidTestCase
 
     abstract protected void setupBeforeEachTest();
 
-    protected void cleanAfterEachTest(){}
+    protected void cleanAfterEachTest() {}
 }

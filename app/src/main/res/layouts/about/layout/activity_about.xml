@@ -111,21 +111,21 @@
                     android:text="@string/more_info"/>
 
             <TextView
-                android:id="@+id/secusoWebsite"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:text="@string/url"
-                android:textStyle="bold" />
+                    android:id="@+id/secusoWebsite"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:text="@string/url"
+                    android:textStyle="bold"/>
 
             <TextView
-                android:id="@+id/githubURL"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:gravity="center_horizontal"
-                android:textStyle="bold"
-                android:text="@string/github" />
+                    android:id="@+id/githubURL"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:gravity="center_horizontal"
+                    android:textStyle="bold"
+                    android:text="@string/github"/>
         </LinearLayout>
     </ScrollView>
 </LinearLayout>

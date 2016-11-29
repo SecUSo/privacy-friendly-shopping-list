@@ -161,7 +161,7 @@ public class MainActivity extends BaseActivity
 
     private void unsubscribeAlert()
     {
-        if (alertSubscriber != null && !alertSubscriber.isUnsubscribed())
+        if ( alertSubscriber != null && !alertSubscriber.isUnsubscribed() )
         {
             cache.getAlertTextView().setVisibility(View.GONE);
             alertSubscriber.unsubscribe();

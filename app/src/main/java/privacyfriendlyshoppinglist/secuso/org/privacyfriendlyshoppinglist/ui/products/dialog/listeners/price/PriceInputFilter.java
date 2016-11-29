@@ -22,10 +22,12 @@ public class PriceInputFilter implements InputFilter
     public PriceInputFilter(ProductDialogCache dialogCache)
     {
         Locale locale = dialogCache.getPrice().getContext().getResources().getConfiguration().locale;
-        if ("US".equals(locale.getCountry()))
+        if ( "US".equals(locale.getCountry()) )
         {
             decimalSeparator = PERIOD;
-        } else {
+        }
+        else
+        {
             decimalSeparator = dialogCache.getPrice().getResources().getString(R.string.number_decimal_separator);
         }
     }

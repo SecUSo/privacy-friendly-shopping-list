@@ -39,7 +39,8 @@ public class ListsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
     }
 
     @Override
-    public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType)
+    {
         Context context = parent.getContext();
         int listItemLayout = getListItemLayout();
         View view = LayoutInflater.from(context).inflate(listItemLayout, parent, false);
@@ -47,14 +48,16 @@ public class ListsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
     }
 
     @Override
-    public void onBindViewHolder(RecyclerView.ViewHolder viewHolder, int position) {
+    public void onBindViewHolder(RecyclerView.ViewHolder viewHolder, int position)
+    {
         ListsItemViewHolder holder = (ListsItemViewHolder) viewHolder;
         ListDto dto = shoppingList.get(position);
         holder.processDto(dto);
     }
 
     @Override
-    public int getItemCount() {
+    public int getItemCount()
+    {
         return shoppingList == null ? 0 : shoppingList.size();
     }
 

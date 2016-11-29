@@ -5,12 +5,12 @@
     <uses-feature android:name="android.hardware.camera" android:required="false"/>
 
     <supports-screens
-        android:anyDensity="true"
-        android:largeScreens="true"
-        android:normalScreens="true"
-        android:resizeable="true"
-        android:smallScreens="true"
-        android:xlargeScreens="true"/>
+            android:anyDensity="true"
+            android:largeScreens="true"
+            android:normalScreens="true"
+            android:resizeable="true"
+            android:smallScreens="true"
+            android:xlargeScreens="true"/>
 
     <application
             android:allowBackup="true"
@@ -20,13 +20,13 @@
             android:theme="@style/AppTheme">
 
         <activity
-            android:name=".ui.main.SplashActivity"
-            android:theme="@style/SplashTheme"
-            android:screenOrientation="portrait">
+                android:name=".ui.main.SplashActivity"
+                android:theme="@style/SplashTheme"
+                android:screenOrientation="portrait">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+                <action android:name="android.intent.action.MAIN"/>
 
-                <category android:name="android.intent.category.LAUNCHER" />
+                <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
         <activity

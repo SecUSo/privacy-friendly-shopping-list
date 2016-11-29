@@ -157,8 +157,12 @@
         Darmstadt und Google Inc.
     </string>
     <string name="more_info">More information can be found on:</string>
-    <string name="github" translatable="false"><a href="https://github.com/SecUSo/privacy-friendly-shopping-list">Github-Repo</a></string>
-    <string name="url" translatable="false"><a href="https://www.secuso.org/pfa">SECUSO-Website</a></string>
+    <string name="github" translatable="false">
+        <a href="https://github.com/SecUSo/privacy-friendly-shopping-list">Github-Repo</a>
+    </string>
+    <string name="url" translatable="false">
+        <a href="https://www.secuso.org/pfa">SECUSO-Website</a>
+    </string>
     <!-- ### DRAWER ###-->
     <string name="action_help">Help</string>
     <string name="action_about">About</string>
@@ -220,47 +224,46 @@
         lists.
     </string>
     <string name="help_intro2">Additionally you can keep track of checked items and visualize the total amount spent,
-        or the total number of units purchased, in a diagram.</string>
+        or the total number of units purchased, in a diagram.
+    </string>
     <string name="help_intro3">A shopping list contains products. Besides product name, quantity and price, you can add
         a category, the store where the item is to be purchased, some notes and a photo by using the camera of your
         device.
     </string>
     <string name="help_how_tos_lists">How To\'s</string>
     <string name="help_how_to_create_a_list">Create a List</string>
-    <string name="help_how_to_create_a_list_summary1">To create a list go to the main menu and press the plus (+) button.
-        Then fill the fields shown in the dialog and press OKAY. There are no mandatory fields.
+    <string name="help_how_to_create_a_list_summary1">To create a list go to the main menu and press the plus (+)
+        button. Then fill the fields shown in the dialog and press OKAY. There are no mandatory fields.
     </string>
     <string name="help_how_to_create_a_list_summary2">A default name will be used if the field \"name\" is empty.
         If priority \"High\" is selected, then you will see an icon (!) on the right side of the card.
     </string>
     <string name="help_how_to_create_a_product">Add a Product</string>
-    <string name="help_how_to_create_a_product_summary1">Once you have created a list, you will jump automatically inside
-        of the new list. To add a product to this list press the plus (+) button.
+    <string name="help_how_to_create_a_product_summary1">Once you have created a list, you will jump automatically
+        inside of the new list. To add a product to this list press the plus (+) button.
     </string>
     <string name="help_how_to_create_a_product_summary2">Then fill the fields shown in the dialog and press OKAY.
         The field \"Product Name\" is mandatory.
     </string>
     <string name="help_how_to_edit_a_list">Edit, Delete, Duplicate, Reset or Share</string>
     <string name="help_how_to_edit_a_list_summary">To edit, delete, duplicate, reset, or share a list or a product you
-        must click the
-        item and hold on pressing for about three seconds, then you see a dialog where the mentioned options are shown.
-        After that you can select the option you would like to perform. Notice that the delete operation will not delete any
-        data saved in the statistics.
+        must click the item and hold on pressing for about three seconds, then you see a dialog where the mentioned
+        options are shown. After that you can select the option you would like to perform. Notice that the delete
+        operation will not delete any data saved in the statistics.
     </string>
     <string name="help_how_to_create_list_fast">Create a List Fast</string>
     <string name="help_how_to_create_list_fast_summary">You can create lists faster by using the icon from
         the action bar that has tree bars and a plus sign. This icon will help you creating a list that contains all
-        existing products
-        from the app. Averages are taken for quantities and prices. After given the list a name you will be prompt to a
-        list where
-        you can delete all irrelevant products.
+        existing products from the app. Averages are taken for quantities and prices. After given the list a name you
+        will be prompt to a list where you can delete all irrelevant products.
     </string>
     <string name="help_how_to_enable_statistics">Enable Statistics</string>
     <string name="help_how_to_enable_statistics_summary1">Once you are in the list dialog (See \"Create a List\"),
         you can enable the statistics by using the switch button next the to icon with three bars. After this option
         has been switched on, items are going to be registered in the statistics as soon as the items are checked.
     </string>
-    <string name="help_how_to_enable_statistics_summary2">Notice that if you checked the product multiple times, then the
+    <string name="help_how_to_enable_statistics_summary2">Notice that if you checked the product multiple times, then
+        the
         product will also be registered multiple times in the statistics. This allows you to reuse the same shopping
         list over and over and being able to keep track of your purchases.
     </string>
@@ -317,8 +320,10 @@
     </string>
     <string name="help_settings_heading">Settings</string>
     <string name="help_settings_summary1">In the settings page you can customize some options to make the app more
-        comfortable for you.</string>
-    <string name="help_settings_summary2">You can choose for example whether the checkbox to check products should be on the left or
+        comfortable for you.
+    </string>
+    <string name="help_settings_summary2">You can choose for example whether the checkbox to check products should be on
+        the left or
         on the right, whether the notifications should be on/off, and some other options. Visit the settings section to
         find out more!
     </string>

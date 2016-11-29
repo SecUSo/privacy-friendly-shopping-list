@@ -223,13 +223,15 @@
     <!--### HELP ###-->
     <string name="help">Hilfe</string>
     <string name="help_overview_heading">Übersicht</string>
-    <string name="help_intro1">Die App ermöglicht es nicht nur Listen anzulegen und Produkte darin zu erfassen, sondern ebenfalls Prioritäten für Listen festzulegen,
+    <string name="help_intro1">Die App ermöglicht es nicht nur Listen anzulegen und Produkte darin zu erfassen, sondern
+        ebenfalls Prioritäten für Listen festzulegen,
         Deadlines und Erinnerungen für Listen zu setzen, und Notizen zu Listen oder Produkten anzufügen.
     </string>
     <string name="help_intro2">Durch das Statistik-Feature können Ausgaben erfasst und graphisch dargestellt werden.
     </string>
     <string name="help_intro3">Eine Einkaufsliste besteht aus Produkteinträgen. Zusätzlich zu Produktname, Menge und
-        Preis kann eine Kategorie und der Einkaufsort eingepflegt werden. Außerdem können Notizen vermerkt und ein Foto eingefügt werden.
+        Preis kann eine Kategorie und der Einkaufsort eingepflegt werden. Außerdem können Notizen vermerkt und ein Foto
+        eingefügt werden.
     </string>
 
     <string name="help_how_tos_lists">Wie funktioniert\'s</string>
@@ -238,8 +240,10 @@
         drückst das (+) Symbol in der rechten unteren Ecke. Fülle alle gewünschten Dialogfelder aus und bestätige den
         Dialog mit OKAY.
     </string>
-    <string name="help_how_to_create_a_list_summary2">Für Listen gibt es keine Pflichtfelder. Bleibt der Listenname leer,
-        wird ein Standardname vergeben. Wird eine Liste mit hoher Priorität deklariert, so erscheint in der Listenübersicht
+    <string name="help_how_to_create_a_list_summary2">Für Listen gibt es keine Pflichtfelder. Bleibt der Listenname
+        leer,
+        wird ein Standardname vergeben. Wird eine Liste mit hoher Priorität deklariert, so erscheint in der
+        Listenübersicht
         ein kleines Symbol mit Ausrufezeichen rechts neben der betroffenen Liste.
     </string>
 
@@ -279,7 +283,8 @@
 
     <string name="help_how_to_setup_deadline">Deadline einstellen</string>
     <string name="help_how_to_setup_deadline_summary1">Im Listendialog (siehe \"Eine Liste erstellen\") kann, wozu auf
-        das Kontrollkästchen (\"Deadline\") geklickt werden muss. Danach kann ein Datum und eine Uhrzeit eingestellt werden.
+        das Kontrollkästchen (\"Deadline\") geklickt werden muss. Danach kann ein Datum und eine Uhrzeit eingestellt
+        werden.
     </string>
     <string name="help_how_to_setup_deadline_summary2">Ist eine Deadline gesetzt, wird am linken Rand der Produktkarte
         standardmäßg ein blauer Streifen angezeigt. Ist die Deadline abgelaufen und befinden sich noch nicht abgehakte
@@ -292,7 +297,8 @@
         vor Eintreten der Deadline eine Erinnerung in Form Benachrichtigung auf dem Telefon angezeigt werden soll.
     </string>
     <string name="help_how_to_setup_reminder_summary2">Es erscheint zusätzlich ein Symbol in Form eines Weckers in der
-        Listenansicht. Dieses ist rot gefärbt, sofern in den die Standardeinstellung für Benachrichtigungen deaktiviert ist.
+        Listenansicht. Dieses ist rot gefärbt, sofern in den die Standardeinstellung für Benachrichtigungen deaktiviert
+        ist.
     </string>
 
     <string name="help_how_to_sort_lists">Elemente sortieren</string>
@@ -308,7 +314,8 @@
         sollen.
     </string>
     <string name="help_how_to_delete_multiple_items_summary2">Zum Abschluss der Aktion musst du auf das Symbol in der
-        unteren rechten Ecke drucken. Hier wirst du erneut aufgefordert deine Aktion zu bestätigen. Das Löschen beeinflusst
+        unteren rechten Ecke drucken. Hier wirst du erneut aufgefordert deine Aktion zu bestätigen. Das Löschen
+        beeinflusst
         keine bereits gespeicherte Statistikdaten, die mit diesen Elementen zusammenhingen.
     </string>
 

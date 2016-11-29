@@ -1,4 +1,3 @@
-
 package privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.statistics.chart;
 
 import android.content.Context;

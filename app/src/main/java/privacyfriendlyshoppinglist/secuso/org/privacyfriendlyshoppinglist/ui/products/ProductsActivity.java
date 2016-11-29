@@ -182,7 +182,7 @@ public class ProductsActivity extends AppCompatActivity
 
     private void unsubscribeAlert()
     {
-        if (alertSubscriber != null && !alertSubscriber.isUnsubscribed())
+        if ( alertSubscriber != null && !alertSubscriber.isUnsubscribed() )
         {
             cache.getAlertTextView().setVisibility(View.GONE);
             alertSubscriber.unsubscribe();
