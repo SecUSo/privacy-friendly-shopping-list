@@ -105,7 +105,6 @@ public class ProductsActivity extends AppCompatActivity
         MenuItem deleteItem = menu.findItem(R.id.imageview_delete);
         deleteItem.setOnMenuItemClickListener(new ShowDeleteProductsOnClickListener(this, listId));
 
-        searchItem.setVisible(menusVisible);
         sortItem.setVisible(menusVisible);
         deleteItem.setVisible(menusVisible);
         return super.onPrepareOptionsMenu(menu);
