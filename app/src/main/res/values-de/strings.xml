@@ -257,15 +257,14 @@
         Produktinformationen, kann über den OKAY Knopf der Dialog geschlossen werden.
     </string>
 
-    <string name="help_how_to_edit_a_list">Bearbeiten, Löschen, Duplizieren, Wiederverwenden oder Teilen</string>
-    <string name="help_how_to_edit_a_list_summary">Um eine Liste oder ein Produkt bearbeiten, löschen, duplizieren,
-        wiederverwenden
-        oder teilen zu können, ist ein längerer Klick auf das Element erforderlich. Hierbei
-        wird ein Dialog mit den genannten Optionen angezeigt, die dann ausgewählt werden können. Beim Löschen des
+    <string name="help_how_to_edit_a_list">Bearbeiten, Löschen, Teilen, etc.</string>
+    <string name="help_how_to_edit_a_list_summary">Um eine Liste oder ein Produkt bearbeiten, löschen oder teilen zu
+        können, ist ein längerer Klick auf das Element erforderlich. Hierbei
+        wird ein Dialog mit unterschiedlichen Optionen angezeigt, die dann ausgewählt werden können. Beim Löschen des
         ausgewählten Elements ist zu beachten, dass dabei keine bereits erfassten
         Statistikdaten gelöscht werden.
     </string>
-    <string name="help_how_to_create_list_fast">Liste schnell erzeugen</string>
+    <string name="help_how_to_create_list_fast">Listen schneller erzeugen</string>
     <string name="help_how_to_create_list_fast_summary">Um schnell eine Liste zu erzeugen, kannst du in der Titelbar das
         Symbol mit den drei horizontalen Balken und einem Plus klicken. Danach kannst du der Liste einen Namen geben und
         OKAY klicken. Eine Liste mit allen vorhandenen Produkten wird geniert werden. Nur wirst du eine Liste sehen,
@@ -325,7 +324,8 @@
         Suchmaske eine Eingabe vorgenommen werden.
     </string>
     <string name="help_how_to_search_products_summary2">Während des Schreibens wird die Liste der vorhandenen Elemente
-        entsprechend der Eingabe gefiltert.
+        entsprechend der Eingabe gefiltert. Falls das gefundene Produkt nicht zu der Liste gehört, wird ein Plussymbol
+        angezeigt, mit dem man das Produkt in die aktuelle Liste kopieren kann.
     </string>
 
     <string name="help_how_to_save_picture">Ein Foto aufnehmen</string>

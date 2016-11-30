@@ -245,13 +245,14 @@
     <string name="help_how_to_create_a_product_summary2">Then fill the fields shown in the dialog and press OKAY.
         The field \"Product Name\" is mandatory.
     </string>
-    <string name="help_how_to_edit_a_list">Edit, Delete, Duplicate, Reset or Share</string>
-    <string name="help_how_to_edit_a_list_summary">To edit, delete, duplicate, reset, or share a list or a product you
-        must click the item and hold on pressing for about three seconds, then you see a dialog where the mentioned
+    <string name="help_how_to_edit_a_list">Edit, Delete, Share, etc.</string>
+    <string name="help_how_to_edit_a_list_summary">To edit, delete, share, or perform other operations with
+        a list or a product you must click the item and hold on pressing for about three seconds,
+        then you see a dialog where the mentioned
         options are shown. After that you can select the option you would like to perform. Notice that the delete
         operation will not delete any data saved in the statistics.
     </string>
-    <string name="help_how_to_create_list_fast">Create a List Fast</string>
+    <string name="help_how_to_create_list_fast">Create Lists faster</string>
     <string name="help_how_to_create_list_fast_summary">You can create lists faster by using the icon from
         the action bar that has tree bars and a plus sign. This icon will help you creating a list that contains all
         existing products from the app. Averages are taken for quantities and prices. After given the list a name you
@@ -306,7 +307,9 @@
         type the words you are looking for.
     </string>
     <string name="help_how_to_search_products_summary2">As you type, the product list will be filtered, showing only the
-        products that match the search. You can manipulate the filtered products as before.
+        products that match the search. You can manipulate the filtered products as before. If the product found does
+        not
+        belong to the current list, then you can copy it by clicking the plus button.
     </string>
     <string name="help_how_to_save_picture">Take a Picture</string>
     <string name="help_how_to_save_picture_summary1">You can use the device\'s camera to take a picture of a certain

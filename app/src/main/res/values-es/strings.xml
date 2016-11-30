@@ -234,11 +234,10 @@
     <string name="help_how_to_create_a_product_summary2">Rellena los campos mostrados y presiona ACEPTAR.
         El campo \"Nombre del Producto\" es obligatorio.
     </string>
-    <string name="help_how_to_edit_a_list">Editar, Eliminar, Duplicar, Reutilizar o Compartir</string>
-    <string name="help_how_to_edit_a_list_summary">Para editar, eliminar, duplicar, reutilizar o compartir una lista o
-        un producto debes hacer
-        clic en el ítem correspondiente, lista o producto, por un tiempo de tres segundos aproximadamente. Esta acción
-        mostrará una ventana en
+    <string name="help_how_to_edit_a_list">Editar, Eliminar, Compartir, etc.</string>
+    <string name="help_how_to_edit_a_list_summary">Para editar, eliminar, compartir, o ejectuar otras operaciones con
+        una lista o un producto debes hacer clic en el ítem correspondiente, lista o producto, por un tiempo de
+        tres segundos aproximadamente. Esta acción mostrará una ventana en
         donde podrás eligir la operación que deseas realizar. La operación de eliminar no afectará los datos
         correspondientes a estadísticas.
     </string>
@@ -305,8 +304,10 @@
         campo en el que podrás escribir las palabras que deseas buscar.
     </string>
     <string name="help_how_to_search_products_summary2">La lista se filtrará a medida que estas escribiendo, mostrando
-        así los ítems que coincidan con la búsqueda. Los ítems allí mostrados pueden ser manipulados tal y como se hace
-        en la vista original (marcar, editar, etc.).
+        así los ítems que coincidan con la búsqueda. Los ítems allí mostrados pueden ser manipulados igual que
+        en la vista original (marcar, editar, etc.). En caso de que el producto encontrado no pertenezca a la lista
+        actual,
+        podrás copiarlo haciendo clic en el botón con el signo más.
     </string>
     <string name="help_how_to_save_picture">Guardar imagen</string>
     <string name="help_how_to_save_picture_summary1">Para guardar una imagen de un producto se puede utilizar la cámara
