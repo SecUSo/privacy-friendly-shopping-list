@@ -1,0 +1,356 @@
+﻿<resources>
+    <!--### GENERAL ### -->
+    <string name="cancel">キャンセル</string>
+    <string name="delete">削除</string>
+    <string name="share">共有</string>
+    <string name="reset">リセット</string>
+    <string name="edit">編集</string>
+    <string name="duplicate">複製</string>
+    <string name="language">JA</string>
+    <string name="date_long_pattern">yyyy/MM/dd EEE HH:mm</string>
+    <string name="date_short_pattern">yyyy/MM/dd EEE</string>
+    <string name="date_day_stats_pattern">yy/MM/dd</string>
+    <string name="date_month_pattern">yy/MM</string>
+    <string name="time_pattern">HH:mm</string>
+    <string name="currency">￥</string>
+    <string name="number_decimal_separator">.</string>
+    <!-- ### TUTORIAL ### -->
+    <string name="tutorial_dialog_title">チュートリアル</string>
+    <string name="tutorial_how_to">使用方法...</string>
+    <string name="tutorial_create_list">... 新しいリストを作成?</string>
+    <string name="tutorial_delete_lists">... 複数のリストを削除?</string>
+    <string name="tutorial_sort_lists">... リストの並び替え?</string>
+    <string name="tutorial_see_details_list">... リストの詳細を参照?</string>
+    <string name="tutorial_icons_meaning">アイコン</string>
+    <string name="tutorial_icon_priority">優先順位の高いリスト</string>
+    <string name="tutorial_icon_reminder_on">リマインダーが設定されます。 通知は
+        <b>
+            <i>オン。</i>
+        </b>
+    </string>
+    <string name="tutorial_icon_reminder_off">リマインダーが設定されます。 通知は
+        <b>
+            <i>オフ。</i>
+        </b>
+    </string>
+    <string name="tutorial_add_product">... 新しい商品を追加?</string>
+    <string name="tutorial_delete_products">... 複数の商品を削除?</string>
+    <string name="tutorial_sort_products">... 商品の並び替え?</string>
+    <string name="tutorial_see_products">... 商品の詳細を参照?</string>
+    <string name="tutorial_see_details_product">... 商品の詳細を参照?</string>
+    <string name="tutorial_check_product">... 商品を確認?</string>
+    <string name="tutorial_check_statistics">現在のリストの統計機能が有効になっていると、
+        商品をチェックするたびに統計に追加されます。 同じ商品を複数回統計に追加することができます。
+        これにより、商品のチェックを外して、リストを再利用して、チェックしたアイテムを追跡することができます。
+    </string>
+    <string name="tutorial_multiple_delete">削除したいアイテムを選択し、削除アイコンを押して、この操作を確定します。
+    </string>
+    <!-- Placeholders-->
+    <!-- ### SHOPPING LIST ### -->
+    <string name="activity_shopping_list">ショッピングリスト:</string>
+    <string name="nr_items">アイテム No</string>
+    <string name="total_list_amount">合計金額</string>
+    <string name="reminder_text">リマインダー: %1$d %2$s 前</string>
+    <string name="lists_empty">ショッピングリストはありません</string>
+    <string name="alert_message_list">リストを作成</string>
+    <string name="alert_message_product">商品を追加</string>
+    <string name="duplicated_suffix">(新)</string>
+    <!-- ### NOTIFICATIONS ### -->
+    <string name="notification_message">リスト名: %1$s\n期限: %2$s</string>
+    <string name="notification_setting_status">通知は無効になっています。 設定に移動してオンにしてください。
+    </string>
+    <!-- ### PRODUCTS ### -->
+    <string name="new_product">新しい商品</string>
+    <string name="product_already_exists">商品はすでにリストに存在します!</string>
+    <string name="price_number_too_big">数字が大きすぎます!</string>
+    <string name="number_format_invalid">無効です: #,###,##0.00</string>
+    <string name="product_list_empty">このリストには商品がありません</string>
+    <string name="total_amount">合計:</string>
+    <string name="total_amount_separator">/</string>
+    <string name="store_label">店舗:</string>
+    <string name="category_label">カテゴリー:</string>
+    <string name="search">検索</string>
+    <string name="no_products_found">商品が見つかりません!</string>
+    <string name="store_detail">店舗: %1$s</string>
+    <string name="category_detail">カテゴリー: %1$s</string>
+    <string name="quantity_detail">数量: %1$s</string>
+    <string name="price_detail">価格: %1$s</string>
+    <string name="total_price_detail">合計価格: %1$s</string>
+    <string name="notes_detail">メモ: %1$s</string>
+    <!-- ### Statistics -->
+    <string name="statistics_total_amout">合計:</string>
+    <string name="statistics_range">範囲:</string>
+    <string name="statistics_group_by">グループ:</string>
+    <string name="statistics_y_values">値:</string>
+    <string name="statistics_quantity_unit">単位</string>
+    <!-- ### SORT ### -->
+    <string name="sort_options">並び替え</string>
+    <string name="sort_ascencing_descending">昇順/降順</string>
+    <string name="sort_ascencing">昇順</string>
+    <string name="sort_descending">降順</string>
+    <string name="sort_by">並び順</string>
+    <string name="sort_by_name">名称</string>
+    <string name="sort_by_priority">優先順位</string>
+    <string name="sort_by_quantity">数量</string>
+    <string name="sort_by_store">店舗</string>
+    <string name="sort_by_price">価格</string>
+    <string name="sort_by_category">カテゴリー</string>
+    <!-- ### DELETE ### -->
+    <string name="delete_confirmation_title">削除の確認</string>
+    <string name="delete_foto_confirmation">選択した画像を削除しますか (%1$s)? この操作を元に戻すことはできません!</string>
+    <!-- ### DELETE SHOPPING LISTS ### -->
+    <string name="delete_lists_confirmation">選択したリストをすべて削除しますか? この操作を元に戻すことはできません!</string>
+    <string name="delete_list_confirmation">選択したリストを削除しますか (%1$s)? この操作を元に戻すことはできません!</string>
+    <string name="activity_delete_lists">ショッピングリストを削除</string>
+    <!-- ### DELETE PRODUCTS LISTS ### -->
+    <string name="delete_products_confirmation">選択した商品をすべて削除しますか? この操作を元に戻すことはできません!</string>
+    <string name="delete_product_confirmation">選択した商品を削除しますか (%1$s)? この操作を元に戻すことはできません!</string>
+    <string name="activity_delete_products">商品を削除</string>
+    <!-- ### STATISTICS ### -->
+    <string name="statistics">統計情報</string>
+    <string name="delete_statistics_confirmation">現在保存された統計情報をすべて削除しますか? この操作を元に戻すことはできません!
+    </string>
+    <!--### ABOUT ###-->
+    <string name="about">アプリについて</string>
+    <string name="version_number">Version 1.0.5</string>
+    <string name="about_developper">作者:</string>
+    <string name="about_author_greb">Grebiel José Ifill Brito</string>
+    <string name="about_author_cri">Christian König と貢献者。</string>
+    <string name="about_affiliation">提携</string>
+    <string name="privacy_friendly">このアプリケーションは、ダルムシュタット工科大学 (Technische Universität Darmstadt, 
+        Germany) が開発したプライバシーフレンドリーアプリのグループに属しています。
+        ソースコードは GPLv3 の下でライセンスされます。画像の著作権は TU Darmstadt および Google Inc.
+    </string>
+    <string name="more_info">さらに詳しい情報は以下でご覧ください:</string>
+    <!-- ### DRAWER ###-->
+    <string name="action_help">ヘルプ</string>
+    <string name="action_about">アプリについて</string>
+    <string name="action_settings">設定</string>
+    <string name="action_main">メイン</string>
+    <string name="navigation_drawer_open">ナビゲーションドロワーを開く</string>
+    <string name="navigation_drawer_close">ナビゲーションドロワーを閉じる</string>
+    <!-- ### SETTINGS ### -->
+    <string name="pref_header_general">全般</string>
+    <string name="title_activity_settings">設定</string>
+    <string name="pref_checkbox_position">チェックボックスの位置</string>
+    <string name="pref_checkbox_summary_on">商品のチェックボックスを右に表示します</string>
+    <string name="pref_checkbox_summary_off">商品のチェックボックスを左に表示します</string>
+    <string name="pref_checkbox_toast_on">チェックボックスは右に表示されます!</string>
+    <string name="pref_checkbox_toast_off">チェックボックスは左に表示されます!</string>
+    <string name="pref_checkbox_right_display_text">R</string>
+    <string name="pref_checkbox_left_display_text">L</string>
+    <string name="pref_move_products">チェックした商品を移動</string>
+    <string name="pref_move_products_summary_on">チェックした商品リストを最後に移動はオンです</string>
+    <string name="pref_move_products_summary_off">チェックした商品リストを最後に移動はオフです</string>
+    <string name="pref_move_products_toast_on">チェックした商品リストを移動はオンになりました!</string>
+    <string name="pref_move_products_toast_off">チェックした商品リストを移動はオフになりました!</string>
+    <string name="pref_header_notifications">通知</string>
+    <string name="pref_notifications_title">リマインダー</string>
+    <string name="pref_notifications_summary_on">リマインダーの通知はオンです</string>
+    <string name="pref_notifications_summary_off">リマインダーの通知はオフです</string>
+    <string name="pref_notifications_toast_on">リマインダーの通知がオンになりました!</string>
+    <string name="pref_notifications_toast_off">リマインダーの通知がオフになりました!</string>
+    <string name="pref_header_statistics">統計情報</string>
+    <string name="pref_statistics_title">デフォルトを設定</string>
+    <string name="pref_statistics_summary_on">新しいリストを作成するとき、デフォルトで統計情報は \"有効\" になります。
+    </string>
+    <string name="pref_statistics_summary_off">新しいリストを作成するとき、デフォルトで統計情報は \"無効\" になります。
+    </string>
+    <string name="pref_statistics_toast_on">統計情報はオンになりました! 商品をチェックするとすぐに
+        アイテムは統計情報に追加されます。
+    </string>
+    <string name="pref_statistics_toast_off">統計情報はオフになりました!</string>
+    <string name="pref_statistics_delete">削除</string>
+    <string name="pref_statistics_delete_summary">保存された統計情報からすべてのデータを削除します</string>
+    <string name="pref_header_currency">通貨</string>
+    <string name="pref_currency_title">通貨を選択</string>
+    <string name="pref_currency_summary">$</string>
+    <!-- ### WELCOME DIALOG ### -->
+    <string name="welcome_text">プライバシーフレンドリーショッピングリストへようこそ。
+        チュートリアルの指示に従って最初のリストを作成してください。 メニューの設定で、通知、統計、
+        その他のデフォルト設定をカスタマイズできます。 アプリの詳細については、ヘルプセクションを参照してください。
+    </string>
+    <string name="welcome">ようこそ</string>
+    <string name="okay">OK</string>
+    <string name="viewhelp">ヘルプを表示</string>
+    <!--### HELP ###-->
+    <string name="help">ヘルプ</string>
+    <string name="help_overview_heading">概要</string>
+    <string name="help_intro1">プライバシーフレンドリーショッピングリストのヘルプページへようこそ。
+        このアプリでは、リストを作成して商品を追加するだけでなく、優先順位、期限、リマインダーを設定したり、
+        リストにメモを追加することもできます。
+    </string>
+    <string name="help_intro2">さらに、チェックされたアイテムを追跡し、費やされた合計金額、
+        または購入されたユニットの総数を図で視覚化することができます。</string>
+    <string name="help_intro3">ショッピングリストには商品が含まれます。
+        商品名、数量、価格のほかに、カテゴリー、購入する店舗、メモや写真をデバイスのカメラで追加することができます。
+    </string>
+    <string name="help_how_tos_lists">使用方法</string>
+    <string name="help_how_to_create_a_list">リストの作成</string>
+    <string name="help_how_to_create_a_list_summary1">リストを作成するには、メインメニューに移動し、
+        プラス (+) ボタンを押してください。 次に、ダイアログに表示されているフィールドに入力し、OK を押します。
+        必須フィールドはありません。
+    </string>
+    <string name="help_how_to_create_a_list_summary2">\"名称\" フィールドが空の場合、デフォルトの名称が使用されます。
+        優先順位 \"高\" を選択すると、カードの右側にアイコン (!) が表示されます。
+    </string>
+    <string name="help_how_to_create_a_product">商品の追加</string>
+    <string name="help_how_to_create_a_product_summary1">リストを作成すると、自動的に新しいリストの中に移動します。
+        このリストに商品を追加するには、プラス (+) ボタンを押します。
+    </string>
+    <string name="help_how_to_create_a_product_summary2">次に、ダイアログに表示されているフィールドに入力し、OK を押します。
+        フィールド \"商品名\" は必須です。
+    </string>
+    <string name="help_how_to_edit_a_list">編集、削除、共有</string>
+    <string name="help_how_to_edit_a_list_summary">リストや商品を編集、削除、共有するには、アイテムをクリックして
+        約 3 秒間押し続けると、オプションのダイアログが表示されます。
+        そこで、実行するオプションを選択することができます。
+        削除操作では、統計情報に保存されたデータは削除されないことにご注意ください。
+    </string>
+    <string name="help_how_to_enable_statistics">統計情報を有効にする</string>
+    <string name="help_how_to_enable_statistics_summary1">リストダイアログに入ると (\"リストの作成\" を参照)、
+        3 本のバーのアイコンの隣にあるスイッチボタンを使用して統計情報を有効にすることができます。
+        このオプションをオンにすると、アイテムがチェックされるとすぐにアイテムが統計情報に登録されます。
+    </string>
+    <string name="help_how_to_enable_statistics_summary2">商品を複数回チェックした場合、
+        その商品も統計情報に何度も登録されることに注意してください。
+        これにより、同じショッピングリストを何度も繰り返し使用して、購入を追跡することができます。
+    </string>
+    <string name="help_how_to_setup_deadline">期限の設定</string>
+    <string name="help_how_to_setup_deadline_summary1">リストダイアログに入ると (\"リストの作成\" を参照)、
+        チェックボックス (\"期限\") をクリックして日付と時刻を追加することで、リストに期限を設定することができます。
+    </string>
+    <string name="help_how_to_setup_deadline_summary2">期限が過ぎて、リストにまだチェックが外されていないアイテムがある場合、
+        リストアイテムの左側の縦線が赤色に変わります。 すべてのアイテムがチェックされている場合、線はグレーです。
+        この線のデフォルトの色は青です。 期限が設定されている場合は、カードに日付と時刻も表示されます。
+    </string>
+    <string name="help_how_to_setup_reminder">リマインダーの設定</string>
+    <string name="help_how_to_setup_reminder_summary1">期限を設定している場合は (\"期限の設定\" を参照)、通知を設定するオプションが表示されます。
+        リマインダーオプションをオンにして、アプリがこのリストについてリマインドするまでの分、時間、日、週を選択します。
+        リマインダーは通知として表示され、デバイスの通知のデフォルトサウンドが使用されます。
+    </string>
+    <string name="help_how_to_setup_reminder_summary2">リマインダーが既に起動されている場合は、リストアイテムの左側にある縦線が黄色に変わります。
+        リマインダーが設定されている場合は、期限の隣にアラームアイコンが表示されます。
+        設定で通知が無効になっている場合、このアイコンは赤色になります。
+    </string>
+    <string name="help_how_to_sort_lists">アイテムの並び替え</string>
+    <string name="help_how_to_sort_lists_summary">アイテムを並べ替えるには、アクションバーにある 3 本の水平線のアイコンを使用します。
+        このアイコンをクリックすると、2 グループのオプションが表示されます。
+        アイテムを昇順または降順に並べ替えるかどうか、およびアイテムを並べ替えるために使用するパラメータを選択できます。
+    </string>
+    <string name="help_how_to_delete_multiple_items">複数アイテムの削除</string>
+    <string name="help_how_to_delete_multiple_items_summary1">複数のアイテムを削除するには、アクションバーにあるゴミ箱のアイコンを使用します。
+        このアイコンをクリックすると、削除する必要があるすべてのアイテムを選択できるビューが表示されます。
+        アイテムの選択が完了したら、下部にあるゴミ箱のアイコンを押して、操作を確認します。 アイテムは正常に削除されます。
+    </string>
+    <string name="help_how_to_delete_multiple_items_summary2">削除操作では、統計情報に保存されたデータは削除されないことにご注意ください。
+    </string>
+    <string name="help_how_to_search_products">リストの商品を検索</string>
+    <string name="help_how_to_search_products_summary1">リスト内の商品を検索するには、現在のリストのアクションバーにある拡大鏡のアイコンを使用します。
+        このアイコンをクリックすると、探している単語を入力できるフィールドが表示されます。
+    </string>
+    <string name="help_how_to_search_products_summary2">入力すると、商品リストがフィルタリングされ、検索に一致する商品のみが表示されます。
+        これまでと同様に、フィルタリングされた商品を操作することができます。
+    </string>
+    <string name="help_how_to_save_picture">写真の撮影</string>
+    <string name="help_how_to_save_picture_summary1">デバイスのカメラを使用して、特定の商品を撮影して保存することができます。
+        このオプションは、商品の追加ダイアログ (\"商品の追加\" を参照)
+        または商品の編集ダイアログ (\"編集、削除、共有\" を参照) にあります。
+    </string>
+    <string name="help_how_to_save_picture_summary2">そこに入ると、矢印をクリックしてさらにオプションを表示してください。
+        デバイスのカメラを使用して商品の写真を撮ったり保存したりすることができる、青色のカメラアイコンが表示されます。
+        この画像にはプライバシーフレンドリーショッピングリストアプリでしかアクセスできないことに注意してください。
+        この画像を共有することはできません。
+    </string>
+    <string name="help_settings_heading">設定</string>
+    <string name="help_settings_summary1">設定ページで、いくつかのオプションをカスタマイズして、アプリをより快適にすることができます。</string>
+    <string name="help_settings_summary2">たとえば、商品をチェックするチェックボックスを左または右にするかどうか、
+        通知をオン/オフにするかどうか、その他のオプションを選択できます。 詳しくは設定セクションをご覧ください!
+    </string>
+    <string name="help_privacy_heading">プライバシー情報</string>
+    <string name="help_camera_permission_heading">カメラのアクセス許可</string>
+    <string name="help_camera_permission_description">このアクセス許可は、写真を撮影して商品に追加するために必要です。
+        このアクセス許可が拒否された場合、この機能は使用できません。
+        このアクセス許可を拒否しても、他の機能には影響しません。
+    </string>
+    <string name="help_permissions_heading">アクセス許可</string>
+    <string name="help_permissions_description">他のアクセス許可は必要ありません。</string>
+    <!-- Product Dialog -->
+    <string name="product_name">商品名</string>
+    <string name="product_name_new">新しい商品</string>
+    <string name="product_name_edit">商品を編集</string>
+    <string name="price">0.00</string>
+    <string name="alert_missing_product_name">商品名を入力してください!</string>
+    <string name="product_dialog_title">タイトル</string>
+    <string name="price_text">価格</string>
+    <string name="quantity_text">数量</string>
+    <string name="category_text">カテゴリー</string>
+    <string name="store_text">店舗</string>
+    <string name="product_as_title">商品: %1$s</string>
+    <string name="close_image">閉じる</string>
+    <string name="edit_dialog_product">商品を編集、削除、共有しますか?</string>
+    <!-- Shopping List Dialog -->
+    <string name="list_name">ショッピングリスト名</string>
+    <string name="list_name_new">新しいリスト</string>
+    <string name="list_name_edit">ショッピングリストを編集</string>
+    <string name="list_as_title">リスト: %1$s</string>
+    <string name="priority">優先順位</string>
+    <string name="priority_high">高</string>
+    <string name="priority_normal">普通</string>
+    <string name="deadline_date">日付</string>
+    <string name="deadline_time">時間</string>
+    <string name="deadline">期限</string>
+    <string name="reminder">リマインダー</string>
+    <string name="reminder_before">前</string>
+    <string name="list_notes">メモ</string>
+    <string name="default_list_name">新しいショッピングリスト</string>
+    <string name="edit_dialog_list">リストを編集、削除、共有しますか?</string>
+    <!-- Sharing -->
+    <string name="no_products">このリストには商品がありません。</string>
+    <string name="share_as_text">テキストとして共有</string>
+    <string-array
+            name="shopping_list_priority_spinner">
+        <item>高</item>
+        <item>普通</item>
+        <item>優先順位</item>
+    </string-array>
+    <string-array
+            name="shopping_list_reminder_spinner">
+        <item>分</item>
+        <item>時間</item>
+        <item>日</item>
+        <item>週間</item>
+        <item>リマインダー</item>
+    </string-array>
+    <string-array name="statistics_spinner_group_by">
+        <item>月</item>
+        <item>週</item>
+        <item>日</item>
+        <item>カテゴリー</item>
+        <item>店舗</item>
+        <item>商品</item>
+    </string-array>
+    <string-array name="statistics_spinner_values">
+        <item>価格</item>
+        <item>数量</item>
+    </string-array>
+    <string-array name="statistics_enabled_text">
+        <item>このリストの統計情報は有効です。</item>
+        <item>このリストの統計情報は無効です。</item>
+        <item></item>
+    </string-array>
+    <string-array name="statistics_months">
+        <item>1月</item>
+        <item>2月</item>
+        <item>3月</item>
+        <item>4月</item>
+        <item>5月</item>
+        <item>6月</item>
+        <item>7月</item>
+        <item>8月</item>
+        <item>9月</item>
+        <item>10月</item>
+        <item>11月</item>
+        <item>12月</item>
+    </string-array>
+</resources>
