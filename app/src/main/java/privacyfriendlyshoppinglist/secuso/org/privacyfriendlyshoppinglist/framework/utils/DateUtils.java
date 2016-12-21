@@ -17,6 +17,7 @@ public abstract class DateUtils
     public static final String ISO_PATTERN = "yyyy-MM-dd";
     public static final String US = "US";
     public static final String DE = "DE";
+    public static final String JA = "JA";
 
     public static String getFormattedDateString(String aDate, String inputPattern, String outputPattern, String language)
     {
@@ -61,6 +62,10 @@ public abstract class DateUtils
         else if ( language.equals(DE) )
         {
             formatter = formatter.withLocale(Locale.GERMAN);
+        }
+        else if ( language.equals(JA) )
+        {
+            formatter = formatter.withLocale(Locale.JAPANESE);
         }
         return formatter;
     }

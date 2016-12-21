@@ -17,6 +17,7 @@ public class DateUtilsTest
 {
     private static final String DE_PATTERN = "EE dd.MM.yyyy HH:mm";
     private static final String US_PATTERN = "EE MM/dd/yyyy HH:mm";
+    private static final String JA_PATTERN = "yyyy/MM/dd EE HH:mm";
 
     private DataAsStringTestCaseBuilder[] parametersForFormattedDateString()
     {
@@ -36,6 +37,13 @@ public class DateUtilsTest
                         .setExpectedDate("Mi 29.06.2016 15:37"),
 
                 new DataAsStringTestCaseBuilder()
+                        .setInputDate("2016-06-29 15:37")
+                        .setInputPattern(DateUtils.ISO_PATTERN_MIN)
+                        .setOutputPaterrn(JA_PATTERN)
+                        .setLanguage(DateUtils.JA)
+                        .setExpectedDate("2016/06/29 êÖ 15:37"),
+
+                new DataAsStringTestCaseBuilder()
                         .setInputDate("Wed 06/29/2016 15:37")
                         .setInputPattern(US_PATTERN)
                         .setOutputPaterrn(DateUtils.ISO_PATTERN_MIN)
@@ -47,6 +55,13 @@ public class DateUtilsTest
                         .setInputPattern(DE_PATTERN)
                         .setOutputPaterrn(DateUtils.ISO_PATTERN_MIN)
                         .setLanguage(DateUtils.DE)
+                        .setExpectedDate("2016-06-29 15:37"),
+
+                new DataAsStringTestCaseBuilder()
+                        .setInputDate("2016/06/29 êÖ 15:37")
+                        .setInputPattern(JA_PATTERN)
+                        .setOutputPaterrn(DateUtils.ISO_PATTERN_MIN)
+                        .setLanguage(DateUtils.JA)
                         .setExpectedDate("2016-06-29 15:37"),
         };
     }
