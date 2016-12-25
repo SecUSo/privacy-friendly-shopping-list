@@ -52,6 +52,7 @@ public class ProductsActivity extends AppCompatActivity
     private ListDto listDto;
     private Subscriber<Long> alertUpdateSubscriber;
     private Subscription alertSubscriber;
+    private boolean menusVisible;
 
     @Override
     protected final void onCreate(final Bundle savedInstanceState)
@@ -60,6 +61,7 @@ public class ProductsActivity extends AppCompatActivity
         setContentView(R.layout.products_activity);
 
         MessageUtils.showTutorialDialog(this);
+        menusVisible = false;
 
         AbstractInstanceFactory instanceFactory = new InstanceFactory(getApplicationContext());
         this.productService = (ProductService) instanceFactory.createInstance(ProductService.class);
@@ -102,6 +104,9 @@ public class ProductsActivity extends AppCompatActivity
 
         MenuItem deleteItem = menu.findItem(R.id.imageview_delete);
         deleteItem.setOnMenuItemClickListener(new ShowDeleteProductsOnClickListener(this, listId));
+
+        sortItem.setVisible(menusVisible);
+        deleteItem.setVisible(menusVisible);
         return super.onPrepareOptionsMenu(menu);
     }
 
@@ -141,6 +146,9 @@ public class ProductsActivity extends AppCompatActivity
                         unsubscribeAlert();
                     }
 
+                    menusVisible = !allProducts.isEmpty();
+                    invalidateOptionsMenu();
+
                     // sort according to last sort selection
                     final ListDto[] listDto = new ListDto[ 1 ];
                     shoppingListService.getById(listId)
@@ -173,7 +181,7 @@ public class ProductsActivity extends AppCompatActivity
 
     private void unsubscribeAlert()
     {
-        if (alertSubscriber != null && !alertSubscriber.isUnsubscribed())
+        if ( alertSubscriber != null && !alertSubscriber.isUnsubscribed() )
         {
             cache.getAlertTextView().setVisibility(View.GONE);
             alertSubscriber.unsubscribe();
@@ -256,6 +264,12 @@ public class ProductsActivity extends AppCompatActivity
             @Override
             public void onNext(Long time)
             {
+                if ( cache.getSearchTextInputLayout().getVisibility() == View.VISIBLE )
+                {
+                    cache.getAlertTextView().setVisibility(View.GONE);
+                    return;
+                }
+
                 if ( time % 2 != 0 )
                 {
                     cache.getAlertTextView().setVisibility(View.GONE);

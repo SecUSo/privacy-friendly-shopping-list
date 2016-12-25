@@ -15,6 +15,7 @@ import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.shoppingList.business.domain.ListDto;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.baseactivity.BaseActivity;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.main.listeners.AddOnClickListener;
+import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.main.listeners.CreateTemplateOnClickListener;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.main.listeners.ShowDeleteListsOnClickListener;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.main.listeners.SortOnClickListener;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.settings.SettingsKeys;
@@ -41,6 +42,8 @@ public class MainActivity extends BaseActivity
     private Subscriber<Long> alertUpdateSubscriber;
     private Subscription alertSubscriber;
 
+    private boolean menusVisible;
+
 
     @Override
     protected final void onCreate(final Bundle savedInstanceState)
@@ -51,6 +54,7 @@ public class MainActivity extends BaseActivity
         AbstractInstanceFactory instanceFactory = new InstanceFactory(getApplicationContext());
         this.shoppingListService = (ShoppingListService) instanceFactory.createInstance(ShoppingListService.class);
         cache = new ShoppingListActivityCache(this);
+        menusVisible = false;
 
 //        getApplicationContext().deleteDatabase(DB.APP.getDbName());
 
@@ -91,11 +95,18 @@ public class MainActivity extends BaseActivity
     @Override
     public boolean onPrepareOptionsMenu(Menu menu)
     {
+        MenuItem templateItem = menu.findItem(R.id.imageview_template);
+        templateItem.setOnMenuItemClickListener(new CreateTemplateOnClickListener(cache));
+
         MenuItem sortItem = menu.findItem(R.id.imageview_sort);
         sortItem.setOnMenuItemClickListener(new SortOnClickListener(cache));
 
         MenuItem deleteItem = menu.findItem(R.id.imageview_delete);
         deleteItem.setOnMenuItemClickListener(new ShowDeleteListsOnClickListener(cache));
+
+        templateItem.setVisible(menusVisible);
+        sortItem.setVisible(menusVisible);
+        deleteItem.setVisible(menusVisible);
         return super.onPrepareOptionsMenu(menu);
     }
 
@@ -124,6 +135,9 @@ public class MainActivity extends BaseActivity
                         unsubscribeAlert();
                     }
 
+                    menusVisible = !allListDtos.isEmpty();
+                    invalidateOptionsMenu();
+
                     // sort according to last sort selection
                     SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
                     String sortBy = sharedPref.getString(SettingsKeys.LIST_SORT_BY, PFAComparators.SORT_BY_NAME);
@@ -147,7 +161,7 @@ public class MainActivity extends BaseActivity
 
     private void unsubscribeAlert()
     {
-        if (alertSubscriber != null && !alertSubscriber.isUnsubscribed())
+        if ( alertSubscriber != null && !alertSubscriber.isUnsubscribed() )
         {
             cache.getAlertTextView().setVisibility(View.GONE);
             alertSubscriber.unsubscribe();

@@ -21,6 +21,7 @@
     <string name="tutorial_create_list">... eine neue Liste erstellen?</string>
     <string name="tutorial_delete_lists">... mehrere Listen löschen?</string>
     <string name="tutorial_sort_lists">... Listen sortieren?</string>
+    <string name="tutorial_recurring_shopping">... Liste mit allen vorhandenen\n\t\t\Produkten erzeugen?</string>
     <string name="tutorial_see_details_list">... Listendetails aufrufen?</string>
     <string name="tutorial_icons_meaning">Symbole</string>
     <string name="tutorial_icon_priority">Listen hoher Priorität</string>
@@ -93,6 +94,15 @@
     <string name="statistics_y_values">Werte</string>
     <string name="statistics_quantity_unit">Einheit</string>
 
+    <!-- ### TEMPLATE ### -->
+    <string name="create_template">Template Erzeugen</string>
+    <string name="template_titel">Template</string>
+    <string name="template_message">Erstellen Sie eine Liste mithilfe aller vorhandenen Produkten in zwei
+        Schritten:\n\n
+        1. Geben Sie einen Namen für die Liste ein.\n
+        2. Löschen Sie die irrelevanten Produkten aus der neuen Liste.\n\n
+        Möchten Sie fortfahren?
+    </string>
     <!-- ### SORT ### -->
     <string name="sort_options">Sortieroptionen</string>
     <string name="sort_ascencing_descending">Aufsteigend/Absteigend</string>
@@ -213,13 +223,15 @@
     <!--### HELP ###-->
     <string name="help">Hilfe</string>
     <string name="help_overview_heading">Übersicht</string>
-    <string name="help_intro1">Die App ermöglicht es nicht nur Listen anzulegen und Produkte darin zu erfassen, sondern ebenfalls Prioritäten für Listen festzulegen,
+    <string name="help_intro1">Die App ermöglicht es nicht nur Listen anzulegen und Produkte darin zu erfassen, sondern
+        ebenfalls Prioritäten für Listen festzulegen,
         Deadlines und Erinnerungen für Listen zu setzen, und Notizen zu Listen oder Produkten anzufügen.
     </string>
     <string name="help_intro2">Durch das Statistik-Feature können Ausgaben erfasst und graphisch dargestellt werden.
     </string>
     <string name="help_intro3">Eine Einkaufsliste besteht aus Produkteinträgen. Zusätzlich zu Produktname, Menge und
-        Preis kann eine Kategorie und der Einkaufsort eingepflegt werden. Außerdem können Notizen vermerkt und ein Foto eingefügt werden.
+        Preis kann eine Kategorie und der Einkaufsort eingepflegt werden. Außerdem können Notizen vermerkt und ein Foto
+        eingefügt werden.
     </string>
 
     <string name="help_how_tos_lists">Wie funktioniert\'s</string>
@@ -228,8 +240,10 @@
         drückst das (+) Symbol in der rechten unteren Ecke. Fülle alle gewünschten Dialogfelder aus und bestätige den
         Dialog mit OKAY.
     </string>
-    <string name="help_how_to_create_a_list_summary2">Für Listen gibt es keine Pflichtfelder. Bleibt der Listenname leer,
-        wird ein Standardname vergeben. Wird eine Liste mit hoher Priorität deklariert, so erscheint in der Listenübersicht
+    <string name="help_how_to_create_a_list_summary2">Für Listen gibt es keine Pflichtfelder. Bleibt der Listenname
+        leer,
+        wird ein Standardname vergeben. Wird eine Liste mit hoher Priorität deklariert, so erscheint in der
+        Listenübersicht
         ein kleines Symbol mit Ausrufezeichen rechts neben der betroffenen Liste.
     </string>
 
@@ -243,14 +257,19 @@
         Produktinformationen, kann über den OKAY Knopf der Dialog geschlossen werden.
     </string>
 
-    <string name="help_how_to_edit_a_list">Bearbeiten, Löschen, oder Teilen</string>
+    <string name="help_how_to_edit_a_list">Bearbeiten, Löschen, Teilen, etc.</string>
     <string name="help_how_to_edit_a_list_summary">Um eine Liste oder ein Produkt bearbeiten, löschen oder teilen zu
         können, ist ein längerer Klick auf das Element erforderlich. Hierbei
-        wird ein Dialog mit den genannten Optionen angezeigt, die dann ausgewählt werden können. Beim Löschen des
+        wird ein Dialog mit unterschiedlichen Optionen angezeigt, die dann ausgewählt werden können. Beim Löschen des
         ausgewählten Elements ist zu beachten, dass dabei keine bereits erfassten
         Statistikdaten gelöscht werden.
     </string>
-
+    <string name="help_how_to_create_list_fast">Listen schneller erzeugen</string>
+    <string name="help_how_to_create_list_fast_summary">Um schnell eine Liste zu erzeugen, kannst du in der Titelbar das
+        Symbol mit den drei horizontalen Balken und einem Plus klicken. Danach kannst du der Liste einen Namen geben und
+        OKAY klicken. Eine Liste mit allen vorhandenen Produkten wird geniert werden. Nur wirst du eine Liste sehen,
+        in der alle irrelevanten Produkten selektiert und gelöscht werden können.
+    </string>
     <string name="help_how_to_enable_statistics">Statistiken aktivieren</string>
     <string name="help_how_to_enable_statistics_summary1">Im Listendialog (siehe \"Eine Liste erstellen\") kann das
         Statistik-Feature individuell für diese Liste aktiviert oder deaktiviert werden. Dafür steht der Schiebeschalter
@@ -263,7 +282,8 @@
 
     <string name="help_how_to_setup_deadline">Deadline einstellen</string>
     <string name="help_how_to_setup_deadline_summary1">Im Listendialog (siehe \"Eine Liste erstellen\") kann, wozu auf
-        das Kontrollkästchen (\"Deadline\") geklickt werden muss. Danach kann ein Datum und eine Uhrzeit eingestellt werden.
+        das Kontrollkästchen (\"Deadline\") geklickt werden muss. Danach kann ein Datum und eine Uhrzeit eingestellt
+        werden.
     </string>
     <string name="help_how_to_setup_deadline_summary2">Ist eine Deadline gesetzt, wird am linken Rand der Produktkarte
         standardmäßg ein blauer Streifen angezeigt. Ist die Deadline abgelaufen und befinden sich noch nicht abgehakte
@@ -276,12 +296,13 @@
         vor Eintreten der Deadline eine Erinnerung in Form Benachrichtigung auf dem Telefon angezeigt werden soll.
     </string>
     <string name="help_how_to_setup_reminder_summary2">Es erscheint zusätzlich ein Symbol in Form eines Weckers in der
-        Listenansicht. Dieses ist rot gefärbt, sofern in den die Standardeinstellung für Benachrichtigungen deaktiviert ist.
+        Listenansicht. Dieses ist rot gefärbt, sofern in den die Standardeinstellung für Benachrichtigungen deaktiviert
+        ist.
     </string>
 
     <string name="help_how_to_sort_lists">Elemente sortieren</string>
     <string name="help_how_to_sort_lists_summary">Um Elemente der aktuellen Ansicht zu sortieren, kannst du in der
-        Titelbar of das Symbol mit den drei horizontalen Balken klicken. Es erscheinen zwei verschiedene
+        Titelbar das Symbol mit den drei horizontalen Balken klicken. Es erscheinen zwei verschiedene
         Sortieroptionen. Es kann ausgewählt werden ob auf- oder absteigend sortiert werden soll, sowie nach welchem
         Parameter die Sortierung stattfinden soll.
     </string>
@@ -292,7 +313,8 @@
         sollen.
     </string>
     <string name="help_how_to_delete_multiple_items_summary2">Zum Abschluss der Aktion musst du auf das Symbol in der
-        unteren rechten Ecke drucken. Hier wirst du erneut aufgefordert deine Aktion zu bestätigen. Das Löschen beeinflusst
+        unteren rechten Ecke drucken. Hier wirst du erneut aufgefordert deine Aktion zu bestätigen. Das Löschen
+        beeinflusst
         keine bereits gespeicherte Statistikdaten, die mit diesen Elementen zusammenhingen.
     </string>
 
@@ -302,7 +324,8 @@
         Suchmaske eine Eingabe vorgenommen werden.
     </string>
     <string name="help_how_to_search_products_summary2">Während des Schreibens wird die Liste der vorhandenen Elemente
-        entsprechend der Eingabe gefiltert.
+        entsprechend der Eingabe gefiltert. Falls das gefundene Produkt nicht zu der Liste gehört, wird ein Plussymbol
+        angezeigt, mit dem man das Produkt in die aktuelle Liste kopieren kann.
     </string>
 
     <string name="help_how_to_save_picture">Ein Foto aufnehmen</string>

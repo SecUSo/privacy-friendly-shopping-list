@@ -8,6 +8,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.AutoCompleteTextView;
 import android.widget.ImageButton;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.R;
+import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.utils.StringUtils;
 
 /**
  * Description:
@@ -35,6 +36,8 @@ public class ShowSearchFieldOnClickListener implements MenuItem.OnMenuItemClickL
         {
             showKeyboard();
         }
+        AutoCompleteTextView searchAutoCompleteTextView = (AutoCompleteTextView) activity.findViewById(R.id.search_input_text);
+        searchAutoCompleteTextView.setText(StringUtils.EMPTY);
         return true;
     }
 

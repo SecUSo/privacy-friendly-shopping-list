@@ -97,6 +97,12 @@
         <Preference
                 android:selectable="false"
                 android:persistent="false"
+                android:title="@string/help_how_to_create_list_fast"
+                android:summary="@string/help_how_to_create_list_fast_summary"/>
+
+        <Preference
+                android:selectable="false"
+                android:persistent="false"
                 android:title="@string/help_how_to_delete_multiple_items"
                 android:summary="@string/help_how_to_delete_multiple_items_summary1"/>
 

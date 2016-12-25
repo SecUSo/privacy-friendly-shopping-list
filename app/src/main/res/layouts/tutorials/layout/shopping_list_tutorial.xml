@@ -137,6 +137,38 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:tint="@color/colorPrimaryDark"
+                        android:layout_centerVertical="true" android:layout_toEndOf="@+id/textView5"/>
+                <TextView
+                        android:paddingLeft="@dimen/dialog_padding_horizontal_big"
+                        android:layout_gravity="center_vertical"
+                        android:text="@string/tutorial_recurring_shopping"
+                        android:inputType="textMultiLine"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/textView5"
+                        android:layout_centerVertical="true"
+                        android:layout_alignParentStart="true"/>
+                <ImageView
+                        android:layout_gravity="center"
+                        android:layout_marginLeft="@dimen/fab_margin"
+                        android:layout_marginRight="@dimen/fab_margin"
+                        android:padding="@dimen/tutorial_icon_padding"
+                        android:src="@drawable/ic_list_add_white_24sp"
+                        android:background="@color/colorPrimaryDark"
+                        android:layout_width="@dimen/tutorial_icon_size"
+                        android:layout_height="@dimen/tutorial_icon_size"
+                        android:layout_alignParentTop="true" android:layout_alignParentEnd="true"/>
+            </RelativeLayout>
+            <RelativeLayout
+                    android:layout_marginBottom="@dimen/tutorial_icon_padding"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+                <ImageView
+                        android:layout_gravity="center"
+                        android:src="@drawable/ic_keyboard_arrow_right_black_24sp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:tint="@color/colorPrimaryDark"
                         android:layout_centerVertical="true"
                         android:layout_toEndOf="@+id/textView4"/>
                 <ImageView

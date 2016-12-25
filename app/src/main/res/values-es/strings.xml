@@ -20,6 +20,7 @@
     <string name="tutorial_create_list">... crear una nueva lista?</string>
     <string name="tutorial_delete_lists">... eliminar varias listas?</string>
     <string name="tutorial_sort_lists">... ordenar listas?</string>
+    <string name="tutorial_recurring_shopping">... crear lista usando todos\n\t\t\los productos existentes?</string>
     <string name="tutorial_see_details_list">... ver detalles?</string>
     <string name="tutorial_icons_meaning">Iconos</string>
     <string name="tutorial_icon_priority">Lista de alta prioridad</string>
@@ -84,6 +85,15 @@
     <string name="statistics_group_by">Agrupar:</string>
     <string name="statistics_y_values">Valores:</string>
     <string name="statistics_quantity_unit">Unidades</string>
+    <!-- ### TEMPLATE ### -->
+    <string name="create_template">Crear Plantilla</string>
+    <string name="template_titel">Plantilla</string>
+    <string name="template_message">Crea una lista partiendo de los productos almacenados en la app en tan solo dos
+        pasos:\n\n
+        1. Asignar nombre a lista y rellenar otros campos de interés\n
+        2. Eliminar los productos que no sean relevantes\n\n
+        ¿Deseas continuar con la operación?
+    </string>
     <!-- ### SORT ### -->
     <string name="sort_options">Ordenar</string>
     <string name="sort_ascencing_descending">Ascendente/Descendente</string>
@@ -102,7 +112,8 @@
         revertida.
     </string>
     <!-- ### DELETE SHOPPING LISTS ### -->
-    <string name="delete_lists_confirmation">¿Deseas eliminar todas las listas seleccionadas? Esta operación no puede ser
+    <string name="delete_lists_confirmation">¿Deseas eliminar todas las listas seleccionadas? Esta operación no puede
+        ser
         revertida.
     </string>
     <string name="delete_list_confirmation">¿Deseas eliminar la lista seleccionada (%1$s)? Esta operación no puede ser
@@ -152,16 +163,22 @@
     <string name="pref_checkbox_right_display_text">D</string>
     <string name="pref_checkbox_left_display_text">I</string>
     <string name="pref_move_products">Mover productos</string>
-    <string name="pref_move_products_summary_on">Mover productos automáticamente al final de la lista al marcarlos</string>
-    <string name="pref_move_products_summary_off">No mover productos automáticamente al final de la lista al marcarlos</string>
-    <string name="pref_move_products_toast_on">¡Los productos serán movidos al final de la lista al ser marcardos!</string>
-    <string name="pref_move_products_toast_off">¡Los productos no serán movidos al final de la lista al ser marcados!</string>
+    <string name="pref_move_products_summary_on">Mover productos automáticamente al final de la lista al marcarlos
+    </string>
+    <string name="pref_move_products_summary_off">No mover productos automáticamente al final de la lista al marcarlos
+    </string>
+    <string name="pref_move_products_toast_on">¡Los productos serán movidos al final de la lista al ser marcardos!
+    </string>
+    <string name="pref_move_products_toast_off">¡Los productos no serán movidos al final de la lista al ser marcados!
+    </string>
     <string name="pref_header_notifications">Notificaciones</string>
     <string name="pref_notifications_title">Recordatorio</string>
     <string name="pref_notifications_summary_on">Las notificaciones para recordatorios se encuentran activadas</string>
-    <string name="pref_notifications_summary_off">Las notificaciones para recordatorios se encuentran desactivadas</string>
+    <string name="pref_notifications_summary_off">Las notificaciones para recordatorios se encuentran desactivadas
+    </string>
     <string name="pref_notifications_toast_on">¡Las notificaciones para recordatorios se encuentran activadas!</string>
-    <string name="pref_notifications_toast_off">¡Las notificaciones para recordatorios se encuentran desactivadas!</string>
+    <string name="pref_notifications_toast_off">¡Las notificaciones para recordatorios se encuentran desactivadas!
+    </string>
     <string name="pref_header_statistics">Estadísticas</string>
     <string name="pref_statistics_title">Valor por defecto</string>
     <string name="pref_statistics_summary_on">Las estadísticas estarán habilitadas por defecto al crear una nueva
@@ -191,20 +208,22 @@
     <string name="help_overview_heading">Resumen</string>
     <string name="help_intro1">Bienvenido a la página de ayuda de Privacy Friendly Shopping List. Con esta aplicación no
         solo podrás crear listas de compras y añadir productos, sino también fijar otra información relevante,
-        como por ejemplo: prioridad, fecha tope, recordatorios y notas.</string>
+        como por ejemplo: prioridad, fecha tope, recordatorios y notas.
+    </string>
     <string name="help_intro2">Además podrás llevar un registro de tus compras y
         visualizar de forma gráfica tanto el monto total gastado como la cantidad total de unidades compradas.
     </string>
-    <string name="help_intro3">Una lista de compras contiene productos. Además de asignarle nombre, cantidad y precio a cada producto,
-        podrás añadir categoría, nombre de la tienda o supermercado e incluso una foto del producto usando la cámara de tu
-        dispositivo.
+    <string name="help_intro3">Una lista de compras contiene productos. Además de asignarle nombre, cantidad y precio a
+        cada producto, podrás añadir categoría, nombre de la tienda o supermercado e incluso una foto del producto
+        usando la cámara de tu dispositivo.
     </string>
     <string name="help_how_tos_lists">Funciones</string>
     <string name="help_how_to_create_a_list">Crear una lista</string>
     <string name="help_how_to_create_a_list_summary1">Para crear una lista ve al menú de inicio y presiona el signo más
         (+). Luego rellena los campos que aparecerán en la ventana y presiona ACEPTAR.
     </string>
-    <string name="help_how_to_create_a_list_summary2">No hay campos obligatorios. Si no se le asigna un nombre a la lista,
+    <string name="help_how_to_create_a_list_summary2">No hay campos obligatorios. Si no se le asigna un nombre a la
+        lista,
         entonces ésta tomará el nombre por defecto \”Nueva lista\”. Si la opción de \"alta\" prioridad es seleccionada,
         entonces aparecerá un icono con el signo \"!\" al lado derecho de la tarjeta.
     </string>
@@ -215,34 +234,47 @@
     <string name="help_how_to_create_a_product_summary2">Rellena los campos mostrados y presiona ACEPTAR.
         El campo \"Nombre del Producto\" es obligatorio.
     </string>
-    <string name="help_how_to_edit_a_list">Editar, Eliminar o Compartir</string>
-    <string name="help_how_to_edit_a_list_summary">Para editar, eliminar o compartir una lista o un producto debes hacer
-        clic en el ítem correspondiente, lista o producto, por un tiempo de tres segundos aproximadamente. Esta acción mostrará una ventana en
+    <string name="help_how_to_edit_a_list">Editar, Eliminar, Compartir, etc.</string>
+    <string name="help_how_to_edit_a_list_summary">Para editar, eliminar, compartir, o ejectuar otras operaciones con
+        una lista o un producto debes hacer clic en el ítem correspondiente, lista o producto, por un tiempo de
+        tres segundos aproximadamente. Esta acción mostrará una ventana en
         donde podrás eligir la operación que deseas realizar. La operación de eliminar no afectará los datos
         correspondientes a estadísticas.
+    </string>
+    <string name="help_how_to_create_list_fast">Crear una lista rápidamente</string>
+    <string name="help_how_to_create_list_fast_summary">Para crear una lista rápidamente selecciona el icono con tres
+        barras
+        horizontales y el signo de más. Luego podrás asignarle un nombre a la nueva lista y hacer clic en ACEPTAR. Una
+        lista
+        con todos los productos de la app será generada. Por último la app mostrará una lista donde podrás seleccionar y
+        eliminar aquellos productos que no necesites.
     </string>
     <string name="help_how_to_enable_statistics">Activar estadísticas</string>
     <string name="help_how_to_enable_statistics_summary1">Una vez que hayas hecho clic en la opción correspondiente para
         crear o editar listas, podrás activar las estadísticas utilizando el botón que se encuentra al lado del icono
         con tres barras (representando un gráfico).
     </string>
-    <string name="help_how_to_enable_statistics_summary2">Luego de haber activado las estadísticas, todos los productos serán
+    <string name="help_how_to_enable_statistics_summary2">Luego de haber activado las estadísticas, todos los productos
+        serán
         guardados en un registro aparte tan pronto sean marcados utilizando la casilla. Este registro es utilizado para
         mostrar de forma gráfica ciertos datos de interés. Un producto será añadido a las estadísticas tantas veces como
         sea marcado.
     </string>
     <string name="help_how_to_setup_deadline">Fijar una fecha tope</string>
     <string name="help_how_to_setup_deadline_summary1">Una vez que hayas hecho clic en la opción correspondiente para
-        crear o editar listas, podrás fijar una fecha tope haciendo clic en la casilla \"Fecha tope\" y fijando una fecha y
+        crear o editar listas, podrás fijar una fecha tope haciendo clic en la casilla \"Fecha tope\" y fijando una
+        fecha y
         una hora.
     </string>
     <string name="help_how_to_setup_deadline_summary2">Si la fecha tope ya ha pasado y la lista aún contiene productos
-        sin marcar, entonces la barra vertical del lado izquierdo de la tarjeta cambiará a color rojo. Si todos los ítems
+        sin marcar, entonces la barra vertical del lado izquierdo de la tarjeta cambiará a color rojo. Si todos los
+        ítems
         han sido marcados, entonces el color de la barra será gris. El color neutral de la barra es azul. Luego de fijar
         una fecha, ésta aparecerá en la tarjeta debajo del nombre de la lista.
     </string>
     <string name="help_how_to_setup_reminder">Fijar un recordatorio</string>
-    <string name="help_how_to_setup_reminder_summary1">Si has fijado una fecha tope para una lista, entonces podrás también
+    <string name="help_how_to_setup_reminder_summary1">Si has fijado una fecha tope para una lista, entonces podrás
+        también
         fijar un recordatorio. Para ello tendrás que hacer clic en el botón que se encuentra al lado del icono de alarma
         y luego introducir cuántos minutos, horas, días o semanas antes de la fecha tope quieres el recordatorio.
     </string>
@@ -253,14 +285,14 @@
     </string>
     <string name="help_how_to_sort_lists">Ordenar ítems</string>
     <string name="help_how_to_sort_lists_summary">Para ordenar ítems utiliza el icono con tres barras horizontales
-        localizado en la parte superior de la ventana. Luego de hacer clic en este icono, verás unas opciones donde podrás
-        escoger si deseas ordenar los ítems de manera ascendente o descendente y el criterio que debe ser utilizado para
-        ordenar los mismos.
+        localizado en la parte superior de la ventana. Luego de hacer clic en este icono, verás unas opciones donde
+        podrás escoger si deseas ordenar los ítems de manera ascendente o descendente y el criterio que debe ser
+        utilizado para ordenar los mismos.
     </string>
     <string name="help_how_to_delete_multiple_items">Eliminar múltiples ítems</string>
-    <string name="help_how_to_delete_multiple_items_summary1">Para eliminar múltiples ítems simultáneamente utiliza el icono de la
-        papelera mostrado en la parte superior derecha de la pantalla. Luego de haber hecho clic en este icono, tendrás la
-        oportunidad de seleccionar todos los ítems que deseas eliminar.
+    <string name="help_how_to_delete_multiple_items_summary1">Para eliminar múltiples ítems simultáneamente utiliza el
+        icono de la papelera mostrado en la parte superior derecha de la pantalla. Luego de haber hecho clic en este
+        icono, tendrás la oportunidad de seleccionar todos los ítems que deseas eliminar.
     </string>
     <string name="help_how_to_delete_multiple_items_summary2">Al final haz clic nuevamente en el icono de la
         papelera localizado en la parte inferior derecha. Esta operación no eliminará ningún dato relacionado con las
@@ -268,23 +300,29 @@
     </string>
     <string name="help_how_to_search_products">Buscar productos en lista</string>
     <string name="help_how_to_search_products_summary1">Para buscar productos en una lista debes utilizar el
-        icono de la lupa que se encuentra en la parte superior de la ventana. Luego de hacer clic en él, aparecerá un campo en el que
-        podrás escribir las palabras que deseas buscar.</string>
+        icono de la lupa que se encuentra en la parte superior de la ventana. Luego de hacer clic en él, aparecerá un
+        campo en el que podrás escribir las palabras que deseas buscar.
+    </string>
     <string name="help_how_to_search_products_summary2">La lista se filtrará a medida que estas escribiendo, mostrando
-        así los ítems que coincidan con la búsqueda. Los ítems allí mostrados pueden ser manipulados tal y como se hace
-        en la vista original (marcar, editar, etc.).
+        así los ítems que coincidan con la búsqueda. Los ítems allí mostrados pueden ser manipulados igual que
+        en la vista original (marcar, editar, etc.). En caso de que el producto encontrado no pertenezca a la lista
+        actual,
+        podrás copiarlo haciendo clic en el botón con el signo más.
     </string>
     <string name="help_how_to_save_picture">Guardar imagen</string>
     <string name="help_how_to_save_picture_summary1">Para guardar una imagen de un producto se puede utilizar la cámara
         del dispositivo. Esta opción se encuentra localizada en la ventana de añadir o editar productos (Vea \"Añadir un
-        producto\" y/o \"Editar, eliminar o compartir\").</string>
+        producto\" y/o \"Editar, eliminar o compartir\").
+    </string>
     <string name="help_how_to_save_picture_summary2">Una vez estando allí, podrás hacer clic en la flecha hacia
         abajo para ver más opciones. Allí encontrarás un icono de una cámara en color azul. La imagen tomada solamente
-        puede ser accedida por esta aplicación. No existe ninguna posibilidad de compartir esta imagen, a menos que hagas una captura de pantalla.
+        puede ser accedida por esta aplicación. No existe ninguna posibilidad de compartir esta imagen, a menos que
+        hagas una captura de pantalla.
     </string>
     <string name="help_settings_heading">Configuración</string>
     <string name="help_settings_summary1">En la página de configuración podrás personalizar la applicación.</string>
-    <string name="help_settings_summary2">Allí podrás escoger por ejemplo si deseas que las casillas para marcar productos
+    <string name="help_settings_summary2">Allí podrás escoger por ejemplo si deseas que las casillas para marcar
+        productos
         sean mostradas a la izquierda o la derecha de la pantalla, dependiendo de con qué mano utilices el dispositivo.
         Además podrás activar/desactivar las notificaciones y otras cosas más. Visita la página de configuración
         para más información.

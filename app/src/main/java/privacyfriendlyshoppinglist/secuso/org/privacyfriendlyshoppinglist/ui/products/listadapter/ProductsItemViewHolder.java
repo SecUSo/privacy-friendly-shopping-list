@@ -9,6 +9,7 @@ import android.support.v7.widget.AppCompatCheckBox;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.ImageButton;
 import android.widget.TextView;
@@ -56,6 +57,16 @@ public class ProductsItemViewHolder extends RecyclerView.ViewHolder
         productItemCache.getProductExtraInfoTextview().setText(dto.getSummary(productActivityCache.getActivity()));
         productItemCache.getListDetailsTextView().setText(dto.getDetailInfo(productActivityCache.getActivity()));
 
+        Button plusButton = productItemCache.getPlusButton();
+        if ( !dto.getListId().equals(productActivityCache.getListId()) )
+        {
+            plusButton.setVisibility(View.VISIBLE);
+        }
+        else
+        {
+            plusButton.setVisibility(View.GONE);
+        }
+
         if ( !dto.isDefaultImage() )
         {
             productItemCache.getProductImageInDetail().setVisibility(View.VISIBLE);
@@ -100,6 +111,19 @@ public class ProductsItemViewHolder extends RecyclerView.ViewHolder
                 host.changeItemPosition(dto);
 
                 updateVisibilityFormat(dto);
+            }
+        });
+
+        plusButton.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View view)
+            {
+                productService.copyToList(dto, productActivityCache.getListId())
+                        .doOnCompleted(() ->
+                        {
+                            plusButton.setVisibility(View.GONE);
+                        }).subscribe();
             }
         });
 

@@ -87,6 +87,7 @@ public class ProductConverterServiceImpl implements ProductConverterService
     @Override
     public void convertEntitiesToDto(ProductItemEntity entity, ProductDto dto)
     {
+        dto.setListId(entity.getShoppingList().getId().toString());
         dto.setProductName(entity.getProductName());
 
         if ( entity.getId() != null )

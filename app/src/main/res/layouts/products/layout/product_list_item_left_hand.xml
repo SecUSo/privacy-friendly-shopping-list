@@ -59,6 +59,17 @@
                     android:layout_toRightOf="@+id/expand_button_list"
                     android:layout_alignParentTop="true"/>
 
+            <Button
+                    style="?android:attr/buttonStyleSmall"
+                    android:layout_width="30sp"
+                    android:layout_height="30sp"
+                    android:background="@drawable/button_normal"
+                    android:textColor="@color/white"
+                    android:text="+"
+                    android:id="@+id/product_button_plus"
+                    android:layout_centerVertical="true"
+                    android:layout_alignStart="@+id/checkbox_is_selected"/>
+
             <ImageButton
                     android:id="@+id/expand_button_list"
                     android:layout_width="50sp"

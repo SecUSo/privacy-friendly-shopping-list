@@ -2,6 +2,7 @@ package privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.pr
 
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.View;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.R;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.context.AbstractInstanceFactory;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.context.InstanceFactory;
@@ -13,6 +14,8 @@ import rx.Subscription;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
 
 /**
  * Description:
@@ -41,23 +44,54 @@ public class SearchTextWatcher implements TextWatcher
     @Override
     public void onTextChanged(CharSequence s, int start, int before, int count)
     {
+        if ( cache.getSearchTextInputLayout().getVisibility() == View.GONE )
+        {
+            return;
+        }
+
         String[] searchedTexts = s.toString().split(" ");
-        List<ProductDto> resultDtos = new ArrayList<>();
+        Map<String, ProductDto> productMap = new TreeMap<>();
 
         if ( searchSubscription != null )
         {
             searchSubscription.unsubscribe();
         }
 
-        searchSubscription = productService.getAllProducts(cache.getListId())
+        searchSubscription = productService.getAllProducts()
                 .filter(dto -> productService.isSearched(searchedTexts, dto))
-                .doOnNext(dto -> resultDtos.add(dto))
+                .doOnNext(dto ->
+                {
+                    ProductDto productDto = productMap.get(dto.getProductName());
+                    if ( productDto == null )
+                    {
+                        productMap.put(dto.getProductName(), dto);
+                    }
+                    else
+                    {
+                        if ( dto.getListId().equals(cache.getListId()) )
+                        {
+                            productMap.put(dto.getProductName(), dto);
+                        }
+                    }
+                })
                 .doOnCompleted(() ->
                 {
+                    if ( productMap.isEmpty() )
+                    {
+                        cache.getNoProductsLayout().setVisibility(View.VISIBLE);
+                    }
+                    else
+                    {
+                        cache.getNoProductsLayout().setVisibility(View.GONE);
+                    }
+
+                    List<ProductDto> products = new ArrayList<>();
+                    products.addAll(productMap.values());
+
                     ProductsActivity activity = (ProductsActivity) cache.getActivity();
-                    activity.setProductsAndUpdateView(resultDtos);
+                    activity.setProductsAndUpdateView(products);
                     activity.reorderProductViewBySelection();
-                    setErrorMessage(resultDtos);
+                    setErrorMessage(products);
                 })
                 .subscribe();
     }

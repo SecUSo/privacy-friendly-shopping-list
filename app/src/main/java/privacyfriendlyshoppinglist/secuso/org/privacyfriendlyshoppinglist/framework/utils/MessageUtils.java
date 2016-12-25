@@ -128,12 +128,22 @@ public class MessageUtils
         editor.commit();
     }
 
+    public static void showInfoDialog(Context context, int titleResource, int messageResource, Observable action)
+    {
+        showAlertDialog(context, titleResource, messageResource, R.drawable.ic_menu_info_darkblue, null, action);
+    }
+
     public static void showAlertDialog(Context context, int titleResource, int messageResource, Observable action)
     {
         showAlertDialog(context, titleResource, messageResource, null, action);
     }
 
     public static void showAlertDialog(Context context, int titleResource, int messageResource, String customText, Observable action)
+    {
+        showAlertDialog(context, titleResource, messageResource, R.drawable.ic_dialog_alert_yellow, customText, action);
+    }
+
+    public static void showAlertDialog(Context context, int titleResource, int messageResource, int icon, String customText, Observable action)
     {
         AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(context, R.style.AlertDialogColourful);
         if ( titleResource != NOTHING )
@@ -169,7 +179,7 @@ public class MessageUtils
                 // do nothing
             }
         });
-        dialogBuilder.setIcon(R.drawable.ic_dialog_alert_yellow);
+        dialogBuilder.setIcon(icon);
         dialogBuilder.show();
     }
 }

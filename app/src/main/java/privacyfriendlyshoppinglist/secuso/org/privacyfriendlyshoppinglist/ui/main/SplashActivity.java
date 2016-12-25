@@ -8,10 +8,12 @@ import android.support.v7.app.AppCompatActivity;
  * Created by yonjuni on 24.10.16.
  */
 
-public class SplashActivity extends AppCompatActivity {
+public class SplashActivity extends AppCompatActivity
+{
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
 
         /* Create an Intent that will start the Menu-Activity. */
