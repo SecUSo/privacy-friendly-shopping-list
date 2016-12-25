@@ -112,7 +112,7 @@
     </string>
     <!--### ABOUT ###-->
     <string name="about">アプリについて</string>
-    <string name="version_number">Version 1.0.5</string>
+    <string name="version_number">Version 1.0.6</string>
     <string name="about_developper">作者:</string>
     <string name="about_author_greb">Grebiel José Ifill Brito</string>
     <string name="about_author_cri">Christian König と貢献者。</string>
