@@ -1,11 +1,14 @@
 package privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.products.dialog.listeners.price;
 
+
 import android.text.InputFilter;
 import android.text.Spanned;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.R;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.products.dialog.ProductDialogCache;
 
-import java.util.Locale;
+import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
+import java.text.NumberFormat;
 
 /**
  * Description:
@@ -14,18 +17,21 @@ import java.util.Locale;
  */
 public class PriceInputFilter implements InputFilter
 {
-    public static final String PERIOD = ".";
-    public static final String COMMA = ",";
+    private static final String PERIOD = ".";
+    private static final String COMMA = ",";
     private String decimalSeparator;
     private static final String INVALID_CHAR_REGEX = "[^0-9\\.\\,]+]";
 
     public PriceInputFilter(ProductDialogCache dialogCache)
     {
-        Locale locale = dialogCache.getPrice().getContext().getResources().getConfiguration().locale;
-        if ("US".equals(locale.getCountry()))
+        NumberFormat nf = NumberFormat.getInstance();
+        if ( nf instanceof DecimalFormat )
         {
-            decimalSeparator = PERIOD;
-        } else {
+            DecimalFormatSymbols symbols = ((DecimalFormat) nf).getDecimalFormatSymbols();
+            decimalSeparator = String.valueOf(symbols.getDecimalSeparator());
+        }
+        else
+        {
             decimalSeparator = dialogCache.getPrice().getResources().getString(R.string.number_decimal_separator);
         }
     }
