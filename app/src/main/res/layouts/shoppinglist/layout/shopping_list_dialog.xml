@@ -1,255 +1,230 @@
-<?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:app="http://schemas.android.com/apk/res-auto"
-              xmlns:android="http://schemas.android.com/apk/res/android"
-              android:orientation="vertical"
-              android:layout_width="match_parent"
-              android:layout_height="wrap_content">
+<?xml version='1.0' encoding='utf-8'?>
+  <LinearLayout xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  android:orientation="vertical"
+  android:layout_width="match_parent"
+  android:layout_height="wrap_content">
 
-    <TextView
-            android:id="@+id/dialog_title"
-            android:gravity="center"
-            android:text="@string/product_dialog_title"
-            android:background="@color/colorPrimaryDark"
-            android:textColor="@color/white"
+  <TextView android:id="@+id/dialog_title"
+    android:gravity="center"
+    android:text="@string/product_dialog_title"
+    android:background="@color/colorPrimaryDark"
+    android:textColor="@color/white"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/dialog_title_height"
+    android:layout_marginBottom="10sp"
+    android:textStyle="bold"/>
+
+  <ScrollView android:fadeScrollbars="false"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:orientation="vertical"
+      android:paddingLeft="@dimen/dialog_padding_horizontal"
+      android:paddingRight="@dimen/dialog_padding_horizontal">
+
+      <RelativeLayout android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <android.support.design.widget.TextInputLayout app:errorTextAppearance="@style/error_appearance"
+          app:counterEnabled="true"
+          app:counterMaxLength="40"
+          app:errorEnabled="true"
+          android:id="@+id/list_name_input_layout"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_toStartOf="@+id/imageview_statistics">
+
+          <android.support.design.widget.TextInputEditText android:id="@+id/list_name"
+            android:inputType="text|textCapSentences"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/dialog_title_height"
-            android:layout_marginBottom="10sp"
-            android:textStyle="bold"/>
-    <ScrollView
-            android:fadeScrollbars="false"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:selectAllOnFocus="true"
+            android:maxLength="40"
+            android:imeOptions="actionNext"
+            android:hint="@string/list_name"/>
+        </android.support.design.widget.TextInputLayout>
 
-        <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:paddingLeft="@dimen/dialog_padding_horizontal"
-                android:paddingRight="@dimen/dialog_padding_horizontal">
+        <ImageView android:id="@+id/imageview_statistics"
+          android:paddingTop="@dimen/icon_padding"
+          android:paddingBottom="@dimen/icon_padding"
+          android:layout_width="24sp"
+          android:layout_height="wrap_content"
+          android:tint="@color/colorPrimaryDark"
+          android:src="@drawable/ic_insert_chart_white_24sp"
+          android:layout_alignParentTop="true"
+          android:layout_toStartOf="@+id/switch_statistics"/>
 
-            <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-
-                <android.support.design.widget.TextInputLayout
-                        app:errorTextAppearance="@style/error_appearance"
-                        app:counterEnabled="true"
-                        app:counterMaxLength="40"
-                        app:errorEnabled="true"
-                        android:id="@+id/list_name_input_layout"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_toStartOf="@+id/imageview_statistics">
-                    <android.support.design.widget.TextInputEditText
-                            android:id="@+id/list_name"
-                            android:inputType="text|textCapSentences"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:selectAllOnFocus="true"
-                            android:maxLength="40"
-                            android:imeOptions="actionNext"
-                            android:hint="@string/list_name"/>
-                </android.support.design.widget.TextInputLayout>
-
-                <ImageView
-                        android:id="@+id/imageview_statistics"
-                        android:paddingTop="@dimen/icon_padding"
-                        android:paddingBottom="@dimen/icon_padding"
-                        android:layout_width="24sp"
-                        android:layout_height="wrap_content"
-                        android:tint="@color/colorPrimaryDark"
-                        android:src="@drawable/ic_insert_chart_white_24sp"
-                        android:layout_alignParentTop="true" android:layout_toStartOf="@+id/switch_statistics"/>
-
-                <android.support.v7.widget.SwitchCompat
-                        android:id="@+id/switch_statistics"
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:checked="false"
-                        android:layout_alignParentTop="true"
-                        android:layout_alignParentEnd="true">
+        <android.support.v7.widget.SwitchCompat android:id="@+id/switch_statistics"
+          android:layout_width="wrap_content"
+          android:layout_height="match_parent"
+          android:checked="false"
+          android:layout_alignParentTop="true"
+          android:layout_alignParentEnd="true">
                 </android.support.v7.widget.SwitchCompat>
-            </RelativeLayout>
+      </RelativeLayout>
 
+      <LinearLayout android:layout_marginTop="@dimen/negative_margin_big"
+        android:gravity="center_vertical"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
 
-            <LinearLayout
-                    android:layout_marginTop="@dimen/negative_margin_big"
-                    android:gravity="center_vertical"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
+        <TextView android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:id="@+id/priority_spinner_content"
+          android:text="@string/priority"/>
 
-                <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/priority_spinner_content"
-                        android:text="@string/priority"/>
-                <Spinner
-                        android:id="@+id/priority_spinner"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:backgroundTint="@color/colorAccent"/>
+        <Spinner android:id="@+id/priority_spinner"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:backgroundTint="@color/colorAccent"/>
 
-                <TextView
-                        android:id="@+id/set_deadline"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/deadline"/>
+        <TextView android:id="@+id/set_deadline"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:text="@string/deadline"/>
 
-                <CheckBox
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/list_dialog_checkbox"
-                        android:layout_toEndOf="@+id/set_deadline"/>
+        <CheckBox android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:id="@+id/list_dialog_checkbox">
+          <!--Removed ObsoleteLayoutParam: layout_toEndOf-->
+        </CheckBox>
 
-                <ImageButton
-                        android:id="@+id/expand_button_list"
-                        android:layout_width="50sp"
-                        android:layout_height="@dimen/icon_size"
-                        android:paddingLeft="15sp"
-                        android:paddingRight="15sp"
-                        android:scaleType="fitCenter"
-                        android:tint="@color/colorAccent"
-                        android:background="?android:selectableItemBackground"
-                        android:src="@drawable/ic_keyboard_arrow_down_white_48sp"
-                        android:visibility="invisible"/>
-            </LinearLayout>
+        <ImageButton android:id="@+id/expand_button_list"
+          android:layout_width="50sp"
+          android:layout_height="@dimen/icon_size"
+          android:paddingLeft="15sp"
+          android:paddingRight="15sp"
+          android:scaleType="fitCenter"
+          android:tint="@color/colorAccent"
+          android:background="?android:selectableItemBackground"
+          android:src="@drawable/ic_keyboard_arrow_down_white_48sp"
+          android:visibility="invisible"/>
+      </LinearLayout>
 
-            <LinearLayout
-                    android:visibility="gone"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/deadline_layout"
-                    android:paddingRight="@dimen/dialog_padding_top"
-                    android:paddingLeft="@dimen/dialog_padding_top"
-                    android:orientation="vertical">
-                <LinearLayout
-                        android:padding="@dimen/dialog_padding_top"
-                        android:orientation="horizontal"
-                        android:weightSum="2"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
-                    <LinearLayout
-                            android:layout_weight="1"
-                            android:orientation="horizontal"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:id="@+id/deadline_date">
+      <LinearLayout android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/deadline_layout"
+        android:paddingRight="@dimen/dialog_padding_top"
+        android:paddingLeft="@dimen/dialog_padding_top"
+        android:orientation="vertical">
 
-                        <ImageView
-                                android:layout_width="30sp"
-                                android:layout_height="30sp"
-                                android:src="@drawable/ic_perm_group_calendar"
-                                android:tint="@color/colorAccent"/>
-                        <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:id="@+id/date_view"
-                                android:layout_alignParentTop="true"
-                                android:layout_gravity="center"/>
-                    </LinearLayout>
+        <LinearLayout android:padding="@dimen/dialog_padding_top"
+          android:orientation="horizontal"
+          android:weightSum="2"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content">
 
-                    <LinearLayout
-                            android:layout_weight="1"
-                            android:orientation="horizontal"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:id="@+id/deadline_time">
+          <LinearLayout android:layout_weight="1"
+            android:orientation="horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/deadline_date">
 
-                        <ImageView
-                                android:layout_width="30sp"
-                                android:layout_height="30sp"
-                                android:tint="@color/colorAccent"
-                                android:src="@drawable/ic_perm_group_system_clock"
-                                android:adjustViewBounds="true"/>
+            <ImageView android:layout_width="30sp"
+              android:layout_height="30sp"
+              android:src="@drawable/ic_perm_group_calendar"
+              android:tint="@color/colorAccent"/>
 
-                        <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:id="@+id/time_view"
-                                android:layout_alignParentTop="true"
-                                android:layout_gravity="center"
-                        />
-                    </LinearLayout>
-                </LinearLayout>
+            <TextView android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:id="@+id/date_view"
+              android:layout_gravity="center">
+              <!--Removed ObsoleteLayoutParam: layout_alignParentTop-->
+            </TextView>
+          </LinearLayout>
 
-                <LinearLayout
-                        android:paddingRight="@dimen/dialog_padding_top"
-                        android:paddingLeft="@dimen/dialog_padding_top"
-                        android:layout_width="wrap_content"
-                        android:gravity="center"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal">
+          <LinearLayout android:layout_weight="1"
+            android:orientation="horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/deadline_time">
 
-                    <android.support.v7.widget.SwitchCompat
-                            android:id="@+id/switch_reminder"
-                            android:layout_width="wrap_content"
-                            android:layout_height="match_parent"
-                            android:checked="false"
-                            android:layout_alignParentTop="true"
-                            android:layout_alignParentEnd="true">
-                    </android.support.v7.widget.SwitchCompat>
+            <ImageView android:layout_width="30sp"
+              android:layout_height="30sp"
+              android:tint="@color/colorAccent"
+              android:src="@drawable/ic_perm_group_system_clock"
+              android:adjustViewBounds="true"/>
 
-                    <ImageView
-                            android:layout_width="30sp"
-                            android:layout_height="30sp"
-                            android:tint="@color/colorAccent"
-                            android:src="@drawable/ic_perm_group_device_alarms"
-                            android:adjustViewBounds="true"/>
-
-                    <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_alignParentTop="true"
-                            android:layout_gravity="center"
-                            android:text="@string/reminder"/>
-                </LinearLayout>
-
-                <LinearLayout
-                        android:id="@+id/layout_reminder"
-                        android:paddingLeft="@dimen/dialog_padding_horizontal_big"
-                        android:layout_width="wrap_content"
-                        android:gravity="center"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal">
-
-                    <android.support.design.widget.TextInputEditText
-                            android:id="@+id/edittext_reminder"
-                            android:layout_width="40sp"
-                            android:layout_height="wrap_content"
-                            android:inputType="number"
-                            android:gravity="center"
-                            android:hint="0"
-                            android:maxLength="3"/>
-
-                    <Spinner
-                            android:id="@+id/reminder_spinner"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:backgroundTint="@color/colorAccent"
-                            android:layout_marginLeft="5sp"/>
-
-                    <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_alignParentTop="true"
-                            android:layout_gravity="center"
-                            android:text="@string/reminder_before"/>
-                </LinearLayout>
-
-
-            </LinearLayout>
-
-            <android.support.design.widget.TextInputLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-                <android.support.design.widget.TextInputEditText
-                        android:id="@+id/list_notes"
-                        android:inputType="textMultiLine|textCapSentences"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:hint="@string/list_notes"/>
-            </android.support.design.widget.TextInputLayout>
+            <TextView android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:id="@+id/time_view"
+              android:layout_gravity="center">
+              <!--Removed ObsoleteLayoutParam: layout_alignParentTop-->
+            </TextView>
+          </LinearLayout>
         </LinearLayout>
-    </ScrollView>
+
+        <LinearLayout android:paddingRight="@dimen/dialog_padding_top"
+          android:paddingLeft="@dimen/dialog_padding_top"
+          android:layout_width="wrap_content"
+          android:gravity="center"
+          android:layout_height="wrap_content"
+          android:orientation="horizontal">
+
+          <android.support.v7.widget.SwitchCompat android:id="@+id/switch_reminder"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:checked="false">
+                    <!--Removed ObsoleteLayoutParam: layout_alignParentTop--><!--Removed ObsoleteLayoutParam: layout_alignParentEnd--></android.support.v7.widget.SwitchCompat>
+
+          <ImageView android:layout_width="30sp"
+            android:layout_height="30sp"
+            android:tint="@color/colorAccent"
+            android:src="@drawable/ic_perm_group_device_alarms"
+            android:adjustViewBounds="true"/>
+
+          <TextView android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="@string/reminder">
+            <!--Removed ObsoleteLayoutParam: layout_alignParentTop-->
+          </TextView>
+        </LinearLayout>
+
+        <LinearLayout android:id="@+id/layout_reminder"
+          android:paddingLeft="@dimen/dialog_padding_horizontal_big"
+          android:layout_width="wrap_content"
+          android:gravity="center"
+          android:layout_height="wrap_content"
+          android:orientation="horizontal">
+
+          <android.support.design.widget.TextInputEditText android:id="@+id/edittext_reminder"
+            android:layout_width="40sp"
+            android:layout_height="wrap_content"
+            android:inputType="number"
+            android:gravity="center"
+            android:hint="0"
+            android:maxLength="3"/>
+
+          <Spinner android:id="@+id/reminder_spinner"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/colorAccent"
+            android:layout_marginLeft="5sp"/>
+
+          <TextView android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="@string/reminder_before">
+            <!--Removed ObsoleteLayoutParam: layout_alignParentTop-->
+          </TextView>
+        </LinearLayout>
+      </LinearLayout>
+
+      <android.support.design.widget.TextInputLayout android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <android.support.design.widget.TextInputEditText android:id="@+id/list_notes"
+          android:inputType="textMultiLine|textCapSentences"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:hint="@string/list_notes"/>
+      </android.support.design.widget.TextInputLayout>
+    </LinearLayout>
+  </ScrollView>
 </LinearLayout>
