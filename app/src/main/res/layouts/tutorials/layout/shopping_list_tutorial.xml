@@ -16,8 +16,19 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
+
             <TextView
                     android:textSize="@dimen/slide_title"
+                    android:textColor="@android:color/white"
+                    android:text="@string/tutorial_manage_lists"
+                    android:textStyle="bold"
+                    android:paddingLeft="@dimen/dialog_padding"
+                    android:paddingBottom="@dimen/dialog_padding"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+
+            <TextView
+                    android:textSize="@dimen/slide_desc"
                     android:text="@string/tutorial_how_to"
                     android:textStyle="bold"
                     android:textColor="@android:color/white"

@@ -22,6 +22,8 @@
     <!-- ### TUTORIAL ### -->
     <string name="do_not_show_again" translatable="false">Don\'t show again!</string>
     <string name="tutorial_dialog_title">Tutorial</string>
+    <string name="tutorial_manage_lists">Manage Lists</string>
+    <string name="tutorial_manage_products">Manage Products</string>
     <string name="tutorial_how_to">How to...</string>
     <string name="tutorial_create_list">... create a new list?</string>
     <string name="tutorial_delete_lists">... delete multiple lists?</string>
@@ -194,10 +196,8 @@
     <string name="pref_currency_title">Select currency</string>
     <string name="pref_currency_summary">$</string>
     <!-- ### WELCOME DIALOG ### -->
-    <string name="welcome_text">Welcome to the Privacy Friendly Shopping List. Follow the tutorial instructions to
-        create your first list. You can customize the default settings for notifications, statistics and others in the
-        menu
-        settings. Consult the Help section to get further information about the app.
+    <string name="welcome_text">With this app you can create and manage shopping lists. Lists can be prioritized, have deadlines,
+         reminders and more.
     </string>
     <string name="welcome">Welcome</string>
     <string name="okay">Okay</string>
@@ -210,7 +210,7 @@
     <string name="help">Help</string>
     <string name="help_overview_heading">Overview</string>
     <string name="help_intro1">Welcome to the help page of Privacy Friendly Shopping List. This App allows you not only
-        creating lists and addding products to it, but also set priority, deadlines, reminders and add notes to your
+        creating lists and adding products to it, but also set priority, deadlines, reminders and add notes to your
         lists.
     </string>
     <string name="help_intro2">Additionally you can keep track of checked items and visualize the total amount spent,

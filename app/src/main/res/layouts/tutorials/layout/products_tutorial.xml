@@ -18,6 +18,16 @@
             <TextView
                     android:textSize="@dimen/slide_title"
                     android:textColor="@android:color/white"
+                    android:text="@string/tutorial_manage_products"
+                    android:textStyle="bold"
+                    android:paddingLeft="@dimen/dialog_padding"
+                    android:paddingBottom="@dimen/dialog_padding"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+
+            <TextView
+                    android:textSize="@dimen/slide_desc"
+                    android:textColor="@android:color/white"
                     android:text="@string/tutorial_how_to"
                     android:textStyle="bold"
                     android:paddingLeft="@dimen/dialog_padding"
@@ -191,40 +201,6 @@
                         android:layout_alignParentTop="true"
                         android:layout_alignParentEnd="true"/>
             </RelativeLayout>
-
-            <TextView
-                    android:textSize="@dimen/slide_desc"
-                    android:textColor="@android:color/white"
-                    android:text="@string/statistics"
-                    android:textStyle="bold"
-                    android:paddingLeft="@dimen/dialog_padding"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"/>
-
-            <LinearLayout
-                    android:orientation="horizontal"
-                    android:padding="@dimen/dialog_padding"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-                <CheckBox
-                        android:layout_gravity="center_vertical"
-                        android:checked="true"
-                        android:clickable="false"
-                        android:padding="@dimen/tutorial_icon_padding"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:buttonTint="@color/white"/>
-                <TextView
-                        android:textSize="@dimen/slide_desc"
-                        android:textColor="@android:color/white"
-                        android:paddingLeft="@dimen/dialog_padding_horizontal"
-                        android:paddingRight="@dimen/dialog_padding_horizontal_big"
-                        android:text="@string/tutorial_check_statistics"
-                        android:layout_gravity="center_vertical"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:inputType="textMultiLine"/>
-            </LinearLayout>
         </LinearLayout>
     </ScrollView>
 </RelativeLayout>

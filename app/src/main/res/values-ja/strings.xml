@@ -16,6 +16,8 @@
     <string name="number_decimal_separator">.</string>
     <!-- ### TUTORIAL ### -->
     <string name="tutorial_dialog_title">チュートリアル</string>
+    <string name="tutorial_manage_lists">リストを管理します</string>
+    <string name="tutorial_manage_products">製品の管理</string>
     <string name="tutorial_how_to">使用方法...</string>
     <string name="tutorial_create_list">... 新しいリストを作成?</string>
     <string name="tutorial_delete_lists">... 複数のリストを削除?</string>

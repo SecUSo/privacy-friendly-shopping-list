@@ -65,7 +65,8 @@ public class TutorialActivity extends AppCompatActivity {
         layouts = new int[]{
                 R.layout.welcome_slide,
                 R.layout.shopping_list_tutorial,
-                R.layout.products_tutorial};
+                R.layout.products_tutorial,
+                R.layout.statistics_tutorial};
 
         // adding bottom dots
         addBottomDots(0);
