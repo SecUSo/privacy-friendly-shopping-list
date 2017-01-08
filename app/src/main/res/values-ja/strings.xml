@@ -173,6 +173,8 @@
     <string name="welcome">ようこそ</string>
     <string name="okay">OK</string>
     <string name="viewhelp">ヘルプを表示</string>
+    <string name="skip">スキップ</string>
+    <string name="next">次</string>
     <!--### HELP ###-->
     <string name="help">ヘルプ</string>
     <string name="help_overview_heading">概要</string>

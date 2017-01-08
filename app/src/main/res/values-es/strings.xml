@@ -186,6 +186,8 @@
     <string name="welcome">Bienvenido</string>
     <string name="okay">Aceptar</string>
     <string name="viewhelp">Ayuda</string>
+    <string name="skip">Saltar</string>
+    <string name="next">Siguiente</string>
     <!--### HELP ###-->
     <string name="help">Ayuda</string>
     <string name="help_overview_heading">Resumen</string>

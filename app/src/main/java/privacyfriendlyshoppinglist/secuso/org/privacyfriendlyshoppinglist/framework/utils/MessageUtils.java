@@ -73,53 +73,6 @@ public class MessageUtils
         }
     }
 
-    public static void showTutorialDialog(Activity activity)
-    {
-        String settingKey;
-        int tutorialLayoutResource;
-        int dialogTheme;
-        if ( activity instanceof MainActivity )
-        {
-            settingKey = SettingsKeys.TUTORIAL_LIST;
-            tutorialLayoutResource = R.layout.shopping_list_tutorial;
-            dialogTheme = R.style.AlertDialogColourful;
-        }
-        else if ( activity instanceof ProductsActivity )
-        {
-            settingKey = SettingsKeys.TUTORIAL_PRODUCT;
-            tutorialLayoutResource = R.layout.products_tutorial;
-            dialogTheme = R.style.AlertDialogColourful;
-        }
-        else if ( activity instanceof DeleteProductsActivity || activity instanceof DeleteListsActivity )
-        {
-            settingKey = SettingsKeys.TUTORIAL_DELETE;
-            tutorialLayoutResource = R.layout.delete_tutorial;
-            dialogTheme = R.style.AlertDialogGrey;
-        }
-        else
-        {
-            return; // ignore
-        }
-
-        if ( PreferenceManager.getDefaultSharedPreferences(activity.getApplicationContext()).getBoolean(settingKey, true) )
-        {
-            setPreferenceToFalse(settingKey, activity);
-            AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(activity, dialogTheme);
-            dialogBuilder.setView(tutorialLayoutResource);
-            dialogBuilder.setPositiveButton(activity.getString(R.string.okay), null);
-            dialogBuilder.setNegativeButton(activity.getString(R.string.viewhelp), new DialogInterface.OnClickListener()
-            {
-                @Override
-                public void onClick(DialogInterface dialog, int which)
-                {
-                    Intent helpIntent = new Intent(activity, HelpActivity.class);
-                    activity.startActivity(helpIntent);
-                }
-            });
-            dialogBuilder.show();
-        }
-    }
-
     private static void setPreferenceToFalse(String preferenceKey, Activity activity)
     {
         SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(activity);

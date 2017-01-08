@@ -55,8 +55,6 @@ public class MainActivity extends BaseActivity
 //        getApplicationContext().deleteDatabase(DB.APP.getDbName());
 
         updateListView();
-        MessageUtils.showWelcomeDialog(SettingsKeys.WELCOME_PREF, this);
-        MessageUtils.showTutorialDialog(this);
 
         SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
         String sortBy = sharedPref.getString(SettingsKeys.LIST_SORT_BY, null);

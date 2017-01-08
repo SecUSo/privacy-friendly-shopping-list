@@ -203,6 +203,9 @@
     <string name="okay">Okay</string>
     <string name="viewhelp">View Help</string>
     <string name="main_button_welcomedialog" translatable="false">Show Welcome</string>
+    <string name="next">Next</string>
+    <string name="skip">Skip</string>
+
     <!--### HELP ###-->
     <string name="help">Help</string>
     <string name="help_overview_heading">Overview</string>

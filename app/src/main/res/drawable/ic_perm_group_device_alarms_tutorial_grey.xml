@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list
+        xmlns:android="http://schemas.android.com/apk/res/android">
+    <item>
+        <shape android:shape="oval">
+            <solid
+                    android:color="@color/white"/>
+
+            <size
+                    android:width="@dimen/tutorial_icon_size"
+                    android:height="@dimen/tutorial_icon_size"
+            />
+        </shape>
+    </item>
+    <item
+            android:drawable="@drawable/ic_perm_group_device_alarms"
+            android:bottom="20sp"
+            android:left="20sp"
+            android:right="20sp"
+            android:top="20sp"
+    />
+</layer-list>

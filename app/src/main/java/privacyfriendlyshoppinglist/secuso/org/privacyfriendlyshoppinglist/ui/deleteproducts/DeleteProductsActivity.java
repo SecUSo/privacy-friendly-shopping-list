@@ -35,8 +35,6 @@ public class DeleteProductsActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.delete_products_activity);
 
-        MessageUtils.showTutorialDialog(this);
-
         AbstractInstanceFactory instanceFactory = new InstanceFactory(getApplicationContext());
         this.productService = (ProductService) instanceFactory.createInstance(ProductService.class);
         this.shoppingListService = (ShoppingListService) instanceFactory.createInstance(ShoppingListService.class);

@@ -209,6 +209,8 @@
     <string name="welcome">Willkommen</string>
     <string name="okay">Okay</string>
     <string name="viewhelp">Öffne \"Hilfe\"</string>
+    <string name="skip">Überspringen</string>
+    <string name="next">Weiter</string>
 
     <!--### HELP ###-->
     <string name="help">Hilfe</string>
