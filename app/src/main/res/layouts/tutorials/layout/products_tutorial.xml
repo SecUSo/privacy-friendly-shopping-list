@@ -1,27 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:orientation="vertical"
               android:layout_width="match_parent"
-              android:layout_height="wrap_content">
-    <TextView
-            android:id="@+id/dialog_title"
-            android:gravity="center"
-            android:text="@string/tutorial_dialog_title"
-            android:background="@color/colorPrimaryDark"
-            android:textColor="@color/white"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/dialog_title_height"
-            android:layout_marginBottom="10sp"
-            android:textStyle="bold"/>
+              android:layout_height="match_parent"
+              android:background="@color/colorAccent">
     <ScrollView
-            android:layout_width="match_parent"
-            android:fadeScrollbars="false"
-            android:layout_height="wrap_content">
-        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                      android:orientation="vertical"
-                      android:layout_width="match_parent"
-                      android:layout_height="wrap_content">
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:gravity="center_horizontal"
+            android:layout_centerVertical="true"
+            android:fadeScrollbars="false">
+        <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
             <TextView
+                    android:textSize="@dimen/slide_title"
+                    android:textColor="@android:color/white"
+                    android:text="@string/tutorial_manage_products"
+                    android:textStyle="bold"
+                    android:paddingLeft="@dimen/dialog_padding"
+                    android:paddingBottom="@dimen/dialog_padding"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+
+            <TextView
+                    android:textSize="@dimen/slide_desc"
+                    android:textColor="@android:color/white"
                     android:text="@string/tutorial_how_to"
                     android:textStyle="bold"
                     android:paddingLeft="@dimen/dialog_padding"
@@ -45,10 +51,12 @@
                         android:src="@drawable/ic_keyboard_arrow_right_black_24sp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:tint="@color/colorPrimaryDark"
+                        android:tint="@color/white"
                         android:id="@+id/imageView2" android:layout_centerVertical="true"
                         android:layout_toEndOf="@+id/textView"/>
                 <TextView
+                        android:textSize="@dimen/slide_desc"
+                        android:textColor="@android:color/white"
                         android:paddingLeft="@dimen/dialog_padding_horizontal_big"
                         android:text="@string/tutorial_add_product"
                         android:inputType="textMultiLine"
@@ -68,10 +76,12 @@
                         android:src="@drawable/ic_keyboard_arrow_right_black_24sp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:tint="@color/colorPrimaryDark"
+                        android:tint="@color/white"
                         android:layout_centerVertical="true" android:layout_toEndOf="@+id/textView2"
                         android:id="@+id/imageView3"/>
                 <TextView
+                        android:textSize="@dimen/slide_desc"
+                        android:textColor="@android:color/white"
                         android:paddingLeft="@dimen/dialog_padding_horizontal_big"
                         android:layout_gravity="center_vertical"
                         android:text="@string/tutorial_delete_products"
@@ -86,7 +96,6 @@
                         android:layout_marginRight="@dimen/fab_margin"
                         android:padding="@dimen/tutorial_icon_padding"
                         android:src="@drawable/ic_delete_white_24sp"
-                        android:background="@color/colorPrimaryDark"
                         android:layout_width="@dimen/tutorial_icon_size"
                         android:layout_height="@dimen/tutorial_icon_size"
                         android:tint="@color/white"
@@ -101,9 +110,11 @@
                         android:src="@drawable/ic_keyboard_arrow_right_black_24sp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:tint="@color/colorPrimaryDark"
+                        android:tint="@color/white"
                         android:layout_centerVertical="true" android:layout_toEndOf="@+id/textView3"/>
                 <TextView
+                        android:textSize="@dimen/slide_desc"
+                        android:textColor="@android:color/white"
                         android:paddingLeft="@dimen/dialog_padding_horizontal_big"
                         android:layout_gravity="center_vertical"
                         android:text="@string/tutorial_sort_products"
@@ -118,7 +129,6 @@
                         android:layout_marginRight="@dimen/fab_margin"
                         android:padding="@dimen/tutorial_icon_padding"
                         android:src="@drawable/ic_sort_white_24sp"
-                        android:background="@color/colorPrimaryDark"
                         android:layout_width="@dimen/tutorial_icon_size"
                         android:layout_height="@dimen/tutorial_icon_size"
                         android:tint="@color/white"
@@ -133,7 +143,7 @@
                         android:src="@drawable/ic_keyboard_arrow_right_black_24sp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:tint="@color/colorPrimaryDark"
+                        android:tint="@color/white"
                         android:layout_centerVertical="true"
                         android:layout_toEndOf="@+id/textView4"/>
                 <ImageView
@@ -144,9 +154,10 @@
                         android:src="@drawable/ic_keyboard_arrow_down_white_48sp"
                         android:layout_width="@dimen/tutorial_icon_size"
                         android:layout_height="@dimen/tutorial_icon_size"
-                        android:tint="@color/colorAccent"
                         android:layout_alignParentTop="true" android:layout_alignParentEnd="true"/>
                 <TextView
+                        android:textSize="@dimen/slide_desc"
+                        android:textColor="@android:color/white"
                         android:paddingLeft="@dimen/dialog_padding_horizontal_big"
                         android:layout_gravity="center_vertical"
                         android:text="@string/tutorial_see_details_product"
@@ -161,6 +172,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
                 <TextView
+                        android:textSize="@dimen/slide_desc"
+                        android:textColor="@android:color/white"
                         android:paddingLeft="@dimen/dialog_padding_horizontal_big"
                         android:layout_gravity="center_vertical"
                         android:text="@string/tutorial_check_product"
@@ -174,51 +187,20 @@
                         android:src="@drawable/ic_keyboard_arrow_right_black_24sp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:tint="@color/colorPrimaryDark"
+                        android:tint="@color/white"
                         android:layout_centerVertical="true"
                         android:layout_toEndOf="@+id/textView5"/>
                 <CheckBox
                         android:layout_marginLeft="@dimen/fab_margin"
                         android:layout_marginRight="@dimen/fab_margin"
-
                         android:layout_gravity="center"
                         android:padding="@dimen/tutorial_icon_padding"
                         android:layout_width="35sp"
                         android:layout_height="@dimen/tutorial_icon_size"
-                        android:backgroundTint="@color/colorAccent"
+                        android:buttonTint="@color/white"
                         android:layout_alignParentTop="true"
                         android:layout_alignParentEnd="true"/>
             </RelativeLayout>
-
-            <TextView
-                    android:text="@string/statistics"
-                    android:textStyle="bold"
-                    android:paddingLeft="@dimen/dialog_padding"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"/>
-
-            <LinearLayout
-                    android:orientation="horizontal"
-                    android:padding="@dimen/dialog_padding"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-                <CheckBox
-                        android:layout_gravity="center_vertical"
-                        android:checked="true"
-                        android:clickable="false"
-                        android:padding="@dimen/tutorial_icon_padding"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:backgroundTint="@color/colorAccent"/>
-                <TextView
-                        android:paddingLeft="@dimen/dialog_padding_horizontal"
-                        android:paddingRight="@dimen/dialog_padding_horizontal_big"
-                        android:text="@string/tutorial_check_statistics"
-                        android:layout_gravity="center_vertical"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:inputType="textMultiLine"/>
-            </LinearLayout>
         </LinearLayout>
     </ScrollView>
-</LinearLayout>
+</RelativeLayout>

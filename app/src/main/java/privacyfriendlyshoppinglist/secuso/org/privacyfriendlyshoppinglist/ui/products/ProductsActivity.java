@@ -59,8 +59,6 @@ public class ProductsActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.products_activity);
 
-        MessageUtils.showTutorialDialog(this);
-
         AbstractInstanceFactory instanceFactory = new InstanceFactory(getApplicationContext());
         this.productService = (ProductService) instanceFactory.createInstance(ProductService.class);
         this.shoppingListService = (ShoppingListService) instanceFactory.createInstance(ShoppingListService.class);

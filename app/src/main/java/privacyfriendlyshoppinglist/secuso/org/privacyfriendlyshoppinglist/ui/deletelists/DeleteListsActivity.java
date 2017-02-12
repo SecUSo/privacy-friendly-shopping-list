@@ -33,8 +33,6 @@ public class DeleteListsActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.delete_lists_activity);
 
-        MessageUtils.showTutorialDialog(this);
-
         AbstractInstanceFactory instanceFactory = new InstanceFactory(getApplicationContext());
         this.shoppingListService = (ShoppingListService) instanceFactory.createInstance(ShoppingListService.class);
         cache = new DeleteListsCache(this);

@@ -16,6 +16,8 @@
     <string name="number_decimal_separator">,</string>
     <!-- ### TUTORIAL ### -->
     <string name="tutorial_dialog_title">Tutorial</string>
+    <string name="tutorial_manage_lists">Administrar Listas</string>
+    <string name="tutorial_manage_products">Administrar Productos</string>
     <string name="tutorial_how_to">¿Cómo...</string>
     <string name="tutorial_create_list">... crear una nueva lista?</string>
     <string name="tutorial_delete_lists">... eliminar varias listas?</string>
@@ -178,14 +180,13 @@
     <string name="pref_currency_title">Seleccionar moneda</string>
     <string name="pref_currency_summary">€</string>
     <!-- ### WELCOME DIALOG ### -->
-    <string name="welcome_text">Bienvenido a Privacy Friendly Shopping List. Sigue las instrucciones del siguiente
-        tutorial para crear tu primera lista. Para personalizar funciones correspondientes a notificaciones,
-        estadísticas, entre otras, ve al menú \"configuración\". Consulta la sección de ayuda para más información
-        acerca de la aplicación.
+    <string name="welcome_text">Esta app te permite crear y administrar listas de compras. Además es posible asignar prioridad a listas, fijar fechas topes, recordatorios y más.
     </string>
     <string name="welcome">Bienvenido</string>
     <string name="okay">Aceptar</string>
     <string name="viewhelp">Ayuda</string>
+    <string name="skip">Saltar</string>
+    <string name="next">Siguiente</string>
     <!--### HELP ###-->
     <string name="help">Ayuda</string>
     <string name="help_overview_heading">Resumen</string>

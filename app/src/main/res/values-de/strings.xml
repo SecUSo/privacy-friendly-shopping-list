@@ -17,6 +17,8 @@
 
     <!-- ### TUTORIAL ### -->
     <string name="tutorial_dialog_title">Tutorial</string>
+    <string name="tutorial_manage_lists">Listenverwaltung</string>
+    <string name="tutorial_manage_products">Produktverwaltung</string>
     <string name="tutorial_how_to">So geht es:</string>
     <string name="tutorial_create_list">... eine neue Liste erstellen?</string>
     <string name="tutorial_delete_lists">... mehrere Listen löschen?</string>
@@ -200,15 +202,14 @@
     <string name="pref_currency_summary">€</string>
 
     <!-- ### WELCOME DIALOG ### -->
-    <string name="welcome_text">Willkommen zur Privacy Friendly Shopping List. Folge den Hinweisen in den Tutorials, um
-        deine erste Liste zu erstellen.
-        Unter dem Menüpunkt Einstellungen kannst du das Standardverhalten für Statistiken, Benachrichtigungen, und
-        Hinweise einrichten. Weitere Hinweise zur
-        Benutzung der App können im Menüpunkt \"Hilfe\" eingesehen werden.
+    <string name="welcome_text">Mit dieser App können Einkaufslisten erstellt und verwaltet werden. Listen können priorisiert werden.
+        Deadlines und Erinnerungen können ebenfalls gesetzt werden.
     </string>
     <string name="welcome">Willkommen</string>
     <string name="okay">Okay</string>
     <string name="viewhelp">Öffne \"Hilfe\"</string>
+    <string name="skip">Überspringen</string>
+    <string name="next">Weiter</string>
 
     <!--### HELP ###-->
     <string name="help">Hilfe</string>
