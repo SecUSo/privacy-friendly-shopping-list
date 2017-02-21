@@ -183,7 +183,7 @@
     <string name="pref_notifications_toast_off">Benachrichtigungen für Erinnerung deaktiviert!</string>
 
     <string name="pref_header_statistics">Statistiken</string>
-    <string name="pref_statistics_title">Standarteinstellung</string>
+    <string name="pref_statistics_title">Standardeinstellung</string>
     <string name="pref_statistics_summary_on">Statistiken sind standardmäßg \"aktiviert\" beim Erstellen neuer Listen.
     </string>
     <string name="pref_statistics_summary_off">Statistiken sind standardmäßg \"deaktiviert\" beim Erstellen neuer
