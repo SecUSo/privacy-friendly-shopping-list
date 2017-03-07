@@ -14,8 +14,8 @@ android {
         applicationId "privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist"
         minSdkVersion 17
         targetSdkVersion 25
-        versionCode 4
-        versionName "1.0.6"
+        versionCode 5
+        versionName "1.0.7"
     }
 
     buildTypes {
