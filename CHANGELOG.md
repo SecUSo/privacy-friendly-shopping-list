@@ -1,11 +1,13 @@
 Changelog
 ==========
 
-Version 1.0.6 *(2016-12-25)*
+Version 1.0.6 *(2017-03-07)*
 ----------------------------
 
  * Japanese translation
  * Reseting of all items added
+ * Minor bug fixes
+ * Design Update
 
 Version 1.0.5 *(2016-11-21)*
 ----------------------------
