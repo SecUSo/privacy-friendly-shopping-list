@@ -168,6 +168,7 @@ public class ProductDialogFragment extends DialogFragment
         else
         {
             dialogCache.getTitleTextView().setText(getActivity().getResources().getString(R.string.product_name_new));
+            dto.setDefaultImage(true);
             Bitmap bitmap = BitmapFactory.decodeResource(getContext().getResources(), R.drawable.ic_menu_camera);
             dialogCache.getProductImage().setImageBitmap(bitmap);
             dialogCache.getProductCheckBox().setVisibility(View.GONE);
@@ -175,18 +176,15 @@ public class ProductDialogFragment extends DialogFragment
 
         dialogCache.getButtonPlus().setOnClickListener(new View.OnClickListener()
         {
-            int value;
-            String newQuantity;
-
             @Override
             public void onClick(View view)
             {
 
                 if ( !StringUtils.isEmpty(String.valueOf(dialogCache.getQuantity().getText())) )
                 {
-                    value = Integer.parseInt(String.valueOf(dialogCache.getQuantity().getText()));
+                    int value = Integer.parseInt(String.valueOf(dialogCache.getQuantity().getText()));
                     value++;
-                    newQuantity = String.valueOf(value);
+                    String newQuantity = String.valueOf(value);
                     dialogCache.getQuantity().setText(newQuantity);
                 }
                 else
@@ -198,18 +196,22 @@ public class ProductDialogFragment extends DialogFragment
 
         dialogCache.getButtonMinus().setOnClickListener(new View.OnClickListener()
         {
-            int value;
-            String newQuantity;
-
             @Override
             public void onClick(View view)
             {
-                value = Integer.parseInt(String.valueOf(dialogCache.getQuantity().getText()));
-                if ( value > 0 )
+                if (!StringUtils.isEmpty(String.valueOf(dialogCache.getQuantity().getText())))
                 {
-                    value--;
-                    newQuantity = String.valueOf(value);
-                    dialogCache.getQuantity().setText(newQuantity);
+                    int value = Integer.parseInt(String.valueOf(dialogCache.getQuantity().getText()));
+
+                    if (value > 0) {
+                        value--;
+                        String newQuantity = String.valueOf(value);
+                        dialogCache.getQuantity().setText(newQuantity);
+                    }
+                }
+                else
+                {
+                    dialogCache.getQuantity().setText("0");
                 }
             }
         });
