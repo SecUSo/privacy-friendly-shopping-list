@@ -51,12 +51,15 @@ public class ProductsActivity extends AppCompatActivity
     private ListItem listItem;
     private Subscriber<Long> alertUpdateSubscriber;
     private Subscription alertSubscriber;
+    private boolean menusVisible;
 
     @Override
     protected final void onCreate(final Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.products_activity);
+
+        menusVisible = false;
 
         AbstractInstanceFactory instanceFactory = new InstanceFactory(getApplicationContext());
         this.productService = (ProductService) instanceFactory.createInstance(ProductService.class);
@@ -99,6 +102,9 @@ public class ProductsActivity extends AppCompatActivity
 
         MenuItem deleteItem = menu.findItem(R.id.imageview_delete);
         deleteItem.setOnMenuItemClickListener(new ShowDeleteProductsOnClickListener(this, listId));
+
+        sortItem.setVisible(menusVisible);
+        deleteItem.setVisible(menusVisible);
         return super.onPrepareOptionsMenu(menu);
     }
 
@@ -138,6 +144,9 @@ public class ProductsActivity extends AppCompatActivity
                         unsubscribeAlert();
                     }
 
+                    menusVisible = !allProducts.isEmpty();
+                    invalidateOptionsMenu();
+
                     // sort according to last sort selection
                     final ListItem[] listItem = new ListItem[ 1 ];
                     shoppingListService.getById(listId)
@@ -148,7 +157,7 @@ public class ProductsActivity extends AppCompatActivity
                                 boolean sortAscending = listItem[ 0 ].isSortAscending();
                                 productService.sortProducts(allProducts, sortBy, sortAscending);
 
-                                cache.getProductsAdapter().setProductsList(allProducts);
+                                cache.getProductsAdapter().setList(allProducts);
                                 cache.getProductsAdapter().notifyDataSetChanged();
 
                                 reorderProductViewBySelection();
@@ -179,7 +188,7 @@ public class ProductsActivity extends AppCompatActivity
 
     public void updateTotals()
     {
-        TotalItem totalItem = productService.computeTotals(cache.getProductsAdapter().getProductsList());
+        TotalItem totalItem = productService.computeTotals(cache.getProductsAdapter().getList());
         cache.getTotalAmountTextView().setText(totalItem.getTotalAmount());
         cache.getTotalCheckedTextView().setText(totalItem.getCheckedAmount());
 
@@ -200,9 +209,9 @@ public class ProductsActivity extends AppCompatActivity
         if ( PreferenceManager.getDefaultSharedPreferences(cache.getActivity()).getBoolean(SettingsKeys.MOVE_PRODUCTS_PREF, true) )
         {
             ProductsAdapter productsAdapter = cache.getProductsAdapter();
-            List<ProductItem> productsList = productsAdapter.getProductsList();
+            List<ProductItem> productsList = productsAdapter.getList();
             List<ProductItem> productItems = productService.moveSelectedToEnd(productsList);
-            productsAdapter.setProductsList(productItems);
+            productsAdapter.setList(productItems);
 
             int initialPosition = productsList.indexOf(item);
             int finalPosition = productItems.indexOf(item);
@@ -221,16 +230,16 @@ public class ProductsActivity extends AppCompatActivity
         if ( PreferenceManager.getDefaultSharedPreferences(cache.getActivity()).getBoolean(SettingsKeys.MOVE_PRODUCTS_PREF, true) )
         {
             ProductsAdapter productsAdapter = cache.getProductsAdapter();
-            List<ProductItem> productsList = productsAdapter.getProductsList();
+            List<ProductItem> productsList = productsAdapter.getList();
             List<ProductItem> productItems = productService.moveSelectedToEnd(productsList);
-            productsAdapter.setProductsList(productItems);
+            productsAdapter.setList(productItems);
             productsAdapter.notifyDataSetChanged();
         }
     }
 
     public void setProductsAndUpdateView(List<ProductItem> sortedProducts)
     {
-        cache.getProductsAdapter().setProductsList(sortedProducts);
+        cache.getProductsAdapter().setList(sortedProducts);
         cache.getProductsAdapter().notifyDataSetChanged();
     }
 
@@ -253,6 +262,12 @@ public class ProductsActivity extends AppCompatActivity
             @Override
             public void onNext(Long time)
             {
+                if ( cache.getSearchTextInputLayout().getVisibility() == View.VISIBLE )
+                {
+                    cache.getAlertTextView().setVisibility(View.GONE);
+                    return;
+                }
+
                 if ( time % 2 != 0 )
                 {
                     cache.getAlertTextView().setVisibility(View.GONE);

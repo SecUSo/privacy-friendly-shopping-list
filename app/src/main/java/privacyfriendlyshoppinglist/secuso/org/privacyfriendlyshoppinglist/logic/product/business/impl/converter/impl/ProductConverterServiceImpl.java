@@ -87,6 +87,7 @@ public class ProductConverterServiceImpl implements ProductConverterService
     @Override
     public void convertEntitiesToItem(ProductItemEntity entity, ProductItem item)
     {
+        item.setListId(entity.getShoppingList().getId().toString());
         item.setProductName(entity.getProductName());
 
         if ( entity.getId() != null )

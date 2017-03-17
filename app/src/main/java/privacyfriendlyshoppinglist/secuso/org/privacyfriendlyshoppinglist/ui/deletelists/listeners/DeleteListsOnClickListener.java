@@ -56,7 +56,7 @@ public class DeleteListsOnClickListener implements View.OnClickListener
     private Void deleteListsSync()
     {
         // delete lists
-        List<ListItem> shoppingList = cache.getDeleteListsAdapter().getShoppingList();
+        List<ListItem> shoppingList = cache.getDeleteListsAdapter().getList();
         shoppingListService.deleteSelected(shoppingList)
                 .doOnNext(id ->
                 {

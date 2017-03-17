@@ -19,6 +19,8 @@ public interface ProductService extends ContextSetter
 
     Observable<Void> duplicateProducts(String listId);
 
+    Observable<Void> copyToList(ProductItem product, String listId);
+
     Observable<Void> resetCheckedProducts(String listId);
 
     Observable<ProductItem> getById(String id);
@@ -32,6 +34,8 @@ public interface ProductService extends ContextSetter
     Observable<Void> deleteSelected(List<ProductItem> productItems);
 
     Observable<ProductItem> getAllProducts(String listId);
+
+    Observable<ProductItem> getAllProducts();
 
     Observable<TotalItem> getInfo(String listId);
 

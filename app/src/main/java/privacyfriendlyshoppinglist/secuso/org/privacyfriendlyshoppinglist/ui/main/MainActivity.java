@@ -40,6 +40,8 @@ public class MainActivity extends BaseActivity
     private Subscriber<Long> alertUpdateSubscriber;
     private Subscription alertSubscriber;
 
+    private boolean menusVisible;
+
 
     @Override
     protected final void onCreate(final Bundle savedInstanceState)
@@ -50,6 +52,7 @@ public class MainActivity extends BaseActivity
         AbstractInstanceFactory instanceFactory = new InstanceFactory(getApplicationContext());
         this.shoppingListService = (ShoppingListService) instanceFactory.createInstance(ShoppingListService.class);
         cache = new ShoppingListActivityCache(this);
+        menusVisible = false;
 
 //        getApplicationContext().deleteDatabase(DB.APP.getDbName());
 
@@ -93,6 +96,9 @@ public class MainActivity extends BaseActivity
 
         MenuItem deleteItem = menu.findItem(R.id.imageview_delete);
         deleteItem.setOnMenuItemClickListener(new ShowDeleteListsOnClickListener(cache));
+
+        sortItem.setVisible(menusVisible);
+        deleteItem.setVisible(menusVisible);
         return super.onPrepareOptionsMenu(menu);
     }
 
@@ -121,13 +127,16 @@ public class MainActivity extends BaseActivity
                         unsubscribeAlert();
                     }
 
+                    menusVisible = !allListItems.isEmpty();
+                    invalidateOptionsMenu();
+
                     // sort according to last sort selection
                     SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
                     String sortBy = sharedPref.getString(SettingsKeys.LIST_SORT_BY, PFAComparators.SORT_BY_NAME);
                     boolean sortAscending = sharedPref.getBoolean(SettingsKeys.LIST_SORT_ASCENDING, true);
                     shoppingListService.sortList(allListItems, sortBy, sortAscending);
 
-                    cache.getListAdapter().setShoppingList(allListItems);
+                    cache.getListAdapter().setList(allListItems);
                     cache.getListAdapter().notifyDataSetChanged();
                 })
                 .subscribe();
@@ -184,7 +193,7 @@ public class MainActivity extends BaseActivity
 
     public void reorderListView(List<ListItem> sortedList)
     {
-        cache.getListAdapter().setShoppingList(sortedList);
+        cache.getListAdapter().setList(sortedList);
         cache.getListAdapter().notifyDataSetChanged();
     }
 }

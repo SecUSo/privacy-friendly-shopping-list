@@ -51,7 +51,7 @@ public class DeleteProductOnClickListener implements View.OnClickListener
     private Void deleteProductsSync()
     {
         // delete products
-        List<ProductItem> productList = cache.getDeleteProductsAdapter().getProductsList();
+        List<ProductItem> productList = cache.getDeleteProductsAdapter().getList();
         productService.deleteSelected(productList).subscribe();
 
         // go to products overview

@@ -5,12 +5,12 @@ import android.preference.PreferenceManager;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageButton;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.R;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.context.AbstractInstanceFactory;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.context.InstanceFactory;
+import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.ui.AbstractViewHolder;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.utils.StringUtils;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.product.business.ProductService;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.product.business.domain.ProductItem;
@@ -29,25 +29,23 @@ import java.util.List;
 /**
  * Created by Chris on 05.06.2016.
  */
-class ListsItemViewHolder extends RecyclerView.ViewHolder
+class ListsItemViewHolder extends AbstractViewHolder<ListItem, ShoppingListActivityCache>
 {
     private static final String HIGH_PRIORITY_INDEX = "0";
     private ListItemCache listItemCache;
-    private ShoppingListActivityCache shoppingListCache;
     private ProductService productService;
     private ShoppingListService shoppingListService;
 
     ListsItemViewHolder(final View parent, ShoppingListActivityCache cache)
     {
-        super(parent);
+        super(parent, cache);
         this.listItemCache = new ListItemCache(parent);
-        this.shoppingListCache = cache;
         AbstractInstanceFactory instanceFactory = new InstanceFactory(cache.getActivity());
         this.productService = (ProductService) instanceFactory.createInstance(ProductService.class);
         this.shoppingListService = (ShoppingListService) instanceFactory.createInstance(ShoppingListService.class);
     }
 
-    void processItem(ListItem item)
+    public void processItem(ListItem item)
     {
         listItemCache.getListNameTextView().setText(item.getListName());
         listItemCache.getDeadLineTextView().setText(item.getDeadlineDate());
@@ -72,7 +70,7 @@ class ListsItemViewHolder extends RecyclerView.ViewHolder
                 .doOnCompleted(() ->
                         {
                             listItemCache.getListDetails().setText(
-                                    totalItem[ 0 ].getInfo(listItemCache.getCurrency(), shoppingListCache.getActivity()) +
+                                    totalItem[ 0 ].getInfo(listItemCache.getCurrency(), cache.getActivity()) +
                                             item.getDetailInfo(listItemCache.getListCard().getContext()));
                             listItemCache.getNrProductsTextView().setText(String.valueOf(totalItem[ 0 ].getNrProducts()));
                         }
@@ -80,17 +78,17 @@ class ListsItemViewHolder extends RecyclerView.ViewHolder
 
         listItemCache.getListCard().setOnClickListener(v ->
         {
-            Intent intent = new Intent(shoppingListCache.getActivity(), ProductsActivity.class);
+            Intent intent = new Intent(cache.getActivity(), ProductsActivity.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             intent.putExtra(MainActivity.LIST_ID_KEY, item.getId());
-            shoppingListCache.getActivity().startActivity(intent);
+            cache.getActivity().startActivity(intent);
         });
 
         listItemCache.getListCard().setOnLongClickListener(view ->
         {
 
-            DialogFragment editDeleteFragment = EditDeleteListDialog.newEditDeleteInstance(item, shoppingListCache);
-            editDeleteFragment.show(shoppingListCache.getActivity().getSupportFragmentManager(), "List");
+            DialogFragment editDeleteFragment = EditDeleteListDialog.newEditDeleteInstance(item, cache);
+            editDeleteFragment.show(cache.getActivity().getSupportFragmentManager(), "List");
 
             return true;
         });
@@ -123,7 +121,7 @@ class ListsItemViewHolder extends RecyclerView.ViewHolder
         else
         {
             listItemCache.getReminderImageView().setVisibility(View.VISIBLE);
-            AppCompatActivity activity = shoppingListCache.getActivity();
+            AppCompatActivity activity = cache.getActivity();
             if ( !PreferenceManager.getDefaultSharedPreferences(activity).getBoolean(SettingsKeys.NOTIFICATIONS_ENABLED, true) )
             {
                 listItemCache.getReminderImageView().setColorFilter(ContextCompat.getColor(activity, R.color.red));

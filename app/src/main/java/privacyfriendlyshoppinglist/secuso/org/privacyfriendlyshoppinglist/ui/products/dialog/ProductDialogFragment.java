@@ -53,6 +53,7 @@ public class ProductDialogFragment extends DialogFragment
     private static final int MY_PERMISSIONS_REQUEST_USE_CAMERA = 2;
     private static final int REQUEST_PHOTO_PREVIEW_FROM_DIALOG = 3;
     private static final double MAX_PRICE_ALLOWED = 10000000;
+    public static final String DEFAULT_QUANTITY = "1";
 
     private static boolean opened;
     private static boolean editDialog;
@@ -189,7 +190,7 @@ public class ProductDialogFragment extends DialogFragment
                 }
                 else
                 {
-                    dialogCache.getQuantity().setText("1");
+                    dialogCache.getQuantity().setText(DEFAULT_QUANTITY);
                 }
             }
         });
@@ -199,11 +200,12 @@ public class ProductDialogFragment extends DialogFragment
             @Override
             public void onClick(View view)
             {
-                if (!StringUtils.isEmpty(String.valueOf(dialogCache.getQuantity().getText())))
+                if ( !StringUtils.isEmpty(String.valueOf(dialogCache.getQuantity().getText())) )
                 {
                     int value = Integer.parseInt(String.valueOf(dialogCache.getQuantity().getText()));
 
-                    if (value > 0) {
+                    if ( value > 0 )
+                    {
                         value--;
                         String newQuantity = String.valueOf(value);
                         dialogCache.getQuantity().setText(newQuantity);
@@ -211,7 +213,7 @@ public class ProductDialogFragment extends DialogFragment
                 }
                 else
                 {
-                    dialogCache.getQuantity().setText("0");
+                    dialogCache.getQuantity().setText(DEFAULT_QUANTITY);
                 }
             }
         });

@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.R;
+import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.business.AbstractItem;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.utils.StringUtils;
 
 /**
@@ -11,12 +12,12 @@ import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framew
  * Author: Grebiel Jose Ifill Brito
  * Created: 11.06.16 creation date
  */
-public class ProductItem
+public class ProductItem extends AbstractItem
 {
+    private String listId;
+
     // product fields
     private String productName;
-
-    private String id;
 
     private String productCategory;
 
@@ -38,14 +39,14 @@ public class ProductItem
 
     private boolean isDefaultImage;
 
-    public String getId()
+    public String getListId()
     {
-        return id;
+        return listId;
     }
 
-    public void setId(String id)
+    public void setListId(String listId)
     {
-        this.id = id;
+        this.listId = listId;
     }
 
     public String getQuantity()
@@ -275,7 +276,7 @@ public class ProductItem
     {
         return "ProductItem{" +
                 "productName='" + productName + '\'' +
-                ", id='" + id + '\'' +
+                ", id='" + getId() + '\'' +
                 ", productCategory='" + productCategory + '\'' +
                 ", quantity='" + quantity + '\'' +
                 ", productNotes='" + productNotes + '\'' +

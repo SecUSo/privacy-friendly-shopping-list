@@ -70,7 +70,7 @@ public class DeleteProductsActivity extends AppCompatActivity
                                         boolean sortAscending = listItem[ 0 ].isSortAscending();
                                         productService.sortProducts(allProducts, sortBy, sortAscending);
 
-                                        cache.getDeleteProductsAdapter().setProductsList(allProducts);
+                                        cache.getDeleteProductsAdapter().setList(allProducts);
                                         cache.getDeleteProductsAdapter().notifyDataSetChanged();
                                     }
                             )

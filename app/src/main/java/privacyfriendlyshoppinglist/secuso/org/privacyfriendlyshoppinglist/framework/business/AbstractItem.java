@@ -1,8 +1,5 @@
 package privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.business;
 
-import java.util.ArrayList;
-import java.util.List;
-
 /**
  * Description:
  * Author: Grebiel Jose Ifill Brito

@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.ContextWrapper;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.R;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.comparators.PFAComparators;
+import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.logger.PFALogger;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.persistence.DB;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.utils.StringUtils;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.product.business.ProductService;
@@ -24,6 +25,10 @@ import rx.schedulers.Schedulers;
 
 import javax.inject.Inject;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.nio.channels.FileChannel;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -112,11 +117,47 @@ public class ProductServiceImpl implements ProductService
         List<ProductItem> products = getAllProductsSync(listId);
         for ( ProductItem product : products )
         {
-            product.setId(null); // new product
-            product.setChecked(false);
-            saveOrUpdateSync(product, newList.getId());
+            copyToListSync(product, newList.getId());
         }
         return null;
+    }
+
+    @Override
+    public Observable<Void> copyToList(ProductItem product, String listId)
+    {
+        Observable<Void> observable = Observable
+                .fromCallable(() -> copyToListSync(product, listId))
+                .subscribeOn(Schedulers.computation())
+                .observeOn(AndroidSchedulers.mainThread());
+        return observable;
+    }
+
+    private Void copyToListSync(ProductItem product, String listId)
+    {
+        String originalProductId = product.getId();
+        product.setId(null); // new product
+        product.setChecked(false);
+        saveOrUpdateSync(product, listId);
+        String newProductId = product.getId();
+        copyImage(originalProductId, newProductId);
+        return null;
+    }
+
+    private void copyImage(String sourceProductId, String destProductId)
+    {
+        File srcImage = new File(getProductImagePath(sourceProductId));
+        if ( srcImage.exists() )
+        {
+            try
+            {
+                File destFile = new File(getProductImagePath(destProductId));
+                copy(srcImage, destFile);
+            }
+            catch ( IOException e )
+            {
+                PFALogger.error("ProductServiceImpl", "duplicateProductSync", e);
+            }
+        }
     }
 
     @Override
@@ -254,6 +295,28 @@ public class ProductServiceImpl implements ProductService
                 .subscribe(item -> productItems.add(item));
 
         return productItems;
+    }
+
+    @Override
+    public Observable<ProductItem> getAllProducts()
+    {
+        Observable<ProductItem> observable = Observable
+                .defer(() -> Observable.from(getAllProductsSync()))
+                .subscribeOn(Schedulers.computation())
+                .observeOn(AndroidSchedulers.mainThread());
+        return observable;
+    }
+
+    private List<ProductItem> getAllProductsSync()
+    {
+        List<ProductItem> productDtos = new ArrayList<>();
+
+        Observable
+                .from(productItemDao.getAllEntities())
+                .map(this::getItem)
+                .subscribe(item -> productDtos.add(item));
+
+        return productDtos;
     }
 
     @Override
@@ -478,5 +541,16 @@ public class ProductServiceImpl implements ProductService
                 .append(productId)
                 .append(EXTENSION);
         return sb.toString();
+    }
+
+    private void copy(File src, File dst) throws IOException
+    {
+        FileInputStream inStream = new FileInputStream(src);
+        FileOutputStream outStream = new FileOutputStream(dst);
+        FileChannel inChannel = inStream.getChannel();
+        FileChannel outChannel = outStream.getChannel();
+        inChannel.transferTo(0, inChannel.size(), outChannel);
+        inStream.close();
+        outStream.close();
     }
 }

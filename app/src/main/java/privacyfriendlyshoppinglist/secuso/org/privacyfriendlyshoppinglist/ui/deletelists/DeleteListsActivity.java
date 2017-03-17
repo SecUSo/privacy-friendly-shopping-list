@@ -57,7 +57,7 @@ public class DeleteListsActivity extends AppCompatActivity
                     boolean sortAscending = sharedPref.getBoolean(SettingsKeys.LIST_SORT_ASCENDING, true);
                     shoppingListService.sortList(allListItems, sortBy, sortAscending);
 
-                    cache.getDeleteListsAdapter().setShoppingList(allListItems);
+                    cache.getDeleteListsAdapter().setList(allListItems);
                     cache.getDeleteListsAdapter().notifyDataSetChanged();
                 })
                 .subscribe();
