@@ -10,9 +10,8 @@ import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.R;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.comparators.PFAComparators;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.context.AbstractInstanceFactory;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.context.InstanceFactory;
-import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.utils.MessageUtils;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.shoppingList.business.ShoppingListService;
-import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.shoppingList.business.domain.ListDto;
+import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.shoppingList.business.domain.ListItem;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.baseactivity.BaseActivity;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.main.listeners.AddOnClickListener;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.main.listeners.ShowDeleteListsOnClickListener;
@@ -105,13 +104,13 @@ public class MainActivity extends BaseActivity
 
     public void updateListView()
     {
-        List<ListDto> allListDtos = new ArrayList<>();
+        List<ListItem> allListItems = new ArrayList<>();
 
-        shoppingListService.getAllListDtos()
-                .doOnNext(dto -> allListDtos.add(dto))
+        shoppingListService.getAllListItems()
+                .doOnNext(item -> allListItems.add(item))
                 .doOnCompleted(() ->
                 {
-                    if ( allListDtos.isEmpty() )
+                    if ( allListItems.isEmpty() )
                     {
                         cache.getNoListsLayout().setVisibility(View.VISIBLE);
                         subscribeAlert();
@@ -126,9 +125,9 @@ public class MainActivity extends BaseActivity
                     SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
                     String sortBy = sharedPref.getString(SettingsKeys.LIST_SORT_BY, PFAComparators.SORT_BY_NAME);
                     boolean sortAscending = sharedPref.getBoolean(SettingsKeys.LIST_SORT_ASCENDING, true);
-                    shoppingListService.sortList(allListDtos, sortBy, sortAscending);
+                    shoppingListService.sortList(allListItems, sortBy, sortAscending);
 
-                    cache.getListAdapter().setShoppingList(allListDtos);
+                    cache.getListAdapter().setShoppingList(allListItems);
                     cache.getListAdapter().notifyDataSetChanged();
                 })
                 .subscribe();
@@ -183,7 +182,7 @@ public class MainActivity extends BaseActivity
         };
     }
 
-    public void reorderListView(List<ListDto> sortedList)
+    public void reorderListView(List<ListItem> sortedList)
     {
         cache.getListAdapter().setShoppingList(sortedList);
         cache.getListAdapter().notifyDataSetChanged();

@@ -1,11 +1,11 @@
 package privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.statistics.business;
 
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.context.ContextSetter;
-import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.product.business.domain.ProductDto;
-import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.statistics.business.domain.StatisticEntryDto;
+import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.product.business.domain.ProductItem;
+import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.statistics.business.domain.StatisticEntryItem;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.statistics.business.domain.StatisticsChartData;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.statistics.business.domain.StatisticsQuery;
-import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.statistics.business.domain.StatsRangeDto;
+import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.statistics.business.domain.StatsRangeItem;
 import rx.Observable;
 
 /**
@@ -15,13 +15,13 @@ import rx.Observable;
  */
 public interface StatisticsService extends ContextSetter
 {
-    Observable<Void> saveRecord(ProductDto dto);
+    Observable<Void> saveRecord(ProductItem item);
 
-    Observable<StatisticEntryDto> getAll();
+    Observable<StatisticEntryItem> getAll();
 
     Observable<Boolean> deleteAll();
 
-    Observable<StatsRangeDto> getRange();
+    Observable<StatsRangeItem> getRange();
 
     Observable<StatisticsChartData> getChartData(StatisticsQuery query);
 

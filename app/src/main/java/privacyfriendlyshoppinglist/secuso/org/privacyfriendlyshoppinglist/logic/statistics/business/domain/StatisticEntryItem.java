@@ -5,7 +5,7 @@ package privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic
  * Author: Grebiel Jose Ifill Brito
  * Created: 23.07.16 creation date
  */
-public class StatisticEntryDto
+public class StatisticEntryItem
 {
     private String recordDate;
 
@@ -82,7 +82,7 @@ public class StatisticEntryDto
     @Override
     public String toString()
     {
-        return "StatisticEntryDto{" +
+        return "StatisticEntryItem{" +
                 "recordDate='" + recordDate + '\'' +
                 ", productName='" + productName + '\'' +
                 ", quantity='" + quantity + '\'' +

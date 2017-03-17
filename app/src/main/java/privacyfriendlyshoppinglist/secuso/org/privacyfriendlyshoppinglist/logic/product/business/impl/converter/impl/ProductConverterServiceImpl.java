@@ -6,7 +6,7 @@ import android.graphics.BitmapFactory;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.R;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.persistence.DB;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.utils.StringUtils;
-import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.product.business.domain.ProductDto;
+import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.product.business.domain.ProductItem;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.product.business.impl.converter.ProductConverterService;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.product.persistence.entity.ProductItemEntity;
 
@@ -37,28 +37,28 @@ public class ProductConverterServiceImpl implements ProductConverterService
     }
 
     @Override
-    public void convertDtoToEntity(ProductDto dto, ProductItemEntity entity)
+    public void convertItemToEntity(ProductItem item, ProductItemEntity entity)
     {
-        entity.setProductName(dto.getProductName());
+        entity.setProductName(item.getProductName());
 
-        if ( !StringUtils.isEmpty(dto.getId()) )
+        if ( !StringUtils.isEmpty(item.getId()) )
         {
-            entity.setId(Long.valueOf(dto.getId()));
+            entity.setId(Long.valueOf(item.getId()));
         }
 
-        if ( !StringUtils.isEmpty(dto.getQuantity()) )
+        if ( !StringUtils.isEmpty(item.getQuantity()) )
         {
-            entity.setQuantity(Integer.valueOf(dto.getQuantity()));
+            entity.setQuantity(Integer.valueOf(item.getQuantity()));
         }
         else
         {
             entity.setQuantity(DEFAULT_QUANTITY);
         }
 
-        entity.setNotes(dto.getProductNotes());
-        entity.setStore(dto.getProductStore());
+        entity.setNotes(item.getProductNotes());
+        entity.setStore(item.getProductStore());
 
-        String priceString = dto.getProductPrice();
+        String priceString = item.getProductPrice();
         if ( !StringUtils.isEmpty(priceString) )
         {
             Double price = getStringAsDouble(priceString);
@@ -69,13 +69,13 @@ public class ProductConverterServiceImpl implements ProductConverterService
             entity.setPrice(DEFAULT_PRICE);
         }
 
-        entity.setCategory(dto.getProductCategory());
-        entity.setSelected(dto.isChecked());
+        entity.setCategory(item.getProductCategory());
+        entity.setSelected(item.isChecked());
 
-        if ( dto.getThumbnailBitmap() != null && !dto.isDefaultImage() )
+        if ( item.getThumbnailBitmap() != null && !item.isDefaultImage() )
         {
             ByteArrayOutputStream stream = new ByteArrayOutputStream();
-            dto.getThumbnailBitmap().compress(Bitmap.CompressFormat.PNG, BITMAP_QUALITY, stream);
+            item.getThumbnailBitmap().compress(Bitmap.CompressFormat.PNG, BITMAP_QUALITY, stream);
             entity.setImageBytes(stream.toByteArray());
         }
         else
@@ -85,48 +85,48 @@ public class ProductConverterServiceImpl implements ProductConverterService
     }
 
     @Override
-    public void convertEntitiesToDto(ProductItemEntity entity, ProductDto dto)
+    public void convertEntitiesToItem(ProductItemEntity entity, ProductItem item)
     {
-        dto.setProductName(entity.getProductName());
+        item.setProductName(entity.getProductName());
 
         if ( entity.getId() != null )
         {
-            dto.setId(String.valueOf(entity.getId()));
+            item.setId(String.valueOf(entity.getId()));
         }
 
         if ( entity.getQuantity() != null )
         {
-            dto.setQuantity(String.valueOf(entity.getQuantity()));
+            item.setQuantity(String.valueOf(entity.getQuantity()));
         }
 
-        dto.setProductNotes(entity.getNotes());
-        dto.setProductStore(entity.getStore());
+        item.setProductNotes(entity.getNotes());
+        item.setProductStore(entity.getStore());
 
         if ( entity.getPrice() != null )
         {
-            dto.setProductPrice(getDoubleAsString(entity.getPrice()));
+            item.setProductPrice(getDoubleAsString(entity.getPrice()));
         }
 
         if ( entity.getQuantity() != null && entity.getPrice() != null )
         {
-            dto.setTotalProductPrice(getDoubleAsString(entity.getPrice() * entity.getQuantity()));
+            item.setTotalProductPrice(getDoubleAsString(entity.getPrice() * entity.getQuantity()));
         }
 
-        dto.setProductCategory(entity.getCategory());
-        dto.setChecked(entity.getSelected());
+        item.setProductCategory(entity.getCategory());
+        item.setChecked(entity.getSelected());
 
         byte[] imageBytes = entity.getImageBytes();
         if ( imageBytes != null )
         {
             Bitmap imageBitMap = BitmapFactory.decodeByteArray(imageBytes, 0, imageBytes.length);
-            dto.setThumbnailBitmap(imageBitMap);
-            dto.setDefaultImage(false);
+            item.setThumbnailBitmap(imageBitMap);
+            item.setDefaultImage(false);
         }
         else
         {
             Bitmap bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.ic_menu_camera);
-            dto.setThumbnailBitmap(bitmap);
-            dto.setDefaultImage(true);
+            item.setThumbnailBitmap(bitmap);
+            item.setDefaultImage(true);
         }
     }
 

@@ -6,8 +6,8 @@ import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.R;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.persistence.DB;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.utils.DateUtils;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.utils.StringUtils;
-import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.product.business.domain.ProductDto;
-import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.statistics.business.domain.StatisticEntryDto;
+import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.product.business.domain.ProductItem;
+import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.statistics.business.domain.StatisticEntryItem;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.statistics.business.impl.converter.StatisticsConverterService;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.statistics.persistence.entity.StatisticEntryEntity;
 
@@ -41,23 +41,23 @@ public class StatisticsConverterServiceImpl implements StatisticsConverterServic
     }
 
     @Override
-    public void convertDtoToEntity(ProductDto dto, StatisticEntryEntity entryEntity)
+    public void convertItemToEntity(ProductItem item, StatisticEntryEntity entryEntity)
     {
-        entryEntity.setProductName(dto.getProductName());
-        entryEntity.setProductCategory(dto.getProductCategory());
+        entryEntity.setProductName(item.getProductName());
+        entryEntity.setProductCategory(item.getProductCategory());
 
-        if ( !StringUtils.isEmpty(dto.getQuantity()) )
+        if ( !StringUtils.isEmpty(item.getQuantity()) )
         {
-            entryEntity.setQuantity(Integer.valueOf(dto.getQuantity()));
+            entryEntity.setQuantity(Integer.valueOf(item.getQuantity()));
         }
         else
         {
             entryEntity.setQuantity(0);
         }
 
-        entryEntity.setProductStore(dto.getProductStore());
+        entryEntity.setProductStore(item.getProductStore());
 
-        String productPrice = dto.getProductPrice();
+        String productPrice = item.getProductPrice();
         if ( !StringUtils.isEmpty(productPrice) )
         {
             entryEntity.setUnitPrice(getStringAsDouble(productPrice));
@@ -69,15 +69,15 @@ public class StatisticsConverterServiceImpl implements StatisticsConverterServic
     }
 
     @Override
-    public void convertEntityToDto(StatisticEntryEntity entryEntity, StatisticEntryDto dto)
+    public void convertEntityToItem(StatisticEntryEntity entryEntity, StatisticEntryItem item)
     {
-        dto.setProductName(entryEntity.getProductName());
-        dto.setProductStore(entryEntity.getProductStore());
-        dto.setProductCategory(dto.getProductCategory());
+        item.setProductName(entryEntity.getProductName());
+        item.setProductStore(entryEntity.getProductStore());
+        item.setProductCategory(item.getProductCategory());
 
         if ( entryEntity.getQuantity() != null )
         {
-            dto.setQuantity(String.valueOf(entryEntity.getQuantity()));
+            item.setQuantity(String.valueOf(entryEntity.getQuantity()));
         }
 
         Date recordDate = entryEntity.getRecordDate();
@@ -85,12 +85,12 @@ public class StatisticsConverterServiceImpl implements StatisticsConverterServic
         if ( recordDate != null )
         {
             String dateAsString = getStringFromDate(recordDate);
-            dto.setRecordDate(dateAsString);
+            item.setRecordDate(dateAsString);
         }
 
         if ( entryEntity.getUnitPrice() != null )
         {
-            dto.setUnitPrice(StringUtils.getDoubleAsString(entryEntity.getUnitPrice(), priceFormat2));
+            item.setUnitPrice(StringUtils.getDoubleAsString(entryEntity.getUnitPrice(), priceFormat2));
         }
     }
 

@@ -2,8 +2,8 @@ package privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic
 
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.context.ContextSetter;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.product.business.domain.AutoCompleteLists;
-import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.product.business.domain.ProductDto;
-import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.product.business.domain.TotalDto;
+import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.product.business.domain.ProductItem;
+import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.product.business.domain.TotalItem;
 import rx.Observable;
 
 import java.util.List;
@@ -15,13 +15,13 @@ import java.util.List;
  */
 public interface ProductService extends ContextSetter
 {
-    Observable<Void> saveOrUpdate(ProductDto dto, String listId);
+    Observable<Void> saveOrUpdate(ProductItem item, String listId);
 
     Observable<Void> duplicateProducts(String listId);
 
     Observable<Void> resetCheckedProducts(String listId);
 
-    Observable<ProductDto> getById(String id);
+    Observable<ProductItem> getById(String id);
 
     String getProductImagePath(String id);
 
@@ -29,25 +29,25 @@ public interface ProductService extends ContextSetter
 
     Observable<Void> deleteOnlyImage(String id);
 
-    Observable<Void> deleteSelected(List<ProductDto> productDtos);
+    Observable<Void> deleteSelected(List<ProductItem> productItems);
 
-    Observable<ProductDto> getAllProducts(String listId);
+    Observable<ProductItem> getAllProducts(String listId);
 
-    Observable<TotalDto> getInfo(String listId);
+    Observable<TotalItem> getInfo(String listId);
 
     Observable<Void> deleteAllFromList(String listId);
 
-    List<ProductDto> moveSelectedToEnd(List<ProductDto> productDtos);
+    List<ProductItem> moveSelectedToEnd(List<ProductItem> productItems);
 
-    TotalDto computeTotals(List<ProductDto> productDtos);
+    TotalItem computeTotals(List<ProductItem> productItems);
 
-    Boolean isSearched(String[] searchedTexts, ProductDto dto);
+    Boolean isSearched(String[] searchedTexts, ProductItem item);
 
-    String getSharableText(ProductDto dto);
+    String getSharableText(ProductItem item);
 
     Observable<AutoCompleteLists> getAutoCompleteListsObservable();
 
     Observable<Boolean> deleteInvisibleProductsFromDb(List<String> listIds);
 
-    void sortProducts(List<ProductDto> products, String criteria, boolean ascending);
+    void sortProducts(List<ProductItem> products, String criteria, boolean ascending);
 }

@@ -13,7 +13,7 @@ import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framew
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.context.InstanceFactory;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.utils.MessageUtils;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.product.business.ProductService;
-import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.product.business.domain.ProductDto;
+import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.product.business.domain.ProductItem;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.products.ProductActivityCache;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.products.ProductsActivity;
 
@@ -23,20 +23,20 @@ import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.pro
 public class EditDeleteProductDialog extends DialogFragment
 {
     private ProductActivityCache cache;
-    private ProductDto dto;
+    private ProductItem item;
     private ProductService productService;
 
-    public static EditDeleteProductDialog newEditDeleteInstance(ProductDto dto, ProductActivityCache cache)
+    public static EditDeleteProductDialog newEditDeleteInstance(ProductItem item, ProductActivityCache cache)
     {
-        EditDeleteProductDialog dialogFragment = getEditDeleteFragment(dto, cache);
+        EditDeleteProductDialog dialogFragment = getEditDeleteFragment(item, cache);
         return dialogFragment;
     }
 
-    private static EditDeleteProductDialog getEditDeleteFragment(ProductDto dto, ProductActivityCache cache)
+    private static EditDeleteProductDialog getEditDeleteFragment(ProductItem item, ProductActivityCache cache)
     {
         EditDeleteProductDialog dialogFragment = new EditDeleteProductDialog();
         dialogFragment.setCache(cache);
-        dialogFragment.setDto(dto);
+        dialogFragment.setItem(item);
         return dialogFragment;
     }
 
@@ -45,9 +45,9 @@ public class EditDeleteProductDialog extends DialogFragment
         this.cache = cache;
     }
 
-    public void setDto(ProductDto dto)
+    public void setItem(ProductItem item)
     {
-        this.dto = dto;
+        this.item = item;
     }
 
 
@@ -65,7 +65,7 @@ public class EditDeleteProductDialog extends DialogFragment
         Button deleteButton = (Button) rootView.findViewById(R.id.delete);
         TextView titleTextView = (TextView) rootView.findViewById(R.id.title);
 
-        String listDialogTitle = getContext().getResources().getString(R.string.product_as_title, dto.getProductName());
+        String listDialogTitle = getContext().getResources().getString(R.string.product_as_title, item.getProductName());
         titleTextView.setText(listDialogTitle);
 
         editButton.setOnClickListener(getEditOnClickListener());
@@ -88,8 +88,8 @@ public class EditDeleteProductDialog extends DialogFragment
                         getContext(),
                         R.string.delete_confirmation_title,
                         R.string.delete_product_confirmation,
-                        dto.getProductName(),
-                        productService.deleteById(dto.getId())
+                        item.getProductName(),
+                        productService.deleteById(item.getId())
                                 .doOnCompleted(() ->
                                 {
                                     ProductsActivity activity = (ProductsActivity) cache.getActivity();
@@ -109,7 +109,7 @@ public class EditDeleteProductDialog extends DialogFragment
                 dismiss();
                 if ( !ProductDialogFragment.isOpened() )
                 {
-                    DialogFragment productFragement = ProductDialogFragment.newEditDialogInstance(dto, cache);
+                    DialogFragment productFragement = ProductDialogFragment.newEditDialogInstance(item, cache);
                     productFragement.show(cache.getActivity().getSupportFragmentManager(), "Product");
                 }
             }
@@ -124,8 +124,8 @@ public class EditDeleteProductDialog extends DialogFragment
             public void onClick(View v)
             {
                 dismiss();
-                String shareableText = productService.getSharableText(dto);
-                MessageUtils.shareText(getContext(), shareableText, dto.getProductName());
+                String shareableText = productService.getSharableText(item);
+                MessageUtils.shareText(getContext(), shareableText, item.getProductName());
             }
         };
     }

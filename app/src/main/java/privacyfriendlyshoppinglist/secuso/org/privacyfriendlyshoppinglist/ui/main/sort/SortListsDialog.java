@@ -16,7 +16,7 @@ import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framew
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.context.AbstractInstanceFactory;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.context.InstanceFactory;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.shoppingList.business.ShoppingListService;
-import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.shoppingList.business.domain.ListDto;
+import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.shoppingList.business.domain.ListItem;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.main.MainActivity;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.settings.SettingsKeys;
 
@@ -82,14 +82,14 @@ public class SortListsDialog extends DialogFragment
                 final String finalCriteria = criteria;
                 boolean ascending = cache.getAscending().isChecked();
 
-                List<ListDto> listDtos = new ArrayList<>();
+                List<ListItem> listItems = new ArrayList<>();
 
-                shoppingListService.getAllListDtos()
-                        .doOnNext(dto -> listDtos.add(dto))
+                shoppingListService.getAllListItems()
+                        .doOnNext(item -> listItems.add(item))
                         .doOnCompleted(() ->
                         {
-                            shoppingListService.sortList(listDtos, finalCriteria, ascending);
-                            host.reorderListView(listDtos);
+                            shoppingListService.sortList(listItems, finalCriteria, ascending);
+                            host.reorderListView(listItems);
                         })
                         .subscribe();
 

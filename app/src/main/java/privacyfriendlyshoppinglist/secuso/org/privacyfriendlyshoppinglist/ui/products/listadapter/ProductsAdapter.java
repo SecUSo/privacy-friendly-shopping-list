@@ -7,7 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.R;
-import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.product.business.domain.ProductDto;
+import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.product.business.domain.ProductItem;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.products.ProductActivityCache;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.settings.SettingsKeys;
 
@@ -20,21 +20,21 @@ import java.util.List;
  */
 public class ProductsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
 {
-    private List<ProductDto> productsList;
+    private List<ProductItem> productsList;
     private ProductActivityCache cache;
 
-    public ProductsAdapter(List<ProductDto> productsList, ProductActivityCache cache)
+    public ProductsAdapter(List<ProductItem> productsList, ProductActivityCache cache)
     {
         this.productsList = productsList;
         this.cache = cache;
     }
 
-    public void setProductsList(List<ProductDto> productsList)
+    public void setProductsList(List<ProductItem> productsList)
     {
         this.productsList = productsList;
     }
 
-    public List<ProductDto> getProductsList()
+    public List<ProductItem> getProductsList()
     {
         return productsList;
     }
@@ -52,8 +52,8 @@ public class ProductsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     public void onBindViewHolder(RecyclerView.ViewHolder viewHolder, int position)
     {
         ProductsItemViewHolder holder = (ProductsItemViewHolder) viewHolder;
-        ProductDto dto = productsList.get(position);
-        holder.processDto(dto);
+        ProductItem item = productsList.get(position);
+        holder.processItem(item);
     }
 
     @Override

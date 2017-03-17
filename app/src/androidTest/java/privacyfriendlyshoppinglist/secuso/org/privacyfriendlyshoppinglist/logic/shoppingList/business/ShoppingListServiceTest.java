@@ -8,7 +8,7 @@ import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.R;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.context.AbstractInstanceFactory;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.context.InstanceFactoryForTests;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.utils.DateUtils;
-import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.shoppingList.business.domain.ListDto;
+import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.shoppingList.business.domain.ListItem;
 
 import java.util.List;
 
@@ -48,51 +48,51 @@ public class ShoppingListServiceTest extends AbstractDatabaseTest
         String time = DateUtils.getDateAsString(datetime.getMillis(), timePattern, language);
         String notes = "notes";
 
-        ListDto dto = new ListDto();
-        dto.setListName(name);
-        dto.setPriority(priority);
-        dto.setIcon(icon);
-        dto.setDeadlineDate(date);
-        dto.setDeadlineTime(time);
-        dto.setNotes(notes);
+        ListItem item = new ListItem();
+        item.setListName(name);
+        item.setPriority(priority);
+        item.setIcon(icon);
+        item.setDeadlineDate(date);
+        item.setDeadlineTime(time);
+        item.setNotes(notes);
 
         // test save
-        shoppingListService.saveOrUpdate(dto).toBlocking().single();
-        String id = dto.getId();
+        shoppingListService.saveOrUpdate(item).toBlocking().single();
+        String id = item.getId();
         assertNotNull(id);
 
         // test getById
-        ListDto newDto = shoppingListService.getById(id).toBlocking().single();
-        assertEquals(id, newDto.getId());
-        assertEquals(name, newDto.getListName());
-        assertEquals(priority, newDto.getPriority());
-        assertEquals(icon, newDto.getIcon());
-        assertEquals(date, newDto.getDeadlineDate());
-        assertEquals(time, newDto.getDeadlineTime());
-        assertEquals(notes, newDto.getNotes());
+        ListItem newItem = shoppingListService.getById(id).toBlocking().single();
+        assertEquals(id, newItem.getId());
+        assertEquals(name, newItem.getListName());
+        assertEquals(priority, newItem.getPriority());
+        assertEquals(icon, newItem.getIcon());
+        assertEquals(date, newItem.getDeadlineDate());
+        assertEquals(time, newItem.getDeadlineTime());
+        assertEquals(notes, newItem.getNotes());
 
         // test update
         String expectedName = "newName";
-        newDto.setListName(expectedName);
-        shoppingListService.saveOrUpdate(newDto).toBlocking().single();
-        ListDto updatedDto = shoppingListService.getById(id).toBlocking().single();
-        assertEquals(expectedName, updatedDto.getListName());
+        newItem.setListName(expectedName);
+        shoppingListService.saveOrUpdate(newItem).toBlocking().single();
+        ListItem updatedItem = shoppingListService.getById(id).toBlocking().single();
+        assertEquals(expectedName, updatedItem.getListName());
 
-        // test getAllListDtos
-        //      save another DTO in order to have 2 entities in the DB
-        updatedDto.setId(null); // if id == null, then the dto will be saved as a new entity
-        shoppingListService.saveOrUpdate(updatedDto).toBlocking().single();
+        // test getAllListItems
+        //      save another ITEM in order to have 2 entities in the DB
+        updatedItem.setId(null); // if id == null, then the item will be saved as a new entity
+        shoppingListService.saveOrUpdate(updatedItem).toBlocking().single();
 
         int expectedSize = 2;
-        List<ListDto> allListDtos = shoppingListService.getAllListDtos().toList().toBlocking().single();
-        assertEquals(expectedSize, allListDtos.size());
+        List<ListItem> allListItems = shoppingListService.getAllListItems().toList().toBlocking().single();
+        assertEquals(expectedSize, allListItems.size());
 
-        // test deleteById using the id of the updatedDto
-        String newId = updatedDto.getId();
+        // test deleteById using the id of the updatedItem
+        String newId = updatedItem.getId();
         shoppingListService.deleteById(newId).toBlocking().single();
         int expectedSizeAfterDelete = 1;
-        List<ListDto> allListDtosAfterDelete = shoppingListService.getAllListDtos().toList().toBlocking().single();
-        assertEquals(expectedSizeAfterDelete, allListDtosAfterDelete.size());
+        List<ListItem> allListItemsAfterDelete = shoppingListService.getAllListItems().toList().toBlocking().single();
+        assertEquals(expectedSizeAfterDelete, allListItemsAfterDelete.size());
     }
 
 

@@ -8,10 +8,9 @@ import java.util.List;
  * Author: Grebiel Jose Ifill Brito
  * Created: 11.06.16 creation date
  */
-public abstract class AbstractDto
+public abstract class AbstractItem
 {
     private String id;
-    private List<String> validationErrors = new ArrayList<>();
 
     public String getId()
     {
@@ -21,15 +20,5 @@ public abstract class AbstractDto
     public void setId(String id)
     {
         this.id = id;
-    }
-
-    public List<String> getValidationErrorsList()
-    {
-        return validationErrors;
-    }
-
-    public boolean hasErrors()
-    {
-        return validationErrors.size() > 0;
     }
 }

@@ -7,7 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.R;
-import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.product.business.domain.ProductDto;
+import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.product.business.domain.ProductItem;
 
 import java.util.List;
 
@@ -18,21 +18,21 @@ import java.util.List;
  */
 public class DeleteProductsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
 {
-    private List<ProductDto> productsList;
+    private List<ProductItem> productsList;
     private AppCompatActivity activity;
 
-    public DeleteProductsAdapter(List<ProductDto> productsList, AppCompatActivity activity)
+    public DeleteProductsAdapter(List<ProductItem> productsList, AppCompatActivity activity)
     {
         this.productsList = productsList;
         this.activity = activity;
     }
 
-    public void setProductsList(List<ProductDto> productsList)
+    public void setProductsList(List<ProductItem> productsList)
     {
         this.productsList = productsList;
     }
 
-    public List<ProductDto> getProductsList()
+    public List<ProductItem> getProductsList()
     {
         return productsList;
     }
@@ -49,8 +49,8 @@ public class DeleteProductsAdapter extends RecyclerView.Adapter<RecyclerView.Vie
     public void onBindViewHolder(RecyclerView.ViewHolder viewHolder, int position)
     {
         DeleteProductsItemViewHolder holder = (DeleteProductsItemViewHolder) viewHolder;
-        ProductDto dto = productsList.get(position);
-        holder.processDto(dto);
+        ProductItem item = productsList.get(position);
+        holder.processItem(item);
     }
 
     @Override

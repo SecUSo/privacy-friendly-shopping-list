@@ -11,7 +11,7 @@ import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framew
  * Author: Grebiel Jose Ifill Brito
  * Created: 11.06.16 creation date
  */
-public class ProductDto
+public class ProductItem
 {
     // product fields
     private String productName;
@@ -236,22 +236,22 @@ public class ProductDto
         if ( this == o ) return true;
         if ( o == null || getClass() != o.getClass() ) return false;
 
-        ProductDto dto = (ProductDto) o;
+        ProductItem item = (ProductItem) o;
 
-        if ( isChecked() != dto.isChecked() ) return false;
-        if ( isSelectedForDeletion() != dto.isSelectedForDeletion() ) return false;
-        if ( getProductName() != null ? !getProductName().equals(dto.getProductName()) : dto.getProductName() != null )
+        if ( isChecked() != item.isChecked() ) return false;
+        if ( isSelectedForDeletion() != item.isSelectedForDeletion() ) return false;
+        if ( getProductName() != null ? !getProductName().equals(item.getProductName()) : item.getProductName() != null )
             return false;
-        if ( getId() != null ? !getId().equals(dto.getId()) : dto.getId() != null ) return false;
-        if ( getProductCategory() != null ? !getProductCategory().equals(dto.getProductCategory()) : dto.getProductCategory() != null )
+        if ( getId() != null ? !getId().equals(item.getId()) : item.getId() != null ) return false;
+        if ( getProductCategory() != null ? !getProductCategory().equals(item.getProductCategory()) : item.getProductCategory() != null )
             return false;
-        if ( getQuantity() != null ? !getQuantity().equals(dto.getQuantity()) : dto.getQuantity() != null )
+        if ( getQuantity() != null ? !getQuantity().equals(item.getQuantity()) : item.getQuantity() != null )
             return false;
-        if ( getProductNotes() != null ? !getProductNotes().equals(dto.getProductNotes()) : dto.getProductNotes() != null )
+        if ( getProductNotes() != null ? !getProductNotes().equals(item.getProductNotes()) : item.getProductNotes() != null )
             return false;
-        if ( getProductStore() != null ? !getProductStore().equals(dto.getProductStore()) : dto.getProductStore() != null )
+        if ( getProductStore() != null ? !getProductStore().equals(item.getProductStore()) : item.getProductStore() != null )
             return false;
-        return getProductPrice() != null ? getProductPrice().equals(dto.getProductPrice()) : dto.getProductPrice() == null;
+        return getProductPrice() != null ? getProductPrice().equals(item.getProductPrice()) : item.getProductPrice() == null;
 
     }
 
@@ -273,7 +273,7 @@ public class ProductDto
     @Override
     public String toString()
     {
-        return "ProductDto{" +
+        return "ProductItem{" +
                 "productName='" + productName + '\'' +
                 ", id='" + id + '\'' +
                 ", productCategory='" + productCategory + '\'' +

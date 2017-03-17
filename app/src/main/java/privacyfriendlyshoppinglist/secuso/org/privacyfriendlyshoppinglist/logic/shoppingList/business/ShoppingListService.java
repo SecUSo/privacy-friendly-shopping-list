@@ -2,8 +2,8 @@ package privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic
 
 import org.joda.time.DateTime;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.context.ContextSetter;
-import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.product.business.domain.ProductDto;
-import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.shoppingList.business.domain.ListDto;
+import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.product.business.domain.ProductItem;
+import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.shoppingList.business.domain.ListItem;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.shoppingList.persistence.entity.ShoppingListEntity;
 import rx.Observable;
 
@@ -16,29 +16,29 @@ import java.util.List;
  */
 public interface ShoppingListService extends ContextSetter
 {
-    Observable<Void> saveOrUpdate(ListDto dto);
+    Observable<Void> saveOrUpdate(ListItem item);
 
-    Void saveOrUpdateSync(ListDto dto);
+    Void saveOrUpdateSync(ListItem item);
 
-    Observable<ListDto> getById(String id);
+    Observable<ListItem> getById(String id);
 
-    DateTime getReminderDate(ListDto dto);
+    DateTime getReminderDate(ListItem item);
 
-    DateTime getDeadLine(ListDto dto);
+    DateTime getDeadLine(ListItem item);
 
-    int getReminderStatusResource(ListDto dto, List<ProductDto> productDtos);
+    int getReminderStatusResource(ListItem item, List<ProductItem> productItems);
 
     ShoppingListEntity getEntityByIdSync(String id);
 
     Observable<Void> deleteById(String id);
 
-    Observable<ListDto> getAllListDtos();
+    Observable<ListItem> getAllListItems();
 
-    Observable<String> deleteSelected(List<ListDto> shoppingListDtos);
+    Observable<String> deleteSelected(List<ListItem> shoppingListItems);
 
-    List<ListDto> moveSelectedToEnd(List<ListDto> shoppingListDtos);
+    List<ListItem> moveSelectedToEnd(List<ListItem> shoppingListItems);
 
-    void sortList(List<ListDto> lists, String criteria, boolean ascending);
+    void sortList(List<ListItem> lists, String criteria, boolean ascending);
 
-    String getShareableText(ListDto listDto, List<ProductDto> productDtos);
+    String getShareableText(ListItem listItem, List<ProductItem> productItems);
 }

@@ -2,7 +2,7 @@ package privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic
 
 import android.content.Context;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.R;
-import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.business.AbstractDto;
+import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.business.AbstractItem;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.utils.StringUtils;
 
 /**
@@ -10,7 +10,7 @@ import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framew
  * Author: Grebiel Jose Ifill Brito
  * Created: 11.06.16 creation date
  */
-public class ListDto extends AbstractDto
+public class ListItem extends AbstractItem
 {
     private String listName;
     private String priority;
@@ -213,26 +213,26 @@ public class ListDto extends AbstractDto
         if ( this == o ) return true;
         if ( o == null || getClass() != o.getClass() ) return false;
 
-        ListDto dto = (ListDto) o;
+        ListItem item = (ListItem) o;
 
-        if ( getIcon() != dto.getIcon() ) return false;
-        if ( isSelected() != dto.isSelected() ) return false;
-        if ( isSortAscending() != dto.isSortAscending() ) return false;
-        if ( isReminderEnabled() != dto.isReminderEnabled() ) return false;
-        if ( getListName() != null ? !getListName().equals(dto.getListName()) : dto.getListName() != null )
+        if ( getIcon() != item.getIcon() ) return false;
+        if ( isSelected() != item.isSelected() ) return false;
+        if ( isSortAscending() != item.isSortAscending() ) return false;
+        if ( isReminderEnabled() != item.isReminderEnabled() ) return false;
+        if ( getListName() != null ? !getListName().equals(item.getListName()) : item.getListName() != null )
             return false;
-        if ( getPriority() != null ? !getPriority().equals(dto.getPriority()) : dto.getPriority() != null )
+        if ( getPriority() != null ? !getPriority().equals(item.getPriority()) : item.getPriority() != null )
             return false;
-        if ( getDeadlineDate() != null ? !getDeadlineDate().equals(dto.getDeadlineDate()) : dto.getDeadlineDate() != null )
+        if ( getDeadlineDate() != null ? !getDeadlineDate().equals(item.getDeadlineDate()) : item.getDeadlineDate() != null )
             return false;
-        if ( getDeadlineTime() != null ? !getDeadlineTime().equals(dto.getDeadlineTime()) : dto.getDeadlineTime() != null )
+        if ( getDeadlineTime() != null ? !getDeadlineTime().equals(item.getDeadlineTime()) : item.getDeadlineTime() != null )
             return false;
-        if ( getNotes() != null ? !getNotes().equals(dto.getNotes()) : dto.getNotes() != null ) return false;
-        if ( getSortCriteria() != null ? !getSortCriteria().equals(dto.getSortCriteria()) : dto.getSortCriteria() != null )
+        if ( getNotes() != null ? !getNotes().equals(item.getNotes()) : item.getNotes() != null ) return false;
+        if ( getSortCriteria() != null ? !getSortCriteria().equals(item.getSortCriteria()) : item.getSortCriteria() != null )
             return false;
-        if ( getReminderCount() != null ? !getReminderCount().equals(dto.getReminderCount()) : dto.getReminderCount() != null )
+        if ( getReminderCount() != null ? !getReminderCount().equals(item.getReminderCount()) : item.getReminderCount() != null )
             return false;
-        return getReminderUnit() != null ? getReminderUnit().equals(dto.getReminderUnit()) : dto.getReminderUnit() == null;
+        return getReminderUnit() != null ? getReminderUnit().equals(item.getReminderUnit()) : item.getReminderUnit() == null;
 
     }
 
@@ -257,7 +257,7 @@ public class ListDto extends AbstractDto
     @Override
     public String toString()
     {
-        return "ListDto{" +
+        return "ListItem{" +
                 "listName='" + listName + '\'' +
                 ", priority='" + priority + '\'' +
                 ", icon=" + icon +

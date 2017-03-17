@@ -1,13 +1,13 @@
 package privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.product.business.domain;
 
-import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.business.AbstractDto;
+import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.business.AbstractItem;
 
 /**
  * Description:
  * Author: Grebiel Jose Ifill Brito
  * Created: 17.07.16 creation date
  */
-public class ProductTemplateDto extends AbstractDto
+public class ProductTemplateItem extends AbstractItem
 {
     // template fields
     private String productName;
@@ -89,19 +89,19 @@ public class ProductTemplateDto extends AbstractDto
         if ( this == o ) return true;
         if ( o == null || getClass() != o.getClass() ) return false;
 
-        ProductTemplateDto dto = (ProductTemplateDto) o;
+        ProductTemplateItem item = (ProductTemplateItem) o;
 
-        if ( getProductName() != null ? !getProductName().equals(dto.getProductName()) : dto.getProductName() != null )
+        if ( getProductName() != null ? !getProductName().equals(item.getProductName()) : item.getProductName() != null )
             return false;
-        if ( getProductCategory() != null ? !getProductCategory().equals(dto.getProductCategory()) : dto.getProductCategory() != null )
+        if ( getProductCategory() != null ? !getProductCategory().equals(item.getProductCategory()) : item.getProductCategory() != null )
             return false;
-        if ( getHistoryCount() != null ? !getHistoryCount().equals(dto.getHistoryCount()) : dto.getHistoryCount() != null )
+        if ( getHistoryCount() != null ? !getHistoryCount().equals(item.getHistoryCount()) : item.getHistoryCount() != null )
             return false;
-        if ( getDefaultNotes() != null ? !getDefaultNotes().equals(dto.getDefaultNotes()) : dto.getDefaultNotes() != null )
+        if ( getDefaultNotes() != null ? !getDefaultNotes().equals(item.getDefaultNotes()) : item.getDefaultNotes() != null )
             return false;
-        if ( getDefaultStore() != null ? !getDefaultStore().equals(dto.getDefaultStore()) : dto.getDefaultStore() != null )
+        if ( getDefaultStore() != null ? !getDefaultStore().equals(item.getDefaultStore()) : item.getDefaultStore() != null )
             return false;
-        return getLastTimePurchased() != null ? getLastTimePurchased().equals(dto.getLastTimePurchased()) : dto.getLastTimePurchased() == null;
+        return getLastTimePurchased() != null ? getLastTimePurchased().equals(item.getLastTimePurchased()) : item.getLastTimePurchased() == null;
 
     }
 

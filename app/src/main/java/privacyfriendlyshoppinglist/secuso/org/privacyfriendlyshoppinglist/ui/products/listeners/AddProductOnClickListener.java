@@ -1,7 +1,7 @@
 package privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.products.listeners;
 
 import android.view.View;
-import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.product.business.domain.ProductDto;
+import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.product.business.domain.ProductItem;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.products.ProductActivityCache;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.products.dialog.ProductDialogFragment;
 
@@ -22,10 +22,10 @@ public class AddProductOnClickListener implements View.OnClickListener
     @Override
     public void onClick(View v)
     {
-        ProductDto dto = new ProductDto();
+        ProductItem item = new ProductItem();
         if ( !ProductDialogFragment.isOpened() )
         {
-            ProductDialogFragment productDialogFragment = ProductDialogFragment.newAddDialogInstance(dto, cache);
+            ProductDialogFragment productDialogFragment = ProductDialogFragment.newAddDialogInstance(item, cache);
             productDialogFragment.show(cache.getActivity().getSupportFragmentManager(), "ProductDialog");
         }
     }

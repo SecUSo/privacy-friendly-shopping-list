@@ -23,11 +23,11 @@ public class AutoCompleteLists
         products = new TreeSet<>();
     }
 
-    public void updateLists(ProductDto dto)
+    public void updateLists(ProductItem item)
     {
-        String name = dto.getProductName();
-        String store = dto.getProductStore();
-        String category = dto.getProductCategory();
+        String name = item.getProductName();
+        String store = item.getProductStore();
+        String category = item.getProductCategory();
 
         if ( !StringUtils.isEmpty(name) )
         {

@@ -8,7 +8,7 @@ import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.R;
  * Author: Grebiel Jose Ifill Brito
  * Created: 21.07.16 creation date
  */
-public class TotalDto
+public class TotalItem
 {
     private static final String DETAIL_SEPARATOR = ": ";
     private static final String NEW_LINE = "\n";

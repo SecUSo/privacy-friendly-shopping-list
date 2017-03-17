@@ -21,7 +21,7 @@ import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framew
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.utils.MessageUtils;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.utils.StringUtils;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.shoppingList.business.ShoppingListService;
-import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.shoppingList.business.domain.ListDto;
+import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.shoppingList.business.domain.ListItem;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.main.MainActivity;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.main.ShoppingListActivityCache;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.products.ProductsActivity;
@@ -40,7 +40,7 @@ public class ListDialogFragment extends DialogFragment
 {
 
     private ShoppingListActivityCache cache;
-    private ListDto dto;
+    private ListItem item;
     private ShoppingListService shoppingListService;
     private Calendar currentDate;
     private int year, month, day, hour, minute;
@@ -48,25 +48,25 @@ public class ListDialogFragment extends DialogFragment
     private static boolean opened;
     private ListDialogCache dialogCache;
 
-    public static ListDialogFragment newEditInstance(ListDto dto, ShoppingListActivityCache cache)
+    public static ListDialogFragment newEditInstance(ListItem item, ShoppingListActivityCache cache)
     {
         editDialog = true;
-        ListDialogFragment dialogFragment = getListDialogFragment(dto, cache);
+        ListDialogFragment dialogFragment = getListDialogFragment(item, cache);
         return dialogFragment;
     }
 
-    public static ListDialogFragment newAddInstance(ListDto dto, ShoppingListActivityCache cache)
+    public static ListDialogFragment newAddInstance(ListItem item, ShoppingListActivityCache cache)
     {
         editDialog = false;
-        ListDialogFragment dialogFragment = getListDialogFragment(dto, cache);
+        ListDialogFragment dialogFragment = getListDialogFragment(item, cache);
         return dialogFragment;
     }
 
-    private static ListDialogFragment getListDialogFragment(ListDto dto, ShoppingListActivityCache cache)
+    private static ListDialogFragment getListDialogFragment(ListItem item, ShoppingListActivityCache cache)
     {
         ListDialogFragment dialogFragment = new ListDialogFragment();
         dialogFragment.setCache(cache);
-        dialogFragment.setDto(dto);
+        dialogFragment.setItem(item);
         return dialogFragment;
     }
 
@@ -75,9 +75,9 @@ public class ListDialogFragment extends DialogFragment
         this.cache = cache;
     }
 
-    public void setDto(ListDto dto)
+    public void setItem(ListItem item)
     {
-        this.dto = dto;
+        this.item = item;
     }
 
     @Override
@@ -110,7 +110,7 @@ public class ListDialogFragment extends DialogFragment
         View v = inflater.inflate(R.layout.shopping_list_dialog, null);
         dialogCache = new ListDialogCache(v);
 
-        dialogCache.getStatisticsSwitch().setChecked(dto.isStatisticEnabled());
+        dialogCache.getStatisticsSwitch().setChecked(item.isStatisticEnabled());
 
         dialogCache.getStatisticsSwitch().setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener()
         {
@@ -131,7 +131,7 @@ public class ListDialogFragment extends DialogFragment
         if ( editDialog )
         {
             dialogCache.getTitleTextView().setText(getActivity().getResources().getString(R.string.list_name_edit));
-            dialogCache.getStatisticsSwitch().setChecked(dto.isStatisticEnabled());
+            dialogCache.getStatisticsSwitch().setChecked(item.isStatisticEnabled());
         }
         else
         {
@@ -141,7 +141,7 @@ public class ListDialogFragment extends DialogFragment
             dialogCache.getStatisticsSwitch().setChecked(statisticsEnabled);
         }
 
-        if ( !StringUtils.isEmpty(dto.getDeadlineDate()) )
+        if ( !StringUtils.isEmpty(item.getDeadlineDate()) )
         {
             dialogCache.getDeadlineExpansionButton().setVisibility(View.VISIBLE);
             dialogCache.getDeadlineExpansionButton().setImageResource(R.drawable.ic_keyboard_arrow_down_white_48sp);
@@ -158,8 +158,8 @@ public class ListDialogFragment extends DialogFragment
             timePatternInput = cache.getActivity().getResources().getString(R.string.time_pattern);
             timePattern = cache.getActivity().getResources().getString(R.string.time_pattern);
 
-            dialogCache.getDateTextView().setText(DateUtils.getFormattedDateString(dto.getDeadlineDate(), datePatternInput, datePattern, language));
-            dialogCache.getTimeTextView().setText(DateUtils.getFormattedDateString(dto.getDeadlineTime(), timePatternInput, timePattern, language));
+            dialogCache.getDateTextView().setText(DateUtils.getFormattedDateString(item.getDeadlineDate(), datePatternInput, datePattern, language));
+            dialogCache.getTimeTextView().setText(DateUtils.getFormattedDateString(item.getDeadlineTime(), timePatternInput, timePattern, language));
         }
 
 
@@ -268,8 +268,8 @@ public class ListDialogFragment extends DialogFragment
             }
         });
 
-        dialogCache.getListNameText().setText(dto.getListName());
-        dialogCache.getListNotes().setText(dto.getNotes());
+        dialogCache.getListNameText().setText(item.getListName());
+        dialogCache.getListNotes().setText(item.getNotes());
         String[] priorityList = cache.getActivity().getResources().getStringArray(R.array.shopping_list_priority_spinner);
         ArrayAdapter<String> prioritySpinnerAdapter = new ArrayAdapter<String>(getActivity(), R.layout.pfa_lists, priorityList)
         {
@@ -293,7 +293,7 @@ public class ListDialogFragment extends DialogFragment
         };
 
         dialogCache.getPrioritySpinner().setAdapter(prioritySpinnerAdapter);
-        dialogCache.getPrioritySpinner().setSelection(Integer.valueOf(dto.getPriority()));
+        dialogCache.getPrioritySpinner().setSelection(Integer.valueOf(item.getPriority()));
 
         String[] reminderItemList = cache.getActivity().getResources().getStringArray(R.array.shopping_list_reminder_spinner);
         ArrayAdapter<String> reminderSpinnerAdapter = new ArrayAdapter<String>(getActivity(), R.layout.pfa_lists, reminderItemList)
@@ -319,8 +319,8 @@ public class ListDialogFragment extends DialogFragment
 
         dialogCache.getReminderSpinner().setAdapter(reminderSpinnerAdapter);
 
-        String reminderCount = dto.getReminderCount();
-        String reminderUnit = dto.getReminderUnit();
+        String reminderCount = item.getReminderCount();
+        String reminderUnit = item.getReminderUnit();
         boolean reminderEnabled = reminderCount != null;
         if ( reminderEnabled )
         {
@@ -366,41 +366,41 @@ public class ListDialogFragment extends DialogFragment
             @Override
             public void onClick(DialogInterface dialogInterface, int i)
             {
-                dto.setListName(dialogCache.getListNameText().getText().toString());
-                dto.setNotes(dialogCache.getListNotes().getText().toString());
+                item.setListName(dialogCache.getListNameText().getText().toString());
+                item.setNotes(dialogCache.getListNotes().getText().toString());
 
-                dto.setPriority(String.valueOf(dialogCache.getPrioritySpinner().getSelectedItemPosition()));
+                item.setPriority(String.valueOf(dialogCache.getPrioritySpinner().getSelectedItemPosition()));
 
-                dto.setDeadlineDate((String) dialogCache.getDateTextView().getText());
-                dto.setDeadlineTime((String) dialogCache.getTimeTextView().getText());
+                item.setDeadlineDate((String) dialogCache.getDateTextView().getText());
+                item.setDeadlineTime((String) dialogCache.getTimeTextView().getText());
 
-                dto.setReminderUnit(String.valueOf(dialogCache.getReminderSpinner().getSelectedItemPosition()));
-                dto.setReminderCount(dialogCache.getReminderText().getText().toString());
-                dto.setReminderEnabled(reminderSwitch.isChecked());
-                dto.setStatisticEnabled(dialogCache.getStatisticsSwitch().isChecked());
+                item.setReminderUnit(String.valueOf(dialogCache.getReminderSpinner().getSelectedItemPosition()));
+                item.setReminderCount(dialogCache.getReminderText().getText().toString());
+                item.setReminderEnabled(reminderSwitch.isChecked());
+                item.setStatisticEnabled(dialogCache.getStatisticsSwitch().isChecked());
 
-                String message = getResources().getString(R.string.notification_message, dto.getListName(), dto.getDeadlineDate() + " " + dto.getDeadlineTime());
+                String message = getResources().getString(R.string.notification_message, item.getListName(), item.getDeadlineDate() + " " + item.getDeadlineTime());
 
-                shoppingListService.saveOrUpdate(dto)
+                shoppingListService.saveOrUpdate(item)
                         .doOnCompleted(() ->
                         {
                             // the reminder feature must happen after save, because the list id is necessary for the notification
                             if ( reminderSwitch.isChecked() )
                             {
-                                DateTime reminderTime = shoppingListService.getReminderDate(dto);
+                                DateTime reminderTime = shoppingListService.getReminderDate(item);
                                 ReminderReceiver alarm = new ReminderReceiver();
 
                                 Intent intent = new Intent(cache.getActivity(), ReminderSchedulingService.class);
                                 intent.putExtra(ReminderSchedulingService.MESSAGE_TEXT, message);
-                                intent.putExtra(MainActivity.LIST_ID_KEY, dto.getId());
-                                alarm.setAlarm(cache.getActivity(), intent, reminderTime.getMillis(), dto.getId());
+                                intent.putExtra(MainActivity.LIST_ID_KEY, item.getId());
+                                alarm.setAlarm(cache.getActivity(), intent, reminderTime.getMillis(), item.getId());
                             }
                             else
                             {
                                 // delete notification if exists
                                 ReminderReceiver alarm = new ReminderReceiver();
                                 Intent intent = new Intent(cache.getActivity(), ReminderSchedulingService.class);
-                                alarm.cancelAlarm(cache.getActivity(), intent, dto.getId());
+                                alarm.cancelAlarm(cache.getActivity(), intent, item.getId());
                             }
 
                             if ( !editDialog )
@@ -408,7 +408,7 @@ public class ListDialogFragment extends DialogFragment
                                 // go to new list
                                 Intent intent = new Intent(cache.getActivity(), ProductsActivity.class);
                                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                                intent.putExtra(MainActivity.LIST_ID_KEY, dto.getId());
+                                intent.putExtra(MainActivity.LIST_ID_KEY, item.getId());
                                 cache.getActivity().startActivity(intent);
                             }
                             else

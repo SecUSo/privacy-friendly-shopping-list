@@ -9,7 +9,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.TextView;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.R;
-import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.product.business.domain.ProductDto;
+import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.product.business.domain.ProductItem;
 
 /**
  * Description:
@@ -28,32 +28,32 @@ public class DeleteProductsItemViewHolder extends RecyclerView.ViewHolder
         this.activity = activity;
     }
 
-    public void processDto(ProductDto dto)
+    public void processItem(ProductItem item)
     {
-        cache.getProductNameTextView().setText(dto.getProductName());
-        cache.getProductQuantityTextView().setText(dto.getQuantity());
-        cache.getCheckBox().setChecked(dto.isChecked());
-        updateVisibilityFormat(dto);
+        cache.getProductNameTextView().setText(item.getProductName());
+        cache.getProductQuantityTextView().setText(item.getQuantity());
+        cache.getCheckBox().setChecked(item.isChecked());
+        updateVisibilityFormat(item);
 
         cache.getProductCard().setAlpha(0.0f);
         cache.getProductCard().setOnClickListener(new View.OnClickListener()
         {
             public void onClick(View v)
             {
-                dto.setSelectedForDeletion(!dto.isSelectedForDeletion());
-                updateVisibilityFormat(dto);
+                item.setSelectedForDeletion(!item.isSelectedForDeletion());
+                updateVisibilityFormat(item);
             }
         });
 
     }
 
-    private void updateVisibilityFormat(ProductDto dto)
+    private void updateVisibilityFormat(ProductItem item)
     {
         Resources resources = cache.getProductCard().getContext().getResources();
         TextView productNameTextView = cache.getProductNameTextView();
         TextView productQuantityTextView = cache.getProductQuantityTextView();
         AppCompatCheckBox checkBox = (AppCompatCheckBox) cache.getCheckBox();
-        if ( dto.isSelectedForDeletion() )
+        if ( item.isSelectedForDeletion() )
         {
             int transparent = resources.getColor(R.color.transparent);
             int grey = resources.getColor(R.color.middlegrey);

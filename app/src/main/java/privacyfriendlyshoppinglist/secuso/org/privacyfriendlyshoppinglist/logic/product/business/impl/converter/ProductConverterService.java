@@ -1,7 +1,7 @@
 package privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.product.business.impl.converter;
 
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.context.ContextSetter;
-import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.product.business.domain.ProductDto;
+import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.product.business.domain.ProductItem;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.product.persistence.entity.ProductItemEntity;
 
 /**
@@ -11,9 +11,9 @@ import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.
  */
 public interface ProductConverterService extends ContextSetter
 {
-    void convertDtoToEntity(ProductDto dto, ProductItemEntity entity);
+    void convertItemToEntity(ProductItem item, ProductItemEntity entity);
 
-    void convertEntitiesToDto(ProductItemEntity entity, ProductDto dto);
+    void convertEntitiesToItem(ProductItemEntity entity, ProductItem item);
 
     String getDoubleAsString(Double price);
 

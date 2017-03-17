@@ -6,7 +6,7 @@ import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.R;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.context.AbstractInstanceFactory;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.context.InstanceFactory;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.product.business.ProductService;
-import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.product.business.domain.ProductDto;
+import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.product.business.domain.ProductItem;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.products.ProductActivityCache;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.products.ProductsActivity;
 import rx.Subscription;
@@ -42,7 +42,7 @@ public class SearchTextWatcher implements TextWatcher
     public void onTextChanged(CharSequence s, int start, int before, int count)
     {
         String[] searchedTexts = s.toString().split(" ");
-        List<ProductDto> resultDtos = new ArrayList<>();
+        List<ProductItem> resultItems = new ArrayList<>();
 
         if ( searchSubscription != null )
         {
@@ -50,21 +50,21 @@ public class SearchTextWatcher implements TextWatcher
         }
 
         searchSubscription = productService.getAllProducts(cache.getListId())
-                .filter(dto -> productService.isSearched(searchedTexts, dto))
-                .doOnNext(dto -> resultDtos.add(dto))
+                .filter(item -> productService.isSearched(searchedTexts, item))
+                .doOnNext(item -> resultItems.add(item))
                 .doOnCompleted(() ->
                 {
                     ProductsActivity activity = (ProductsActivity) cache.getActivity();
-                    activity.setProductsAndUpdateView(resultDtos);
+                    activity.setProductsAndUpdateView(resultItems);
                     activity.reorderProductViewBySelection();
-                    setErrorMessage(resultDtos);
+                    setErrorMessage(resultItems);
                 })
                 .subscribe();
     }
 
-    private void setErrorMessage(List<ProductDto> resultDtos)
+    private void setErrorMessage(List<ProductItem> resultItems)
     {
-        if ( resultDtos.isEmpty() )
+        if ( resultItems.isEmpty() )
         {
             cache.getSearchTextInputLayout().setError(cache.getActivity().getResources().getString(R.string.no_products_found));
         }
