@@ -5,11 +5,10 @@ import android.support.v7.app.AppCompatActivity;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.R;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.context.AbstractInstanceFactory;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.context.InstanceFactory;
-import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.utils.MessageUtils;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.product.business.ProductService;
-import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.product.business.domain.ProductDto;
+import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.product.business.domain.ProductItem;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.shoppingList.business.ShoppingListService;
-import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.shoppingList.business.domain.ListDto;
+import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.shoppingList.business.domain.ListItem;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.deleteproducts.listeners.DeleteProductOnClickListener;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.main.MainActivity;
 
@@ -27,7 +26,7 @@ public class DeleteProductsActivity extends AppCompatActivity
     private ShoppingListService shoppingListService;
     private DeleteProductsCache cache;
     private String listId;
-    private ListDto dto;
+    private ListItem item;
 
     @Override
     protected final void onCreate(final Bundle savedInstanceState)
@@ -41,10 +40,10 @@ public class DeleteProductsActivity extends AppCompatActivity
 
         listId = getIntent().getStringExtra(MainActivity.LIST_ID_KEY);
         shoppingListService.getById(listId)
-                .doOnNext(result -> dto = result)
+                .doOnNext(result -> item = result)
                 .doOnCompleted(() ->
                 {
-                    cache = new DeleteProductsCache(this, listId, dto.getListName());
+                    cache = new DeleteProductsCache(this, listId, item.getListName());
                     cache.getDeleteFab().setOnClickListener(new DeleteProductOnClickListener(cache));
                     updateListView();
                 })
@@ -55,23 +54,23 @@ public class DeleteProductsActivity extends AppCompatActivity
 
     public void updateListView()
     {
-        List<ProductDto> allProducts = new ArrayList<>();
+        List<ProductItem> allProducts = new ArrayList<>();
 
         productService.getAllProducts(cache.getListId())
-                .doOnNext(dto -> allProducts.add(dto))
+                .doOnNext(item -> allProducts.add(item))
                 .doOnCompleted(() ->
                 {
                     // sort according to last sort selection
-                    final ListDto[] listDto = new ListDto[ 1 ];
+                    final ListItem[] listItem = new ListItem[ 1 ];
                     shoppingListService.getById(listId)
-                            .doOnNext(result -> listDto[ 0 ] = result)
+                            .doOnNext(result -> listItem[ 0 ] = result)
                             .doOnCompleted(() ->
                                     {
-                                        String sortBy = listDto[ 0 ].getSortCriteria();
-                                        boolean sortAscending = listDto[ 0 ].isSortAscending();
+                                        String sortBy = listItem[ 0 ].getSortCriteria();
+                                        boolean sortAscending = listItem[ 0 ].isSortAscending();
                                         productService.sortProducts(allProducts, sortBy, sortAscending);
 
-                                        cache.getDeleteProductsAdapter().setProductsList(allProducts);
+                                        cache.getDeleteProductsAdapter().setList(allProducts);
                                         cache.getDeleteProductsAdapter().notifyDataSetChanged();
                                     }
                             )

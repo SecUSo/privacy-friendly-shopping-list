@@ -1,24 +1,23 @@
 package privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.deletelists.listadapter;
 
-import android.app.Activity;
 import android.content.res.Resources;
 import android.graphics.Paint;
 import android.preference.PreferenceManager;
 import android.support.v4.content.ContextCompat;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
-import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.TextView;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.R;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.context.AbstractInstanceFactory;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.context.InstanceFactory;
+import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.ui.AbstractViewHolder;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.utils.StringUtils;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.product.business.ProductService;
-import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.product.business.domain.ProductDto;
-import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.product.business.domain.TotalDto;
+import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.product.business.domain.ProductItem;
+import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.product.business.domain.TotalItem;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.shoppingList.business.ShoppingListService;
-import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.shoppingList.business.domain.ListDto;
+import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.shoppingList.business.domain.ListItem;
+import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.deletelists.DeleteListsCache;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.settings.SettingsKeys;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.shoppinglist.listadapter.ListItemCache;
 
@@ -28,69 +27,67 @@ import java.util.List;
 /**
  * Created by Chris on 05.06.2016.
  */
-class DeleteListsItemViewHolder extends RecyclerView.ViewHolder
+class DeleteListsItemViewHolder extends AbstractViewHolder<ListItem, DeleteListsCache>
 {
 
     private static final String HIGH_PRIORITY_INDEX = "0";
-    private ListItemCache cache;
+    private ListItemCache listItemCache;
     private ProductService productService;
     private ShoppingListService shoppingListService;
-    private Activity activity;
 
-    DeleteListsItemViewHolder(final View parent, AppCompatActivity activity)
+    DeleteListsItemViewHolder(final View parent, DeleteListsCache deleteListsCache)
     {
-        super(parent);
-        this.activity = activity;
-        this.cache = new ListItemCache(parent);
-        AbstractInstanceFactory instanceFactory = new InstanceFactory(activity.getApplicationContext());
+        super(parent, deleteListsCache);
+        this.listItemCache = new ListItemCache(parent);
+        AbstractInstanceFactory instanceFactory = new InstanceFactory(deleteListsCache.getActivity());
         this.productService = (ProductService) instanceFactory.createInstance(ProductService.class);
         this.shoppingListService = (ShoppingListService) instanceFactory.createInstance(ShoppingListService.class);
     }
 
-    void processDto(ListDto dto)
+    public void processItem(ListItem item)
     {
-        cache.getListNameTextView().setText(dto.getListName());
-        cache.getDeadLineTextView().setText(dto.getDeadlineDate());
+        listItemCache.getListNameTextView().setText(item.getListName());
+        listItemCache.getDeadLineTextView().setText(item.getDeadlineDate());
 
-        cache.getShowDetailsImageButton().setVisibility(View.GONE);
+        listItemCache.getShowDetailsImageButton().setVisibility(View.GONE);
 
-        List<ProductDto> productDtos = new ArrayList<>();
-        productService.getAllProducts(dto.getId())
-                .filter(productDto -> !productDto.isChecked())
-                .doOnNext(productDto -> productDtos.add(productDto))
+        List<ProductItem> productItems = new ArrayList<>();
+        productService.getAllProducts(item.getId())
+                .filter(productItem -> !productItem.isChecked())
+                .doOnNext(productItem -> productItems.add(productItem))
                 .doOnCompleted(() ->
                 {
-                    int reminderStatus = shoppingListService.getReminderStatusResource(dto, productDtos);
-                    cache.getReminderBar().setImageResource(reminderStatus);
+                    int reminderStatus = shoppingListService.getReminderStatusResource(item, productItems);
+                    listItemCache.getReminderBar().setImageResource(reminderStatus);
                 })
                 .subscribe();
 
-        final TotalDto[] totalDto = new TotalDto[ 1 ];
-        productService.getInfo(dto.getId())
-                .doOnNext(result -> totalDto[ 0 ] = result)
+        final TotalItem[] totalItem = new TotalItem[ 1 ];
+        productService.getInfo(item.getId())
+                .doOnNext(result -> totalItem[ 0 ] = result)
                 .doOnCompleted(() ->
-                        cache.getNrProductsTextView().setText(String.valueOf(totalDto[ 0 ].getNrProducts()))
+                        listItemCache.getNrProductsTextView().setText(String.valueOf(totalItem[ 0 ].getNrProducts()))
                 ).subscribe();
 
-        setupPriorityIcon(dto);
-        setupReminderIcon(dto);
+        setupPriorityIcon(item);
+        setupReminderIcon(item);
 
-        updateVisibilityFormat(dto);
+        updateVisibilityFormat(item);
 
-        cache.getListCard().setOnClickListener(v ->
+        listItemCache.getListCard().setOnClickListener(v ->
         {
-            dto.setSelected(!dto.isSelected());
-            updateVisibilityFormat(dto);
+            item.setSelected(!item.isSelected());
+            updateVisibilityFormat(item);
         });
     }
 
-    private void updateVisibilityFormat(ListDto dto)
+    private void updateVisibilityFormat(ListItem item)
     {
-        CardView listCard = cache.getListCard();
-        TextView listNameTextView = cache.getListNameTextView();
-        TextView listNrProdTextView = cache.getNrProductsTextView();
+        CardView listCard = listItemCache.getListCard();
+        TextView listNameTextView = listItemCache.getListNameTextView();
+        TextView listNrProdTextView = listItemCache.getNrProductsTextView();
         Resources resources = listCard.getContext().getResources();
-        if ( dto.isSelected() )
+        if ( item.isSelected() )
         {
             listCard.setCardBackgroundColor(resources.getColor(R.color.transparent));
             listNameTextView.setTextColor(resources.getColor(R.color.middlegrey));
@@ -106,35 +103,35 @@ class DeleteListsItemViewHolder extends RecyclerView.ViewHolder
         }
     }
 
-    private void setupReminderIcon(ListDto dto)
+    private void setupReminderIcon(ListItem item)
     {
-        if ( StringUtils.isEmpty(dto.getReminderCount()) )
+        if ( StringUtils.isEmpty(item.getReminderCount()) )
         {
-            cache.getReminderImageView().setVisibility(View.GONE);
+            listItemCache.getReminderImageView().setVisibility(View.GONE);
         }
         else
         {
-            cache.getReminderImageView().setVisibility(View.VISIBLE);
-            if ( !PreferenceManager.getDefaultSharedPreferences(activity).getBoolean(SettingsKeys.NOTIFICATIONS_ENABLED, true) )
+            listItemCache.getReminderImageView().setVisibility(View.VISIBLE);
+            if ( !PreferenceManager.getDefaultSharedPreferences(cache.getActivity()).getBoolean(SettingsKeys.NOTIFICATIONS_ENABLED, true) )
             {
-                cache.getReminderImageView().setColorFilter(ContextCompat.getColor(activity, R.color.red));
+                listItemCache.getReminderImageView().setColorFilter(ContextCompat.getColor(cache.getActivity(), R.color.red));
             }
             else
             {
-                cache.getReminderImageView().setColorFilter(ContextCompat.getColor(activity, R.color.middlegrey));
+                listItemCache.getReminderImageView().setColorFilter(ContextCompat.getColor(cache.getActivity(), R.color.middlegrey));
             }
         }
     }
 
-    private void setupPriorityIcon(ListDto dto)
+    private void setupPriorityIcon(ListItem item)
     {
-        if ( HIGH_PRIORITY_INDEX.equals(dto.getPriority()) )
+        if ( HIGH_PRIORITY_INDEX.equals(item.getPriority()) )
         {
-            cache.getHighPriorityImageView().setVisibility(View.VISIBLE);
+            listItemCache.getHighPriorityImageView().setVisibility(View.VISIBLE);
         }
         else
         {
-            cache.getHighPriorityImageView().setVisibility(View.GONE);
+            listItemCache.getHighPriorityImageView().setVisibility(View.GONE);
         }
     }
 

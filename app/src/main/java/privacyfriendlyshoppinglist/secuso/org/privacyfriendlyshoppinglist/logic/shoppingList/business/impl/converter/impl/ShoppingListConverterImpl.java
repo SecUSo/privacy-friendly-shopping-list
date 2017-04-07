@@ -6,7 +6,7 @@ import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framew
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.persistence.DB;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.utils.DateUtils;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.utils.StringUtils;
-import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.shoppingList.business.domain.ListDto;
+import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.shoppingList.business.domain.ListItem;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.shoppingList.business.impl.converter.ShoppingListConverter;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.shoppingList.persistence.entity.ShoppingListEntity;
 
@@ -38,21 +38,21 @@ public class ShoppingListConverterImpl implements ShoppingListConverter
     }
 
     @Override
-    public void convertDtoToEntity(ListDto dto, ShoppingListEntity entity)
+    public void convertItemToEntity(ListItem item, ShoppingListEntity entity)
     {
-        Long id = getIdAsLong(dto);
+        Long id = getIdAsLong(item);
         entity.setId(id);
-        entity.setListName(dto.getListName());
-        entity.setSortAscending(dto.isSortAscending());
-        entity.setSortCriteria(dto.getSortCriteria());
-        entity.setStatisticsEnabled(dto.isStatisticEnabled());
+        entity.setListName(item.getListName());
+        entity.setSortAscending(item.isSortAscending());
+        entity.setSortCriteria(item.getSortCriteria());
+        entity.setStatisticsEnabled(item.isStatisticEnabled());
 
-        String fullDate = dto.getDeadlineDate() + SPACE + dto.getDeadlineTime();
+        String fullDate = item.getDeadlineDate() + SPACE + item.getDeadlineTime();
         if ( !SPACE.equals(fullDate) )
         {
             Date deadline = DateUtils.getDateFromString(fullDate, dateLongPattern, language).toDate();
             entity.setDeadline(deadline);
-            setReminder(dto, entity);
+            setReminder(item, entity);
         }
         else
         {
@@ -60,20 +60,20 @@ public class ShoppingListConverterImpl implements ShoppingListConverter
             entity.setReminderCount(null);
             entity.setReminderUnit(null);
         }
-        entity.setIcon(dto.getIcon());
-        entity.setNotes(dto.getNotes());
-        entity.setPriority(dto.getPriority());
+        entity.setIcon(item.getIcon());
+        entity.setNotes(item.getNotes());
+        entity.setPriority(item.getPriority());
     }
 
-    private void setReminder(ListDto dto, ShoppingListEntity entity)
+    private void setReminder(ListItem item, ShoppingListEntity entity)
     {
-        if ( dto.getReminderCount() != null )
+        if ( item.getReminderCount() != null )
         {
-            if ( dto.isReminderEnabled() )
+            if ( item.isReminderEnabled() )
             {
-                if ( !StringUtils.isEmpty(dto.getReminderCount()) )
+                if ( !StringUtils.isEmpty(item.getReminderCount()) )
                 {
-                    entity.setReminderCount(Integer.valueOf(dto.getReminderCount()));
+                    entity.setReminderCount(Integer.valueOf(item.getReminderCount()));
                 }
                 else
                 {
@@ -84,55 +84,55 @@ public class ShoppingListConverterImpl implements ShoppingListConverter
             {
                 entity.setReminderCount(null);
             }
-            entity.setReminderUnit(Integer.valueOf(dto.getReminderUnit()));
+            entity.setReminderUnit(Integer.valueOf(item.getReminderUnit()));
         }
     }
 
     @Override
-    public void convertEntityToDto(ShoppingListEntity entity, ListDto dto)
+    public void convertEntityToItem(ShoppingListEntity entity, ListItem item)
     {
-        dto.setId(entity.getId().toString());
-        dto.setListName(entity.getListName());
-        dto.setStatisticEnabled(entity.getStatisticsEnabled());
+        item.setId(entity.getId().toString());
+        item.setListName(entity.getListName());
+        item.setStatisticEnabled(entity.getStatisticsEnabled());
 
         if ( entity.getSortCriteria() != null )
         {
-            dto.setSortCriteria(entity.getSortCriteria());
-            dto.setSortAscending(entity.getSortAscending());
+            item.setSortCriteria(entity.getSortCriteria());
+            item.setSortAscending(entity.getSortAscending());
         }
         else // default sort config
         {
-            dto.setSortCriteria(PFAComparators.SORT_BY_NAME);
-            dto.setSortAscending(true);
+            item.setSortCriteria(PFAComparators.SORT_BY_NAME);
+            item.setSortAscending(true);
         }
 
         if ( entity.getDeadline() != null )
         {
             String deadlineDateAsString = DateUtils.getDateAsString(entity.getDeadline().getTime(), datePattern, language);
             String deadlineTimeAsString = DateUtils.getDateAsString(entity.getDeadline().getTime(), timePattern, language);
-            dto.setDeadlineDate(deadlineDateAsString);
-            dto.setDeadlineTime(deadlineTimeAsString);
+            item.setDeadlineDate(deadlineDateAsString);
+            item.setDeadlineTime(deadlineTimeAsString);
         }
         else
         {
-            dto.setDeadlineDate(StringUtils.EMPTY);
-            dto.setDeadlineTime(StringUtils.EMPTY);
+            item.setDeadlineDate(StringUtils.EMPTY);
+            item.setDeadlineTime(StringUtils.EMPTY);
         }
 
         if ( entity.getReminderCount() != null )
         {
-            dto.setReminderCount(String.valueOf(entity.getReminderCount()));
-            dto.setReminderUnit(String.valueOf(entity.getReminderUnit()));
+            item.setReminderCount(String.valueOf(entity.getReminderCount()));
+            item.setReminderUnit(String.valueOf(entity.getReminderUnit()));
         }
 
-        dto.setIcon(entity.getIcon());
-        dto.setNotes(entity.getNotes());
-        dto.setPriority(entity.getPriority());
+        item.setIcon(entity.getIcon());
+        item.setNotes(entity.getNotes());
+        item.setPriority(entity.getPriority());
     }
 
-    private Long getIdAsLong(ListDto dto)
+    private Long getIdAsLong(ListItem item)
     {
-        String stringId = dto.getId();
+        String stringId = item.getId();
         return stringId == null ? null : Long.valueOf(stringId);
     }
 }

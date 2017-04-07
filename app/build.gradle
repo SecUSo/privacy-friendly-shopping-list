@@ -58,28 +58,34 @@ android {
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     // android
-    androidTestCompile 'com.android.support:support-annotations:25.2.0'
-    compile 'com.android.support:appcompat-v7:25.2.0'
-    compile 'com.android.support:design:25.2.0'
-    compile 'com.android.support:support-v4:25.2.0'
-    compile 'com.android.support:recyclerview-v7:25.2.0'
-    compile 'com.android.support:cardview-v7:25.2.0'
+    /* if you change the version 25.0.1 please make sure that
+     * the floating action button behavior still works.
+     * version 25.2.0 has a bug that makes the floating
+     * action button disappear when scrolling down, but the button
+     * does not appear again when scrolling up
+     */
+    androidTestCompile 'com.android.support:support-annotations:25.0.1'
+    compile 'com.android.support:appcompat-v7:25.0.1'
+    compile 'com.android.support:design:25.0.1'
+    compile 'com.android.support:support-v4:25.0.1'
+    compile 'com.android.support:recyclerview-v7:25.0.1'
+    compile 'com.android.support:cardview-v7:25.0.1'
     // tests
     testCompile 'junit:junit:4.12'
-    testCompile "org.mockito:mockito-core:1.9.5"
+    testCompile 'org.mockito:mockito-core:1.9.5'
     androidTestCompile 'com.android.support.test:runner:0.5'
     androidTestCompile 'com.android.support.test:rules:0.5'
-    testCompile group: 'pl.pragmatists', name: 'JUnitParams', version: '0.3.6'
+    testCompile 'pl.pragmatists:JUnitParams:0.3.6'
     // dependency injection
-    compile 'com.squareup.dagger:dagger:1.2.+'
-    provided 'com.squareup.dagger:dagger-compiler:1.2.+'
+    compile 'com.squareup.dagger:dagger:1.2.5'
+    provided 'com.squareup.dagger:dagger-compiler:1.2.5'
     // persistence
     compile 'com.j256.ormlite:ormlite-android:4.46'
     // reactive x
     compile 'io.reactivex:rxandroid:1.2.0'
     compile 'io.reactivex:rxjava:1.1.5'
     // joda
-    compile "joda-time:joda-time:2.2"
+    compile 'joda-time:joda-time:2.2'
     // graphics
     compile 'com.github.PhilJay:MPAndroidChart:v3.0.0-beta1'
     // image zoom

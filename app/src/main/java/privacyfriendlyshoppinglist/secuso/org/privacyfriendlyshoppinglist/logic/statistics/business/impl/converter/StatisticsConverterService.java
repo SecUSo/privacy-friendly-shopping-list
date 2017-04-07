@@ -2,8 +2,8 @@ package privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic
 
 import org.joda.time.DateTime;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.context.ContextSetter;
-import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.product.business.domain.ProductDto;
-import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.statistics.business.domain.StatisticEntryDto;
+import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.product.business.domain.ProductItem;
+import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.statistics.business.domain.StatisticEntryItem;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.statistics.persistence.entity.StatisticEntryEntity;
 
 import java.util.Date;
@@ -15,9 +15,9 @@ import java.util.Date;
  */
 public interface StatisticsConverterService extends ContextSetter
 {
-    void convertDtoToEntity(ProductDto dto, StatisticEntryEntity entryEntity);
+    void convertItemToEntity(ProductItem item, StatisticEntryEntity entryEntity);
 
-    void convertEntityToDto(StatisticEntryEntity entryEntity, StatisticEntryDto dto);
+    void convertEntityToItem(StatisticEntryEntity entryEntity, StatisticEntryItem item);
 
     String getMonthFromDate(Date recordDate);
 

@@ -12,6 +12,7 @@ import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.R;
+import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.business.PFACache;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.products.listadapter.ProductsAdapter;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.settings.SettingsKeys;
 
@@ -22,7 +23,7 @@ import java.util.ArrayList;
  * Author: Grebiel Jose Ifill Brito
  * Created: 20.07.16 creation date
  */
-public class ProductActivityCache
+public class ProductActivityCache extends PFACache
 {
     private AppCompatActivity activity;
     private FloatingActionButton newListFab;

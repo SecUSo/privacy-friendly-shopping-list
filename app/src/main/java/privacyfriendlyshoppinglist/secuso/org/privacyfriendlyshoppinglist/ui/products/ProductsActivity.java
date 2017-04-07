@@ -10,12 +10,11 @@ import android.view.View;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.R;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.context.AbstractInstanceFactory;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.context.InstanceFactory;
-import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.utils.MessageUtils;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.product.business.ProductService;
-import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.product.business.domain.ProductDto;
-import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.product.business.domain.TotalDto;
+import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.product.business.domain.ProductItem;
+import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.product.business.domain.TotalItem;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.shoppingList.business.ShoppingListService;
-import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.shoppingList.business.domain.ListDto;
+import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.shoppingList.business.domain.ListItem;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.main.MainActivity;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.products.listadapter.ProductsAdapter;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.products.listeners.*;
@@ -49,9 +48,10 @@ public class ProductsActivity extends AppCompatActivity
     private ShoppingListService shoppingListService;
     private ProductActivityCache cache;
     private String listId;
-    private ListDto listDto;
+    private ListItem listItem;
     private Subscriber<Long> alertUpdateSubscriber;
     private Subscription alertSubscriber;
+    private boolean menusVisible;
 
     @Override
     protected final void onCreate(final Bundle savedInstanceState)
@@ -59,17 +59,19 @@ public class ProductsActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.products_activity);
 
+        menusVisible = false;
+
         AbstractInstanceFactory instanceFactory = new InstanceFactory(getApplicationContext());
         this.productService = (ProductService) instanceFactory.createInstance(ProductService.class);
         this.shoppingListService = (ShoppingListService) instanceFactory.createInstance(ShoppingListService.class);
 
         listId = getIntent().getStringExtra(MainActivity.LIST_ID_KEY);
         shoppingListService.getById(listId)
-                .doOnNext(result -> listDto = result)
+                .doOnNext(result -> listItem = result)
                 .doOnCompleted(() ->
                 {
-                    setTitle(listDto.getListName());
-                    cache = new ProductActivityCache(this, listId, listDto.getListName(), listDto.isStatisticEnabled());
+                    setTitle(listItem.getListName());
+                    cache = new ProductActivityCache(this, listId, listItem.getListName(), listItem.isStatisticEnabled());
                     cache.getNewListFab().setOnClickListener(new AddProductOnClickListener(cache));
                     cache.getSearchAutoCompleteTextView().addTextChangedListener(new SearchTextWatcher(cache));
                     cache.getCancelSarchButton().setOnClickListener(new CancelSearchOnClick(cache));
@@ -100,6 +102,9 @@ public class ProductsActivity extends AppCompatActivity
 
         MenuItem deleteItem = menu.findItem(R.id.imageview_delete);
         deleteItem.setOnMenuItemClickListener(new ShowDeleteProductsOnClickListener(this, listId));
+
+        sortItem.setVisible(menusVisible);
+        deleteItem.setVisible(menusVisible);
         return super.onPrepareOptionsMenu(menu);
     }
 
@@ -122,10 +127,10 @@ public class ProductsActivity extends AppCompatActivity
 
     public void updateListView()
     {
-        List<ProductDto> allProducts = new ArrayList<>();
+        List<ProductItem> allProducts = new ArrayList<>();
 
         productService.getAllProducts(cache.getListId())
-                .doOnNext(dto -> allProducts.add(dto))
+                .doOnNext(item -> allProducts.add(item))
                 .doOnCompleted(() ->
                 {
                     if ( allProducts.isEmpty() )
@@ -139,17 +144,20 @@ public class ProductsActivity extends AppCompatActivity
                         unsubscribeAlert();
                     }
 
+                    menusVisible = !allProducts.isEmpty();
+                    invalidateOptionsMenu();
+
                     // sort according to last sort selection
-                    final ListDto[] listDto = new ListDto[ 1 ];
+                    final ListItem[] listItem = new ListItem[ 1 ];
                     shoppingListService.getById(listId)
-                            .doOnNext(dto -> listDto[ 0 ] = dto)
+                            .doOnNext(item -> listItem[ 0 ] = item)
                             .doOnCompleted(() ->
                             {
-                                String sortBy = listDto[ 0 ].getSortCriteria();
-                                boolean sortAscending = listDto[ 0 ].isSortAscending();
+                                String sortBy = listItem[ 0 ].getSortCriteria();
+                                boolean sortAscending = listItem[ 0 ].isSortAscending();
                                 productService.sortProducts(allProducts, sortBy, sortAscending);
 
-                                cache.getProductsAdapter().setProductsList(allProducts);
+                                cache.getProductsAdapter().setList(allProducts);
                                 cache.getProductsAdapter().notifyDataSetChanged();
 
                                 reorderProductViewBySelection();
@@ -180,11 +188,11 @@ public class ProductsActivity extends AppCompatActivity
 
     public void updateTotals()
     {
-        TotalDto totalDto = productService.computeTotals(cache.getProductsAdapter().getProductsList());
-        cache.getTotalAmountTextView().setText(totalDto.getTotalAmount());
-        cache.getTotalCheckedTextView().setText(totalDto.getCheckedAmount());
+        TotalItem totalItem = productService.computeTotals(cache.getProductsAdapter().getList());
+        cache.getTotalAmountTextView().setText(totalItem.getTotalAmount());
+        cache.getTotalCheckedTextView().setText(totalItem.getCheckedAmount());
 
-        if ( totalDto.isEqualsZero() )
+        if ( totalItem.isEqualsZero() )
         {
             cache.getTotalLayout().animate().alpha(0.0f).translationY(100).setDuration(DURATION);
             cache.getTotalLayout().setVisibility(View.GONE);
@@ -196,17 +204,17 @@ public class ProductsActivity extends AppCompatActivity
         }
     }
 
-    public void changeItemPosition(ProductDto dto)
+    public void changeItemPosition(ProductItem item)
     {
         if ( PreferenceManager.getDefaultSharedPreferences(cache.getActivity()).getBoolean(SettingsKeys.MOVE_PRODUCTS_PREF, true) )
         {
             ProductsAdapter productsAdapter = cache.getProductsAdapter();
-            List<ProductDto> productsList = productsAdapter.getProductsList();
-            List<ProductDto> productDtos = productService.moveSelectedToEnd(productsList);
-            productsAdapter.setProductsList(productDtos);
+            List<ProductItem> productsList = productsAdapter.getList();
+            List<ProductItem> productItems = productService.moveSelectedToEnd(productsList);
+            productsAdapter.setList(productItems);
 
-            int initialPosition = productsList.indexOf(dto);
-            int finalPosition = productDtos.indexOf(dto);
+            int initialPosition = productsList.indexOf(item);
+            int finalPosition = productItems.indexOf(item);
             productsAdapter.notifyItemMoved(initialPosition, finalPosition);
             // Animation ends in final position when the initial position is equals zero.
             // Therefore the animation needs to be fix by scrolling back to position 0.
@@ -222,16 +230,16 @@ public class ProductsActivity extends AppCompatActivity
         if ( PreferenceManager.getDefaultSharedPreferences(cache.getActivity()).getBoolean(SettingsKeys.MOVE_PRODUCTS_PREF, true) )
         {
             ProductsAdapter productsAdapter = cache.getProductsAdapter();
-            List<ProductDto> productsList = productsAdapter.getProductsList();
-            List<ProductDto> productDtos = productService.moveSelectedToEnd(productsList);
-            productsAdapter.setProductsList(productDtos);
+            List<ProductItem> productsList = productsAdapter.getList();
+            List<ProductItem> productItems = productService.moveSelectedToEnd(productsList);
+            productsAdapter.setList(productItems);
             productsAdapter.notifyDataSetChanged();
         }
     }
 
-    public void setProductsAndUpdateView(List<ProductDto> sortedProducts)
+    public void setProductsAndUpdateView(List<ProductItem> sortedProducts)
     {
-        cache.getProductsAdapter().setProductsList(sortedProducts);
+        cache.getProductsAdapter().setList(sortedProducts);
         cache.getProductsAdapter().notifyDataSetChanged();
     }
 
@@ -254,6 +262,12 @@ public class ProductsActivity extends AppCompatActivity
             @Override
             public void onNext(Long time)
             {
+                if ( cache.getSearchTextInputLayout().getVisibility() == View.VISIBLE )
+                {
+                    cache.getAlertTextView().setVisibility(View.GONE);
+                    return;
+                }
+
                 if ( time % 2 != 0 )
                 {
                     cache.getAlertTextView().setVisibility(View.GONE);

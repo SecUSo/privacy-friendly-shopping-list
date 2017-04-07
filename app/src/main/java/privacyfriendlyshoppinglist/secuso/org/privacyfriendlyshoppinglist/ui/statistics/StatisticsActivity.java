@@ -110,10 +110,10 @@ public class StatisticsActivity extends BaseActivity implements Observer
         final String[] minDate = new String[ 1 ];
 
         statisticsService.getRange()
-                .doOnNext(dto ->
+                .doOnNext(item ->
                 {
-                    maxDate[ 0 ] = dto.getMaxDate();
-                    minDate[ 0 ] = dto.getMinDate();
+                    maxDate[ 0 ] = item.getMaxDate();
+                    minDate[ 0 ] = item.getMinDate();
                 })
                 .doOnCompleted(() ->
                         {

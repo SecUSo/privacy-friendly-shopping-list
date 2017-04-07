@@ -7,16 +7,17 @@ import android.graphics.Paint;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.widget.AppCompatCheckBox;
 import android.support.v7.widget.CardView;
-import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.R;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.context.AbstractInstanceFactory;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.context.InstanceFactory;
+import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.ui.AbstractViewHolder;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.product.business.ProductService;
-import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.product.business.domain.ProductDto;
+import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.product.business.domain.ProductItem;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.statistics.business.StatisticsService;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.products.PhotoPreviewActivity;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.products.ProductActivityCache;
@@ -29,37 +30,45 @@ import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.pro
  * Author: Grebiel Jose Ifill Brito
  * Created: 20.07.16 creation date
  */
-public class ProductsItemViewHolder extends RecyclerView.ViewHolder
+public class ProductsItemViewHolder extends AbstractViewHolder<ProductItem, ProductActivityCache>
 {
     private ProductItemCache productItemCache;
-    private ProductActivityCache productActivityCache;
     private ProductService productService;
     private StatisticsService statisticsService;
 
     public ProductsItemViewHolder(final View parent, ProductActivityCache cache)
     {
-        super(parent);
+        super(parent, cache);
         this.productItemCache = new ProductItemCache(parent);
-        this.productActivityCache = cache;
-        AbstractInstanceFactory instanceFactory = new InstanceFactory(productActivityCache.getActivity());
+        AbstractInstanceFactory instanceFactory = new InstanceFactory(this.cache.getActivity());
         this.productService = (ProductService) instanceFactory.createInstance(ProductService.class);
         this.statisticsService = (StatisticsService) instanceFactory.createInstance(StatisticsService.class);
 
     }
 
-    public void processDto(ProductDto dto)
+    public void processItem(ProductItem item)
     {
         final CheckBox checkbox = productItemCache.getCheckbox();
-        checkbox.setChecked(dto.isChecked());
-        productItemCache.getProductNameTextView().setText(dto.getProductName());
-        productItemCache.getQuantityTextView().setText(dto.getQuantity());
-        productItemCache.getProductExtraInfoTextview().setText(dto.getSummary(productActivityCache.getActivity()));
-        productItemCache.getListDetailsTextView().setText(dto.getDetailInfo(productActivityCache.getActivity()));
+        checkbox.setChecked(item.isChecked());
+        productItemCache.getProductNameTextView().setText(item.getProductName());
+        productItemCache.getQuantityTextView().setText(item.getQuantity());
+        productItemCache.getProductExtraInfoTextview().setText(item.getSummary(cache.getActivity()));
+        productItemCache.getListDetailsTextView().setText(item.getDetailInfo(cache.getActivity()));
 
-        if ( !dto.isDefaultImage() )
+        Button plusButton = productItemCache.getPlusButton();
+        if ( !item.getListId().equals(cache.getListId()) )
+        {
+            plusButton.setVisibility(View.VISIBLE);
+        }
+        else
+        {
+            plusButton.setVisibility(View.GONE);
+        }
+
+        if ( !item.isDefaultImage() )
         {
             productItemCache.getProductImageInDetail().setVisibility(View.VISIBLE);
-            productItemCache.getProductImageInDetail().setImageBitmap(dto.getThumbnailBitmap());
+            productItemCache.getProductImageInDetail().setImageBitmap(item.getThumbnailBitmap());
         }
         else
         {
@@ -72,34 +81,47 @@ public class ProductsItemViewHolder extends RecyclerView.ViewHolder
             @Override
             public void onClick(View v)
             {
-                Intent viewPhotoIntent = new Intent(productActivityCache.getActivity(), PhotoPreviewActivity.class);
-                viewPhotoIntent.putExtra(ProductsActivity.PRODUCT_ID_KEY, dto.getId());
-                viewPhotoIntent.putExtra(ProductsActivity.PRODUCT_NAME, dto.getProductName());
+                Intent viewPhotoIntent = new Intent(cache.getActivity(), PhotoPreviewActivity.class);
+                viewPhotoIntent.putExtra(ProductsActivity.PRODUCT_ID_KEY, item.getId());
+                viewPhotoIntent.putExtra(ProductsActivity.PRODUCT_NAME, item.getProductName());
                 viewPhotoIntent.putExtra(ProductsActivity.FROM_DIALOG, false);
-                ProductsActivity activity = (ProductsActivity) productActivityCache.getActivity();
+                ProductsActivity activity = (ProductsActivity) cache.getActivity();
                 activity.startActivityForResult(viewPhotoIntent, ProductsActivity.REQUEST_PHOTO_PREVIEW_FROM_ITEM);
             }
         });
 
-        updateVisibilityFormat(dto);
+        updateVisibilityFormat(item);
 
         checkbox.setOnClickListener(new View.OnClickListener()
         {
             @Override
             public void onClick(View v)
             {
-                dto.setChecked(checkbox.isChecked());
-                productService.saveOrUpdate(dto, productActivityCache.getListId()).subscribe();
-                if ( checkbox.isChecked() && productActivityCache.getStatisticsEnabled() )
+                item.setChecked(checkbox.isChecked());
+                productService.saveOrUpdate(item, cache.getListId()).subscribe();
+                if ( checkbox.isChecked() && cache.getStatisticsEnabled() )
                 {
-                    statisticsService.saveRecord(dto).subscribe();
+                    statisticsService.saveRecord(item).subscribe();
                 }
 
-                ProductsActivity host = (ProductsActivity) productActivityCache.getActivity();
+                ProductsActivity host = (ProductsActivity) cache.getActivity();
                 host.updateTotals();
-                host.changeItemPosition(dto);
+                host.changeItemPosition(item);
 
-                updateVisibilityFormat(dto);
+                updateVisibilityFormat(item);
+            }
+        });
+
+        plusButton.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View view)
+            {
+                productService.copyToList(item, cache.getListId())
+                        .doOnCompleted(() ->
+                        {
+                            plusButton.setVisibility(View.GONE);
+                        }).subscribe();
             }
         });
 
@@ -110,8 +132,8 @@ public class ProductsItemViewHolder extends RecyclerView.ViewHolder
             {
                 if ( !ProductDialogFragment.isOpened() )
                 {
-                    DialogFragment productFragement = ProductDialogFragment.newEditDialogInstance(dto, productActivityCache);
-                    productFragement.show(productActivityCache.getActivity().getSupportFragmentManager(), "Product");
+                    DialogFragment productFragement = ProductDialogFragment.newEditDialogInstance(item, cache);
+                    productFragement.show(cache.getActivity().getSupportFragmentManager(), "Product");
                 }
 
             }
@@ -122,8 +144,8 @@ public class ProductsItemViewHolder extends RecyclerView.ViewHolder
             @Override
             public boolean onLongClick(View view)
             {
-                DialogFragment editDeleteFragment = EditDeleteProductDialog.newEditDeleteInstance(dto, productActivityCache);
-                editDeleteFragment.show(productActivityCache.getActivity().getSupportFragmentManager(), "Product");
+                DialogFragment editDeleteFragment = EditDeleteProductDialog.newEditDeleteInstance(item, cache);
+                editDeleteFragment.show(cache.getActivity().getSupportFragmentManager(), "Product");
                 return true;
             }
         });
@@ -147,16 +169,16 @@ public class ProductsItemViewHolder extends RecyclerView.ViewHolder
 
     }
 
-    private void updateVisibilityFormat(ProductDto dto)
+    private void updateVisibilityFormat(ProductItem item)
     {
-        Resources resources = productActivityCache.getActivity().getResources();
+        Resources resources = cache.getActivity().getResources();
         TextView productNameTextView = productItemCache.getProductNameTextView();
         TextView productQuantityTextView = productItemCache.getQuantityTextView();
         TextView quantityTextView = productItemCache.getQuantityTextView();
         CardView productCard = productItemCache.getProductCard();
         AppCompatCheckBox checkbox = (AppCompatCheckBox) productItemCache.getCheckbox();
 
-        if ( dto.isChecked() )
+        if ( item.isChecked() )
         {
             int grey = resources.getColor(R.color.middlegrey);
             productCard.setCardBackgroundColor(resources.getColor(R.color.transparent));

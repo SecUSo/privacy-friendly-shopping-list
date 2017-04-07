@@ -5,7 +5,7 @@ package privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic
  * Author: Grebiel Jose Ifill Brito
  * Created: 26.08.16 creation date
  */
-public class StatsRangeDto
+public class StatsRangeItem
 {
     private String maxDate;
     private String minDate;

@@ -4,12 +4,12 @@ import android.content.Context;
 import org.joda.time.DateTime;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.R;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.persistence.DB;
-import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.product.business.domain.ProductDto;
+import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.product.business.domain.ProductItem;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.statistics.business.StatisticsService;
-import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.statistics.business.domain.StatisticEntryDto;
+import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.statistics.business.domain.StatisticEntryItem;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.statistics.business.domain.StatisticsChartData;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.statistics.business.domain.StatisticsQuery;
-import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.statistics.business.domain.StatsRangeDto;
+import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.statistics.business.domain.StatsRangeItem;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.statistics.business.impl.converter.StatisticsConverterService;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.statistics.persistence.StatisticsDao;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.statistics.persistence.entity.StatisticEntryEntity;
@@ -57,43 +57,43 @@ public class StatisticsServiceImpl implements StatisticsService
     }
 
     @Override
-    public Observable<Void> saveRecord(ProductDto dto)
+    public Observable<Void> saveRecord(ProductItem item)
     {
         Observable<Void> observable = Observable
-                .fromCallable(() -> saveRecordSync(dto))
+                .fromCallable(() -> saveRecordSync(item))
                 .subscribeOn(Schedulers.computation())
                 .observeOn(AndroidSchedulers.mainThread());
         return observable;
     }
 
-    private Void saveRecordSync(ProductDto dto)
+    private Void saveRecordSync(ProductItem item)
     {
         StatisticEntryEntity entity = new StatisticEntryEntity();
-        converterService.convertDtoToEntity(dto, entity);
+        converterService.convertItemToEntity(item, entity);
         entity.setRecordDate(new Date());
         statisticsDao.save(entity);
         return null;
     }
 
     @Override
-    public Observable<StatisticEntryDto> getAll()
+    public Observable<StatisticEntryItem> getAll()
     {
-        Observable<StatisticEntryDto> observable = Observable
+        Observable<StatisticEntryItem> observable = Observable
                 .defer(() -> Observable.from(getAllSync()))
                 .subscribeOn(Schedulers.computation())
                 .observeOn(AndroidSchedulers.mainThread());
         return observable;
     }
 
-    private List<StatisticEntryDto> getAllSync()
+    private List<StatisticEntryItem> getAllSync()
     {
-        List<StatisticEntryDto> dtos = new ArrayList<>();
+        List<StatisticEntryItem> items = new ArrayList<>();
         Observable
                 .from(statisticsDao.getAllEntities())
-                .map(this::getDto)
-                .subscribe(dto -> dtos.add(dto));
+                .map(this::getItem)
+                .subscribe(item -> items.add(item));
 
-        return dtos;
+        return items;
     }
 
     @Override
@@ -109,23 +109,23 @@ public class StatisticsServiceImpl implements StatisticsService
     }
 
     @Override
-    public Observable<StatsRangeDto> getRange()
+    public Observable<StatsRangeItem> getRange()
     {
-        Observable<StatsRangeDto> observable = Observable
+        Observable<StatsRangeItem> observable = Observable
                 .fromCallable(() -> getRangeSync())
                 .subscribeOn(Schedulers.computation())
                 .observeOn(AndroidSchedulers.mainThread());
         return observable;
     }
 
-    private StatsRangeDto getRangeSync()
+    private StatsRangeItem getRangeSync()
     {
         String maxDateSync = getMaxDateSync();
         String minDateSync = getMinDateSync();
-        StatsRangeDto dto = new StatsRangeDto();
-        dto.setMaxDate(maxDateSync);
-        dto.setMinDate(minDateSync);
-        return dto;
+        StatsRangeItem item = new StatsRangeItem();
+        item.setMaxDate(maxDateSync);
+        item.setMinDate(minDateSync);
+        return item;
     }
 
     private String getMaxDateSync()
@@ -488,11 +488,11 @@ public class StatisticsServiceImpl implements StatisticsService
         return chartData;
     }
 
-    private StatisticEntryDto getDto(StatisticEntryEntity entryEntity)
+    private StatisticEntryItem getItem(StatisticEntryEntity entryEntity)
     {
-        StatisticEntryDto dto = new StatisticEntryDto();
-        converterService.convertEntityToDto(entryEntity, dto);
-        return dto;
+        StatisticEntryItem item = new StatisticEntryItem();
+        converterService.convertEntityToItem(entryEntity, item);
+        return item;
     }
 
     public String getTitle()

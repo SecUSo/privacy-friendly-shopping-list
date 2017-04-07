@@ -28,7 +28,7 @@ import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framew
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.utils.StringUtils;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.product.business.ProductService;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.product.business.domain.AutoCompleteLists;
-import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.product.business.domain.ProductDto;
+import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.product.business.domain.ProductItem;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.statistics.business.StatisticsService;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.camera.CameraActivity;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.products.PhotoPreviewActivity;
@@ -53,38 +53,39 @@ public class ProductDialogFragment extends DialogFragment
     private static final int MY_PERMISSIONS_REQUEST_USE_CAMERA = 2;
     private static final int REQUEST_PHOTO_PREVIEW_FROM_DIALOG = 3;
     private static final double MAX_PRICE_ALLOWED = 10000000;
+    public static final String DEFAULT_QUANTITY = "1";
 
     private static boolean opened;
     private static boolean editDialog;
     private static boolean resetState;
     private static boolean saveConfirmed;
 
-    private ProductDto dto;
+    private ProductItem item;
     private ProductDialogCache dialogCache;
     private ProductActivityCache cache;
 
     private ProductService productService;
     private StatisticsService statisticsService;
 
-    public static ProductDialogFragment newEditDialogInstance(ProductDto dto, ProductActivityCache cache)
+    public static ProductDialogFragment newEditDialogInstance(ProductItem item, ProductActivityCache cache)
     {
         editDialog = true;
-        ProductDialogFragment dialogFragment = getProductDialogFragment(dto, cache);
+        ProductDialogFragment dialogFragment = getProductDialogFragment(item, cache);
         return dialogFragment;
     }
 
-    public static ProductDialogFragment newAddDialogInstance(ProductDto dto, ProductActivityCache cache)
+    public static ProductDialogFragment newAddDialogInstance(ProductItem item, ProductActivityCache cache)
     {
         editDialog = false;
-        ProductDialogFragment dialogFragment = getProductDialogFragment(dto, cache);
+        ProductDialogFragment dialogFragment = getProductDialogFragment(item, cache);
         return dialogFragment;
     }
 
-    private static ProductDialogFragment getProductDialogFragment(ProductDto dto, ProductActivityCache cache)
+    private static ProductDialogFragment getProductDialogFragment(ProductItem item, ProductActivityCache cache)
     {
         ProductDialogFragment dialogFragment = new ProductDialogFragment();
         dialogFragment.setCache(cache);
-        dialogFragment.setDto(dto);
+        dialogFragment.setItem(item);
         return dialogFragment;
     }
 
@@ -93,9 +94,9 @@ public class ProductDialogFragment extends DialogFragment
         this.cache = cache;
     }
 
-    public void setDto(ProductDto dto)
+    public void setItem(ProductItem item)
     {
-        this.dto = dto;
+        this.item = item;
     }
 
     @Override
@@ -113,8 +114,8 @@ public class ProductDialogFragment extends DialogFragment
 
         if ( resetState && !saveConfirmed )
         {
-            // if dto was implicitly saved because of taking a picture for the product, then delete the product
-            productService.deleteById(dto.getId())
+            // if item was implicitly saved because of taking a picture for the product, then delete the product
+            productService.deleteById(item.getId())
                     .doOnCompleted(() ->
                     {
                         ProductsActivity productsActivity = (ProductsActivity) cache.getActivity();
@@ -144,13 +145,13 @@ public class ProductDialogFragment extends DialogFragment
 
         dialogCache.getExpandableLayout().setVisibility(View.GONE);
 
-        dialogCache.getProductName().setText(dto.getProductName());
-        dialogCache.getProductNotes().setText(dto.getProductNotes());
-        dialogCache.getQuantity().setText(dto.getQuantity());
-        dialogCache.getPrice().setText(dto.getProductPrice());
-        dialogCache.getCategory().setText(dto.getProductCategory());
-        dialogCache.getCustomStore().setText(dto.getProductStore());
-        dialogCache.getProductCheckBox().setChecked(dto.isChecked());
+        dialogCache.getProductName().setText(item.getProductName());
+        dialogCache.getProductNotes().setText(item.getProductNotes());
+        dialogCache.getQuantity().setText(item.getQuantity());
+        dialogCache.getPrice().setText(item.getProductPrice());
+        dialogCache.getCategory().setText(item.getProductCategory());
+        dialogCache.getCustomStore().setText(item.getProductStore());
+        dialogCache.getProductCheckBox().setChecked(item.isChecked());
 
         PackageManager pm = getContext().getPackageManager();
         if ( !pm.hasSystemFeature(PackageManager.FEATURE_CAMERA) )
@@ -162,12 +163,13 @@ public class ProductDialogFragment extends DialogFragment
         if ( editDialog )
         {
             dialogCache.getTitleTextView().setText(getActivity().getResources().getString(R.string.product_name_edit));
-            dialogCache.getProductImage().setImageBitmap(dto.getThumbnailBitmap());
+            dialogCache.getProductImage().setImageBitmap(item.getThumbnailBitmap());
             dialogCache.getProductCheckBox().setVisibility(View.VISIBLE);
         }
         else
         {
             dialogCache.getTitleTextView().setText(getActivity().getResources().getString(R.string.product_name_new));
+            item.setDefaultImage(true);
             Bitmap bitmap = BitmapFactory.decodeResource(getContext().getResources(), R.drawable.ic_menu_camera);
             dialogCache.getProductImage().setImageBitmap(bitmap);
             dialogCache.getProductCheckBox().setVisibility(View.GONE);
@@ -175,41 +177,43 @@ public class ProductDialogFragment extends DialogFragment
 
         dialogCache.getButtonPlus().setOnClickListener(new View.OnClickListener()
         {
-            int value;
-            String newQuantity;
-
             @Override
             public void onClick(View view)
             {
 
                 if ( !StringUtils.isEmpty(String.valueOf(dialogCache.getQuantity().getText())) )
                 {
-                    value = Integer.parseInt(String.valueOf(dialogCache.getQuantity().getText()));
+                    int value = Integer.parseInt(String.valueOf(dialogCache.getQuantity().getText()));
                     value++;
-                    newQuantity = String.valueOf(value);
+                    String newQuantity = String.valueOf(value);
                     dialogCache.getQuantity().setText(newQuantity);
                 }
                 else
                 {
-                    dialogCache.getQuantity().setText("1");
+                    dialogCache.getQuantity().setText(DEFAULT_QUANTITY);
                 }
             }
         });
 
         dialogCache.getButtonMinus().setOnClickListener(new View.OnClickListener()
         {
-            int value;
-            String newQuantity;
-
             @Override
             public void onClick(View view)
             {
-                value = Integer.parseInt(String.valueOf(dialogCache.getQuantity().getText()));
-                if ( value > 0 )
+                if ( !StringUtils.isEmpty(String.valueOf(dialogCache.getQuantity().getText())) )
                 {
-                    value--;
-                    newQuantity = String.valueOf(value);
-                    dialogCache.getQuantity().setText(newQuantity);
+                    int value = Integer.parseInt(String.valueOf(dialogCache.getQuantity().getText()));
+
+                    if ( value > 0 )
+                    {
+                        value--;
+                        String newQuantity = String.valueOf(value);
+                        dialogCache.getQuantity().setText(newQuantity);
+                    }
+                }
+                else
+                {
+                    dialogCache.getQuantity().setText(DEFAULT_QUANTITY);
                 }
             }
         });
@@ -268,7 +272,7 @@ public class ProductDialogFragment extends DialogFragment
 
         Set<String> productNames = new TreeSet<>();
         productService.getAllProducts(cache.getListId())
-                .map(dto -> dto.getProductName())
+                .map(item -> item.getProductName())
                 .doOnNext(name -> productNames.add(name))
                 .subscribe();
 
@@ -280,7 +284,7 @@ public class ProductDialogFragment extends DialogFragment
             @Override
             public void onClick(View v)
             {
-                if ( !dto.isDefaultImage() && !dialogCache.isImageScheduledForDeletion() )
+                if ( !item.isDefaultImage() && !dialogCache.isImageScheduledForDeletion() )
                 {
                     startPhotoPreviewActivity();
                 }
@@ -326,11 +330,11 @@ public class ProductDialogFragment extends DialogFragment
                 {
                     saveConfirmed = true;
                     saveUserInput(productName);
-                    if ( dto.isChecked() && cache.getStatisticsEnabled() )
+                    if ( item.isChecked() && cache.getStatisticsEnabled() )
                     {
-                        statisticsService.saveRecord(dto).subscribe();
+                        statisticsService.saveRecord(item).subscribe();
                     }
-                    productService.saveOrUpdate(dto, cache.getListId())
+                    productService.saveOrUpdate(item, cache.getListId())
                             .doOnCompleted(() ->
                             {
                                 ProductsActivity productsActivity = (ProductsActivity) cache.getActivity();
@@ -423,8 +427,8 @@ public class ProductDialogFragment extends DialogFragment
     private void startPhotoPreviewActivity()
     {
         Intent viewPhotoIntent = new Intent(cache.getActivity(), PhotoPreviewActivity.class);
-        viewPhotoIntent.putExtra(ProductsActivity.PRODUCT_ID_KEY, dto.getId());
-        viewPhotoIntent.putExtra(ProductsActivity.PRODUCT_NAME, dto.getProductName());
+        viewPhotoIntent.putExtra(ProductsActivity.PRODUCT_ID_KEY, item.getId());
+        viewPhotoIntent.putExtra(ProductsActivity.PRODUCT_NAME, item.getProductName());
         viewPhotoIntent.putExtra(ProductsActivity.FROM_DIALOG, true);
         this.startActivityForResult(viewPhotoIntent, REQUEST_PHOTO_PREVIEW_FROM_DIALOG);
     }
@@ -437,21 +441,21 @@ public class ProductDialogFragment extends DialogFragment
 
     private void saveUserInput(String productName)
     {
-        dto.setProductName(productName);
-        dto.setProductNotes(String.valueOf(dialogCache.getProductNotes().getText()));
-        dto.setQuantity(String.valueOf(dialogCache.getQuantity().getText()));
-        dto.setProductPrice(String.valueOf(dialogCache.getPrice().getText()));
-        dto.setProductCategory(String.valueOf(dialogCache.getCategory().getText()));
-        dto.setProductStore(String.valueOf(dialogCache.getCustomStore().getText()));
-        dto.setChecked(dialogCache.getProductCheckBox().isChecked());
+        item.setProductName(productName);
+        item.setProductNotes(String.valueOf(dialogCache.getProductNotes().getText()));
+        item.setQuantity(String.valueOf(dialogCache.getQuantity().getText()));
+        item.setProductPrice(String.valueOf(dialogCache.getPrice().getText()));
+        item.setProductCategory(String.valueOf(dialogCache.getCategory().getText()));
+        item.setProductStore(String.valueOf(dialogCache.getCustomStore().getText()));
+        item.setChecked(dialogCache.getProductCheckBox().isChecked());
 
         if ( dialogCache.isImageScheduledForDeletion() )
         {
             Bitmap bitmap = BitmapFactory.decodeResource(getContext().getResources(), R.drawable.ic_menu_camera);
-            File imageFile = new File(productService.getProductImagePath(dto.getId()));
+            File imageFile = new File(productService.getProductImagePath(item.getId()));
             imageFile.delete();
-            dto.setThumbnailBitmap(bitmap);
-            dto.setDefaultImage(true);
+            item.setThumbnailBitmap(bitmap);
+            item.setDefaultImage(true);
         }
     }
 
@@ -464,8 +468,8 @@ public class ProductDialogFragment extends DialogFragment
             Bitmap imageBitmap = (Bitmap) extras.get(CameraActivity.THUMBNAIL_KEY);
 
             dialogCache.getProductImage().setImageBitmap(imageBitmap);
-            dto.setThumbnailBitmap(imageBitmap);
-            dto.setDefaultImage(false);
+            item.setThumbnailBitmap(imageBitmap);
+            item.setDefaultImage(false);
             changePhotoThumbnailVisibility(R.drawable.ic_keyboard_arrow_up_white_48sp, View.VISIBLE);
         }
         else if ( requestCode == REQUEST_PHOTO_PREVIEW_FROM_DIALOG && resultCode == RESULT_OK )
@@ -498,7 +502,7 @@ public class ProductDialogFragment extends DialogFragment
 
     private void startImageCaptureAction()
     {
-        // dto must be saved first in order to have an id.
+        // item must be saved first in order to have an id.
         // id is needed to generate a unique file name for the image
         String productName = String.valueOf(dialogCache.getProductName().getText());
         if ( StringUtils.isEmpty(productName) )
@@ -506,16 +510,16 @@ public class ProductDialogFragment extends DialogFragment
             String newProductName = getResources().getString(R.string.new_product);
             productName = newProductName;
         }
-        boolean newProductAdded = dto.getId() == null;
+        boolean newProductAdded = item.getId() == null;
         resetState = true && newProductAdded;
         saveUserInput(productName);
-        productService.saveOrUpdate(dto, cache.getListId()).subscribe();
+        productService.saveOrUpdate(item, cache.getListId()).subscribe();
         saveConfirmed = false;
 
         dialogCache.setImageScheduledForDeletion(false);
         Intent takePictureIntent = new Intent(cache.getActivity(), CameraActivity.class);
-        takePictureIntent.putExtra(ProductsActivity.PRODUCT_ID_KEY, dto.getId());
-        takePictureIntent.putExtra(ProductsActivity.PRODUCT_NAME, dto.getProductName());
+        takePictureIntent.putExtra(ProductsActivity.PRODUCT_ID_KEY, item.getId());
+        takePictureIntent.putExtra(ProductsActivity.PRODUCT_NAME, item.getProductName());
         this.startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
     }
 

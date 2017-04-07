@@ -21,14 +21,12 @@ public class ScrollAwareFabBehaviorForDeleteActivities extends ScrollAwareFabBeh
     @Override
     public void onStopNestedScroll(CoordinatorLayout coordinatorLayout, FloatingActionButton child, View target)
     {
-        super.onStopNestedScroll(coordinatorLayout, child, target);
         child.show();
     }
 
     @Override
     public void onNestedPreScroll(CoordinatorLayout coordinatorLayout, FloatingActionButton child, View target, int dx, int dy, int[] consumed)
     {
-        super.onNestedPreScroll(coordinatorLayout, child, target, dx, dy, consumed);
         child.hide();
     }
 }

@@ -16,9 +16,9 @@ import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framew
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.utils.MessageUtils;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.utils.NotificationUtils;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.product.business.ProductService;
-import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.product.business.domain.ProductDto;
+import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.product.business.domain.ProductItem;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.shoppingList.business.ShoppingListService;
-import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.shoppingList.business.domain.ListDto;
+import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.shoppingList.business.domain.ListItem;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.main.MainActivity;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.main.ShoppingListActivityCache;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.shoppinglist.reminder.ReminderReceiver;
@@ -37,24 +37,24 @@ public class EditDeleteListDialog extends DialogFragment
 {
 
     private ShoppingListActivityCache cache;
-    private ListDto dto;
+    private ListItem listItem;
     private ShoppingListService shoppingListService;
     private ProductService productService;
 
 
-    public static EditDeleteListDialog newEditDeleteInstance(ListDto dto, ShoppingListActivityCache cache)
+    public static EditDeleteListDialog newEditDeleteInstance(ListItem item, ShoppingListActivityCache cache)
     {
 
-        EditDeleteListDialog dialogFragment = getEditDeleteFragment(dto, cache);
+        EditDeleteListDialog dialogFragment = getEditDeleteFragment(item, cache);
         return dialogFragment;
     }
 
 
-    private static EditDeleteListDialog getEditDeleteFragment(ListDto dto, ShoppingListActivityCache cache)
+    private static EditDeleteListDialog getEditDeleteFragment(ListItem item, ShoppingListActivityCache cache)
     {
         EditDeleteListDialog dialogFragment = new EditDeleteListDialog();
         dialogFragment.setCache(cache);
-        dialogFragment.setDto(dto);
+        dialogFragment.setListItem(item);
         return dialogFragment;
     }
 
@@ -63,9 +63,9 @@ public class EditDeleteListDialog extends DialogFragment
         this.cache = cache;
     }
 
-    public void setDto(ListDto dto)
+    public void setListItem(ListItem listItem)
     {
-        this.dto = dto;
+        this.listItem = listItem;
     }
 
     @Override
@@ -85,7 +85,7 @@ public class EditDeleteListDialog extends DialogFragment
         Button deleteButton = (Button) rootView.findViewById(R.id.delete);
         TextView titleTextView = (TextView) rootView.findViewById(R.id.title);
 
-        String listDialogTitle = getContext().getResources().getString(R.string.list_as_title, dto.getListName());
+        String listDialogTitle = getContext().getResources().getString(R.string.list_as_title, listItem.getListName());
         titleTextView.setText(listDialogTitle);
 
         editButton.setOnClickListener(getEditOnClickListener());
@@ -110,7 +110,7 @@ public class EditDeleteListDialog extends DialogFragment
                         getContext(),
                         R.string.delete_confirmation_title,
                         R.string.delete_list_confirmation,
-                        dto.getListName(),
+                        listItem.getListName(),
                         deleteList());
             }
         };
@@ -126,7 +126,7 @@ public class EditDeleteListDialog extends DialogFragment
                 dismiss();
                 if ( !ListDialogFragment.isOpened() )
                 {
-                    DialogFragment productFragment = ListDialogFragment.newEditInstance(dto, cache);
+                    DialogFragment productFragment = ListDialogFragment.newEditInstance(listItem, cache);
                     productFragment.show(cache.getActivity().getSupportFragmentManager(), "List");
                 }
             }
@@ -141,14 +141,14 @@ public class EditDeleteListDialog extends DialogFragment
             public void onClick(View view)
             {
                 dismiss();
-                List<ProductDto> productDtos = new ArrayList<>();
+                List<ProductItem> productItems = new ArrayList<>();
                 Context context = getContext();
-                productService.getAllProducts(dto.getId())
-                        .doOnNext(productDto -> productDtos.add(productDto))
+                productService.getAllProducts(listItem.getId())
+                        .doOnNext(productItem -> productItems.add(productItem))
                         .doOnCompleted(() ->
                         {
-                            String shareableText = shoppingListService.getShareableText(dto, productDtos);
-                            MessageUtils.shareText(context, shareableText, dto.getListName());
+                            String shareableText = shoppingListService.getShareableText(listItem, productItems);
+                            MessageUtils.shareText(context, shareableText, listItem.getListName());
                         })
                         .subscribe();
 
@@ -164,7 +164,7 @@ public class EditDeleteListDialog extends DialogFragment
             public void onClick(View view)
             {
                 dismiss();
-                productService.duplicateProducts(dto.getId())
+                productService.duplicateProducts(listItem.getId())
                         .doOnCompleted(() ->
                         {
                             MainActivity activity = (MainActivity) cache.getActivity();
@@ -184,7 +184,7 @@ public class EditDeleteListDialog extends DialogFragment
             public void onClick(View view)
             {
                 dismiss();
-                productService.resetCheckedProducts(dto.getId())
+                productService.resetCheckedProducts(listItem.getId())
                         .doOnCompleted(() ->
                         {
                             MainActivity activity = (MainActivity) cache.getActivity();
@@ -206,7 +206,7 @@ public class EditDeleteListDialog extends DialogFragment
 
     private Void deleteListSync()
     {
-        String id = dto.getId();
+        String id = listItem.getId();
         shoppingListService.deleteById(id)
                 .doOnCompleted(() ->
                 {

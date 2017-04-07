@@ -13,9 +13,9 @@ import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framew
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.context.AbstractInstanceFactory;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.context.InstanceFactory;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.product.business.ProductService;
-import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.product.business.domain.ProductDto;
+import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.product.business.domain.ProductItem;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.shoppingList.business.ShoppingListService;
-import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.shoppingList.business.domain.ListDto;
+import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.shoppingList.business.domain.ListItem;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.products.ProductsActivity;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.products.listeners.CancelSearchOnClick;
 
@@ -67,8 +67,8 @@ public class SortProductsDialog extends DialogFragment
         View rootView = i.inflate(R.layout.sort_products_dialog, null);
 
         SortProductsDialogCache cache = new SortProductsDialogCache(rootView);
-        final ListDto[] dtoAddress = {new ListDto()};
-        setupPreviosOptions(shoppingListService, cache, dtoAddress);
+        final ListItem[] itemAddress = {new ListItem()};
+        setupPreviosOptions(shoppingListService, cache, itemAddress);
 
         builder.setView(rootView);
         builder.setTitle(getActivity().getString(R.string.sort_options));
@@ -105,26 +105,26 @@ public class SortProductsDialog extends DialogFragment
                 boolean ascending = cache.getAscending().isChecked();
                 final String finalCriteria = criteria;
 
-                List<ProductDto> productDtos = new ArrayList<>();
+                List<ProductItem> productItems = new ArrayList<>();
 
                 productService.getAllProducts(listId)
-                        .doOnNext(dto -> productDtos.add(dto))
+                        .doOnNext(item -> productItems.add(item))
                         .doOnCompleted(() ->
                         {
-                            productService.sortProducts(productDtos, PFAComparators.SORT_BY_NAME, ascending);
-                            productService.sortProducts(productDtos, finalCriteria, ascending);
-                            host.setProductsAndUpdateView(productDtos);
+                            productService.sortProducts(productItems, PFAComparators.SORT_BY_NAME, ascending);
+                            productService.sortProducts(productItems, finalCriteria, ascending);
+                            host.setProductsAndUpdateView(productItems);
                             host.reorderProductViewBySelection();
                         })
                         .subscribe();
 
                 // save sort options
                 shoppingListService.getById(listId)
-                        .doOnNext(dto ->
+                        .doOnNext(item ->
                         {
-                            dto.setSortAscending(ascending);
-                            dto.setSortCriteria(finalCriteria);
-                            shoppingListService.saveOrUpdate(dto).subscribe();
+                            item.setSortAscending(ascending);
+                            item.setSortCriteria(finalCriteria);
+                            shoppingListService.saveOrUpdate(item).subscribe();
                         })
                         .subscribe();
 
@@ -134,16 +134,16 @@ public class SortProductsDialog extends DialogFragment
         return builder.create();
     }
 
-    private void setupPreviosOptions(ShoppingListService shoppingListService, SortProductsDialogCache cache, ListDto[] dtoAddress)
+    private void setupPreviosOptions(ShoppingListService shoppingListService, SortProductsDialogCache cache, ListItem[] itemAddress)
     {
         shoppingListService.getById(listId)
-                .doOnNext(result -> dtoAddress[ 0 ] = result)
+                .doOnNext(result -> itemAddress[ 0 ] = result)
                 .doOnCompleted(() ->
                         {
-                            ListDto dto = dtoAddress[ 0 ];
-                            cache.getAscending().setChecked(dto.isSortAscending());
-                            cache.getDescending().setChecked(!dto.isSortAscending());
-                            String sortCriteria = dto.getSortCriteria();
+                            ListItem item = itemAddress[ 0 ];
+                            cache.getAscending().setChecked(item.isSortAscending());
+                            cache.getDescending().setChecked(!item.isSortAscending());
+                            String sortCriteria = item.getSortCriteria();
                             switch ( sortCriteria )
                             {
                                 case PFAComparators.SORT_BY_QUANTITY:

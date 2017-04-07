@@ -4,7 +4,7 @@ import org.junit.Test;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.AbstractDatabaseTest;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.context.AbstractInstanceFactory;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.context.InstanceFactoryForTests;
-import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.product.business.domain.ProductDto;
+import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.product.business.domain.ProductItem;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.product.persistence.entity.ProductItemEntity;
 
 /**
@@ -24,7 +24,7 @@ public class ProductConverterServiceTest extends AbstractDatabaseTest
     }
 
     @Test
-    public void testConvertDtoToEntity() throws Exception
+    public void testConvertItemToEntity() throws Exception
     {
         String expectedProductId = "1";
         String expectedQuantity = "5";
@@ -32,16 +32,16 @@ public class ProductConverterServiceTest extends AbstractDatabaseTest
         String expectedStore = "Store";
         String expectedPrice = "10.00";
 
-        ProductDto dto = new ProductDto();
-        dto.setId(expectedProductId);
-        dto.setQuantity(expectedQuantity);
-        dto.setProductNotes(expectedNotes);
-        dto.setProductStore(expectedStore);
-        dto.setProductPrice(expectedPrice);
-        dto.setChecked(true);
+        ProductItem item = new ProductItem();
+        item.setId(expectedProductId);
+        item.setQuantity(expectedQuantity);
+        item.setProductNotes(expectedNotes);
+        item.setProductStore(expectedStore);
+        item.setProductPrice(expectedPrice);
+        item.setChecked(true);
 
         ProductItemEntity entity = new ProductItemEntity();
-        converterService.convertDtoToEntity(dto, entity);
+        converterService.convertItemToEntity(item, entity);
 
         assertEquals(Long.valueOf(expectedProductId), entity.getId());
         assertEquals(Integer.valueOf(expectedQuantity), entity.getQuantity());
@@ -52,7 +52,7 @@ public class ProductConverterServiceTest extends AbstractDatabaseTest
     }
 
     @Test
-    public void testConvertEntitiesToDto() throws Exception
+    public void testConvertEntitiesToItem() throws Exception
     {
         String expectedProductName = "product";
         String expectedCategory = "category";
@@ -75,17 +75,17 @@ public class ProductConverterServiceTest extends AbstractDatabaseTest
         entity.setPrice(expectedPrice);
         entity.setSelected(true);
 
-        ProductDto dto = new ProductDto();
-        converterService.convertEntitiesToDto(entity, dto);
+        ProductItem item = new ProductItem();
+        converterService.convertEntitiesToItem(entity, item);
 
-        assertEquals(expectedProductName, dto.getProductName());
-        assertEquals(expectedCategory, dto.getProductCategory());
+        assertEquals(expectedProductName, item.getProductName());
+        assertEquals(expectedCategory, item.getProductCategory());
 
-        assertEquals(String.valueOf(expectedProductId), dto.getId());
-        assertEquals(String.valueOf(expectedQuantity), dto.getQuantity());
-        assertEquals(expectedNotes, dto.getProductNotes());
-        assertEquals(expectedStore, dto.getProductStore());
-        assertEquals(expectedPriceString, dto.getProductPrice());
+        assertEquals(String.valueOf(expectedProductId), item.getId());
+        assertEquals(String.valueOf(expectedQuantity), item.getQuantity());
+        assertEquals(expectedNotes, item.getProductNotes());
+        assertEquals(expectedStore, item.getProductStore());
+        assertEquals(expectedPriceString, item.getProductPrice());
         assertTrue(entity.getSelected());
     }
 }
