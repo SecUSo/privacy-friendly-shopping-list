@@ -3,6 +3,7 @@ package privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.fa
 import android.content.Context;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v4.view.ViewCompat;
 import android.util.AttributeSet;
 import android.view.View;
 
@@ -11,11 +12,22 @@ import android.view.View;
  * Source: https://guides.codepath.com/android/floating-action-buttons
  * Created: 16.07.16 creation date
  */
-public class ScrollAwareFabBehaviorForDeleteActivities extends ScrollAwareFabBehavior
+public class ScrollAwareFabBehaviorForDeleteActivities extends FloatingActionButton.Behavior
 {
     public ScrollAwareFabBehaviorForDeleteActivities(Context context, AttributeSet attrs)
     {
         super(context, attrs);
+    }
+
+    @Override
+    public boolean onStartNestedScroll(
+            CoordinatorLayout coordinatorLayout,
+            FloatingActionButton child,
+            View directTargetChild,
+            View target,
+            int nestedScrollAxes)
+    {
+        return nestedScrollAxes == ViewCompat.SCROLL_AXIS_VERTICAL;
     }
 
     @Override

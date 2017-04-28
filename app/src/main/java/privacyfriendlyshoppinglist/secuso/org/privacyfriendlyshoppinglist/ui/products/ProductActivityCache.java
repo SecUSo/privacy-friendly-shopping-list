@@ -13,6 +13,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.R;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.business.PFACache;
+import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.fab.FabScrollListenerForCreateActivities;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.products.listadapter.ProductsAdapter;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.settings.SettingsKeys;
 
@@ -70,6 +71,8 @@ public class ProductActivityCache extends PFACache
         String defaultCurrency = activity.getResources().getString(R.string.currency);
         String currency = sharedPreferences.getString(SettingsKeys.CURRENCY, defaultCurrency);
         currencyTextView.setText(currency);
+
+        recyclerView.addOnScrollListener(new FabScrollListenerForCreateActivities(newListFab));
     }
 
     public AppCompatActivity getActivity()
