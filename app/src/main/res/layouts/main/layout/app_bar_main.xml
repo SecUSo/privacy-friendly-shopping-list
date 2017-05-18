@@ -23,8 +23,7 @@
             android:tint="@color/white"
             android:src="@android:drawable/ic_input_add"
             app:layout_anchor="@id/recyclerView"
-            app:layout_anchorGravity="bottom|right|end"
-            app:layout_behavior=".ui.fab.ScrollAwareFabBehavior"/>
+            app:layout_anchorGravity="bottom|right|end"/>
 
     <LinearLayout
             android:visibility="gone"

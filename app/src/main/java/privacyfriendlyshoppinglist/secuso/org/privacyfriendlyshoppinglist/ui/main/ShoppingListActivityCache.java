@@ -7,6 +7,7 @@ import android.support.v7.widget.RecyclerView;
 import android.widget.LinearLayout;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.R;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.business.PFACache;
+import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.fab.FabScrollListenerForCreateActivities;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.shoppinglist.listadapter.ListsAdapter;
 
 import java.util.ArrayList;
@@ -38,6 +39,8 @@ public class ShoppingListActivityCache extends PFACache
         alertTextView = (LinearLayout) activity.findViewById(R.id.insert_alert);
 
         noListsLayout = (LinearLayout) activity.findViewById(R.id.no_lists_layout);
+
+        recyclerView.addOnScrollListener(new FabScrollListenerForCreateActivities(newListFab));
     }
 
     public AppCompatActivity getActivity()

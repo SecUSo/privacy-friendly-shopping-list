@@ -58,18 +58,12 @@ android {
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     // android
-    /* if you change the version 25.0.1 please make sure that
-     * the floating action button behavior still works.
-     * version 25.2.0 has a bug that makes the floating
-     * action button disappear when scrolling down, but the button
-     * does not appear again when scrolling up
-     */
-    androidTestCompile 'com.android.support:support-annotations:25.0.1'
-    compile 'com.android.support:appcompat-v7:25.0.1'
-    compile 'com.android.support:design:25.0.1'
-    compile 'com.android.support:support-v4:25.0.1'
-    compile 'com.android.support:recyclerview-v7:25.0.1'
-    compile 'com.android.support:cardview-v7:25.0.1'
+    androidTestCompile 'com.android.support:support-annotations:25.3.1'
+    compile 'com.android.support:appcompat-v7:25.3.1'
+    compile 'com.android.support:design:25.3.1'
+    compile 'com.android.support:support-v4:25.3.1'
+    compile 'com.android.support:recyclerview-v7:25.3.1'
+    compile 'com.android.support:cardview-v7:25.3.1'
     // tests
     testCompile 'junit:junit:4.12'
     testCompile 'org.mockito:mockito-core:1.9.5'
