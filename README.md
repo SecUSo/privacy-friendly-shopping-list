@@ -44,7 +44,7 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 
-The icons used in the nagivation drawer are licensed under the [CC BY 2.5] (http://creativecommons.org/licenses/by/2.5/). In addition to them the app uses icons from [Google Design Material Icons](https://design.google.com/icons/index.html) licensed under Apache License Version 2.0. All other images (the logo of Privacy Friendly Apps, the SECUSO logo, the header in the navigation drawer and the splash screen icon) copyright [Technische Universtität Darmstadt] (www.tu-darmstadt.de) (2016). The logo used for the notifications is part of the main logo of Privacy Friendly Shopping List.
+The icons used in the nagivation drawer are licensed under the [CC BY 2.5] (http://creativecommons.org/licenses/by/2.5/). In addition to them the app uses icons from [Google Design Material Icons](https://design.google.com/icons/index.html) licensed under Apache License Version 2.0. All other images (the logo of Privacy Friendly Apps, the SECUSO logo, the app logo and the splash screen icon) copyright [Technische Universtität Darmstadt] (www.tu-darmstadt.de) (2016). The logo used for the notifications is part of the main logo of Privacy Friendly Shopping List.
 
 ## Contributors
 
