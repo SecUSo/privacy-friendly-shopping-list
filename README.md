@@ -8,7 +8,7 @@ The Privacy Friendly App Shopping List is an Android application that does not r
 
 Nowadays there are many apps that require many or all permissions available in Android in order to be installed. However these apps do not always need all of the permissions they ask for. With this project we want to offer an app where the user can be sure that private information such as contacts, location, identity etc., are not being used by the application. This app is part of the Privacy Friendly Apps group develop by Technische Universität Darmstadt, Germany. More information can be found under https://secuso.org/pfa
 
-##Building
+## Building
 
 The app can be installed by using IntelliJ or Android Studio (we recommend to use version 2.2.2 or higher).
 
