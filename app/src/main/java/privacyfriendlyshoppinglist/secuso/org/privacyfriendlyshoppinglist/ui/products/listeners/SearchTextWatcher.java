@@ -93,6 +93,7 @@ public class SearchTextWatcher implements TextWatcher
                     activity.reorderProductViewBySelection();
                     setErrorMessage(products);
                 })
+                .doOnError(Throwable::printStackTrace)
                 .subscribe();
     }
 

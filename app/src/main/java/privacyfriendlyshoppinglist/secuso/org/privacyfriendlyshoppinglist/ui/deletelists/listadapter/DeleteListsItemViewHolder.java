@@ -60,11 +60,13 @@ class DeleteListsItemViewHolder extends AbstractViewHolder<ListItem, DeleteLists
                     int reminderStatus = shoppingListService.getReminderStatusResource(item, productItems);
                     listItemCache.getReminderBar().setImageResource(reminderStatus);
                 })
+                .doOnError(Throwable::printStackTrace)
                 .subscribe();
 
         final TotalItem[] totalItem = new TotalItem[ 1 ];
         productService.getInfo(item.getId())
                 .doOnNext(result -> totalItem[ 0 ] = result)
+                .doOnError(Throwable::printStackTrace)
                 .doOnCompleted(() ->
                         listItemCache.getNrProductsTextView().setText(String.valueOf(totalItem[ 0 ].getNrProducts()))
                 ).subscribe();

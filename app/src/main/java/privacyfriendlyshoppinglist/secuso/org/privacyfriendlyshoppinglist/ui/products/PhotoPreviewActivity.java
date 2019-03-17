@@ -68,6 +68,7 @@ public class PhotoPreviewActivity extends AppCompatActivity
                     progressBar.setVisibility(View.GONE);
                     productImage.setImage(ImageSource.bitmap(fullSizeBitmap));
                 })
+                .doOnError(Throwable::printStackTrace)
                 .subscribe();
     }
 
@@ -154,6 +155,7 @@ public class PhotoPreviewActivity extends AppCompatActivity
                         return Observable.error(e);
                     }
                 })
+                .doOnError(Throwable::printStackTrace)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread());
         return observable;

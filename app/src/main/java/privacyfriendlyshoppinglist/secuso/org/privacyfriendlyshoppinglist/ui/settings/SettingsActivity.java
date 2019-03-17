@@ -286,6 +286,7 @@ public class SettingsActivity extends BaseActivity
         {
             Observable observable = Observable
                     .defer(() -> Observable.just(deleteStatisticsSync()))
+                    .doOnError(Throwable::printStackTrace)
                     .subscribeOn(Schedulers.computation());
             return observable;
         }
@@ -294,7 +295,8 @@ public class SettingsActivity extends BaseActivity
         {
             AbstractInstanceFactory instanceFactory = new InstanceFactory(getActivity().getApplicationContext());
             StatisticsService statisticsService = (StatisticsService) instanceFactory.createInstance(StatisticsService.class);
-            statisticsService.deleteAll().subscribe();
+            statisticsService.deleteAll()
+                    .doOnError(Throwable::printStackTrace).subscribe();
             return null;
         }
 

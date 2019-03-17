@@ -116,6 +116,7 @@ public class SortProductsDialog extends DialogFragment
                             host.setProductsAndUpdateView(productItems);
                             host.reorderProductViewBySelection();
                         })
+                        .doOnError(Throwable::printStackTrace)
                         .subscribe();
 
                 // save sort options
@@ -126,6 +127,7 @@ public class SortProductsDialog extends DialogFragment
                             item.setSortCriteria(finalCriteria);
                             shoppingListService.saveOrUpdate(item).subscribe();
                         })
+                        .doOnError(Throwable::printStackTrace)
                         .subscribe();
 
             }
@@ -162,6 +164,8 @@ public class SortProductsDialog extends DialogFragment
                                     cache.getName().setChecked(true);
                             }
                         }
-                ).subscribe();
+                )
+                .doOnError(Throwable::printStackTrace)
+                .subscribe();
     }
 }

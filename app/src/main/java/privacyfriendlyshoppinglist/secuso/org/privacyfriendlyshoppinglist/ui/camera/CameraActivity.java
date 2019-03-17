@@ -158,7 +158,9 @@ public class CameraActivity extends AppCompatActivity implements View.OnClickLis
                         {
                             rotatedThumbnailBitmap = bitmap;
                             // save bitmap using a new background thread
-                            CameraUtils.saveBitmap(takenImageBitmap, productImagePath, cameraOrientation).subscribe();
+                            CameraUtils.saveBitmap(takenImageBitmap, productImagePath, cameraOrientation)
+                                    .doOnError(Throwable::printStackTrace)
+                                    .subscribe();
                         })
                         .doOnCompleted(() ->
                         {
@@ -168,6 +170,7 @@ public class CameraActivity extends AppCompatActivity implements View.OnClickLis
                             camera.release();
                             finish();
                         })
+                        .doOnError(Throwable::printStackTrace)
                         .subscribe();
             }
         }
@@ -239,6 +242,7 @@ public class CameraActivity extends AppCompatActivity implements View.OnClickLis
         Observable observable = Observable
                 .defer(() -> Observable.just(prepareBitmapsSync(data)))
                 .subscribeOn(Schedulers.computation())
+                .doOnError(Throwable::printStackTrace)
                 .observeOn(AndroidSchedulers.mainThread());
         return observable;
     }

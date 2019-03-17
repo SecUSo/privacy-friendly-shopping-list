@@ -268,12 +268,14 @@ public class ProductDialogFragment extends DialogFragment
         rxAutoCompleteLists
                 .doOnNext(result -> result.copyTo(autoCompleteLists))
                 .doOnCompleted(() -> setupAutoCompleteLists(autoCompleteLists))
+                .doOnError(Throwable::printStackTrace)
                 .subscribe();
 
         Set<String> productNames = new TreeSet<>();
         productService.getAllProducts(cache.getListId())
                 .map(item -> item.getProductName())
                 .doOnNext(name -> productNames.add(name))
+                .doOnError(Throwable::printStackTrace)
                 .subscribe();
 
         dialogCache.getQuantity().setOnFocusChangeListener(new ProductDialogFocusListener(dialogCache));
@@ -332,7 +334,8 @@ public class ProductDialogFragment extends DialogFragment
                     saveUserInput(productName);
                     if ( item.isChecked() && cache.getStatisticsEnabled() )
                     {
-                        statisticsService.saveRecord(item).subscribe();
+                        statisticsService.saveRecord(item)
+                                .doOnError(Throwable::printStackTrace).subscribe();
                     }
                     productService.saveOrUpdate(item, cache.getListId())
                             .doOnCompleted(() ->
@@ -340,6 +343,7 @@ public class ProductDialogFragment extends DialogFragment
                                 ProductsActivity productsActivity = (ProductsActivity) cache.getActivity();
                                 productsActivity.updateListView();
                             })
+                            .doOnError(Throwable::printStackTrace)
                             .subscribe();
                     dialog.dismiss();
                 }
@@ -513,7 +517,8 @@ public class ProductDialogFragment extends DialogFragment
         boolean newProductAdded = item.getId() == null;
         resetState = true && newProductAdded;
         saveUserInput(productName);
-        productService.saveOrUpdate(item, cache.getListId()).subscribe();
+        productService.saveOrUpdate(item, cache.getListId())
+                .doOnError(Throwable::printStackTrace).subscribe();
         saveConfirmed = false;
 
         dialogCache.setImageScheduledForDeletion(false);

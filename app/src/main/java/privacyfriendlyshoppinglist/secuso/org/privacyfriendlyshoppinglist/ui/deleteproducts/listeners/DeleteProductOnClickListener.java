@@ -44,6 +44,7 @@ public class DeleteProductOnClickListener implements View.OnClickListener
     {
         Observable observable = Observable
                 .defer(() -> Observable.just(deleteProductsSync()))
+                .doOnError(Throwable::printStackTrace)
                 .subscribeOn(Schedulers.computation());
         return observable;
     }
@@ -52,7 +53,8 @@ public class DeleteProductOnClickListener implements View.OnClickListener
     {
         // delete products
         List<ProductItem> productList = cache.getDeleteProductsAdapter().getList();
-        productService.deleteSelected(productList).subscribe();
+        productService.deleteSelected(productList)
+                .doOnError(Throwable::printStackTrace).subscribe();
 
         // go to products overview
         AppCompatActivity activity = cache.getActivity();

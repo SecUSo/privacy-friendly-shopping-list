@@ -59,6 +59,7 @@ class ListsItemViewHolder extends AbstractViewHolder<ListItem, ShoppingListActiv
                     int reminderStatus = shoppingListService.getReminderStatusResource(item, productItems);
                     listItemCache.getReminderBar().setImageResource(reminderStatus);
                 })
+                .doOnError(Throwable::printStackTrace)
                 .subscribe();
 
         setupPriorityIcon(item);
@@ -74,7 +75,9 @@ class ListsItemViewHolder extends AbstractViewHolder<ListItem, ShoppingListActiv
                                             item.getDetailInfo(listItemCache.getListCard().getContext()));
                             listItemCache.getNrProductsTextView().setText(String.valueOf(totalItem[ 0 ].getNrProducts()));
                         }
-                ).subscribe();
+                )
+                .doOnError(Throwable::printStackTrace)
+                .subscribe();
 
         listItemCache.getListCard().setOnClickListener(v ->
         {

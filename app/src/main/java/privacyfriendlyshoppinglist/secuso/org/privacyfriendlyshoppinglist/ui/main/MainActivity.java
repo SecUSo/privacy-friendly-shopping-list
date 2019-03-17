@@ -139,6 +139,7 @@ public class MainActivity extends BaseActivity
                     cache.getListAdapter().setList(allListItems);
                     cache.getListAdapter().notifyDataSetChanged();
                 })
+                .doOnError(Throwable::printStackTrace)
                 .subscribe();
     }
 
@@ -148,6 +149,7 @@ public class MainActivity extends BaseActivity
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .doOnNext(x -> alertUpdateSubscriber.onNext(x))
+                .doOnError(Throwable::printStackTrace)
                 .subscribe();
     }
 

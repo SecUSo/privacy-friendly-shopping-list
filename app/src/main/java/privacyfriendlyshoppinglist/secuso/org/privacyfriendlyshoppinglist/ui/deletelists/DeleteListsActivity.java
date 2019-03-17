@@ -60,6 +60,7 @@ public class DeleteListsActivity extends AppCompatActivity
                     cache.getDeleteListsAdapter().setList(allListItems);
                     cache.getDeleteListsAdapter().notifyDataSetChanged();
                 })
+                .doOnError(Throwable::printStackTrace)
                 .subscribe();
     }
 }

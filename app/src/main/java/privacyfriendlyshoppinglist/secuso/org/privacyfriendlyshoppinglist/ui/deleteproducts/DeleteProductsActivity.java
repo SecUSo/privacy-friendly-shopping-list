@@ -47,6 +47,7 @@ public class DeleteProductsActivity extends AppCompatActivity
                     cache.getDeleteFab().setOnClickListener(new DeleteProductOnClickListener(cache));
                     updateListView();
                 })
+                .doOnError(Throwable::printStackTrace)
                 .subscribe();
 
         overridePendingTransition(0, 0);
@@ -74,8 +75,10 @@ public class DeleteProductsActivity extends AppCompatActivity
                                         cache.getDeleteProductsAdapter().notifyDataSetChanged();
                                     }
                             )
+                            .doOnError(Throwable::printStackTrace)
                             .subscribe();
                 })
+                .doOnError(Throwable::printStackTrace)
                 .subscribe();
     }
 }

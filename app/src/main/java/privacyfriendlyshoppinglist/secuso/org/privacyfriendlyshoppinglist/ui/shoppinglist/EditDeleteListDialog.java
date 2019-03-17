@@ -150,6 +150,7 @@ public class EditDeleteListDialog extends DialogFragment
                             String shareableText = shoppingListService.getShareableText(listItem, productItems);
                             MessageUtils.shareText(context, shareableText, listItem.getListName());
                         })
+                        .doOnError(Throwable::printStackTrace)
                         .subscribe();
 
             }
@@ -170,6 +171,7 @@ public class EditDeleteListDialog extends DialogFragment
                             MainActivity activity = (MainActivity) cache.getActivity();
                             activity.updateListView();
                         })
+                        .doOnError(Throwable::printStackTrace)
                         .subscribe();
 
             }
@@ -190,6 +192,7 @@ public class EditDeleteListDialog extends DialogFragment
                             MainActivity activity = (MainActivity) cache.getActivity();
                             activity.updateListView();
                         })
+                        .doOnError(Throwable::printStackTrace)
                         .subscribe();
             }
         };
@@ -200,6 +203,7 @@ public class EditDeleteListDialog extends DialogFragment
         Observable observable = Observable
                 .defer(() -> Observable.just(deleteListSync()))
                 .subscribeOn(Schedulers.computation())
+                .doOnError(Throwable::printStackTrace)
                 .observeOn(AndroidSchedulers.mainThread());
         return observable;
     }
@@ -213,8 +217,10 @@ public class EditDeleteListDialog extends DialogFragment
                     MainActivity activity = (MainActivity) cache.getActivity();
                     activity.updateListView();
                 })
+                .doOnError(Throwable::printStackTrace)
                 .subscribe();
-        productService.deleteAllFromList(id).subscribe();
+        productService.deleteAllFromList(id)
+                .doOnError(Throwable::printStackTrace).subscribe();
 
         // delete notification if any
         NotificationUtils.removeNotification(cache.getActivity(), id);

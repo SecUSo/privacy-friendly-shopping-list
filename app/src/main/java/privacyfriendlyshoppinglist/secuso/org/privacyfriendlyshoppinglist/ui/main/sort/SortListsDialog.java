@@ -91,6 +91,7 @@ public class SortListsDialog extends DialogFragment
                             shoppingListService.sortList(listItems, finalCriteria, ascending);
                             host.reorderListView(listItems);
                         })
+                        .doOnError(Throwable::printStackTrace)
                         .subscribe();
 
                 // save sort options

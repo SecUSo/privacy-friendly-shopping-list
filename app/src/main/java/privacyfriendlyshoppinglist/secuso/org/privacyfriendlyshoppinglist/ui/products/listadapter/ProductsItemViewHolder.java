@@ -98,10 +98,12 @@ public class ProductsItemViewHolder extends AbstractViewHolder<ProductItem, Prod
             public void onClick(View v)
             {
                 item.setChecked(checkbox.isChecked());
-                productService.saveOrUpdate(item, cache.getListId()).subscribe();
+                productService.saveOrUpdate(item, cache.getListId())
+                        .doOnError(Throwable::printStackTrace).subscribe();
                 if ( checkbox.isChecked() && cache.getStatisticsEnabled() )
                 {
-                    statisticsService.saveRecord(item).subscribe();
+                    statisticsService.saveRecord(item)
+                            .doOnError(Throwable::printStackTrace).subscribe();
                 }
 
                 ProductsActivity host = (ProductsActivity) cache.getActivity();
@@ -121,7 +123,8 @@ public class ProductsItemViewHolder extends AbstractViewHolder<ProductItem, Prod
                         .doOnCompleted(() ->
                         {
                             plusButton.setVisibility(View.GONE);
-                        }).subscribe();
+                        })
+                        .doOnError(Throwable::printStackTrace).subscribe();
             }
         });
 

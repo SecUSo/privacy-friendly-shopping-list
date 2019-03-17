@@ -77,6 +77,7 @@ public class ProductsActivity extends AppCompatActivity
                     cache.getCancelSarchButton().setOnClickListener(new CancelSearchOnClick(cache));
                     updateListView();
                 })
+                .doOnError(Throwable::printStackTrace)
                 .subscribe();
 
         setupAlertSubscriber();
@@ -163,8 +164,10 @@ public class ProductsActivity extends AppCompatActivity
                                 reorderProductViewBySelection();
                                 updateTotals();
                             })
+                            .doOnError(Throwable::printStackTrace)
                             .subscribe();
                 })
+                .doOnError(Throwable::printStackTrace)
                 .subscribe();
     }
 
@@ -174,6 +177,7 @@ public class ProductsActivity extends AppCompatActivity
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .doOnNext(x -> alertUpdateSubscriber.onNext(x))
+                .doOnError(Throwable::printStackTrace)
                 .subscribe();
     }
 

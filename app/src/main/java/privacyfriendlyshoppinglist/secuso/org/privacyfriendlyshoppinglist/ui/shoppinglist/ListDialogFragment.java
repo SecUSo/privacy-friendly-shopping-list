@@ -418,6 +418,7 @@ public class ListDialogFragment extends DialogFragment
                                 mainActivity.updateListView();
                             }
                         })
+                        .doOnError(Throwable::printStackTrace)
                         .subscribe();
             }
         });

@@ -49,6 +49,7 @@ public class DeleteListsOnClickListener implements View.OnClickListener
     {
         Observable observable = Observable
                 .defer(() -> Observable.just(deleteListsSync()))
+                .doOnError(Throwable::printStackTrace)
                 .subscribeOn(Schedulers.computation());
         return observable;
     }
@@ -61,7 +62,8 @@ public class DeleteListsOnClickListener implements View.OnClickListener
                 .doOnNext(id ->
                 {
                     // delete all products
-                    productService.deleteAllFromList(id).subscribe();
+                    productService.deleteAllFromList(id)
+                            .doOnError(Throwable::printStackTrace).subscribe();
 
                     // delete reminder
                     ReminderReceiver alarm = new ReminderReceiver();
@@ -69,6 +71,7 @@ public class DeleteListsOnClickListener implements View.OnClickListener
                     alarm.cancelAlarm(cache.getActivity(), intent, id);
                     NotificationUtils.removeNotification(cache.getActivity(), id);
                 })
+                .doOnError(Throwable::printStackTrace)
                 .subscribe();
 
         // go back to list overview

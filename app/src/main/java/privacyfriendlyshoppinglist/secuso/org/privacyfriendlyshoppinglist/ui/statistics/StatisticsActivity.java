@@ -87,6 +87,7 @@ public class StatisticsActivity extends BaseActivity implements Observer
                     cache.getTotalTextView().setText(totalAmount);
                     cache.getTitleTextView().setText(chartData[ 0 ].getTitle());
                 })
+                .doOnError(Throwable::printStackTrace)
                 .subscribe();
     }
 
@@ -129,6 +130,7 @@ public class StatisticsActivity extends BaseActivity implements Observer
                         }
 
                 )
+                .doOnError(Throwable::printStackTrace)
                 .subscribe();
     }
 
