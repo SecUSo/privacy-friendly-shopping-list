@@ -2,7 +2,7 @@ apply plugin: 'com.android.application'
 apply plugin: 'me.tatarka.retrolambda'
 
 android {
-    compileSdkVersion 25
+    compileSdkVersion 28
 
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
@@ -12,9 +12,9 @@ android {
     defaultConfig {
         applicationId "privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist"
         minSdkVersion 17
-        targetSdkVersion 25
-        versionCode 6
-        versionName "1.0.8"
+        targetSdkVersion 26
+        versionCode 7
+        versionName "1.0.9"
     }
 
     buildTypes {
@@ -57,17 +57,17 @@ android {
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     // android
-    androidTestImplementation 'com.android.support:support-annotations:25.3.1'
-    implementation 'com.android.support:appcompat-v7:25.3.1'
-    implementation 'com.android.support:design:25.3.1'
-    implementation 'com.android.support:support-v4:25.3.1'
-    implementation 'com.android.support:recyclerview-v7:25.3.1'
-    implementation 'com.android.support:cardview-v7:25.3.1'
+    androidTestImplementation 'com.android.support:support-annotations:28.0.0'
+    implementation 'com.android.support:appcompat-v7:28.0.0'
+    implementation 'com.android.support:design:28.0.0'
+    implementation 'com.android.support:support-v4:28.0.0'
+    implementation 'com.android.support:recyclerview-v7:28.0.0'
+    implementation 'com.android.support:cardview-v7:28.0.0'
     // tests
     testImplementation 'junit:junit:4.12'
-    testImplementation 'org.mockito:mockito-core:1.9.5'
-    androidTestImplementation 'com.android.support.test:runner:0.5'
-    androidTestImplementation 'com.android.support.test:rules:0.5'
+    testImplementation 'org.mockito:mockito-core:2.7.6'
+    androidTestImplementation 'com.android.support.test:runner:1.0.2'
+    androidTestImplementation 'com.android.support.test:rules:1.0.2'
     testImplementation 'pl.pragmatists:JUnitParams:0.3.6'
     // dependency injection
     implementation 'com.squareup.dagger:dagger:1.2.5'
@@ -75,12 +75,12 @@ dependencies {
     annotationProcessor 'com.squareup.dagger:dagger-compiler:1.2.5'
     compileOnly 'com.squareup.dagger:dagger-compiler:1.2.5'
     // persistence
-    implementation 'com.j256.ormlite:ormlite-android:4.46'
+    implementation 'com.j256.ormlite:ormlite-android:5.0'
     // reactive x
     implementation 'io.reactivex:rxandroid:1.2.0'
     implementation 'io.reactivex:rxjava:1.1.5'
     // joda
-    implementation 'joda-time:joda-time:2.2'
+    implementation 'joda-time:joda-time:2.10.1'
     // graphics
     implementation 'com.github.PhilJay:MPAndroidChart:v3.0.0-beta1'
     // image zoom
