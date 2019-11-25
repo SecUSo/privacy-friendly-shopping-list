@@ -1,0 +1,22 @@
+Privacy Friendly Shopping List allows you to create shopping lists and manage them. It belongs to the Privacy Friendly Apps group developed by the research group SECUSO at Technische Universität Darmstadt. More information can be found an secuso.org/pfa
+
+Create shopping lists and managing them (adding, editing and deleting of lists and items).
+Further features include:
+– Prioritization of the list regarding importance of items.
+– Setup of deadlines and reminders. The reminder will appear as a notification.
+– Visualizing of shopping activities through a bar diagram.
+– Adding of categories, stores and additional notes to products. Possibility to add a product picture. This photo can only be accessed by Privacy Friendly Shopping List.
+– Sharing of lists and/or products as text without the requirement of special system permissions.
+
+What makes Privacy Friendly Shopping List different from other similar apps?
+
+1. Minimal Permissions
+Privacy Friendly Shopping List does not use any permission for its core functions. Only the camera permission is needed, so you can take a picture for a particular product. If this permission is denied (Android version higher than 6), the feature will not be available. All other features will be at your disposition.
+
+2. Full control over your data
+All saved data in the statistics can be deleted permanently with just a few clicks. All this data lives only inside Privacy Friendly Shopping List and can not be accessed from outside.
+
+3. Sharing of list or product data without access of the phone contacts.
+
+4. No advertisement
+Privacy Friendly Shopping List completely relinquishes advertisement.

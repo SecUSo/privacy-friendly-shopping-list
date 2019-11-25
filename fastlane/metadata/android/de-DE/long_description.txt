@@ -1,0 +1,26 @@
+Privacy Friendly Shoppingliste ermöglicht es, Listen für Erledigungen und Einkäufe anzulegen sowie Produkteinträge zu erfassen und zu verwalten.
+
+Die Grundfunktionen der App werden durch einige Features erweitert, die die Nützlichkeit der Verwendung steigern sollen:
+
+1. Listen können nach Wichtigkeit priorisiert werden.
+2. Deadlines und Erinnerungen für Listen können eingestellt werden, die als App-Benachrichtigungen auf dem Smartphone erscheinen.
+3. Erledigte Einkäufe können statistisch erfasst werden und über ein Statistik-Feature graphisch visualisiert werden. So kann beispielsweise herausgefunden werden wie viel Geld pro Monat für bestimmte Produkte gezahlt wird.
+4. Für Produkteinträge können Fotoaufnahmen hinzugefügt werden.
+5. Listen und einzelne Produkte können als Text direkt aus der App mit anderen geteilt werden.
+6. Rechts- oder linkshändige Einstellung der Checkbox für Produkte - damit erscheint die Checkbox zum Abhaken der Einkäufe jeweils am linken oder rechten Rand der Ansicht
+
+Was unterscheidet Privacy Friendly Shoppingliste von anderen, ähnlichen Anwendungen?
+
+1. Reduziertes Einbinden von Berechtigungen
+Privacy Friendly Shoppingliste verzichtet auf Berechtigungen für alle Grundfunktionen. Lediglich für die Nutzung des Foto-Features wird eine Berechtigung für die Kameranutzung benötigt. Diese kann (seit Android 6) auch entzogen werden, was die weiteren Funktionen der App nicht beeinträchtigt.
+
+2. Volle Kontrolle über die gespeicherten Daten der App
+Privacy Friendly Shoppingliste ermöglicht ein Erfassen von Statistiken von Einkäufen und Erledigungen. Diese Funktion kann mit einem einfachen Klick in den Einstellungen global deaktiviert werden. Zusätzlich können alle gespeicherten Daten durch einen Klick permanent gelöscht werden.
+
+3. Sharing von Listen- und Produktdaten ohne Zugriff auf Kontakte
+Listen- und Produktdaten können mit Anderen als formatiert Text geteilt werden, ohne dass auf die Kontakte durch Privacy Friendly Shoppingliste zugegriffen werden muss.
+
+4. Keine Werbung
+Die App verzichtet auf störende Werbung, die zusätzlich Akkulaufzeit und den Verbrauch von Datenvolumen beeinflussen würde.
+
+Die App gehört zur Gruppe der Privacy Friendly Apps, die von der Forschungsgruppe SECUSO der Technischen Universität Darmstadt entwickelt werden. Mehr Informationen unter: https://secuso.org/pfa
