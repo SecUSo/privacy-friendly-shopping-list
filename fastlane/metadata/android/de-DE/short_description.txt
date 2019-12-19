@@ -1,1 +1,1 @@
-Listen für Erledigungen und Einkäufe anlegen sowie Produkteinträge erfassen und verwalten
+Listen für Erledigungen und Einkäufe anlegen sowie Produkteinträge verwalten
