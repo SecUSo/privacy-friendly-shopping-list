@@ -293,7 +293,7 @@
     <string name="help_how_to_save_picture">Take a Picture</string>
     <string name="help_how_to_save_picture_summary1">You can use the device\'s camera to take a picture of a certain
         product and save it. This option is located in the add product dialog (See \"Add a Product\"), or in the edit
-        product dialog (See \"Edit, Delete or Remove\").
+        product dialog (See \"Edit, Delete or Share\").
     </string>
     <string name="help_how_to_save_picture_summary2">Once you are there, click on the arrow to see more options.
         You will see a blue camera icon that will allow you using the camera of your device to take and save a picture
