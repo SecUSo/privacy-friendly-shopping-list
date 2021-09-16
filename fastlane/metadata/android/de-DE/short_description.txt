@@ -1,1 +1,1 @@
-Listen für Erledigungen und Einkäufe anlegen sowie Produkteinträge verwalten
+(SECUSO) Listen für Erledigungen anlegen und Produkteinträge verwalten
