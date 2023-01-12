@@ -13,7 +13,7 @@
             android:layout_height="match_parent">
     </FrameLayout>
 
-    <android.support.design.widget.FloatingActionButton
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/button_capture"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -25,7 +25,7 @@
             android:layout_margin="@dimen/fab_margin"
             android:layout_alignParentBottom="true" android:layout_alignParentEnd="true"/>
 
-    <android.support.design.widget.FloatingActionButton
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/button_flash"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -37,7 +37,7 @@
             android:layout_margin="@dimen/fab_margin"
             android:layout_alignParentTop="true" android:layout_alignParentEnd="true"/>
 
-    <android.support.design.widget.FloatingActionButton
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/button_retake"
             android:visibility="gone"
             android:layout_width="wrap_content"

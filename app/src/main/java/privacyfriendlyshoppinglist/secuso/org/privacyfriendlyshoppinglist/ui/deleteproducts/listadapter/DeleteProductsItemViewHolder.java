@@ -3,9 +3,11 @@ package privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.de
 import android.content.res.ColorStateList;
 import android.content.res.Resources;
 import android.graphics.Paint;
-import android.support.v7.widget.AppCompatCheckBox;
 import android.view.View;
 import android.widget.TextView;
+
+import androidx.appcompat.widget.AppCompatCheckBox;
+
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.R;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.ui.AbstractViewHolder;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.product.business.domain.ProductItem;

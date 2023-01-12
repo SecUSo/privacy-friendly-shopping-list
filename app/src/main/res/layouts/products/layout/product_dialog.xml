@@ -30,7 +30,7 @@
                     android:paddingRight="@dimen/dialog_padding_horizontal"
                     android:paddingLeft="@dimen/dialog_padding_horizontal">
 
-                <android.support.design.widget.TextInputLayout
+                <com.google.android.material.textfield.TextInputLayout
                         app:errorTextAppearance="@style/error_appearance"
                         app:errorEnabled="true"
                         app:counterEnabled="true"
@@ -48,7 +48,7 @@
                             android:imeOptions="actionNext"
                             android:hint="@string/product_name">
                     </AutoCompleteTextView>
-                </android.support.design.widget.TextInputLayout>
+                </com.google.android.material.textfield.TextInputLayout>
 
                 <CheckBox
                         android:id="@+id/product_checkbox"
@@ -91,10 +91,10 @@
                             android:text="+"
                             android:id="@+id/product_button_plus"/>
 
-                    <android.support.design.widget.TextInputLayout
+                    <com.google.android.material.textfield.TextInputLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content">
-                        <android.support.design.widget.TextInputEditText
+                        <com.google.android.material.textfield.TextInputEditText
                                 android:id="@+id/quantity"
                                 android:inputType="number"
                                 android:layout_width="match_parent"
@@ -105,8 +105,8 @@
                                 android:maxLength="3"
                                 android:imeOptions="actionNext"
                                 android:hint="@string/quantity_text">
-                        </android.support.design.widget.TextInputEditText>
-                    </android.support.design.widget.TextInputLayout>
+                        </com.google.android.material.textfield.TextInputEditText>
+                    </com.google.android.material.textfield.TextInputLayout>
                 </LinearLayout>
 
                 <LinearLayout
@@ -115,13 +115,13 @@
                         android:layout_height="wrap_content"
                         android:orientation="horizontal">
 
-                    <android.support.design.widget.TextInputLayout
+                    <com.google.android.material.textfield.TextInputLayout
                             app:errorTextAppearance="@style/error_appearance"
                             app:errorEnabled="true"
                             android:id="@+id/product_price_input_layout"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content">
-                        <android.support.design.widget.TextInputEditText
+                        <com.google.android.material.textfield.TextInputEditText
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:id="@+id/product_price"
@@ -132,7 +132,7 @@
                                 android:selectAllOnFocus="true"
                                 android:imeOptions="actionNext"
                                 android:hint="@string/price_text"/>
-                    </android.support.design.widget.TextInputLayout>
+                    </com.google.android.material.textfield.TextInputLayout>
 
                 </LinearLayout>
             </LinearLayout>
@@ -146,17 +146,17 @@
                     android:paddingRight="@dimen/dialog_padding_horizontal"
                     android:paddingLeft="@dimen/dialog_padding_horizontal">
 
-                <android.support.design.widget.TextInputLayout
+                <com.google.android.material.textfield.TextInputLayout
                         android:layout_toStartOf="@+id/expand_button"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content">
-                    <android.support.design.widget.TextInputEditText
+                    <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/product_notes"
                             android:inputType="textMultiLine|textCapSentences"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:hint="@string/list_notes"/>
-                </android.support.design.widget.TextInputLayout>
+                </com.google.android.material.textfield.TextInputLayout>
 
                 <ImageButton
                         android:id="@+id/expand_button"
@@ -193,7 +193,7 @@
                             android:layout_height="wrap_content"
                             android:orientation="vertical">
 
-                        <android.support.design.widget.TextInputLayout
+                        <com.google.android.material.textfield.TextInputLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content">
                             <AutoCompleteTextView
@@ -205,9 +205,9 @@
                                     android:singleLine="true"
                                     android:imeOptions="actionNext"
                                     android:maxLength="15"/>
-                        </android.support.design.widget.TextInputLayout>
+                        </com.google.android.material.textfield.TextInputLayout>
 
-                        <android.support.design.widget.TextInputLayout
+                        <com.google.android.material.textfield.TextInputLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content">
                             <AutoCompleteTextView
@@ -217,7 +217,7 @@
                                     android:inputType="textAutoComplete|textCapSentences"
                                     android:hint="@string/store_text"
                                     android:maxLength="15"/>
-                        </android.support.design.widget.TextInputLayout>
+                        </com.google.android.material.textfield.TextInputLayout>
 
                     </LinearLayout>
 

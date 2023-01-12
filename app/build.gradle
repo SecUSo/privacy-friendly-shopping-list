@@ -1,18 +1,12 @@
 apply plugin: 'com.android.application'
-apply plugin: 'me.tatarka.retrolambda'
 
 android {
-    compileSdkVersion 28
-
-    compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
-    }
+    compileSdkVersion 33
 
     defaultConfig {
         applicationId "privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist"
-        minSdkVersion 17
-        targetSdkVersion 26
+        minSdkVersion 23
+        targetSdkVersion 33
         versionCode 7
         versionName "1.0.9"
     }
@@ -57,17 +51,18 @@ android {
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     // android
-    androidTestImplementation 'com.android.support:support-annotations:28.0.0'
-    implementation 'com.android.support:appcompat-v7:28.0.0'
-    implementation 'com.android.support:design:28.0.0'
-    implementation 'com.android.support:support-v4:28.0.0'
-    implementation 'com.android.support:recyclerview-v7:28.0.0'
-    implementation 'com.android.support:cardview-v7:28.0.0'
+    androidTestImplementation 'androidx.annotation:annotation:1.0.0'
+    implementation 'androidx.appcompat:appcompat:1.0.0'
+    implementation 'com.google.android.material:material:1.0.0'
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    implementation 'androidx.recyclerview:recyclerview:1.0.0'
+    implementation 'androidx.cardview:cardview:1.0.0'
+
     // tests
     testImplementation 'junit:junit:4.12'
     testImplementation 'org.mockito:mockito-core:2.7.6'
-    androidTestImplementation 'com.android.support.test:runner:1.0.2'
-    androidTestImplementation 'com.android.support.test:rules:1.0.2'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.1'
+    androidTestImplementation 'androidx.test:rules:1.1.1'
     testImplementation 'pl.pragmatists:JUnitParams:0.3.6'
     // dependency injection
     implementation 'com.squareup.dagger:dagger:1.2.5'

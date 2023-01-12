@@ -2,11 +2,13 @@ package privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.sh
 
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
-import android.support.v7.widget.CardView;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import androidx.cardview.widget.CardView;
+
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.R;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.settings.SettingsKeys;
 

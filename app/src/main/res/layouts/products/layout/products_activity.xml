@@ -6,7 +6,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-    <android.support.design.widget.TextInputLayout
+    <com.google.android.material.textfield.TextInputLayout
             android:visibility="gone"
             app:errorTextAppearance="@style/error_appearance"
             app:errorEnabled="true"
@@ -30,7 +30,7 @@
                 android:hint="@string/search"
                 android:selectAllOnFocus="true">
         </AutoCompleteTextView>
-    </android.support.design.widget.TextInputLayout>
+    </com.google.android.material.textfield.TextInputLayout>
 
     <ImageButton
             android:visibility="gone"
@@ -48,20 +48,20 @@
             android:layout_alignParentEnd="true"
             android:layout_alignTop="@+id/search_input_layout"/>
 
-    <android.support.design.widget.CoordinatorLayout
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_above="@+id/layout_total"
             android:layout_below="@+id/search_input_layout">
 
-        <android.support.v7.widget.RecyclerView
+        <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recyclerView"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 app:layout_behavior="@string/appbar_scrolling_view_behavior"
                 android:layout_above="@+id/layout_total"/>
 
-        <android.support.design.widget.FloatingActionButton
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
                 android:id="@+id/fab_new_product"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -98,7 +98,7 @@
                     android:layout_height="wrap_content"/>
         </LinearLayout>
 
-    </android.support.design.widget.CoordinatorLayout>
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
     <LinearLayout
             android:id="@+id/no_products_layout"

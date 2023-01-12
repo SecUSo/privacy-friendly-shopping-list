@@ -2,15 +2,18 @@ package privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.pr
 
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.TextInputLayout;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.widget.AutoCompleteTextView;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.textfield.TextInputLayout;
+
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.R;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.business.PFACache;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.fab.FabScrollListenerForCreateActivities;
@@ -24,9 +27,9 @@ import java.util.ArrayList;
  * Author: Grebiel Jose Ifill Brito
  * Created: 20.07.16 creation date
  */
-public class ProductActivityCache extends PFACache
+public class ProductActivityCache<A extends AppCompatActivity> extends PFACache
 {
-    private AppCompatActivity activity;
+    private A activity;
     private FloatingActionButton newListFab;
     private ProductsAdapter productsAdapter;
     private TextView totalAmountTextView;
@@ -43,7 +46,7 @@ public class ProductActivityCache extends PFACache
     private ImageButton cancelSarchButton;
     private LinearLayout alertTextView;
 
-    public ProductActivityCache(AppCompatActivity activity, String listId, String listName, boolean statisticsEnabled)
+    public ProductActivityCache(A activity, String listId, String listName, boolean statisticsEnabled)
     {
         this.activity = activity;
         this.listId = listId;
@@ -75,7 +78,7 @@ public class ProductActivityCache extends PFACache
         recyclerView.addOnScrollListener(new FabScrollListenerForCreateActivities(newListFab));
     }
 
-    public AppCompatActivity getActivity()
+    public A getActivity()
     {
         return activity;
     }

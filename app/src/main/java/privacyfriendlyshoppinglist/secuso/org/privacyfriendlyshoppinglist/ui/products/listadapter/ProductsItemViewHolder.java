@@ -4,14 +4,16 @@ import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.content.res.Resources;
 import android.graphics.Paint;
-import android.support.v4.app.DialogFragment;
-import android.support.v7.widget.AppCompatCheckBox;
-import android.support.v7.widget.CardView;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.ImageButton;
 import android.widget.TextView;
+
+import androidx.appcompat.widget.AppCompatCheckBox;
+import androidx.cardview.widget.CardView;
+import androidx.fragment.app.DialogFragment;
+
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.R;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.context.AbstractInstanceFactory;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.context.InstanceFactory;
@@ -30,7 +32,7 @@ import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.pro
  * Author: Grebiel Jose Ifill Brito
  * Created: 20.07.16 creation date
  */
-public class ProductsItemViewHolder extends AbstractViewHolder<ProductItem, ProductActivityCache>
+public class ProductsItemViewHolder extends AbstractViewHolder<ProductItem, ProductActivityCache<ProductsActivity>>
 {
     private ProductItemCache productItemCache;
     private ProductService productService;
@@ -85,8 +87,7 @@ public class ProductsItemViewHolder extends AbstractViewHolder<ProductItem, Prod
                 viewPhotoIntent.putExtra(ProductsActivity.PRODUCT_ID_KEY, item.getId());
                 viewPhotoIntent.putExtra(ProductsActivity.PRODUCT_NAME, item.getProductName());
                 viewPhotoIntent.putExtra(ProductsActivity.FROM_DIALOG, false);
-                ProductsActivity activity = (ProductsActivity) cache.getActivity();
-                activity.startActivityForResult(viewPhotoIntent, ProductsActivity.REQUEST_PHOTO_PREVIEW_FROM_ITEM);
+                cache.getActivity().startActivityForResult(viewPhotoIntent, ProductsActivity.REQUEST_PHOTO_PREVIEW_FROM_ITEM);
             }
         });
 
