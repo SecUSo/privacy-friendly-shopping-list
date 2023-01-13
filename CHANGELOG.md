@@ -1,88 +1,124 @@
 # Changelog
 
-<a name="v1.0.9"></a>
-## [Shopping List (Privacy Friendly) v1.0.9 (v1.0.9)](https://github.com/SecUSo/privacy-friendly-shopping-list/releases/tag/v1.0.9) - 28 Mar 2019
+## [Unreleased](https://github.com/SecUSo/privacy-friendly-shopping-list/tree/HEAD)
 
-- fixed a frequent crash
+[Full Changelog](https://github.com/SecUSo/privacy-friendly-shopping-list/compare/v1.0.9...HEAD)
 
-[Changes][v1.0.9]
+**Implemented enhancements:**
+
+- enhancement: show categories [\#88](https://github.com/SecUSo/privacy-friendly-shopping-list/issues/88)
+
+**Closed issues:**
+
+- Copyright violation [\#50](https://github.com/SecUSo/privacy-friendly-shopping-list/issues/50)
+
+**Merged pull requests:**
+
+- Feature/backup integration [\#95](https://github.com/SecUSo/privacy-friendly-shopping-list/pull/95) ([coderPaddyS](https://github.com/coderPaddyS))
+- Repair formatting problems [\#58](https://github.com/SecUSo/privacy-friendly-shopping-list/pull/58) ([katrinleinweber](https://github.com/katrinleinweber))
+
+## [v1.0.9](https://github.com/SecUSo/privacy-friendly-shopping-list/tree/v1.0.9) (2019-03-28)
+
+[Full Changelog](https://github.com/SecUSo/privacy-friendly-shopping-list/compare/v1.0.8...v1.0.9)
+
+**Fixed bugs:**
+
+- rx.exceptions.OnErrorNotImplementedException [\#41](https://github.com/SecUSo/privacy-friendly-shopping-list/issues/41)
+
+**Closed issues:**
+
+- Feature Request: Sortierung "Nach Alphabet \(A bis Z\)" [\#63](https://github.com/SecUSo/privacy-friendly-shopping-list/issues/63)
+- Feature Request: erledigte Aufgaben am Seitenende \(Ansicht "Alle Aufgaben"\) [\#62](https://github.com/SecUSo/privacy-friendly-shopping-list/issues/62)
+- Feature Request: Einstellung bzgl. Aufgaben-Ansicht dauerhaft gespeichert [\#61](https://github.com/SecUSo/privacy-friendly-shopping-list/issues/61)
+- New Product dialog: Category textbox inaccessible if cursor is in Notes [\#57](https://github.com/SecUSo/privacy-friendly-shopping-list/issues/57)
+
+**Merged pull requests:**
+
+- Fix typo [\#60](https://github.com/SecUSo/privacy-friendly-shopping-list/pull/60) ([8sd](https://github.com/8sd))
+
+## [v1.0.8](https://github.com/SecUSo/privacy-friendly-shopping-list/tree/v1.0.8) (2017-06-29)
+
+[Full Changelog](https://github.com/SecUSo/privacy-friendly-shopping-list/compare/v1.0.7...v1.0.8)
+
+**Fixed bugs:**
+
+- Present quantity field to 1 [\#33](https://github.com/SecUSo/privacy-friendly-shopping-list/issues/33)
+
+**Closed issues:**
+
+- + Button gets inaccessible [\#37](https://github.com/SecUSo/privacy-friendly-shopping-list/issues/37)
+- "+" button disappears and doesn't come back when scrolling long lists [\#36](https://github.com/SecUSo/privacy-friendly-shopping-list/issues/36)
+
+**Merged pull requests:**
+
+- Use ScrollListener for current support library [\#39](https://github.com/SecUSo/privacy-friendly-shopping-list/pull/39) ([rleonhardt](https://github.com/rleonhardt))
+- Bug Fixes, Refactoring and New Feature [\#35](https://github.com/SecUSo/privacy-friendly-shopping-list/pull/35) ([ifillbrito](https://github.com/ifillbrito))
+
+## [v1.0.7](https://github.com/SecUSo/privacy-friendly-shopping-list/tree/v1.0.7) (2017-03-07)
+
+[Full Changelog](https://github.com/SecUSo/privacy-friendly-shopping-list/compare/v1.0.6...v1.0.7)
+
+## [v1.0.6](https://github.com/SecUSo/privacy-friendly-shopping-list/tree/v1.0.6) (2017-03-07)
+
+[Full Changelog](https://github.com/SecUSo/privacy-friendly-shopping-list/compare/v1.0.5...v1.0.6)
+
+**Implemented enhancements:**
+
+- Update Welcome-Dialog [\#24](https://github.com/SecUSo/privacy-friendly-shopping-list/issues/24)
+- comma in fractional numbers [\#21](https://github.com/SecUSo/privacy-friendly-shopping-list/issues/21)
+- Feature Request: reset list [\#16](https://github.com/SecUSo/privacy-friendly-shopping-list/issues/16)
+
+**Closed issues:**
+
+- typo \(german version\) [\#30](https://github.com/SecUSo/privacy-friendly-shopping-list/issues/30)
+- Use intent instead of camera [\#19](https://github.com/SecUSo/privacy-friendly-shopping-list/issues/19)
+
+**Merged pull requests:**
+
+- Fixes \#30 Typo: Standardeinstellung [\#31](https://github.com/SecUSo/privacy-friendly-shopping-list/pull/31) ([ifillbrito](https://github.com/ifillbrito))
+- Update welcome dialog [\#29](https://github.com/SecUSo/privacy-friendly-shopping-list/pull/29) ([ifillbrito](https://github.com/ifillbrito))
+- luiscruz contribution: refactor obsoleteLayoutParam [\#28](https://github.com/SecUSo/privacy-friendly-shopping-list/pull/28) ([ifillbrito](https://github.com/ifillbrito))
+- Point/Comma bug fix [\#26](https://github.com/SecUSo/privacy-friendly-shopping-list/pull/26) ([ifillbrito](https://github.com/ifillbrito))
+- japanese translation [\#23](https://github.com/SecUSo/privacy-friendly-shopping-list/pull/23) ([naofum](https://github.com/naofum))
+- Reset list [\#17](https://github.com/SecUSo/privacy-friendly-shopping-list/pull/17) ([ifillbrito](https://github.com/ifillbrito))
+
+## [v1.0.5](https://github.com/SecUSo/privacy-friendly-shopping-list/tree/v1.0.5) (2016-11-21)
+
+[Full Changelog](https://github.com/SecUSo/privacy-friendly-shopping-list/compare/v1.0.4...v1.0.5)
+
+**Implemented enhancements:**
+
+- \[Feature Request\] Sort of place of purchase [\#10](https://github.com/SecUSo/privacy-friendly-shopping-list/issues/10)
+- autorotation, font-size [\#5](https://github.com/SecUSo/privacy-friendly-shopping-list/issues/5)
+
+**Merged pull requests:**
+
+- Font size according to device settings [\#12](https://github.com/SecUSo/privacy-friendly-shopping-list/pull/12) ([ifillbrito](https://github.com/ifillbrito))
+- Edit, Delete, Share dialog for products updated [\#11](https://github.com/SecUSo/privacy-friendly-shopping-list/pull/11) ([ifillbrito](https://github.com/ifillbrito))
+
+## [v1.0.4](https://github.com/SecUSo/privacy-friendly-shopping-list/tree/v1.0.4) (2016-11-19)
+
+[Full Changelog](https://github.com/SecUSo/privacy-friendly-shopping-list/compare/v1.0.3...v1.0.4)
+
+**Closed issues:**
+
+- Create a new list from the old list [\#7](https://github.com/SecUSo/privacy-friendly-shopping-list/issues/7)
+- Missing root project: Move build.gradle.copy to build.gradle [\#4](https://github.com/SecUSo/privacy-friendly-shopping-list/issues/4)
+- Mismatching version information [\#3](https://github.com/SecUSo/privacy-friendly-shopping-list/issues/3)
+
+**Merged pull requests:**
+
+- closes \#7. Duplicate lists, Screen rotation, ScrollViews, Async Refactoring [\#9](https://github.com/SecUSo/privacy-friendly-shopping-list/pull/9) ([ifillbrito](https://github.com/ifillbrito))
+
+## [v1.0.3](https://github.com/SecUSo/privacy-friendly-shopping-list/tree/v1.0.3) (2016-11-05)
+
+[Full Changelog](https://github.com/SecUSo/privacy-friendly-shopping-list/compare/9f73390a63c9690cff1c90ac416e7adb1a631bfc...v1.0.3)
+
+**Closed issues:**
+
+- README.md and License [\#2](https://github.com/SecUSo/privacy-friendly-shopping-list/issues/2)
+- Please remove Funktionsumfangsdokument from Repo [\#1](https://github.com/SecUSo/privacy-friendly-shopping-list/issues/1)
 
 
-<a name="v1.0.8"></a>
-## [Privacy Friendly Shopping List v1.0.8 (v1.0.8)](https://github.com/SecUSo/privacy-friendly-shopping-list/releases/tag/v1.0.8) - 29 Jun 2017
 
-- Bug Fixing
-- New Tutorial
-
-[Changes][v1.0.8]
-
-
-<a name="v1.0.7"></a>
-## [Privacy Friendly Shopping List v1.0.7 (v1.0.7)](https://github.com/SecUSo/privacy-friendly-shopping-list/releases/tag/v1.0.7) - 07 Mar 2017
-
-Versioning problem solved
-
-[Changes][v1.0.7]
-
-
-<a name="v1.0.6"></a>
-## [Privacy Friendly Shopping List v1.0.6 (v1.0.6)](https://github.com/SecUSo/privacy-friendly-shopping-list/releases/tag/v1.0.6) - 07 Mar 2017
-
-- Japanese translation
-- Reseting of all items added
-- Minor bug fixes
-- Design Update
-
-
-[Changes][v1.0.6]
-
-
-<a name="v1.0.5"></a>
-## [Privacy Friendly Shopping List v1.0.5 (v1.0.5)](https://github.com/SecUSo/privacy-friendly-shopping-list/releases/tag/v1.0.5) - 21 Nov 2016
-
-New features:
-- Duplication of list items
-- Sharing of list items
-
-Bug fixes:
-- Adjustment of font size according to the device
-
-
-[Changes][v1.0.5]
-
-
-<a name="v1.0.4"></a>
-## [Privacy Friendly Shopping List v1.0.4 (v1.0.4)](https://github.com/SecUSo/privacy-friendly-shopping-list/releases/tag/v1.0.4) - 19 Nov 2016
-
-New feature: duplication of lists
-
-
-[Changes][v1.0.4]
-
-
-<a name="v1.0.3"></a>
-## [Privacy Friendly Shopping List v1.0.3 (v1.0.3)](https://github.com/SecUSo/privacy-friendly-shopping-list/releases/tag/v1.0.3) - 06 Nov 2016
-
-Create shopping lists and managing them (adding, editing and deleting of lists and items).
-Further features include:
-– Prioritization of list
-– Setup of deadlines and reminders. The reminder will appear as a notification.
-– Visualizing of shopping activities through a bar diagram
-– Adding of categories, stores and additional notes to products. Possibility to add a product picture. This photo can only be accessed by Privacy Friendly Shopping List.
-– Sharing of lists and/or products as text without the requirement of special system permissions.
-
-This app is optimized regarding the user’s privacy. It doesn’t use any tracking mechanisms, neither it displays any advertisement. It belongs to the Privacy Friendly Apps group developed by the Technische Universität Darmstadt.
-
-
-[Changes][v1.0.3]
-
-
-[v1.0.9]: https://github.com/SecUSo/privacy-friendly-shopping-list/compare/v1.0.8...v1.0.9
-[v1.0.8]: https://github.com/SecUSo/privacy-friendly-shopping-list/compare/v1.0.7...v1.0.8
-[v1.0.7]: https://github.com/SecUSo/privacy-friendly-shopping-list/compare/v1.0.6...v1.0.7
-[v1.0.6]: https://github.com/SecUSo/privacy-friendly-shopping-list/compare/v1.0.5...v1.0.6
-[v1.0.5]: https://github.com/SecUSo/privacy-friendly-shopping-list/compare/v1.0.4...v1.0.5
-[v1.0.4]: https://github.com/SecUSo/privacy-friendly-shopping-list/compare/v1.0.3...v1.0.4
-[v1.0.3]: https://github.com/SecUSo/privacy-friendly-shopping-list/tree/v1.0.3
-
- <!-- Generated by https://github.com/rhysd/changelog-from-release -->
+\* *This Changelog was automatically generated by [github_changelog_generator](https://github.com/github-changelog-generator/github-changelog-generator)*
