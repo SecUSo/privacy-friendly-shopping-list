@@ -1,4 +1,5 @@
 apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
 
 android {
     compileSdkVersion 33
@@ -47,7 +48,6 @@ android {
         }
     }
 }
-
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     // android
@@ -66,9 +66,9 @@ dependencies {
     testImplementation 'pl.pragmatists:JUnitParams:0.3.6'
     // dependency injection
     implementation 'com.squareup.dagger:dagger:1.2.5'
-
     annotationProcessor 'com.squareup.dagger:dagger-compiler:1.2.5'
     compileOnly 'com.squareup.dagger:dagger-compiler:1.2.5'
+
     // persistence
     implementation 'com.j256.ormlite:ormlite-android:5.0'
     // reactive x
@@ -80,4 +80,17 @@ dependencies {
     implementation 'com.github.PhilJay:MPAndroidChart:v3.0.0-beta1'
     // image zoom
     implementation 'com.davemorrissey.labs:subsampling-scale-image-view:3.5.0'
+
+    implementation 'androidx.sqlite:sqlite:2.3.0'
+    implementation 'androidx.sqlite:sqlite-ktx:2.3.0'
+
+    // Backup API
+    implementation project(':backup-api')
+    def work_version = '2.7.1'
+    implementation "androidx.work:work-runtime:$work_version"
+    implementation "androidx.work:work-runtime-ktx:$work_version"
+    androidTestImplementation "androidx.work:work-testing:$work_version"
+
+    implementation 'androidx.core:core-ktx:1.7.20'
 }
+
