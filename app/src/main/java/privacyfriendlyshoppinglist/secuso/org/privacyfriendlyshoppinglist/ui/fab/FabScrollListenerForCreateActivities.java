@@ -1,7 +1,8 @@
 package privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.fab;
 
-import android.support.design.widget.FloatingActionButton;
-import android.support.v7.widget.RecyclerView;
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 
 public class FabScrollListenerForCreateActivities extends RecyclerView.OnScrollListener {

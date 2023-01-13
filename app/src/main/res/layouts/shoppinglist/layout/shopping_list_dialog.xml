@@ -31,7 +31,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
 
-                <android.support.design.widget.TextInputLayout
+                <com.google.android.material.textfield.TextInputLayout
                         app:errorTextAppearance="@style/error_appearance"
                         app:counterEnabled="true"
                         app:counterMaxLength="40"
@@ -40,7 +40,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_toStartOf="@+id/imageview_statistics">
-                    <android.support.design.widget.TextInputEditText
+                    <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/list_name"
                             android:inputType="text|textCapSentences"
                             android:layout_width="match_parent"
@@ -49,7 +49,7 @@
                             android:maxLength="40"
                             android:imeOptions="actionNext"
                             android:hint="@string/list_name"/>
-                </android.support.design.widget.TextInputLayout>
+                </com.google.android.material.textfield.TextInputLayout>
 
                 <ImageView
                         android:id="@+id/imageview_statistics"
@@ -61,14 +61,14 @@
                         android:src="@drawable/ic_insert_chart_white_24sp"
                         android:layout_alignParentTop="true" android:layout_toStartOf="@+id/switch_statistics"/>
 
-                <android.support.v7.widget.SwitchCompat
+                <androidx.appcompat.widget.SwitchCompat
                         android:id="@+id/switch_statistics"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:checked="false"
                         android:layout_alignParentTop="true"
                         android:layout_alignParentEnd="true">
-                </android.support.v7.widget.SwitchCompat>
+                </androidx.appcompat.widget.SwitchCompat>
             </RelativeLayout>
 
 
@@ -179,12 +179,12 @@
                         android:layout_height="wrap_content"
                         android:orientation="horizontal">
 
-                    <android.support.v7.widget.SwitchCompat
+                    <androidx.appcompat.widget.SwitchCompat
                             android:id="@+id/switch_reminder"
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
                             android:checked="false">
-                    </android.support.v7.widget.SwitchCompat>
+                    </androidx.appcompat.widget.SwitchCompat>
 
                     <ImageView
                             android:layout_width="30sp"
@@ -208,7 +208,7 @@
                         android:layout_height="wrap_content"
                         android:orientation="horizontal">
 
-                    <android.support.design.widget.TextInputEditText
+                    <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/edittext_reminder"
                             android:layout_width="40sp"
                             android:layout_height="wrap_content"
@@ -234,16 +234,16 @@
 
             </LinearLayout>
 
-            <android.support.design.widget.TextInputLayout
+            <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
-                <android.support.design.widget.TextInputEditText
+                <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/list_notes"
                         android:inputType="textMultiLine|textCapSentences"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="@string/list_notes"/>
-            </android.support.design.widget.TextInputLayout>
+            </com.google.android.material.textfield.TextInputLayout>
         </LinearLayout>
     </ScrollView>
 </LinearLayout>
