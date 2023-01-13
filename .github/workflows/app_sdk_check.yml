@@ -1,0 +1,44 @@
+name: AppVersionCheck
+
+on:
+  workflow_call:
+    inputs: 
+      app_gradle:
+        required: false
+        default: app/build.gradle
+        type: string
+      ref:
+        required: true
+        type: string
+        description: "The commit ref to checkout and compare against"
+      minTargetSdkVersion:
+        required: true
+        type: string
+    secrets:
+      token:
+        required: true
+    
+jobs:
+  sdk_version:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          ref: ${{ inputs.ref }}
+      - name: "Getting the target sdk version"
+        id: version
+        run: |
+          echo targetSdkVersion=$(cat ${{ inputs.app_gradle }} | grep targetSdkVersion | awk '{print $2}') >> $GITHUB_OUTPUT
+    outputs:
+      targetSdkVersion: ${{ steps.version.outputs.targetSdkVersion }}
+
+  check_versions:
+    runs-on: ubuntu-latest
+    needs:
+      - sdk_version
+    steps:
+      - name: "Newer target sdk than ${{inputs.minTargetSdkVersion}}"
+        run: |
+          if [[ "${{ needs.sdk_version.outputs.targetSdkVersion }}" -lt "${{ inputs.minTargetSdkVersion }}" ]]; then
+            exit 1
+          fi

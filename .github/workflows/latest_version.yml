@@ -1,0 +1,29 @@
+name: Get current version
+
+on:
+  workflow_call:
+    outputs:
+      latest:
+        description: "The latest version number in x.y.z notation"
+        value: ${{ jobs.version.outputs.latest }}
+    secrets:
+      token:
+        required: true
+    
+jobs:
+  version:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: InsonusK/get-latest-release@v1.0.1
+        name: "Retreiving the last version number"
+        id: v
+        with:
+          myToken: ${{ secrets.token }}
+          excludeTypes: "prerelease|draft"
+      - id: out
+        run: |
+          latest=$(echo ${{ steps.v.outputs.tag_name }} | grep -Po '[0-9]+\.[0-9]+\.[0-9]+')
+          echo "latest=$latest" >> $GITHUB_OUTPUT
+    outputs:
+      latest: ${{ steps.out.outputs.latest }}

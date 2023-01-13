@@ -1,23 +1,54 @@
-name: Changelog Generation
+name: Create Changelog
 
 on:
-  release:
-    types: [published, released]
-  workflow_dispatch:
+  workflow_call:
+    inputs:
+      ref:
+        required: true
+        type: string
+      version:
+        required: true
+        type: string
+        description: The next version tag
+    secrets:
+      token:
+        required: true
+    outputs:
+      changelog:
+        value: ${{ jobs.changelog.outputs.changelog }}  
+        description: The identifier for the artifact
 
 jobs:
   changelog:
     runs-on: ubuntu-latest
+
     steps:
       - uses: actions/checkout@v3
+        name: "Checkout ${{ inputs.ref }}"
         with:
+          ref: ${{ inputs.ref }}
           submodules: 'recursive'
-          ref: master
-      - uses: rhysd/changelog-from-release/action@v3
+      - name: "Current Date"
+        id: date
+        run: echo "date=$(date +'%Y-%m-%d')" >> $GITHUB_OUTPUT
+      - name: "Get PR body"
+        id: body
+        run: echo body=$(echo "${{github.event.pull_request.body}}" | sed -e 's/Release-Version:.*//') >> $GITHUB_OUTPUT
+      - uses: heinrichreimer/action-github-changelog-generator@v2.3
+        name: "Generate Changelog"
         with:
-          file: CHANGELOG.md
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          commit_summary_template: 'update changelog for %s changes'
-          args: -l 2
-          header: |
-            # Changelog
+          token: ${{ secrets.token }}
+          output: "CHANGELOG.md"
+      - name: "Change Unreleased: to new version ${{ inputs.version }}"
+        run: |
+          sed -e 's/\[Unreleased\](https:\/\/github.com\/SecUSo\/privacy-friendly-shopping-list\/tree\/HEAD)/[${{ inputs.version }}](https:\/\/github.com\/SecUSo\/privacy-friendly-shopping-list\/tree\/v${{needs.next_version.outputs.next}}) (${{steps.date.outputs.date}})/' CHANGELOG.md > /tmp/CHANGELOG.md
+          mv /tmp/CHANGELOG.md CHANGELOG.md
+      - name: Upload Changelog
+        uses: actions/upload-artifact@master
+        with:
+          name: Changelog
+          path: CHANGELOG.md
+
+    outputs:
+      changelog: Changelog
+      
