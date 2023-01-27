@@ -6,6 +6,7 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.preference.PreferenceManager;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.TaskStackBuilder;
@@ -65,7 +66,11 @@ public class ReminderSchedulingService extends IntentService
                 .create(context)
                 .addParentStack(ProductsActivity.class)
                 .addNextIntent(pendingIntent);
-        return stackBuilder.getPendingIntent(Integer.parseInt(listId), PendingIntent.FLAG_UPDATE_CURRENT);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            return stackBuilder.getPendingIntent(Integer.parseInt(listId), PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
+        } else {
+            return stackBuilder.getPendingIntent(Integer.parseInt(listId), PendingIntent.FLAG_UPDATE_CURRENT);
+        }
     }
 
 
