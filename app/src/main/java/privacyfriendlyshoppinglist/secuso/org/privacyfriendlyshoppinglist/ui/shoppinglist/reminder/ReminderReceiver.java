@@ -25,7 +25,12 @@ public class ReminderReceiver extends WakefulBroadcastReceiver
     public void setAlarm(Context context, Intent i, long deltaTimeInMillis, String listId)
     {
         alarmMgr = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
-        PendingIntent pi = PendingIntent.getService(context, Integer.parseInt(listId), i, PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
+        PendingIntent pi = null;
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
+            pi = PendingIntent.getService(context, Integer.parseInt(listId), i, PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
+        } else {
+            pi = PendingIntent.getService(context, Integer.parseInt(listId), i, PendingIntent.FLAG_UPDATE_CURRENT);
+        }
         alarmMgr.set(AlarmManager.RTC_WAKEUP, deltaTimeInMillis, pi);
     }
 
@@ -33,7 +38,12 @@ public class ReminderReceiver extends WakefulBroadcastReceiver
     {
         // If the alarm has been set, cancel it.
         alarmMgr = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
-        PendingIntent pi = PendingIntent.getService(context, Integer.parseInt(listId), i, PendingIntent.FLAG_CANCEL_CURRENT | PendingIntent.FLAG_IMMUTABLE);
+        PendingIntent pi = null;
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
+            pi = PendingIntent.getService(context, Integer.parseInt(listId), i, PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
+        } else {
+            pi = PendingIntent.getService(context, Integer.parseInt(listId), i, PendingIntent.FLAG_UPDATE_CURRENT);
+        }
         pi.cancel();
         alarmMgr.cancel(pi);
     }

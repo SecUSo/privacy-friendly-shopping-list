@@ -6,10 +6,11 @@ android {
 
     defaultConfig {
         applicationId "privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist"
-        minSdkVersion 23
+        minSdkVersion 17
         targetSdkVersion 33
         versionCode 7
         versionName "1.0.9"
+        multiDexEnabled true
     }
 
     buildTypes {
@@ -17,6 +18,11 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
+    }
+
+    compileOptions {
+        sourceCompatibility 1.8
+        targetCompatibility 1.8
     }
 
     testOptions {
@@ -48,14 +54,23 @@ android {
         }
     }
 }
+
+android.applicationVariants.all { variant ->
+    variant.outputs.all {
+        def appName = "pfa-shopping-list"
+        outputFileName = appName + "-${variant.name}-v${variant.versionName}.apk"
+    }
+}
+
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     // android
     androidTestImplementation 'androidx.annotation:annotation:1.0.0'
-    implementation 'androidx.appcompat:appcompat:1.0.0'
-    implementation 'com.google.android.material:material:1.0.0'
+
+    implementation 'androidx.appcompat:appcompat:1.5.1'
+    implementation 'com.google.android.material:material:1.6.1'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
-    implementation 'androidx.recyclerview:recyclerview:1.0.0'
+    implementation 'androidx.recyclerview:recyclerview:1.2.1'
     implementation 'androidx.cardview:cardview:1.0.0'
 
     // tests
@@ -92,5 +107,9 @@ dependencies {
     androidTestImplementation "androidx.work:work-testing:$work_version"
 
     implementation 'androidx.core:core-ktx:1.7.20'
+
+    // Multi-Dex
+    def multidex_version = "2.0.1"
+    implementation("androidx.multidex:multidex:$multidex_version")
 }
 
