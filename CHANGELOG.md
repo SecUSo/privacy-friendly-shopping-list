@@ -1,6 +1,6 @@
 # Changelog
 
-## [Unreleased](https://github.com/SecUSo/privacy-friendly-shopping-list/tree/HEAD)
+## [v1.0.10](https://github.com/SecUSo/privacy-friendly-shopping-list/tree/v1.0.10) (2023-01-14)
 
 [Full Changelog](https://github.com/SecUSo/privacy-friendly-shopping-list/compare/v1.0.9...HEAD)
 

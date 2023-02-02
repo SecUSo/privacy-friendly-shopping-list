@@ -1,0 +1,66 @@
+name: AppVersionCheck
+
+on:
+  workflow_call:
+    inputs: 
+      app_gradle:
+        required: false
+        default: app/build.gradle
+        type: string
+      ref:
+        required: true
+        type: string
+        description: "The commit ref to checkout and compare against"
+    secrets:
+      token:
+        required: true
+    
+jobs:
+  latest_release:
+    uses: ./.github/workflows/latest_version.yml
+    secrets: 
+      token: ${{ secrets.token }}
+
+  old_app_version:
+    runs-on: ubuntu-latest
+    needs: latest_release
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          ref: v${{ needs.latest_release.outputs.latest }}
+      - name: "Getting the old app version"
+        id: version
+        run: |
+          echo versionCode=$(cat ${{ inputs.app_gradle }} | grep versionCode | awk '{print $2}') >> $GITHUB_OUTPUT
+          echo versionName=$(cat ${{ inputs.app_gradle }} | grep versionName | awk '{print $2}') >> $GITHUB_OUTPUT
+    outputs:
+      versionCode: ${{ steps.version.outputs.versionCode }}
+      versionName: ${{ steps.version.outputs.versionName }}
+
+  new_app_version:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          ref: ${{ inputs.ref }}
+      - name: "Getting the new app version"
+        id: version
+        run: |
+          echo versionCode=$(cat ${{ inputs.app_gradle }} | grep versionCode | awk '{print $2}') >> $GITHUB_OUTPUT
+          echo versionName=$(cat ${{ inputs.app_gradle }} | grep versionName | awk '{print $2}') >> $GITHUB_OUTPUT
+    outputs:
+      versionCode: ${{ steps.version.outputs.versionCode }}
+      versionName: ${{ steps.version.outputs.versionName }}
+
+  check_versions:
+    runs-on: ubuntu-latest
+    needs:
+      - old_app_version
+      - new_app_version
+    steps:
+      - name: "Same VersionCode"
+        if: ${{ needs.old_app_version.outputs.versionCode }} == ${{ needs.new_app_version.outputs.versionCode }}
+        run: exit 1
+      - name: "Same VersionName"
+        if: ${{ needs.old_app_version.outputs.versionName }} == ${{ needs.new_app_version.outputs.versionName }}
+        run: exit 1

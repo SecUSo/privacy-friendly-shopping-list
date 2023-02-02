@@ -1,0 +1,76 @@
+name: Changelog Generation
+
+on:
+  pull_request: 
+
+jobs:
+
+  next_version:
+    if: ${{ contains(github.event.pull_request.labels.*.name, 'Release') }}
+    uses: ./.github/workflows/next_version.yml
+    secrets: 
+      token: ${{ secrets.GITHUB_TOKEN }}
+
+  app_version_check:
+    if: ${{ contains(github.event.pull_request.labels.*.name, 'Release') }}
+    uses: ./.github/workflows/app_version_check.yml
+    with:
+      ref: ${{ github.event.pull_request.head.ref }}
+    secrets: 
+      token: ${{ secrets.GITHUB_TOKEN }}
+
+  sdk_version_check:
+    if: ${{ contains(github.event.pull_request.labels.*.name, 'Release') }}
+    uses: ./.github/workflows/app_sdk_check.yml
+    with:
+      ref: ${{ github.event.pull_request.head.ref }}
+      minTargetSdkVersion: ${{ vars.MIN_TARGET_SDK }}
+    secrets: 
+      token: ${{ secrets.GITHUB_TOKEN }}
+      
+  changelog:
+    if: ${{ contains(github.event.pull_request.labels.*.name, 'Release') }}
+    uses: ./.github/workflows/changelog.yml
+    needs: next_version
+    with:
+      ref: ${{ github.event.pull_request.head.ref }}
+      version: v${{ needs.next_version.outputs.next }}
+    secrets: 
+      token: ${{ secrets.GITHUB_TOKEN }}
+
+  finalize:
+    if: ${{ contains(github.event.pull_request.labels.*.name, 'Release') }}
+    runs-on: ubuntu-latest
+    needs:
+      - next_version
+      - app_version_check
+      - sdk_version_check
+      - changelog
+    steps:
+      - uses: actions/checkout@v3
+        name: "Checkout ${{ inputs.ref }}"
+        with:
+          ref: ${{ inputs.ref }}
+          submodules: 'recursive'
+      - uses: actions/download-artifact@master
+        with:
+          name: ${{ needs.changelog.outputs.changelog }}
+          path: CHANGELOG.md
+      - name: "Pushing Changelog"
+        run: |
+          version=v${{ needs.next_version.outputs.next }}
+
+          git add "CHANGELOG.md"
+          git config --global user.name "Action-Changelog-Generator"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          if git commit -m "[Action] generated changelog for $version"; then
+            git tag -d "$version" || true
+            git tag "$version"
+            git push 
+          fi
+          echo "commit=$(git rev-parse HEAD)" >> $GITHUB_OUTPUT
+      - name: "Append version ${{ needs.next_version.outputs.next }}"
+        uses: AsasInnab/pr-body-action@v1
+        with:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          body: "${{steps.body.outputs.body}}\n\nRelease-Version: ${{ needs.next_version.outputs.next }}. [Changelog](../blob/${{ steps.changelog.outputs.commit }}/CHANGELOG.md)"
