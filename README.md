@@ -36,6 +36,10 @@ The app can be installed by using IntelliJ or Android Studio (we recommend to us
 Mininum SDK: 17
 Target SDK: 25
 
+## Application Data Import & Export
+
+This application does not natively have a data import and export feature. Please install and use the [SECUSO Privacy Friendly Backup](https://github.com/SecUSo/privacy-friendly-backup) to backup and restore this application's data. This feature is required when a user migrates their data to a new phone.
+
 ## License
 
 Copyright 2016 by Grebiel J. Ifill B. and Christian König
