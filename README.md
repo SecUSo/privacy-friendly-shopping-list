@@ -36,6 +36,10 @@ The app can be installed by using IntelliJ or Android Studio (we recommend to us
 Mininum SDK: 17
 Target SDK: 25
 
+## Data Backup
+
+You can use the [Privacy Friendly Backup app](https://github.com/SecUSo/privacy-friendly-backup) to backup and restore this application's data. This can also be used to migrate your data to a new phone.
+
 ## License
 
 Copyright 2016 by Grebiel J. Ifill B. and Christian König
