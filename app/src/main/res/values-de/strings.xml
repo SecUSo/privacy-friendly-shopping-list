@@ -201,6 +201,13 @@
     <string name="pref_currency_title">Währung auswählen</string>
     <string name="pref_currency_summary">€</string>
 
+    <string name="pref_app_theme_title">Design</string>
+    <string-array name="pref_app_theme_entries">
+        <item>Hell</item>
+        <item>Dunkel</item>
+        <item>Systemstandard</item>
+    </string-array>
+
     <!-- ### WELCOME DIALOG ### -->
     <string name="welcome_text">Mit dieser App können Einkaufslisten erstellt und verwaltet werden. Listen können priorisiert werden.
         Deadlines und Erinnerungen können ebenfalls gesetzt werden.

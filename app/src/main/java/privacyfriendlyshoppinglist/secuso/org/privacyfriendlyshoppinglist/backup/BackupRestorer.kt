@@ -9,6 +9,7 @@ import org.secuso.privacyfriendlybackup.api.backup.DatabaseUtil
 import org.secuso.privacyfriendlybackup.api.backup.FileUtil
 import org.secuso.privacyfriendlybackup.api.pfa.IBackupRestorer
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.persistence.DB
+import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.helpers.PreferenceKeys
 import java.io.IOException
 import java.io.InputStream
 import java.io.InputStreamReader

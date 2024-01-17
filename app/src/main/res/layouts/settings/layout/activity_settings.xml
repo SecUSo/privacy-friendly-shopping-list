@@ -46,4 +46,10 @@
             app:headerLayout="@layout/nav_header_main"
             app:menu="@menu/activity_main_drawer"/>
 
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/fragment_container_view"
+        android:name="privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.settings.SettingsActivity$MainPreferenceFragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
 </androidx.drawerlayout.widget.DrawerLayout>
