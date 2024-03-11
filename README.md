@@ -18,7 +18,7 @@ The Privacy Friendly App Shopping List is an Android application that does not r
 
 ## Motivation
 
-Nowadays there are many apps that require many or all permissions available in Android in order to be installed. However these apps do not always need all of the permissions they ask for. With this project we want to offer an app where the user can be sure that private information such as contacts, location, identity etc., are not being used by the application. This app is part of the Privacy Friendly Apps group develop by Technische Universität Darmstadt, Germany. More information can be found under https://secuso.org/pfa
+Nowadays there are many apps that require many or all permissions available in Android in order to be installed. However these apps do not always need all of the permissions they ask for. With this project we want to offer an app where the user can be sure that private information such as contacts, location, identity etc., are not being used by the application. This app is part of the Privacy Friendly Apps group develop by Karlsruhe Institute of Technology, Germany. More information can be found under https://secuso.org/pfa
 
 ## Building
 
@@ -56,7 +56,7 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 
-The icons used in the nagivation drawer are licensed under the [CC BY 2.5](http://creativecommons.org/licenses/by/2.5/). In addition to them the app uses icons from [Google Design Material Icons](https://design.google.com/icons/index.html) licensed under Apache License Version 2.0. All other images (the logo of Privacy Friendly Apps, the SECUSO logo, the app logo and the splash screen icon) copyright [Technische Universtität Darmstadt](https://www.tu-darmstadt.de/) (2016). The logo used for the notifications is part of the main logo of Privacy Friendly Shopping List.
+The icons used in the nagivation drawer are licensed under the [CC BY 2.5](http://creativecommons.org/licenses/by/2.5/). In addition to them the app uses icons from [Google Design Material Icons](https://design.google.com/icons/index.html) licensed under Apache License Version 2.0. All other images (the logo of Privacy Friendly Apps, the SECUSO logo, the app logo and the splash screen icon) copyright [SECUSO](www.secuso.org) (2019). The logo used for the notifications is part of the main logo of Privacy Friendly Shopping List.
 
 ## Contributors
 

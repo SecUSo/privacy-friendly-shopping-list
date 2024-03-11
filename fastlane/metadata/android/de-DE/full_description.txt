@@ -1,6 +1,4 @@
-Privacy Friendly Shoppingliste ermöglicht es, Listen für Erledigungen und Einkäufe anzulegen sowie Produkteinträge zu erfassen und zu verwalten.
 
-Die Grundfunktionen der App werden durch einige Features erweitert, die die Nützlichkeit der Verwendung steigern sollen:
 
 1. Listen können nach Wichtigkeit priorisiert werden.
 2. Deadlines und Erinnerungen für Listen können eingestellt werden, die als App-Benachrichtigungen auf dem Smartphone erscheinen.
@@ -24,3 +22,9 @@ Listen- und Produktdaten können mit Anderen als formatiert Text geteilt werden,
 Die App verzichtet auf störende Werbung, die zusätzlich Akkulaufzeit und den Verbrauch von Datenvolumen beeinflussen würde.
 
 Die App gehört zur Gruppe der Privacy Friendly Apps, die von der Forschungsgruppe SECUSO der Technischen Universität Darmstadt entwickelt werden. Mehr Informationen unter: https://secuso.org/pfa
+
+
+Kontaktieren Sie uns gerne über:
+Twitter - @SECUSOResearch https://twitter.com/secusoresearc)
+Mastodon - @SECUSO_Research@bawü.social https://xn--baw-joa.social/@SECUSO_Research/
+Offene Stellen - https://secuso.aifb.kit.edu/83_1557.php
