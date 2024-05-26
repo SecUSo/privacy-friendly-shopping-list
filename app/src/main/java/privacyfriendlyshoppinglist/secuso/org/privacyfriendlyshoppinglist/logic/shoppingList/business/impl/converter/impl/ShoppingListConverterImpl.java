@@ -65,28 +65,20 @@ public class ShoppingListConverterImpl implements ShoppingListConverter
         entity.setPriority(item.getPriority());
     }
 
-    private void setReminder(ListItem item, ShoppingListEntity entity)
-    {
-        if ( item.getReminderCount() != null )
-        {
-            if ( item.isReminderEnabled() )
-            {
-                if ( !StringUtils.isEmpty(item.getReminderCount()) )
-                {
-                    entity.setReminderCount(Integer.valueOf(item.getReminderCount()));
-                }
-                else
-                {
-                    entity.setReminderCount(0);
-                }
-            }
-            else
-            {
-                entity.setReminderCount(null);
-            }
-            entity.setReminderUnit(Integer.valueOf(item.getReminderUnit()));
-        }
-    }
+    private static void setReminder(ListItem item, ShoppingListEntity entity) {
+		if (item.getReminderCount() != null) {
+			if (item.isReminderEnabled()) {
+				if (!StringUtils.isEmpty(item.getReminderCount())) {
+					entity.setReminderCount(Integer.valueOf(item.getReminderCount()));
+				} else {
+					entity.setReminderCount(0);
+				}
+			} else {
+				entity.setReminderCount(null);
+			}
+			entity.setReminderUnit(Integer.valueOf(item.getReminderUnit()));
+		}
+	}
 
     @Override
     public void convertEntityToItem(ShoppingListEntity entity, ListItem item)
