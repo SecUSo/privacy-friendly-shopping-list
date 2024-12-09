@@ -5,12 +5,14 @@ import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.content.res.Resources;
 import android.graphics.Paint;
+import android.util.TypedValue;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+import androidx.annotation.ColorInt;
 import androidx.appcompat.widget.AppCompatCheckBox;
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.DialogFragment;
@@ -184,23 +186,31 @@ public class ProductsItemViewHolder extends AbstractViewHolder<ProductItem, Prod
         CardView productCard = productItemCache.getProductCard();
         AppCompatCheckBox checkbox = (AppCompatCheckBox) productItemCache.getCheckbox();
 
+        TypedValue typedValue = new TypedValue();
+        Resources.Theme theme = checkbox.getContext().getTheme();
         if ( item.isChecked() )
         {
-            int grey = resources.getColor(R.color.middlegrey);
-            productCard.setCardBackgroundColor(resources.getColor(R.color.transparent));
+            theme.resolveAttribute(R.attr.productListItemCheckedBackgroundColor, typedValue, true);
+            @ColorInt int bgColor = typedValue.data;
+            theme.resolveAttribute(R.attr.productListItemCheckedTextColor, typedValue, true);
+            @ColorInt int textColor = typedValue.data;
+            productCard.setCardBackgroundColor(bgColor);
             checkbox.setSupportButtonTintList(ColorStateList.valueOf(resources.getColor(R.color.middleblue)));
-            productNameTextView.setTextColor(grey);
-            quantityTextView.setTextColor(grey);
+            productNameTextView.setTextColor(textColor);
+            quantityTextView.setTextColor(textColor);
             productNameTextView.setPaintFlags(productNameTextView.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
             productQuantityTextView.setPaintFlags(productQuantityTextView.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
         }
         else
         {
-            int black = resources.getColor(R.color.black);
-            productCard.setCardBackgroundColor(resources.getColor(R.color.white));
+            theme.resolveAttribute(R.attr.productListItemBackgroundColor, typedValue, true);
+            @ColorInt int bgColor = typedValue.data;
+            theme.resolveAttribute(R.attr.productListItemTextColor, typedValue, true);
+            @ColorInt int textColor = typedValue.data;
+            productCard.setCardBackgroundColor(bgColor);
             checkbox.setSupportButtonTintList(ColorStateList.valueOf(resources.getColor(R.color.colorAccent)));
-            productNameTextView.setTextColor(black);
-            quantityTextView.setTextColor(black);
+            productNameTextView.setTextColor(textColor);
+            quantityTextView.setTextColor(textColor);
             productNameTextView.setPaintFlags(productNameTextView.getPaintFlags() & (~Paint.STRIKE_THRU_TEXT_FLAG));
             productQuantityTextView.setPaintFlags(productQuantityTextView.getPaintFlags() & (~Paint.STRIKE_THRU_TEXT_FLAG));
         }
