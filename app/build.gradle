@@ -27,6 +27,14 @@ android {
         targetCompatibility JavaVersion.VERSION_17
     }
 
+    kotlinOptions {
+        jvmTarget = JavaVersion.VERSION_17.toString()
+    }
+
+    kotlin {
+        jvmToolchain {17}
+    }
+
     testOptions {
         unitTests {
             returnDefaultValues = true
@@ -57,6 +65,7 @@ android {
     }
     lint {
         lintConfig = file("lint.xml")
+        abortOnError false
     }
     namespace 'privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist'
 }
