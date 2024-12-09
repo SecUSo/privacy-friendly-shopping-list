@@ -73,7 +73,8 @@ class BackupRestorer : IBackupRestorer {
             when (name) {
                 "workoutMode",
                 "privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.pref.sort_asc_dec_key" -> preferences.putBoolean(name, reader.nextBoolean())
-                "privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.pref.sort_by_key" -> preferences.putString(name, reader.nextString())
+                "privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.pref.sort_by_key",
+                PreferenceKeys.APP_THEME-> preferences.putString(name, reader.nextString())
                 else -> throw RuntimeException("Unknown preference $name")
             }
         }
