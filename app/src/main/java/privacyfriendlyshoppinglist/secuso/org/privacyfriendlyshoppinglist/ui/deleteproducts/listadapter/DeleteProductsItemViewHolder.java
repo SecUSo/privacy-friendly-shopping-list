@@ -1,5 +1,6 @@
 package privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.deleteproducts.listadapter;
 
+import android.annotation.SuppressLint;
 import android.content.res.ColorStateList;
 import android.content.res.Resources;
 import android.graphics.Paint;
@@ -47,6 +48,7 @@ public class DeleteProductsItemViewHolder extends AbstractViewHolder<ProductItem
 
     }
 
+    @SuppressLint("RestrictedApi")
     private void updateVisibilityFormat(ProductItem item)
     {
         Resources resources = deleteProductItemCache.getProductCard().getContext().getResources();
