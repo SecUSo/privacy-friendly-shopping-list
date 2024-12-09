@@ -1,13 +1,13 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-parcelize'
 
 android {
-    compileSdkVersion 33
-
     defaultConfig {
         applicationId "privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist"
         minSdkVersion 19
-        targetSdkVersion 33
+        compileSdk 34
+        targetSdkVersion 34
         versionCode 8
         versionName "1.1"
         multiDexEnabled true
@@ -23,8 +23,8 @@ android {
     }
 
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
     }
 
     testOptions {
@@ -58,10 +58,11 @@ android {
     lint {
         lintConfig = file("lint.xml")
     }
+    namespace 'privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist'
 }
 
-android.applicationVariants.all { variant ->
-    variant.outputs.all {
+android.applicationVariants.configureEach { variant ->
+    variant.outputs.configureEach {
         def appName = "pfa-shopping-list"
         outputFileName = appName + "-${variant.name}-v${variant.versionName}.apk"
     }
@@ -70,17 +71,16 @@ android.applicationVariants.all { variant ->
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     // android
-    androidTestImplementation 'androidx.annotation:annotation:1.0.0'
 
-    implementation 'androidx.appcompat:appcompat:1.5.1'
-    implementation 'com.google.android.material:material:1.6.1'
+    implementation 'androidx.appcompat:appcompat:1.6.1'
+    implementation 'com.google.android.material:material:1.11.0'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     implementation 'androidx.preference:preference-ktx:1.2.1'
-    implementation 'androidx.recyclerview:recyclerview:1.2.1'
+    implementation 'androidx.recyclerview:recyclerview:1.3.2'
     implementation 'androidx.cardview:cardview:1.0.0'
 
     // tests
-    testImplementation 'junit:junit:4.12'
+    testImplementation 'junit:junit:4.13.2'
     testImplementation 'org.mockito:mockito-core:2.7.6'
     androidTestImplementation 'androidx.test.ext:junit:1.2.1'
     androidTestImplementation 'androidx.test:rules:1.6.1'
@@ -104,17 +104,17 @@ dependencies {
     // image zoom
     implementation 'com.davemorrissey.labs:subsampling-scale-image-view:3.5.0'
 
-    implementation 'androidx.sqlite:sqlite:2.3.0'
-    implementation 'androidx.sqlite:sqlite-ktx:2.3.0'
+    implementation 'androidx.sqlite:sqlite:2.4.0'
+    implementation 'androidx.sqlite:sqlite-ktx:2.4.0'
 
     // Backup API
     implementation project(':backup-api')
-    def work_version = '2.7.1'
+    def work_version = '2.9.0'
     implementation "androidx.work:work-runtime:$work_version"
     implementation "androidx.work:work-runtime-ktx:$work_version"
     androidTestImplementation "androidx.work:work-testing:$work_version"
 
-    implementation 'androidx.core:core-ktx:1.7.20'
+    implementation "androidx.core:core-ktx:$kotlin_version"
 
     // Multi-Dex
     def multidex_version = "2.0.1"
