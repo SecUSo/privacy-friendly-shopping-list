@@ -55,6 +55,9 @@ android {
                     ]
         }
     }
+    lint {
+        lintConfig = file("lint.xml")
+    }
 }
 
 android.applicationVariants.all { variant ->
