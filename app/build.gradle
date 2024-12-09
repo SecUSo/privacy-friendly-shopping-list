@@ -6,11 +6,13 @@ android {
 
     defaultConfig {
         applicationId "privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist"
-        minSdkVersion 17
+        minSdkVersion 19
         targetSdkVersion 33
         versionCode 8
         versionName "1.1"
         multiDexEnabled true
+
+        testInstrumentationRunner 'androidx.test.runner.AndroidJUnitRunner'
     }
 
     buildTypes {
@@ -53,6 +55,9 @@ android {
                     ]
         }
     }
+    lint {
+        lintConfig = file("lint.xml")
+    }
 }
 
 android.applicationVariants.all { variant ->
@@ -76,8 +81,10 @@ dependencies {
     // tests
     testImplementation 'junit:junit:4.12'
     testImplementation 'org.mockito:mockito-core:2.7.6'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.1'
-    androidTestImplementation 'androidx.test:rules:1.1.1'
+    androidTestImplementation 'androidx.test.ext:junit:1.2.1'
+    androidTestImplementation 'androidx.test:rules:1.6.1'
+    androidTestImplementation 'androidx.test:core:1.6.1'
+    androidTestImplementation 'com.android.support.test.espresso:espresso-contrib:3.0.2'
     testImplementation 'pl.pragmatists:JUnitParams:0.3.6'
     // dependency injection
     implementation 'com.squareup.dagger:dagger:1.2.5'

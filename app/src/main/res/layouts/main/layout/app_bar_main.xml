@@ -1,76 +1,76 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:id="@+id/coordinatorLayout"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/coordinatorLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
-    <include layout="@layout/main_toolbar"/>
+    <include layout="@layout/main_toolbar" />
 
     <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recyclerView"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
+        android:id="@+id/recyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/fab_new_list"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom|end"
-            android:layout_margin="@dimen/fab_margin"
-            android:tint="@color/white"
-            android:src="@android:drawable/ic_input_add"
-            app:layout_anchor="@id/recyclerView"
-            app:layout_anchorGravity="bottom|right|end"/>
+        android:id="@+id/fab_new_list"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="@dimen/fab_margin"
+        android:src="@android:drawable/ic_input_add"
+        android:tint="@color/white"
+        app:layout_anchor="@id/recyclerView"
+        app:layout_anchorGravity="bottom|right|end" />
 
     <LinearLayout
-            android:visibility="gone"
-            android:id="@+id/insert_alert"
-            android:orientation="horizontal"
-            android:layout_margin="@dimen/fab_margin"
-            android:paddingRight="70sp"
-            android:gravity="center_vertical"
-            app:layout_anchor="@id/fab_new_list"
-            app:layout_anchorGravity="bottom|left"
-            android:layout_width="wrap_content"
-            android:layout_height="50sp">
+        android:id="@+id/insert_alert"
+        android:layout_width="wrap_content"
+        android:layout_height="50sp"
+        android:layout_margin="@dimen/fab_margin"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingRight="70sp"
+        android:visibility="gone"
+        app:layout_anchor="@id/fab_new_list"
+        app:layout_anchorGravity="bottom|left">
 
         <TextView
-                android:text="@string/alert_message_list"
-                android:gravity="center_vertical"
-                android:textStyle="bold|italic"
-                android:textColor="@color/colorPrimaryDark"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:text="@string/alert_message_list"
+            android:textColor="@color/colorPrimaryDark"
+            android:textStyle="bold|italic" />
 
         <ImageView
-                android:tint="@color/colorPrimary"
-                android:src="@drawable/ic_keyboard_arrow_right_black_24sp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_keyboard_arrow_right_black_24sp"
+            app:tint="@color/colorPrimary" />
     </LinearLayout>
 
     <LinearLayout
-            android:visibility="gone"
-            android:id="@+id/no_lists_layout"
-            android:orientation="vertical"
-            android:gravity="center"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
+        android:id="@+id/no_lists_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:visibility="gone">
+
         <ImageView
-                android:layout_gravity="center"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/icon_splash"/>
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:src="@drawable/icon_splash" />
 
         <TextView
-                android:layout_gravity="center"
-                android:textAlignment="center"
-                android:text="@string/lists_empty"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="@string/lists_empty"
+            android:textAlignment="center" />
     </LinearLayout>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

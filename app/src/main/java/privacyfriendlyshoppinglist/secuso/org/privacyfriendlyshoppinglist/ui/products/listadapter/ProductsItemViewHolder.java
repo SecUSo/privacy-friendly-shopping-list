@@ -1,5 +1,6 @@
 package privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.products.listadapter;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.content.res.Resources;
@@ -173,6 +174,7 @@ public class ProductsItemViewHolder extends AbstractViewHolder<ProductItem, Prod
 
     }
 
+    @SuppressLint("RestrictedApi")
     private void updateVisibilityFormat(ProductItem item)
     {
         Resources resources = cache.getActivity().getResources();

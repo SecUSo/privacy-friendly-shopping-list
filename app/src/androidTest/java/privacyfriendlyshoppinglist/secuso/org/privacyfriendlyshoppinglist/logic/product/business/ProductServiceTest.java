@@ -1,8 +1,19 @@
 package privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.product.business;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
+
 import android.content.res.Resources;
+
+import androidx.test.platform.app.InstrumentationRegistry;
+
 import org.joda.time.DateTime;
 import org.junit.Test;
+
+import java.util.Arrays;
+import java.util.List;
+
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.AbstractDatabaseTest;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.R;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.context.AbstractInstanceFactory;
@@ -13,16 +24,12 @@ import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.shoppingList.business.ShoppingListService;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.shoppingList.business.domain.ListItem;
 
-import java.util.Arrays;
-import java.util.List;
-
 /**
  * Description:
  * Author: Grebiel Jose Ifill Brito
  * Created: 17.07.16 creation date
  */
-public class ProductServiceTest extends AbstractDatabaseTest
-{
+public class ProductServiceTest extends AbstractDatabaseTest {
 
     private ProductService productService;
     private ShoppingListService shoppingListService;
@@ -33,14 +40,13 @@ public class ProductServiceTest extends AbstractDatabaseTest
     private String language;
 
     @Override
-    protected void setupBeforeEachTest()
-    {
-        AbstractInstanceFactory instanceFactory = new InstanceFactoryForTests(getContext());
+    protected void setupBeforeEachTest() {
+        AbstractInstanceFactory instanceFactory = new InstanceFactoryForTests(InstrumentationRegistry.getInstrumentation().getContext());
         productService = (ProductService) instanceFactory.createInstance(ProductService.class);
         shoppingListService = (ShoppingListService) instanceFactory.createInstance(ShoppingListService.class);
         productItemDao = (ProductItemDao) instanceFactory.createInstance(ProductItemDao.class);
 
-        Resources resources = getContext().getResources();
+        Resources resources = InstrumentationRegistry.getInstrumentation().getContext().getResources();
         shortDatePattern = resources.getString(R.string.date_short_pattern);
         timePattern = resources.getString(R.string.time_pattern);
         language = resources.getString(R.string.language);
@@ -67,8 +73,7 @@ public class ProductServiceTest extends AbstractDatabaseTest
     }
 
     @Test
-    public void testSaveProductItem()
-    {
+    public void testSaveProductItem() {
         ProductItem item = getDefaultItem();
 
         productService.saveOrUpdate(item, listId).toBlocking().single();
@@ -77,8 +82,7 @@ public class ProductServiceTest extends AbstractDatabaseTest
     }
 
     @Test
-    public void testGetById()
-    {
+    public void testGetById() {
         ProductItem item = getDefaultItem();
         productService.saveOrUpdate(item, listId).toBlocking().single();
 
@@ -87,8 +91,7 @@ public class ProductServiceTest extends AbstractDatabaseTest
     }
 
     @Test
-    public void testDeleteById()
-    {
+    public void testDeleteById() {
         ProductItem item = getDefaultItem();
         productService.saveOrUpdate(item, listId).toBlocking().single();
 
@@ -99,8 +102,7 @@ public class ProductServiceTest extends AbstractDatabaseTest
     }
 
     @Test
-    public void testDeleteSelected()
-    {
+    public void testDeleteSelected() {
         ProductItem item1 = getDefaultItem();
         item1.setSelectedForDeletion(false);
         productService.saveOrUpdate(item1, listId).toBlocking().single();
@@ -121,8 +123,7 @@ public class ProductServiceTest extends AbstractDatabaseTest
     }
 
     @Test
-    public void testGetAllProducts()
-    {
+    public void testGetAllProducts() {
         ProductItem item1 = getDefaultItem();
         productService.saveOrUpdate(item1, listId).toBlocking().single();
 
@@ -140,8 +141,7 @@ public class ProductServiceTest extends AbstractDatabaseTest
     }
 
     @Test
-    public void testMoveSelectedToEnd()
-    {
+    public void testMoveSelectedToEnd() {
         ProductItem item1 = getDefaultItem();
         item1.setChecked(true);
         ProductItem item2 = getDefaultItem();
@@ -154,8 +154,7 @@ public class ProductServiceTest extends AbstractDatabaseTest
     }
 
     @Test
-    public void testDeleteProductsWhenListIsDeleted()
-    {
+    public void testDeleteProductsWhenListIsDeleted() {
         ProductItem item1 = getDefaultItem();
         item1.setId(null);
         item1.setId(null);
@@ -177,8 +176,7 @@ public class ProductServiceTest extends AbstractDatabaseTest
     }
 
 
-    private ProductItem getDefaultItem()
-    {
+    private ProductItem getDefaultItem() {
         String expectedProductId = "1";
         String expectedQuantity = "5";
         String expectedNotes = "Some Notes";

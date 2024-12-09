@@ -1,6 +1,12 @@
 package privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.product.business.impl.converter;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+
+import androidx.test.platform.app.InstrumentationRegistry;
+
 import org.junit.Test;
+
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.AbstractDatabaseTest;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.context.AbstractInstanceFactory;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.context.InstanceFactoryForTests;
@@ -12,20 +18,17 @@ import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.
  * Author: Grebiel Jose Ifill Brito
  * Created: 17.07.16 creation date
  */
-public class ProductConverterServiceTest extends AbstractDatabaseTest
-{
+public class ProductConverterServiceTest extends AbstractDatabaseTest {
     private ProductConverterService converterService;
 
     @Override
-    protected void setupBeforeEachTest()
-    {
-        AbstractInstanceFactory instanceFactory = new InstanceFactoryForTests(getContext());
+    protected void setupBeforeEachTest() {
+        AbstractInstanceFactory instanceFactory = new InstanceFactoryForTests(InstrumentationRegistry.getInstrumentation().getContext());
         converterService = (ProductConverterService) instanceFactory.createInstance(ProductConverterService.class);
     }
 
     @Test
-    public void testConvertItemToEntity() throws Exception
-    {
+    public void testConvertItemToEntity() throws Exception {
         String expectedProductId = "1";
         String expectedQuantity = "5";
         String expectedNotes = "Some Notes";
@@ -52,8 +55,7 @@ public class ProductConverterServiceTest extends AbstractDatabaseTest
     }
 
     @Test
-    public void testConvertEntitiesToItem() throws Exception
-    {
+    public void testConvertEntitiesToItem() throws Exception {
         String expectedProductName = "product";
         String expectedCategory = "category";
 
