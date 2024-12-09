@@ -65,7 +65,6 @@ android {
     }
     lint {
         lintConfig = file("lint.xml")
-        abortOnError false
     }
     namespace 'privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist'
 }
