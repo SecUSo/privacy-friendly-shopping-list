@@ -241,7 +241,7 @@
         data saved in the statistics.
     </string>
     <string name="help_how_to_enable_statistics">Enable Statistics</string>
-    <string name="help_how_to_enable_statistics_summary1">Once you are in the list dialog (See \"Create a List\"),
+    <string name="help_how_to_enable_statistics_summary1">Once you are in the add or edit list dialog (See \"Create a List\" or \"Edit, Delete or Share\"),
         you can enable the statistics by using the switch button next the to icon with three bars. After this option
         has been switched on, items are going to be registered in the statistics as soon as the items are checked.
     </string>
@@ -293,7 +293,7 @@
     <string name="help_how_to_save_picture">Take a Picture</string>
     <string name="help_how_to_save_picture_summary1">You can use the device\'s camera to take a picture of a certain
         product and save it. This option is located in the add product dialog (See \"Add a Product\"), or in the edit
-        product dialog (See \"Edit, Delete or Remove\").
+        product dialog (See \"Edit, Delete or Share\").
     </string>
     <string name="help_how_to_save_picture_summary2">Once you are there, click on the arrow to see more options.
         You will see a blue camera icon that will allow you using the camera of your device to take and save a picture
