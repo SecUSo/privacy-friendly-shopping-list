@@ -3,6 +3,7 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-parcelize'
 
 android {
+    namespace "privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist"
     defaultConfig {
         applicationId "privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist"
         minSdkVersion 19
@@ -122,7 +123,7 @@ dependencies {
     implementation "androidx.work:work-runtime-ktx:$work_version"
     androidTestImplementation "androidx.work:work-testing:$work_version"
 
-    implementation "androidx.core:core-ktx:$kotlin_version"
+    implementation "androidx.core:core-ktx:1.9.0"
 
     // Multi-Dex
     def multidex_version = "2.0.1"
