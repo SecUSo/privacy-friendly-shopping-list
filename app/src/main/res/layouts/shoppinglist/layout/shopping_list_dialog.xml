@@ -68,9 +68,9 @@
                     android:id="@+id/switch_statistics"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:layout_alignParentTop="true"
+                    android:layout_centerInParent="true"
                     android:layout_alignParentEnd="true"
-                    android:checked="false"></androidx.appcompat.widget.SwitchCompat>
+                    android:checked="false" />
             </RelativeLayout>
 
 
