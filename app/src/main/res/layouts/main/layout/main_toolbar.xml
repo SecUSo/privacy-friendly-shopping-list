@@ -11,6 +11,7 @@
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:background="?attr/colorPrimary"
+            app:titleTextColor="@color/design_default_color_on_primary"
             app:popupTheme="@style/AppTheme.PopupOverlay">
     </androidx.appcompat.widget.Toolbar>
 

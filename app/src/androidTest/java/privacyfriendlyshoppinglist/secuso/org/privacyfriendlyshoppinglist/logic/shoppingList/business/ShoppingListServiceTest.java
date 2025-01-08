@@ -1,5 +1,10 @@
 package privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.shoppingList.business;
 
+import static androidx.test.InstrumentationRegistry.getContext;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+
 import android.content.res.Resources;
 import org.joda.time.DateTime;
 import org.junit.Test;

@@ -1,7 +1,14 @@
 package privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.product.persistence;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+
+import androidx.test.platform.app.InstrumentationRegistry;
+
 import com.j256.ormlite.dao.ForeignCollection;
+
 import org.junit.Test;
+
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.AbstractDatabaseTest;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.context.AbstractInstanceFactory;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.context.InstanceFactoryForTests;
@@ -14,8 +21,7 @@ import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.
  * Author: Grebiel Jose Ifill Brito
  * Created: 11.06.16 creation date
  */
-public class ProductItemDaoTest extends AbstractDatabaseTest
-{
+public class ProductItemDaoTest extends AbstractDatabaseTest {
 
     private ShoppingListDao shoppingListDao;
     private ProductItemDao productItemDao;
@@ -23,9 +29,8 @@ public class ProductItemDaoTest extends AbstractDatabaseTest
 
 
     @Override
-    protected void setupBeforeEachTest()
-    {
-        AbstractInstanceFactory instanceFactory = new InstanceFactoryForTests(getContext());
+    protected void setupBeforeEachTest() {
+        AbstractInstanceFactory instanceFactory = new InstanceFactoryForTests(InstrumentationRegistry.getInstrumentation().getContext());
 
         shoppingListDao = (ShoppingListDao) instanceFactory.createInstance(ShoppingListDao.class);
         productItemDao = (ProductItemDao) instanceFactory.createInstance(ProductItemDao.class);
@@ -37,8 +42,7 @@ public class ProductItemDaoTest extends AbstractDatabaseTest
     }
 
     @Test
-    public void testSave()
-    {
+    public void testSave() {
         ProductItemEntity entity = new ProductItemEntity();
         entity.setShoppingList(shoppingList);
 
@@ -53,8 +57,7 @@ public class ProductItemDaoTest extends AbstractDatabaseTest
     }
 
     @Test(expected = Exception.class)
-    public void testSaveWithoutProductTemplate()
-    {
+    public void testSaveWithoutProductTemplate() {
         ProductItemEntity entity = new ProductItemEntity();
         entity.setShoppingList(shoppingList);
 
@@ -62,8 +65,7 @@ public class ProductItemDaoTest extends AbstractDatabaseTest
     }
 
     @Test(expected = Exception.class)
-    public void testSaveWithoutShoppingList()
-    {
+    public void testSaveWithoutShoppingList() {
         ProductItemEntity entity = new ProductItemEntity();
         productItemDao.save(entity);
     }

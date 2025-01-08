@@ -195,6 +195,18 @@
     <string name="pref_header_currency">Currency</string>
     <string name="pref_currency_title">Select currency</string>
     <string name="pref_currency_summary">$</string>
+    <string name="pref_app_theme_title">Theme</string>
+    <string-array name="pref_app_theme_entries">
+        <item>Light</item>
+        <item>Dark</item>
+        <item>System default</item>
+    </string-array>
+    <string name="pref_app_theme_default" translatable="false">SYSTEM</string>
+    <string-array name="pref_app_theme_values" translatable="false">
+        <item>LIGHT</item>
+        <item>DARK</item>
+        <item>SYSTEM</item>
+    </string-array>
     <!-- ### WELCOME DIALOG ### -->
     <string name="welcome_text">With this app you can create and manage shopping lists. Lists can be prioritized, have deadlines,
          reminders and more.

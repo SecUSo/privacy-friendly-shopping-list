@@ -26,3 +26,15 @@ local.properties
 .Trashes
 ehthumbs.db
 Thumbs.db
+
+# Documents
+*.pdf
+*.doc
+*.docx
+*.odt
+
+# APKs
+*.apk
+/pfa.properties
+/.idea/
+/app/release

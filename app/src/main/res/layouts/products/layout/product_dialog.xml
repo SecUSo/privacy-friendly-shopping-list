@@ -1,248 +1,256 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              xmlns:app="http://schemas.android.com/apk/res-auto"
-              android:layout_width="match_parent"
-              android:layout_height="wrap_content"
-              android:orientation="vertical">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
     <TextView
-            android:id="@+id/dialog_title"
-            android:gravity="center"
-            android:text="@string/product_dialog_title"
-            android:background="@color/colorPrimaryDark"
-            android:textColor="@color/white"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/dialog_title_height"
-            android:textStyle="bold"/>
+        android:id="@+id/dialog_title"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dialog_title_height"
+        android:background="@color/colorPrimaryDark"
+        android:gravity="center"
+        android:text="@string/product_dialog_title"
+        android:textColor="@color/white"
+        android:textStyle="bold" />
 
     <ScrollView
-            android:fadeScrollbars="false"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fadeScrollbars="false">
 
         <LinearLayout
-                android:orientation="vertical"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
             <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:paddingRight="@dimen/dialog_padding_horizontal"
-                    android:paddingLeft="@dimen/dialog_padding_horizontal">
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingLeft="@dimen/dialog_padding_horizontal"
+                android:paddingRight="@dimen/dialog_padding_horizontal">
 
                 <com.google.android.material.textfield.TextInputLayout
-                        app:errorTextAppearance="@style/error_appearance"
-                        app:errorEnabled="true"
-                        app:counterEnabled="true"
-                        app:counterMaxLength="40"
-                        android:id="@+id/product_name_input_layout"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content" android:layout_toStartOf="@+id/product_checkbox">
+                    android:id="@+id/product_name_input_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_toStartOf="@+id/product_checkbox"
+                    app:counterEnabled="true"
+                    app:counterMaxLength="40"
+                    app:errorEnabled="true"
+                    app:errorTextAppearance="@style/error_appearance">
+
                     <AutoCompleteTextView
-                            android:id="@+id/product_name"
-                            android:inputType="text|textCapSentences"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:selectAllOnFocus="true"
-                            android:maxLength="40"
-                            android:imeOptions="actionNext"
-                            android:hint="@string/product_name">
-                    </AutoCompleteTextView>
+                        android:id="@+id/product_name"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/product_name"
+                        android:imeOptions="actionNext"
+                        android:inputType="text|textCapSentences"
+                        android:maxLength="40"
+                        android:selectAllOnFocus="true"></AutoCompleteTextView>
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <CheckBox
-                        android:id="@+id/product_checkbox"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerVertical="true"
-                        android:layout_alignParentEnd="true"/>
+                    android:id="@+id/product_checkbox"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true" />
 
             </RelativeLayout>
 
             <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:weightSum="1"
-                    android:orientation="horizontal"
-                    android:paddingRight="@dimen/dialog_padding_horizontal"
-                    android:paddingLeft="@dimen/dialog_padding_horizontal">
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingLeft="@dimen/dialog_padding_horizontal"
+                android:paddingRight="@dimen/dialog_padding_horizontal"
+                android:weightSum="1">
 
                 <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="0.3"
-                        android:gravity="center_vertical"
-                        android:orientation="horizontal">
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.3"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
                     <Button
-                            android:layout_marginRight="@dimen/dialog_margin_buttons"
-                            style="?android:attr/buttonStyleSmall"
-                            android:layout_width="30sp"
-                            android:layout_height="30sp"
-                            android:background="@drawable/button_normal"
-                            android:textColor="@color/white"
-                            android:text="-"
-                            android:id="@+id/product_button_minus"/>
+                        android:id="@+id/product_button_minus"
+                        style="?android:attr/buttonStyleSmall"
+                        android:layout_width="30sp"
+                        android:layout_height="30sp"
+                        android:layout_marginRight="@dimen/dialog_margin_buttons"
+                        android:background="@drawable/button_normal"
+                        android:text="-"
+                        android:textColor="@color/white" />
+
                     <Button
-                            style="?android:attr/buttonStyleSmall"
-                            android:layout_width="30sp"
-                            android:layout_height="30sp"
-                            android:background="@drawable/button_normal"
-                            android:textColor="@color/white"
-                            android:text="+"
-                            android:id="@+id/product_button_plus"/>
+                        android:id="@+id/product_button_plus"
+                        style="?android:attr/buttonStyleSmall"
+                        android:layout_width="30sp"
+                        android:layout_height="30sp"
+                        android:background="@drawable/button_normal"
+                        android:text="+"
+                        android:textColor="@color/white" />
 
                     <com.google.android.material.textfield.TextInputLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content">
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
                         <com.google.android.material.textfield.TextInputEditText
-                                android:id="@+id/quantity"
-                                android:inputType="number"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:selectAllOnFocus="true"
-                                android:maxLines="1"
-                                android:gravity="center"
-                                android:maxLength="3"
-                                android:imeOptions="actionNext"
-                                android:hint="@string/quantity_text">
-                        </com.google.android.material.textfield.TextInputEditText>
+                            android:id="@+id/quantity"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:hint="@string/quantity_text"
+                            android:imeOptions="actionNext"
+                            android:inputType="number"
+                            android:maxLength="3"
+                            android:maxLines="1"
+                            android:selectAllOnFocus="true"></com.google.android.material.textfield.TextInputEditText>
                     </com.google.android.material.textfield.TextInputLayout>
                 </LinearLayout>
 
                 <LinearLayout
-                        android:layout_weight="0.7"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal">
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.7"
+                    android:orientation="horizontal">
 
                     <com.google.android.material.textfield.TextInputLayout
-                            app:errorTextAppearance="@style/error_appearance"
-                            app:errorEnabled="true"
-                            android:id="@+id/product_price_input_layout"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content">
+                        android:id="@+id/product_price_input_layout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:errorEnabled="true"
+                        app:errorTextAppearance="@style/error_appearance">
+
                         <com.google.android.material.textfield.TextInputEditText
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:id="@+id/product_price"
-                                android:gravity="center"
-                                android:maxLines="1"
-                                android:inputType="numberDecimal"
-                                android:digits="0123456789.,"
-                                android:selectAllOnFocus="true"
-                                android:imeOptions="actionNext"
-                                android:hint="@string/price_text"/>
+                            android:id="@+id/product_price"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:digits="0123456789.,"
+                            android:gravity="center"
+                            android:hint="@string/price_text"
+                            android:imeOptions="actionNext"
+                            android:inputType="numberDecimal"
+                            android:maxLines="1"
+                            android:selectAllOnFocus="true" />
                     </com.google.android.material.textfield.TextInputLayout>
 
                 </LinearLayout>
             </LinearLayout>
 
             <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_marginTop="@dimen/negative_margin_big"
-                    android:paddingBottom="@dimen/dialog_padding_vertical"
-                    android:paddingRight="@dimen/dialog_padding_horizontal"
-                    android:paddingLeft="@dimen/dialog_padding_horizontal">
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/negative_margin_big"
+                android:orientation="horizontal"
+                android:paddingLeft="@dimen/dialog_padding_horizontal"
+                android:paddingRight="@dimen/dialog_padding_horizontal"
+                android:paddingBottom="@dimen/dialog_padding_vertical">
 
                 <com.google.android.material.textfield.TextInputLayout
-                        android:layout_toStartOf="@+id/expand_button"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_toStartOf="@+id/expand_button">
+
                     <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/product_notes"
-                            android:inputType="textMultiLine|textCapSentences"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:hint="@string/list_notes"/>
+                        android:id="@+id/product_notes"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/list_notes"
+                        android:inputType="textMultiLine|textCapSentences" />
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <ImageButton
-                        android:id="@+id/expand_button"
-                        android:tint="@color/colorAccent"
-                        android:layout_width="50sp"
-                        android:layout_height="@dimen/icon_size"
-                        android:paddingLeft="15sp"
-                        android:paddingRight="15sp"
-                        android:scaleType="fitCenter"
-                        android:layout_marginLeft="@dimen/list_margin_big"
-                        android:background="?android:selectableItemBackground"
-                        android:src="@drawable/ic_keyboard_arrow_down_white_48sp"
-                        android:layout_centerVertical="true"
-                        android:layout_alignParentEnd="true"/>
+                    android:id="@+id/expand_button"
+                    android:layout_width="50sp"
+                    android:layout_height="@dimen/icon_size"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/list_margin_big"
+                    android:background="?android:selectableItemBackground"
+                    android:paddingLeft="15sp"
+                    android:paddingRight="15sp"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/ic_keyboard_arrow_down_white_48sp"
+                    app:tint="@color/colorAccent" />
             </RelativeLayout>
 
             <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical"
-                    android:id="@+id/expandable_product_view"
-                    android:paddingRight="@dimen/dialog_padding_horizontal"
-                    android:paddingLeft="@dimen/dialog_padding_horizontal">
+                android:id="@+id/expandable_product_view"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:paddingLeft="@dimen/dialog_padding_horizontal"
+                android:paddingRight="@dimen/dialog_padding_horizontal">
 
                 <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:weightSum="1"
-                        android:orientation="horizontal">
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:weightSum="1">
 
                     <LinearLayout
-                            android:layout_weight="0.5"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:orientation="vertical">
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.5"
+                        android:orientation="vertical">
 
                         <com.google.android.material.textfield.TextInputLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content">
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
                             <AutoCompleteTextView
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:id="@+id/category_input"
-                                    android:inputType="textAutoComplete|textCapSentences"
-                                    android:hint="@string/category_text"
-                                    android:singleLine="true"
-                                    android:imeOptions="actionNext"
-                                    android:maxLength="15"/>
+                                android:id="@+id/category_input"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:hint="@string/category_text"
+                                android:imeOptions="actionNext"
+                                android:inputType="textAutoComplete|textCapSentences"
+                                android:maxLength="15"
+                                android:singleLine="true" />
                         </com.google.android.material.textfield.TextInputLayout>
 
                         <com.google.android.material.textfield.TextInputLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content">
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
                             <AutoCompleteTextView
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:id="@+id/store_input"
-                                    android:inputType="textAutoComplete|textCapSentences"
-                                    android:hint="@string/store_text"
-                                    android:maxLength="15"/>
+                                android:id="@+id/store_input"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:hint="@string/store_text"
+                                android:inputType="textAutoComplete|textCapSentences"
+                                android:maxLength="15" />
                         </com.google.android.material.textfield.TextInputLayout>
 
                     </LinearLayout>
 
                     <LinearLayout
-                            android:layout_weight="0.5"
-                            android:layout_width="wrap_content"
-                            android:layout_height="match_parent"
-                            android:orientation="vertical">
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_weight="0.5"
+                        android:orientation="vertical">
 
                         <ImageButton
-                                android:layout_width="50sp"
-                                android:layout_height="50sp"
-                                android:padding="10sp"
-                                android:scaleType="fitCenter"
-                                android:background="?android:selectableItemBackground"
-                                android:tint="@color/colorAccent"
-                                android:src="@drawable/ic_camera_alt_white_48sp"
-                                android:id="@+id/camera_button"
-                                android:layout_gravity="right"/>
+                            android:id="@+id/camera_button"
+                            android:layout_width="50sp"
+                            android:layout_height="50sp"
+                            android:layout_gravity="right"
+                            android:background="?android:selectableItemBackground"
+                            android:padding="10sp"
+                            android:scaleType="fitCenter"
+                            android:src="@drawable/ic_camera_alt_white_48sp"
+                            app:tint="@color/colorAccent" />
 
                         <ImageView
-                                android:src="@android:drawable/ic_menu_camera"
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:id="@+id/image_view"/>
+                            android:id="@+id/image_view"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:src="@android:drawable/ic_menu_camera" />
 
                     </LinearLayout>
 

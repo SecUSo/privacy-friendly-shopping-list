@@ -1,5 +1,10 @@
 package privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.statistics.persistence;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+
+import androidx.test.platform.app.InstrumentationRegistry;
+
 import org.joda.time.DateTime;
 import org.junit.Test;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.AbstractDatabaseTest;
@@ -22,7 +27,7 @@ public class StatisticsDaoTest extends AbstractDatabaseTest
     @Override
     protected void setupBeforeEachTest()
     {
-        AbstractInstanceFactory instanceFactory = new InstanceFactoryForTests(getContext());
+        AbstractInstanceFactory instanceFactory = new InstanceFactoryForTests(InstrumentationRegistry.getInstrumentation().getContext());
         statisticsDao = (StatisticsDao) instanceFactory.createInstance(StatisticsDao.class);
     }
 

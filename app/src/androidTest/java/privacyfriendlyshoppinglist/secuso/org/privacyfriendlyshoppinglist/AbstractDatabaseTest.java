@@ -1,8 +1,12 @@
 package privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist;
 
-import android.support.test.runner.AndroidJUnit4;
-import android.test.AndroidTestCase;
+import androidx.test.ext.junit.runners.AndroidJUnit4;
+import androidx.test.platform.app.InstrumentationRegistry;
+
+import org.junit.After;
+import org.junit.Before;
 import org.junit.runner.RunWith;
+
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.persistence.DB;
 
 /**
@@ -11,24 +15,22 @@ import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framew
  * Created: 31.05.16 creation date
  */
 @RunWith(AndroidJUnit4.class)
-abstract public class AbstractDatabaseTest extends AndroidTestCase
-{
+abstract public class AbstractDatabaseTest {
 
-    protected void setUp() throws Exception
-    {
-        super.setUp();
+    @Before
+    public void setUp() throws Exception {
         // delete database before each test
-        getContext().deleteDatabase(DB.TEST.getDbName());
+        InstrumentationRegistry.getInstrumentation().getContext().deleteDatabase(DB.TEST.getDbName());
         setupBeforeEachTest();
     }
 
-    protected void tearDown() throws Exception
-    {
-        super.tearDown();
+    @After
+    public void tearDown() throws Exception {
         cleanAfterEachTest();
     }
 
     abstract protected void setupBeforeEachTest();
 
-    protected void cleanAfterEachTest(){}
+    protected void cleanAfterEachTest() {
+    }
 }

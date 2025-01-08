@@ -9,10 +9,14 @@ import android.os.Bundle;
 import android.preference.*;
 import android.view.MenuItem;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatDelegate;
+
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.R;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.context.AbstractInstanceFactory;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.context.InstanceFactory;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.utils.MessageUtils;
+import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.helpers.PreferenceKeys;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.statistics.business.StatisticsService;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.ui.baseactivity.BaseActivity;
 import rx.Observable;
@@ -280,6 +284,16 @@ public class SettingsActivity extends BaseActivity
                 }
             });
             //bindPreferenceSummaryToValue(findPreference("example_list"));
+            findPreference(PreferenceKeys.APP_THEME).setOnPreferenceChangeListener((preference, newValue) -> {
+                if (newValue.equals("DARK")) {
+                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+                } else if (newValue.equals("LIGHT")) {
+                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+                } else {
+                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM);
+                }
+                return true;
+            });
         }
 
         private Observable<Void> deleteStatistics()

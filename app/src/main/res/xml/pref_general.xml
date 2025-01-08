@@ -55,6 +55,16 @@
                 android:defaultValue="@string/currency"
                 android:singleLine="true"/>
     </PreferenceCategory>
+    <PreferenceCategory
+        android:title="@string/pref_app_theme_title">
+        <ListPreference
+            android:defaultValue="@string/pref_app_theme_default"
+            android:entries="@array/pref_app_theme_entries"
+            android:entryValues="@array/pref_app_theme_values"
+            android:key="pref_app_theme"
+            android:summary="%s"
+            android:title="@string/pref_app_theme_title" />
+    </PreferenceCategory>
 
     <!-- NOTE: EditTextPreference accepts EditText attributes. -->
     <!-- NOTE: EditTextPreference's summary should be set to its value by the activity code. -->

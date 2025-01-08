@@ -1,127 +1,126 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<RelativeLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
     <com.google.android.material.textfield.TextInputLayout
-            android:visibility="gone"
-            app:errorTextAppearance="@style/error_appearance"
-            app:errorEnabled="true"
-            android:hint=" "
-            android:id="@+id/search_input_layout"
+        android:id="@+id/search_input_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_margin="8sp"
+        android:layout_toStartOf="@+id/cancel_search"
+        android:hint=" "
+        android:visibility="gone"
+        app:errorEnabled="true"
+        app:errorTextAppearance="@style/error_appearance">
+
+        <AutoCompleteTextView
+            android:id="@+id/search_input_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="8sp"
-            android:layout_toStartOf="@+id/cancel_search"
-            android:layout_alignParentEnd="true">
-        <AutoCompleteTextView
-                android:id="@+id/search_input_text"
-                android:inputType="text|textCapSentences"
-                android:paddingRight="50sp"
-                android:paddingLeft="8sp"
-                android:paddingTop="8sp"
-                android:paddingBottom="8sp"
-                android:background="@drawable/search_border_style"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="@string/search"
-                android:selectAllOnFocus="true">
-        </AutoCompleteTextView>
+            android:background="@drawable/search_border_style"
+            android:hint="@string/search"
+            android:inputType="text|textCapSentences"
+            android:paddingLeft="8sp"
+            android:paddingTop="8sp"
+            android:paddingRight="50sp"
+            android:paddingBottom="8sp"
+            android:selectAllOnFocus="true"></AutoCompleteTextView>
     </com.google.android.material.textfield.TextInputLayout>
 
     <ImageButton
-            android:visibility="gone"
-            android:id="@+id/cancel_search"
-            android:tint="@color/colorAccent"
-            android:background="?android:selectableItemBackground"
-            android:src="@drawable/ic_cancel_white_48sp"
-            android:layout_width="45sp"
-            android:layout_height="38sp"
-            android:layout_marginTop="12sp"
-            android:layout_marginRight="6sp"
-            android:paddingLeft="10sp"
-            android:paddingRight="10sp"
-            android:scaleType="fitCenter"
-            android:layout_alignParentEnd="true"
-            android:layout_alignTop="@+id/search_input_layout"/>
+        android:id="@+id/cancel_search"
+        android:layout_width="45sp"
+        android:layout_height="38sp"
+        android:layout_alignTop="@+id/search_input_layout"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="12sp"
+        android:layout_marginRight="6sp"
+        android:background="?android:selectableItemBackground"
+        android:paddingLeft="10sp"
+        android:paddingRight="10sp"
+        android:scaleType="fitCenter"
+        android:src="@drawable/ic_cancel_white_48sp"
+        android:visibility="gone"
+        app:tint="@color/colorAccent" />
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/layout_total"
+        android:layout_below="@+id/search_input_layout">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_above="@+id/layout_total"
-            android:layout_below="@+id/search_input_layout">
-
-        <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recyclerView"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                app:layout_behavior="@string/appbar_scrolling_view_behavior"
-                android:layout_above="@+id/layout_total"/>
+            app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
-                android:id="@+id/fab_new_product"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="@dimen/fab_margin"
-                android:tint="@color/white"
-                android:src="@android:drawable/ic_input_add"
-                app:layout_anchor="@id/recyclerView"
-                app:layout_anchorGravity="bottom|right|end"/>
+            android:id="@+id/fab_new_product"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/fab_margin"
+            android:src="@android:drawable/ic_input_add"
+            app:layout_anchor="@id/recyclerView"
+            app:layout_anchorGravity="bottom|right|end"
+            app:tint="@color/white" />
 
         <LinearLayout
-                android:visibility="gone"
-                android:id="@+id/insert_alert"
-                android:orientation="horizontal"
-                android:layout_margin="@dimen/fab_margin"
-                android:paddingRight="70sp"
-                android:gravity="center_vertical"
-                app:layout_anchor="@id/fab_new_product"
-                app:layout_anchorGravity="bottom|left"
-                android:layout_width="wrap_content"
-                android:layout_height="50sp">
+            android:id="@+id/insert_alert"
+            android:layout_width="wrap_content"
+            android:layout_height="50sp"
+            android:layout_margin="@dimen/fab_margin"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingRight="70sp"
+            android:visibility="gone"
+            app:layout_anchor="@id/fab_new_product"
+            app:layout_anchorGravity="bottom|left">
 
             <TextView
-                    android:text="@string/alert_message_product"
-                    android:gravity="center_vertical"
-                    android:textStyle="bold|italic"
-                    android:textColor="@color/colorPrimaryDark"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:text="@string/alert_message_product"
+                android:textColor="@color/colorPrimaryDark"
+                android:textStyle="bold|italic" />
 
             <ImageView
-                    android:tint="@color/colorPrimary"
-                    android:src="@drawable/ic_keyboard_arrow_right_black_24sp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_keyboard_arrow_right_black_24sp"
+                app:tint="@color/colorPrimary" />
         </LinearLayout>
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
     <LinearLayout
-            android:id="@+id/no_products_layout"
-            android:visibility="gone"
-            android:orientation="vertical"
-            android:gravity="center"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
+        android:id="@+id/no_products_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:visibility="gone">
+
         <ImageView
-                android:layout_gravity="center"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/icon_splash"/>
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:src="@drawable/icon_splash" />
 
         <TextView
-                android:layout_gravity="center"
-                android:textAlignment="center"
-                android:text="@string/product_list_empty"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="@string/product_list_empty"
+            android:textAlignment="center" />
     </LinearLayout>
 
-    <include
-            layout="@layout/products_total_amount"/>
+    <include layout="@layout/products_total_amount" />
 
 </RelativeLayout>
