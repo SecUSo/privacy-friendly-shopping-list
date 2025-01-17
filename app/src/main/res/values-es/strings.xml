@@ -1,7 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!--### GENERAL ### -->
     <string name="cancel">Cancelar</string>
-    <string name="delete">Eliminar</string>
     <string name="share">Compartir</string>
     <string name="reset">Reutilizar</string>
     <string name="edit">Editar</string>
@@ -331,14 +331,12 @@
     <!-- Sharing -->
     <string name="no_products">Esta lista no contiene productos.</string>
     <string name="share_as_text">Compartir Texto</string>
-    <string-array
-            name="shopping_list_priority_spinner">
+    <string-array name="shopping_list_priority_spinner">
         <item>Alta</item>
         <item>Normal</item>
         <item>Prioridad</item>
     </string-array>
-    <string-array
-            name="shopping_list_reminder_spinner">
+    <string-array name="shopping_list_reminder_spinner">
         <item>Minutos</item>
         <item>Horas</item>
         <item>Días</item>
@@ -360,7 +358,7 @@
     <string-array name="statistics_enabled_text">
         <item>Estadísticas activadas para esta lista.</item>
         <item>Estadísticas desactivadas para esta lista.</item>
-        <item></item>
+        <item/>
     </string-array>
     <string-array name="statistics_months">
         <item>Ene.</item>

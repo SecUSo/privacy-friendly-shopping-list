@@ -1,7 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!--### GENERAL ### -->
     <string name="cancel">Abbrechen</string>
-    <string name="delete">Löschen</string>
     <string name="share">Teilen</string>
     <string name="reset">Wiederverwenden</string>
     <string name="edit">Bearbeiten</string>
@@ -14,7 +14,6 @@
     <string name="time_pattern">HH:mm</string>
     <string name="currency">€</string>
     <string name="number_decimal_separator">,</string>
-
     <!-- ### TUTORIAL ### -->
     <string name="tutorial_dialog_title">Tutorial</string>
     <string name="tutorial_manage_lists">Listenverwaltung</string>
@@ -36,7 +35,6 @@
             <i>ausgeschaltet.</i>
         </b>
     </string>
-
     <string name="tutorial_add_product">... neues Produkt hinzufügen?</string>
     <string name="tutorial_delete_products">... mehrere Produkte löschen?</string>
     <string name="tutorial_sort_products">... Produkte sortieren?</string>
@@ -51,7 +49,6 @@
     <string name="tutorial_multiple_delete">Wähle alle Elemente aus, die gelöscht werden sollen. Drücke das Symbol zum
         Löschen und bestätige die Aktion im auftretenden Dialog.
     </string>
-
     <!-- ### SHOPPING LIST ### -->
     <string name="activity_shopping_list">Einkaufsliste:</string>
     <string name="nr_items">Nr. v. Elementen</string>
@@ -61,13 +58,11 @@
     <string name="alert_message_list">Erstelle eine Liste</string>
     <string name="alert_message_product">Füge ein Produkt ein</string>
     <string name="duplicated_suffix">(Neu)</string>
-
     <!-- ### NOTIFICATIONS ### -->
     <string name="notification_message">Listenname: %1$s\nDeadline: %2$s</string>
     <string name="notification_setting_status">Benachrichtigungen sind deaktiviert. Aktivierung ist im Menüpunkt
         \"Einstellungen\" möglich.
     </string>
-
     <!-- ### PRODUCTS ### -->
     <string name="new_product">Neues Produkt</string>
     <string name="product_already_exists">Ein Produkt mit diesem Namen existiert bereits in der Liste!</string>
@@ -80,21 +75,18 @@
     <string name="category_label">Kategorie:</string>
     <string name="search">Suche</string>
     <string name="no_products_found">Keine Produkte gefunden!</string>
-
     <string name="store_detail">Einkaufsort: %1$s</string>
     <string name="category_detail">Kategorie: %1$s</string>
     <string name="quantity_detail">Menge: %1$s</string>
     <string name="price_detail">Preis: %1$s</string>
     <string name="total_price_detail">Gesamtpreis: %1$s</string>
     <string name="notes_detail">Notizen: %1$s</string>
-
     <!-- ### Statistics -->
     <string name="statistics_total_amout">Gesamt:</string>
     <string name="statistics_range">Von-Bis:</string>
     <string name="statistics_group_by">Gruppieren nach</string>
     <string name="statistics_y_values">Werte</string>
     <string name="statistics_quantity_unit">Einheit</string>
-
     <!-- ### SORT ### -->
     <string name="sort_options">Sortieroptionen</string>
     <string name="sort_ascencing_descending">Aufsteigend/Absteigend</string>
@@ -107,8 +99,6 @@
     <string name="sort_by_store">Einkaufsort</string>
     <string name="sort_by_price">Preis</string>
     <string name="sort_by_category">Kategorie</string>
-
-
     <!-- ### DELETE ### -->
     <string name="delete_confirmation_title">Löschen bestätigen</string>
     <string name="delete_foto_confirmation">Das ausgewählte Bild löschen (%1$s)? Diese Aktion kann nicht rückgängig
@@ -135,7 +125,6 @@
     <string name="delete_statistics_confirmation">Alle bisher gespeicherten Statistiken löschen? Diese Aktion kann nicht
         rückgängig gemacht werden!
     </string>
-
     <!--### ABOUT ###-->
     <string name="about">Über</string>
     <string name="version_number">Version</string>
@@ -148,16 +137,13 @@
         Google Inc.
     </string>
     <string name="more_info">Weitere Infos unter:</string>
-
     <!-- ### DRAWER ###-->
     <string name="action_help">Hilfe</string>
     <string name="action_about">Über</string>
     <string name="action_settings">Einstellungen</string>
     <string name="action_main">Hauptmenü</string>
-
     <string name="navigation_drawer_open">Seitenmenü öffnen</string>
     <string name="navigation_drawer_close">Seitenmenü schließen</string>
-
     <!-- ### SETTINGS ### -->
     <string name="pref_header_general">Allgemein</string>
     <string name="title_activity_settings">Einstellungen</string>
@@ -174,14 +160,12 @@
     </string>
     <string name="pref_move_products_toast_on">Abgehakte Produkte verschieben aktiviert!</string>
     <string name="pref_move_products_toast_off">Abgehakte Produkte verschieben deaktiviert!</string>
-
     <string name="pref_header_notifications">Benachrichtigungen</string>
     <string name="pref_notifications_title">Erinnerung</string>
     <string name="pref_notifications_summary_on">Benachrichtigungen für Erinnerung aktiviert</string>
     <string name="pref_notifications_summary_off">Benachrichtigungen für Erinnerung deaktiviert</string>
     <string name="pref_notifications_toast_on">Benachrichtigungen für Erinnerung aktiviert!</string>
     <string name="pref_notifications_toast_off">Benachrichtigungen für Erinnerung deaktiviert!</string>
-
     <string name="pref_header_statistics">Statistiken</string>
     <string name="pref_statistics_title">Standardeinstellung</string>
     <string name="pref_statistics_summary_on">Statistiken sind standardmäßg \"aktiviert\" beim Erstellen neuer Listen.
@@ -193,14 +177,11 @@
         der Statistik erfasst.
     </string>
     <string name="pref_statistics_toast_off">Statistiken sind jetzt deaktiviert!</string>
-
     <string name="pref_statistics_delete">Löschen</string>
     <string name="pref_statistics_delete_summary">Alle gespeicherte Statistikdaten löschen</string>
-
     <string name="pref_header_currency">Währung</string>
     <string name="pref_currency_title">Währung auswählen</string>
     <string name="pref_currency_summary">€</string>
-
     <!-- ### WELCOME DIALOG ### -->
     <string name="welcome_text">Mit dieser App können Einkaufslisten erstellt und verwaltet werden. Listen können priorisiert werden.
         Deadlines und Erinnerungen können ebenfalls gesetzt werden.
@@ -210,7 +191,6 @@
     <string name="viewhelp">Öffne \"Hilfe\"</string>
     <string name="skip">Überspringen</string>
     <string name="next">Weiter</string>
-
     <!--### HELP ###-->
     <string name="help">Hilfe</string>
     <string name="help_overview_heading">Übersicht</string>
@@ -222,7 +202,6 @@
     <string name="help_intro3">Eine Einkaufsliste besteht aus Produkteinträgen. Zusätzlich zu Produktname, Menge und
         Preis kann eine Kategorie und der Einkaufsort eingepflegt werden. Außerdem können Notizen vermerkt und ein Foto eingefügt werden.
     </string>
-
     <string name="help_how_tos_lists">Wie funktioniert\'s</string>
     <string name="help_how_to_create_a_list">Liste erstellen</string>
     <string name="help_how_to_create_a_list_summary1">Um eine neue Liste zu erstellen, wechselst du in das Hauptmenü und
@@ -233,7 +212,6 @@
         wird ein Standardname vergeben. Wird eine Liste mit hoher Priorität deklariert, so erscheint in der Listenübersicht
         ein kleines Symbol mit Ausrufezeichen rechts neben der betroffenen Liste.
     </string>
-
     <string name="help_how_to_create_a_product">Produkt hinzufügen</string>
     <string name="help_how_to_create_a_product_summary1">Nachdem eine Liste erstellt wurde, springt die App automatisch
         in diese Liste und ist bereit zum Erstellen neuer Produkte. Dafür drückst du wiederum auf das (+) Symbol in der
@@ -243,7 +221,6 @@
         Produktname erforderlich ist, um den Dialog schließen zu können. Wenn du fertig bist mit dem Ausfüllen der
         Produktinformationen, kann über den OKAY Knopf der Dialog geschlossen werden.
     </string>
-
     <string name="help_how_to_edit_a_list">Bearbeiten, Löschen, oder Teilen</string>
     <string name="help_how_to_edit_a_list_summary">Um eine Liste oder ein Produkt bearbeiten, löschen oder teilen zu
         können, ist ein längerer Klick auf das Element erforderlich. Hierbei
@@ -251,7 +228,6 @@
         ausgewählten Elements ist zu beachten, dass dabei keine bereits erfassten
         Statistikdaten gelöscht werden.
     </string>
-
     <string name="help_how_to_enable_statistics">Statistiken aktivieren</string>
     <string name="help_how_to_enable_statistics_summary1">Im Listendialog (siehe \"Eine Liste erstellen\") kann das
         Statistik-Feature individuell für diese Liste aktiviert oder deaktiviert werden. Dafür steht der Schiebeschalter
@@ -261,7 +237,6 @@
     <string name="help_how_to_enable_statistics_summary2">Durch mehrfaches Abhaken werden Produkte mehrfach in der
         Statistik erfasst.
     </string>
-
     <string name="help_how_to_setup_deadline">Deadline einstellen</string>
     <string name="help_how_to_setup_deadline_summary1">Im Listendialog (siehe \"Eine Liste erstellen\") kann, wozu auf
         das Kontrollkästchen (\"Deadline\") geklickt werden muss. Danach kann ein Datum und eine Uhrzeit eingestellt werden.
@@ -270,7 +245,6 @@
         standardmäßg ein blauer Streifen angezeigt. Ist die Deadline abgelaufen und befinden sich noch nicht abgehakte
         Produkte in der Liste, wird dieser Streifen rot. Sind alle Produkte abgehakt, wird der Streifen grau.
     </string>
-
     <string name="help_how_to_setup_reminder">Erinnerung einstellen</string>
     <string name="help_how_to_setup_reminder_summary1">Wird eine Deadline gesetzt, erscheint im Dialog die Option einer
         Erinnerung. Wird der Schiebeschalter aktiviert, kann eingestellt werden wieviele Minuten, Stunden, etc.
@@ -279,14 +253,12 @@
     <string name="help_how_to_setup_reminder_summary2">Es erscheint zusätzlich ein Symbol in Form eines Weckers in der
         Listenansicht. Dieses ist rot gefärbt, sofern in den die Standardeinstellung für Benachrichtigungen deaktiviert ist.
     </string>
-
     <string name="help_how_to_sort_lists">Elemente sortieren</string>
     <string name="help_how_to_sort_lists_summary">Um Elemente der aktuellen Ansicht zu sortieren, kannst du in der
         Titelbar of das Symbol mit den drei horizontalen Balken klicken. Es erscheinen zwei verschiedene
         Sortieroptionen. Es kann ausgewählt werden ob auf- oder absteigend sortiert werden soll, sowie nach welchem
         Parameter die Sortierung stattfinden soll.
     </string>
-
     <string name="help_how_to_delete_multiple_items">Mehrere Elemente löschen</string>
     <string name="help_how_to_delete_multiple_items_summary1">Um mehrere Elemente zu löschen, kannst du auf das
         Mülleimersymbol klicken. Danach kannst du alle Elemente durch einen Klick darauf auswählen, die gelöscht werden
@@ -296,7 +268,6 @@
         unteren rechten Ecke drucken. Hier wirst du erneut aufgefordert deine Aktion zu bestätigen. Das Löschen beeinflusst
         keine bereits gespeicherte Statistikdaten, die mit diesen Elementen zusammenhingen.
     </string>
-
     <string name="help_how_to_search_products">Produkte in Listen suchen</string>
     <string name="help_how_to_search_products_summary1">Um Produkte in einer Liste einfacher zu finden, kannst du eine
         Suchfunktion benutzen. Diese ist mit dem Lupensymbol aufrufbar. Nach dem Klick auf die Lupe kann in der
@@ -305,7 +276,6 @@
     <string name="help_how_to_search_products_summary2">Während des Schreibens wird die Liste der vorhandenen Elemente
         entsprechend der Eingabe gefiltert.
     </string>
-
     <string name="help_how_to_save_picture">Ein Foto aufnehmen</string>
     <string name="help_how_to_save_picture_summary1">Um für bestimmte Produkte eine visuelle Erinnerungshilfe zu haben,
         steht dir eine Fotofunktion im Produktdialog zur Verfügung. Dazu wird die Gerätekamera verwendet und erfordert
@@ -315,7 +285,6 @@
         ein Bild geschossen und und gespeichert werden. Dieses erscheint dann als
         vergrößerbares Bild im Produktdialog.
     </string>
-
     <string name="help_settings_heading">Einstellungen</string>
     <string name="help_settings_summary1">Unter dem Menüpunkt Einstellungen kannst du die App in verschiedener Weise
         personalisieren, um ihren Gebrauch für dich komfortabler zu machen.
@@ -324,8 +293,6 @@
         oder rechten Seite erscheinen soll, ob Benachrichtigungen ein- oder ausgeschaltet sein sollen, und vieles mehr.
         Alle Einstellungen werden auch im Menüpunkt erklärt.
     </string>
-
-
     <string name="help_privacy_heading">Datenschutz-Information</string>
     <string name="help_camera_permission_heading">Berechtigung für die Kameranutzung</string>
     <string name="help_camera_permission_description">Diese Berechtigung ist erforderlich, um im Produktdialog Fotos
@@ -351,17 +318,14 @@
     <string name="product_as_title">Produkt: %1$s</string>
     <string name="close_image">Schließen</string>
     <string name="edit_dialog_product">Bearbeiten, löschen oder teilen?</string>
-
     <!-- Shopping List Dialog -->
     <string name="list_name">Name der Einkaufsliste</string>
     <string name="list_name_new">Neue Liste</string>
     <string name="list_name_edit">Einkaufsliste bearbeiten</string>
     <string name="list_as_title">Liste: %1$s</string>
-
     <string name="priority">Priorität</string>
     <string name="priority_high">Hoch</string>
     <string name="priority_normal">Normal</string>
-
     <string name="deadline_date">Datum</string>
     <string name="deadline_time">Uhrzeit</string>
     <string name="deadline">Deadline</string>
@@ -370,27 +334,21 @@
     <string name="list_notes">Notizen</string>
     <string name="default_list_name">Neue Liste</string>
     <string name="edit_dialog_list">Liste editieren, löschen oder teilen?</string>
-
     <!-- Sharing -->
     <string name="no_products">Diese Liste enthält noch keine Produkte.</string>
     <string name="share_as_text">Teile als Textformat</string>
-
-    <string-array
-            name="shopping_list_priority_spinner">
+    <string-array name="shopping_list_priority_spinner">
         <item>Hoch</item>
         <item>Normal</item>
         <item>Priorität</item>
     </string-array>
-
-    <string-array
-            name="shopping_list_reminder_spinner">
+    <string-array name="shopping_list_reminder_spinner">
         <item>Minuten</item>
         <item>Stunden</item>
         <item>Tage</item>
         <item>Wochen</item>
         <item>Erinnerung</item>
     </string-array>
-
     <string-array name="statistics_spinner_group_by">
         <item>Monat</item>
         <item>Woche</item>
@@ -399,18 +357,15 @@
         <item>Einkaufsort</item>
         <item>Produkt</item>
     </string-array>
-
     <string-array name="statistics_spinner_values">
         <item>Preis</item>
         <item>Menge</item>
     </string-array>
-
     <string-array name="statistics_enabled_text">
         <item>Statistiken sind für diese Liste aktiviert.</item>
         <item>Statistiken sind für diese Liste deaktiviert.</item>
-        <item></item>
+        <item/>
     </string-array>
-
     <string-array name="statistics_months">
         <item>Jan.</item>
         <item>Febr.</item>
@@ -425,5 +380,4 @@
         <item>Nov.</item>
         <item>Dez.</item>
     </string-array>
-
 </resources>
