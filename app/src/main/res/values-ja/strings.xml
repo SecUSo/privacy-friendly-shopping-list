@@ -1,7 +1,7 @@
-﻿<resources>
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
     <!--### GENERAL ### -->
     <string name="cancel">キャンセル</string>
-    <string name="delete">削除</string>
     <string name="share">共有</string>
     <string name="reset">リセット</string>
     <string name="edit">編集</string>
@@ -312,14 +312,12 @@
     <!-- Sharing -->
     <string name="no_products">このリストには商品がありません。</string>
     <string name="share_as_text">テキストとして共有</string>
-    <string-array
-            name="shopping_list_priority_spinner">
+    <string-array name="shopping_list_priority_spinner">
         <item>高</item>
         <item>普通</item>
         <item>優先順位</item>
     </string-array>
-    <string-array
-            name="shopping_list_reminder_spinner">
+    <string-array name="shopping_list_reminder_spinner">
         <item>分</item>
         <item>時間</item>
         <item>日</item>
@@ -341,7 +339,7 @@
     <string-array name="statistics_enabled_text">
         <item>このリストの統計情報は有効です。</item>
         <item>このリストの統計情報は無効です。</item>
-        <item></item>
+        <item/>
     </string-array>
     <string-array name="statistics_months">
         <item>1月</item>

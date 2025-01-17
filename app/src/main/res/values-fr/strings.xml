@@ -2,7 +2,6 @@
 <resources>
     <!--### GENERAL ### -->
     <string name="cancel">Annuler</string>
-    <string name="delete">Supprimer</string>
     <string name="share">Partager</string>
     <string name="reset">Réutiliser</string>
     <string name="edit">Modifier</string>
