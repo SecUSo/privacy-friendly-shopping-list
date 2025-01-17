@@ -1,9 +1,9 @@
-<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name" translatable="false">Shopping List</string>
     <string name="app_name_long" translatable="false">Privacy Friendly Shopping List</string>
     <!--### GENERAL ### -->
     <string name="cancel">Cancel</string>
+    <string name="delete">Delete</string>
     <string name="share">Share</string>
     <string name="reset">Reset</string>
     <string name="edit">Edit</string>
@@ -104,7 +104,7 @@
     <string name="statistics_group_by">Group by:</string>
     <string name="statistics_y_values">Values:</string>
     <string name="statistics_quantity_unit">Units</string>
-    <string name="no_scale_abbreviation" translatable="false"/>
+    <string name="no_scale_abbreviation" translatable="false"></string>
     <string name="kilo_abbreviation" translatable="false">K.</string>
     <string name="million_abbreviation" translatable="false">M.</string>
     <string name="no_scale_value" translatable="false">1</string>
@@ -205,6 +205,7 @@
     <string name="main_button_welcomedialog" translatable="false">Show Welcome</string>
     <string name="next">Next</string>
     <string name="skip">Skip</string>
+
     <!--### HELP ###-->
     <string name="help">Help</string>
     <string name="help_overview_heading">Overview</string>
@@ -348,12 +349,14 @@
     <!-- Sharing -->
     <string name="no_products">This list does not contain any products.</string>
     <string name="share_as_text">Share as Text</string>
-    <string-array name="shopping_list_priority_spinner">
+    <string-array
+            name="shopping_list_priority_spinner">
         <item>High</item>
         <item>Normal</item>
         <item>Priority</item>
     </string-array>
-    <string-array name="shopping_list_reminder_spinner">
+    <string-array
+            name="shopping_list_reminder_spinner">
         <item>Minutes</item>
         <item>Hours</item>
         <item>Days</item>
@@ -375,7 +378,7 @@
     <string-array name="statistics_enabled_text">
         <item>Statistics are enabled for this list.</item>
         <item>Statistics are disabled for this list.</item>
-        <item/>
+        <item></item>
     </string-array>
     <string-array name="statistics_months">
         <item>Jan</item>
