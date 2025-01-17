@@ -2,6 +2,7 @@
 <resources>
     <!--### GENERAL ### -->
     <string name="cancel">Cancelar</string>
+    <string name="delete">Eliminar</string>
     <string name="share">Compartir</string>
     <string name="reset">Reutilizar</string>
     <string name="edit">Editar</string>

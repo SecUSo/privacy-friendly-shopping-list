@@ -2,6 +2,7 @@
 <resources>
     <!--### GENERAL ### -->
     <string name="cancel">キャンセル</string>
+    <string name="delete">削除</string>
     <string name="share">共有</string>
     <string name="reset">リセット</string>
     <string name="edit">編集</string>
