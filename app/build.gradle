@@ -9,7 +9,7 @@ android {
         minSdkVersion 19
         compileSdk 34
         targetSdkVersion 34
-        versionCode 9
+        versionCode 10
         versionName "1.2.0-rc1"
         multiDexEnabled true
 
