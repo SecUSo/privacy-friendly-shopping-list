@@ -13,7 +13,7 @@ align="right"
 style="float: right; margin-right: 10px;" />
 # Privacy Friendly Shopping List
 
-[<img src="https://f-droid.org/badge/get-it-on.png" alt="Get it on F-Droid" height="60">](https://f-droid.org/repository/browse/?fdid=privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist)<a href="https://play.google.com/store/apps/details?id=privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist"><img src="https://play.google.com/intl/en_us/badges/images/generic/en_badge_web_generic.png" height="60"></a>
+[<img src="https://f-droid.org/badge/get-it-on.png" alt="Get it on F-Droid" height="60">](https://f-droid.org/repository/browse/?fdid=privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist)
 
 The Privacy Friendly App Shopping List is an Android application that does not require any permissions from the user in order to be installed. With this app users will be able to manage their shopping lists. Basically users will be able to add, edit and remove lists. A shopping list contains products which can be added, edited and removed as well.
 
