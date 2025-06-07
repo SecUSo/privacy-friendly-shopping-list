@@ -4,8 +4,8 @@
     <string name="tutorial_check_product">...проверить продукты?</string>
     <string name="reset">Сброс</string>
     <string name="language">США</string>
-    <string name="help_overview_heading">Знакомство</string>
-    <string name="edit">Изменить</string>
+    <string name="help_overview_heading">Обзор</string>
+    <string name="edit">Редактировать</string>
     <string name="share">Поделиться</string>
     <string name="close_image">Закрыть</string>
     <string name="delete">Удалить</string>
@@ -46,8 +46,8 @@
     <string name="sort_by_category">Категориям</string>
     <string name="action_about">О приложении</string>
     <string name="privacy_friendly">Это одно из приложений группы Уважающих Конфиденциальность Приложений (Privacy Friendly Apps, PFA), разработанных исследовательской группой SECUSO в Технологическом Институте Карлсруэ (KIT). Исходный код доступен по лицензии GPLv3. Авторские права на изображения принадлежат KIT и Google Inc.</string>
-    <string name="next">Далее</string>
-    <string name="skip">Пропустить</string>
+    <string name="next">Дальше</string>
+    <string name="skip">Пропуск</string>
     <string name="help_how_tos_lists">Примеры использования</string>
     <string name="help_how_to_create_a_list">Завести список</string>
     <string name="help_how_to_search_products">Искать продукты в списке</string>
@@ -96,7 +96,7 @@
     <string name="quantity_detail">Количество: %1$s</string>
     <string name="price_detail">Цена: %1$s</string>
     <string name="total_price_detail">Общая цена: %1$s</string>
-    <string name="action_help">Справка</string>
+    <string name="action_help">Помощь</string>
     <string name="activity_delete_products">Удалить продукты</string>
     <string name="statistics">Статистика</string>
     <string name="about">О приложении</string>
@@ -107,7 +107,7 @@
     <string name="pref_header_general">Главные</string>
     <string name="title_activity_settings">Настройки</string>
     <string name="pref_checkbox_position">Позиция галочек</string>
-    <string name="okay">Ладно</string>
+    <string name="okay">Хорошо</string>
     <string name="viewhelp">Посмотреть справку</string>
     <string name="pref_header_currency">Валюта</string>
     <string name="pref_currency_title">Выбрать валюту</string>
@@ -118,4 +118,8 @@
     <string name="product_name">Название продукта</string>
     <string name="product_name_new">Новый продукт</string>
     <string name="help_how_to_create_a_product">Добавить продукт</string>
+    <string name="about_affiliation">Вместе с</string>
+    <string name="more_info">Подробнее можно узнать на:</string>
+    <string name="pref_header_notifications">Уведомления</string>
+    <string name="help_privacy_heading">О конфиденциальности</string>
 </resources>
