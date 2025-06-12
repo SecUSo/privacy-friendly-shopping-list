@@ -6,6 +6,8 @@ import android.preference.PreferenceManager;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+
+import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.GoodbyeGoogleHelperKt;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.R;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.comparators.PFAComparators;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.context.AbstractInstanceFactory;
@@ -72,6 +74,7 @@ public class MainActivity extends BaseActivity
         setupAlertSubscriber();
 
         overridePendingTransition(0, 0);
+        GoodbyeGoogleHelperKt.checkGoodbyeGoogle(this, getLayoutInflater());
     }
 
     @Override
