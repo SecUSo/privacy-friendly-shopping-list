@@ -102,7 +102,7 @@
     <string name="about">О приложении</string>
     <string name="version_number">Версия</string>
     <string name="about_developper">Авторы:</string>
-    <string name="action_settings">Натсройки</string>
+    <string name="action_settings">Настройки</string>
     <string name="action_main">Главная</string>
     <string name="pref_header_general">Главные</string>
     <string name="title_activity_settings">Настройки</string>
