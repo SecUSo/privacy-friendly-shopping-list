@@ -109,7 +109,7 @@
     <string name="about_developper">Auteurs :</string>
     <string name="about_author_greb">Grebiel José Ifill Brito</string>
     <string name="about_author_cri">Christian König et des contributeurs.</string>
-    <string name="about_affiliation">En collaboration avec</string>
+    <string name="about_affiliation">En affiliation avec</string>
     <string name="privacy_friendly">Cette application appartient à la collection \"Privacy Friendly Apps\" développée par la Technische Universität Darmstadt. Le code source est distribué sous la licence Apache, Version 2.0. Droits d\'auteur des images : TU Darmstadt et Google Inc.</string>
     <string name="more_info">Pour plus d\'informations :</string>
     <!-- ### DRAWER ###-->
