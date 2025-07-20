@@ -25,7 +25,7 @@
     <string name="tutorial_dialog_title">Tutorial</string>
     <string name="tutorial_manage_lists">Manage Lists</string>
     <string name="tutorial_manage_products">Manage Products</string>
-    <string name="tutorial_how_to">How to...</string>
+    <string name="tutorial_how_to">How to ...</string>
     <string name="tutorial_create_list">... create a new list?</string>
     <string name="tutorial_delete_lists">... delete multiple lists?</string>
     <string name="tutorial_sort_lists">... sort lists?</string>
