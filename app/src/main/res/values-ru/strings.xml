@@ -86,7 +86,7 @@
     <string name="tutorial_dialog_title">Руководство</string>
     <string name="tutorial_manage_lists">Управление списками</string>
     <string name="tutorial_manage_products">Управление продуктами</string>
-    <string name="tutorial_how_to">Как сделать...</string>
+    <string name="tutorial_how_to">Как сделать ...</string>
     <string name="total_amount">Всего:</string>
     <string name="store_label">Магазин:</string>
     <string name="category_label">Категория:</string>
@@ -107,8 +107,8 @@
     <string name="pref_header_general">Главные</string>
     <string name="title_activity_settings">Настройки</string>
     <string name="pref_checkbox_position">Позиция галочек</string>
-    <string name="okay">Ладно</string>
-    <string name="viewhelp">Смотреть Справку</string>
+    <string name="okay">Хорошо</string>
+    <string name="viewhelp">Просмотр справки</string>
     <string name="pref_header_currency">Валюта</string>
     <string name="pref_currency_title">Выбрать валюту</string>
     <string name="welcome">Добро пожаловать</string>
