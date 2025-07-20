@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="cancel">Отмена</string>
+    <string name="cancel">Отменить</string>
     <string name="tutorial_check_product">...проверить продукты?</string>
     <string name="reset">Сброс</string>
     <string name="language">США</string>
     <string name="help_overview_heading">Обзор</string>
-    <string name="edit">Редактировать</string>
+    <string name="edit">Отредактировать</string>
     <string name="share">Поделиться</string>
     <string name="close_image">Закрыть</string>
     <string name="delete">Удалить</string>
@@ -13,7 +13,7 @@
     <string name="sort_by">Сортировка по</string>
     <string name="duplicate">Дублировать</string>
     <string name="tutorial_see_details_product">... посмотреть подробности продукта?</string>
-    <string name="help">Справка</string>
+    <string name="help">Помощь</string>
     <string name="tutorial_icon_reminder_off">Напоминание установлено. Уведомления <b><i>выключены</i></b></string>
     <string name="tutorial_add_product">... добавить новый продукт?</string>
     <string name="tutorial_icons_meaning">Значки</string>
@@ -99,7 +99,7 @@
     <string name="action_help">Справка</string>
     <string name="activity_delete_products">Удалить продукты</string>
     <string name="statistics">Статистика</string>
-    <string name="about">О приложении</string>
+    <string name="about">О программе</string>
     <string name="version_number">Версия</string>
     <string name="about_developper">Авторы:</string>
     <string name="action_settings">Настройки</string>
