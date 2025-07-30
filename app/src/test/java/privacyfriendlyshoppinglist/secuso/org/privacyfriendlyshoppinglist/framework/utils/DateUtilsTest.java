@@ -34,14 +34,14 @@ public class DateUtilsTest
                         .setInputPattern(DateUtils.ISO_PATTERN_MIN)
                         .setOutputPaterrn(DE_PATTERN)
                         .setLanguage(DateUtils.DE)
-                        .setExpectedDate("Mi 29.06.2016 15:37"),
+                        .setExpectedDate("Mi. 29.06.2016 15:37"),
 
                 new DataAsStringTestCaseBuilder()
                         .setInputDate("2016-06-29 15:37")
                         .setInputPattern(DateUtils.ISO_PATTERN_MIN)
                         .setOutputPaterrn(JA_PATTERN)
                         .setLanguage(DateUtils.JA)
-                        .setExpectedDate("2016/06/29 … 15:37"),
+                        .setExpectedDate("2016/06/29 水 15:37"),
 
                 new DataAsStringTestCaseBuilder()
                         .setInputDate("Wed 06/29/2016 15:37")
@@ -51,14 +51,14 @@ public class DateUtilsTest
                         .setExpectedDate("2016-06-29 15:37"),
 
                 new DataAsStringTestCaseBuilder()
-                        .setInputDate("Mi 29.06.2016 15:37")
+                        .setInputDate("Mi. 29.06.2016 15:37")
                         .setInputPattern(DE_PATTERN)
                         .setOutputPaterrn(DateUtils.ISO_PATTERN_MIN)
                         .setLanguage(DateUtils.DE)
                         .setExpectedDate("2016-06-29 15:37"),
 
                 new DataAsStringTestCaseBuilder()
-                        .setInputDate("2016/06/29 … 15:37")
+                        .setInputDate("2016/06/29 水 15:37")
                         .setInputPattern(JA_PATTERN)
                         .setOutputPaterrn(DateUtils.ISO_PATTERN_MIN)
                         .setLanguage(DateUtils.JA)

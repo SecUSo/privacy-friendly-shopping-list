@@ -9,6 +9,7 @@ import org.secuso.privacyfriendlybackup.api.backup.DatabaseUtil
 import org.secuso.privacyfriendlybackup.api.backup.FileUtil
 import org.secuso.privacyfriendlybackup.api.pfa.IBackupRestorer
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.persistence.DB
+import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.helpers.PreferenceKeys
 import java.io.IOException
 import java.io.InputStream
 import java.io.InputStreamReader
@@ -72,7 +73,8 @@ class BackupRestorer : IBackupRestorer {
             when (name) {
                 "workoutMode",
                 "privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.pref.sort_asc_dec_key" -> preferences.putBoolean(name, reader.nextBoolean())
-                "privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.pref.sort_by_key" -> preferences.putString(name, reader.nextString())
+                "privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.pref.sort_by_key",
+                PreferenceKeys.APP_THEME-> preferences.putString(name, reader.nextString())
                 else -> throw RuntimeException("Unknown preference $name")
             }
         }

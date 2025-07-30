@@ -1,34 +1,37 @@
 package privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.shoppingList.persistence;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+
+import androidx.test.platform.app.InstrumentationRegistry;
+
 import org.joda.time.DateTime;
 import org.junit.Test;
+
+import java.util.Date;
+import java.util.List;
+
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.AbstractDatabaseTest;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.context.AbstractInstanceFactory;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.framework.context.InstanceFactoryForTests;
 import privacyfriendlyshoppinglist.secuso.org.privacyfriendlyshoppinglist.logic.shoppingList.persistence.entity.ShoppingListEntity;
-
-import java.util.Date;
-import java.util.List;
 
 /**
  * Description:
  * Author: Grebiel Jose Ifill Brito
  * Created: 10.06.16 creation date
  */
-public class ShoppingListDaoTest extends AbstractDatabaseTest
-{
+public class ShoppingListDaoTest extends AbstractDatabaseTest {
     private ShoppingListDao shoppingListDao;
 
     @Override
-    protected void setupBeforeEachTest()
-    {
-        AbstractInstanceFactory instanceFactory = new InstanceFactoryForTests(getContext());
+    protected void setupBeforeEachTest() {
+        AbstractInstanceFactory instanceFactory = new InstanceFactoryForTests(InstrumentationRegistry.getInstrumentation().getContext());
         shoppingListDao = (ShoppingListDao) instanceFactory.createInstance(ShoppingListDao.class);
     }
 
     @Test
-    public void testSave()
-    {
+    public void testSave() {
         ShoppingListEntity entity = new ShoppingListEntity();
         entity.setListName("name");
         entity.setPriority("HIGH");
@@ -41,8 +44,7 @@ public class ShoppingListDaoTest extends AbstractDatabaseTest
     }
 
     @Test
-    public void testGetById()
-    {
+    public void testGetById() {
         String expectedName = "name";
         String expectedPriority = "HIGH";
         String expectedNotes = "notes";
@@ -67,8 +69,7 @@ public class ShoppingListDaoTest extends AbstractDatabaseTest
     }
 
     @Test
-    public void testGetAllEntities()
-    {
+    public void testGetAllEntities() {
         ShoppingListEntity entity1 = new ShoppingListEntity();
         ShoppingListEntity entity2 = new ShoppingListEntity();
         entity1.setListName("entity1");
@@ -83,8 +84,7 @@ public class ShoppingListDaoTest extends AbstractDatabaseTest
     }
 
     @Test
-    public void testDeleteById()
-    {
+    public void testDeleteById() {
         ShoppingListEntity entity1 = new ShoppingListEntity();
         ShoppingListEntity entity2 = new ShoppingListEntity();
         entity1.setListName("entity1");

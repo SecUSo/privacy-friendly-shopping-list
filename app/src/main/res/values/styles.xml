@@ -1,29 +1,35 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+    <style name="AppTheme" parent="Theme.AppCompat.DayNight.DarkActionBar">
+		<item name="secusoLogoDrawable">@drawable/secuso_logo_black</item>
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="colorOnPrimary">@color/white</item>
+        <item name="productListItemBackgroundColor">@color/white</item>
+        <item name="productListItemTextColor">@color/black</item>
+        <item name="productListItemCheckedBackgroundColor">@color/transparent</item>
+        <item name="productListItemCheckedTextColor">@color/middlegrey</item>
     </style>
 
     <!-- Base application theme. -->
-    <style name="DeleteTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+    <style name="DeleteTheme" parent="AppTheme">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/middlegrey</item>
         <item name="colorPrimaryDark">@color/middlegrey</item>
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
-    <style name="AlertDialogColourful" parent="Theme.AppCompat.Light.Dialog.Alert">
+    <style name="AlertDialogColourful" parent="Theme.AppCompat.DayNight.Dialog.Alert">
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
         <item name="android:windowSoftInputMode">stateUnchanged</item>
     </style>
 
-    <style name="AlertDialogGrey" parent="Theme.AppCompat.Light.Dialog.Alert">
+    <style name="AlertDialogGrey" parent="Theme.AppCompat.DayNight.Dialog.Alert">
         <item name="colorPrimary">@color/middlegrey</item>
         <item name="colorPrimaryDark">@color/middlegrey</item>
         <item name="colorAccent">@color/colorAccent</item>

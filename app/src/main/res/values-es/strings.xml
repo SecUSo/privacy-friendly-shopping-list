@@ -180,6 +180,12 @@
     <string name="pref_header_currency">Moneda</string>
     <string name="pref_currency_title">Seleccionar moneda</string>
     <string name="pref_currency_summary">€</string>
+    <string name="pref_app_theme_title">Design</string>
+    <string-array name="pref_app_theme_entries">
+        <item>Luz</item>
+        <item>Oscuro</item>
+        <item>Sistemanorma</item>
+    </string-array>
     <!-- ### WELCOME DIALOG ### -->
     <string name="welcome_text">Esta app te permite crear y administrar listas de compras. Además es posible asignar prioridad a listas, fijar fechas topes, recordatorios y más.
     </string>
