@@ -109,15 +109,15 @@
     <string name="about_developper">Auteurs :</string>
     <string name="about_author_greb">Grebiel José Ifill Brito</string>
     <string name="about_author_cri">Christian König et des contributeurs.</string>
-    <string name="about_affiliation">En partenariat avec</string>
+    <string name="about_affiliation">En collaboration avec</string>
     <string name="privacy_friendly">Cette application appartient à la collection \"Privacy Friendly Apps\" développée par la Technische Universität Darmstadt. Le code source est distribué sous la licence Apache, Version 2.0. Droits d\'auteur des images : TU Darmstadt et Google Inc.</string>
-    <string name="more_info">Des informations complémentaires sont disponibles sur :</string>
+    <string name="more_info">Plus d\'informations :</string>
     <!-- ### DRAWER ###-->
     <string name="action_help">Aide</string>
     <string name="action_about">À propos</string>
-    <string name="action_settings">Paramètres globaux</string>
+    <string name="action_settings">Paramètres</string>
     <string name="action_main">Accueil</string>
-    <string name="navigation_drawer_open">Afficher le menu de navigation</string>
+    <string name="navigation_drawer_open">Ouvrir le menu de navigation</string>
     <string name="navigation_drawer_close">Fermer le menu de navigation</string>
     <!-- ### SETTINGS ### -->
     <string name="pref_header_general">Principaux</string>
@@ -155,7 +155,7 @@
     <string name="welcome_text">Cette application vous permet de créer et de gérer des listes de courses. Vous pouvez associer à ces listes des priorités, des dates limites, des rappels et plus encore.
     </string>
     <string name="welcome">Bienvenue</string>
-    <string name="okay">D\'accord</string>
+    <string name="okay">Ok</string>
     <string name="viewhelp">Afficher l\'aide</string>
     <string name="next">Suivant</string>
     <string name="skip">Ignorer</string>
@@ -237,7 +237,7 @@
     <string name="help_settings_heading">Paramètres</string>
     <string name="help_settings_summary1">Dans le menu Paramètres, vous pouvez personnaliser des options pour vous rendre l\'utilisation de l\'application plus confortable.</string>
     <string name="help_settings_summary2">Vous pouvez par exemple définir si la case à cocher des produits doit se situer à gauche ou à droite du nom, activer/désactiver les notifications ainsi que d\'autres options. Rendez-vous dans le menu Paramètres pour en savoir plus !</string>
-    <string name="help_privacy_heading">Respect de la vie privée</string>
+    <string name="help_privacy_heading">Vie privée</string>
     <string name="help_camera_permission_heading">Permission d\'accès à l\'appareil photo</string>
     <string name="help_camera_permission_description">Cette permission est nécessaire afin de pouvoir prendre une photo et l\'ajouter à la fiche d\'un produit. Si la permission est refusée, cette fonctionnalité-ci ne pourra pas être utilisée, mais cela
         n\'affectera pas les autres fonctionnalités.
