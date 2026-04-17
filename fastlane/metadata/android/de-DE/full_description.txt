@@ -21,7 +21,7 @@ Listen- und Produktdaten können mit Anderen als formatiert Text geteilt werden,
 4. Keine Werbung
 Die App verzichtet auf störende Werbung, die zusätzlich Akkulaufzeit und den Verbrauch von Datenvolumen beeinflussen würde.
 
-Die App gehört zur Gruppe der Privacy Friendly Apps, die von der Forschungsgruppe SECUSO der Technischen Universität Darmstadt entwickelt werden. Mehr Informationen unter: https://secuso.org/pfa
+Die App gehört zur Gruppe der Privacy Friendly Apps, die von der Forschungsgruppe SECUSO des Karlsruher Institute für Technologie entwickelt werden. Mehr Informationen unter: https://secuso.org/pfa
 
 
 Kontaktieren Sie uns gerne über:
