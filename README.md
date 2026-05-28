@@ -6,7 +6,7 @@
 [PFA]: https://secuso.org/pfa
 [Mastodon]: https://xn--baw-joa.social/@SECUSO_Research
 [Bluesky]: https://bsky.app/profile/secusoresearch.bsky.social
-<img src="https://raw.githubusercontent.com/SecUSo/privacy-friendly-shopping-list/master/fastlane/metadata/android/en-US/images/website_icon.png"
+<img src="https://raw.githubusercontent.com/SecUSo/privacy-friendly-shopping-list/master/fastlane/metadata/android/en-US/images/icon.png"
 alt="Privacy Friendly Notes Icon"
 width="120px"
 align="right"
