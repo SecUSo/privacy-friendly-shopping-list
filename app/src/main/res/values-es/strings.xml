@@ -23,7 +23,7 @@
     <string name="tutorial_create_list">... crear una nueva lista?</string>
     <string name="tutorial_delete_lists">... eliminar varias listas?</string>
     <string name="tutorial_sort_lists">... ordenar listas?</string>
-    <string name="tutorial_see_details_list">... ver detalles?</string>
+    <string name="tutorial_see_details_list">... ver los detalles de la lista?</string>
     <string name="tutorial_icons_meaning">Iconos</string>
     <string name="tutorial_icon_priority">Lista de alta prioridad</string>
     <string name="tutorial_icon_reminder_on">Recordatorio activado. Notificaciones
@@ -39,8 +39,8 @@
     <string name="tutorial_add_product">... añadir un nuevo producto?</string>
     <string name="tutorial_delete_products">... eliminar varios productos?</string>
     <string name="tutorial_sort_products">... ordenar productos?</string>
-    <string name="tutorial_see_products">... ver detalles?</string>
-    <string name="tutorial_see_details_product">... ver detalles?</string>
+    <string name="tutorial_see_products">... ver los detalles del producto?</string>
+    <string name="tutorial_see_details_product">... ver los detalles del producto?</string>
     <string name="tutorial_check_product">... marcar un producto?</string>
     <string name="tutorial_check_statistics">Si las estadísticas han sido habilitadas, entonces cada vez que un producto
         sea marcado, este será guardado en un registro aparte para las estadísticas. El mismo producto puede ser marcado
@@ -67,7 +67,7 @@
     <string name="product_already_exists">¡Este producto ya existe!</string>
     <string name="price_number_too_big">¡Número muy grande!</string>
     <string name="number_format_invalid">Invalido: #.###.##0,00</string>
-    <string name="product_list_empty">Esta lista no contiene productos.</string>
+    <string name="product_list_empty">Esta lista no contiene productos</string>
     <string name="lists_empty">No existen listas</string>
     <string name="total_amount">Total:</string>
     <string name="total_amount_separator">/</string>
@@ -101,30 +101,18 @@
     <string name="sort_by_category">Categoría</string>
     <!-- ### DELETE ### -->
     <string name="delete_confirmation_title">Eliminar</string>
-    <string name="delete_foto_confirmation">¿Deseas eliminar la imagen seleccionada (%1$s)? Esta operación no puede ser
-        revertida.
-    </string>
+    <string name="delete_foto_confirmation">¿Deseas eliminar la imagen seleccionada (%1$s)? ¡Esta operación no se puede deshacer!</string>
     <!-- ### DELETE SHOPPING LISTS ### -->
-    <string name="delete_lists_confirmation">¿Deseas eliminar todas las listas seleccionadas? Esta operación no puede ser
-        revertida.
-    </string>
-    <string name="delete_list_confirmation">¿Deseas eliminar la lista seleccionada (%1$s)? Esta operación no puede ser
-        revertida.
-    </string>
+    <string name="delete_lists_confirmation">¿Deseas eliminar todas las listas seleccionadas? ¡Esta operación no se puede deshacer!</string>
+    <string name="delete_list_confirmation">¿Deseas eliminar la lista seleccionada (%1$s)? ¡Esta operación no se puede deshacer!</string>
     <string name="activity_delete_lists">Eliminar listas</string>
     <!-- ### DELETE PRODUCTS LISTS ### -->
-    <string name="delete_products_confirmation">¿Deseas eliminar todos los productos seleccionados? Esta operación no
-        puede ser revertida.
-    </string>
-    <string name="delete_product_confirmation">¿Deseas eliminar el producto seleccionado (%1$s)? Esta operación no puede
-        ser revertida.
-    </string>
+    <string name="delete_products_confirmation">¿Deseas eliminar todos los productos seleccionados? ¡Esta operación no se puede deshacer!</string>
+    <string name="delete_product_confirmation">¿Deseas eliminar el producto seleccionado (%1$s)? ¡Esta operación no se puede deshacer!</string>
     <string name="activity_delete_products">Eliminar productos</string>
     <!-- ### STATISTICS ### -->
     <string name="statistics">Stadísticas</string>
-    <string name="delete_statistics_confirmation">¿Deseas eliminar el registro de estadísticas? Esta operación no puede
-        ser revertida.
-    </string>
+    <string name="delete_statistics_confirmation">¿Deseas eliminar todas las estadísticas guardadas actualmente? ¡Esta operación no se puede deshacer!</string>
     <!--### ABOUT ###-->
     <string name="about">Acerca de Shopping List</string>
     <string name="version_number">Versión</string>
@@ -173,7 +161,7 @@
     <string name="pref_statistics_summary_off">Las estadísticas estarán deshabilitadas por defecto al crear una nueva
         lista.
     </string>
-    <string name="pref_statistics_toast_on">!Estadísticas habilitadas!</string>
+    <string name="pref_statistics_toast_on">¡Estadísticas habilitadas! Los elementos se añadirán a las estadísticas en cuanto se marquen.</string>
     <string name="pref_statistics_toast_off">!Estadísticas deshabilitadas!</string>
     <string name="pref_statistics_delete">Eliminar</string>
     <string name="pref_statistics_delete_summary">Eliminar todos los datos de las estadísticas</string>
@@ -248,27 +236,13 @@
         fijar un recordatorio. Para ello tendrás que hacer clic en el botón que se encuentra al lado del icono de alarma
         y luego introducir cuántos minutos, horas, días o semanas antes de la fecha tope quieres el recordatorio.
     </string>
-    <string name="help_how_to_setup_reminder_summary2">Si la alarma ya ha sonado, entonces la barra vertical al lado
-        izquierdo de la tarjeta cambiará a color amarillo. Listas con recordatorio mostrarán en la tarjeta un icono de
-        alarma ubicado al lado de la fecha tope. Si las notificaciones han sido deshabilitadas en la aplicación,
-        entonces el color del icono será rojo.
-    </string>
-    <string name="help_how_to_sort_lists">Ordenar ítems</string>
-    <string name="help_how_to_sort_lists_summary">Para ordenar ítems utiliza el icono con tres barras horizontales
-        localizado en la parte superior de la ventana. Luego de hacer clic en este icono, verás unas opciones donde podrás
-        escoger si deseas ordenar los ítems de manera ascendente o descendente y el criterio que debe ser utilizado para
-        ordenar los mismos.
-    </string>
-    <string name="help_how_to_delete_multiple_items">Eliminar múltiples ítems</string>
-    <string name="help_how_to_delete_multiple_items_summary1">Para eliminar múltiples ítems simultáneamente utiliza el icono de la
-        papelera mostrado en la parte superior derecha de la pantalla. Luego de haber hecho clic en este icono, tendrás la
-        oportunidad de seleccionar todos los ítems que deseas eliminar.
-    </string>
-    <string name="help_how_to_delete_multiple_items_summary2">Al final haz clic nuevamente en el icono de la
-        papelera localizado en la parte inferior derecha. Esta operación no eliminará ningún dato relacionado con las
-        estadísticas.
-    </string>
-    <string name="help_how_to_search_products">Buscar productos en lista</string>
+    <string name="help_how_to_setup_reminder_summary2">Si ya hay un recordatorio activado, la línea vertical a la izquierda del elemento de la lista se vuelve amarilla. Si se configura un recordatorio, aparecerá un ícono de alarma junto a la fecha límite. Si las notificaciones están deshabilitadas en la configuración, este ícono será rojo.</string>
+    <string name="help_how_to_sort_lists">Ordenar elementos</string>
+    <string name="help_how_to_sort_lists_summary">Para ordenar los elementos, utilice el icono con las tres líneas horizontales que se encuentra en la barra de acciones. Al hacer clic en este icono, verá dos grupos de opciones. Puede seleccionar si los elementos se deben ordenar de forma ascendente o descendente y el parámetro que se debe utilizar para ordenar los elementos.</string>
+    <string name="help_how_to_delete_multiple_items">Eliminar varios elementos</string>
+    <string name="help_how_to_delete_multiple_items_summary1">Para eliminar varios elementos, utilice el icono de la papelera ubicado en la barra de acciones. Después de hacer clic en este icono, tendrá una vista donde puede seleccionar todos los elementos que deben eliminarse. Una vez que haya terminado de seleccionar los elementos, presione el icono de la papelera ubicado en la parte inferior y confirme la acción. Los elementos se eliminarán correctamente.</string>
+    <string name="help_how_to_delete_multiple_items_summary2">Tenga en cuenta que la operación de eliminación no eliminará ningún dato guardado en las estadísticas.</string>
+    <string name="help_how_to_search_products">Buscar productos en la lista</string>
     <string name="help_how_to_search_products_summary1">Para buscar productos en una lista debes utilizar el
         icono de la lupa que se encuentra en la parte superior de la ventana. Luego de hacer clic en él, aparecerá un campo en el que
         podrás escribir las palabras que deseas buscar.</string>
@@ -284,54 +258,47 @@
         abajo para ver más opciones. Allí encontrarás un icono de una cámara en color azul. La imagen tomada solamente
         puede ser accedida por esta aplicación. No existe ninguna posibilidad de compartir esta imagen, a menos que hagas una captura de pantalla.
     </string>
-    <string name="help_settings_heading">Configuración</string>
-    <string name="help_settings_summary1">En la página de configuración podrás personalizar la applicación.</string>
-    <string name="help_settings_summary2">Allí podrás escoger por ejemplo si deseas que las casillas para marcar productos
-        sean mostradas a la izquierda o la derecha de la pantalla, dependiendo de con qué mano utilices el dispositivo.
-        Además podrás activar/desactivar las notificaciones y otras cosas más. Visita la página de configuración
-        para más información.
-    </string>
-    <string name="help_privacy_heading">Información de Privacidad</string>
-    <string name="help_camera_permission_heading">Permiso para acceder a la cámara</string>
-    <string name="help_camera_permission_description">Este permiso es necesario para poder tomar y guardar fotos de un
-        producto. Si el permiso es negado, la función no podrá ser utilizada. Negar este permiso no afecta las otras
-        funciones de la aplicación.
-    </string>
+    <string name="help_settings_heading">Ajustes</string>
+    <string name="help_settings_summary1">En la configuración, puedes personalizar algunas opciones para que la aplicación sea más cómoda.</string>
+    <string name="help_settings_summary2">Por ejemplo, puede elegir si desea marcar las casillas a la izquierda o a la derecha para verificar los productos, si desea activar o desactivar las notificaciones y otras opciones. ¡Consulta la sección de configuración para obtener más detalles!</string>
+    <string name="help_privacy_heading">Información de privacidad</string>
+    <string name="help_camera_permission_heading">Permiso de acceso a la cámara</string>
+    <string name="help_camera_permission_description">Este permiso es necesario para poder tomar una fotografía y agregarla a un producto. Si se deniega este permiso, no se podrá utilizar esta función. Denegar este permiso no afectará a ninguna de las demás funciones.</string>
     <string name="help_permissions_heading">Permisos</string>
-    <string name="help_permissions_description">No se requiere de otros permisos.</string>
+    <string name="help_permissions_description">No se requieren otros permisos.</string>
     <!-- Product Dialog -->
-    <string name="product_name">Nombre</string>
-    <string name="product_name_new">Nuevo producto</string>
+    <string name="product_name">Nombre del producto</string>
+    <string name="product_name_new">Producto nuevo</string>
     <string name="product_name_edit">Editar producto</string>
     <string name="price">0,00</string>
     <string name="alert_missing_product_name">¡Por favor introduce el nombre del producto!</string>
     <string name="product_dialog_title">Título</string>
     <string name="price_text">Precio</string>
-    <string name="quantity_text">Cant.</string>
+    <string name="quantity_text">Cantidad</string>
     <string name="category_text">Categoría</string>
     <string name="store_text">Tienda</string>
     <string name="product_as_title">Producto: %1$s</string>
     <string name="close_image">Cerrar</string>
     <string name="edit_dialog_product">Editar, eliminar o compartir producto?</string>
     <!-- Shopping List Dialog -->
-    <string name="list_name">Nombre</string>
+    <string name="list_name">Nombre de la lista de compras</string>
     <string name="list_name_new">Nueva lista</string>
-    <string name="list_name_edit">Editar lista</string>
+    <string name="list_name_edit">Editar lista de compras</string>
     <string name="list_as_title">Lista: %1$s</string>
     <string name="priority">Prioridad</string>
     <string name="priority_high">Alta</string>
     <string name="priority_normal">Normal</string>
     <string name="deadline_date">Fecha</string>
     <string name="deadline_time">Hora</string>
-    <string name="deadline">Fecha tope</string>
+    <string name="deadline">Fecha límite</string>
     <string name="reminder">Recordatorio</string>
     <string name="reminder_before">antes</string>
     <string name="list_notes">Notas</string>
-    <string name="default_list_name">Nueva lista</string>
-    <string name="edit_dialog_list">Editar, eliminar o compartir lista?</string>
+    <string name="default_list_name">Nueva lista de compras</string>
+    <string name="edit_dialog_list">¿Editar, eliminar o compartir lista?</string>
     <!-- Sharing -->
-    <string name="no_products">Esta lista no contiene productos.</string>
-    <string name="share_as_text">Compartir Texto</string>
+    <string name="no_products">Esta lista no contiene ningún producto.</string>
+    <string name="share_as_text">Compartir como texto</string>
     <string-array name="shopping_list_priority_spinner">
         <item>Alta</item>
         <item>Normal</item>
